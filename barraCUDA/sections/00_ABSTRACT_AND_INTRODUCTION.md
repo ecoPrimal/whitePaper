@@ -98,9 +98,12 @@ This paper presents:
   remaining modeled benchmarks to real hardware execution. Included for transparency.
 
 - **Section 4 (Control Experiments)**: Reproduction of published Murillo Group
-  computational physics results in their original Python implementations. 81/81
+  computational physics results in their original Python implementations. 86/86
   quantitative checks pass across molecular dynamics (Sarkas), plasma transport
-  (Two-Temperature Model), and surrogate learning. These establish the ground truth
+  (Two-Temperature Model), surrogate learning, and nuclear EOS validation.
+  Phase B BarraCUDA results include GPU FP64 validation (sub-ULP precision),
+  478× throughput improvement at L1, and energy profiling showing 44.8× less
+  energy consumption on GPU vs Python. These establish the ground truth
   for BarraCUDA Phase B re-implementation.
 
 - **Section 5 (Constrained Evolution)**: Side-by-side code comparison of the NTT

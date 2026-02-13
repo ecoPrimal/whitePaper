@@ -15,6 +15,17 @@ We ran the first end-to-end GPU FP64 nuclear physics computation on the RTX 4070
 
 ## 1. What We Built (on our side — you'll reimplement)
 
+### 1.0 `hotSpring/barracuda/src/bench.rs` — Benchmark harness (NEW)
+
+A comprehensive time + energy + hardware context measurement system:
+- **Hardware inventory**: CPU model, cores/threads, cache, RAM, GPU name/VRAM/driver/compute capability, OS kernel, Rust version
+- **CPU energy**: Intel RAPL (`/sys/class/powercap/intel-rapl:0/energy_uj`) with counter-wrap handling
+- **GPU energy**: Background thread polls `nvidia-smi` every 100ms, integrates power → Joules, tracks peak temp/VRAM/utilization
+- **Memory**: Peak RSS from `/proc/self/status`
+- **Reporting**: Structured JSON + summary table with energy attribution per substrate
+
+Paired with `control/surrogate/nuclear-eos/scripts/bench_wrapper.py` (Python equivalent) so all three substrates report in the same format.
+
 ### 1.1 `hotSpring/barracuda/src/gpu.rs` — GPU device wrapper
 
 A thin wrapper around `wgpu` that:
@@ -67,7 +78,9 @@ When we precompute transcendentals (A^(2/3), A^(1/3), sqrt(A)) on CPU and pass t
 | Max |B_cpu - B_gpu| | **4.55e-13 MeV** |
 | Mean |B_cpu - B_gpu| | 8.31e-14 MeV |
 | |chi2 diff| | 8.88e-15 |
-| GPU speedup | **2.0x** |
+| GPU speedup (vs BarraCUDA CPU) | **1.8x** |
+| GPU speedup (vs Python) | **28.8x** |
+| GPU energy savings (vs Python) | **44.8x** |
 
 This is sub-ULP noise. The GPU f64 arithmetic is **bit-exact** with CPU f64 for add/sub/mul/div.
 
@@ -87,13 +100,30 @@ The 0.4 keV precision gap comes from `pow_f64` which chains `exp_f64(exponent * 
 
 `ShaderTemplate::with_math_f64(user_shader)` concatenates the math library + user code into one shader module. Naga validates the whole thing as a unit. No include mechanism needed.
 
-### 2.5 Timing summary (RTX 4070, 52 nuclei batched)
+### 2.5 Timing summary (RTX 4070, 52 nuclei batched, 100k iterations)
 
-| Path | us/eval | vs CPU |
-|------|:-------:|:------:|
-| CPU (BarraCUDA native) | 72.0 | baseline |
-| GPU (CPU precompute) | 35.7 | **2.0x** |
-| GPU (pure math_f64) | 45.0 | **1.6x** |
+| Path | us/eval | vs CPU | vs Python |
+|------|:-------:|:------:|:---------:|
+| Python (CPython 3.10) | 1,143 | 15.7x slower | baseline |
+| CPU (BarraCUDA native) | 72.7 | baseline | **15.7x** |
+| GPU (CPU precompute) | 39.7 | **1.8x** | **28.8x** |
+| GPU (pure math_f64) | 46.4 | **1.6x** | **24.6x** |
+
+### 2.6 Energy profiling (NEW — February 13, 2026)
+
+We added a full benchmark harness (`barracuda/src/bench.rs`) that measures CPU energy via Intel RAPL and GPU energy via nvidia-smi at 100ms polling intervals. The three-way energy comparison for L1 SEMF (100k iterations, 52 nuclei):
+
+| Substrate | Wall Time | Energy (J) | J/eval | Power (W) |
+|-----------|-----------|------------|--------|-----------|
+| **Python** (CPython 3.10) | 114.3 s | **5,648 J** | 0.056 | 49 W CPU |
+| **BarraCUDA CPU** (Rust native) | 7.27 s | **374 J** | 0.0037 | 51 W CPU |
+| **BarraCUDA GPU** (RTX 4070 f64) | 3.97 s | **126 J** | 0.0013 | 32 W GPU |
+
+**Key insight**: GPU L1 uses **44.8x less energy** than Python and **3.0x less** than BarraCUDA CPU — while producing bit-identical physics.
+
+For L2 HFB DirectSampler (12 evals, full SCF): **32,500 J** at 135W avg CPU power for 4 minutes. The Murillo paper ran 30,000 evaluations at similar per-eval cost. At 20s/eval, that is ~7 days wall time and ~810 MJ of CPU energy on this hardware. This is the compute cost that GPU evolution aims to cut by orders of magnitude.
+
+**Measurement infrastructure**: Reports saved as JSON to `benchmarks/nuclear-eos/results/` with full hardware inventory, per-phase energy, and physics results. Compatible between Rust and Python paths. See `benchmarks/PROTOCOL.md` for the full specification.
 
 ---
 
@@ -220,29 +250,44 @@ We did **not** modify `wgpu_device.rs` or any other core BarraCUDA files.
 
 ## 6. Measured Results for Your Records
 
-### L1 SEMF (SLy4, 52 nuclei, RTX 4070)
+### L1 SEMF (SLy4, 52 nuclei, RTX 4070, 100k iterations)
 
 ```
+Python (CPython 3.10):
+  chi2/datum = 4.99
+  1,143 us/eval
+  Energy: 5,648 J (49 W CPU, 114.3s)
+
 CPU (BarraCUDA native):
   chi2/datum = 4.9851
-  72.0 us/eval
+  72.7 us/eval
+  Energy: 374 J (51 W CPU, 7.27s)
 
 GPU (CPU-precomputed transcendentals):
   chi2/datum = 4.9851
-  35.7 us/eval (2.0x speedup)
+  39.7 us/eval (1.8x vs CPU, 28.8x vs Python)
   Max |B_cpu - B_gpu| = 4.55e-13 MeV (EXACT)
+  Energy: 126 J (32 W GPU, 3.97s)
 
 GPU (pure math_f64 library):
   chi2/datum ≈ 4.9851
-  45.0 us/eval (1.6x speedup)
+  46.4 us/eval (1.6x vs CPU, 24.6x vs Python)
   Max |B_cpu - B_pure| = 4.06e-4 MeV (GOOD, improvable)
 ```
 
 ### L1 DirectSampler optimization
 
 ```
-CPU:  chi2/datum = 2.74 (24 evals, 0.08s)
-GPU:  chi2/datum = 2.74 (identical)
+CPU:  chi2/datum = 1.52 (48 evals, 6 rounds, 32.4s)
+GPU:  chi2/datum = 1.52 (identical physics, GPU-accelerated eval)
+```
+
+### L1 LHS Sweep (512 parameter sets)
+
+```
+Python:          chi2/datum = 6.87 (best of 512), 147.2s, 7,420 J
+BarraCUDA CPU:   chi2/datum = 5.69 (best of 512), 5.07s, 265 J
+BarraCUDA GPU:   chi2/datum = 5.69 (best of 512), 3.75s, 122 J
 ```
 
 ### L2 HFB (SLy4 baseline + DirectSampler)
@@ -250,17 +295,33 @@ GPU:  chi2/datum = 2.74 (identical)
 ```
 SLy4 single-eval: chi2/datum = 54.91 (14/19 converged, 3.6s)
 DirectSampler:     chi2/datum = 23.09 (12 evals, 252s, 21s/eval)
+Energy: 32,500 J (135 W CPU avg)
 ```
 
-### Three-way comparison table
+### Three-way comparison table (with energy)
 
 ```
-┌─────────┬────────────────┬────────────────┬────────────────┐
-│ Level   │ Python/SciPy   │ BarraCUDA CPU  │ BarraCUDA GPU  │
-├─────────┼────────────────┼────────────────┼────────────────┤
-│ L1 SEMF │ chi2 ~6.62     │ chi2 = 2.74    │ chi2 = 2.74    │
-│ L2 HFB  │ chi2 ~61.87    │ chi2 = 23.09   │ (SCF on CPU)   │
-└─────────┴────────────────┴────────────────┴────────────────┘
+┌────────────┬──────────────────────────────┬──────────────────────────────┬──────────────────────────────┐
+│ Level      │ Python/SciPy                 │ BarraCUDA CPU                │ BarraCUDA GPU                │
+├────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│ L1 SEMF    │ χ² = 4.99                    │ χ² = 4.99                    │ χ² = 4.99                    │
+│ (100k)     │ 1,143 us/eval, 5,648 J       │ 72.7 us/eval, 374 J          │ 39.7 us/eval, 126 J          │
+│            │                              │ 15.7× faster, 15.1× less E   │ 28.8× faster, 44.8× less E  │
+├────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│ L1 LHS     │ χ² = 6.87 (best/512)         │ χ² = 5.69 (best/512)         │ χ² = 5.69 (best/512)         │
+│ (512 pts)  │ 147.2s, 7,420 J              │ 5.07s, 265 J                 │ 3.75s, 122 J                 │
+│            │                              │ 29.0× faster, 28.0× less E   │ 39.3× faster, 60.8× less E  │
+├────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│ L1 Direct- │ (not comparable)             │ χ² = 1.52 (48 evals)         │ χ² = 1.52 (GPU-eval)         │
+│ Sampler    │                              │ 32.4s                        │ (same optimizer)             │
+├────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│ L2 HFB     │ χ² = 1.93 (3,008 evals)      │ χ² = 23.09 (12 evals)        │ (SCF on CPU, GPU pending)    │
+│            │ 3.2h (Python/mystic)         │ 252s, 32,500 J               │                              │
+│            │ SparsitySampler advantage    │ DirectSampler only           │                              │
+└────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+
+Energy measured: CPU via Intel RAPL, GPU via nvidia-smi polling.
+Hardware: i9-12900K, RTX 4070 (SHADER_F64), Pop!_OS 22.04 / Linux 6.17.4
 ```
 
 ---

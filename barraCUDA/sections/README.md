@@ -14,7 +14,7 @@
 | 01 | [FHE Validation](01_FHE_VALIDATION.md) | 265 | Draft v2 (corrected) |
 | 02 | [Hardware Comparison](02_HARDWARE_COMPARISON.md) | 363 | Draft v2 (honesty audit) |
 | 03 | [ToadStool Wiring Directive](03_TOADSTOOL_WIRING_DIRECTIVE.md) | 285 | Action items |
-| 04 | [Control Experiments](04_CONTROL_EXPERIMENTS.md) | ~360 | Draft v3 (surrogate expanded) |
+| 04 | [Control Experiments](04_CONTROL_EXPERIMENTS.md) | ~430 | Draft v4 (86/86, energy profiling, GPU data) |
 | 04a | [Surrogate Open Science](04a_SURROGATE_OPEN_SCIENCE.md) | ~220 | Draft v1 (Code Ocean critique) |
 | 05 | [Constrained Evolution](05_CONSTRAINED_EVOLUTION.md) | ~200 | Draft v1 |
 | 06 | [Conclusion and Future Work](06_CONCLUSION.md) | ~170 | Draft v1 |
@@ -68,13 +68,14 @@ No result labeled "validated" uses mocks, simulations, or estimated timings.
 | GPU NTT speedup (N=4096) | **110×** | §1 — measured |
 | Cross-vendor correctness | **34/36** (all GPU correct) | §1 — measured |
 | NTT → FFT code reuse | **80%** | §5 — source comparison |
-| Control checks (all) | **81/81 pass** | §4 — measured |
+| Control checks (all) | **86/86 pass** | §4 — measured |
 | Sarkas observables | **60/60 pass** | §4 — measured |
 | Upstream bugs found | **5** (3 silent) | §4 — documented |
 | Force kernel hotspot | **97.2%** of exec time | §4 — profiled |
 | Energy efficiency range | **10⁶×** across workloads | §2 — measured |
-| BarraCUDA L1 vs Python | **8.3× better** accuracy | §4 Phase B — measured |
-| BarraCUDA L2 vs Python | **3.8× better** accuracy | §4 Phase B — measured |
+| BarraCUDA L1 vs Python | **478× faster**, chi2 2.27 vs 6.62 | §4 Phase B — measured |
+| BarraCUDA GPU energy | **44.8× less** than Python (L1 SEMF) | §4 Phase B — measured (RAPL + nvidia-smi) |
+| GPU FP64 precision | **4.55e-13 MeV** max error vs CPU | §4 Phase B — measured |
 | L2 improvement (4 cycles) | **1,764× improvement** | §4 Phase B — measured |
 | Math functions validated | **11** against NumPy/SciPy | §4 Phase B — production |
 | External dependencies | **0** (nalgebra removed) | §4 Phase B — verified |

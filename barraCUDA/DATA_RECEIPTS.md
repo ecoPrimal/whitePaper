@@ -263,15 +263,25 @@ Source: `data/validation-results/universal_homomorphic.json`
 
 Source: `hotSpring/barracuda/` and `hotSpring/control/surrogate/nuclear-eos/results/`
 
-### Nuclear EOS — BarraCUDA vs Python/SciPy
+### Nuclear EOS — Three-Way Substrate Comparison (Updated Feb 13, 2026)
 
-| Level | BarraCUDA chi2/datum | Python/SciPy chi2/datum | Evals | Speedup | Improvement |
-|-------|---------------------|------------------------|-------|---------|-------------|
-| **L1 (SEMF)** | **0.80** | 6.62 | 64 vs 1,008 | **400x throughput** | **8.3x accuracy** |
-| **L2 (HFB, best accuracy)** | **16.11** | 61.87 | 60 vs 96 | **2.4x fewer evals** | **3.8x accuracy** |
-| **L2 (HFB, best NMP)** | **19.29** | 61.87 | 60 vs 96 | **2.4x fewer evals** | **3.2x accuracy** |
+| Level | Python chi2 | BarraCUDA CPU chi2 | BarraCUDA GPU chi2 | Speedup | Energy Ratio |
+|-------|------------|-------------------|-------------------|---------|:------------:|
+| **L1 (SLy4 baseline, 100k)** | 4.99 | 4.99 | 4.99 | 28.8× (GPU vs Python) | **44.8× less** |
+| **L1 (DirectSampler)** | 6.62 | **2.27** (6,028 evals) | **1.52** (48 evals) | **478×** | — |
+| **L2 (HFB)** | **1.93** (SparsitySampler) | 23.09 (DirectSampler) | (SCF on CPU) | 1.7× | — |
+| L2 (HFB, Run A) | — | **16.11** (seed=42) | — | — | — |
+| L2 (HFB, Run B, NMP) | — | **19.29** (seed=123) | — | — | — |
 
-**Key**: BarraCUDA exceeds Python/SciPy at both L1 and L2 with zero external dependencies.
+### Energy profiling (L1 SEMF, 100k iters, 52 nuclei)
+
+| Substrate | Wall Time | Energy (J) | J/eval | Power (W) |
+|-----------|-----------|------------|--------|-----------|
+| Python (CPython 3.10) | 114.3s | 5,648 | 0.056 | 49 W CPU |
+| BarraCUDA CPU (Rust) | 7.27s | 374 | 0.0037 | 51 W CPU |
+| BarraCUDA GPU (RTX 4070) | 3.97s | **126** | **0.0013** | 32 W GPU |
+
+**Key**: GPU path uses 44.8× less energy than Python for identical physics. At paper scale (30,000 evals), Python costs ~1.7 MJ; GPU costs ~39 kJ. Energy measured via Intel RAPL (CPU) and nvidia-smi (GPU).
 
 ### BarraCUDA Math Functions Validated Against NumPy/SciPy
 

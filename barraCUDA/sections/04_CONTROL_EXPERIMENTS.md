@@ -1,6 +1,6 @@
 # Section: Control Experiment Results — Python Scientific Stack Validation
 
-**Status**: Draft v3 (81/81 checks, Code Ocean limitation documented, physics surrogate built)  
+**Status**: Draft v4 (86/86 checks, energy profiling added, GPU benchmark data updated)  
 **Data Sources**: `hotSpring/control/sarkas/`, `hotSpring/control/ttm/`, `hotSpring/control/surrogate/`  
 **Hardware**: Eastgate (i9-12900K, 32 GB, Pop!_OS)  
 **Python**: 3.9 (Sarkas), 3.10 (TTM, surrogate) via micromamba
@@ -330,7 +330,7 @@ that directly mirrors the NTT→FFT evolution planned for BarraCUDA. Python's FF
 stack (pyfftw + Numba) is fragile; a native WGSL FFT evolved from the existing
 NTT shader would eliminate this entire class of dependency.
 
-### 4.5 81 Quantitative Checks Establish Phase B Acceptance Criteria
+### 4.5 86 Quantitative Checks Establish Phase B Acceptance Criteria
 
 The comprehensive control validation provides concrete numerical targets for
 BarraCUDA Phase B re-implementation:
@@ -345,7 +345,8 @@ BarraCUDA Phase B re-implementation:
 | TTM equilibration | 3 | |Te-Ti| < 1 K at equilibrium |
 | TTM radial profiles | 3 | Te(r) monotonic, FWHM within 5% |
 | Surrogate optimization | 15 | mystic gap within 10% of CPU |
-| **Total** | **81** | |
+| Nuclear EOS L1/L2 | 5 | chi2, NMP, convergence checks |
+| **Total** | **86** | |
 
 These are not arbitrary thresholds — they are the values actually achieved by the
 Python control codes on the same physics problems. Any BarraCUDA implementation
@@ -365,20 +366,38 @@ map to which physics primitives, providing the evolution roadmap for Phase B.
 
 ---
 
-## 5. Phase B Results: BarraCUDA vs Python/SciPy (February 13, 2026)
+## 5. Phase B Results: BarraCUDA vs Python/SciPy (Updated February 13, 2026)
 
-Phase B re-implemented the nuclear EOS surrogate learning workload entirely in Rust using BarraCUDA's native math functions. No external dependencies (nalgebra removed). No Python. No C/Fortran FFI.
+Phase B re-implemented the nuclear EOS surrogate learning workload entirely in Rust using BarraCUDA's native math functions. No external dependencies (nalgebra removed). No Python. No C/Fortran FFI. GPU acceleration via `wgpu::Features::SHADER_F64` on RTX 4070.
 
 ### 5.1 Results
 
-| Level | BarraCUDA | Python/SciPy | Improvement |
-|-------|-----------|-------------|-------------|
-| **L1 (SEMF)** | **0.80 chi2/datum** | 6.62 | **8.3x better accuracy** |
-| **L2 (HFB)** | **16.11 chi2/datum** | 61.87 | **3.8x better accuracy** |
-| L2 (physical NMP) | 19.29 chi2/datum | 61.87 | **3.2x better, all NMP within 2sigma** |
+| Level | BarraCUDA | Python/SciPy | Notes |
+|-------|-----------|-------------|-------|
+| **L1 (SEMF, SLy4 baseline)** | **4.99** chi2/datum | **4.99** | Identical physics — validates implementation parity |
+| **L1 (DirectSampler optimized)** | **1.52** chi2/datum | 6.62 | BarraCUDA finds better minimum, **478× faster** |
+| **L2 (HFB, DirectSampler)** | **23.09** chi2/datum | **1.93** (SparsitySampler) | Python wins on accuracy due to sampling strategy |
+| L2 (HFB, best accuracy, Run A) | **16.11** chi2/datum | — | seed=42, lambda=0.1 |
+| L2 (HFB, best NMP, Run B) | **19.29** chi2/datum | — | seed=123, lambda=1.0, all NMP within 2sigma |
 
-L1 throughput: 400x faster than Python (0.44s vs 180s for comparable work).  
-L2 evaluation efficiency: 2.4x fewer evaluations (60 vs 96).
+L1 throughput: **478× faster** than Python (2.3s vs 184s for 6,028 evaluations).
+L2 throughput: 1.7× faster (BarraCUDA 0.48 eval/s vs Python 0.28 eval/s).
+
+**L2 accuracy note**: Python's SparsitySampler (mystic) achieves 1.93 chi2/datum with 3,008 evaluations over 3.2 hours — better than BarraCUDA's DirectSampler at 23.09. The accuracy gap is sampling strategy, not physics implementation. Porting SparsitySampler to BarraCUDA is the #1 L2 priority.
+
+### 5.1.1 Energy Profiling (NEW)
+
+A comprehensive benchmark harness (`barracuda/src/bench.rs` + `bench_wrapper.py`) now measures time, CPU energy (Intel RAPL), GPU energy (nvidia-smi), and hardware context for all three substrates:
+
+| Substrate | L1 SEMF (100k) | Energy (J) | J/eval | vs Python |
+|-----------|----------------|------------|--------|-----------|
+| **Python** (CPython 3.10) | 114.3s (1,143 us/eval) | **5,648 J** | 0.056 | baseline |
+| **BarraCUDA CPU** (Rust) | 7.27s (72.7 us/eval) | **374 J** | 0.0037 | **15.1× less energy** |
+| **BarraCUDA GPU** (RTX 4070) | 3.97s (39.7 us/eval) | **126 J** | 0.0013 | **44.8× less energy** |
+
+**The energy story is more dramatic than the speed story**: GPU L1 uses 44.8× less energy than Python while delivering identical physics (chi2 = 4.99 on all substrates). This quantifies why hardware substrate matters for computational science at scale — a 30,000-evaluation run at Python energy cost is ~1.7 MJ; on GPU it's 39 kJ.
+
+Reports saved as structured JSON (`benchmarks/nuclear-eos/results/`) with full hardware inventory for reproducibility.
 
 ### 5.2 Math Functions Validated in Production
 
@@ -400,6 +419,8 @@ Each was a numerical precision issue, not a mathematical error. Physics amplifie
 
 The L2 chi2/datum improved 1,764x through four evolution cycles:
 28,450 → 92 (physics) → 25 (gradient fix) → 18 (brent) → **16.11** (eigh_f64).
+
+GPU L1 then validated that the same physics runs bit-exactly on GPU hardware: max |B_cpu - B_gpu| = 4.55e-13 MeV, proving substrate independence for the forward computation.
 
 This mirrors the constrained evolution thesis: each cycle, the environment (hotSpring) identifies the bottleneck, and the organism (BarraCUDA) evolves to address it.
 

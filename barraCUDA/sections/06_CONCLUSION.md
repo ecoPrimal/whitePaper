@@ -39,7 +39,7 @@
 |-------|--------|------------|
 | NPU sparse processing advantage | Modeled (sleep/busy-loop) | ToadStool Akida wiring |
 | End-to-end encrypted ML | FHE primitives ready, composition missing | NUCLEUS + BearDog |
-| BarraCUDA reproduces Sarkas physics | Python control established, GPU phase not started | Phase B implementation |
+| BarraCUDA reproduces Sarkas physics | Python control established, GPU L1 validated (exact), L2 CPU validated | Phase B MD implementation |
 | Full-scale MD (N=10,000) | N=2,000 validated, N=10,000 needs 32GB+ RAM | Strandgate execution |
 
 ---
@@ -79,7 +79,7 @@ one-off result. The pattern extends across BarraCUDA's operation set:
 Each of these pairs shares the same computational pattern for different physical
 reasons. The convergence is mathematical, not accidental.
 
-### 2.3 81 Quantitative Checks Provide Phase B Acceptance Criteria
+### 2.3 86 Quantitative Checks Provide Phase B Acceptance Criteria
 
 The control experiments did not just validate the upstream codes — they produced
 concrete numerical targets for BarraCUDA's GPU re-implementation:
@@ -91,10 +91,20 @@ concrete numerical targets for BarraCUDA's GPU re-implementation:
 - Te=Ti equilibrium within 1 K
 - FWHM expansion within 5%
 - Surrogate optimization gap within 10%
+- Nuclear EOS chi2 and NMP parity (L1 and L2)
 
 These criteria are not arbitrary thresholds. They are the values actually achieved
 by the Python codes on the same physics. Meeting them on GPU proves numerical
 equivalence.
+
+### 2.4 Energy Cost Is a First-Class Scientific Metric
+
+The three-way benchmark harness (Python, BarraCUDA CPU, BarraCUDA GPU) reveals that
+**energy efficiency varies by 45× across substrates** for identical physics. L1 SEMF
+at 100k iterations: Python consumes 5,648 J, BarraCUDA CPU 374 J, BarraCUDA GPU
+126 J. At the Murillo paper's scale (30,000 evaluations), the Python path requires
+~1.7 MJ; the GPU path requires ~39 kJ. This is not a marginal improvement — it
+changes which computations are tractable on consumer hardware.
 
 ### 2.4 "Reproducible" Science Has Access Gates
 
@@ -147,7 +157,7 @@ requires institutional access. Our circumvention took two forms:
 | 1 | Wire real Akida inference into pipeline dispatch | 1-2 days | Converts NPU from modeled → real |
 | 1 | Wire Akida power telemetry | 1 day | Converts energy from datasheet → measured |
 | 2 | Delete fake GPU demos (sleep-based) | 30 min | Removes misleading data |
-| 2 | Wire GPU power measurement (nvidia-smi) | 2 hours | Measured GPU energy |
+| ✅ | ~~Wire GPU power measurement (nvidia-smi)~~ | Done | **DONE** — `bench.rs` polls nvidia-smi at 100ms, integrates W→J |
 | 3 | Full transformer architecture | 3-5 days | Production-competitive ML |
 | 3 | Audio STFT with real FFT shader | 1-2 days | Validates FFT evolution |
 
@@ -176,7 +186,7 @@ What makes the evolution path credible:
    three codebases, three of which were silent. This is the problem space BarraCUDA
    addresses.
 
-3. **81 quantitative checks establish falsifiable acceptance criteria**. Phase B
+3. **86 quantitative checks establish falsifiable acceptance criteria**. Phase B
    either reproduces these numbers on GPU or it doesn't. There is no ambiguity.
 
 4. **The honest gaps are documented**. NPU benchmarks that use sleep() are labeled

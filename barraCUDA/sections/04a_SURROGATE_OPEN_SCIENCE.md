@@ -89,7 +89,7 @@ description plus the `_model.py` configuration files in the Zenodo data.
 ### 3.2 Physics-Based EOS Objective
 
 Instead of the gated nuclear EOS, we built a physics-based objective from our own
-validated Sarkas molecular dynamics results (§4, 81/81 checks pass):
+validated Sarkas molecular dynamics results (§4, 86/86 checks pass):
 
 - **Input**: (κ, log₁₀Γ) — plasma screening and coupling parameters
 - **Output**: χ² measuring departure from MD-validated transport properties
