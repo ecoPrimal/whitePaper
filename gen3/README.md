@@ -49,6 +49,18 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 
 This velocity is possible because the constrained evolution methodology works. The Rust infrastructure (primals) was built over the preceding ~8 months. The springs consume that infrastructure and validate it against published science. Each spring produces evidence that feeds back into the next spring's design.
 
+### What Comes Next: NUCLEUS Scaling
+
+The 2,513 checks were produced on individual gates, running one experiment at a time. The NUCLEUS deployment architecture (see `ECOSYSTEM_ARCHITECTURE.md` §3-4) composes the basement HPC (~$15K, 100+ cores, ~128GB GPU VRAM, 10G backbone) into a coordinated mesh. The bonding model determines how others join:
+
+- **Covalent** (family gates): The basement runs as one machine. All springs execute simultaneously across all GPUs. BarraCUDA's WGSL shaders are vendor-agnostic — validated on both NVIDIA and AMD in the mesh.
+- **Ionic** (faculty labs): A professor's GPU joins under a metered contract. They contribute compute and consume BarraCUDA kernels. Sovereignty is preserved — their hardware, their data, scoped access.
+- **Metallic** (institutional HPC): MSU's ICER deploys NUCLEUS atomics. Every idle campus GPU becomes a BarraCUDA node. The lattice QCD that requires CERN-scale allocation runs on a distributed campus fleet instead.
+
+The springs are the acceptance tests. The 2,513 checks prove the kernels are correct. When a new node joins the mesh — covalent, ionic, or metallic — it runs the same validated shaders on its own hardware. The science doesn't change. The scale does.
+
+See `data/README.md` §"What NUCLEUS Unlocks" for the full scaling vision.
+
 ---
 
 ## The Papers

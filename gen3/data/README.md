@@ -68,6 +68,75 @@ Remaining P0-P1 gaps (driven by faculty extension papers):
 
 All spring repositories are public under AGPL-3.0. No institutional access required. No proprietary software. Runs on consumer hardware purchased from Newegg and Facebook Marketplace.
 
+**Current state**: One developer, one gate at a time, running experiments sequentially. This is the baseline — what constrained evolution produces on a single RTX 4070 in a basement.
+
+---
+
+## What NUCLEUS Unlocks
+
+The 2,513 checks above were produced on single gates, running one experiment at a time. NUCLEUS changes the economics by composing the basement HPC into a coordinated mesh.
+
+### The Hardware (Today)
+
+| Gate | CPU | GPU | RAM | Role |
+|------|-----|-----|-----|------|
+| Northgate | i9-14900K | RTX 5090 | 192GB DDR5 | Flagship AI/LLM |
+| Southgate | 5800X3D | RTX 3090 | 128GB DDR4 | Heavy compute |
+| Eastgate | i9-12900 | RTX 4070 + Akida NPU | 32GB DDR5 | Utility + neuromorphic |
+| Strandgate | Dual EPYC 7452 (64 cores) | RTX 3090 + RX 6950 XT + 2x Akida | 256GB ECC DDR4 | Bioinformatics |
+| Westgate | i7-4771 | RTX 2070 Super | 32GB DDR3 | 76TB ZFS cold storage |
+| + 4 more towers | Mixed | Mixed | 288GB total | Staging, flock, expansion |
+
+**Aggregate**: 100+ CPU cores, ~128GB GPU VRAM (NVIDIA + AMD), ~1TB system RAM, ~100TB storage, 3x Akida NPU (160 NPUs), 10G backbone. ~$15K total investment.
+
+### Covalent Bonding: The Basement as a Supercomputer
+
+With NUCLEUS deployed, each gate runs its own NUCLEUS atomic composition. biomeOS coordinates the mesh. The bonding model (see `ECOSYSTEM_ARCHITECTURE.md` §4) determines how gates share capabilities:
+
+- **Covalent bonding** (family gates): Full genetic trust. Workloads flow freely across gates. Strandgate's 64 cores handle CPU-bound bioinformatics while Northgate's RTX 5090 handles GPU-bound ML. Westgate's 76TB ZFS stores everything. No human orchestration — biomeOS routes workloads to hardware that matches.
+
+- **What this means for the springs**: Instead of running one experiment per gate, all 5 springs run simultaneously across the mesh. hotSpring's Yukawa MD on Northgate's 5090. wetSpring's 16S pipeline on Strandgate's EPYC. neuralSpring's LSTM training on Southgate's 3090. groundSpring's Monte Carlo on Eastgate's 4070. All writing to Westgate's ZFS. The BarraCUDA WGSL shaders run identically on NVIDIA and AMD — validated on both in the mesh.
+
+### Ionic Bonding: Others Join
+
+The bonding model supports **ionic bonding** — contract-scoped access for external collaborators. A professor's lab GPU contributes compute under a metered contract. They get access to specific capabilities (e.g., run BarraCUDA lattice QCD on their parameter sweep) but not to the family's genetic lineage or storage. Usage is auditable. Access is scoped.
+
+Scenario: Murillo's group has GPUs. Bazavov's group has GPUs. Kachkovskiy may have GPUs (he was selling hardware, after all). If each runs a NUCLEUS with ionic bonding to the basement mesh:
+
+- Murillo's gates run Sarkas parameter sweeps across the Γ-κ grid
+- Bazavov's gates run lattice QCD temperature scans
+- Kachkovskiy's gates run Anderson localization eigenvalue computations
+- The basement mesh coordinates, stores results, and provides the BarraCUDA kernel library
+
+Each group maintains sovereignty over their hardware. The mesh is voluntary. The science is shared. The compute cost is split. AGPL-3.0 ensures all improvements flow back.
+
+### Metallic Bonding: MSU Turns ICER Into a Lattice
+
+MSU's Institute for Cyber-Enabled Research (ICER) runs a traditional HPC: identical nodes, centralized scheduler, homogeneous workloads. In the NUCLEUS bonding model, this is **metallic bonding** — an electron sea of delocalized compute. Sub-specialized. Efficient for throughput. No sovereignty per node.
+
+If ICER deployed NUCLEUS atomics on its nodes, every idle GPU on campus becomes a BarraCUDA compute node. The WGSL shaders are vendor-agnostic — they run on whatever GPU ICER has. The lattice QCD workloads that currently require CERN's HPC or Fermilab's allocation could run on Michigan State's campus GPU fleet.
+
+The math:
+
+- CERN's LHCC computing: ~1M CPU cores, ~50K GPUs, $1B+ infrastructure
+- MSU ICER: ~20K cores, ~200 GPUs, ~$50M infrastructure
+- Basement mesh: 100 cores, 8 GPUs, $15K
+- BarraCUDA cost per hotSpring paper: **$0.01-0.10**
+
+NUCLEUS doesn't make the basement as fast as CERN. It makes the *science-per-dollar* comparable, because the constraint isn't raw FLOPS — it's whether the compute produces correct, reproducible, published-quality results. 2,513 checks say it does.
+
+The path from a basement in Lansing to a distributed physics computing network:
+
+```
+Basement (covalent)
+  └──→ Faculty labs join (ionic)
+        └──→ ICER deploys NUCLEUS (metallic)
+              └──→ Other universities join (ionic/metallic)
+                    └──→ Distributed science mesh
+```
+
+Each step is additive. Each step preserves sovereignty. Each step uses the same BarraCUDA kernels validated by the springs. The 2,513 checks don't need to be re-run — they're the acceptance tests for every new node that joins.
+
 ---
 
 ## Relationship to gen3/ Papers
