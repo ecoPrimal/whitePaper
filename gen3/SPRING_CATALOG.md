@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: February 12, 2026
+**Last Updated**: February 20, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -63,7 +63,7 @@ The springs are organized into two tiers:
 
 **Domain**: Evapotranspiration, soil moisture sensing, IoT irrigation scheduling
 **Grade**: Full Python→Rust→cross-validation pipeline complete
-**Checks**: 142/142 Python + 101/101 Rust + 53/53 cross-validation = 296 total
+**Checks**: 142/142 Python + 119/119 Rust + 65/65 cross-validation = 326 total
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0
@@ -76,8 +76,8 @@ The springs are organized into two tiers:
 |-------|------|--------|------------|
 | 0 (Python control) | FAO-56, Dong 2020 soil, Dong 2024 IoT, water balance | 142/142 | Paper examples matched exactly |
 | 0+ (Real data) | 4 Michigan stations, 918 station-days | R²=0.967 | Open-Meteo ERA5 validates open data approach |
-| 1 (Rust) | 5 validation binaries, 106 unit tests | 101/101 | Hargreaves ET₀, 10-crop Kc, sensor calibration |
-| 2 (Cross-validation) | Python↔Rust value comparison | 53/53 | All values match within 1e-5 |
+| 1 (Rust) | 7 binaries, 233 tests (161 unit + 72 integration) | 119/119 | Hargreaves ET₀, 10-crop Kc, sensor calibration |
+| 2 (Cross-validation) | Python↔Rust value comparison | 65/65 | All values match within 1e-5 |
 
 **Papers reproduced**: Allen et al. (1998) FAO-56 Chapters 2/4/8, Dong et al. (2020) soil sensor calibration, Dong et al. (2024) IoT irrigation pipeline.
 
@@ -95,7 +95,7 @@ The springs are organized into two tiers:
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
 **Grade**: Most modules — 30 sovereign Rust modules, 1 runtime dependency
-**Checks**: 135/135 CPU + 38/38 GPU = 173/173 total
+**Checks**: 1,116 total across 42 experiments (7 phases including GPU pipeline)
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -106,11 +106,14 @@ The springs are organized into two tiers:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| 1 (Galaxy/Python) | 8 experiments in Galaxy/QIIME2/Python | Baselined | Published pipeline reproduced |
-| 2 (Rust CPU) | 7 validation binaries, 30 modules, 284 tests | 135/135 | Sovereign bioinformatics in Rust |
+| 1-2 (Galaxy→Rust) | 16S + LC-MS + PFAS pipelines, 30 modules | 135/135 | Sovereign bioinformatics in Rust |
 | 3 (GPU) | 11 ToadStool primitives, f64 precision | 38/38 | 1,077x spectral cosine speedup |
+| 4 (Sovereign 16S) | DADA2 + chimera + taxonomy + UniFrac | 37/37 | Complete 16S in Rust |
+| 5 (Paper parity) | Real NCBI data + VOC peaks | 51/51 | Algae pond + Reese 2019 match |
+| 6 (Public benchmark) | 4 BioProjects vs paper ground truth | 202/202 | 22 samples, all match |
+| 7 (GPU pipeline) | Full DADA2 + chimera + taxonomy on GPU | 88/88 | 10 samples, QF WGSL, streaming |
 
-**Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust).
+**Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth).
 
 **Papers queued**: 22 candidates across 3 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), Jones PFAS (Track 2). See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
@@ -164,8 +167,8 @@ The springs are organized into two tiers:
 ### 1.5 neuralSpring — Machine Learning Primitives & Isomorphic Patterns
 
 **Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction
-**Grade**: Phase 0 + Phase 0+ complete with 5 published paper reproductions
-**Checks**: 48/48 synthetic + 27/27 scholarly = 75/75 total
+**Grade**: Phase 0 + Phase 0+ + Rust validation + GPU pipeline
+**Checks**: 190/190 Python + 549/549 Rust + 66 GPU = 805 total
 **Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
@@ -178,6 +181,9 @@ The springs are organized into two tiers:
 |-------|------|--------|------------|
 | 0 (Synthetic) | 5 experiments: surrogate, transformer, LSTM, transfer, isomorphic | 48/48 | 6 primitives explain all architectures |
 | 0+ (Scholarly) | 5 published studies reproduced | 27/27 | PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference |
+| 0++ (Extended) | 6 additional Python reproductions | 115/115 | Autoencoder, GAN, reservoir, attention variants |
+| 1 (Rust) | 9 BarraCUDA validation binaries + native modules | 549/549 | 242 BarraCUDA primitives + 167 native + 123 CPU ports + 17 unit |
+| 1+ (GPU) | Fused pipeline, shader checks | 66 | 43-78x speedup via single-encoder dispatch |
 
 **Studies reproduced**:
 
@@ -189,7 +195,7 @@ The springs are organized into two tiers:
 | LSTM ERA5 | Real Open-Meteo data | NSE=0.849, RMSE=3.46°C on 4 years Michigan |
 | Quantized inference | INT8/INT4 methodology | INT8: 0.017% loss, INT4: 0.79% loss |
 
-**Papers queued**: 11 candidates — Dolson counterdiabatic evolution (Nature Physics 2020), Liu PhyloNet-HMM, Waters cooperation game theory. See `neuralSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers queued**: 13 candidates — Dolson counterdiabatic evolution (Nature Physics 2020), Liu PhyloNet-HMM, Waters cooperation game theory, Kachkovskiy spectral/optimization. See `neuralSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
 **BarraCUDA primitives validated**: GEMM, Attention, LayerNorm, BatchNorm, RMSNorm, ReLU, GELU, Conv2d, MaxPool, LSTM cell, autograd, quantized GEMV (Q4/Q8), MSE loss, Adam optimizer.
 
@@ -208,17 +214,19 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 5 |
-| Total quantitative checks | 610+ passing |
+| Total quantitative checks | **2,513** passing |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML |
-| Papers reproduced | 15+ (published, peer-reviewed) |
-| Papers queued for review | 57 candidates across all springs |
-| Faculty connected | 9 professors (MSU + Sandia) |
+| Papers reproduced | 20+ (published, peer-reviewed) |
+| Papers queued for review | 60+ candidates across all springs |
+| Faculty connected | 9 professors (MSU + Sandia) across 6 departments |
 | BarraCUDA kernels validated by springs | 25+ distinct GPU primitives |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
+| Rust validation checks | 549 (neuralSpring) + 119 (airSpring) + hotSpring Rust pipeline |
 | Languages | Python (Phase 0), Rust (Phase 1+), WGSL shaders (Phase 2+) |
 | License | AGPL-3.0 (all springs, no exceptions) |
 | Institutional access required | Zero |
 | Proprietary software required | Zero |
+| Time from first spring to 2,513 checks | ~20 days |
 
 ### 2.2 Cross-Spring Data Flow
 
@@ -318,4 +326,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 
 ---
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0. The science is open because the methodology demands it.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 2,513 checks across 5 domains in 20 days — the constrained evolution methodology works.**

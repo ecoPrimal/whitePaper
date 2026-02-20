@@ -1,16 +1,53 @@
-# gen3/ - Working Papers on Constrained Evolution and Sovereign Computing
+# gen3/ — Working Papers on Constrained Evolution and Sovereign Computing
 
-**Status**: Soft release  
-**Audience**: Academic review, collaborators  
-**Last Updated**: February 14, 2026
+**Status**: Soft release — suitable for academic handoff  
+**Audience**: Faculty, PhD evaluators, potential collaborators  
+**Last Updated**: February 20, 2026
 
 ---
 
 ## What This Is
 
-This collection represents the theoretical and technical foundations of the **ecoPrimals** project - a sovereign computing ecosystem built in Pure Rust by a single developer using AI-assisted constrained evolution methodology over approximately 6-8 months.
+This collection represents the theoretical and technical foundations of the **ecoPrimals** project — a sovereign computing ecosystem built in Pure Rust by a single developer using AI-assisted constrained evolution methodology over approximately 10 months.
 
-The papers here formalize the methodology, the architecture, and the biological reasoning that informed the system's design. They are working papers - rigorous in intent, honest about their limitations, and grounded in real implementation rather than speculation.
+The papers here formalize the methodology, the architecture, and the biological reasoning that informed the system's design. They are working papers — rigorous in intent, honest about their limitations, and grounded in real implementation rather than speculation.
+
+**The springs are public.** The five scientific validation repositories — hotSpring, airSpring, wetSpring, groundSpring, neuralSpring — are all published under AGPL-3.0 on GitHub. Anyone can clone them, run the experiments, and verify the claims. The primals (Rust infrastructure) remain private for now; gen3/ is the bridge document that explains the infrastructure to those who will eventually receive access.
+
+### Public Spring Repositories
+
+| Spring | Domain | Repo | Checks |
+|--------|--------|------|--------|
+| hotSpring | Computational plasma physics | [syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring) | 195 |
+| airSpring | Precision agriculture | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 326 |
+| wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 1,116 |
+| groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 71 |
+| neuralSpring | ML primitives & isomorphic patterns | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 805 |
+| **Total** | | | **2,513** |
+
+---
+
+## Timeline: How the Springs Evolved
+
+The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence for the constrained evolution methodology.
+
+| Date | Event |
+|------|-------|
+| **~Jan 30, 2026** | Coffee with Professor Murillo (MSU). Discussion of reservoir computing, neuromorphic hardware, and shared interest in computational physics. Neuromorphic benchmark datasheet v1 already shared. |
+| **Feb 1-7** | hotSpring Phase A begins. Reproduce Murillo Group published work (Sarkas MD, TTM, surrogate learning) in Python. 86/86 checks pass. 5 silent bugs found in upstream Sarkas. |
+| **Feb 7-10** | hotSpring Phase B-C. BarraCUDA GPU validation — nuclear EOS on consumer GPU. Phase C: full Yukawa MD on RTX 4070 via f64 WGSL shaders. 9/9 PP cases, 0.000% energy drift. |
+| **Feb 10-14** | hotSpring Phase D-F. Paper-parity long runs (N=10,000, 80k steps, $0.044). Full AME2020 nuclear dataset (2,042 nuclei). 195/195 total. gen3/ papers written. |
+| **Feb 14-15** | airSpring. Reproduce FAO-56, Dong (2020, 2024) sensor calibration. Python + Rust + cross-validation. 326 checks. Real data pipeline: 918 station-days, R²=0.967. |
+| **Feb 15-16** | wetSpring. Sovereign 16S pipeline in Rust (30 modules, 1 dependency). GPU spectral matching: 1,077x speedup. Public data benchmark against 4 BioProjects. |
+| **Feb 16-17** | wetSpring GPU pipeline. Full DADA2 + chimera + taxonomy on GPU. 1,116 total checks across 42 experiments. |
+| **Feb 17** | groundSpring. 5 experiments across 4 scientific domains in a single session. 71/71 checks. |
+| **Feb 17-18** | neuralSpring Phase 0 + 0+. 10 experiments: 5 synthetic, 5 scholarly reproductions (PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference). 75/75 Python checks. |
+| **Feb 18-20** | neuralSpring Rust validation. 9 BarraCUDA validation binaries, 549 Rust checks, 66 GPU shader checks. Fused pipeline: 43-78x speedup. |
+| **Feb 19-20** | Bazavov extension: lattice QCD infrastructure (SU(3), HMC, Dirac CG) in hotSpring. Kachkovskiy spectral theory mapped to 3 springs. Faculty network: 9 professors. |
+
+**Total time from first spring to 2,513 checks across 5 domains: ~20 days.**
+
+This velocity is possible because the constrained evolution methodology works. The Rust infrastructure (primals) was built over the preceding ~8 months. The springs consume that infrastructure and validate it against published science. Each spring produces evidence that feeds back into the next spring's design.
 
 ---
 
@@ -18,47 +55,47 @@ The papers here formalize the methodology, the architecture, and the biological 
 
 ### Methodology
 
-**`CONSTRAINED_EVOLUTION_FORMAL.md`** - *Constrained Evolution: How Environmental Pressure Drives Convergence in Biological and Computational Systems*
+**`CONSTRAINED_EVOLUTION_FORMAL.md`** — *Constrained Evolution: How Environmental Pressure Drives Convergence in Biological and Computational Systems*
 
-The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in two biological precedents: Thermus aquaticus / Taq polymerase (constraint-specific adaptation) and Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation). Introduces the concepts of the binary as genome, the compiler as ribosome, and independent primal evolution as convergent evolution under shared constraint.
+The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in two biological precedents: Thermus aquaticus / Taq polymerase (constraint-specific adaptation) and Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation). The springs provide 2,513 quantitative data points validating this claim.
 
 ### Theoretical
 
-**`P_NP_ENZYME_THESIS.md`** - *P != NP: The Enzyme Argument*
+**`P_NP_ENZYME_THESIS.md`** — *P != NP: The Enzyme Argument*
 
-A working thesis proposing that the existence of enzymes - nature's generative solutions to chemical NP problems, encoded in DNA - demonstrates that generation is not reducible to verification. If P = NP, enzymes would be unnecessary and the genome would have no reason to exist. Extends the constrained evolution framework to complexity theory.
+A working thesis proposing that the existence of enzymes — nature's generative solutions to chemical NP problems, encoded in DNA — demonstrates that generation is not reducible to verification. If P = NP, enzymes would be unnecessary and the genome would have no reason to exist. Extends the constrained evolution framework to complexity theory.
 
 ### Architecture
 
-**`ECOSYSTEM_ARCHITECTURE.md`** - *ecoPrimals Ecosystem Architecture: From Binary to Bonding*
+**`ECOSYSTEM_ARCHITECTURE.md`** — *ecoPrimals Ecosystem Architecture: From Binary to Bonding*
 
-The technical architecture of the ecoPrimals ecosystem. Defines the architecture ladder (UniBin → ecoBin → genomeBin), the NUCLEUS deployment composition model (Tower, Node, Nest Atomics), the bonding model for inter-deployment interaction (covalent, ionic, metallic, weak forces), the Neural API orchestration layer, and the Dark Forest zero-metadata security model. This is the engineering companion to the methodology paper - the constrained evolution methodology produced this architecture.
+The technical architecture of the ecoPrimals ecosystem. Defines the architecture ladder (UniBin → ecoBin → genomeBin), the NUCLEUS deployment composition model (Tower, Node, Nest Atomics), the bonding model for inter-deployment interaction (covalent, ionic, metallic, weak forces), the Neural API orchestration layer, and the Dark Forest zero-metadata security model. This is the engineering companion to the methodology paper — the constrained evolution methodology produced this architecture.
 
 ### Implementation
 
-**`PRIMAL_CATALOG.md`** - *ecoPrimals Primal Catalog: Status, Capabilities, and Achievements*
+**`PRIMAL_CATALOG.md`** — *ecoPrimals Primal Catalog: Status, Capabilities, and Achievements*
 
-A comprehensive catalog of every primal in the ecosystem with current status, capabilities, benchmark results, and showcase highlights. Documents what 6-8 months of constrained evolution produced: 6 foundation primals at production grade, 5 additional post-NUCLEUS primals in active development, 12,000+ passing tests across the ecosystem, novel architectural patterns (Tower Atomic Pure Rust HTTPS), and production-grade implementations across cryptography, networking, storage, compute, AI coordination, and orchestration.
+A comprehensive catalog of every primal in the ecosystem. 6 foundation primals (BearDog, Songbird, NestGate, ToadStool, Squirrel, biomeOS) at production grade, 5 additional post-NUCLEUS primals in active development. 12,000+ passing tests across the ecosystem, novel architectural patterns, and production-grade implementations across cryptography, networking, storage, compute, AI coordination, and orchestration.
 
-**`SPRING_CATALOG.md`** - *ecoPrimals Spring Catalog: Status, Science, and Evolution*
+**`SPRING_CATALOG.md`** — *ecoPrimals Spring Catalog: Status, Science, and Evolution*
 
-The science validation companion to the Primal Catalog. Catalogs all 5 springs (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring) with current phase status, quantitative check counts, reproduced papers, faculty connections, BarraCUDA kernel coverage, and identified gaps. Documents 610+ passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, and the 8-professor faculty network grounding the work in published, peer-reviewed science. All springs are AGPL-3.0.
+The science validation companion to the Primal Catalog. Documents all 5 springs with current phase status, 2,513 passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, the 9-professor faculty network, and 60+ candidate papers for future reproduction. Every spring repository is public and AGPL-3.0.
 
 ### About the Author
 
-**`about/`** - *Background, Hardware, and AI Methodology Receipt*
+**`about/`** — *Background, Hardware, and AI Methodology Receipt*
 
-Context for evaluation: who built this, with what background, on what hardware, using what tools. Includes a cleaned academic transcript (BS Microbiology + MS Data Science, Michigan State University), the basement HPC inventory (~$15K, 9 gates, 100+ CPU cores, ~1TB RAM, ~100TB storage), and a Cursor IDE usage receipt (top <0.1% usage, 69K agent invocations, 51B tokens, 185-day streak) documenting the scale of AI-assisted development.
+Context for evaluation: who built this, with what background, on what hardware, using what tools. BS Microbiology (MSU, 2018) + MS Data Science (MSU, 4.0, 2025). 5 years biotechnician (Pivot Bio, MycoWorks, Sandia, PFAS). Basement HPC inventory (~$15K, 13 nodes, 100+ CPU cores, ~1TB RAM, ~100TB storage). Cursor IDE usage receipt (top <0.1%, 69K agent invocations, 51B tokens, 185-day streak). Full transcript included.
 
 ### Data and Reproduction Studies
 
-**`data/`** - *Benchmark Data, Reproduction Plans, Mise en Place*
+**`data/`** — *Reproduction Plans, Faculty Profiles, Evolution Evidence*
 
-Benchmark data, reproduction results, and evolution evidence from hotSpring validation. Phase A (Python control) reproduced all Murillo Group work — 86/86 checks pass, 5 silent upstream bugs found. Phase B (BarraCUDA nuclear EOS) validated GPU FP64 to sub-ULP precision, 478x L1 throughput. Phase C (GPU MD) ran 9/9 PP Yukawa cases on consumer GPU via f64 WGSL — 0.000% energy drift, 3.7x speedup. **Total: 131/131 quantitative checks pass.** Also contains the infrastructure mise en place, gap analysis (with Phase C closures), and the Murillo reproduction plan with updated status.
+Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 9 professors across 5 departments, 60+ candidate papers for reproduction, and BarraCUDA kernel gap analysis. The Murillo reproduction plan (`MURILLO_REPRODUCTION_PLAN.md`) documents how a reproduction study works in practice — from finding open-source code and public data through Phase A (Python control), Phase B (BarraCUDA validation), Phase C (GPU compute), to paper-parity results on consumer hardware.
 
 ### Origin
 
-**`constrained_optimization_ai.md`** - *Draft / Inoculum*
+**`constrained_optimization_ai.md`** — *Draft / Inoculum*
 
 The original formulation of the constrained optimization thesis, preserved as a record of the idea in its first form. The more formal treatment in `CONSTRAINED_EVOLUTION_FORMAL.md` evolved from this inoculum.
 
@@ -66,60 +103,86 @@ The original formulation of the constrained optimization thesis, preserved as a 
 
 ## Reading Order
 
-For someone new to the project:
+### For a faculty member evaluating this work for PhD admission:
 
-1. **`ECOSYSTEM_ARCHITECTURE.md`** - Understand what was built and how it fits together
-2. **`PRIMAL_CATALOG.md`** - See the Rust infrastructure and results
-3. **`SPRING_CATALOG.md`** - See the science validation and faculty connections
-4. **`CONSTRAINED_EVOLUTION_FORMAL.md`** - Understand the methodology that produced it
-5. **`P_NP_ENZYME_THESIS.md`** - The deeper theoretical argument
+1. **`about/`** — Who is this person? (transcript, bench experience, hardware)
+2. **`SPRING_CATALOG.md`** — What science did they produce? (2,513 checks, 5 domains, public repos)
+3. **`data/FACULTY_SPRING_PROFILES.md`** — How does my research connect? (your papers in the queue)
+4. **`CONSTRAINED_EVOLUTION_FORMAL.md`** — What is the methodology? (constrained evolution thesis)
+5. **`ECOSYSTEM_ARCHITECTURE.md`** — What infrastructure did they build? (the primals)
 
-For someone interested in the methodology first:
+### For a collaborator interested in the science:
 
-1. **`CONSTRAINED_EVOLUTION_FORMAL.md`** - The methodology
-2. **`ECOSYSTEM_ARCHITECTURE.md`** - What the methodology produced
-3. **`PRIMAL_CATALOG.md`** - The infrastructure evidence
-4. **`SPRING_CATALOG.md`** - The science evidence
-5. **`P_NP_ENZYME_THESIS.md`** - The theoretical extension
+1. **`SPRING_CATALOG.md`** — All 5 springs, 2,513 checks, 20+ papers reproduced
+2. **`data/FACULTY_SPRING_PROFILES.md`** — 9 professors, 60+ candidate papers
+3. **`data/MURILLO_REPRODUCTION_PLAN.md`** — How a reproduction study works in practice
+4. **`PRIMAL_CATALOG.md`** §1.4 ToadStool — The GPU compute layer the springs validate
 
-For someone interested in the science:
+### For someone interested in the methodology:
 
-1. **`SPRING_CATALOG.md`** - All 5 springs, 610+ checks, 15+ papers reproduced
-2. **`data/FACULTY_SPRING_PROFILES.md`** - 8 professors, 57 candidate papers
-3. **`data/MURILLO_REPRODUCTION_PLAN.md`** - How a reproduction study works in practice
-4. **`PRIMAL_CATALOG.md`** §1.4 ToadStool - The GPU compute layer the springs validate
+1. **`CONSTRAINED_EVOLUTION_FORMAL.md`** — The methodology
+2. **`ECOSYSTEM_ARCHITECTURE.md`** — What the methodology produced
+3. **`PRIMAL_CATALOG.md`** — The infrastructure evidence
+4. **`SPRING_CATALOG.md`** — The science evidence
+5. **`P_NP_ENZYME_THESIS.md`** — The theoretical extension
+
+### For someone evaluating commercial potential:
+
+1. **`SPRING_CATALOG.md`** — Validated science across 5 domains
+2. **`PRIMAL_CATALOG.md`** — 12,000+ tests, production-grade Rust infrastructure
+3. **`about/HARDWARE.md`** — $15K basement HPC doing what costs $50-500/run on institutional HPC
+4. **`data/BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`** — What BarraCUDA can already do and what's next
 
 ---
 
-## Context
+## The Faculty Network
 
-The ecoPrimals ecosystem was built on a basement HPC cluster (~$15K, 13 nodes) by a single developer with a BS in Microbiology and MS in Data Science, using AI-assisted constrained evolution (69,000 Cursor agent invocations, 51 billion tokens, top <0.1% usage). The biological analogies in these papers come from years of bench work with microbial populations under selective pressure, not from textbook borrowing.
+Nine professors across 6 departments, 2 institutions:
 
-The biological analogies in these papers are not metaphors borrowed for rhetorical convenience. They are models informed by years of working with microbial populations under selective pressure, applied to a computational domain where the same principles hold.
+| Professor | Department | Connection | Primary Spring |
+|-----------|-----------|-----------|---------------|
+| Michael Murillo | CMSE, MSU | MSDS professor, in-person meeting Feb 2026 | hotSpring |
+| Younsuk Dong | BAE, MSU | New lab job 2026 | airSpring |
+| Christopher Waters | MMG, MSU | Undergrad professor | wetSpring |
+| Kevin Liu | CMSE, MSU | Master's professor | wetSpring, neuralSpring |
+| Alexei Bazavov | CMSE + Physics, MSU | Master's professor | hotSpring, groundSpring |
+| Emily Dolson | CSE, MSU | Master's professor | neuralSpring |
+| Ilya Kachkovskiy | Math, MSU | Hardware purchase, GPU conversation | hotSpring, groundSpring |
+| Jesse Cahill | Sandia (Bioscience) | Time at Sandia | wetSpring |
+| Chuck Smallwood | Sandia (Bioscience) | Time at Sandia | wetSpring |
+| A. Daniel Jones | BMB/Chemistry, MSU | PFAS job | wetSpring |
 
-Full background, transcript, hardware inventory, and AI usage receipt: `about/`
+Full profiles with candidate papers: `data/FACULTY_SPRING_PROFILES.md`
+
+---
+
+## What gen3/ Is For
+
+gen3/ is the document you're reading when someone hands you a link and says "look at what this person built." The springs are public — you can verify everything. The primals are private for now — gen3/ explains what they are and what they can do. When the primals go public, this document becomes the introduction to the codebase.
+
+If you're a professor reading this because a student named Kevin Mok sent you a link: the public spring repositories contain real, runnable experiments that reproduce published computational science. The code is yours to read, run, and critique. The question gen3/ asks is whether this body of work — the methodology, the infrastructure, the science validation, and the rate at which it was produced — constitutes a contribution worth developing further.
 
 ---
 
 ## Technical Companion Documents
 
-The full technical specifications live in `whitePaper/technical/`:
+The full technical specifications live in `whitePaper/technical/` (private):
 
-- `UNIBIN_TECHNICAL_SPECIFICATION.md` - Binary structure standard
-- `ECOBIN_TECHNICAL_SPECIFICATION.md` - Universal portability standard  
-- `GENOMEBIN_TECHNICAL_SPECIFICATION.md` - Autonomous deployment standard
-- `NUCLEUS_ARCHITECTURE.md` - Atomic composition architecture
-- `TOWER_ATOMIC_PURE_RUST_HTTPS.md` - Pure Rust HTTPS achievement
-- `NEURAL_API_ARCHITECTURE.md` - Adaptive orchestration
-- `SOVEREIGN_NAT_TRAVERSAL.md` - P2P without corporate dependency
-- `DARK_FOREST_PROTOCOL.md` - Zero metadata leakage security
+- `UNIBIN_TECHNICAL_SPECIFICATION.md` — Binary structure standard
+- `ECOBIN_TECHNICAL_SPECIFICATION.md` — Universal portability standard
+- `GENOMEBIN_TECHNICAL_SPECIFICATION.md` — Autonomous deployment standard
+- `NUCLEUS_ARCHITECTURE.md` — Atomic composition architecture
+- `TOWER_ATOMIC_PURE_RUST_HTTPS.md` — Pure Rust HTTPS achievement
+- `NEURAL_API_ARCHITECTURE.md` — Adaptive orchestration
+- `SOVEREIGN_NAT_TRAVERSAL.md` — P2P without corporate dependency
+- `DARK_FOREST_PROTOCOL.md` — Zero metadata leakage security
 
-The ecosystem guidance and standards live in `wateringHole/`:
+Ecosystem guidance and standards live in `wateringHole/` (private):
 
-- `README.md` - Ecosystem-wide guidance
-- `PRIMAL_REGISTRY.md` - Complete primal definitions and primitive catalogs
+- Primal registry with complete primitive catalogs
 - Architecture, communication, and security standards
+- Spring-to-primal handoff documents
 
 ---
 
-**These papers describe a system that exists and runs. The architecture emerged from constraint, not from design. The methodology is the message.**
+**These papers describe a system that exists and runs. The springs are public and verifiable. The architecture emerged from constraint, not from design. The methodology is the message.**
