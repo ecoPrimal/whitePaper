@@ -2,7 +2,7 @@
 
 **Status**: Active preparation  
 **Purpose**: Set up the Python scientific computing stack to reproduce Murillo Group work as our control experiment. BarraCUDA evolves in parallel on ToadStool's timeline.  
-**Last Updated**: February 7, 2026
+**Last Updated**: February 14, 2026
 
 **Implementation**: `ecoPrimals/hotSpring/` - the working project directory with conda environments, clone scripts, benchmark protocols, and all control experiment work.
 
@@ -348,25 +348,27 @@ System-level: FFTW3 dev libraries, gfortran (for FMM3D compilation).
 - [x] Map BarraCUDA capabilities to scientific computing needs (see `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`)
 - [x] Identify gaps for Phase B (FFT, complex arithmetic, PBC, force kernels, Bessel functions)
 
-### Do Now (Any Gate, No NUCLEUS)
+### Do Now (Any Gate, No NUCLEUS) — Phase A COMPLETE
 
-- [ ] Install FFTW3 system libraries on Strandgate
-- [ ] Install FFTW3 system libraries on Northgate and Southgate
-- [ ] Create `sarkas` conda environment on Strandgate
-- [ ] Install Sarkas and validate import
-- [ ] Clone all three primary repos to `~/research/murillo-group/`
-- [ ] Run Sarkas quickstart notebook
-- [ ] Run Sarkas full tutorial (Yukawa simulation)
-- [ ] Compare Sarkas output to Dense Plasma Properties Database reference data
-- [ ] Download Zenodo surrogate learning datasets
-- [ ] Download Code Ocean surrogate learning capsule
-- [ ] Review Code Ocean capsule structure and dependencies
-- [ ] Create `surrogate` conda environment
-- [ ] Read Nature Machine Intelligence paper in full
-- [ ] Create `ttm` conda environment
-- [ ] Run TTM Jupyter notebooks
+- [x] Install FFTW3 system libraries on Eastgate
+- [x] Create `sarkas` conda environment on Eastgate
+- [x] Install Sarkas and validate import
+- [x] Clone all three primary repos to `~/research/murillo-group/`
+- [x] Run Sarkas quickstart notebook
+- [x] Run Sarkas full tutorial (Yukawa simulation) — **12 DSF cases validated**
+- [x] Compare Sarkas output to Dense Plasma Properties Database reference data — **60/60 checks pass**
+- [x] Download Zenodo surrogate learning datasets
+- [x] Download Code Ocean surrogate learning capsule — **GATED (registration denied)**
+- [x] Review Code Ocean capsule structure and dependencies — **rebuilt from first principles instead**
+- [x] Create `surrogate` conda environment
+- [x] Read Nature Machine Intelligence paper in full
+- [x] Create `ttm` conda environment
+- [x] Run TTM Jupyter notebooks — **6/6 checks pass**
 - [ ] Review Teaching_Content repo for CMSE 890 materials
-- [ ] Profile Sarkas: where does compute time go?
+- [x] Profile Sarkas: where does compute time go? — **97.2% in force_pp.update()**
+- [x] **Phase B (nuclear EOS)**: L1 478x faster, L2 validated, GPU FP64 exact
+- [x] **Phase C (GPU MD)**: 9/9 PP Yukawa cases on RTX 4070, 0.000% energy drift, 3.7x GPU speedup
+- [ ] Install FFTW3/Sarkas on Strandgate, Northgate, Southgate (cross-gate benchmarks deferred)
 
 ### Do After NUCLEUS Stabilizes (Cross-Gate Benchmarks)
 

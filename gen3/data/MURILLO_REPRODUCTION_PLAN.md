@@ -1,8 +1,8 @@
 # Murillo Group Reproduction Studies
 
-**Status**: Research plan  
+**Status**: Phase A COMPLETE (86/86), Phase C GPU MD COMPLETE (9/9 PP Yukawa)  
 **Purpose**: Reproduce published computational physics work from the Murillo Group (MSU) on the basement HPC, then re-execute the core computation on BarraCUDA's Pure Rust vendor-agnostic GPU compute layer  
-**Last Updated**: February 7, 2026
+**Last Updated**: February 14, 2026
 
 ---
 
@@ -102,15 +102,16 @@ Take the profiled hot paths from Phase A and implement them as WGSL shaders disp
 
 | MD Operation | Sarkas (Python) | BarraCUDA (WGSL) | Status |
 |-------------|-----------------|-------------------|--------|
-| Pairwise forces | NumPy broadcasting + Numba | `pairwise_distance.wgsl` + `cdist.wgsl` + custom force shader | Distance ops exist, force shader needed |
+| Pairwise forces | NumPy broadcasting + Numba | Custom f64 Yukawa force shader (PBC, PE) | **DONE** (Phase C, 9/9 validated) |
 | Coulomb screening | SciPy `erfc()` | `erfc.wgsl` + `erf.wgsl` | **Ready** |
-| Neighbor lists | NumPy sort + cell lists | `sort.wgsl` + `searchsorted.wgsl` + `argsort.wgsl` | **Ready** |
-| Velocity-Verlet | NumPy arithmetic | `unified_math.rs` basic ops | **Ready** |
-| Reductions (energy, pressure) | NumPy `sum()`, `mean()` | `sum_reduce.wgsl` + `mean_reduce.wgsl` | **Ready** |
-| Radial distribution g(r) | NumPy `histogram()` | `histc.wgsl` + `bincount.wgsl` | **Ready** |
+| Neighbor lists | NumPy sort + cell lists | CPU-managed cell-list + GPU force compute | **DONE** (Phase C) |
+| Velocity-Verlet | NumPy arithmetic | Split f64 WGSL: half-kick + drift/PBC + second half-kick | **DONE** (Phase C, 0.000% drift) |
+| Berendsen thermostat | NumPy velocity rescaling | f64 WGSL velocity rescaling shader | **DONE** (Phase C) |
+| Reductions (energy, pressure) | NumPy `sum()`, `mean()` | f64 WGSL kinetic energy reduction | **DONE** (Phase C) |
+| Radial distribution g(r) | NumPy `histogram()` | f64 WGSL RDF histogram with atomicAdd | **DONE** (Phase C) |
 | Structure factors | pyfftw FFT | NTT/INTT shaders exist; true FFT shader needed | **Partial** (NTT ≠ FFT, but structure exists) |
 | Tensor contractions | NumPy `einsum()` | `einsum.wgsl` | **Ready** |
-| Double-precision forces | NumPy float64 | `matmul_fp64.wgsl` + u64 emulation (`u64_emu.wgsl`) | **Ready** |
+| Double-precision forces | NumPy float64 | SHADER_F64 + `math_f64.wgsl` (27 transcendental functions) | **DONE** (Phase C, sub-ULP precision) |
 
 **Key engineering challenge**: FFT. Sarkas uses FFTW3 for Particle-Particle Particle-Mesh (PPPM) long-range force decomposition. BarraCUDA has NTT/INTT (number theoretic transform - for FHE), but a true complex FFT shader is needed for PPPM. This is the primary new development required.
 
@@ -257,20 +258,27 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 
 ## Timeline
 
-### Pre-NUCLEUS (Now)
+### Completed
 
 | Task | Status |
 |------|--------|
-| ToadStool benchmark data collection (NPU/GPU/FHE) | **In progress** |
-| BarraCUDA op inventory and capability mapping | **Done** (this document) |
-| Identify all Murillo Group repos and data sources | **Done** (see `MISE_EN_PLACE.md`) |
-| Locate Zenodo datasets + Code Ocean capsule | **Done** |
-| Document BarraCUDA → Sarkas kernel mapping | **Done** (this document) |
-| Read Sarkas docs/tutorials thoroughly | Planned |
-| Read Nature MI paper in full | Planned |
-| Download Zenodo datasets locally | Planned |
-| Clone all Murillo Group repos for review | Planned |
+| BarraCUDA op inventory and capability mapping | **Done** |
+| Identify all Murillo Group repos and data sources | **Done** |
+| Locate Zenodo datasets + Code Ocean capsule | **Done** (Code Ocean gated — rebuilt from scratch) |
+| Document BarraCUDA → Sarkas kernel mapping | **Done** |
+| Read Sarkas docs/tutorials thoroughly | **Done** |
+| Read Nature MI paper in full | **Done** |
+| Download Zenodo datasets locally | **Done** |
+| Clone all Murillo Group repos | **Done** |
 | Identify FFT gap in BarraCUDA (needed for PPPM) | **Identified** |
+| **Phase A: Sarkas MD** (12 DSF cases, 60 checks) | **DONE — 60/60 pass** |
+| **Phase A: TTM** (3 species, local + hydro) | **DONE — 6/6 pass** |
+| **Phase A: Surrogate learning** (9 benchmarks + EOS) | **DONE — 15/15 pass** |
+| **Phase A: Nuclear EOS** (Python L1 + L2) | **DONE — L1 chi2=6.62, L2 chi2=1.93** |
+| **Phase B: Nuclear EOS** (BarraCUDA L1 + L2) | **DONE — L1 chi2=2.27 (478x faster), L2 chi2=16.11** |
+| **Phase B: GPU FP64 validation** | **DONE — 4.55e-13 MeV max error** |
+| **Phase C: GPU MD** (9 PP Yukawa, f64 WGSL) | **DONE — 9/9 pass, 0.000% drift, 3.7x GPU speedup** |
+| **Total acceptance checks** | **131/131** |
 
 ### Post-NUCLEUS (Phase A - Python Reproduction)
 
@@ -335,8 +343,9 @@ This connects directly to the ecoPrimals thesis: sovereignty through constraint.
 
 ## Notes
 
-- Professor Murillo is in California this week (ignition conference talk). Follow up when he returns.
+- Professor Murillo was in California (ignition conference, week of Feb 10). Follow up when he returns (week of Feb 17).
 - The neuromorphic benchmark datasheet (v1) has already been shared. Updated benchmarks from ToadStool's current runs will be shared as v2 when available.
-- All reproduction studies should be documented with sufficient detail for publication or inclusion in a joint paper.
-- The FFT gap in BarraCUDA is the primary technical blocker for Phase B of Study 1. NTT/INTT exist for FHE. A complex FFT shader for scientific simulation is the natural next evolution.
-- BarraCUDA's `unified_hardware.rs` + `scheduler.rs` already handle device detection and workload routing. The infrastructure for "run this kernel on whatever GPU is available" already exists.
+- All reproduction studies are documented with sufficient detail for publication. See `hotSpring/whitePaper/STUDY.md`.
+- The FFT gap in BarraCUDA remains the primary blocker for the 3 PPPM Coulomb cases (kappa=0). NTT→FFT evolution is the natural next step.
+- **Phase C GPU MD is a novel contribution**: full Sarkas-equivalent Yukawa MD running on consumer GPU via f64 WGSL shaders. No CUDA. No HPC. This capability does not exist in the Murillo Group's toolchain.
+- The hotSpring repo (`github.com/syntheticChemistry/hotSpring`) is public and AGPL-3.0 licensed. Ready for sharing.

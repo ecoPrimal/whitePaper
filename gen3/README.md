@@ -2,7 +2,7 @@
 
 **Status**: Soft release  
 **Audience**: Academic review, collaborators  
-**Last Updated**: February 7, 2026
+**Last Updated**: February 14, 2026
 
 ---
 
@@ -40,6 +40,10 @@ The technical architecture of the ecoPrimals ecosystem. Defines the architecture
 
 A comprehensive catalog of every primal in the ecosystem with current status, capabilities, benchmark results, and showcase highlights. Documents what 6-8 months of constrained evolution produced: 6 foundation primals at production grade, 5 additional post-NUCLEUS primals in active development, 12,000+ passing tests across the ecosystem, novel architectural patterns (Tower Atomic Pure Rust HTTPS), and production-grade implementations across cryptography, networking, storage, compute, AI coordination, and orchestration.
 
+**`SPRING_CATALOG.md`** - *ecoPrimals Spring Catalog: Status, Science, and Evolution*
+
+The science validation companion to the Primal Catalog. Catalogs all 5 springs (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring) with current phase status, quantitative check counts, reproduced papers, faculty connections, BarraCUDA kernel coverage, and identified gaps. Documents 610+ passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, and the 8-professor faculty network grounding the work in published, peer-reviewed science. All springs are AGPL-3.0.
+
 ### About the Author
 
 **`about/`** - *Background, Hardware, and AI Methodology Receipt*
@@ -50,7 +54,7 @@ Context for evaluation: who built this, with what background, on what hardware, 
 
 **`data/`** - *Benchmark Data, Reproduction Plans, Mise en Place*
 
-Benchmark data from ToadStool's universal compute framework (NPU/GPU/CPU comparisons, in progress) and two-phase reproduction plans for published computational physics research from the Murillo Group. Phase A reproduces the original work in Python to validate correctness. Phase B re-executes the same computation on BarraCUDA - ToadStool's Pure Rust GPU compute engine (165+ ops, 226+ WGSL shaders) that runs on any GPU vendor without CUDA or vendor lock-in. Three studies planned: Sarkas molecular dynamics (with detailed kernel-to-shader mapping), surrogate learning from the Nature Machine Intelligence 2024 paper (open data on Zenodo + Code Ocean), and agent-based infectious disease modeling. Also contains the infrastructure mise en place: every dependency, data source, repository, storage plan, and hardware assignment cataloged. This is a long-term, whole-ecosystem project blocked on NUCLEUS stability.
+Benchmark data, reproduction results, and evolution evidence from hotSpring validation. Phase A (Python control) reproduced all Murillo Group work — 86/86 checks pass, 5 silent upstream bugs found. Phase B (BarraCUDA nuclear EOS) validated GPU FP64 to sub-ULP precision, 478x L1 throughput. Phase C (GPU MD) ran 9/9 PP Yukawa cases on consumer GPU via f64 WGSL — 0.000% energy drift, 3.7x speedup. **Total: 131/131 quantitative checks pass.** Also contains the infrastructure mise en place, gap analysis (with Phase C closures), and the Murillo reproduction plan with updated status.
 
 ### Origin
 
@@ -65,16 +69,25 @@ The original formulation of the constrained optimization thesis, preserved as a 
 For someone new to the project:
 
 1. **`ECOSYSTEM_ARCHITECTURE.md`** - Understand what was built and how it fits together
-2. **`PRIMAL_CATALOG.md`** - See the concrete implementations and results
-3. **`CONSTRAINED_EVOLUTION_FORMAL.md`** - Understand the methodology that produced it
-4. **`P_NP_ENZYME_THESIS.md`** - The deeper theoretical argument
+2. **`PRIMAL_CATALOG.md`** - See the Rust infrastructure and results
+3. **`SPRING_CATALOG.md`** - See the science validation and faculty connections
+4. **`CONSTRAINED_EVOLUTION_FORMAL.md`** - Understand the methodology that produced it
+5. **`P_NP_ENZYME_THESIS.md`** - The deeper theoretical argument
 
 For someone interested in the methodology first:
 
 1. **`CONSTRAINED_EVOLUTION_FORMAL.md`** - The methodology
 2. **`ECOSYSTEM_ARCHITECTURE.md`** - What the methodology produced
-3. **`PRIMAL_CATALOG.md`** - The evidence
-4. **`P_NP_ENZYME_THESIS.md`** - The theoretical extension
+3. **`PRIMAL_CATALOG.md`** - The infrastructure evidence
+4. **`SPRING_CATALOG.md`** - The science evidence
+5. **`P_NP_ENZYME_THESIS.md`** - The theoretical extension
+
+For someone interested in the science:
+
+1. **`SPRING_CATALOG.md`** - All 5 springs, 610+ checks, 15+ papers reproduced
+2. **`data/FACULTY_SPRING_PROFILES.md`** - 8 professors, 57 candidate papers
+3. **`data/MURILLO_REPRODUCTION_PLAN.md`** - How a reproduction study works in practice
+4. **`PRIMAL_CATALOG.md`** §1.4 ToadStool - The GPU compute layer the springs validate
 
 ---
 

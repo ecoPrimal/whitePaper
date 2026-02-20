@@ -1,9 +1,9 @@
 # BarraCUDA: Scientific Computing Gap Analysis
 
-**Status**: Discovery document  
+**Status**: Discovery document (updated with Phase C results)  
 **Purpose**: Map what computational physics reveals as new evolution targets for BarraCUDA  
-**Context**: First analysis of BarraCUDA through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE  
-**Last Updated**: February 7, 2026
+**Context**: First analysis of BarraCUDA through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE. Updated Feb 14, 2026 with Phase C GPU MD results — several gaps are now CLOSED.  
+**Last Updated**: February 14, 2026
 
 ---
 
@@ -12,6 +12,8 @@
 BarraCUDA evolved under three selective pressures: **machine learning**, **fully homomorphic encryption**, and **universal GPU portability**. This analysis is the first time we've looked at it through the lens of **computational physics** - specifically, what would it take to run Sarkas molecular dynamics, the Two-Temperature Model, surrogate learning, and agent-based epidemiology entirely on BarraCUDA.
 
 The finding: **ML-driven evolution covered ~60-70% of what scientific computing needs**, because the underlying math is shared. The remaining 30-40% is genuinely new territory - and it's illuminating to see exactly where the gap is.
+
+**Update (Feb 14, 2026)**: Phase C GPU MD validated that the actual coverage is higher than predicted. For Yukawa OCP molecular dynamics, **100% of the mathematical operations needed already existed** in BarraCUDA from ML/FHE development (exp, sqrt, pow, sum_reduce, mean_reduce, histc). Only new *compositions* were needed (force kernels, integrators, thermostats), not new *math*. Several gaps listed below are now CLOSED.
 
 ---
 
@@ -97,11 +99,13 @@ The shader architecture (butterfly pattern, twiddle factors, bit-reversal permut
 
 ---
 
-### 3. Periodic Boundary Conditions (PBC)
+### 3. Periodic Boundary Conditions (PBC) -- CLOSED
 
-**Priority**: HIGH (required for any MD simulation in a periodic box)
+**Priority**: ~~HIGH~~ **RESOLVED** (implemented in hotSpring Phase C GPU MD)
 
-**What's missing**: MD simulations occur in periodic boxes where particles that exit one side re-enter from the other. All distance calculations must use the **minimum image convention**.
+**What was missing**: MD simulations occur in periodic boxes where particles that exit one side re-enter from the other. All distance calculations must use the **minimum image convention**.
+
+**Resolution**: hotSpring implemented PBC directly in the f64 WGSL force and drift kernels using minimum image convention (`dx = dx - L * round(dx / L)`). Validated across 9 PP Yukawa cases with correct RDF tail convergence (g(r)->1). See `hotSpring/barracuda/src/md/shaders.rs`.
 
 **Operations needed**:
 
@@ -117,11 +121,11 @@ The shader architecture (butterfly pattern, twiddle factors, bit-reversal permut
 
 ---
 
-### 4. Physics-Specific Force Kernels
+### 4. Physics-Specific Force Kernels -- PARTIALLY CLOSED
 
-**Priority**: HIGH (core of MD simulation)
+**Priority**: ~~HIGH~~ **PARTIALLY RESOLVED** (Yukawa implemented in hotSpring Phase C)
 
-**What's missing**: Specialized shaders for common interparticle potentials with force and energy computation.
+**What was missing**: Specialized shaders for common interparticle potentials with force and energy computation.
 
 | Potential | Formula | Use Case |
 |-----------|---------|----------|
@@ -133,9 +137,11 @@ The shader architecture (butterfly pattern, twiddle factors, bit-reversal permut
 
 Each needs: potential V(r), force F(r) = -dV/dr, virial contribution for pressure.
 
-**Implementation approach**: These are composable from existing ops (exp, pow, reciprocal, etc.). The shader would be a fused kernel: take particle pair, compute distance (with PBC), evaluate potential + force, accumulate. One dispatch per pair, massive parallelism.
+**Resolution (Yukawa)**: hotSpring implemented the Yukawa force kernel as an all-pairs f64 WGSL shader with PBC and per-particle PE accumulation. Uses `exp_f64`, `sqrt_f64`, `pow_f64` from `math_f64.wgsl` — all functions that evolved from ML/FHE needs. Validated: 9/9 cases pass with 0.000% energy drift. See `hotSpring/barracuda/src/md/shaders.rs`.
 
-**Why ML didn't need it**: ML doesn't compute physics potentials. But the constituent math (exp, pow, reciprocal, sqrt) already exists.
+**Remaining**: Coulomb (bare, no screening), Lennard-Jones, Morse, Born-Mayer still needed for broader coverage. But the pattern is established.
+
+**Why ML didn't need it**: ML doesn't compute physics potentials. But the constituent math (exp, pow, reciprocal, sqrt) already exists — and Phase C confirmed this is sufficient.
 
 ---
 
@@ -172,11 +178,11 @@ Each needs: potential V(r), force F(r) = -dV/dr, virial contribution for pressur
 
 ---
 
-### 7. ODE/PDE Solvers
+### 7. ODE/PDE Solvers -- PARTIALLY CLOSED
 
-**Priority**: MEDIUM (needed for TTM, general physics simulation)
+**Priority**: ~~MEDIUM~~ **PARTIALLY RESOLVED** (Velocity-Verlet + Berendsen thermostat implemented)
 
-**What's missing**: Explicit time-stepping schemes on GPU.
+**What was missing**: Explicit time-stepping schemes on GPU.
 
 | Solver | Type | Use Case |
 |--------|------|----------|
@@ -187,7 +193,9 @@ Each needs: potential V(r), force F(r) = -dV/dr, virial contribution for pressur
 | Finite difference stencils | PDE | Heat equation, diffusion, TTM |
 | Crank-Nicolson | Implicit PDE | Stable diffusion |
 
-**Implementation approach**: These are patterns over existing arithmetic. A Velocity-Verlet shader is: `v += 0.5*F/m*dt; x += v*dt; recompute F; v += 0.5*F/m*dt`. The structure is simple; the value is having it as a reusable shader.
+**Resolution (Velocity-Verlet + Berendsen)**: hotSpring implemented split Velocity-Verlet (half-kick + drift/PBC-wrap + second half-kick) and Berendsen thermostat as f64 WGSL shaders. Validated with 0.000% energy drift across 9 MD cases at 35,000 timesteps each. See `hotSpring/barracuda/src/md/shaders.rs`.
+
+**Remaining**: RK4, RK45, Leapfrog, finite difference stencils, Crank-Nicolson still needed for broader coverage.
 
 **Why ML didn't need it**: Neural networks train via backpropagation (gradient descent), not forward-time integration. The closest ML equivalent is Neural ODEs, which is a niche architecture.
 
@@ -304,21 +312,21 @@ To get FFT from NTT:
 
 ### Must Have (Phase B Blockers)
 
-| # | Gap | Effort | Dependencies |
-|---|-----|--------|-------------|
-| 1 | Complex number type/arithmetic | Medium | None - foundational |
-| 2 | Complex FFT (1D, 2D, 3D) | Medium-High | Complex arithmetic, NTT structure |
-| 3 | Periodic boundary conditions | Low | Existing distance ops |
-| 4 | Force kernels (Coulomb, Yukawa, LJ) | Low-Medium | PBC, existing math |
+| # | Gap | Effort | Dependencies | Status |
+|---|-----|--------|-------------|--------|
+| 1 | Complex number type/arithmetic | Medium | None - foundational | Open |
+| 2 | Complex FFT (1D, 2D, 3D) | Medium-High | Complex arithmetic, NTT structure | Open |
+| 3 | Periodic boundary conditions | Low | Existing distance ops | **CLOSED** (Phase C) |
+| 4 | Force kernels (Coulomb, Yukawa, LJ) | Low-Medium | PBC, existing math | **Yukawa CLOSED** (Phase C) |
 
 ### Should Have (Full Scientific Computing)
 
-| # | Gap | Effort | Dependencies |
-|---|-----|--------|-------------|
-| 5 | Bessel functions | Medium | Series/polynomial approximation |
-| 6 | ODE/PDE solvers (Verlet, RK4, FD stencils) | Medium | Basic arithmetic |
-| 7 | Scientific interpolation (spline, Chebyshev) | Low-Medium | None |
-| 8 | High-quality PRNG | Medium | None |
+| # | Gap | Effort | Dependencies | Status |
+|---|-----|--------|-------------|--------|
+| 5 | Bessel functions | Medium | Series/polynomial approximation | Open |
+| 6 | ODE/PDE solvers (Verlet, RK4, FD stencils) | Medium | Basic arithmetic | **VV + Berendsen CLOSED** (Phase C) |
+| 7 | Scientific interpolation (spline, Chebyshev) | Low-Medium | None | Open |
+| 8 | High-quality PRNG | Medium | None | Open |
 
 ### Nice to Have (Extended Capability)
 

@@ -337,7 +337,7 @@ The FFT is *shorter* than its NTT ancestor because the target domain (complex fl
 
 Critically, no one designed BarraCUDA for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly is the FFT's skeleton. Each step follows by mathematical necessity. This is constrained evolution as described in this paper: the constraint (FHE) reshaped the fitness landscape to select for a structure (butterfly transform) that happened to be fit for an unrelated domain (physics).
 
-The hotSpring control experiments (see `whitePaper/barraCUDA/sections/04_CONTROL_EXPERIMENTS.md`) further validate this by establishing 81 quantitative acceptance criteria for the physics domain. When BarraCUDA's evolved FFT reproduces the same molecular dynamics observables (dynamic structure factor, radial distribution function, velocity autocorrelation) that the Python control baseline achieves, the evolution from FHE to physics will be empirically confirmed — not by analogy, but by data.
+The hotSpring control experiments (see `whitePaper/barraCUDA/sections/04_CONTROL_EXPERIMENTS.md`) validate this with 131 quantitative acceptance criteria across three phases. Phase A (Python control) established 86 checks. Phase C (GPU MD) added 45 more: the f64 WGSL shaders — built from the same `math_f64.wgsl` transcendental functions evolved for ML and nuclear EOS — now run full Yukawa OCP molecular dynamics on a consumer GPU. All 9 PP Yukawa cases pass with 0.000% energy drift. The same math that trains neural networks computes plasma physics forces. The evolution from FHE to physics is empirically confirmed — not by analogy, but by data.
 
 ---
 
