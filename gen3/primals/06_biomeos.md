@@ -111,6 +111,29 @@ For multi-machine deployments, biomeOS instances can form a "plasmodium" — a c
 - `biomeos-spore` — Plasmodium collective (multi-machine)
 - `biomeos-genomebin-v3` — Deployment packaging
 
+## What's Been Deployed
+
+### USB-to-Pixel Handshake (Cross-Network, Cross-Architecture)
+
+biomeOS orchestrated the first cross-network cryptographic handshake: a USB LiveSpore (x86_64, desktop LAN) and a Pixel 8a (aarch64, mobile hotspot) paired through the Tower's rendezvous endpoint via `api.nestgate.io`.
+
+The flow:
+- `pixel8a-deploy/` contains the mobile deployment scripts (`start_nucleus_mobile.sh`, `test_nat_traversal.sh`)
+- `livespore-usb/` contains cross-arch binaries (x86_64 and aarch64) with deploy scripts
+- `crates/biomeos-api/src/handlers/rendezvous.rs` implements the blind matchmaker — POST/check beacon, lineage verification, 5-minute TTL slots
+- `crates/biomeos-spore/src/dark_forest.rs` implements BirdSong beacon encryption (ChaCha20-Poly1305, `birdsong-broadcast-v1` context)
+- `crates/biomeos-core/src/connection_strategy.rs` implements 4-tier NAT traversal (LAN → punch → coordinated → relay)
+
+The E2E test (`crates/biomeos-api/tests/sovereign_mesh_e2e.rs`) covers the full Pixel-USB-Tower handshake with cryptographic mock BearDog, beacon posting, lineage matching, and encrypted data transfer.
+
+### nestgate.io Tunnel
+
+`api.nestgate.io` runs as a Cloudflare tunnel to Tower:3492 in the basement. Any device on any network can reach the Tower through HTTPS. The Pixel on a mobile hotspot, a NUC on a coffee shop WiFi, a gate at a friend's house — all reach the same rendezvous point through the tunnel. This is sovereign infrastructure: your domain, your tunnel, your machine.
+
+### NUC Federation
+
+Intel NUC nodes running Tower Atomic have been validated in the federation — discovery, beacon exchange, and capability registration through biomeOS. These are the always-on relay/discovery nodes described in the hardware inventory.
+
 ## What Makes It Interesting
 
 biomeOS is the only primal in Phase 2 that is classified as "Foundation." It was added later than the Phase 1 primals but is architecturally fundamental — nothing works without orchestration.

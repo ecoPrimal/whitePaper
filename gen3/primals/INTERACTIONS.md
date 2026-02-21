@@ -228,6 +228,68 @@ These patterns were not specified in a design document. They emerged independent
 
 ---
 
+## Deployment History — What's Running
+
+### Phase 1: Distributed Workloads on LAN (~November 2025)
+
+ToadStool and Songbird managed basic distributed workloads — LAN-based, plaintext. Compute dispatch across machines in the basement mesh, discovered via Songbird, executed via ToadStool. This was the first proof that primals could coordinate across machines. No encryption, no NAT traversal, no cross-network. Just LAN.
+
+### The `ring` Discovery
+
+The Rust crypto ecosystem depends heavily on the `ring` crate for TLS, key exchange, and hashing. `ring` wraps BoringSSL — a C library. This means any Rust project using `ring` has a C dependency, breaking the Pure Rust constraint.
+
+This was an existential problem: if the networking stack needs TLS (it does), and TLS needs `ring` (it did), and `ring` needs C (it does), then the Pure Rust directive is dead.
+
+**Tower Atomic was the solution.** Instead of embedding crypto in Songbird (which would require `ring`), crypto was delegated to BearDog via IPC. BearDog owns all cryptographic operations — TLS key exchange, certificate handling, symmetric encryption — using Pure Rust implementations (`RustCrypto` crates, no C). Songbird handles the TLS state machine and protocol logic, calling BearDog for every crypto operation over a Unix socket.
+
+The result: **Pure Rust HTTPS with zero C dependencies.** Not a workaround — a composition pattern that emerged because the constraint eliminated the conventional approach.
+
+This is why Tower Atomic is the headline composition. It wasn't designed as "let's split crypto from networking." It was discovered as the only way to have TLS without C. The constraint produced the architecture.
+
+### Phase 2: Tower Atomic Deployed
+
+Tower Atomic (BearDog + Songbird) provides:
+- Pure Rust HTTPS (TLS 1.3, no OpenSSL, no BoringSSL, no `ring`)
+- Onion routing (Pure Rust Tor)
+- Dark Forest beacons (BirdSong, ChaCha20-Poly1305)
+- NAT traversal (4-tier: LAN → direct punch → coordinated punch → relay)
+- BearDog lineage verification for family-based trust
+
+Tower runs on every gate in the basement. It's the foundation for everything else.
+
+### Phase 3: USB-to-Pixel Handshake Across Separate Networks
+
+**The achievement:** A USB LiveSpore (x86_64 binary on a flash drive, plugged into a desktop on LAN) and a Pixel 8a (aarch64 binary, running on its own mobile hotspot) completed a cryptographic handshake — while on completely separate networks.
+
+**The path:**
+```
+USB (x86_64, LAN) ──[encrypted beacon]──> api.nestgate.io ──> Tower:3492
+Pixel (aarch64, hotspot) ──[encrypted beacon]──> api.nestgate.io ──> Tower:3492
+```
+
+Both devices POST BirdSong beacons (ChaCha20-Poly1305 encrypted with the shared `.family.seed`) to the Tower's rendezvous endpoint via `api.nestgate.io` (Cloudflare tunnel). The Tower verifies lineage via BearDog, matches peers by lineage hash, and pairs them. The Tower never sees plaintext — it's a blind matchmaker. The 4-tier NAT traversal strategy then negotiates a direct connection.
+
+**What this proved:**
+- **Cross-architecture works.** x86_64 and aarch64 binaries, same protocol, same crypto handshake.
+- **Cross-network works.** LAN and mobile hotspot — completely isolated IP spaces — found each other through the nestgate.io tunnel.
+- **Dark Forest security works.** BirdSong beacons are encrypted; only devices with the same family seed can complete the handshake.
+- **The Tower is sovereign infrastructure.** nestgate.io → Cloudflare tunnel → Tower:3492 in the basement. Not AWS. Not a third-party relay. Your domain, your machine.
+- **NAT traversal works without institutional infrastructure.** No rented TURN servers. The 4-tier strategy is self-hosted.
+
+The E2E test (`sovereign_mesh_e2e.rs`) covers the full Pixel-USB-Tower flow: beacon posting, lineage verification, peer matching, encrypted data transfer. All automated, all passing.
+
+### Phase 4: Node + Nest Atomics (In Progress)
+
+Node Atomic (Tower + ToadStool) and Nest Atomic (Tower + NestGate) will complete the capability set for the basement HPC. Once deployed:
+
+- **Node** gates can accept authenticated compute requests over HTTPS and dispatch to BarraCUDA
+- **Nest** gates can accept authenticated storage requests and route to NestGate's content-addressed store
+- The basement mesh becomes a **covalent NUCLEUS** — machines bonded by family seed (SoloKey FIDO2), each running the atomics that match their hardware profile
+
+This is when the springs start running distributed: hotSpring's lattice QCD on Strandgate's dual EPYC + RTX 3090, while Eastgate's RTX 4070 handles the MD, coordinated by biomeOS's plasmodium across the mesh.
+
+---
+
 ## The Bonding Model (Multi-Machine)
 
 When multiple machines run NUCLEUS instances, biomeOS coordinates them through chemistry-inspired trust levels:

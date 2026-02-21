@@ -112,7 +112,38 @@ By eliminating CUDA at the constraint level (Pure Rust directive), we were force
 
 ---
 
-## Discovery 5: Convergent IPC Without Specification
+## Discovery 5: The `ring` C Dependency and Tower Atomic
+
+### The Need
+
+TLS for secure communication between machines. Every networking library in Rust uses the `ring` crate for TLS handshakes, key exchange, and hashing.
+
+### The Discovery
+
+`ring` wraps BoringSSL — Google's fork of OpenSSL. It's C code. Any Rust project that uses `ring` for TLS has a C dependency hiding inside what looks like a Rust dependency. The Pure Rust constraint was dead on arrival.
+
+This was found when Songbird's TLS implementation was audited for C dependencies. The audit showed: `ring` → BoringSSL → C compiler required → Pure Rust violated.
+
+### The Solution: Tower Atomic
+
+Instead of embedding crypto in Songbird (which would require `ring`), all cryptographic operations were delegated to BearDog via JSON-RPC over Unix sockets. BearDog uses `RustCrypto` crates — Pure Rust implementations of the same algorithms, no C. Songbird handles the TLS state machine and protocol logic, calling BearDog for every crypto operation.
+
+The composition pattern:
+```
+HTTPS request → Songbird (protocol) → BearDog (crypto) → Response
+```
+
+Neither primal can do HTTPS alone. Together, they do it with zero C dependencies, zero unsafe blocks. This is the Tower Atomic — the foundational composition that every other atomic builds on.
+
+### The Implication
+
+The constraint didn't just find an alternative to `ring`. It forced a separation of concerns (protocol vs. crypto) that turned out to be architecturally superior. Songbird can upgrade its protocol handling without touching crypto. BearDog can upgrade its crypto algorithms without touching networking. The IPC boundary is a clean evolutionary interface between two independent lineages.
+
+This is also why the convergent IPC pattern matters (Discovery 6 below): the JSON-RPC socket interface that Tower Atomic depends on was already present in every primal. The composition pattern was available because the constraint environment had already selected for it.
+
+---
+
+## Discovery 6: Convergent IPC Without Specification
 
 ### The Need
 
@@ -133,6 +164,31 @@ This wasn't copied from a template. Each primal's IPC was written independently,
 ### The Implication
 
 This is what made the constrained evolution thesis visible. The convergence across 12 independent codebases, without a shared design document, is the computational analog of cephalization or camera eyes — independent lineages arriving at the same solution because the physics of the environment (memory safety, type contracts, IPC latency) rewards these structures.
+
+---
+
+## Discovery 7: Cross-Network Handshake (USB ↔ Pixel via nestgate.io)
+
+### The Need
+
+Two devices on completely separate networks needed to find each other and establish a cryptographic handshake: a USB LiveSpore on a desktop LAN and a Pixel 8a on its own mobile hotspot. No shared subnet, no port forwarding, no VPN.
+
+### The Discovery
+
+The Tower's rendezvous endpoint (`/api/v1/rendezvous/beacon`) combined with the BirdSong beacon protocol and the nestgate.io Cloudflare tunnel solved it:
+
+1. Both devices POST encrypted BirdSong beacons to `api.nestgate.io` (Cloudflare QUIC tunnel → Tower:3492 in the basement)
+2. Tower verifies lineage via BearDog (same `.family.seed` → same lineage hash)
+3. Tower matches peers and returns connection info (STUN address, NAT type)
+4. The 4-tier NAT traversal strategy negotiates a direct connection
+
+The Tower never sees plaintext. Beacons are ChaCha20-Poly1305 encrypted. Slots expire in 5 minutes. The rendezvous is a blind matchmaker.
+
+### The Implication
+
+This is cross-architecture (x86_64 ↔ aarch64), cross-network (LAN ↔ mobile hotspot), with end-to-end encryption, on sovereign infrastructure (your domain, your tunnel, your machine). No rented TURN servers, no WebRTC relay services, no third-party signaling.
+
+The same mechanism scales to the full basement HPC mesh: any device with the family seed can find any other device through the Tower, regardless of network topology. This is the bootstrap for NUCLEUS — the discovery and trust layer that allows covalent bonding across machines that can't see each other at the network level.
 
 ---
 

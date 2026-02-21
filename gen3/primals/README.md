@@ -114,14 +114,29 @@ BearDog must be first because everything needs crypto. Songbird must be second b
 
 Primals compose into larger units called **atomics**:
 
-| Atomic | Components | What It Provides |
-|--------|------------|------------------|
-| **Tower** | BearDog + Songbird | Pure Rust HTTPS, zero C dependencies |
-| **Node** | Tower + ToadStool | Tower + GPU/CPU/NPU compute |
-| **Nest** | Tower + NestGate | Tower + content-addressed storage |
-| **Full NUCLEUS** | Tower + Node + Nest + Squirrel | Complete sovereign stack |
+| Atomic | Components | What It Provides | Status |
+|--------|------------|------------------|--------|
+| **Tower** | BearDog + Songbird | Pure Rust HTTPS, zero C dependencies | **Deployed** — running on all gates + NUCs |
+| **Node** | Tower + ToadStool | Tower + GPU/CPU/NPU compute | In progress |
+| **Nest** | Tower + NestGate | Tower + content-addressed storage | In progress |
+| **Full NUCLEUS** | Tower + Node + Nest + Squirrel | Complete sovereign stack | Future — requires Node + Nest |
 
-Tower Atomic is the headline: Pure Rust HTTPS with zero C dependencies, zero unsafe. It emerged when the Pure Rust constraint eliminated OpenSSL and forced the composition pattern — BearDog provides crypto, Songbird provides the TLS state machine. Neither primal alone can do HTTPS. Together they can.
+### How Tower Atomic Was Discovered
+
+~November 2025, ToadStool and Songbird managed basic distributed workloads on LAN — plaintext, no encryption. Then an audit of Songbird's TLS dependencies revealed: the `ring` crate wraps BoringSSL (C code). Any Rust project using `ring` for TLS has a hidden C dependency. The Pure Rust constraint was broken.
+
+Tower Atomic was the solution: delegate all crypto to BearDog (which uses Pure Rust `RustCrypto` crates, no C) via JSON-RPC over Unix sockets. Songbird handles the TLS state machine; BearDog handles the math. Pure Rust HTTPS, onion routing, Dark Forest beacons — all via primal composition, zero C.
+
+### What Tower Has Achieved
+
+- **USB-to-Pixel cross-network handshake**: x86_64 LiveSpore (desktop LAN) ↔ aarch64 Pixel 8a (mobile hotspot), paired through `api.nestgate.io` Cloudflare tunnel → Tower:3492. Encrypted BirdSong beacons, lineage-verified, Tower never sees plaintext.
+- **4-tier NAT traversal**: LAN → direct punch → coordinated punch → relay. Self-hosted, no rented TURN servers.
+- **NUC federation**: Intel NUC nodes running Tower validated for always-on relay/discovery.
+- **Cross-arch deployment**: Same protocol on x86_64 and aarch64 binaries.
+
+### What Node + Nest Will Unlock
+
+Node and Nest atomics will allow the basement HPC to become a covalent NUCLEUS mesh — machines bonded by family seed (SoloKey FIDO2), each running atomics matched to their hardware. Distributed springs: lattice QCD on Strandgate's dual EPYC, MD on Eastgate's RTX 4070, coordinated by biomeOS plasmodium.
 
 ---
 
