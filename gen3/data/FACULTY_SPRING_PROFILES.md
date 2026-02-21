@@ -272,39 +272,80 @@ ikachkov@msu.edu
 
 ---
 
+### Rika Anderson
+**Associate Professor, Department of Biology, Carleton College**  
+https://www.carleton.edu/directory/randerson/  
+randerson@carleton.edu  
+**Connection**: Found via literature search — her work on *Sulfolobus* in Yellowstone hot springs is the living experimental corollary to the Taq polymerase argument in `CONSTRAINED_EVOLUTION_FORMAL.md`  
+**Previously at**: University of Washington (MS, PhD); Virtual Planetary Laboratory (NASA)
+
+**Key Research Themes**:
+1. **Microbial evolution in deep-sea hydrothermal vents** — how extreme environments shape microbial genomes (Nature Communications 2017)
+2. **Stochastic vs deterministic evolution in low-biomass environments** — when does genetic drift dominate natural selection? (mSystems 2021, 2022)
+3. **Population genomics of extremophiles** — *Sulfolobus* in Yellowstone, *Sulfurovum* at vents, subseafloor archaea
+4. **Viral ecology and host-virus coevolution** — CRISPRs as metagenomic tools, phage biogeography
+5. **Pangenomics and gene gain/loss** — selection vs drift in functional evolution
+
+**Candidate Papers for Reproduction**:
+
+| Paper | Domain | Spring Relevance |
+|-------|--------|-----------------|
+| Campbell, Anderson et al. (2017) "*Sulfolobus islandicus* meta-populations in Yellowstone National Park hot springs." Env Microbiol 19:2392-2405 | Hot spring ecology | hotSpring + gen3/CONSTRAINED_EVOLUTION: **This is the direct experimental study of organisms in the same Yellowstone hot springs where *Thermus aquaticus* was discovered.** Population genomics of an extremophilic archaeon under thermal constraint. Living proof that the constrained environment drives population differentiation |
+| Anderson (2021) "Tracking Microbial Evolution in the Subseafloor Biosphere." mSystems 6:e00731-21 | Evolutionary theory | groundSpring + gen3/CONSTRAINED_EVOLUTION: Formalizes when stochastic forces (drift) dominate over deterministic forces (selection) in extreme environments. Cites Lenski LTEE. Directly supports §1.2 of the constrained evolution thesis |
+| Anderson et al. (2017) "Genomic variation in microbial populations inhabiting the marine subseafloor at deep-sea hydrothermal vents." Nature Communications 8:1114 | Population genomics | wetSpring + groundSpring: How extreme geochemistry shapes genome-level variation. Selection signatures at single-nucleotide resolution. dN/dS analysis of microbial populations under constraint |
+| Moulana, Anderson et al. (2020) "Selection is a significant driver of gene gain and loss in the pangenome of Sulfurovum." mSystems 5:e00673-19 | Pangenomics | neuralSpring: Constrained evolution of bacterial pangenomes — gene gain/loss under selective pressure at hydrothermal vents. Functional evolution ↔ feature selection in ML |
+| Mateos, Anderson et al. (2023) "The evolution and spread of sulfur-cycling enzymes reflect the redox state of the early Earth." Science Advances 9:eade4847 | Enzyme evolution | wetSpring: Traces enzyme evolution across geological time using phylogenomics. Co-evolution of enzymes with their geochemical environment = constrained evolution over 3+ billion years |
+| Boden, Anderson et al. (2024) "Timing the evolution of phosphorus-cycling enzymes through geological time." Nature Communications 15:3703 | Deep-time evolution | wetSpring: Uses tree reconciliation to date metabolic innovations. Bioinformatics pipeline directly applicable to sovereign 16S/metagenomics |
+| Anderson et al. (2014) "Evolutionary strategies of viruses and cells in hydrothermal systems revealed through metagenomics." PLoS ONE 9:e109696 | Viral ecology | wetSpring: Phage-host interactions in vent ecosystems — connects to Cahill phage biocontrol and Waters phage defense work |
+| Anderson, Sogin, Baross (2015) "Biogeography and ecology of the rare and abundant microbial lineages in deep-sea hydrothermal vents." FEMS Microbiol Ecol 91:fiu016 | Microbial biogeography | wetSpring + groundSpring: Rare vs abundant lineages — noise floor of microbial diversity. When does a lineage constitute signal vs sampling noise? |
+
+**BarraCUDA relevance**: Sequence alignment (GEMM), diversity indices (reduction), dN/dS selection tests (pairwise comparison), phylogenetic tree construction (parallel likelihood), rarefaction curves (bootstrap resampling), pangenome analysis (set operations). All of these are already validated in wetSpring's sovereign pipeline.
+
+**Why this is the corollary to Taq polymerase**: The constrained evolution thesis (§1.1) uses *Thermus aquaticus* from Yellowstone hot springs as its founding biological example — thermal constraint produced Taq polymerase, which enabled PCR and modern molecular biology. Anderson's lab has published the **population genomics** of another extremophile (*Sulfolobus islandicus*) living in the **exact same Yellowstone hot springs**. Her 2017 paper with Campbell shows how thermal constraint drives population differentiation, susceptibility to mobile genetic elements, and structured genomic variation in these hot spring populations. This is not a metaphor for the constrained evolution thesis — this is the empirical data that would appear in §1.1 if we were writing a full literature review. Additionally, her 2021 mSystems paper explicitly discusses stochastic vs deterministic evolution under environmental constraint, cites Lenski's LTEE (the same experiment that anchors §1.2), and introduces Muller's ratchet as a consequence of extreme energy limitation — all themes directly present in `CONSTRAINED_EVOLUTION_FORMAL.md`.
+
+**Co-author network**: John Baross (UW — pioneer of deep-sea microbiology), Julie Huber (WHOI — subseafloor biosphere), Mitch Sogin (MBL — rare biosphere), Rachel Whitaker (Illinois — *Sulfolobus* population genetics), Emily Stüeken (St Andrews — early Earth geochemistry), Ben Tully (USC — marine metagenomics).
+
+---
+
 ## Cross-Spring Faculty Connections
 
 ```
-                    hotSpring (Murillo, Bazavov, Kachkovskiy)
+                    hotSpring (Murillo, Bazavov, Kachkovskiy, R. Anderson)
                     ┌──────────────────────────┐
                     │ Strongly coupled           │
                     │ many-body systems          │
                     │ MD, EOS, spectral theory   │
                     │ GPU compute                │
+                    │ Hot spring microbial pop.   │
+                    │ genetics (Taq corollary)   │
                     └──────┬─────────────────────┘
                            │
           ┌────────────────┼────────────────┐
           │                │                │
    groundSpring            │         neuralSpring
    (Bazavov inverse,       │    (Dolson evolution,
-    Kachkovskiy localize)  │     Liu HMM/phylo,
-   ┌──────────────┐        │     Bazavov parallel,
-   │ Inverse probs│        │     Kachkovskiy spectral)
+    Kachkovskiy localize,  │     Liu HMM/phylo,
+    R. Anderson stochastic)│     Bazavov parallel,
+   ┌──────────────┐        │     Kachkovskiy spectral,
+   │ Inverse probs│        │     R. Anderson pangenomics)
    │ Noise/signal │        │    ┌──────────────┐
    │ Anderson loc │        │    │ ML primitives │
-   │ Spectral recon│       │    │ Evolutionary  │
-   └──────┬───────┘        │    │ optimization  │
-          │                │    └──────┬───────┘
+   │ Stochastic vs│        │    │ Evolutionary  │
+   │ deterministic│        │    │ optimization  │
+   │ Spectral recon│       │    └──────┬───────┘
+   └──────┬───────┘        │           │
           │                │           │
           └────────┬───────┘───────────┘
                    │
-            wetSpring (Cahill, Smallwood, Jones, Waters, Liu)
+            wetSpring (Cahill, Smallwood, Jones, Waters, Liu, R. Anderson)
             ┌──────────────────────────┐
             │ Microbial ecology         │
             │ Metagenomics              │
             │ Quorum sensing/signaling  │
             │ PFAS detection            │
             │ Phage dynamics            │
+            │ Vent population genomics  │
+            │ Deep-time enzyme evolution│
             └──────────────────────────┘
 ```
 
@@ -324,13 +365,20 @@ Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCUDA kerne
 7. **Liu et al. (2009)** — Science — SATé phylogenetic estimation → large-scale divide-and-conquer benchmark
 8. **Hsueh et al. (2022)** — Nature Microbiology — Phage defense deaminase → evolutionary arms race dynamics
 
+### Tier 2 (new) — Empirical constrained evolution evidence
+9. **Campbell, Anderson et al. (2017)** — Env Microbiol — *Sulfolobus* population genetics in Yellowstone hot springs → **direct empirical data for CONSTRAINED_EVOLUTION_FORMAL.md §1.1** (same environment as Taq polymerase)
+10. **Anderson (2021)** — mSystems — Stochastic vs deterministic evolution in subsurface → **supports §1.2 Lenski argument**, cites LTEE, formalizes when drift dominates selection
+11. **Moulana, Anderson et al. (2020)** — mSystems — Constrained evolution of *Sulfurovum* pangenomes → gene gain/loss driven by geochemistry = functional evolution under environmental constraint
+
 ### Tier 2.5 — Mathematical foundations, strengthens multiple springs
-9. **Bourgain & Kachkovskiy (2018)** — GAFA — Anderson localization for interacting particles → groundSpring noise/signal theory, computational eigenvalue methods for BarraCUDA
-10. **Kachkovskiy (2016)** — CMP — Quasiperiodic spin chain transport → hotSpring plasma transport bridge, validates Lanczos/spectral BarraCUDA primitives
+12. **Bourgain & Kachkovskiy (2018)** — GAFA — Anderson localization for interacting particles → groundSpring noise/signal theory, computational eigenvalue methods for BarraCUDA
+13. **Kachkovskiy (2016)** — CMP — Quasiperiodic spin chain transport → hotSpring plasma transport bridge, validates Lanczos/spectral BarraCUDA primitives
 
 ### Tier 3 — Longer horizon, connect to broader themes
-11. **Bazavov et al. (2025)** — Phys Rev D — Muon g-2 HVP → precision lattice computation
-12. **Fernandez et al. (2020)** — PNAS — Cell shape regulation → bistable dynamical systems
-13. **Dolson (2023)** — J R Soc Interface — Ecology-evolution continuum → origin-of-life context
-14. **Liu working manuscript** — Fungi-bacteria coevolution → cophylogenetic methods for wetSpring
-15. **Filonov & Kachkovskiy (2018)** — Acta Math — 2D band edge structure → electronic/phononic transport, deep eigenvalue mathematics
+14. **Bazavov et al. (2025)** — Phys Rev D — Muon g-2 HVP → precision lattice computation
+15. **Fernandez et al. (2020)** — PNAS — Cell shape regulation → bistable dynamical systems
+16. **Dolson (2023)** — J R Soc Interface — Ecology-evolution continuum → origin-of-life context
+17. **Liu working manuscript** — Fungi-bacteria coevolution → cophylogenetic methods for wetSpring
+18. **Filonov & Kachkovskiy (2018)** — Acta Math — 2D band edge structure → electronic/phononic transport, deep eigenvalue mathematics
+19. **Mateos, Anderson et al. (2023)** — Science Advances — Sulfur-cycling enzyme evolution across geological time → deep-time validation of constrained evolution, bioinformatics pipeline
+20. **Boden, Anderson et al. (2024)** — Nature Communications — Phosphorus-cycling enzyme timing → tree reconciliation methods, geological time enzyme dating

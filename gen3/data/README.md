@@ -101,7 +101,7 @@ With NUCLEUS deployed, each gate runs its own NUCLEUS atomic composition. biomeO
 
 The bonding model supports **ionic bonding** — contract-scoped access for external collaborators. A professor's lab GPU contributes compute under a metered contract. They get access to specific capabilities (e.g., run BarraCUDA lattice QCD on their parameter sweep) but not to the family's genetic lineage or storage. Usage is auditable. Access is scoped.
 
-Scenario: Murillo's group has GPUs. Bazavov's group has GPUs. Kachkovskiy may have GPUs (he was selling hardware, after all). If each runs a NUCLEUS with ionic bonding to the basement mesh:
+Scenario: Murillo's group has persoanl GPUs. Bazavov's group has personal GPUs. Kachkovskiy has a RTX 5080 GPU. If each runs a NUCLEUS with ionic bonding to the basement mesh:
 
 - Murillo's gates run Sarkas parameter sweeps across the Γ-κ grid
 - Bazavov's gates run lattice QCD temperature scans

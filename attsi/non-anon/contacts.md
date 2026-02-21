@@ -1,43 +1,78 @@
 # ecoPrimals — Faculty Network
 
+> Detailed interaction profiles and paper reproduction logs: `gen3/about/FACULTY.md`
+
 ## hotSpring
 
 **Michael Murillo** — Professor, Computational Mathematics, Science & Engineering, MSU
 - https://engineering.msu.edu/faculty/michael-murillo
 - Domain: Hot dense plasmas, molecular dynamics, surrogate learning
-- Papers reproduced: Sarkas MD (Yukawa OCP), TTM, Diaw et al. (2024) surrogate learning (Nature Machine Intelligence)
+- Papers reproduced: Sarkas MD (Yukawa OCP), TTM, Diaw et al. (2024), Stanton & Murillo (2016), Murillo & Weisheit (1998)
 - hotSpring status: 195/195 checks, BarraCUDA GPU validated
-- Relationship: MSDS professor (master's program)
+- Also in: neuralSpring (surrogate learning)
+- Relationship: MSDS professor (CMSE 890, Spring 2025)
 
 ## airSpring
 
 **Younsuk Dong** — Assistant Professor, Biosystems & Agricultural Engineering, MSU
 - https://www.egr.msu.edu/bae/water/irrigation/
 - Domain: Precision irrigation, ET₀, soil moisture, IoT sensors
-- Papers reproduced: Dong (2020) sensor validation, Dong (2024) soil calibration, FAO-56
-- airSpring status: 142/142 checks + 918 station-days real data pipeline
+- Papers reproduced: Dong (2020) sensor validation, Dong (2024) soil calibration, FAO-56 (1998)
+- airSpring status: 326 checks, R²=0.967 across 918 station-days real data
 - Relationship: New lab job 2026
 
-## wetSpring
+## wetSpring — Track 1: Life Science
 
 **Jesse Cahill** — Senior Member of Technical Staff, Sandia National Laboratories (Bioscience)
 - Domain: Phage biology, biocontrol, algae-phage interactions
-- Papers reproduced: Raceway algae pond crash forensics, phage-based biocontrol
+- Papers reproduced: Algal pond time-series (11/11), crash forensics
 - wetSpring status: Track 1 Life Science
-- Relationship: Time at Sandia
+- Relationship: Sandia fellowship (Summer 2024)
 
 **Chuck Smallwood** — Principal Member of Technical Staff, Sandia National Laboratories (Bioscience)
 - Domain: Metagenomics, microbial ecology, raceway pond monitoring
-- Papers reproduced: Algal pond metagenomics pipelines
+- Papers reproduced: Bloom surveillance (15/15)
 - wetSpring status: Track 1 Life Science
-- Relationship: Time at Sandia
+- Relationship: Sandia fellowship (Summer 2024)
+
+**Christopher Waters** — Professor, Microbiology, Genetics & Immunology, MSU
+- https://mgi.natsci.msu.edu/labs/waters-lab/
+- watersc3@msu.edu | Room 5180, Biomed Phys Sci | (517) 884-5360
+- Domain: Bacterial signaling (c-di-GMP, quorum sensing), *Vibrio cholerae*, biofilm, phage defense
+- Papers reproduced: 7 papers — Waters (2008), Massie (2012), Hsueh/Severin (2022), Fernandez (2020), Mhatre (2020), Bruger/Waters (2018), Srivastava (2011)
+- Also in: neuralSpring (QS game theory, 23/23 checks)
+- Relationship: Undergraduate professor (MMG, MSU)
+
+**Kevin Liu** — Associate Professor, Computational Mathematics, Science & Engineering, MSU
+- https://engineering.msu.edu/directory/faculty/kjl
+- kjl@msu.edu | Room 1104, Engineering Building | (517) 355-5240
+- Domain: Comparative genomics, phylogenetics, phylogenomics, population genetics
+- Papers reproduced: 6 papers — PhyloNet-HMM (2014), SATé (2009), Alamin & Liu (2024), Zheng et al. (2023), RAWR (2021), Introgression (2015)
+- Also in: neuralSpring (HMM learning, 26/26 checks)
+- Software: PhyloNet-HMM, Coal-Miner, Coal-Map, DACTAL, SATé-II
+- PhD: CSE, UT Austin (2009); Postdoc: Rice University
+- Relationship: MSDS professor (CMSE/CSE faculty)
+
+## wetSpring — Track 2: PFAS / Analytical Chemistry
 
 **A. Daniel Jones** — Professor, Biochemistry & Molecular Biology / Chemistry, MSU
 - https://www.canr.msu.edu/news/center-for-pfas-research-faculty-spotlight-a-daniel-jones
 - Domain: Analytical chemistry, mass spectrometry, PFAS detection
-- Papers reproduced: PFAS mass spec pipelines (blueFish track)
-- wetSpring status: Track 2 PFAS/blueFish
-- Relationship: PFAS job
+- Papers reproduced: FindPFAS (17/17), EPA PFAS ML (14/14), MassBank spectral (9/9)
+- wetSpring status: Track 2 blueFish — 40/40 checks
+- Relationship: Current employer (PFAS Research Lab, Oct 2024–present)
+
+## wetSpring / hotSpring — Extremophile Evolution
+
+**Rika Anderson** — Associate Professor, Department of Biology, Carleton College
+- https://www.carleton.edu/directory/randerson/
+- randerson@carleton.edu | Hulings Hall 313 | (507) 222-4382
+- Domain: Microbial evolution in deep-sea hydrothermal vents, subseafloor biosphere, astrobiology, metagenomics, pangenomics
+- Papers reproduced: 6 papers — Anderson (2017 Nature Comm), Moulana/Anderson (2020), Mateos/Anderson (2023 Sci Adv), Boden/Anderson (2024 Nature Comm), Anderson (2014 PLoS ONE), Anderson/Sogin/Baross (2015 FEMS)
+- Also in: neuralSpring (pangenomics, 16/16 checks), hotSpring (Yellowstone *Sulfolobus* — queued)
+- Previously at: University of Washington (MS, PhD); NASA Virtual Planetary Laboratory
+- Key for thesis: *Sulfolobus islandicus* in Yellowstone = Taq polymerase corollary; mSystems (2021) review = stochastic vs deterministic evolution under constraint
+- Relationship: Found via literature search
 
 ## Master's Program Professors (MSU CMSE / CSE)
 
@@ -45,41 +80,24 @@
 - https://engineering.msu.edu/directory/faculty/dolsonem
 - dolsonem@msu.edu | Room 1105, IST Building
 - Domain: Evolutionary computation, artificial life, eco-evolutionary dynamics, mathematical oncology
-- Key papers: "Controlling the speed and trajectory of evolution with counterdiabatic driving" (Nature Physics 2020), "The MODES Toolbox" (Artificial Life 2019)
+- Papers reproduced: 5 papers — Iram/Dolson (2020 Nature Physics), Dolson (2019 Artificial Life), Dolson/Ofria (2018 GECCO), Dolson (2022 eLife), Foreback/Bohm/Dolson (2025 IEEE)
+- neuralSpring status: 46/46 checks
+- Also in: groundSpring (queued — eco-evolutionary signal vs noise)
 - Software: MABE (Modular Agent-Based Evolver), Empirical C++ library
 - Core faculty in Ecology, Evolution, and Behavior program
-- Potential spring connections: neuralSpring (evolutionary optimization, constrained evolution), groundSpring (eco-evolutionary dynamics, population noise)
 - PhD: CSE + EEB dual, MSU (2019); BA: CS + Biology, Swarthmore (2013)
-
-**Kevin Liu** — Associate Professor, Computational Mathematics, Science & Engineering, MSU
-- https://engineering.msu.edu/directory/faculty/kjl
-- kjl@msu.edu | Room 1104, Engineering Building | (517) 355-5240
-- Domain: Comparative genomics, phylogenetics, phylogenomics, population genetics
-- Key papers: "Interspecific Introgressive Origin of Genomic Diversity in the House Mouse" (PNAS 2015), SATé/SATé-II (Science 2009, Systematic Biology 2012)
-- Software: PhyloNet-HMM, Coal-Miner, Coal-Map, DACTAL, SATé-II
-- Faculty in Genetics & Genome Sciences and Ecology, Evolution, & Behavior programs
-- Potential spring connections: wetSpring (comparative genomics, metagenomics), neuralSpring (HMM learning, phylogenetic inference algorithms)
+- Relationship: MSDS professor (CSE faculty)
 
 **Alexei Bazavov** — Associate Professor, CMSE & Physics & Astronomy, MSU
 - https://directory.natsci.msu.edu/directory/Profiles/Person/101033
 - bazavov@msu.edu | Room 1509, Engineering Building | (517) 432-0369
 - Domain: Lattice QCD, quantum field theory, heavy ion physics, inverse problems, parallel algorithms
-- Key papers: HotQCD collaboration — QCD equation of state (Nuclear Physics A 2014), hadronic vacuum polarization for muon g-2 (Phys Rev D 2025), spectral reconstruction inverse problems
-- Affiliations: CERN Theory Division, Fermilab Lattice Collaboration, HPQCD, MILC
-- Potential spring connections: hotSpring (lattice gauge theory ↔ Sarkas MD — both solve large-scale particle physics on HPC), groundSpring (inverse problems, spectral reconstruction), neuralSpring (parallel algorithms, lattice computations on GPU)
+- Papers reproduced: 6 papers — SU(3) Wilson (12/12), Abelian Higgs (17/17), QCD EOS (2014), Polyakov loop (2016), HVP muon g-2 (2025), freeze-out curvature (2016)
+- hotSpring status: 29+ checks validated + GPU pipelines complete
+- Also in: groundSpring (queued — inverse problems, spectral reconstruction)
+- Affiliations: CERN Theory Division, Fermilab Lattice, HPQCD, MILC
 - PhD: Physics, Florida State (2007); BS: Theoretical Physics, Kiev State (1997)
-
-## Undergraduate Professor (MSU MMG)
-
-**Christopher Waters** — Professor, Microbiology, Genetics & Immunology, MSU
-- https://directory.natsci.msu.edu/directory/Profiles/Person/101708
-- watersc3@msu.edu | Room 5180, Biomed Phys Sci | (517) 884-5360
-- https://mgi.natsci.msu.edu/labs/waters-lab/
-- Domain: Bacterial signaling (c-di-GMP, quorum sensing), Vibrio cholerae, biofilm formation, phage defense
-- Key papers: "Quorum sensing controls biofilm formation in Vibrio cholerae through modulation of c-di-GMP levels" (J Bacteriology 2008), cyclic GMP-AMP discovery in bacteria
-- Faculty in Genetics & Genome Sciences, Cell & Molecular Biology programs
-- Potential spring connections: wetSpring (bacterial ecology, biofilm = microbial community ↔ algae ponds, quorum sensing as microbial signaling), groundSpring (sensing systems in biology — quorum = noise + signal)
-- PhD: Microbiology, U Minnesota (2002); Postdoc: Princeton (2003-2008)
+- Relationship: MSDS professor (CMSE faculty)
 
 ## Mathematics Department (MSU)
 
@@ -87,16 +105,17 @@
 - https://users.math.msu.edu/users/ikachkov/
 - ikachkov@msu.edu | Room C300, Wells Hall | (517) 844-1455
 - Domain: Spectral theory of periodic & quasiperiodic Schrödinger operators, Anderson localization, transport in quantum spin systems
+- Papers reproduced: 11 papers — Anderson (1958), Aubry-André (1980), Jitomirskaya (1999), Herman (1983), Lanczos (1950), Abrahams et al. (1979), Slevin-Ohtsuki (1999), Hofstadter (1976), Avila-Jitomirskaya (2009), Kachkovskiy-Safarov (2016), Bourgain-Kachkovskiy (2018)
+- hotSpring spectral track: 10+ checks
+- Also in: neuralSpring (16/16 checks), groundSpring (queued)
+- NSF funded: DMS-1758326
 - Previously at: Institute for Advanced Study, UC Irvine
-- Key papers: Bourgain & Kachkovskiy (2018) "Anderson localization for two interacting quasiperiodic particles" (GAFA), Jitomirskaya & Kachkovskiy (2018) "All couplings localization" (JEMS), Kachkovskiy & Safarov (2016) JAMS
-- NSF funded: DMS-1758326 "Spectral theory of periodic and quasiperiodic quantum systems"
-- Potential spring connections: hotSpring (spectral theory ↔ Bazavov's lattice spectral reconstruction, quantum spin transport ↔ Murillo's plasma transport), groundSpring (Anderson localization = wave propagation in disordered media = signal vs noise in sensing systems, quasiperiodic = structured noise), neuralSpring (spectral methods for optimization landscape analysis, eigenvalue problems in neural net training dynamics)
-- Relationship: Sold the NucBox M6 to Kevin on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
+- Relationship: Sold the NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
 
 ## Industry / MSUBI
 
-Pivot Bio — microbiome/nitrogen fixation (worked on bench scale → 10L reactor)
+Pivot Bio — microbiome/nitrogen fixation (bench scale → 10L reactor, 2019–2024)
 - https://www.pivotbio.com/blog/seedsafety
 
-MycoWorks — mycelium materials (worked on pilot plant ~3000L)
+MycoWorks — mycelium materials (pilot plant ~3,000L, 2019–2024)
 - https://www.mycoworks.com/scientificresources

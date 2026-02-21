@@ -1,0 +1,52 @@
+# Constrained Evolution: Environmental Pressure, Sovereign Computing, and the Convergence of Biological and Computational Systems
+
+---
+
+**A Dissertation**
+
+Submitted to Michigan State University  
+in partial fulfillment of the requirements  
+for the degree of
+
+**Doctor of Philosophy**
+
+[Department TBD — Computational Mathematics, Science and Engineering (CMSE) / Microbiology and Molecular Genetics (MMG) / Computer Science and Engineering (CSE)]
+
+2026 [projected]
+
+---
+
+**Kevin Mok**
+
+BS Microbiology, Michigan State University, 2018  
+MS Data Science, Michigan State University, 2025
+
+---
+
+## Abstract
+
+This dissertation formalizes and validates a general principle of constrained evolution: that environmental constraints do not merely accelerate convergence to known solutions, but reshape fitness landscapes so that systems specialize toward constraint-specific optima through independent evolutionary trajectories. The argument rests on three pillars.
+
+**Biological foundation.** Three lines of evidence establish the principle in living systems. (1) *Thermus aquaticus* in Yellowstone hot springs produced Taq polymerase — a thermostable enzyme that enabled PCR — because thermal constraint defined the fitness landscape, not because heat made "better" enzymes (Brock, 1967; Chien et al., 1976). (2) Lenski's Long-Term Evolution Experiment demonstrated that 12 identical *E. coli* populations under glucose limitation produced 12 different evolutionary trajectories, all increasing fitness for the constrained environment, with only one lineage evolving the headline innovation of citrate metabolism (Lenski et al., 1991; Blount et al., 2008; Wiser et al., 2013). (3) Anderson's population genomics of *Sulfolobus islandicus* in the same Yellowstone hot springs showed structured population differentiation under thermal constraint, while her deep-sea subsurface work revealed that extreme energy limitation can cause genetic drift to dominate natural selection — a failure mode where constraint outstrips the population's capacity to respond (Campbell et al., 2017; Anderson, 2021; Anderson et al., 2022).
+
+**Computational system.** The principle was applied to construct the ecoPrimals ecosystem: 3.8 million lines of compiled code (Rust + WGSL) across 12 primals, 628 WebGPU (WGSL) shaders totaling 48,698 lines, and 104,000+ tests, built by a single developer with AI assistance over approximately 10 months. The Rust type system served as the environmental constraint (analogous to temperature in hot springs), the Pure Rust directive and capability-based architecture served as selective direction (analogous to nutrient limitation in the LTEE), and AI-assisted code generation served as the mutation operator (analogous to DNA replication with error). The compile-time fitness check eliminates unsound solutions before they reach the binary — analogous to a ribosome that refuses to translate lethal mRNA.
+
+The system includes BarraCUDA, a vendor-agnostic scientific computing engine that runs f64 GPU compute via WGSL/Vulkan on any GPU (NVIDIA, AMD, Intel) without CUDA dependency. BarraCUDA's NTT-to-FFT evolution — where a Number Theoretic Transform evolved under cryptographic constraints shares character-identical main compute kernels with the Fast Fourier Transform needed for physics simulation — provides quantitative evidence that the constrained evolution principle operates in computational systems.
+
+**Empirical validation.** Five scientific validation suites ("springs") prove the system computes real science correctly across physics, agriculture, biology, chemistry, and machine learning. 2,882 quantitative checks pass across 80+ reproduced peer-reviewed papers, all on consumer hardware ($600 GPU, $15K basement HPC), all open-source (AGPL-3.0), produced in approximately 20 days. The springs validate both the infrastructure and the methodology: each spring consumes BarraCUDA kernels evolved under constraint and produces empirical evidence that the constrained evolution methodology works.
+
+**Proposed biological validation.** The LTEE frozen fossil record — 75,000+ generations of *E. coli* frozen at 500-generation intervals, physically housed at Michigan State University — provides the opportunity to test the constrained evolution principle biologically, not by analogy. Whole-genome sequencing across timepoints and populations, analyzed with the computational tools validated by the springs, could reveal whether the same statistical signatures (convergent solutions, power-law fitness dynamics, hitchhiker mutations, historical contingency for innovation) appear in both biological and computational evolution under constraint.
+
+The dissertation contributes: (1) a formal theory of constrained evolution bridging biology and computation, (2) a sovereign scientific computing platform validated across 5 domains, (3) 2,882 empirical data points demonstrating the methodology, and (4) a concrete proposal for biological validation using MSU's LTEE frozen library.
+
+---
+
+## Acknowledgments
+
+[To be written — will include Murillo, Dong, Waters, Liu, Bazavov, Dolson, Kachkovskiy, Anderson, Cahill, Smallwood, Jones, and the broader MSU community that made this work possible.]
+
+---
+
+## Dedication
+
+[To be written]

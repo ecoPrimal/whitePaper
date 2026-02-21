@@ -30,7 +30,7 @@ The springs are organized into two tiers:
 **Domain**: Dense plasmas, nuclear structure, molecular dynamics, surrogate learning
 **Grade**: Most mature spring — Phase A through F complete
 **Checks**: 195/195 quantitative checks pass
-**Faculty**: Michael Murillo (CMSE, MSU — MSDS professor), Alexei Bazavov (CMSE + Physics, MSU — master's professor), Ilya Kachkovskiy (Math, MSU — spectral theory)
+**Faculty**: Michael Murillo (CMSE, MSU — MSDS professor), Alexei Bazavov (CMSE + Physics, MSU — master's professor), Ilya Kachkovskiy (Math, MSU — spectral theory), Rika Anderson (Biology, Carleton — *Sulfolobus* in Yellowstone hot springs, Taq corollary)
 **Repository**: git@github.com:syntheticChemistry/hotSpring.git
 **License**: AGPL-3.0
 
@@ -96,7 +96,7 @@ The springs are organized into two tiers:
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
 **Grade**: Most modules — 30 sovereign Rust modules, 1 runtime dependency
 **Checks**: 1,116 total across 42 experiments (7 phases including GPU pipeline)
-**Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job)
+**Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
 
@@ -132,7 +132,7 @@ The springs are organized into two tiers:
 **Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems
 **Grade**: Phase 0 complete across 4 scientific domains
 **Checks**: 71/71 quantitative checks pass
-**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization)
+**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution)
 **Repository**: git@github.com:syntheticChemistry/groundSpring.git
 **License**: AGPL-3.0
 
@@ -169,7 +169,7 @@ The springs are organized into two tiers:
 **Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction
 **Grade**: Phase 0 + Phase 0+ + Rust validation + GPU pipeline
 **Checks**: 190/190 Python + 549/549 Rust + 66 GPU = 805 total
-**Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape)
+**Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
 
@@ -218,7 +218,7 @@ The springs are organized into two tiers:
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML |
 | Papers reproduced | 20+ (published, peer-reviewed) |
 | Papers queued for review | 60+ candidates across all springs |
-| Faculty connected | 9 professors (MSU + Sandia) across 6 departments |
+| Faculty connected | 10 professors (MSU + Sandia + Carleton) across 7 departments |
 | BarraCUDA kernels validated by springs | 25+ distinct GPU primitives |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
 | Rust validation checks | 549 (neuralSpring) + 119 (airSpring) + hotSpring Rust pipeline |
@@ -283,6 +283,7 @@ wetSpring (biology + chemistry)
 | Jesse Cahill | Sandia (Bioscience) | Time at Sandia | wetSpring |
 | Chuck Smallwood | Sandia (Bioscience) | Time at Sandia | wetSpring |
 | A. Daniel Jones | BMB/Chemistry, MSU | PFAS job | wetSpring |
+| Rika Anderson | Biology, Carleton College | Literature search | hotSpring, wetSpring, groundSpring, neuralSpring |
 
 Full profiles: `data/FACULTY_SPRING_PROFILES.md`
 

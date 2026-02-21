@@ -43,7 +43,8 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 | **Feb 17** | groundSpring. 5 experiments across 4 scientific domains in a single session. 71/71 checks. |
 | **Feb 17-18** | neuralSpring Phase 0 + 0+. 10 experiments: 5 synthetic, 5 scholarly reproductions (PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference). 75/75 Python checks. |
 | **Feb 18-20** | neuralSpring Rust validation. 9 BarraCUDA validation binaries, 549 Rust checks, 66 GPU shader checks. Fused pipeline: 43-78x speedup. |
-| **Feb 19-20** | Bazavov extension: lattice QCD infrastructure (SU(3), HMC, Dirac CG) in hotSpring. Kachkovskiy spectral theory mapped to 3 springs. Faculty network: 9 professors. |
+| **Feb 19-20** | Bazavov extension: lattice QCD infrastructure (SU(3), HMC, Dirac CG) in hotSpring. Kachkovskiy spectral theory mapped to 3 springs. |
+| **Feb 12** | Rika Anderson (Carleton College) discovered via literature search. Her *Sulfolobus* population genomics in Yellowstone hot springs — the same environment where Taq polymerase was found — provides direct empirical evidence for the constrained evolution thesis. Faculty network: 10 professors across 3 institutions. |
 
 **Total time from first spring to 2,513 checks across 5 domains: ~20 days.**
 
@@ -69,7 +70,7 @@ See `data/README.md` §"What NUCLEUS Unlocks" for the full scaling vision.
 
 **`CONSTRAINED_EVOLUTION_FORMAL.md`** — *Constrained Evolution: How Environmental Pressure Drives Convergence in Biological and Computational Systems*
 
-The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in two biological precedents: Thermus aquaticus / Taq polymerase (constraint-specific adaptation) and Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation). The springs provide 2,513 quantitative data points validating this claim.
+The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in three biological lines of evidence: *Thermus aquaticus* / Taq polymerase (constraint-specific adaptation), Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation), and Rika Anderson's population genomics of extremophiles in Yellowstone hot springs and the deep-sea subsurface (constrained evolution in natural populations, including the same hot springs where Taq was discovered). The springs provide 2,513 quantitative data points validating this claim.
 
 ### Theoretical
 
@@ -91,7 +92,7 @@ A comprehensive catalog of every primal in the ecosystem. 6 foundation primals (
 
 **`SPRING_CATALOG.md`** — *ecoPrimals Spring Catalog: Status, Science, and Evolution*
 
-The science validation companion to the Primal Catalog. Documents all 5 springs with current phase status, 2,513 passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, the 9-professor faculty network, and 60+ candidate papers for future reproduction. Every spring repository is public and AGPL-3.0.
+The science validation companion to the Primal Catalog. Documents all 5 springs with current phase status, 2,513 passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, the 10-professor faculty network, and 60+ candidate papers for future reproduction. Every spring repository is public and AGPL-3.0.
 
 ### About the Author
 
@@ -103,13 +104,19 @@ Context for evaluation: who built this, with what background, on what hardware, 
 
 **`data/`** — *Reproduction Plans, Faculty Profiles, Evolution Evidence*
 
-Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 9 professors across 5 departments, 60+ candidate papers for reproduction, and BarraCUDA kernel gap analysis. The Murillo reproduction plan (`MURILLO_REPRODUCTION_PLAN.md`) documents how a reproduction study works in practice — from finding open-source code and public data through Phase A (Python control), Phase B (BarraCUDA validation), Phase C (GPU compute), to paper-parity results on consumer hardware.
+Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 10 professors across 7 departments, 60+ candidate papers for reproduction, and BarraCUDA kernel gap analysis. The Murillo reproduction plan (`MURILLO_REPRODUCTION_PLAN.md`) documents how a reproduction study works in practice — from finding open-source code and public data through Phase A (Python control), Phase B (BarraCUDA validation), Phase C (GPU compute), to paper-parity results on consumer hardware.
+
+### PhD Thesis (Working Draft)
+
+**`thesis/`** — *Constrained Evolution: Environmental Pressure, Sovereign Computing, and the Convergence of Biological and Computational Systems*
+
+A full-length PhD thesis expanding the constrained evolution methodology into a 16-chapter academic work with comprehensive literature review, formal theoretical framework, five domain-specific results chapters, quantitative evidence analysis, and a proposed biological validation via LTEE sequencing. 2,186 lines across 20 files. See `thesis/README.md` for structure and reading guide.
 
 ### Origin
 
 **`constrained_optimization_ai.md`** — *Draft / Inoculum*
 
-The original formulation of the constrained optimization thesis, preserved as a record of the idea in its first form. The more formal treatment in `CONSTRAINED_EVOLUTION_FORMAL.md` evolved from this inoculum.
+The original formulation of the constrained optimization thesis, preserved as a record of the idea in its first form. The evolution: inoculum → `CONSTRAINED_EVOLUTION_FORMAL.md` (working paper) → `thesis/` (PhD thesis).
 
 ---
 
@@ -149,7 +156,7 @@ The original formulation of the constrained optimization thesis, preserved as a 
 
 ## The Faculty Network
 
-Nine professors across 6 departments, 2 institutions:
+Ten professors across 7 departments, 3 institutions:
 
 | Professor | Department | Connection | Primary Spring |
 |-----------|-----------|-----------|---------------|
@@ -160,6 +167,7 @@ Nine professors across 6 departments, 2 institutions:
 | Alexei Bazavov | CMSE + Physics, MSU | Master's professor | hotSpring, groundSpring |
 | Emily Dolson | CSE, MSU | Master's professor | neuralSpring |
 | Ilya Kachkovskiy | Math, MSU | Hardware purchase, GPU conversation | hotSpring, groundSpring |
+| Rika Anderson | Biology, Carleton College | Literature search — Taq polymerase corollary | hotSpring, wetSpring, groundSpring, neuralSpring |
 | Jesse Cahill | Sandia (Bioscience) | Time at Sandia | wetSpring |
 | Chuck Smallwood | Sandia (Bioscience) | Time at Sandia | wetSpring |
 | A. Daniel Jones | BMB/Chemistry, MSU | PFAS job | wetSpring |

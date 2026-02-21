@@ -2,13 +2,13 @@
 
 **Status**: Working paper  
 **Lineage**: Evolved from `constrained_optimization_ai.md` (draft/inoculum)  
-**Last Updated**: February 6, 2026
+**Last Updated**: February 12, 2026
 
 ---
 
 ## Abstract
 
-This paper formalizes a development methodology discovered during the construction of the ecoPrimals ecosystem: that strategic environmental constraints accelerate convergence to fit solutions, in both biological and computational systems. The argument is grounded in two biological precedents - thermophilic adaptation (Thermus aquaticus and Taq polymerase) and the Lenski Long-Term Evolution Experiment (LTEE) with E. coli. The critical insight from Lenski is not that some populations evolved novel metabolic capabilities, but that ALL populations - including those that never acquired the novel trait - showed increased fitness for their constrained environment. The organisms specialized to the tube. This same principle - that constraints drive specialization toward fitness, not toward a single predetermined solution - is what we observe in AI-assisted software development within the Rust type system.
+This paper formalizes a development methodology discovered during the construction of the ecoPrimals ecosystem: that strategic environmental constraints accelerate convergence to fit solutions, in both biological and computational systems. The argument is grounded in three biological lines of evidence: (1) thermophilic adaptation (*Thermus aquaticus* and Taq polymerase), (2) the Lenski Long-Term Evolution Experiment (LTEE) with *E. coli*, and (3) Rika Anderson's population genomics of extremophiles in Yellowstone hot springs and the deep-sea subsurface. The critical insight from Lenski is not that some populations evolved novel metabolic capabilities, but that ALL populations — including those that never acquired the novel trait — showed increased fitness for their constrained environment. Anderson extends this to natural populations: *Sulfolobus* in the same Yellowstone hot springs where Taq was discovered shows structured population differentiation under thermal constraint, while her deep-sea work reveals what happens when populations are too small for selection to outweigh drift. This same principle — that constraints drive specialization toward fitness, not toward a single predetermined solution — is what we observe in AI-assisted software development within the Rust type system.
 
 ---
 
@@ -46,13 +46,25 @@ The populations became more **fastidious** - more specialized to their constrain
 
 This is the key observation: **the constraint drove specialization toward environmental fitness, not toward a single predetermined solution**. Twelve populations under identical constraints produced twelve different evolutionary trajectories, all of which increased fitness for the constrained environment, most of which did not include the headline innovation (citrate metabolism).
 
+### 1.2.1 Anderson: The Same Principle in the Wild
+
+The LTEE demonstrates constrained evolution in a controlled laboratory setting. Rika Anderson's work at Carleton College demonstrates it in nature — and, critically, in the *same extreme environments* that produced Taq polymerase.
+
+**The Yellowstone connection**: Campbell, Anderson et al. (2017, *Env Microbiol*) studied *Sulfolobus islandicus* meta-populations across Yellowstone National Park hot springs — the same thermal environment where Thomas Brock discovered *Thermus aquaticus* in 1966. Anderson's population genomics showed that geographically isolated hot springs (separated by as little as a few hundred meters) harbored genetically distinct *Sulfolobus* populations with different susceptibilities to mobile genetic elements (viruses and transposable elements). Same constraint (65-85°C, pH 2-4), different populations, different evolutionary trajectories — exactly Lenski's result, but in the field instead of the lab.
+
+**The subsurface extension**: Anderson (2021, *mSystems*; 2022, *mBio*) extended this to the deep-sea subsurface, where energy-limited microbial populations face a different kind of extreme constraint. Here, generation times may be thousands of years, and population sizes are so small that genetic drift — pure stochastic noise — can dominate over natural selection. Anderson explicitly identified this as a case where Muller's ratchet may operate across entire ecosystems: when the constraint is extreme enough and the population small enough, deleterious mutations accumulate because there is insufficient selective pressure to remove them. The constraint still defines the fitness landscape, but the populations may be too small to efficiently explore it.
+
+This introduces a critical nuance to the constrained evolution principle: **constraint drives specialization, but only when population size is sufficient for selection to outweigh drift**. In computational terms, this maps to the observation that an AI agent given too few iterations (too small a population of solutions) under strict constraints may accumulate technical debt (deleterious mutations) rather than converging toward fitness. The Rust type system functions as an artificial selection pressure that is *strong enough* to prevent Muller's ratchet — the compiler rejects deleterious mutations immediately, regardless of population size.
+
+Anderson also explicitly cites Lenski's LTEE in her 2021 framework paper, connecting the laboratory evidence (§1.2) to the field evidence in a single theoretical framework.
+
 ### 1.3 The Principle
 
-From these two biological precedents, a general principle emerges:
+From these three biological lines of evidence — the Taq polymerase discovery, Lenski's controlled LTEE, and Anderson's field population genomics — a general principle emerges:
 
 > **Environmental constraints do not merely accelerate convergence to a known solution. They reshape the fitness landscape so that organisms (or systems) specialize toward the constraint. Different lineages under the same constraint may find different solutions, but all lineages become more fit for the constrained environment.**
 
-Thermus aquaticus shows that constraints define what solutions are possible - heat requires heat-stable enzymes; no amount of time gives E. coli Taq polymerase. Lenski shows that constraints drive fitness broadly - all populations improved, not just the one that found the novel innovation.
+*Thermus aquaticus* shows that constraints define what solutions are possible — heat requires heat-stable enzymes; no amount of time gives *E. coli* Taq polymerase. Lenski shows that constraints drive fitness broadly — all populations improved, not just the one that found the novel innovation. Anderson shows that the same principle operates in nature: different hot springs produce different *Sulfolobus* populations, all adapted to thermal constraint, none identical — and that extreme constraint with insufficient population size risks Muller's ratchet rather than productive specialization.
 
 ---
 

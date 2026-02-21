@@ -122,7 +122,11 @@ Lansing, MI area
 
 ## Document Index
 
-- `README.md` - This file
+- `README.md` - This file (author background, education, bench experience, AI methodology)
+- `FACULTY.md` - Faculty interaction profiles — personal connections to each professor, their papers reproduced in the springs, what those reproductions validated
+- `SOVEREIGN_SCIENCE.md` - The philosophical frame: why open publication + named review + consumer hardware changes the game. Artificial scarcity in journals, PhD programs, and HPC allocation. Proof of work over citation-sitting.
 - `TRANSCRIPT.md` - Academic transcript (cleaned, organized)
 - `HARDWARE.md` - Basement HPC inventory
 - `cursor-2025-receipt.png` - Cursor IDE usage receipt (source: cursor.com/2025)
+
+Related: `attsi/non-anon/contacts.md` has the contact directory. `gen3/thesis/references.md` has the formal bibliography. `FACULTY.md` connects the two — it's the narrative of how the author's life intersected with the science in the springs. `SOVEREIGN_SCIENCE.md` is why it's structured this way.
