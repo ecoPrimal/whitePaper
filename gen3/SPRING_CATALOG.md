@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: February 20, 2026
+**Last Updated**: February 23, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -95,7 +95,7 @@ The springs are organized into two tiers:
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
 **Grade**: Most modules — 30 sovereign Rust modules, 1 runtime dependency
-**Checks**: 1,116 total across 42 experiments (7 phases including GPU pipeline)
+**Checks**: 3,028+ total across 149 experiments (38 phases including GPU pipeline, Anderson-QS, NCBI validation, extension papers)
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -214,7 +214,7 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 5 |
-| Total quantitative checks | **2,513** passing |
+| Total quantitative checks | **4,425+** passing |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML |
 | Papers reproduced | 20+ (published, peer-reviewed) |
 | Papers queued for review | 60+ candidates across all springs |
@@ -226,7 +226,7 @@ The springs are organized into two tiers:
 | License | AGPL-3.0 (all springs, no exceptions) |
 | Institutional access required | Zero |
 | Proprietary software required | Zero |
-| Time from first spring to 2,513 checks | ~20 days |
+| Time from first spring to 4,425+ checks | ~24 days |
 
 ### 2.2 Cross-Spring Data Flow
 
@@ -327,4 +327,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 
 ---
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 2,513 checks across 5 domains in 20 days — the constrained evolution methodology works.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 4,425+ checks across 5 domains in 24 days — the constrained evolution methodology works.**

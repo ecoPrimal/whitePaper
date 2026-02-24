@@ -71,6 +71,19 @@ Node Atomic with neuromorphic capability. The Akida NPU handles ToadStool's neur
 
 Heavy Node Atomic, the most capable multi-substrate compute node. The 64-core dual EPYC with 256GB ECC handles CPU-bound bioinformatics (Kraken2, alignment). The RTX 3090 + RX 6950 XT provide dual-vendor GPU compute - BarraCUDA's WGSL shaders run on both NVIDIA and AMD, validating the universal compute claim. The 2x Akida PCIe cards handle neuromorphic workloads (k-mer filtering benchmarks: 2.3x faster, 53x power efficiency vs CPU).
 
+### biomeGate - Semi-Mobile Mini HPC
+
+| Component | Specification |
+|-----------|--------------|
+| **CPU** | AMD Threadripper 3970X (32 cores / 64 threads) |
+| **GPU** | NVIDIA RTX 3090 + NVIDIA Titan V |
+| **NPU** | 1x BrainChip Akida |
+| **RAM** | 256GB DDR4 (non-ECC) |
+| **Storage** | 1TB NVMe (boot) + 2x 2TB NVMe (work/scratch) |
+| **Role** | Semi-mobile heavy compute, lab-deployable mini HPC |
+
+Heavy Node Atomic, designed for portability to labs and extended compute runs. The Threadripper 3970X provides 32 cores for CPU-parallel baselines and verification. The RTX 3090 (24 GB GDDR6X) is the primary GPU compute target — 2× the VRAM of the RTX 4070, enabling 24⁴ dynamical fermion lattices GPU-resident. The Titan V (12 GB HBM2) runs NVK for driver-independent verification (validated on Eastgate, same setup). The Akida NPU handles real-time phase screening. The 5 TB NVMe scratch pool supports large-lattice checkpointing. PCIe lanes are expandable — future additions possible as bandwidth and streaming pipelines mature.
+
 ### Westgate - Cold Storage Archive
 
 | Component | Specification |
@@ -199,17 +212,17 @@ The 10G backbone connects the four primary towers. Once cabled, the covalent mes
 
 | Resource | Total |
 |----------|-------|
-| **Towers** | 9 |
+| **Towers** | 10 |
 | **Small form factor** | 4 (1x NucBox + 3x Intel NUC) |
-| **CPU Cores** | 100+ (across all gates) |
-| **GPU VRAM** | ~128GB (RTX 5090 + 2x RTX 3090 + RX 6950 XT + RTX 4070 + RTX 3070 Ti + 2x RTX 3070 + RTX 2070S) |
-| **System RAM** | ~1TB (across all gates) |
-| **Storage** | ~100TB+ (76TB ZFS cold + NVMe hot across nodes) |
+| **CPU Cores** | 130+ (across all gates) |
+| **GPU VRAM** | ~176GB (RTX 5090 + 3x RTX 3090 + Titan V + RX 6950 XT + RTX 4070 + RTX 3070 Ti + 2x RTX 3070 + RTX 2070S) |
+| **System RAM** | ~1.2TB (across all gates) |
+| **Storage** | ~105TB+ (76TB ZFS cold + NVMe hot across nodes) |
 | **GPU Vendors** | NVIDIA + AMD (BarraCUDA universal compute validated on both) |
-| **GPU Generations** | RTX 2070 through RTX 5090 (4 NVIDIA generations) + RX 6950 XT (AMD RDNA 2) |
-| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through Dual EPYC 7452) |
+| **GPU Generations** | RTX 2070 through RTX 5090 (4 NVIDIA generations) + Titan V (Volta) + RX 6950 XT (AMD RDNA 2) |
+| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through Threadripper 3970X through Dual EPYC 7452) |
 | **Memory Types** | DDR3, DDR4, DDR4 ECC, DDR5 |
-| **NPU** | 3x BrainChip Akida (160 NPUs total) |
+| **NPU** | 4x BrainChip Akida (213 NPUs total) |
 | **HSM** | 4x SoloKey FIDO2 + Android StrongBox |
 | **Network** | 10G backbone (4 towers) + 1G mesh (remaining) |
 
@@ -225,4 +238,4 @@ The NUCLEUS architecture handles heterogeneity because the hardware demanded it.
 
 ---
 
-**Built from scratch. Assembled in a basement. 6 production primals across 13 nodes. ~$15,000. One developer. The metal is real.**
+**Built from scratch. Assembled in a basement. 6 production primals across 14 nodes. ~$15,000. One developer. The metal is real.**

@@ -62,6 +62,26 @@ Extend validation to new domains: materials science, climate modeling, quantum c
 
 Kauffman's NK model (1993) formalizes fitness landscape ruggedness. [TODO: Derive the constrained evolution dynamics in NK terms. Show that constraint reduces effective K (epistatic interactions), flattening the landscape in ways that accelerate convergence. Compare to Wiser et al. power-law fitness dynamics.]
 
+### 16.3.6 baseCamp Companion Papers
+
+Independent explorations that arose from applying ecoPrimals technology to
+questions driven by the author's bench microbiology background. These are
+documented in `baseCamp/` and include:
+
+1. **Anderson Localization as QS Null Hypothesis** (`baseCamp/01_anderson_qs.md`) — Condensed matter physics (Anderson 1958) applied to microbial QS signal propagation, establishing that 3D geometry is necessary and sufficient for QS in diverse communities. 2,992+ validation checks. Three evolutionary NP solutions identified (V. cholerae logic inversion, Myxococcus self-organized geometry, Dictyostelium relay).
+
+2. **Extending the Frozen Fossil Record** (`baseCamp/02_ltee_extensions.md`) — Quantitative predictions for LTEE (§16.3.1), permafrost thaw, and agricultural soil archives using the constrained evolution framework. Extends §14 proposals with Anderson-QS dimensional predictions.
+
+3. **Precision Microbiome for Tree Crops** (`baseCamp/03_bioag_microbiome.md`) — Anderson model applied to pistachio/almond orchard microbiome engineering. Geometry-aware inoculant design for N-fixation, biocontrol, and mycorrhizal optimization.
+
+4. **Microbial Sentinels** (`baseCamp/04_sentinel_microbes.md`) — Anderson regime shift as a quantitative biosensor signal for PFAS contamination, harmful algal blooms, and pathogen emergence. Paired with ESN anomaly detection (wetSpring Exp114-119).
+
+5. **Cross-Species Signaling** (`baseCamp/05_cross_species_signaling.md`) — Anderson geometry predictions for multi-kingdom signaling in lichen, rhizobia, coral holobionts. Identifies convergent NP solution evolution across independent symbiotic lineages.
+
+These companion papers are not thesis chapters. Each stands alone as a
+potential publication and demonstrates the technology applied to real science.
+They connect back to constrained evolution where the biology demands it.
+
 ---
 
 ## 16.4 Closing
