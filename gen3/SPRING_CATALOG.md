@@ -220,7 +220,7 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 5 |
-| Total quantitative checks | **2,515+** passing |
+| Total quantitative checks | **4,427+** passing |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing |
 | Papers reproduced | 22+ (published, peer-reviewed) |
 | Papers queued for review | 60+ candidates across all springs |
@@ -233,7 +233,7 @@ The springs are organized into two tiers:
 | License | AGPL-3.0 (all springs, no exceptions) |
 | Institutional access required | Zero |
 | Proprietary software required | Zero |
-| Time from first spring to 2,515+ checks | ~26 days |
+| Time from first spring to 4,427+ checks | ~26 days |
 
 ### 2.2 Cross-Spring Data Flow
 
@@ -334,4 +334,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 
 ---
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 2,515+ checks across 5 domains in 26 days — the constrained evolution methodology works. A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 4,427+ checks across 5 domains in 26 days — the constrained evolution methodology works. A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**

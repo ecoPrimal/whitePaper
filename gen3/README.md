@@ -20,10 +20,10 @@ The papers here formalize the methodology, the architecture, and the biological 
 |--------|--------|------|--------|
 | hotSpring | Computational plasma physics, lattice QCD, spectral theory, NPU | [syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring) | 197+ |
 | airSpring | Precision agriculture | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 326 |
-| wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 1,116 |
+| wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 3,028+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 71 |
 | neuralSpring | ML primitives & isomorphic patterns | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 805 |
-| **Total** | | | **2,515+** |
+| **Total** | | | **4,427+** |
 
 ---
 
@@ -50,19 +50,19 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 | **Feb 25-26** | metalForge NPU characterization (6 pipeline placements, Akida feedback). Cross-substrate ESN: first GPU ESN dispatch via WGSL, GPU crossover at RS≈512, NPU 1000× faster streaming. 21 experiments, 78 binaries, 62 WGSL shaders. |
 | **Feb 12** | Rika Anderson (Carleton College) discovered via literature search. Her *Sulfolobus* population genomics in Yellowstone hot springs — the same environment where Taq polymerase was found — provides direct empirical evidence for the constrained evolution thesis. Faculty network: 10 professors across 3 institutions. |
 
-**Total time from first spring to 2,515+ checks across 5 domains: ~26 days.**
+**Total time from first spring to 4,427+ checks across 5 domains: ~26 days.**
 
 This velocity is possible because the constrained evolution methodology works. The Rust infrastructure (primals) was built over the preceding ~8 months. The springs consume that infrastructure and validate it against published science. Each spring produces evidence that feeds back into the next spring's design.
 
 ### What Comes Next: NUCLEUS Scaling
 
-The 2,515+ checks were produced on individual gates, running one experiment at a time. The NUCLEUS deployment architecture (see `ECOSYSTEM_ARCHITECTURE.md` §3-4) composes the basement HPC (~$15K, 100+ cores, ~128GB GPU VRAM, 10G backbone) into a coordinated mesh. The bonding model determines how others join:
+The 4,427+ checks were produced on individual gates, running one experiment at a time. The NUCLEUS deployment architecture (see `ECOSYSTEM_ARCHITECTURE.md` §3-4) composes the basement HPC (~$15K, 100+ cores, ~128GB GPU VRAM, 10G backbone) into a coordinated mesh. The bonding model determines how others join:
 
 - **Covalent** (family gates): The basement runs as one machine. All springs execute simultaneously across all GPUs. BarraCUDA's WGSL shaders are vendor-agnostic — validated on both NVIDIA and AMD in the mesh.
 - **Ionic** (faculty labs): A professor's GPU joins under a metered contract. They contribute compute and consume BarraCUDA kernels. Sovereignty is preserved — their hardware, their data, scoped access.
 - **Metallic** (institutional HPC): MSU's ICER deploys NUCLEUS atomics. Every idle campus GPU becomes a BarraCUDA node. The lattice QCD that requires CERN-scale allocation runs on a distributed campus fleet instead.
 
-The springs are the acceptance tests. The 2,515+ checks prove the kernels are correct. When a new node joins the mesh — covalent, ionic, or metallic — it runs the same validated shaders on its own hardware. The science doesn't change. The scale does.
+The springs are the acceptance tests. The 4,427+ checks prove the kernels are correct. When a new node joins the mesh — covalent, ionic, or metallic — it runs the same validated shaders on its own hardware. The science doesn't change. The scale does.
 
 See `data/README.md` §"What NUCLEUS Unlocks" for the full scaling vision.
 
@@ -74,7 +74,7 @@ See `data/README.md` §"What NUCLEUS Unlocks" for the full scaling vision.
 
 **`CONSTRAINED_EVOLUTION_FORMAL.md`** — *Constrained Evolution: How Environmental Pressure Drives Convergence in Biological and Computational Systems*
 
-The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in three biological lines of evidence: *Thermus aquaticus* / Taq polymerase (constraint-specific adaptation), Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation), and Rika Anderson's population genomics of extremophiles in Yellowstone hot springs and the deep-sea subsurface (constrained evolution in natural populations, including the same hot springs where Taq was discovered). The springs provide 2,515+ quantitative data points validating this claim.
+The core methodology paper. Argues that strategic environmental constraints (Rust's type system, the Pure Rust directive, capability-based architecture) drive specialization toward fitness, not toward a predetermined solution. Grounded in three biological lines of evidence: *Thermus aquaticus* / Taq polymerase (constraint-specific adaptation), Lenski's Long-Term Evolution Experiment (fitness without predetermined innovation), and Rika Anderson's population genomics of extremophiles in Yellowstone hot springs and the deep-sea subsurface (constrained evolution in natural populations, including the same hot springs where Taq was discovered). The springs provide 4,427+ quantitative data points validating this claim.
 
 ### Theoretical
 
@@ -96,7 +96,7 @@ A comprehensive catalog of every primal in the ecosystem. 6 foundation primals (
 
 **`SPRING_CATALOG.md`** — *ecoPrimals Spring Catalog: Status, Science, and Evolution*
 
-The science validation companion to the Primal Catalog. Documents all 5 springs with current phase status, 2,515+ passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, the 10-professor faculty network, and 60+ candidate papers for future reproduction. Every spring repository is public and AGPL-3.0.
+The science validation companion to the Primal Catalog. Documents all 5 springs with current phase status, 4,427+ passing quantitative checks across physics, agriculture, biology, chemistry, geophysics, and machine learning. Maps the cross-spring data flow, spring-to-primal connections, the 10-professor faculty network, and 60+ candidate papers for future reproduction. Every spring repository is public and AGPL-3.0.
 
 ### About the Author
 
@@ -129,14 +129,14 @@ The original formulation of the constrained optimization thesis, preserved as a 
 ### For a faculty member evaluating this work for PhD admission:
 
 1. **`about/`** — Who is this person? (transcript, bench experience, hardware)
-2. **`SPRING_CATALOG.md`** — What science did they produce? (2,515+ checks, 5 domains, public repos)
+2. **`SPRING_CATALOG.md`** — What science did they produce? (4,427+ checks, 5 domains, public repos)
 3. **`data/FACULTY_SPRING_PROFILES.md`** — How does my research connect? (your papers in the queue)
 4. **`CONSTRAINED_EVOLUTION_FORMAL.md`** — What is the methodology? (constrained evolution thesis)
 5. **`ECOSYSTEM_ARCHITECTURE.md`** — What infrastructure did they build? (the primals)
 
 ### For a collaborator interested in the science:
 
-1. **`SPRING_CATALOG.md`** — All 5 springs, 2,515+ checks, 22+ papers reproduced
+1. **`SPRING_CATALOG.md`** — All 5 springs, 4,427+ checks, 22+ papers reproduced
 2. **`data/FACULTY_SPRING_PROFILES.md`** — 9 professors, 60+ candidate papers
 3. **`data/MURILLO_REPRODUCTION_PLAN.md`** — How a reproduction study works in practice
 4. **`PRIMAL_CATALOG.md`** §1.4 ToadStool — The GPU compute layer the springs validate
