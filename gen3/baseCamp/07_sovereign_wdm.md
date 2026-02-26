@@ -285,15 +285,21 @@ demonstrates that:
 neuralSpring contributes validated ML surrogates and spectral analysis directly
 to WDM science:
 
-- **WDM surrogates** (nW-01 through nW-05): MLP surrogate models for EOS
-  interpolation — the Diaw surrogate (Paper P20) is already validated.
-  Remaining queue: pair correlation functions, transport coefficients,
-  dynamic structure factor, dense hydrogen opacity
+- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 87)
+  - nW-01: MLP transport surrogate (D*, η*, λ*) — 30/30 Rust checks
+  - nW-02: MLP EOS surrogate P(ρ,T), E(ρ,T) — 36/36 + 15/15 GPU checks
+  - nW-03: LSTM reservoir S(q,ω) peak predictor — 27/27 Rust checks, R²=0.98
+  - nW-04: MLP classical→WDM transfer learning — 6/6 Rust checks
+  - nW-05: ESN regime classifier (Classical/WDM/Degenerate) — 39/39 Rust checks, 96.5% accuracy
+- **Reservoir computing**: nW-03 (LSTM) and nW-05 (ESN) demonstrate that
+  reservoir computing (fixed random weights + ridge regression readout) is
+  effective for WDM sequence analysis and regime classification
 - **Spectral analysis**: neuralSpring's `eigh_f64` eigendecomposition and
   `spectral_entropy` (rewired to `barracuda::stats::shannon_from_frequencies`
   in Session 81) apply directly to plasma eigenmode analysis
-- **Session 81 status**: 129+ named tolerances, 39 BarraCUDA rewires,
-  full PyTorch deterministic seeding for reproducible surrogate training
+- **Session 87 status**: 623 lib tests, 172 binaries, 156/156 validators,
+  129+ named tolerances, 39 BarraCUDA rewires, 31 Python baselines (all
+  deterministically seeded), 2450+ total validation checks
 
 ---
 

@@ -100,8 +100,8 @@ The springs are organized into two tiers:
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: Most modules — 30 sovereign Rust modules, 1 runtime dependency
-**Checks**: 1,116 total across 42 experiments (7 phases including GPU pipeline)
+**Grade**: Phase 59 — 30 sovereign Rust modules, 1 runtime dependency
+**Checks**: 4,688+ validation checks (1,578 GPU) across 197 experiments. 1,008 Rust tests, 86 named tolerances, 184 binaries (169 validate + 15 benchmark). 52/52 papers, 39/39 three-tier. ToadStool S68, 79 primitives consumed.
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -118,55 +118,76 @@ The springs are organized into two tiers:
 | 5 (Paper parity) | Real NCBI data + VOC peaks | 51/51 | Algae pond + Reese 2019 match |
 | 6 (Public benchmark) | 4 BioProjects vs paper ground truth | 202/202 | 22 samples, all match |
 | 7 (GPU pipeline) | Full DADA2 + chimera + taxonomy on GPU | 88/88 | 10 samples, QF WGSL, streaming |
+| V53-V58 | Anderson QS, Track 4 soil, drug repurposing, cross-spring S68 | 3,043+ | 52/52 papers, 79 primitives, 0 local WGSL |
+| V59 | Science extensions + three-tier controls | 1,094+ | NCBI sovereign, cold seep, dynamic W(t), NPU sentinel, Exp190-192 |
 
-**Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth).
+**Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth), real NCBI sovereign pipeline (EFetch/SRA → FASTA → diversity → Anderson), cold seep metagenome classification, dynamic Anderson W(t) perturbation models.
 
-**Papers queued**: 22 candidates across 3 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), Jones PFAS (Track 2). See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers reproduced**: 52/52 across 4 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), deep-sea metagenomics (Track 1c), Jones PFAS (Track 2). 39/39 three-tier eligible papers have full CPU + GPU + metalForge validation. See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
-**BarraCUDA kernels validated**: FusedMapReduceF64, BrayCurtisF64, BatchedEighGpu, GemmF64, VarianceF64, CorrelationF64, CovarianceF64, WeightedDotF64.
+**BarraCUDA primitives consumed**: 79 via ToadStool S68 `compile_shader_universal` — including FusedMapReduceF64, BrayCurtisF64, BatchedEighGpu, GemmF64, anderson_3d, lanczos, lanczos_eigenvalues, level_spacing_ratio, and all diversity/spectral primitives. Zero local WGSL, zero local derivative/regression math.
 
-**BarraCUDA gaps identified**: ODE solver (c-di-GMP dynamics), Gillespie stochastic sim, HMM Viterbi, Smith-Waterman alignment, phylogenetic likelihood.
+**BarraCUDA gaps resolved by wetSpring**: ODE solver (bistable, capacitor, qs_ode), Gillespie stochastic sim, HMM Viterbi (phylohmm), Smith-Waterman alignment.
 
 **Key discovery**: `log_f64` bug in ToadStool — coefficients halved, causing ~1e-3 precision instead of ~1e-15. Found during Shannon entropy validation, fixed immediately in ToadStool core.
 
-**Participates in**: ToadStool validation (GPU science, bug discovery), biomeOS (microbiome health monitoring), Squirrel (learned classifiers).
+**Participates in**: ToadStool validation (GPU science, bug discovery, 79 primitives consumed), biomeOS (microbiome health monitoring, science graph), Squirrel (learned classifiers), NestGate (NCBI JSON-RPC integration).
 
 ---
 
 ### 1.4 groundSpring — Measurement Noise & Uncertainty
 
-**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems
-**Grade**: Phase 0 complete across 4 scientific domains
-**Checks**: 71/71 quantitative checks pass
-**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution)
+**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems, spectral theory, quasispecies, rare biosphere, jackknife, freeze-out
+**Grade**: Phase 0 + Phase 1 (Rust) complete across 8 scientific domains
+**Checks**: 236/236 Rust validation checks (all PASS), 280 Rust tests, 21/21 mathematical parity (Python == Rust)
+**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization, Almost-Mathieu, transport, band edge), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution, drift, uncertainty bridge, rare biosphere)
 **Repository**: git@github.com:syntheticChemistry/groundSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains.
+**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains. Phase 1 adds spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, and spectral reconstruction.
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
 | 0 (Python) | 5 experiments across 4 domains | 71/71 | Unified noise characterization framework |
+| 1 (Rust) | 21 experiments across 8 domains, dual-mode CI | 236/236 | 24 library modules, 27 barracuda delegations (22 CPU + 5 GPU) |
 
 **Experiment catalog**:
 
 | # | Domain | Checks | Key Finding |
 |---|--------|--------|-------------|
-| 001 | Agricultural sensors | 32/32 | EC5 bias-dominated (77%); site calibration removes most error |
-| 002 | Meteorology (ERA5 vs station) | 5/5 | Representation noise dominates model-observation gap |
-| 003 | ET₀ uncertainty (FAO-56) | 8/8 | Humidity dominates at 66% of total variance |
-| 004 | Microbiome sequencing depth | 16/16 | Genus saturation at 5,000 reads; phyla robust at 100 reads |
-| 005 | Seismic source inversion | 10/10 | ±2km horizontal, ±8.5km depth from ±0.5s noise |
+| 001 | Agricultural sensors | 36 | EC5 bias-dominated (77%); site calibration removes most error |
+| 002 | ERA5 observation gap | 13 | Representation noise dominates model-observation gap |
+| 003 | FAO-56 ET₀ error propagation | 15 | Humidity dominates at 66% of total variance |
+| 004 | Sequencing noise rarefaction | 15 | Genus saturation at 5,000 reads; phyla robust at 100 reads |
+| 005 | Seismic source inversion | 9 | ±2km horizontal, ±8.5km depth from ±0.5s noise |
+| 006 | Signal specificity | 12 | Waters bistable, multi-signal QS |
+| 007 | RAWR resampling | 11 | Liu resampling convergence |
+| 008 | Anderson localization | 8 | Kachkovskiy 1D/2D/3D |
+| 009 | Almost-Mathieu localization | 8 | Kachkovskiy spectral theory |
+| 010 | Bistable switching | 9 | Waters ODE dynamics |
+| 011 | Multi-signal QS | 8 | Waters quorum sensing |
+| 012 | Spin chain transport | 18 | Kachkovskiy transport |
+| 013 | Resampling convergence | 8 | Liu RAWR |
+| 014 | Drift vs selection | 7 | R. Anderson evolution |
+| 015 | Uncertainty bridge | 8 | R. Anderson |
+| 016 | Rare biosphere | 10 | R. Anderson |
+| 017 | Quasispecies threshold | 6 | Dolson |
+| 018 | Band edge structure | 10 | Kachkovskiy |
+| 019 | Jackknife estimation | 9 | Bazavov |
+| 020 | Freeze-out inverse | 8 | Bazavov |
+| 021 | Spectral reconstruction | 8 | Bazavov |
 
-**Papers queued**: 18 candidates — Bazavov spectral reconstruction, Waters biological signal specificity, Liu RAWR resampling, Kachkovskiy Anderson localization. See `groundSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers completed**: Waters (signal specificity, bistable, multi-signal QS), Liu (RAWR, resampling convergence), Kachkovskiy (Anderson, Almost-Mathieu, transport, band edge), Dolson (quasispecies), R. Anderson (drift, uncertainty bridge, rare biosphere), Bazavov (jackknife, freeze-out, spectral recon).
 
-**BarraCUDA gaps identified**: FFT (shared with hotSpring), Gillespie (shared with wetSpring), jackknife/bootstrap, regularized inversion, Lanczos eigensolve + SpMV (shared with hotSpring, needed for Kachkovskiy spectral methods).
+**Papers queued**: Remaining candidates. See `groundSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
-**Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning.
+**BarraCUDA gaps NOW**: FFT (resolved in hotSpring), batched_multinomial (Tier C), eigenvector solver (Tier C), grid search GPU (now implemented CPU). Most gaps resolved. **Cholesky solve batch** is the main NEW gap.
 
-**Participates in**: All springs (provides uncertainty quantification), neuralSpring (noise labels for training robustness).
+**Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning. Spectral theory (Anderson, Almost-Mathieu, band edge) shared with hotSpring and wetSpring. Transport, quasispecies, rare biosphere feed wetSpring and neuralSpring.
+
+**Participates in**: All springs (provides uncertainty quantification), neuralSpring (noise labels for training robustness), hotSpring (spectral primitives), wetSpring (quasispecies, rare biosphere).
 
 ---
 
@@ -220,30 +241,31 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 5 |
-| Total quantitative checks | **4,427+** passing |
+| Total quantitative checks | **11,161+** passing |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing |
-| Papers reproduced | 22+ (published, peer-reviewed) |
+| Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
 | Papers queued for review | 60+ candidates across all springs |
 | Faculty connected | 10 professors (MSU + Sandia + Carleton) across 7 departments |
-| BarraCUDA kernels validated by springs | 60+ distinct GPU/NPU primitives |
+| BarraCUDA kernels validated by springs | 79+ distinct GPU/NPU primitives (wetSpring alone consumes 79 via ToadStool S68) |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
-| Rust validation checks | 549 (neuralSpring) + 119 (airSpring) + ~697 hotSpring (~78 binaries) |
-| WGSL shaders | 62 hotSpring + springs (164+ cross-spring via toadStool) |
+| Rust validation checks | 1,008 (wetSpring) + 2,250+ (neuralSpring) + 3,123+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
+| WGSL shaders | 700+ cross-spring via ToadStool S68 universal precision |
 | Languages | Python (Phase 0), Rust (Phase 1+), WGSL shaders (Phase 2+) |
 | License | AGPL-3.0 (all springs, no exceptions) |
 | Institutional access required | Zero |
 | Proprietary software required | Zero |
-| Time from first spring to 4,427+ checks | ~26 days |
+| Time from first spring to 11,161+ checks | ~27 days |
 
 ### 2.2 Cross-Spring Data Flow
 
 ```
-groundSpring (uncertainty)
+groundSpring (uncertainty + spectral + quasispecies — 21 experiments, 236/236 checks, 8 domains)
     │
     ├──→ airSpring: "humidity dominates ET₀ uncertainty at 66%"
-    ├──→ wetSpring: "genus saturation at 5,000 reads"
-    ├──→ neuralSpring: "expect 0.004-0.021 m³/m³ sensor noise floor"
-    └──→ hotSpring: "inverse problem depth poorly constrained"
+    ├──→ wetSpring: "genus saturation at 5,000 reads; quasispecies, rare biosphere"
+    ├──→ neuralSpring: "expect 0.004-0.021 m³/m³ sensor noise floor; noise labels"
+    ├──→ hotSpring: "inverse problem depth poorly constrained; Anderson, Almost-Mathieu, band edge spectral primitives"
+    └──→ ToadStool: "27 barracuda delegations (22 CPU + 5 GPU)"
 
 neuralSpring (ML primitives)
     │
@@ -259,11 +281,15 @@ hotSpring (GPU compute patterns)
     ├──→ wetSpring: "FusedMapReduceF64 pattern for bulk statistics"
     └──→ ToadStool: "195 acceptance checks, 6 bugs found"
 
-wetSpring (biology + chemistry)
+wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
     │
-    ├──→ ToadStool: "log_f64 bug found and fixed"
-    ├──→ airSpring: "kriging spatial interpolation module"
-    └──→ groundSpring: "sequencing noise calibrates rarefaction"
+    ├──→ ToadStool: "log_f64 bug found and fixed; 79 primitives consumed; three-tier validated (CPU→GPU→metalForge)"
+    ├──→ ToadStool: "Anderson spectral primitives (anderson_3d, lanczos, level_spacing_ratio) validated at f64"
+    ├──→ ToadStool: "Typed NCBI errors (Error::Ncbi) for sovereign data acquisition"
+    ├──→ airSpring: "kriging spatial interpolation; dynamic Anderson W(t) models soil moisture coupling"
+    ├──→ hotSpring: "Anderson localization applied to biology — shared spectral primitives, W_c determination"
+    ├──→ neuralSpring: "ESN/LSTM anomaly detection for sentinel microbes; NPU int8 quantization validated"
+    └──→ groundSpring: "sequencing noise calibrates rarefaction; 86 named tolerances with provenance"
 ```
 
 ### 2.3 Spring → Primal Connections
@@ -296,18 +322,19 @@ Full profiles: `data/FACULTY_SPRING_PROFILES.md`
 
 ### 2.5 BarraCUDA Gap Summary (Across All Springs)
 
-| Gap | Requesting Springs | Priority | Faculty Driver | Impact |
+| Gap | Requesting Springs | Priority | Faculty Driver | Status |
 |-----|-------------------|----------|---------------|--------|
-| FFT | hotSpring (lattice QCD), groundSpring (spectral recon), wetSpring (signal) | P0 | Bazavov | Unlocks Bazavov extension + spectral methods |
-| ODE solver (RK4) | wetSpring (c-di-GMP), groundSpring (bifurcation) | P0 | Waters | Unlocks signaling dynamics |
-| Lanczos eigensolve | hotSpring (Dirac spectrum), groundSpring (Anderson localization), neuralSpring (Hessian) | P1 | Kachkovskiy | Unlocks spectral theory, sparse eigenvalue problems |
-| SpMV (sparse matrix-vector) | hotSpring (lattice gauge), groundSpring (spectral), neuralSpring (sparse attention) | P1 | Kachkovskiy | Foundation for Lanczos + sparse computation |
-| HMM Viterbi | neuralSpring (PhyloNet-HMM), wetSpring (metagenomics) | P1 | Liu | Unlocks comparative genomics |
-| Evolutionary optimization | neuralSpring (counterdiabatic), groundSpring (Dolson) | P1 | Dolson | Unlocks constrained evolution validation |
-| Smith-Waterman alignment | wetSpring (genomics), neuralSpring (sequence models) | P1 | Liu | Unlocks large-scale sequence analysis |
-| Gillespie simulation | wetSpring (quorum sensing), groundSpring (biological noise) | P1 | Waters | Unlocks stochastic biology |
-| Matrix exponentiation | hotSpring (SU(3) HMC), groundSpring (transport) | P2 | Kachkovskiy, Bazavov | General exp(A) for time evolution |
-| L-BFGS optimizer | neuralSpring (PINN improvement) | P2 | Raissi | Closes PINN error gap (5.1% → ~0.06%) |
+| FFT | hotSpring (lattice QCD), groundSpring (spectral recon), wetSpring (signal) | P0 | Bazavov | **Resolved** — hotSpring |
+| ODE solver (RK4) | wetSpring (c-di-GMP), groundSpring (bifurcation) | P0 | Waters | **Resolved** — wetSpring bistable, capacitor, qs_ode validated |
+| Lanczos eigensolve | hotSpring (Dirac spectrum), groundSpring (Anderson), neuralSpring (Hessian) | P1 | Kachkovskiy | **Resolved** — wetSpring + hotSpring: `lanczos`, `lanczos_eigenvalues` validated (CPU + GPU) |
+| SpMV (sparse matrix-vector) | hotSpring (lattice gauge), groundSpring (spectral), neuralSpring (sparse) | P1 | Kachkovskiy | **Resolved** — implemented for Lanczos + Anderson 3D |
+| HMM Viterbi | neuralSpring (PhyloNet-HMM), wetSpring (metagenomics) | P1 | Liu | **Resolved** — wetSpring `phylohmm` module validated |
+| Evolutionary optimization | neuralSpring (counterdiabatic), groundSpring (Dolson) | P1 | Dolson | Open — unlocks constrained evolution validation |
+| Smith-Waterman alignment | wetSpring (genomics), neuralSpring (sequence models) | P1 | Liu | **Resolved** — wetSpring Exp028 validated |
+| Gillespie simulation | wetSpring (quorum sensing), groundSpring (biological noise) | P1 | Waters | **Resolved** — wetSpring stochastic modules validated |
+| Matrix exponentiation | hotSpring (SU(3) HMC), groundSpring (transport) | P2 | Kachkovskiy, Bazavov | Open — general exp(A) for time evolution |
+| L-BFGS optimizer | neuralSpring (PINN improvement) | P2 | Raissi | Open — closes PINN error gap (5.1% → ~0.06%) |
+| Cholesky solve batch | groundSpring (jackknife, spectral recon) | P1 | Bazavov | Open — main NEW gap |
 
 ---
 
@@ -324,7 +351,7 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 **Evidence**: hotSpring runs paper-parity Yukawa MD (N=10,000, 80k steps) on a $600 RTX 4070 for $0.044. The same computation costs $50-500 on institutional HPC.
 
 **Claim**: Sovereign Rust can replace the Python scientific stack.
-**Evidence**: wetSpring's 30 Rust modules with 1 runtime dependency cover the complete 16S pipeline. airSpring's Rust crate matches Python to 1e-5 across 53 cross-validated values.
+**Evidence**: wetSpring's 30 Rust modules with 1 runtime dependency cover the complete 16S pipeline with 4,688+ checks across 197 experiments, 52/52 papers reproduced, and 39/39 three-tier validated (CPU→GPU→metalForge). airSpring's Rust crate matches Python to 1e-5 across 53 cross-validated values.
 
 **Claim**: BarraCUDA's 6 isomorphic primitives serve all domains.
 **Evidence**: neuralSpring proves GEMM + Attention + Normalization + Nonlinearity + Reduction + Gating explain LLaMA, OpenFold, ResNet, ViT, MLP surrogates, and LSTM weather models. All 6 are WGSL shaders in BarraCUDA.
@@ -334,4 +361,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 
 ---
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 4,427+ checks across 5 domains in 26 days — the constrained evolution methodology works. A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 11,161+ checks across 5 domains in 27 days — the constrained evolution methodology works. 7 of 11 BarraCUDA gaps have been resolved by the springs themselves (ODE, Lanczos, SpMV, HMM, Smith-Waterman, Gillespie, FFT). A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**

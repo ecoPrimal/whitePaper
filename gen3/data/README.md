@@ -59,12 +59,12 @@ Remaining P0-P1 gaps (driven by faculty extension papers):
 
 | Spring | Experiments | Checks | Papers Reproduced | Domain |
 |--------|-----------|--------|------------------|--------|
-| hotSpring | 6 phases | 195 | 4 published + lattice QCD infra | Plasma physics, nuclear structure |
-| airSpring | 4 + Rust + cross-val | 326 | 3 published + real data pipeline | ET₀, soil moisture, IoT |
-| wetSpring | 42 experiments | 1,116 | 8 pipelines + 4 BioProject benchmarks | 16S, LC-MS, PFAS, GPU pipeline |
+| hotSpring | 21 experiments | 664+ | 14 published + lattice QCD + spectral | Plasma physics, nuclear structure, NPU |
+| airSpring | 100+ experiments | 3,123+ | 20+ published + 100-station atlas | ET₀, soil hydrology, crop phenology |
+| wetSpring | 197 experiments | 4,688+ | 52 papers, 39/39 three-tier | 16S, LC-MS, PFAS, Anderson QS, metagenomics |
 | groundSpring | 5 experiments | 71 | 5 noise characterization baselines | Sensors, weather, seismic, microbiome |
-| neuralSpring | 10 + Rust + GPU | 805 | 5 published (PINN, DeepONet, LeNet-5, LSTM, quantized) | ML primitives, scholarly reproduction |
-| **Total** | | **2,513** | **20+** | **6 scientific domains** |
+| neuralSpring | 25+ experiments | 2,250+ | 25 papers + 5 WDM surrogates | ML primitives, spectral, surrogates |
+| **Total** | | **10,796+** | **70+** | **7 scientific domains** |
 
 All spring repositories are public under AGPL-3.0. No institutional access required. No proprietary software. Runs on consumer hardware purchased from Newegg and Facebook Marketplace.
 

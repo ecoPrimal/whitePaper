@@ -119,6 +119,14 @@ Testable with archived soil DNA: compare QS gene prevalence (luxI/luxR,
 lasI/lasR) between no-till and conventional-till plots from the same LTAR
 site and year.
 
+airSpring contributes complementary agricultural time series: a 60-year
+water balance (Wooster OH, Triplett-Van Doren dataset) parallel to LTEE
+as a long-term archive; cover crop dual Kc + no-till validation (40/40
+checks) providing agronomic context for QS predictions in tilled vs
+no-till soil; and the Michigan Crop Water Atlas (100 stations, 80 years
+simulated) as a massive temporal dataset for agricultural time series
+analysis.
+
 ### 3.3 Pivot Bio Connection
 
 The Pivot Bio model (engineering N-fixation via seed-coat inoculant) relies
@@ -172,17 +180,27 @@ validated, Exp001-070) can process all three sample types. Additionally:
 
 ### 5.2 neuralSpring Integration
 
-neuralSpring adds ML primitives for LTEE analysis:
+neuralSpring adds ML primitives for LTEE analysis (Session 87: 623 lib tests,
+172 binaries, 156/156 validators, 2,450+ checks, 5 WDM surrogates complete):
 
 - **HMM / PhyloNet-HMM** (Liu Papers 016-018): Introgression detection applied
   to LTEE genomes — identify horizontal transfer events and adaptive introgression
   across 75,000 generations
-- **Transfer learning** (Exp 004): Cross-environment adaptation models.
+- **Transfer learning** (Exp 004, nW-04): Cross-environment adaptation models.
   Training on one LTEE population, testing on others, mirrors the
   constrained-evolution prediction that convergent pathways (not identical
-  mutations) recur across replicates
-- **LSTM time series** (Study 004, NSE=0.849): Predict temporal dynamics
-  of mutation accumulation and fitness plateaus across the 12 LTEE populations
+  mutations) recur across replicates. nW-04 demonstrates classical→WDM transfer
+  learning — the same framework applies to training on one LTEE replicate and
+  transferring to another
+- **LSTM time series** (Study 004, NSE=0.849; nW-03 LSTM reservoir, R²=0.98):
+  Predict temporal dynamics of mutation accumulation and fitness plateaus across
+  the 12 LTEE populations. nW-03's pooled-readout LSTM (mean + std + last hidden
+  state after washout) validates the sequence processing pipeline for extracting
+  temporal features from biological time series
+- **ESN regime classifier** (nW-05, 96.5% accuracy): Classify evolutionary
+  regimes (e.g., pre-citrate vs post-citrate Ara-3) from population genomic
+  features using reservoir computing. Fixed-weight ESN + ridge readout requires
+  no backpropagation — suitable for rapid regime detection on streaming data
 
 ### 5.2 Wet Lab (MSU Resources)
 

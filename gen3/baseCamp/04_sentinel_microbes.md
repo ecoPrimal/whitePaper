@@ -1,7 +1,7 @@
 # Sub-Thesis 04: Microbial Sentinels — Community Shifts as Biosensors for Contamination and Disease
 
 **Date:** February 26, 2026
-**Status:** **Validated** — NPU pipeline complete: ESN reservoir → int8 quantization → Akida AKD1000 deployment. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks) provides analytical chemistry backbone. Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization
+**Status:** **Validated** — NPU pipeline complete: ESN reservoir → int8 quantization → Akida AKD1000 deployment. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks) provides analytical chemistry backbone. Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization. V59 extension: NPU sentinel real stream (Exp188 — 10 checks: steady-state monitoring, stress injection, bloom detection, int8 inference fidelity); int8 quantization validated via three-tier (Exp190 CPU D04: 13 affine quantization + round-trip fidelity checks)
 **Domain:** Environmental microbiology, biosensing, contamination monitoring
 **Novelty:** Anderson regime shift as a measurable signal for environmental
 perturbation; ESN/reservoir computing for real-time anomaly detection on
@@ -201,15 +201,39 @@ The echo state network (ESN) approach validated in neuralSpring and wetSpring
 task: detecting anomalous patterns in time series without explicit model
 specification.
 
-Additionally, neuralSpring's LSTM (Study 004, NSE=0.849 on ERA5 weather data)
-provides a complementary deep learning approach for longer-horizon predictions.
-The LSTM captures temporal dependencies across seasons, while the ESN excels at
+**Session 87 directly validates this pipeline**: neuralSpring now has two
+reservoir computing surrogates with full Python→Rust cross-language parity:
+
+- **nW-05 ESN regime classifier** (`wdm_esn.rs`): 2-step ESN with tanh
+  reservoir (size 64), spectral radius 0.9, trained via ridge regression.
+  Classifies WDM plasma into 3 regimes (Classical/WDM/Degenerate) at 96.5%
+  accuracy. The same architecture classifies Anderson regimes from community
+  features — substituting (log_ρ, log_T) inputs with (J, d_eff) inputs and
+  predicting QS regime (extended/marginal/localized) instead of plasma regime.
+  39/39 Rust validation checks, Python↔Rust score parity < 1e-10.
+
+- **nW-03 LSTM reservoir** (`wdm_sqw.rs`): LSTM cell (hidden size 32) with
+  fixed random weights, processing time series via pooled hidden states
+  (mean + std + last after washout). Extracts oscillation frequency and
+  damping from synthetic MD time series at R²=0.98. The same pooled-readout
+  LSTM architecture applies to community time series — extracting seasonal
+  periodicity and anomaly features from diversity index sequences.
+  27/27 Rust validation checks.
+
+Both reservoir models use fixed random weights + ridge regression readout —
+no backpropagation needed. This makes them suitable for NPU deployment
+(deterministic, lightweight inference) and edge-device monitoring.
+
+neuralSpring's LSTM (Study 004, NSE=0.849 on ERA5 weather data) provides a
+complementary deep learning approach for longer-horizon predictions. The LSTM
+captures temporal dependencies across seasons, while the ESN excels at
 real-time anomaly detection with minimal computational overhead.
 
 neuralSpring also contributes spectral analysis primitives (`eigh_f64`, IPR,
 level spacing ratio) for characterizing community structure shifts — the same
 primitives validated against Kachkovskiy Papers 022-023 (129+ tolerances,
-39 BarraCUDA rewires as of Session 81).
+39 BarraCUDA rewires). Session 87 total: 623 lib tests, 172 binaries, 156/156
+validators, 2,450+ checks across 25 papers + 5 WDM surrogates.
 
 Training: 12-24 months of baseline community sampling (monthly 16S)
 establishes the natural variation envelope. The ESN learns the dynamics

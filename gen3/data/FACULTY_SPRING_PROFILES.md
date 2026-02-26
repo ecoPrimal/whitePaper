@@ -2,7 +2,7 @@
 
 **Status**: Working draft  
 **Purpose**: Map known faculty to ecoPrimals springs, identify candidate papers for reproduction  
-**Last Updated**: February 12, 2026
+**Last Updated**: February 26, 2026
 
 ---
 
@@ -48,14 +48,16 @@ https://engineering.msu.edu/faculty/michael-murillo
 https://www.egr.msu.edu/bae/water/irrigation/  
 **Connection**: New lab job (2026)
 
-**Spring Status**: 142/142 Phase A checks PASS, 918 station-days real data pipeline
+**Spring Status**: 3,123+ total checks (594 Python + 491 Rust + 570 validation + 1393 atlas + 75 cross-val), 22 experiments, 27 binaries
 
 **Reproduced Papers**:
 | Paper | Status | Checks |
 |-------|--------|--------|
-| Dong (2020) sensor validation | Reproduced | airSpring Phase A |
-| Dong (2024) soil calibration | Reproduced | airSpring Phase A |
+| Dong (2020) soil sensor calibration | Reproduced | airSpring Phase A |
+| Dong (2024) IoT irrigation pipeline | Reproduced | airSpring Phase A |
 | FAO-56 Penman-Monteith reference ET₀ | Reproduced | airSpring Phase A |
+
+**Experiments** (beyond original 3 Dong papers): Richards PDE, biochar P adsorption, dual Kc, cover crops, yield response, scheduling optimization, lysimeter, sensitivity analysis, atlas, PT/HG/Thornthwaite ET₀, GDD, Saxton-Rawls pedotransfer, CW2D, 60-year water balance.
 
 **Candidate Papers for Future Reproduction**:
 - Dong et al. — IoT soil moisture sensor network calibration (fieldwork data)

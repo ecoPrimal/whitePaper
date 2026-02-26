@@ -194,20 +194,49 @@ Gel carrier application emerges as the Anderson-optimal method: it maintains
 
 ## 7. neuralSpring Connections
 
-neuralSpring's transfer learning framework (Exp 004) applies directly to
-inoculant response prediction:
+neuralSpring's ML primitives (Session 87: 623 lib tests, 172 binaries,
+2,450+ checks, 5 WDM surrogates complete) apply directly to inoculant
+response prediction:
 
-- **Cross-climate transfer**: Michigan → California parallels neuralSpring's
-  pistachio → almond climate transfer learning. Train on KBS (Kellogg
+- **Cross-climate transfer** (Exp 004, nW-04): Michigan → California parallels
+  neuralSpring's classical→WDM transfer learning. Train on KBS (Kellogg
   Biological Station) Michigan soil data, predict inoculant success in
   California almond orchards
-- **LSTM time series** (Study 004, NSE=0.849): Predict seasonal QS regime
-  dynamics from soil parameters (moisture, temperature, diversity index)
+- **LSTM time series** (Study 004, NSE=0.849; nW-03 LSTM reservoir, R²=0.98):
+  Predict seasonal QS regime dynamics from soil parameters (moisture,
+  temperature, diversity index). nW-03's pooled-readout architecture extracts
+  temporal features (mean, std, final state) from sequences — applicable to
+  seasonal diversity index time series
+- **ESN regime classifier** (nW-05, 96.5% accuracy): Classify soil QS regime
+  (QS-active/marginal/suppressed) from (J, d_eff) inputs using reservoir
+  computing. Lightweight inference suitable for edge deployment at field scale
 - **HMM for introgression**: Detect horizontal gene transfer of QS genes
   in inoculant strains post-application — does the inoculant's QS circuit
   persist or get displaced by native community HGT?
 
-## 8. Connection to Constrained Evolution
+## 8. airSpring Connections
+
+airSpring provides the soil hydrology and irrigation primitives that
+parameterize Anderson geometry in orchard soil. FAO-56 water balance and
+Richards PDE compute the exact θ(t) field that determines pore connectivity
+(d_eff) for Anderson QS — the same coupling documented in baseCamp/06.
+Precision irrigation for tree crops requires accurate ET₀: airSpring
+validates four methods (PM, PT, HG, Thornthwaite) and delivers scheduling
+optimization (53–72% water savings). Saxton-Rawls pedotransfer yields
+continuous soil hydraulic properties from texture without lab measurement.
+Cover crop dual Kc (FAO-56 Ch. 11, 40/40 checks) and biochar P adsorption
+(Kumari et al. 2025 Langmuir/Freundlich) complete the orchard-floor
+characterization toolkit.
+
+| airSpring primitive | Orchard relevance |
+|---------------------|-------------------|
+| θ(t) from FAO-56 + Richards | d_eff for Anderson QS in soil |
+| ET₀ (PM, PT, HG, Thornthwaite) | Irrigation scheduling, 53–72% savings |
+| Saxton-Rawls pedotransfer | Soil hydraulic properties from texture |
+| Dual Kc cover crops | Orchard floor management |
+| Biochar P adsorption | Soil amendment characterization |
+
+## 9. Connection to Constrained Evolution
 
 Orchard soil is a constrained environment: water-limited, salinized,
 pathogen-pressured. The microbiome evolves under these constraints toward
@@ -219,7 +248,7 @@ This is constrained evolution applied as engineering: understanding the
 constraint landscape to design interventions that work with the physics
 rather than against it.
 
-## 8. PFAS Monitoring Angle
+## 10. PFAS Monitoring Angle
 
 Agricultural soils near military installations and wastewater application sites
 accumulate PFAS. The Anderson model predicts that PFAS contamination disrupts

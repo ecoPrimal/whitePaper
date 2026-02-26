@@ -1,7 +1,7 @@
 # Sub-Thesis 01: Anderson Localization as a Null Hypothesis for Microbial Quorum Sensing
 
 **Date:** February 26, 2026
-**Status:** 3,400+ validation checks across 76 experiments (Exp107-156, 170-182), all PASS; W_c = 16.26 ± 0.95 (finite-size scaling); Track 4 soil QS complete (9 papers, full three-tier: CPU + GPU + metalForge); 9 extension papers validated (cold seep, wave synthesis, burst stats, eavesdroppers, interkingdom, physical comm, density correlation, cAMP relay); correlated disorder + dilution effects quantified
+**Status:** 3,700+ validation checks across 82 experiments (Exp107-156, 170-182, 184-186, 190-192), all PASS; W_c = 16.26 ± 0.95 (finite-size scaling); Track 4 soil QS complete (9 papers, full three-tier: CPU + GPU + metalForge); 9 extension papers validated (cold seep, wave synthesis, burst stats, eavesdroppers, interkingdom, physical comm, density correlation, cAMP relay); correlated disorder + dilution effects quantified; V59: real NCBI sovereign pipeline (Exp184 — NCBI→FASTA→diversity→Anderson), cold seep metagenomes (Exp185 — 50 communities, Bray-Curtis, Anderson classification), dynamic W(t) models (Exp186 — tillage/antibiotic/seasonal perturbation); three-tier controls (Exp190 CPU 75 checks, Exp191 GPU 29 checks, Exp192 metalForge 36 checks)
 **Domain:** Condensed matter physics applied to microbial ecology
 **Novelty:** No prior work applies Anderson localization to QS signaling
 (confirmed via literature search, February 2026)
@@ -211,8 +211,14 @@ network weight matrices that gen3 Sub-01 uses on microbial communities:
 - **Cross-validation**: If Anderson localization governs both microbial QS
   geometry (gen3) and neural network weight spectra (neuralSpring), the
   framework gains biological AND computational evidence simultaneously
-- **Current status**: neuralSpring Session 81 — 129+ named tolerances,
-  39 functions rewired to BarraCUDA, `spectral_entropy` delegated to
+- **ESN regime classifier** (nW-05, Session 87): neuralSpring's ESN classifier
+  validates the reservoir computing pattern used for regime detection — the
+  same architecture can classify Anderson regimes (extended/localized/marginal)
+  from community time-series features, directly applicable to QS regime
+  monitoring (Sub-thesis 04, 06)
+- **Current status**: neuralSpring Session 87 — 623 lib tests, 172 binaries,
+  156/156 validators, 2,450+ total checks, 5 WDM surrogates complete (nW-01..05),
+  129+ named tolerances, 39 BarraCUDA rewires, `spectral_entropy` delegated to
   `barracuda::stats::shannon_from_frequencies`
 
 ## 8. Reproducibility

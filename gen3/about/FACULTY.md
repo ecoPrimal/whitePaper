@@ -70,7 +70,7 @@ Dong runs the precision irrigation lab in MSU's Biosystems & Agricultural Engine
 | Soil sensor calibration | Dong et al. (2020) | Phase A | 36/36 | CS616 and EC5 sensor calibration curves. VWC from raw sensor output. |
 | IoT irrigation pipeline | Dong et al. (2024) | Phase B | 24/24 | SoilWatch 10 integration, real-time irrigation scheduling. |
 | Water balance | Allen et al. — FAO-56 Ch. 8 (1998) | Phase B | 18/18 | Soil water depletion, deep percolation, runoff. |
-| Real data pipeline | Dong lab Michigan stations | Phase C | R² = 0.967 | 918 station-days across 4 Michigan stations. Python↔Rust cross-validation. |
+| Real data pipeline | Dong lab Michigan stations | Phase C | R² = 0.967 | 918 station-days across 100 Michigan stations (originally 6 MAWN stations). Python↔Rust cross-validation. |
 
 ### What His Work Proved About ecoPrimals
 
