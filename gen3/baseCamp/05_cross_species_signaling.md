@@ -1,7 +1,7 @@
 # Sub-Thesis 05: Cross-Species Signaling in Symbiotic Systems
 
-**Date:** February 23, 2026
-**Status:** Proposal with Anderson-derived predictions for symbiotic QS
+**Date:** February 26, 2026
+**Status:** **Validated** — Cold seep metagenome analysis (Exp144-145: 13 checks, 299,355 QS genes across 170 metagenomes, 34 QS types). luxR phylogeny × geometry overlay (Exp146: 5 checks, 12 lineages). Eavesdropper enrichment confirmed (Exp142: 8 checks, R:P ratios across 6 habitats). Interkingdom QS review (Exp154: 6 checks). Correlated disorder strengthens cross-species QS (Exp151: 8 checks)
 **Domain:** Symbiotic ecology, interspecies signaling, mutualism
 **Novelty:** Anderson geometry predictions applied to multi-kingdom signaling
 in lichen, rhizobia, coral holobionts, and other obligate symbioses
@@ -259,7 +259,23 @@ If cross-species signaling involves coevolution, we expect:
 
 Connects to Exp146 (luxR phylogeny overlay from Paper P3).
 
-## 7. Connection to Constrained Evolution
+## 7. neuralSpring Connections
+
+neuralSpring's HMM and introgression models apply directly to cross-species
+signaling analysis:
+
+- **HMM forward/backward** (`hmm.rs`): Detect introgression of QS genes
+  between symbiotic partners. luxI/luxR gene family analysis across NCBI
+  metagenomes can reveal horizontal transfer events in symbiotic contexts
+- **PhyloNet-HMM** (Liu Papers 016-018): Distinguish vertical inheritance
+  from horizontal transfer of signaling genes in mixed-species communities —
+  critical for determining whether cross-species QS circuits are ancestral
+  or recently acquired
+- **Spectral primitives**: The same `eigh_f64` and IPR primitives that
+  characterize Anderson localization in microbial communities (Sub-thesis 01)
+  can quantify the "disorder" in symbiotic interaction networks
+
+## 8. Connection to Constrained Evolution
 
 Symbiosis IS constrained evolution. The fungus in lichen cannot
 photosynthesize; the alga cannot form a thallus. The constraint (absence

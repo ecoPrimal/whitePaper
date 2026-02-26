@@ -1,7 +1,7 @@
 # Sub-Thesis 03: Precision Microbiome Engineering for Perennial Tree Crops
 
-**Date:** February 23, 2026
-**Status:** Proposal with Anderson-derived predictions
+**Date:** February 26, 2026
+**Status:** Proposal with Anderson-derived predictions. Track 4 validates the soil QS framework (9 papers, Exp170-182, 321 checks, full three-tier). Rhizosphere W ≈ 6.7 confirmed deep in extended regime (Exp129). R:P eavesdropper ratio = 2.3:1 in rhizosphere (Exp142). Correlated disorder (biofilm clustering) strengthens QS (Exp151)
 **Domain:** Agricultural microbiology, soil science
 **Novelty:** Anderson localization model applied to orchard microbiome design;
 geometry-aware inoculant selection for pistachio and almond
@@ -192,7 +192,22 @@ Gel carrier application emerges as the Anderson-optimal method: it maintains
 - Measure: QS gene expression (RT-qPCR for luxI/luxR), root colonization
   density, N-fixation (acetylene reduction), yield
 
-## 7. Connection to Constrained Evolution
+## 7. neuralSpring Connections
+
+neuralSpring's transfer learning framework (Exp 004) applies directly to
+inoculant response prediction:
+
+- **Cross-climate transfer**: Michigan → California parallels neuralSpring's
+  pistachio → almond climate transfer learning. Train on KBS (Kellogg
+  Biological Station) Michigan soil data, predict inoculant success in
+  California almond orchards
+- **LSTM time series** (Study 004, NSE=0.849): Predict seasonal QS regime
+  dynamics from soil parameters (moisture, temperature, diversity index)
+- **HMM for introgression**: Detect horizontal gene transfer of QS genes
+  in inoculant strains post-application — does the inoculant's QS circuit
+  persist or get displaced by native community HGT?
+
+## 8. Connection to Constrained Evolution
 
 Orchard soil is a constrained environment: water-limited, salinized,
 pathogen-pressured. The microbiome evolves under these constraints toward

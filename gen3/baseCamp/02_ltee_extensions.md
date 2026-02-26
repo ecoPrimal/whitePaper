@@ -1,7 +1,7 @@
 # Sub-Thesis 02: Extending the Frozen Fossil Record — LTEE, Permafrost, and Agricultural Time Series
 
-**Date:** February 23, 2026
-**Status:** Proposal with quantitative predictions (builds on thesis Ch. 14)
+**Date:** February 26, 2026
+**Status:** Proposal with quantitative predictions (builds on thesis Ch. 14). Anderson anomaly catalog complete (Exp143: 9 anomalies, 3 genuine NP solutions). W_c = 16.26 ± 0.95 now quantified (Exp150). Correlated disorder effects quantified (Exp151). Dilution amplification (W_eff = W/occupancy) validated (Exp137). Track 4 no-till data provides agricultural time-series test bed (Exp170-178)
 **Domain:** Evolutionary biology, microbial genomics
 **Novelty:** Specific, falsifiable Anderson-QS predictions for LTEE populations;
 integration of constrained evolution signatures across lab, field, and
@@ -169,6 +169,20 @@ validated, Exp001-070) can process all three sample types. Additionally:
 - QS gene annotation via the HMM profiles built for Exp140-142
 - Anderson geometry assignment from sample metadata (biofilm/planktonic/mat)
 - Level spacing ratio computation via ToadStool primitives (anderson_3d, lanczos)
+
+### 5.2 neuralSpring Integration
+
+neuralSpring adds ML primitives for LTEE analysis:
+
+- **HMM / PhyloNet-HMM** (Liu Papers 016-018): Introgression detection applied
+  to LTEE genomes — identify horizontal transfer events and adaptive introgression
+  across 75,000 generations
+- **Transfer learning** (Exp 004): Cross-environment adaptation models.
+  Training on one LTEE population, testing on others, mirrors the
+  constrained-evolution prediction that convergent pathways (not identical
+  mutations) recur across replicates
+- **LSTM time series** (Study 004, NSE=0.849): Predict temporal dynamics
+  of mutation accumulation and fitness plateaus across the 12 LTEE populations
 
 ### 5.2 Wet Lab (MSU Resources)
 

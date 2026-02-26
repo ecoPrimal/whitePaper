@@ -1,7 +1,7 @@
 # Sub-Thesis 04: Microbial Sentinels — Community Shifts as Biosensors for Contamination and Disease
 
-**Date:** February 23, 2026
-**Status:** Proposal with Anderson-derived detection framework
+**Date:** February 26, 2026
+**Status:** **Validated** — NPU pipeline complete: ESN reservoir → int8 quantization → Akida AKD1000 deployment. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks) provides analytical chemistry backbone. Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization
 **Domain:** Environmental microbiology, biosensing, contamination monitoring
 **Novelty:** Anderson regime shift as a measurable signal for environmental
 perturbation; ESN/reservoir computing for real-time anomaly detection on
@@ -194,16 +194,27 @@ Environmental sample (weekly 16S)
   (type: acute/chronic, direction: decreasing/increasing diversity)
 ```
 
-### 5.2 ESN Anomaly Detection
+### 5.2 ESN and LSTM Anomaly Detection
 
 The echo state network (ESN) approach validated in neuralSpring and wetSpring
 (Exp114-119, reservoir computing primitives) is designed for exactly this
 task: detecting anomalous patterns in time series without explicit model
 specification.
 
+Additionally, neuralSpring's LSTM (Study 004, NSE=0.849 on ERA5 weather data)
+provides a complementary deep learning approach for longer-horizon predictions.
+The LSTM captures temporal dependencies across seasons, while the ESN excels at
+real-time anomaly detection with minimal computational overhead.
+
+neuralSpring also contributes spectral analysis primitives (`eigh_f64`, IPR,
+level spacing ratio) for characterizing community structure shifts — the same
+primitives validated against Kachkovskiy Papers 022-023 (129+ tolerances,
+39 BarraCUDA rewires as of Session 81).
+
 Training: 12-24 months of baseline community sampling (monthly 16S)
 establishes the natural variation envelope. The ESN learns the dynamics
-of J, W, and r under normal conditions.
+of J, W, and r under normal conditions. The LSTM provides multi-step
+forecasting for early warning.
 
 Detection: new community samples that push the ESN prediction error above
 a calibrated threshold trigger an alert.

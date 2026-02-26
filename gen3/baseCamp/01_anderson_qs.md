@@ -1,7 +1,7 @@
 # Sub-Thesis 01: Anderson Localization as a Null Hypothesis for Microbial Quorum Sensing
 
-**Date:** February 23, 2026
-**Status:** 2,992+ validation checks across 37 experiments (Exp107-143), all PASS
+**Date:** February 26, 2026
+**Status:** 3,400+ validation checks across 76 experiments (Exp107-156, 170-182), all PASS; W_c = 16.26 ± 0.95 (finite-size scaling); Track 4 soil QS complete (9 papers, full three-tier: CPU + GPU + metalForge); 9 extension papers validated (cold seep, wave synthesis, burst stats, eavesdroppers, interkingdom, physical comm, density correlation, cAMP relay); correlated disorder + dilution effects quantified
 **Domain:** Condensed matter physics applied to microbial ecology
 **Novelty:** No prior work applies Anderson localization to QS signaling
 (confirmed via literature search, February 2026)
@@ -198,7 +198,24 @@ will support QS-dependent phenotypes (N-fixation regulation, biocontrol
 signaling). Seed coatings that promote 3D root-surface biofilm should
 outperform broadcast inoculation — the model explains why.
 
-## 7. Reproducibility
+## 7. neuralSpring Connections
+
+neuralSpring validates the same spectral primitives (`eigh_f64`, `BatchIprGpu`,
+level spacing ratio) used in this sub-thesis — Kachkovskiy Papers 022-023 are
+shared anchors. neuralSpring's own baseCamp Sub-01 (weight matrices as disordered
+Hamiltonians) applies the **same Anderson localization framework** to neural
+network weight matrices that gen3 Sub-01 uses on microbial communities:
+
+- **Shared primitives**: `eigh_f64` eigendecomposition, IPR calculation,
+  level spacing ratio `r`, Wigner-Dyson vs Poisson statistics
+- **Cross-validation**: If Anderson localization governs both microbial QS
+  geometry (gen3) and neural network weight spectra (neuralSpring), the
+  framework gains biological AND computational evidence simultaneously
+- **Current status**: neuralSpring Session 81 — 129+ named tolerances,
+  39 functions rewired to BarraCUDA, `spectral_entropy` delegated to
+  `barracuda::stats::shannon_from_frequencies`
+
+## 8. Reproducibility
 
 All 37 experiments (Exp107-143) are Rust binaries in `wetSpring/barracuda/`:
 
