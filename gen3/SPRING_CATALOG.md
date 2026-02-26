@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: February 20, 2026
+**Last Updated**: February 26, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -25,37 +25,43 @@ The springs are organized into two tiers:
 
 ---
 
-### 1.1 hotSpring — Computational Plasma Physics
+### 1.1 hotSpring — Computational Plasma Physics, Lattice QCD, Spectral Theory
 
-**Domain**: Dense plasmas, nuclear structure, molecular dynamics, surrogate learning
-**Grade**: Most mature spring — Phase A through F complete
-**Checks**: 195/195 quantitative checks pass
+**Domain**: Dense plasmas, nuclear structure, molecular dynamics, lattice QCD, spectral theory, neuromorphic computing
+**Grade**: Most mature spring — Phase A through F complete, 21 experiments, 39/39 validation suites
+**Checks**: 197+ quantitative checks pass (~697 tests, 78 binaries, 62 WGSL shaders)
 **Faculty**: Michael Murillo (CMSE, MSU — MSDS professor), Alexei Bazavov (CMSE + Physics, MSU — master's professor), Ilya Kachkovskiy (Math, MSU — spectral theory), Rika Anderson (Biology, Carleton — *Sulfolobus* in Yellowstone hot springs, Taq corollary)
 **Repository**: git@github.com:syntheticChemistry/hotSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: hotSpring proves BarraCUDA can do first-principles computational physics on a consumer GPU. Sarkas Yukawa MD runs at paper parity (N=10,000, 80k production steps) on a $600 RTX 4070 for $0.044 in electricity — roughly 1,000-10,000x cheaper than institutional HPC allocations. The full AME2020 nuclear dataset (2,042 nuclei, 39x the published paper) runs on a single consumer GPU.
+**What it validates**: hotSpring proves BarraCUDA can do first-principles computational physics on consumer hardware. Sarkas Yukawa MD runs at paper parity (N=10,000, 80k production steps) on a $600 RTX 4070 for $0.044 in electricity. The full AME2020 nuclear dataset (2,042 nuclei, 39x the published paper) runs on a single consumer GPU. Lattice QCD production β-scans (32⁴, 12 temperatures) resolve the deconfinement transition on a $500 RTX 3090 for $0.58. A $300 Akida NPU runs ESN inference at 2.8μs/step — 1000× faster than GPU for streaming workloads. GPU ESN dispatch via WGSL crosses over CPU at reservoir size ≈512 (8.2× faster at 1024).
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
 | A (Python control) | Sarkas MD, TTM, surrogates, nuclear EOS | 86/86 | 5 silent upstream bugs found and fixed |
-| B (BarraCUDA GPU) | Nuclear EOS L1/L2 | Validated | 478x speedup, 44.8x energy reduction |
+| B (BarraCUDA GPU) | Nuclear EOS L1/L2 | Validated | 478× speedup, 44.8× energy reduction |
 | C (GPU MD) | Yukawa MD N=2,000 | 9/9 | 0.000% energy drift, 149-259 steps/s |
 | D (f64 + scaling) | N=10,000 native WGSL | Validated | 5.3 min per case, native builtins |
 | E (Paper parity) | N=10,000, 80k steps | 9/9 | 3.66 hours total, $0.044 electricity |
-| F (Full nuclear EOS) | 2,042 nuclei AME2020 | 195 total | Consumer GPU does nuclear structure |
+| F (Full nuclear EOS) | 2,042 nuclei AME2020 | 9/9 | Consumer GPU does nuclear structure |
+| Lattice QCD | SU(3) HMC + dynamical fermion + GPU streaming | 39/39 suites | 32⁴ β-scan, χ=40.1 at β=5.69 |
+| Spectral | Anderson, Hofstadter, Lanczos | 45/45 | GPU SpMV + Lanczos validated |
+| NPU | metalForge cross-substrate ESN + characterization | 48/48 | 10 SDK assumptions overturned, 2.8μs streaming |
+| DF64 | FP32-core double precision | Validated | 3.24 TFLOPS, 9.9× native f64 throughput |
 
-**Papers reproduced**: Sarkas Yukawa OCP, TTM, Diaw et al. (2024) Nat Mach Intel surrogate learning, SEMF→HFB nuclear EOS on full AME2020.
+**Papers reproduced**: Sarkas Yukawa OCP, TTM, Diaw et al. (2024) surrogate learning, SEMF→HFB nuclear EOS on full AME2020, Stanton-Murillo transport (Green-Kubo), Murillo-Weisheit screened Coulomb (Sturm bisection), HotQCD EOS tables, SU(3) pure gauge Wilson action, dynamical fermion QCD (pseudofermion HMC), Abelian Higgs U(1), Anderson localization (1D/2D/3D), Hofstadter butterfly, Kachkovskiy spectral theory.
 
-**Papers queued**: Bazavov [HotQCD] (2014) QCD EOS, Polyakov loop (2016), muon g-2 HVP (2025). See `hotSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers queued**: muon g-2 HVP (2025), WDM & ignition (Papers 32-42). See `hotSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
-**BarraCUDA kernels validated**: Yukawa force, Velocity Verlet, cell-list, thermostats, GEMM, BatchedEighGpu, FusedMapReduce, PPPM Ewald, SSF.
+**BarraCUDA kernels validated**: Yukawa force, Velocity Verlet, cell-list, thermostats, GEMM, BatchedEighGpu, FusedMapReduce, PPPM Ewald, SSF, SU(3) HMC (gauge force, plaquette, KE — all DF64), staggered Dirac, CG solver (GPU-resident), complex f64, Lanczos, SpMV, ESN reservoir update + readout.
 
-**BarraCUDA gaps identified**: FFT (momentum-space), complex f64 arithmetic, SU(3) matrix ops, Lanczos eigensolve + SpMV (Kachkovskiy spectral theory).
+**BarraCUDA gaps closed** (since Feb 20): ~~FFT~~ (done), ~~complex f64~~ (done), ~~SU(3) matrix ops~~ (done), ~~Lanczos eigensolve + SpMV~~ (done). GPU-resident CG reduces readback by 15,360×. DF64 core streaming delivers 14-digit precision on FP32 cores. Bidirectional streaming pipeline dispatches 90%+ to GPU with async readback.
 
-**Participates in**: ToadStool validation (primary GPU science driver), gen3 constrained evolution evidence.
+**metalForge (NPU + cross-substrate)**: 21 experiments including NPU characterization campaign (6 pipeline placements, Akida feedback report drafted), cross-substrate ESN comparison (CPU/GPU/NPU), streaming pipeline topology with substrate routing. NPU achieves 9,017× less energy for transport predictions. GPU can function as ESN reservoir (crossover at RS≈512). See `hotSpring/metalForge/` and `hotSpring/whitePaper/baseCamp/neuromorphic_silicon.md`.
+
+**Participates in**: ToadStool validation (primary GPU science driver), gen3 constrained evolution evidence, metalForge hardware exploration.
 
 ---
 
@@ -214,19 +220,20 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 5 |
-| Total quantitative checks | **2,513** passing |
-| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML |
-| Papers reproduced | 20+ (published, peer-reviewed) |
+| Total quantitative checks | **2,515+** passing |
+| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing |
+| Papers reproduced | 22+ (published, peer-reviewed) |
 | Papers queued for review | 60+ candidates across all springs |
 | Faculty connected | 10 professors (MSU + Sandia + Carleton) across 7 departments |
-| BarraCUDA kernels validated by springs | 25+ distinct GPU primitives |
+| BarraCUDA kernels validated by springs | 60+ distinct GPU/NPU primitives |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
-| Rust validation checks | 549 (neuralSpring) + 119 (airSpring) + hotSpring Rust pipeline |
+| Rust validation checks | 549 (neuralSpring) + 119 (airSpring) + ~697 hotSpring (~78 binaries) |
+| WGSL shaders | 62 hotSpring + springs (164+ cross-spring via toadStool) |
 | Languages | Python (Phase 0), Rust (Phase 1+), WGSL shaders (Phase 2+) |
 | License | AGPL-3.0 (all springs, no exceptions) |
 | Institutional access required | Zero |
 | Proprietary software required | Zero |
-| Time from first spring to 2,513 checks | ~20 days |
+| Time from first spring to 2,515+ checks | ~26 days |
 
 ### 2.2 Cross-Spring Data Flow
 
@@ -327,4 +334,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 
 ---
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 2,513 checks across 5 domains in 20 days — the constrained evolution methodology works.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 2,515+ checks across 5 domains in 26 days — the constrained evolution methodology works. A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**

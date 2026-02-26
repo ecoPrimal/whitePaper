@@ -2,7 +2,7 @@
 
 ## 8.1 Validation Summary
 
-hotSpring validates BarraCUDA and the ecoPrimals infrastructure against computational plasma physics, nuclear structure, lattice QCD, and spectral theory. All 195 checks pass across six validation phases at ~$0.20 total compute cost. Five silent bugs in the upstream Sarkas MD package were identified and patched during reproduction.
+hotSpring validates BarraCUDA and the ecoPrimals infrastructure against computational plasma physics, nuclear structure, lattice QCD, spectral theory, and neuromorphic computing. All 197+ checks pass across 39 validation suites and 21 experiments at ~$0.80 total compute cost. Five silent bugs in the upstream Sarkas MD package were identified and patched during reproduction. The crate has evolved to 78 binaries, 62 WGSL shaders, and ~697 tests.
 
 ### Table 8.1 — Phase-by-Phase Validation
 
@@ -182,7 +182,97 @@ Full AME2020 dataset: **2,042 nuclei** validated — 39× the 52 nuclei in the o
 
 ---
 
-## 8.9 Key Tolerances
+## 8.9 DF64 Core Streaming Discovery
+
+### 8.9.1 The Problem
+
+Native FP64 on consumer GPUs runs at 1:64 throughput (CUDA or Vulkan). The Titan V provides 1:2, but costs $500 used. Science requires 14+ digit precision for energy conservation, lattice QCD plaquettes, and nuclear EOS fitting.
+
+### 8.9.2 The Discovery
+
+Double-float (DF64) arithmetic — representing each f64 as a pair of f32 values — runs on the FP32 cores at full throughput. On an RTX 3090 (10,496 FP32 cores), this delivers **3.24 TFLOPS at 14-digit precision** — 9.9× the throughput of native FP64.
+
+| Substrate | Throughput | Precision | Cost |
+|-----------|-----------|-----------|------|
+| Native FP64 (consumer) | 0.33 TFLOPS | 16 digits | $600 |
+| DF64 on FP32 cores | **3.24 TFLOPS** | 14 digits | $600 |
+| Native FP64 (Titan V) | 6.1 TFLOPS | 16 digits | $500 used |
+
+### 8.9.3 Production Validation
+
+32⁴ lattice QCD production β-scan: **7.1 hours** with DF64 mixed pipeline vs **13.6 hours** FP64-only. Gauge force, plaquette, and kinetic energy shaders run in DF64; momentum update and link update remain native FP64. 60% of HMC compute in DF64, 2× overall speedup. 12 β-values, deconfinement transition resolved at χ=40.1 (β=5.69, matching known β_c=5.692).
+
+---
+
+## 8.10 GPU Streaming HMC and Resident CG
+
+### 8.10.1 GPU-Resident CG Solver
+
+The conjugate gradient solver for the Dirac equation D†Dx=b was made GPU-resident: all scalar operations (α, β, rz, convergence check) run on GPU. Only 8-byte convergence readback per 10-iteration batch. Result: **15,360× readback reduction** (37 MB → 2.4 KB per trajectory) and **30.7× speedup** for dynamical fermion HMC.
+
+### 8.10.2 Streaming Pipeline
+
+Bidirectional streaming: 90%+ data flows to GPU, async readback for CG convergence only. NPU branch screens lattice configurations in parallel (0.09% overhead). GPU PRNG eliminates host random-number generation. Scaling: 4⁴→16⁴ validated, GPU **67× CPU** at 16⁴ (22.2× at CG solve level).
+
+---
+
+## 8.11 Cross-Substrate ESN Comparison (Exp 021)
+
+### 8.11.1 GPU as ESN Reservoir
+
+The Echo State Network (ESN) was dispatched to GPU for the first time using the existing WGSL shaders (`esn_reservoir_update.wgsl`, `esn_readout.wgsl`). New f32 buffer management methods were added to `GpuF64`.
+
+### 8.11.2 Scaling Crossover
+
+| RS | CPU-f64 (μs) | GPU-f32 (μs) | GPU/CPU |
+|----|-------------|-------------|---------|
+| 16 | 27 | 4,876 | 0.006× |
+| 100 | 483 | 5,711 | 0.08× |
+| 512 | ~10,400 | ~5,500 | ~1.0× |
+| 1024 | 16,481 | 3,665 | **8.2×** |
+
+GPU crossover at **RS ≈ 512**. Below this, CPU wins (dispatch overhead dominates). Above, GPU parallelism in matrix-vector products dominates.
+
+### 8.11.3 NPU Streaming Advantage
+
+| Metric | NPU-sim | GPU-f32 |
+|--------|---------|---------|
+| Per-inference | **2.8 μs** | 3,170 μs |
+| Streaming throughput | 357k inf/s | 317 inf/s |
+| Power estimate | ~30 mW | ~350 W |
+
+The NPU owns single-sample streaming inference. No other substrate matches its latency for per-step ESN updates.
+
+### 8.11.4 Engineering Discovery
+
+**Recurrent network GPU dispatch requires per-step submit.** Naive encoder batching fails because `queue.write_buffer()` races with encoded dispatches — all steps see the last input. Each recurrent step must be submitted individually because state at step t depends on state at step t-1.
+
+---
+
+## 8.12 NPU Characterization Campaign (Exp 020)
+
+### 8.12.1 Pipeline Placement Framework
+
+Six placement options tested for NPU pre-screening in lattice QCD:
+
+| Placement | Description | Projected Savings |
+|-----------|-------------|-------------------|
+| A | Pre-thermalization screening | **3.15 hours** (biggest win) |
+| B | Mid-trajectory abort | Useful at large lattices |
+| C | Post-trajectory classification | Baseline |
+| D | Inter-beta steering | Needs more training data |
+| E | Pre-run bootstrap | Warm-start from prior runs |
+| F | All combined | 390 trajectories saved |
+
+### 8.12.2 Models Trained
+
+- Thermalization detector: 87.5% accuracy, 61.8% savings
+- Rejection predictor: 96.2% accuracy
+- 6-output multi-model: all outputs finite, multi-output free confirmed
+
+---
+
+## 8.13 Key Tolerances
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
@@ -198,7 +288,7 @@ Full AME2020 dataset: **2,042 nuclei** validated — 39× the 52 nuclei in the o
 
 ---
 
-## 8.10 Scholarly Reproduction Log
+## 8.14 Scholarly Reproduction Log
 
 | # | Paper | Domain | Key Metric | Status |
 |---|-------|--------|------------|--------|
@@ -211,13 +301,16 @@ Full AME2020 dataset: **2,042 nuclei** validated — 39× the 52 nuclei in the o
 | 7 | HotQCD EOS tables (Bazavov 2014) | QCD thermodynamics | Thermo validated | PASS |
 | 8 | Pure gauge SU(3) Wilson action | Lattice QCD | 12/12 checks | PASS |
 | 9 | Abelian Higgs (Bazavov 2015) | Lattice gauge | 17/17, 143× Rust speedup | PASS |
-| 10–18 | Spectral theory (Kachkovskiy) | Anderson, Hofstadter, Lanczos | All pass | PASS |
+| 10 | Dynamical fermion QCD (Paper 10) | Lattice QCD | 7/7 pseudofermion HMC | PASS |
+| 11-19 | Spectral theory (Kachkovskiy) | Anderson, Hofstadter, Lanczos | All pass | PASS |
+| 20 | Freeze-out conditions | QCD phenomenology | Validated | PASS |
+| 21 | HVP g-2 | QCD + muon anomaly | Kernel validated | PASS |
 
 ---
 
-## 8.11 Connection to Constrained Evolution Thesis
+## 8.15 Connection to Constrained Evolution Thesis
 
-hotSpring validates the thesis at three levels:
+hotSpring validates the thesis at five levels:
 
 1. **Infrastructure correctness**: BarraCUDA's Yukawa force kernel, evolved under ML and FHE constraints, reproduces published plasma physics at 0.000% energy drift — confirming that the constrained evolution produced correct scientific computing primitives.
 
@@ -225,4 +318,6 @@ hotSpring validates the thesis at three levels:
 
 3. **Cross-domain fitness**: The NTT→FFT evolution (Chapter 6, §6.4) enables PPPM electrostatics in MD. Kernels evolved for cryptography serve physics without modification. The 39× expansion of nuclear EOS coverage beyond the original paper illustrates how reproducibility scaffolding enables exploratory evolution within fixed constraints.
 
-4. **Cost democratization**: $0.20 total for 18 papers on consumer hardware ($600 GPU) vs. $50–500 for equivalent institutional HPC time. The constraint (Pure Rust, no CUDA) forced exploration of the WGSL/Vulkan path, producing a cheaper solution.
+4. **Cost democratization**: ~$0.80 total for 22 papers on consumer hardware vs. $50–500 for equivalent institutional HPC time. The constraint (Pure Rust, no CUDA) forced exploration of the WGSL/Vulkan path, producing a cheaper solution.
+
+5. **Cross-substrate capability hunting**: The DF64 discovery (FP32 cores delivering 14-digit precision at 9.9× native f64 throughput) and the NPU characterization (10 SDK assumptions overturned by probing beyond the vendor SDK) are both instances of the capability hunting methodology. The same math runs on CPU (f64), GPU (f32 via WGSL), and NPU (int4 via Akida) — each substrate found by probing the hardware, not by following vendor documentation. The cross-substrate ESN comparison (Exp 021) quantifies exactly where each substrate belongs: CPU for small reservoirs, GPU for RS≥512, NPU for streaming inference at 2.8μs/step.

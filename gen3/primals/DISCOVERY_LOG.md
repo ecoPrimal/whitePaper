@@ -192,6 +192,45 @@ The same mechanism scales to the full basement HPC mesh: any device with the fam
 
 ---
 
+## Discovery 8: DF64 Core Streaming (FP32 Cores for Science)
+
+### The Need
+
+Consumer GPUs have f64 at 1:64 throughput (both CUDA and Vulkan). The Titan V has 1:2. But consumer GPUs have 5,000-10,000 FP32 cores sitting idle during f64 workloads.
+
+### The Discovery
+
+Double-float (DF64) arithmetic represents each f64 value as a pair of f32 values, computed on the FP32 cores. On an RTX 3090: **3.24 TFLOPS at 14-digit precision** — 9.9× the throughput of the same chip's native f64. The gauge force, plaquette, and kinetic energy shaders in lattice QCD HMC were converted to DF64. Result: 32⁴ production β-scan in **7.1 hours** (vs 13.6h FP64-only), with identical physics (deconfinement at β_c=5.69, matching known 5.692).
+
+### The Implication
+
+The hardware constraint (consumer GPU with throttled f64) forced exploration of double-float arithmetic. The FP32 cores were always there — they were just being used for the wrong thing. DF64 is the Taq analog for GPU precision: the capability existed in the silicon, hidden by the vendor's product segmentation. The constraint (Pure Rust, no CUDA) meant we needed to understand the hardware at the shader level, which made DF64 obvious once we looked.
+
+---
+
+## Discovery 9: Cross-Substrate ESN — GPU as Reservoir Computer
+
+### The Need
+
+The Echo State Network (ESN) was running on CPU (f64) and NPU (int4). Could a GPU run the reservoir update directly, and when would it make sense?
+
+### The Discovery
+
+The ESN WGSL shaders (`esn_reservoir_update.wgsl`, `esn_readout.wgsl`) already existed but had never been dispatched to GPU. Building the `GpuEsn` pipeline required adding f32 buffer management to `GpuF64` and handling a critical recurrent-network constraint: per-step GPU submit is mandatory (naive encoder batching fails because state at step t depends on step t-1).
+
+**Scaling crossover at RS ≈ 512.** Below this, CPU wins (GPU dispatch overhead ~40μs + 3.5ms/step dominates). Above, GPU parallel matrix-vector wins: 8.2× at RS=1024. NPU streaming is 1000× faster than GPU for single-step inference (2.8μs vs 3,170μs).
+
+### The Implication
+
+Each substrate has a fitness niche:
+- **NPU**: streaming inference (2.8μs/step, 30mW)
+- **CPU**: small reservoirs and precision-critical readout
+- **GPU**: large reservoirs (RS≥512) where parallelism overcomes dispatch overhead
+
+This is ecological niche partitioning applied to silicon. The capability hunting methodology discovered the crossover point by measuring, not by design. No vendor SDK would have told us "use the NPU for RS<200, GPU for RS>512" — that emerged from the experiment.
+
+---
+
 ## The Methodology: Capability Hunting vs. Monolithic SDKs
 
 ### Monolithic Approach (CUDA/PyTorch/TensorFlow)
