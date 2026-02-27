@@ -1,7 +1,7 @@
 # Sub-Thesis 08: Neuromorphic Edge Intelligence for Sovereign Agricultural IoT
 
 **Date:** February 26, 2026
-**Status:** **Validated on Live Hardware** — airSpring Exp 028 (35+21 checks) + Exp 029 (32/32 checks), AKD1000 PCIe on Eastgate. Streaming inference at 20,545 Hz, seasonal weight evolution, multi-crop crosstalk detection, LOCOMOS power budget analysis.
+**Status:** **Validated on Live Hardware** — airSpring Exp 028 (35+21 checks) + Exp 029 (32/32 checks), AKD1000 PCIe on Eastgate. Streaming inference at 20,545 Hz, seasonal weight evolution, multi-crop crosstalk detection, LOCOMOS power budget analysis. **Feb 27 update**: hotSpring Exp 023 demonstrates 11-head ESN GPU conductor pattern on same AKD1000 — NPU orchestrates GPU workloads (pipelined predictions, quenched monitoring, adaptive CG, intra-scan steering). The pattern generalizes: any workload with a setup phase can use NPU pipelining for zero-stall pre-computation.
 **Domain:** Agricultural IoT, neuromorphic computing, precision irrigation, edge inference
 **Novelty:** First demonstration that neuromorphic (AKD1000) inference at agricultural sensor cadence costs <0.001% of active cycle energy, enabling radical cadence increases without power budget impact. First validated multi-crop classifier hot-swap on spiking NPU. First analytical proof that NPU edge inference is 10.7× more energy-efficient than cloud round-trip for LOCOMOS-style systems.
 **Cross-Spring:** airSpring (sensor pipeline, water balance, ET₀, IoT) × wetSpring (NPU driver, ESN readout, Anderson QS sentinel inference) × neuralSpring (ESN classifier, LSTM time series)
