@@ -1,6 +1,6 @@
 # Sub-Thesis 05: Cross-Species Signaling in Symbiotic Systems
 
-**Date:** February 26, 2026
+**Date:** February 27, 2026
 **Status:** **Validated** — Cold seep metagenome analysis (Exp144-145: 13 checks, 299,355 QS genes across 170 metagenomes, 34 QS types). luxR phylogeny × geometry overlay (Exp146: 5 checks, 12 lineages). Eavesdropper enrichment confirmed (Exp142: 8 checks, R:P ratios across 6 habitats). Interkingdom QS review (Exp154: 6 checks). Correlated disorder strengthens cross-species QS (Exp151: 8 checks). V59 extension: cold seep sovereign pipeline (Exp185 — 8 checks: 50 synthetic communities, Bray-Curtis dissimilarity matrix, Anderson spectral classification of cold seep biomes); GPU cold seep spectral classification validated (Exp191 G04: 3 checks)
 **Domain:** Symbiotic ecology, interspecies signaling, mutualism
 **Novelty:** Anderson geometry predictions applied to multi-kingdom signaling
@@ -261,8 +261,8 @@ Connects to Exp146 (luxR phylogeny overlay from Paper P3).
 
 ## 7. neuralSpring Connections
 
-neuralSpring's ML primitives (Session 87: 623 lib tests, 172 binaries,
-2,450+ checks, 5 WDM surrogates complete) apply directly to cross-species
+neuralSpring's ML primitives (Session 88+: 668 lib tests, 175 binaries,
+3,034+ checks, 5 WDM surrogates complete) apply directly to cross-species
 signaling analysis:
 
 - **HMM forward/backward** (`hmm.rs`): Detect introgression of QS genes

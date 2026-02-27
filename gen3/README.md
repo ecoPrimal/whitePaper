@@ -19,7 +19,7 @@ The papers here formalize the methodology, the architecture, and the biological 
 | Spring | Domain | Repo | Checks |
 |--------|--------|------|--------|
 | hotSpring | Computational plasma physics, lattice QCD, spectral theory, NPU | [syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring) | 664+ |
-| airSpring | Precision agriculture, ET₀, soil hydrology, crop phenology | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 3,123+ |
+| airSpring | Precision agriculture, ET₀, soil hydrology, crop phenology, Anderson coupling | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 4,153+ |
 | wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 4,688+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 236+ |
 | neuralSpring | ML primitives & isomorphic patterns | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 2,450+ |
@@ -38,7 +38,7 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 | **Feb 7-10** | hotSpring Phase B-C. BarraCUDA GPU validation — nuclear EOS on consumer GPU. Phase C: full Yukawa MD on RTX 4070 via f64 WGSL shaders. 9/9 PP cases, 0.000% energy drift. |
 | **Feb 10-14** | hotSpring Phase D-F. Paper-parity long runs (N=10,000, 80k steps, $0.044). Full AME2020 nuclear dataset (2,042 nuclei). 195/195 total. gen3/ papers written. |
 | **Feb 14-15** | airSpring. Reproduce FAO-56, Dong (2020, 2024) sensor calibration. Python + Rust + cross-validation. 326 checks. Real data pipeline: 918 station-days, R²=0.967. |
-| **Feb 25-26** | airSpring v0.4.5–v0.4.8. 22 experiments (was 5). Richards PDE, biochar isotherms, dual Kc, cover crops, yield response, lysimeter, sensitivity, Priestley-Taylor, Thornthwaite, GDD, pedotransfer. 100-station Michigan Crop Water Atlas. 594 Python + 491 Rust + 570 validation + 1393 atlas + 75 cross-val = 3,123+ checks. 27 binaries. 11 Tier A GPU modules. |
+| **Feb 25-27** | airSpring v0.4.5–v0.5.1. 45 experiments (was 5). Richards PDE, biochar, dual Kc, cover crops, yield, lysimeter, sensitivity, Priestley-Taylor, Thornthwaite, GDD, pedotransfer, AmeriFlux, Hargreaves, diversity, multi-crop, NPU, forecast, SCAN, NASS yield, Anderson coupling, GPU live, metalForge. 1109 Python + 651 Rust + 1393 atlas + 75 cross-val + 25.9× CPU speedup = 4,153+ checks. 54 binaries. 11 Tier A GPU modules. Titan V live. AKD1000 NPU live. |
 | **Feb 15-16** | wetSpring. Sovereign 16S pipeline in Rust (30 modules, 1 dependency). GPU spectral matching: 1,077x speedup. Public data benchmark against 4 BioProjects. |
 | **Feb 16-17** | wetSpring GPU pipeline. Full DADA2 + chimera + taxonomy on GPU. 1,116 total checks across 42 experiments. |
 | **Feb 26** | wetSpring V59: 197 experiments, 4,688+ checks, 52/52 papers, 39/39 three-tier. Science extensions (NCBI sovereign pipeline, cold seep metagenomes, dynamic Anderson W(t), DF64 Anderson, NPU sentinel). Three-tier controls (Exp190-192: CPU 75 + GPU 29 + metalForge 36 checks). Typed NCBI errors, 86 named tolerances, 184 binaries. ToadStool S68, 79 primitives consumed via `compile_shader_universal`. |

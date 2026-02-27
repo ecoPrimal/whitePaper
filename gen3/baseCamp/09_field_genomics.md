@@ -1,7 +1,7 @@
 # Sub-Thesis 09: Sovereign Field Genomics — Nanopore Sequencing + Neuromorphic Edge Classification
 
 **Date:** February 26, 2026
-**Status:** Architecture defined — all computational components validated independently. NPU live on AKD1000 (wetSpring Exp193-195, airSpring Exp028-029). 16S sovereign pipeline operational (wetSpring Exp184-185). ESN classifiers validated on hardware. Awaiting sequencer hardware (MinION Mk1D or Mk1C) for end-to-end integration.
+**Status:** Architecture defined — all computational components validated independently. NPU live on AKD1000 (wetSpring Exp193-195, airSpring Exp028-029). 16S sovereign pipeline operational (wetSpring Exp184-185). ESN classifiers validated on hardware. V66 dispatch evolution (Exp213: 49/49, workload routing + PCIe bypass + NUCLEUS model), NUCLEUS V8 I/O evolution (Exp214: 49/49, byte-native FASTQ + nanopore + MS2 through IPC dispatch). 216 experiments, 5,251+ checks. Awaiting sequencer hardware (MinION Mk1D or Mk1C) for end-to-end integration.
 **Domain:** Environmental genomics, field sequencing, edge inference, adaptive sampling
 **Novelty:** First architecture combining nanopore sequencing with neuromorphic (AKD1000) edge classification via a sovereign Rust bioinformatics pipeline. NPU-driven adaptive sampling for real-time read selection. No cloud dependency, no vendor SDK, no Python runtime.
 **Cross-Spring:** wetSpring (16S pipeline, NPU driver, ESN classifiers, Anderson QS, PFAS ML) × airSpring (soil sensors, water balance, agricultural IoT) × neuralSpring (ESN/LSTM reservoir computing, spectral analysis) × hotSpring (akida-driver, GPU Lanczos) × groundSpring (uncertainty budgets, rare biosphere, sensor noise)
@@ -17,7 +17,7 @@ genomics architecture that replaces every component with sovereign Rust
 equivalents and adds neuromorphic edge classification:
 
 1. **BarraCUDA** processes raw nanopore signal through a validated 16S pipeline
-   (DADA2, chimera, taxonomy — 4,748+ checks across 200 experiments)
+   (DADA2, chimera, taxonomy — 5,251+ checks across 216 experiments)
 2. **AKD1000 NPU** classifies community profiles in real time (18.8K Hz,
    <10 mW, coin-cell battery life) using ESN reservoir computing
 3. **NPU-driven adaptive sampling** feeds accept/reject decisions back to the
@@ -271,7 +271,7 @@ All downstream modules are validated. Two new modules are needed:
 | Classification | Cloud ML or laptop | NPU: 18.8K Hz, <10 mW |
 | Adaptive sampling | CPU/GPU alignment (readfish) | NPU: sub-ms latency, 37x headroom |
 | Pipeline | QIIME2/Galaxy + internet | Sovereign Rust, zero dependencies |
-| Validation | Published tools (black box) | 200 experiments, 4,748+ checks |
+| Validation | Published tools (black box) | 211 experiments, 5,061+ checks |
 | Hardware lock-in | ONT software stack | Pure Rust driver, AGPL-3.0 |
 | Power (classification) | Laptop 45-65W | Coin cell, 11 years at 1 Hz |
 

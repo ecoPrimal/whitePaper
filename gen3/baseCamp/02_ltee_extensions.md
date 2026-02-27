@@ -1,6 +1,6 @@
 # Sub-Thesis 02: Extending the Frozen Fossil Record — LTEE, Permafrost, and Agricultural Time Series
 
-**Date:** February 26, 2026
+**Date:** February 27, 2026
 **Status:** Proposal with quantitative predictions (builds on thesis Ch. 14). Anderson anomaly catalog complete (Exp143: 9 anomalies, 3 genuine NP solutions). W_c = 16.26 ± 0.95 now quantified (Exp150). Correlated disorder effects quantified (Exp151). Dilution amplification (W_eff = W/occupancy) validated (Exp137). Track 4 no-till data provides agricultural time-series test bed (Exp170-178)
 **Domain:** Evolutionary biology, microbial genomics
 **Novelty:** Specific, falsifiable Anderson-QS predictions for LTEE populations;
@@ -180,8 +180,8 @@ validated, Exp001-070) can process all three sample types. Additionally:
 
 ### 5.2 neuralSpring Integration
 
-neuralSpring adds ML primitives for LTEE analysis (Session 87: 623 lib tests,
-172 binaries, 156/156 validators, 2,450+ checks, 5 WDM surrogates complete):
+neuralSpring adds ML primitives for LTEE analysis (Session 88+: 668 lib tests,
+175 binaries, 174/175 validators, 3,034+ checks, 5 WDM surrogates complete):
 
 - **HMM / PhyloNet-HMM** (Liu Papers 016-018): Introgression detection applied
   to LTEE genomes — identify horizontal transfer events and adaptive introgression

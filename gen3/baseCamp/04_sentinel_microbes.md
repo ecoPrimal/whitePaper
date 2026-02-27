@@ -1,6 +1,6 @@
 # Sub-Thesis 04: Microbial Sentinels — Community Shifts as Biosensors for Contamination and Disease
 
-**Date:** February 26, 2026
+**Date:** February 27, 2026
 **Status:** **Validated on Real AKD1000 Hardware** — Full NPU pipeline running on live neuromorphic silicon: ESN reservoir → int8 quantization → DMA → AKD1000 inference → classification. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks). Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization. V59: NPU sentinel real stream (Exp188 — 10 checks). **V60 Live AKD1000 (Exp193-195, 60 checks)**: 3 ESN classifiers validated sim↔hardware (QS 49%/34%, Bloom 25%/25%, Disorder 33%/32%); 18.8K Hz inference throughput; reservoir weight loading 37 MB/s; online readout switching 86 µs (weight mutation); batch 20.7K infer/sec; 1.4 µJ/infer (coin-cell 11 years); PUF fingerprint 6.34 bits entropy; online (1+1)-ES evolution 136 gen/sec; 12.9K Hz temporal streaming p99=76 µs; Anderson disorder sweep on NPU mesh; cross-reservoir crosstalk 12.8K switch/sec. **Pure Rust driver** via ToadStool `akida-driver` — Phase C sovereign driver achieved (zero SDK/vendor dependency)
 **Domain:** Environmental microbiology, biosensing, contamination monitoring
 **Novelty:** Anderson regime shift as a measurable signal for environmental
@@ -201,7 +201,7 @@ The echo state network (ESN) approach validated in neuralSpring and wetSpring
 task: detecting anomalous patterns in time series without explicit model
 specification.
 
-**Session 87 directly validates this pipeline**: neuralSpring now has two
+**Session 88+ directly validates this pipeline**: neuralSpring now has two
 reservoir computing surrogates with full Python→Rust cross-language parity:
 
 - **nW-05 ESN regime classifier** (`wdm_esn.rs`): 2-step ESN with tanh
@@ -232,8 +232,8 @@ real-time anomaly detection with minimal computational overhead.
 neuralSpring also contributes spectral analysis primitives (`eigh_f64`, IPR,
 level spacing ratio) for characterizing community structure shifts — the same
 primitives validated against Kachkovskiy Papers 022-023 (129+ tolerances,
-39 BarraCUDA rewires). Session 87 total: 623 lib tests, 172 binaries, 156/156
-validators, 2,450+ checks across 25 papers + 5 WDM surrogates.
+42 upstream rewires). Session 88+ total: 668 lib tests, 175 binaries, 174/175
+validators, 3,034+ checks across 25 papers + 5 WDM surrogates.
 
 Training: 12-24 months of baseline community sampling (monthly 16S)
 establishes the natural variation envelope. The ESN learns the dynamics

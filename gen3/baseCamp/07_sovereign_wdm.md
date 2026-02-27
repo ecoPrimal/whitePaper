@@ -290,7 +290,7 @@ df64-validated protein folding primitives directly to WDM science:
   df64 compute → f64 output). Validates that df64 generalizes from nuclear
   physics to ML workloads. Two precision tiers: arithmetic 3.6e-8 to 5.6e-7,
   transcendental 1.7e-4 to 3.4e-4. 37/37 GPU checks on RTX 4070
-- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 87)
+- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 88+)
   - nW-01: MLP transport surrogate (D*, η*, λ*) — 30/30 Rust checks
   - nW-02: MLP EOS surrogate P(ρ,T), E(ρ,T) — 36/36 + 15/15 GPU checks
   - nW-03: LSTM reservoir S(q,ω) peak predictor — 27/27 Rust checks, R²=0.98
@@ -302,9 +302,9 @@ df64-validated protein folding primitives directly to WDM science:
 - **Spectral analysis**: neuralSpring's `eigh_f64` eigendecomposition and
   `spectral_entropy` (rewired to `barracuda::stats::shannon_from_frequencies`
   in Session 81) apply directly to plasma eigenmode analysis
-- **Session 87 status**: 623 lib tests, 172 binaries, 156/156 validators,
-  129+ named tolerances, 39 BarraCUDA rewires, 31 Python baselines (all
-  deterministically seeded), 2450+ total validation checks
+- **Session 88+ status**: 668 lib tests, 175 binaries, 174/175 validators,
+  129+ named tolerances, 42 upstream rewires, 31 Python baselines (all
+  deterministically seeded), 3,034+ total validation checks
 
 ### 6.2 groundSpring Integration
 
@@ -343,6 +343,34 @@ hotSpring applies it to production WDM data.
 **Combined pipeline**: hotSpring (GPU simulation) → groundSpring (inverse
 problem + error bars) → neuralSpring (surrogate acceleration). This is the
 full lattice QCD workflow, validated independently in three springs.
+
+### 6.3 groundSpring WDM Uncertainty Budget (Exp 025–027)
+
+groundSpring Experiments 025–027 provide the **uncertainty budget** that
+validates the numerical claims in this paper's consumer-GPU WDM pipeline:
+
+- **Exp 025 — f32 vs f64 precision drift**: Measures systematic bias from
+  single-precision arithmetic across WDM observables (pair correlation g(r),
+  diffusion D*, viscosity η*, thermal conductivity λ*). Key result: **28%
+  systematic bias** in f32 transport coefficients at Γ>10, proving f64
+  (or DF64 emulation) is mandatory for production WDM. 6/6 Py, 6/6 Rust checks
+- **Exp 026 — System-size convergence**: Finite-size scaling analysis for
+  WDM MD simulations. Extrapolation to thermodynamic limit via 1/N^(1/3)
+  linear fit achieves R² > 0.999, confirming current systems are within 1%
+  of D_inf. Establishes minimum system sizes for each observable. 8/8 Py,
+  8/8 Rust checks
+- **Exp 027 — GPU vendor parity**: Cross-vendor comparison of WDM trajectory
+  output between GPU architectures (RTX 4070 vs Titan V). Differences at
+  1e-12 relative level, confirming IEEE 754 compliance and reproducibility
+  across consumer and workstation GPUs. Critical for NUCLEUS multi-gate
+  dispatch where different gates run different GPU hardware. 6/6 Py, 6/6
+  Rust checks
+
+**Why this matters**: Before claiming "$19 WDM on consumer GPU," the
+uncertainty budget must prove that (a) f32 alone is insufficient (Exp 025),
+(b) the system sizes used actually converge (Exp 026), and (c) results are
+reproducible across GPU vendors (Exp 027). These three experiments convert
+the cost projection in Section 8 from speculation to validated science.
 
 ---
 

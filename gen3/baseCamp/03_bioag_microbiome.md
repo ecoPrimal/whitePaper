@@ -1,6 +1,6 @@
 # Sub-Thesis 03: Precision Microbiome Engineering for Perennial Tree Crops
 
-**Date:** February 26, 2026
+**Date:** February 27, 2026
 **Status:** Proposal with Anderson-derived predictions. Track 4 validates the soil QS framework (9 papers, Exp170-182, 321 checks, full three-tier). Rhizosphere W ≈ 6.7 confirmed deep in extended regime (Exp129). R:P eavesdropper ratio = 2.3:1 in rhizosphere (Exp142). Correlated disorder (biofilm clustering) strengthens QS (Exp151)
 **Domain:** Agricultural microbiology, soil science
 **Novelty:** Anderson localization model applied to orchard microbiome design;
@@ -194,8 +194,8 @@ Gel carrier application emerges as the Anderson-optimal method: it maintains
 
 ## 7. neuralSpring Connections
 
-neuralSpring's ML primitives (Session 87: 623 lib tests, 172 binaries,
-2,450+ checks, 5 WDM surrogates complete) apply directly to inoculant
+neuralSpring's ML primitives (Session 88+: 668 lib tests, 175 binaries,
+3,034+ checks, 5 WDM surrogates complete) apply directly to inoculant
 response prediction:
 
 - **Cross-climate transfer** (Exp 004, nW-04): Michigan → California parallels
