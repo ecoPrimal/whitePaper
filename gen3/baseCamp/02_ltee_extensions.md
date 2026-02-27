@@ -202,7 +202,41 @@ neuralSpring adds ML primitives for LTEE analysis (Session 87: 623 lib tests,
   features using reservoir computing. Fixed-weight ESN + ridge readout requires
   no backpropagation — suitable for rapid regime detection on streaming data
 
-### 5.2 Wet Lab (MSU Resources)
+### 5.3 groundSpring Integration
+
+groundSpring contributes uncertainty quantification and stochastic modeling
+directly relevant to LTEE analysis:
+
+- **Exp 014 — Drift vs selection** (R. Anderson 2022): Wright-Fisher fixation
+  probability and Kimura neutral theory. Quantifies when stochastic drift
+  dominates deterministic selection — the central question for interpreting
+  LTEE mutation fixation trajectories. Predicts the ~30-50% hitchhiker
+  fraction in §1.2 above. 7/7 Py, 7/7 Rust checks
+- **Exp 017 — Quasispecies threshold** (Dolson 2023): Eigen's error threshold
+  predicts when mutation rate destroys genetic information. Directly applicable
+  to LTEE's observed power-law fitness dynamics — the mutation-selection
+  balance determines whether adaptive trajectories are signal (selection)
+  or noise (drift). 6/6 Rust checks
+- **Exp 016 — Rare biosphere signal detection** (R. Anderson 2015): Sequencing
+  depth determines the boundary between real biological signal and sampling
+  artifact. Critical for LTEE frozen fossil analysis — detecting rare mutant
+  lineages that will later become dominant (pre-potentiating mutations for
+  the citrate innovation). 10/10 Rust checks
+- **Exp 019 — Jackknife estimation** (Bazavov 2025): Subpercent precision
+  error bars via delete-one and block jackknife. The standard method for
+  quantifying uncertainty in population genomic measurements from LTEE
+  samples. 9/9 Rust checks
+- **Exp 004 — Sequencing noise rarefaction**: Genus saturation at 5,000 reads;
+  phyla robust at 100 reads. Establishes the sampling floor for LTEE
+  community-level analysis. 15/15 Rust checks
+
+**Cross-spring pipeline for LTEE**: wetSpring (16S/WGS pipeline) →
+groundSpring (sampling noise floor + jackknife error bars + drift vs
+selection classification) → neuralSpring (HMM introgression + ESN regime
+detection). This three-spring pipeline covers the full LTEE analysis
+workflow from raw sequencing to evolutionary inference.
+
+### 5.4 Wet Lab (MSU Resources)
 
 - MSU Genomics Core: Illumina sequencing for LTEE frozen samples
 - MSU RTSF: high-throughput sequencing for soil/environmental DNA

@@ -1,7 +1,7 @@
 # Sub-Thesis 04: Microbial Sentinels — Community Shifts as Biosensors for Contamination and Disease
 
 **Date:** February 26, 2026
-**Status:** **Validated** — NPU pipeline complete: ESN reservoir → int8 quantization → Akida AKD1000 deployment. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks) provides analytical chemistry backbone. Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization. V59 extension: NPU sentinel real stream (Exp188 — 10 checks: steady-state monitoring, stress injection, bloom detection, int8 inference fidelity); int8 quantization validated via three-tier (Exp190 CPU D04: 13 affine quantization + round-trip fidelity checks)
+**Status:** **Validated on Real AKD1000 Hardware** — Full NPU pipeline running on live neuromorphic silicon: ESN reservoir → int8 quantization → DMA → AKD1000 inference → classification. Bloom sentinel (Exp118, 123: 20 checks), QS phase classifier (Exp114: 13 checks), spectral triage (Exp124: 10 checks). All three-tier validated. PFAS screening pipeline (Exp041-042: 23 checks). Communication mode analysis (Exp147, 152: 15 checks) — 4/6 modes subject to Anderson localization. V59: NPU sentinel real stream (Exp188 — 10 checks). **V60 Live AKD1000 (Exp193-195, 60 checks)**: 3 ESN classifiers validated sim↔hardware (QS 49%/34%, Bloom 25%/25%, Disorder 33%/32%); 18.8K Hz inference throughput; reservoir weight loading 37 MB/s; online readout switching 86 µs (weight mutation); batch 20.7K infer/sec; 1.4 µJ/infer (coin-cell 11 years); PUF fingerprint 6.34 bits entropy; online (1+1)-ES evolution 136 gen/sec; 12.9K Hz temporal streaming p99=76 µs; Anderson disorder sweep on NPU mesh; cross-reservoir crosstalk 12.8K switch/sec. **Pure Rust driver** via ToadStool `akida-driver` — Phase C sovereign driver achieved (zero SDK/vendor dependency)
 **Domain:** Environmental microbiology, biosensing, contamination monitoring
 **Novelty:** Anderson regime shift as a measurable signal for environmental
 perturbation; ESN/reservoir computing for real-time anomaly detection on
@@ -259,7 +259,66 @@ hardware with no external dependencies.
 | Biofilm geometry determines pathogen coordination | 3D vs 2D surface microcosm with P. aeruginosa | QS gene expression (lasI, rhlI) higher on 3D surfaces |
 | ESN detects regime shifts with > 90% recall | Simulated perturbation on baseline community time series | ROC analysis with ESN vs threshold detector |
 
-## 7. Connection to Constrained Evolution
+## 7. groundSpring Connections
+
+groundSpring provides the uncertainty calibration that separates real sentinel
+alerts from false positives:
+
+- **Exp 001 — Sensor noise decomposition**: Quantifies how much of a detected
+  signal change is real perturbation vs instrument noise. For sentinel
+  deployment, false alarm rate is determined by the sensor noise floor. If
+  the community shift signal-to-noise ratio (Exp 006: SNR ≈ 2 at 20×
+  activation) is below the measurement uncertainty, the sentinel is blind.
+  36/36 Rust checks
+- **Exp 016 — Rare biosphere signal detection** (R. Anderson 2015): Rare
+  species are often the first responders to contamination. This experiment
+  quantifies when a rare taxon detection is real biology vs sequencing
+  artifact — the critical distinction for early-warning biosensing. 10/10
+  Rust checks
+- **Exp 019 — Jackknife estimation** (Bazavov 2025): Subpercent error bars
+  for community diversity metrics (J, W, r). When the ESN anomaly detector
+  flags a regime shift, the jackknife quantifies whether the shift exceeds
+  measurement uncertainty. 9/9 Rust checks
+- **Exp 015 — Uncertainty bridge**: The complete pipeline from sensor noise
+  → Anderson ξ → QS regime uncertainty. For sentinels, this determines the
+  minimum detectable perturbation: how large must an environmental shift be
+  before it's distinguishable from natural community variation + measurement
+  noise? 8/8 Rust checks
+- **Exp 003 — FAO-56 error propagation**: Humidity dominates environmental
+  measurement uncertainty at 66% of total variance. For outdoor sentinel
+  deployments, environmental covariates must be measured with calibrated
+  uncertainty. 15/15 Rust checks
+
+**Sentinel calibration pipeline**: groundSpring (sensor noise floor +
+uncertainty propagation) → wetSpring (16S pipeline → diversity → Anderson
+regime) → neuralSpring (ESN anomaly detection) → hotSpring (NPU int8
+deployment). groundSpring's uncertainty budget determines the ESN's
+detection threshold — without it, the sentinel cannot distinguish signal
+from noise.
+
+## 8. Nanopore Integration (Sub-thesis 09: Field Genomics)
+
+The sentinel pipeline reaches full capability when paired with in-field DNA
+sequencing. A MinION nanopore sequencer at the sentinel station enables
+real-time community profiling without lab turnaround:
+
+```
+MinION (sequences eDNA) → BarraCUDA (16S) → AKD1000 NPU (classify) → Alert
+                                                  ↓
+                                    Adaptive sampling feedback
+                                    (NPU tells MinION which reads to keep)
+```
+
+The NPU's 18.8K Hz throughput provides 37x headroom over MinION's peak
+read rate, enabling real-time adaptive sampling: the NPU classifies each
+partial read and decides whether to keep or reject it. Target programs:
+Great Lakes HAB monitoring, soil health sentinel, AMR wastewater
+surveillance, PFAS dual-mode detection.
+
+See [Sub-thesis 09: Field Genomics](09_field_genomics.md) for the full
+architecture, experiment plan (Exp196-202), and literature review.
+
+## 9. Connection to Constrained Evolution
 
 Environmental contamination is a NOVEL CONSTRAINT applied to an existing
 community. The constrained evolution framework predicts the community will
@@ -269,3 +328,7 @@ produces Taq in hot springs and streamlined genomes in the LTEE.
 The sentinel concept turns this process into a measurement: the RATE and
 DIRECTION of the community's evolutionary response to a novel constraint
 IS the signal. Anderson localization provides the physics to quantify it.
+Field genomics (Sub-thesis 09) extends this from inference-only to
+sequence-classify-act: the sentinel generates its own data via nanopore
+sequencing and adapts its strategy in real time via NPU-driven adaptive
+sampling.

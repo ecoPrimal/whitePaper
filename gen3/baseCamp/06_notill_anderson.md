@@ -7,7 +7,7 @@
 conventional tillage outcomes; no prior work models tillage as dimensional collapse
 of a QS-active system
 **Cross-Spring:** wetSpring (Anderson QS + 16S) × airSpring (soil moisture + ET₀) ×
-groundSpring (uncertainty) × neuralSpring (LSTM time series)
+groundSpring (uncertainty, spectral theory, rare biosphere, jackknife) × neuralSpring (LSTM time series)
 
 ---
 
@@ -390,7 +390,7 @@ Extend the Anderson lattice experiments to model soil pore geometry:
 | Soil moisture θ(t) | airSpring | FAO-56 water balance (v0.4.8: 594 Python + 491 tests + 570 validation + 1393 atlas, 27 binaries). Saxton-Rawls pedotransfer (Exp 023) provides continuous θ_wp, θ_fc, θ_s from texture, directly useful for the Anderson coupling model's moisture-geometry pipeline |
 | ET₀ seasonal pattern | airSpring | Validated (594/594 Python, 491 Rust tests + 570 validation + 1393 atlas checks, 97.45% coverage) |
 | van Genuchten θ(h) inversion | airSpring | `eco::van_genuchten` module, `barracuda::optimize::brent` (R-S66 wired) |
-| Sampling uncertainty | groundSpring | Exp004 (genus saturation at 5,000 reads) |
+| Sampling uncertainty | groundSpring | Exp004 (genus saturation at 5,000 reads). Exp016 (rare biosphere — detecting rare soil taxa at low abundance). Exp019 (jackknife — subpercent error bars for soil microbiome metrics). Exp015 (uncertainty bridge — sensor noise → Anderson ξ → QS regime uncertainty, the pipeline that makes Anderson predictions testable from real soil sampling data) |
 | LSTM time series prediction | neuralSpring | Study 004 (ERA5 LSTM, NSE=0.849). Session 87: 623 lib tests, 172 binaries, 156/156 validators, 129+ tolerances, 39 BarraCUDA rewires. nW-03 LSTM reservoir (R²=0.98) validates pooled-readout sequence processing — same architecture predicts r(t) from soil parameters. nW-05 ESN classifier (96.5% accuracy) validates regime classification — same architecture classifies QS regimes (extended/marginal/localized) from (J, d_eff) inputs |
 
 ---

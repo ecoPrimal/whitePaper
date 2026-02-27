@@ -185,9 +185,21 @@ The springs are organized into two tiers:
 
 **BarraCUDA gaps NOW**: FFT (resolved in hotSpring), batched_multinomial (Tier C), eigenvector solver (Tier C), grid search GPU (now implemented CPU). Most gaps resolved. **Cholesky solve batch** is the main NEW gap.
 
-**Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning. Spectral theory (Anderson, Almost-Mathieu, band edge) shared with hotSpring and wetSpring. Transport, quasispecies, rare biosphere feed wetSpring and neuralSpring.
+**Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning. Spectral theory (Anderson, Almost-Mathieu, band edge) shared with hotSpring and wetSpring. Transport, quasispecies, rare biosphere feed wetSpring and neuralSpring. **Bazavov experiments (019-021) connect directly to hotSpring lattice QCD**: freeze-out inverse validates thermodynamic observable extraction, spectral reconstruction validates ill-posed inversion from Euclidean correlators, and jackknife provides the standard error estimation used in every lattice QCD publication. Combined pipeline: hotSpring (GPU simulation) → groundSpring (inverse problem + error bars) → neuralSpring (surrogate acceleration).
 
-**Participates in**: All springs (provides uncertainty quantification), neuralSpring (noise labels for training robustness), hotSpring (spectral primitives), wetSpring (quasispecies, rare biosphere).
+**baseCamp coordination**: groundSpring now contributes to ALL 7 baseCamp papers. The spectral theory experiments (008, 009, 012, 018) validate the Anderson framework underlying papers 01, 05, 06. The Bazavov experiments (019-021) serve paper 07 (WDM/lattice QCD). The evolutionary biology experiments (014, 016, 017) serve papers 02, 04. The sensor noise experiments (001-005) serve papers 03, 04, 06. This makes groundSpring the only spring that contributes to every baseCamp paper — reflecting its role as the universal uncertainty quantification layer.
+
+**Evolution path**:
+
+| Phase | Target | Status |
+|-------|--------|--------|
+| 0 (Python) | 21 experiments, ~211 Python checks | Complete |
+| 1 (Rust CPU) | 236/236 Rust checks, 280 tests, 21/21 parity | Complete |
+| 2a (BarraCUDA CPU) | Pure Rust math faster than Python, 27 delegations (22 CPU + 5 GPU) | Delegation inventory ready; ToadStool absorbing |
+| 2b (BarraCUDA GPU) | GPU implementations match CPU exactly | Pending ToadStool absorption |
+| 3 (metalForge) | Cross-substrate dispatch (GPU → NPU → CPU) | Architecture defined |
+
+**Participates in**: All springs (provides uncertainty quantification), all 7 baseCamp papers, neuralSpring (noise labels for training robustness), hotSpring (spectral primitives + lattice QCD inverse problems), wetSpring (quasispecies, rare biosphere, Anderson validation).
 
 ---
 

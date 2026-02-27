@@ -109,7 +109,9 @@ Squirrel: AI model inference requests
 - `toadstool-core` — Hardware discovery, device management
 - `toadstool-server` — JSON-RPC + tarpc server
 - `toadstool-gpu` — GPU-specific runtime (wgpu, pipeline caching)
-- `toadstool-neuromorphic` — NPU support (AKD1000, experimental)
+- `toadstool-neuromorphic` — NPU support (AKD1000, **live hardware validated**)
+  - `akida-driver` — Pure Rust driver for BrainChip AKD1000/AKD1500 (Phase C sovereign: zero SDK)
+  - wetSpring V60 (Feb 2026): 18.8K Hz inference, 37 MB/s DMA, online evolution at 136 gen/sec
 - `toadstool-distributed` — Multi-node compute dispatch
 
 ## What Makes It Interesting

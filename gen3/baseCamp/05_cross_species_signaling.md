@@ -280,7 +280,43 @@ signaling analysis:
   characterize Anderson localization in microbial communities (Sub-thesis 01)
   can quantify the "disorder" in symbiotic interaction networks
 
-## 8. Connection to Constrained Evolution
+## 8. groundSpring Connections
+
+groundSpring validates the mathematical foundation that this paper's
+cross-species Anderson predictions rest on:
+
+- **Exp 008 — Anderson localization** (Bourgain & Kachkovskiy 2018):
+  The same 1D/2D/3D Anderson model used here to predict QS failure in
+  lichen (2D) vs success in root nodules (3D). groundSpring validates
+  the spectral diagnostic (level spacing ratio r, Thouless conductance)
+  at benchmark precision. 8/8 Rust checks
+- **Exp 012 — Spin chain transport** (Kachkovskiy 2016): Signal transport
+  through disordered chains. Directly models the question of whether a
+  QS signal can traverse a mycorrhizal network ("wood wide web") — each
+  fungal node is a site in a disordered chain. 18/18 Rust checks
+- **Exp 017 — Quasispecies threshold** (Dolson 2023): Eigen's error
+  threshold for mutation-driven information collapse. In cross-species QS,
+  signal fidelity degrades through multiple relay steps (Dictyostelium-like
+  relay in mycorrhizal networks). The quasispecies threshold predicts when
+  relay fidelity falls below the information limit. 6/6 Rust checks
+- **Exp 016 — Rare biosphere signal detection** (R. Anderson 2015):
+  Cross-species signaling often involves rare community members (e.g.,
+  the eavesdropper species detected in Exp142). Quantifying when rare
+  taxa are detectable vs noise is critical for mapping interaction
+  networks in complex symbioses. 10/10 Rust checks
+- **Exp 018 — Band edge structure** (Filonov & Kachkovskiy 2018): Band
+  edges mark the boundary between propagating and evanescent states in
+  periodic media. For the coral skeleton (periodic calcium carbonate
+  lattice), band edge theory predicts QS signal propagation windows —
+  frequencies where the signal passes through the skeleton vs where it
+  is absorbed. 10/10 Rust checks
+
+**Cross-species pipeline**: groundSpring (Anderson spectral validation
++ transport + error thresholds) → wetSpring (NCBI metagenome QS gene
+search + luxR phylogeny) → neuralSpring (HMM introgression detection for
+horizontal QS gene transfer between symbiotic partners).
+
+## 9. Connection to Constrained Evolution
 
 Symbiosis IS constrained evolution. The fungus in lichen cannot
 photosynthesize; the alga cannot form a thallus. The constraint (absence

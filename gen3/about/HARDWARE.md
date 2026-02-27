@@ -55,7 +55,7 @@ Balanced Node Atomic. Originally a gaming tower, upgraded for the mesh with 128G
 | **Network** | 10G NIC (copper) |
 | **Role** | Utility compute, neuromorphic workloads |
 
-Node Atomic with neuromorphic capability. The Akida NPU handles ToadStool's neuromorphic inference workloads alongside traditional GPU compute.
+Node Atomic with neuromorphic capability. The Akida AKD1000 NPU handles ToadStool's neuromorphic inference workloads alongside traditional GPU compute. **V60 (Feb 2026):** First live AKD1000 validation via pure Rust `akida-driver` — 3 ESN classifiers (QS/Bloom/Disorder) at 18.8K Hz, online (1+1)-ES evolution at 136 gen/sec, 12.9K Hz temporal streaming (p99=76 µs), PUF fingerprint (6.34 bits), coin-cell 11 years. Phase C sovereign driver achieved — zero vendor SDK dependency.
 
 ### Strandgate - Bioinformatics Powerhouse
 

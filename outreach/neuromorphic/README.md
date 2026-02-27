@@ -1,8 +1,8 @@
 # Neuromorphic Compute Partnership — Open Outreach
 
-**Date:** February 25, 2026
-**Project:** ecoPrimals / hotSpring
-**License:** AGPL-3.0-only
+**Date:** February 26, 2026
+**Project:** ecoPrimals / hotSpring + wetSpring
+**License:** AGPL-3.0-or-later
 **Repository:** [github.com/syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring)
 
 ---
@@ -70,8 +70,10 @@ operating at microwatt power while GPUs handle the heavy compute.
 |-----------|--------|------|--------|
 | Primary GPU | NVIDIA RTX 3090 (24 GB) | DF64 production HMC | ✅ Production |
 | Compute GPU | NVIDIA Titan V ×2 (12 GB each) | Native f64 oracle | ✅ Validated |
-| NPU | BrainChip AKD1000 (PCIe) | ESN adaptive steering | ✅ Integrated |
+| NPU | BrainChip AKD1000 (PCIe) | ESN adaptive steering | ✅ Integrated (hotSpring SDK) |
+| NPU | BrainChip AKD1000 (PCIe) | ESN classifiers, online evolution | ✅ **Live via Pure Rust driver** (wetSpring V60) |
 | CPU | AMD Threadripper 3970X (32C/64T) | Orchestration + reference | ✅ Baseline |
+| CPU | Intel i9-12900K | wetSpring NPU host | ✅ Production (Exp193-195) |
 
 Full hardware inventory: [`whitePaper/gen3/about/HARDWARE.md`](../../gen3/about/HARDWARE.md)
 
@@ -112,3 +114,23 @@ philosophical foundations of this project. This directory represents the
 grounded, data-driven evolution of that vision: we built the system,
 measured the hardware, published the results, and now seek to expand
 the substrate diversity.
+
+### V60 Update (February 26, 2026): Pure Rust NPU — Phase C Sovereign Driver
+
+wetSpring now runs 3 ESN classifiers (QS phase, bloom sentinel, Anderson
+disorder) on a **live AKD1000** via ToadStool's pure Rust `akida-driver`.
+Zero Python, zero C++, zero vendor SDK in the data path.
+
+Key measurements on real silicon:
+- **18.8K Hz** inference throughput via DMA
+- **37 MB/s** reservoir weight loading to 10 MB SRAM
+- **86 µs** online readout switching (weight mutation — 3 classifiers hot-swapped)
+- **136 gen/sec** online evolutionary learning on hardware
+- **12.9K Hz** temporal streaming with p99=76 µs latency
+- **1.4 µJ/inference** → coin-cell CR2032 lasts **11 years** at 1 Hz
+- **6.34 bits** byte entropy from SRAM PUF fingerprint
+
+This is the first published scientific computing validation of an AKD1000
+using a non-vendor driver. The Rust `akida-driver` achieves kernel-independent
+hardware access — answering the AKD1500 datasheet's "no plans for updates"
+Linux kernel support policy with a sovereign alternative.

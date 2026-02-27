@@ -321,7 +321,10 @@ low-power neuromorphic coprocessing.
 |--------|-------------|----------------|--------|--------|
 | **hotSpring** | Adaptive β steering (QCD) | Plaquette, Polyakov loop, susceptibility | β_c estimate, measurement allocation | ✅ Validated (Exp 015) |
 | **hotSpring** | Transport prediction (MD) | Velocity features (8-dim) | D*, η*, λ* | ✅ ESN trained, deployment queued |
-| **wetSpring** | Real-time QS regime detection | Hill activation, c-di-GMP, community diversity | Anderson regime (localized/extended/critical) | Queued — 321 QS checks ready |
+| **wetSpring** | QS Phase Classifier | Hill activation, c-di-GMP, community diversity | Anderson regime (3-class) | ✅ **Live on AKD1000** (Exp194, 18.8K Hz) |
+| **wetSpring** | Bloom Sentinel | Shannon, Simpson, richness, evenness, Bray-Curtis, temp | Bloom phase (4-class) | ✅ **Live on AKD1000** (Exp194, 18.8K Hz) |
+| **wetSpring** | Disorder Classifier | Shannon, Simpson, richness, evenness, W | Anderson regime (3-class) | ✅ **Live on AKD1000** (Exp194, 18.6K Hz) |
+| **wetSpring** | Online Readout Evolution | ESN state → mutated weights → fitness | Adaptive classifier | ✅ **Live on AKD1000** (Exp195, 136 gen/sec) |
 | **wetSpring** | Metagenomic anomaly monitor | Shannon diversity, Bray-Curtis distance, richness | Drift alert (normal/perturbed/regime-shift) | Queued |
 | **airSpring** | Continuous ET₀ prediction | Temperature, humidity, radiation, wind | Evapotranspiration (mm/day) | Queued — 16 papers validated |
 | **airSpring** | Irrigation trigger | Soil moisture, crop Kc, ET₀ | Irrigate (yes/no), volume (mm) | Queued (Penny Irrigation) |
@@ -378,25 +381,42 @@ All eight models fit trivially. The NP mesh can switch between models
 via `set_variable()` weight mutation (13 ms overhead) or, if programmed
 as separate sequences, route to different NP subsets concurrently.
 
-### 6.4 Sovereign NPU Driver (Rust-Native)
+### 6.4 Sovereign NPU Driver (Rust-Native) — PHASE C ACHIEVED
 
-The current integration path goes through BrainChip's Python SDK or
-C++ engine. The long-term target is a pure Rust driver that talks
-directly to `/dev/akida0`:
+The sovereign driver roadmap has reached Phase C: direct `/dev/akida0`
+access via a pure Rust driver, bypassing all vendor code.
 
 ```
-Phase A: Python SDK → Rust FFI wrapper (current: npu_hw.rs)
-Phase B: C++ Engine → Rust FFI to libakida.so
-Phase C: Direct ioctl / mmap on /dev/akida0 (bypass all vendor code)
-Phase D: Rust akida_pcie driver module (full sovereignty)
+Phase A: Python SDK → Rust FFI wrapper (current: npu_hw.rs)      ✅ DONE
+Phase B: C++ Engine → Rust FFI to libakida.so                     ✅ DONE
+Phase C: Direct ioctl / mmap on /dev/akida0 (bypass all vendor)   ✅ DONE (Feb 26, 2026)
+Phase D: Rust akida_pcie driver module (full sovereignty)         In progress
 ```
 
-Phase A is complete. Phase B is in progress (symbol analysis of 1,048
-C++ exports documented in BEYOND_SDK.md). Phases C-D are research
-targets — the BAR0 register map and FlatBuffer program format are
-partially reverse-engineered.
+**Phase C evidence (wetSpring V60, February 26, 2026):**
 
-This follows the same evolutionary arc as toadStool's sovereign GPU
+ToadStool's `akida-driver` crate provides pure Rust access to the AKD1000
+via `DeviceManager::discover()` → `AkidaDevice::open()` → `write()`/`read()`.
+wetSpring wraps this as `wetspring_barracuda::npu` (feature-gated `npu`).
+Three validation binaries (`validate_npu_hardware`, `validate_npu_live`,
+`validate_npu_funky`) exercise the full hardware path:
+
+| Metric | Measured (Real AKD1000) |
+|--------|------------------------|
+| DMA throughput | 37 MB/s sustained (read + write) |
+| Single inference | 54 µs (18.5K Hz) |
+| Batch inference (8-wide) | 20.7K infer/sec |
+| Reservoir weight loading (200×200) | 164 KB in 4.5 ms |
+| Online readout switching | 86 µs for 3 swaps (weight mutation) |
+| Energy per inference | 1.4 µJ |
+| Coin-cell CR2032 (1 Hz) | 11 years |
+| Online evolution | 136 gen/sec (real-time adaptive inference) |
+| Temporal streaming | 12.9K Hz, p99=76 µs |
+| PUF fingerprint | 6.34 bits entropy, deterministic dual-state |
+
+**Zero Python. Zero C++. Zero SDK.** Pure Rust from `discover()` to `infer()`.
+
+This follows the same evolutionary arc as ToadStool's sovereign GPU
 compiler: start with vendor APIs, progressively replace with Rust-native
 implementations, publish everything under AGPL-3.0.
 

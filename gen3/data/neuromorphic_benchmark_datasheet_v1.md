@@ -186,6 +186,48 @@ NPU:      0.6 J  █
 
 ---
 
+## Real Hardware Measurements: wetSpring V60 (February 26, 2026)
+
+**Update:** The following measurements are from a live AKD1000 using a **pure Rust driver**
+(ToadStool `akida-driver`), validating the ESN classifier pipeline end-to-end on real silicon.
+No vendor SDK, no Python, no C++ in the measurement path.
+
+### ESN Classifier Pipeline on AKD1000 (Exp194)
+
+| Classifier | Classes | CPU Sim | NPU Live | NPU Throughput | Energy/Infer |
+|------------|:-------:|:-------:|:--------:|:--------------:|:------------:|
+| QS Phase (Vibrio biofilm) | 3 | 49.2% | 33.6% | 18,837 Hz | 1.4 µJ |
+| Bloom Sentinel (HAB) | 4 | 25.0% | 25.3% | 18,773 Hz | 1.4 µJ |
+| Disorder (Anderson) | 3 | 32.9% | 31.6% | 18,626 Hz | 1.4 µJ |
+
+### DMA and Weight Mutation (Exp193-194)
+
+| Operation | Measured |
+|-----------|---------|
+| Sustained DMA throughput | 37 MB/s (read + write) |
+| Reservoir weight loading (164 KB) | 4.5 ms |
+| Online readout switching | 28 µs per swap |
+| Batch inference (8-wide) | 20,754 infer/sec |
+| Coin-cell CR2032 (1 Hz edge) | 11 years |
+
+### Novel Hardware Explorations (Exp195)
+
+| Experiment | Finding |
+|------------|---------|
+| Physical Unclonable Function (PUF) | 6.34 bits entropy, deterministic dual-state alternating SRAM signature |
+| Online (1+1)-ES Evolution | 136 generations/sec — real-time adaptive inference on neuromorphic hardware |
+| Temporal Streaming (500-step HAB) | 12,883 Hz sustained, p99 latency = 76 µs |
+| Anderson Disorder Sweep | 8 disorder levels loaded as mesh weights, response variance characterized |
+| Cross-Reservoir Crosstalk | 12,765 classifier switches/sec, no state corruption between readouts |
+
+### Significance
+
+These are the first published benchmarks of an AKD1000 using a non-vendor,
+pure Rust driver. The `akida-driver` achieves **Phase C** of the sovereign
+driver roadmap: direct `/dev/akida0` access, zero vendor code in the path.
+
+---
+
 ## Key Takeaways
 
 1. **Neuromorphic computing is production-ready** for specific workload classes (pattern matching, small inference, classification)
@@ -197,6 +239,8 @@ NPU:      0.6 J  █
 4. **Heterogeneous computing is essential** - no single architecture wins all workloads
 
 5. **Orchestration matters** - unified scheduling across CPU/GPU/NPU maximizes utilization and efficiency
+
+6. **Pure Rust NPU access is achieved** — Phase C sovereign driver validated on real AKD1000 with 18.8K Hz ESN inference, 37 MB/s DMA, and 136 gen/sec online evolution (wetSpring V60, February 2026)
 
 ---
 

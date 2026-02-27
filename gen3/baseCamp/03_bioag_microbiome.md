@@ -236,7 +236,39 @@ characterization toolkit.
 | Dual Kc cover crops | Orchard floor management |
 | Biochar P adsorption | Soil amendment characterization |
 
-## 9. Connection to Constrained Evolution
+## 9. groundSpring Connections
+
+groundSpring contributes the uncertainty quantification layer that makes
+Anderson-guided inoculant design quantitatively testable:
+
+- **Exp 001 — Sensor noise decomposition**: EC5 soil moisture sensors are
+  bias-dominated (77%); site calibration removes most error. This is
+  directly relevant to field monitoring of orchard soil conditions — if
+  θ(t) measurements feeding the Anderson geometry model are poorly
+  calibrated, the QS regime predictions are unreliable. 36/36 Rust checks
+- **Exp 004 — Sequencing noise rarefaction**: Genus saturation at 5,000 reads;
+  phyla robust at 100 reads. Sets the sampling floor for monitoring
+  inoculant persistence via 16S — below 5,000 reads, rare inoculant
+  strains may be undetectable. 15/15 Rust checks
+- **Exp 016 — Rare biosphere signal detection** (R. Anderson 2015): When
+  an inoculant disperses into native soil, its abundance drops to rare
+  biosphere levels. This experiment quantifies exactly when sequencing
+  can still detect a rare lineage vs when it falls below the noise
+  floor. Critical for monitoring inoculant persistence. 10/10 Rust checks
+- **Exp 015 — Uncertainty bridge**: Bridges sensor noise (Exp 001) to
+  Anderson localization length ξ to QS regime classification. The complete
+  pipeline from field measurement uncertainty to biology prediction. 8/8
+  Rust checks
+- **Exp 019 — Jackknife estimation** (Bazavov 2025): Subpercent error bars
+  for soil diversity metrics. When reporting rhizosphere W ≈ 6.7, the
+  jackknife gives rigorous confidence intervals. 9/9 Rust checks
+
+**Field deployment pipeline**: airSpring (θ(t) from soil sensors) →
+groundSpring (sensor calibration + sampling noise floor + uncertainty
+propagation) → wetSpring (16S diversity → Anderson QS regime) →
+neuralSpring (ESN classifier for QS-active/marginal/suppressed).
+
+## 10. Connection to Constrained Evolution
 
 Orchard soil is a constrained environment: water-limited, salinized,
 pathogen-pressured. The microbiome evolves under these constraints toward
@@ -248,7 +280,7 @@ This is constrained evolution applied as engineering: understanding the
 constraint landscape to design interventions that work with the physics
 rather than against it.
 
-## 10. PFAS Monitoring Angle
+## 11. PFAS Monitoring Angle
 
 Agricultural soils near military installations and wastewater application sites
 accumulate PFAS. The Anderson model predicts that PFAS contamination disrupts

@@ -272,12 +272,63 @@ embedded deployment without a PCIe host. For our ESN inference payload
 
 ---
 
+## 14. wetSpring Live Hardware Results (Pure Rust, February 26, 2026)
+
+**Driver:** ToadStool `akida-driver` 0.1.0 — **pure Rust, zero SDK/vendor dependency**
+**Host:** Intel i9-12900K, 64 GB DDR5, Pop!\_OS 22.04
+**Device:** AKD1000 @ `0000:08:00.0` (80 NPUs, 10 MB SRAM, PCIe Gen2 x1)
+
+### 14.1 ESN Classifier Inference (Exp194)
+
+| Classifier | CPU Sim Acc | NPU Live Acc | Throughput | Energy/Infer |
+|------------|:----------:|:----------:|:----------:|:------------:|
+| QS Phase (3-class) | 49.2% | 33.6% | 18,837 Hz | 1.4 µJ |
+| Bloom Sentinel (4-class) | 25.0% | 25.3% | 18,773 Hz | 1.4 µJ |
+| Disorder (3-class) | 32.9% | 31.6% | 18,626 Hz | 1.4 µJ |
+
+### 14.2 DMA Performance
+
+| Operation | Measured |
+|-----------|---------|
+| Sustained write throughput | 37 MB/s |
+| Sustained read throughput | 37 MB/s |
+| Reservoir load (200×200 sparse, 164 KB) | 4.5 ms |
+| Single inference round-trip | 54 µs |
+| Batch inference (8-wide) | 20,754 infer/sec |
+| Readout switch (weight mutation) | 28 µs avg |
+
+### 14.3 Novel Capabilities (Exp195)
+
+| Experiment | Result |
+|------------|--------|
+| Physical Reservoir Fingerprint (PUF) | 6.34 bits byte entropy, deterministic dual-state alternating signature |
+| Online (1+1)-ES Evolution | 136 gen/sec, 24% → 32% fitness in 50 gens (real-time capable) |
+| Temporal Streaming (500-step) | 12,883 Hz sustained, p99=76 µs |
+| Anderson Disorder Sweep | 8 levels (W=0 to 30), response characterized per disorder strength |
+| Cross-Reservoir Crosstalk | 12,765 switch/sec, no state bleed between classifiers |
+
+### 14.4 Edge Power Budget
+
+| Scenario | Power | Energy/Day | Coin-Cell CR2032 |
+|----------|-------|-----------|:----------------:|
+| 1 Hz edge buoy | 30 mW | 0.125 J | **11 years** |
+| 10 Hz sensor node | 30 mW | 1.25 J | 400 days |
+| Continuous (18K Hz) | 30 mW | 2,592 J | N/A (wired) |
+
+### 14.5 Significance: Phase C Sovereign Driver
+
+These measurements were taken entirely through the ToadStool `akida-driver`
+pure Rust crate — no Python SDK, no C++ engine, no vendor code in the path.
+This is the first public benchmark of an AKD1000 using a non-vendor driver.
+
+---
+
 ## Measurement Conditions
 
-- All AKD1000 measurements taken February 19-25, 2026
+- hotSpring AKD1000 measurements: February 19-25, 2026 (SDK: Akida 2.19.1, Python 3.10)
+- wetSpring AKD1000 measurements: February 26, 2026 (Driver: ToadStool `akida-driver` 0.1.0, pure Rust)
 - AKD1500 projections based on Datasheet v1.2 (June 2025) — no hardware
-- SDK: Akida 2.19.1, Python 3.10
-- Device permissions: `/dev/akida0` (chmod 666 via pkexec)
+- Device permissions: `/dev/akida0` (chmod 666)
 - GPU measurements: nvidia-smi polling, RAPL energy counters
 - Thermal: sustained 100% GPU utilization, 74-75°C, no throttling
 - All results reproducible from public repository

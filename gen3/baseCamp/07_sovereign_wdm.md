@@ -1,7 +1,7 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** February 26, 2026
-**Status:** **Validated** — hotSpring v0.6.14 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites
+**Date:** February 27, 2026
+**Status:** **Validated** — hotSpring v0.6.14 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites. **neuralSpring S88**: all 15 sovereign folding WGSL shaders evolved to df64 core streaming (f64 buffers + df64 compute), confirming the df64 pattern generalizes from nuclear physics to ML/protein folding. 37/37 GPU checks, 158/158 validate\_all
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
@@ -282,9 +282,14 @@ demonstrates that:
 
 ### 6.1 neuralSpring Integration
 
-neuralSpring contributes validated ML surrogates and spectral analysis directly
-to WDM science:
+neuralSpring contributes validated ML surrogates, spectral analysis, and
+df64-validated protein folding primitives directly to WDM science:
 
+- **df64 core streaming** (Session 88): All 15 sovereign folding WGSL shaders
+  evolved to the hotSpring/ToadStool three-zone pattern (f64 buffer I/O →
+  df64 compute → f64 output). Validates that df64 generalizes from nuclear
+  physics to ML workloads. Two precision tiers: arithmetic 3.6e-8 to 5.6e-7,
+  transcendental 1.7e-4 to 3.4e-4. 37/37 GPU checks on RTX 4070
 - **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 87)
   - nW-01: MLP transport surrogate (D*, η*, λ*) — 30/30 Rust checks
   - nW-02: MLP EOS surrogate P(ρ,T), E(ρ,T) — 36/36 + 15/15 GPU checks
@@ -300,6 +305,44 @@ to WDM science:
 - **Session 87 status**: 623 lib tests, 172 binaries, 156/156 validators,
   129+ named tolerances, 39 BarraCUDA rewires, 31 Python baselines (all
   deterministically seeded), 2450+ total validation checks
+
+### 6.2 groundSpring Integration
+
+groundSpring's Bazavov experiments (Exp 019-021) are **direct lattice QCD
+contributions** — the same physics that hotSpring simulates on GPU:
+
+- **Exp 020 — Freeze-out inverse problem** (Bazavov et al., Phys Rev D 93,
+  014512, 2016): Recovers freeze-out temperature T₀ and curvature κ₂ from
+  heavy-ion collision data via Taylor expansion and 2D grid search. This is
+  the inverse problem hotSpring's lattice QCD pipeline generates data for —
+  groundSpring validates the statistical inference that turns lattice output
+  into physical observables. 8/8 Py, 8/8 Rust checks
+- **Exp 021 — Spectral function reconstruction** (Bazavov et al., arXiv
+  2501.12259, 2025): Tikhonov-regularized inversion of Euclidean correlators
+  to recover spectral functions via Laplace-transform kernel and Cholesky
+  decomposition. This is the ill-posed inverse problem at the heart of
+  extracting physics from lattice QCD data — the same mathematical challenge
+  faced by WDM dynamic structure factor S(q,ω) extraction. 8/8 Py, 8/8
+  Rust checks
+- **Exp 019 — Jackknife error estimation** (Bazavov et al., Phys Rev D 111,
+  094508, 2025): Delete-one and block jackknife for subpercent precision
+  error bars. This is the standard error estimation method used in every
+  lattice QCD publication — groundSpring validates the statistical machinery
+  that hotSpring will need for production uncertainty quantification. 9/9
+  Py, 9/9 Rust checks
+
+**Why this matters for WDM**: hotSpring generates raw simulation data
+(trajectories, correlators, transport integrals). Converting that data into
+physical observables with rigorous uncertainty requires exactly the inverse
+problem and error estimation machinery that groundSpring validates.
+The freeze-out curve is a thermodynamic observable extracted from lattice data;
+the spectral function is a dynamic observable extracted from Euclidean correlators.
+groundSpring proves the extraction math works at benchmark precision before
+hotSpring applies it to production WDM data.
+
+**Combined pipeline**: hotSpring (GPU simulation) → groundSpring (inverse
+problem + error bars) → neuralSpring (surrogate acceleration). This is the
+full lattice QCD workflow, validated independently in three springs.
 
 ---
 
