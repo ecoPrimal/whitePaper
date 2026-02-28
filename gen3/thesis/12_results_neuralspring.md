@@ -22,20 +22,31 @@ neuralSpring validates BarraCUDA's ML primitives against published neural networ
 | Phase 5e (Pure GPU promotion) | 38 CPU→GPU ops (~90% math on GPU) | 47 | **47/47** |
 | **Total** | | **1800+** | **All pass** |
 
-### Post-Phase Status (Session 87)
+### Post-Phase Status (Session 94)
 
 | Quality Gate | Status |
 |--------------|--------|
-| Validation binaries | 172 |
-| Library tests | 623 |
-| Named tolerances | 129+ |
-| `validate_all` | 156/156 PASS |
-| Python baselines | 31 |
+| Validation binaries | 197 |
+| Library tests | 685 |
+| Named tolerances | 139+ |
+| `validate_all` | 185/185 PASS |
+| Python baselines | 39 |
 | WDM surrogates | 5 (nW-01..05) |
+| coralForge (AlphaFold2/3) | Py 62/62, Rs 55/55, GPU 37/37 |
 | clippy (pedantic+nursery) | 0 warnings |
+| doc warnings | 0 |
 | `unsafe` blocks | 0 (forbid) |
 | TODO/FIXME/MOCK/STUB | 0 in src/ |
 | Hardcoded paths | 0 |
+| Inline magic numbers | 0 |
+
+### coralForge: Sovereign Structure Prediction (Sessions 88–94)
+
+coralForge extends neuralSpring with sovereign structure prediction primitives — AlphaFold2 Evoformer, IPA, backbone frames, and torsion angles; AlphaFold3 diffusion, pairformer, and confidence heads. All implemented in pure Rust f64, validated against NumPy baselines, and accelerated via 15 df64 WGSL shaders on consumer GPUs.
+
+coralForge is the strongest test of the Isomorphism Theorem: structure prediction uses "novel" operations (triangle multiplication, Invariant Point Attention, SE(3)-equivariant diffusion) that appear unique to the domain. Yet every operation decomposes into the same 6 fundamental primitives. No new primitive category was required.
+
+**See**: `coralForge/` white paper series for full design, architecture, validation, and LTEE application plan.
 
 ---
 

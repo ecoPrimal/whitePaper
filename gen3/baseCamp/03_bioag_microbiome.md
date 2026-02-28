@@ -249,7 +249,9 @@ Anderson-guided inoculant design quantitatively testable:
 - **Exp 004 — Sequencing noise rarefaction**: Genus saturation at 5,000 reads;
   phyla robust at 100 reads. Sets the sampling floor for monitoring
   inoculant persistence via 16S — below 5,000 reads, rare inoculant
-  strains may be undetectable. 15/15 Rust checks
+  strains may be undetectable. wetSpring GPU rarefaction now uses
+  dedicated `BatchedMultinomialGpu` for batched multinomial sampling.
+  15/15 Rust checks
 - **Exp 016 — Rare biosphere signal detection** (R. Anderson 2015): When
   an inoculant disperses into native soil, its abundance drops to rare
   biosphere levels. This experiment quantifies exactly when sequencing

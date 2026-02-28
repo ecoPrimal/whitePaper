@@ -60,6 +60,7 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 07 | Sovereign Warm Dense Matter Simulation on Consumer GPU | Plasma Physics × Distributed Computing | hotSpring Tier 4 + neuralSpring surrogates + groundSpring uncertainty | WDM transport on $600 GPU; deconfinement at β_c=5.69 on $1,500 GPU; **11-head NPU GPU conductor** (Exp 023) | **Validated** — hotSpring v0.6.15 |
 | 08 | Neuromorphic Edge Intelligence for Sovereign Agricultural IoT | Agricultural IoT × Neuromorphic Computing | airSpring Exp 028-029 (88+ checks) + Exp 047 GPU portability + wetSpring NPU driver | NPU inference at 0.0009% of active cycle energy; 10.7× more efficient than cloud; 1-min cadence unlocked; multi-crop hot-swap; GPU math portability proven (46/46 all 13 modules) | **Validated on Live Hardware** — AKD1000, streaming + evolution + power budget + ESN GPU conductor + GPU portability |
 | 09 | Sovereign Field Genomics — Nanopore + NPU | Environmental Genomics × Edge Inference | wetSpring Exp193-195 (NPU) + Exp184-185 (16S) + planned Exp196-202 | MinION sequencing + AKD1000 classification + BarraCUDA 16S pipeline = autonomous field sentinel. NPU-driven adaptive sampling (37x read-rate headroom). No cloud, no Python. | **Architecture defined** — all compute components validated, awaiting sequencer hardware |
+| 10 | coralForge: Sovereign Structure Prediction for Evolutionary Biology | Structural Biology × Constrained Evolution | neuralSpring coralForge (Py 62/62, Rs 55/55, GPU 37/37 = 154 checks) | AlphaFold2/3 primitives in pure Rust f64; LTEE structural evolution analysis; sovereign pipeline on consumer GPU ($60 vs $83K cloud). See `coralForge/` white paper. | **Primitives validated** — 154 checks, 15 df64 WGSL shaders, pipeline planned |
 
 ## Reading Order
 
@@ -78,6 +79,10 @@ baseCamp papers use that validated infrastructure to explore new science.
 **For an agricultural engineer**: 08 (NPU edge IoT) → 09 (field genomics) → 06 (no-till physics) → 03 (bioag microbiome) → 04 (sentinel monitoring)
 
 **For a field genomics researcher**: 09 (field genomics) → 04 (sentinel concept) → 01 (Anderson detection signal) → 08 (NPU agricultural IoT) → the wetSpring experiment docs (Exp193-195, planned Exp196-202)
+
+**For a structural biologist**: 10 (coralForge) → 02 (LTEE extensions) → 01 (Anderson-QS) → the `coralForge/` white paper series
+
+**For the LTEE sequencing proposal**: 02 (LTEE extensions) → 10 (coralForge structural analysis) → Ch. 14 (biological validation) → 01 (Anderson-QS predictions)
 
 ## Bench Experience Behind These Papers
 

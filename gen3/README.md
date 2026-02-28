@@ -2,7 +2,7 @@
 
 **Status**: Soft release — suitable for academic handoff  
 **Audience**: Faculty, PhD evaluators, potential collaborators  
-**Last Updated**: February 26, 2026
+**Last Updated**: February 28, 2026
 
 ---
 
@@ -22,8 +22,8 @@ The papers here formalize the methodology, the architecture, and the biological 
 | airSpring | Precision agriculture, ET₀, soil hydrology, crop phenology, Anderson coupling | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 4,153+ |
 | wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 4,688+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 236+ |
-| neuralSpring | ML primitives & isomorphic patterns | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 2,450+ |
-| **Total** | | | **11,161+** |
+| neuralSpring | ML primitives, isomorphic patterns, coralForge structure prediction | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 3,200+ |
+| **Total** | | | **11,911+** |
 
 ---
 
@@ -119,6 +119,12 @@ Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 10 professors acro
 
 A full-length PhD thesis expanding the constrained evolution methodology into a 16-chapter academic work with comprehensive literature review, formal theoretical framework, five domain-specific results chapters, quantitative evidence analysis, and a proposed biological validation via LTEE sequencing. 2,186 lines across 20 files. See `thesis/README.md` for structure and reading guide.
 
+### Sovereign Structure Prediction
+
+**`../coralForge/`** — *coralForge: Sovereign Structure Prediction White Paper*
+
+AlphaFold2/AlphaFold3 primitives in pure Rust f64, validated against NumPy baselines, accelerated via BarraCUDA WGSL shaders. 7 documents covering design, architecture, isomorphism proof, implementation, validation, evolution roadmap, and LTEE wet lab application. coralForge is the structural analysis layer for the LTEE sequencing proposal (Ch. 14) and baseCamp Paper 02/10. 154 validated checks (Py 62 + Rs 55 + GPU 37). See `../coralForge/README.md`.
+
 ### Origin
 
 **`constrained_optimization_ai.md`** — *Draft / Inoculum*
@@ -132,7 +138,7 @@ The original formulation of the constrained optimization thesis, preserved as a 
 ### For a faculty member evaluating this work for PhD admission:
 
 1. **`about/`** — Who is this person? (transcript, bench experience, hardware)
-2. **`SPRING_CATALOG.md`** — What science did they produce? (10,796+ checks, 5 domains, public repos)
+2. **`SPRING_CATALOG.md`** — What science did they produce? (11,911+ checks, 5 domains, public repos)
 3. **`data/FACULTY_SPRING_PROFILES.md`** — How does my research connect? (your papers in the queue)
 4. **`CONSTRAINED_EVOLUTION_FORMAL.md`** — What is the methodology? (constrained evolution thesis)
 5. **`ECOSYSTEM_ARCHITECTURE.md`** — What infrastructure did they build? (the primals)

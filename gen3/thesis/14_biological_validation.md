@@ -81,15 +81,31 @@ However, specific analyses motivated by the constrained evolution thesis — com
 
 ---
 
-## 14.4 Why MSU
+## 14.4 Structural Evolution via coralForge
 
-The LTEE is at Michigan State University. The author holds degrees from MSU (BS Microbiology, MS Data Science). The frozen fossil record is accessible. The sequencing infrastructure exists (MSU Genomics Core, RTSF). The computational analysis tools — bioinformatics pipelines, statistical methods, machine learning — are validated by the springs (wetSpring's sovereign 16S/metagenomics pipeline, neuralSpring's ML primitives, groundSpring's statistical framework).
+**coralForge** (`coralForge/` white paper series) is neuralSpring's sovereign structure prediction engine — pure Rust f64 implementations of AlphaFold2/AlphaFold3 primitives, validated against NumPy baselines (62/62 Python, 55/55 Rust, 37/37 GPU = 154 checks), and accelerated via 15 df64 WGSL shaders on consumer GPUs.
+
+coralForge enables a structural analysis layer for every proposal in §14.3:
+
+- **§14.3.1 Convergent solutions**: Predict protein structures for each population's variant of convergently evolving genes. Test whether different amino acid sequences converge to the same fold (phenotype-convergent at the structural level).
+- **§14.3.2 Hitchhiker impact**: Predict structures for beneficial vs. hitchhiker mutations. Test whether hitchhikers produce structurally silent changes (structural buffering).
+- **§14.3.3 Temporal dynamics**: Track structural RMSD from ancestor at every timepoint. Fit power-law model to structural divergence.
+- **§14.3.4 Fastidiousness**: Measure structural complexity (domains, contact order) over time. Correlate with pseudogene accumulation.
+- **§14.3.5 Citrate precursor**: Predict structures before, during, and after the Ara-3 potentiating mutations. Detect structural precursors before phenotypic innovation.
+
+**Scale**: 500 essential genes × 30 timepoints × 12 populations = 180,000 predictions. Cost: $60 in electricity on 4× consumer GPUs over 3 months. Compare to cloud AlphaFold: $1,800 + rate limits + data sovereignty risk. See `coralForge/06_LTEE_APPLICATION.md` for the full pipeline.
+
+---
+
+## 14.5 Why MSU
+
+The LTEE is at Michigan State University. The author holds degrees from MSU (BS Microbiology, MS Data Science). The frozen fossil record is accessible. The sequencing infrastructure exists (MSU Genomics Core, RTSF). The computational analysis tools — bioinformatics pipelines, statistical methods, machine learning — are validated by the springs (wetSpring's sovereign 16S/metagenomics pipeline, neuralSpring's ML primitives and coralForge structure prediction, groundSpring's statistical framework).
 
 This is not a hypothetical proposal. It is a concrete research plan that could be executed as part of a PhD program at MSU, using existing resources, with a faculty network already mapped to the relevant scientific domains.
 
 ---
 
-## 14.5 Expected Outcomes
+## 14.6 Expected Outcomes
 
 If the constrained evolution thesis is correct, we expect:
 
@@ -110,7 +126,7 @@ The predictions are specific, quantitative, and falsifiable. The LTEE data is th
 
 ---
 
-## 14.6 Connection to Anderson's Work
+## 14.7 Connection to Anderson's Work
 
 Anderson's population genomics of *Sulfolobus* in Yellowstone hot springs (Campbell et al., 2017) and *Sulfurovum* at hydrothermal vents (Moulana et al., 2020) provide the natural-population complement to the LTEE's controlled experiment. The analysis framework proposed here for the LTEE could be applied to Anderson's vent population data as well, testing whether the same signatures appear in natural populations under environmental constraint.
 
