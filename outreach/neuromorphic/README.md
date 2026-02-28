@@ -1,6 +1,6 @@
 # Neuromorphic Compute Partnership — Open Outreach
 
-**Date:** February 26, 2026
+**Date:** February 27, 2026
 **Project:** ecoPrimals / hotSpring + wetSpring
 **License:** AGPL-3.0-or-later
 **Repository:** [github.com/syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring)
@@ -40,7 +40,7 @@ operating at microwatt power while GPUs handle the heavy compute.
 - Hardware integration roadmap: on-board GPU co-location, chiplet architectures, edge nodes, custom PCB design
 - Sovereign Rust driver development — your hardware gets kernel-independent Linux support
 
-**What we ask:**
+**What you can give:**
 - Evaluation hardware (dev board, reference design, or engineering sample)
 - Technical contact for driver/SDK questions during integration
 
@@ -58,8 +58,8 @@ operating at microwatt power while GPUs handle the heavy compute.
 
 | Document | Description |
 |----------|-------------|
-| [`TECHNICAL_BRIEF.md`](TECHNICAL_BRIEF.md) | Full technical findings: architecture, benchmarks, 10 SDK assumptions overturned, AKD1500 analysis, near-future NPU extension roadmap across 5 scientific domains, hardware integration vision (on-board NPU, modular chiplet, edge nodes, custom PCB), and what we want to test next |
-| [`BENCHMARK_DATASHEET.md`](BENCHMARK_DATASHEET.md) | Raw benchmark numbers: latency, throughput, power, precision parity, three-substrate production results, AKD1500 projected performance |
+| [`TECHNICAL_BRIEF.md`](TECHNICAL_BRIEF.md) | Full technical findings: architecture, benchmarks, 10 SDK assumptions overturned, AKD1500 analysis, near-future NPU extension roadmap across 5 scientific domains, hardware integration vision (on-board NPU, modular chiplet, edge nodes, custom PCB), Exp 022 production results, and what we want to test next |
+| [`BENCHMARK_DATASHEET.md`](BENCHMARK_DATASHEET.md) | Raw benchmark numbers: latency, throughput, power, precision parity, three-substrate production results (Exp 015 + Exp 022 live NPU), AKD1500 projected performance |
 | [`AKD1500-Datasheet-1.2.pdf`](AKD1500-Datasheet-1.2.pdf) | BrainChip AKD1500 datasheet (reference) |
 
 ---
@@ -84,15 +84,16 @@ Full hardware inventory: [`whitePaper/gen3/about/HARDWARE.md`](../../gen3/about/
 ```
 hotSpring/
 ├── barracuda/                    ← 76 validation binaries, 664 tests, v0.6.14
-│   ├── src/bin/                  ← includes validate_three_substrate, validate_titan_oracle
+│   ├── src/bin/                  ← includes validate_three_substrate, production_mixed_pipeline
 │   ├── src/md/npu_hw.rs          ← AKD1000 Rust hardware adapter
-│   ├── src/md/reservoir.rs       ← ESN + NpuSimulator
+│   ├── src/md/reservoir.rs       ← ESN + NpuSimulator + cross-run learning
 │   └── src/discovery.rs          ← capability-based NPU probe (sysfs + akida-driver)
 ├── metalForge/
 │   ├── forge/src/probe.rs        ← PCIe vendor-ID scan (0x1e7c), substrate abstraction
 │   └── npu/akida/                ← HARDWARE.md, BEYOND_SDK.md, EXPLORATION.md, scripts/
-├── experiments/                  ← 17 experiment journals (001-017)
-│   ├── 015_MIXED_PIPELINE_BENCHMARK.md   ← three-substrate production run
+├── experiments/                  ← 22 experiment journals (001-022)
+│   ├── 015_MIXED_PIPELINE_BENCHMARK.md   ← three-substrate validation (3 β)
+│   ├── 022_MIXED_PIPELINE_NPU_PRODUCTION.md ← live NPU production (10 β, 5,978 NPU calls)
 │   └── 016_CROSS_SPRING_EVOLUTION_MAP.md ← full shader flow map
 └── wateringHole/handoffs/        ← cross-project evolution record
 ```
@@ -134,3 +135,13 @@ This is the first published scientific computing validation of an AKD1000
 using a non-vendor driver. The Rust `akida-driver` achieves kernel-independent
 hardware access — answering the AKD1500 datasheet's "no plans for updates"
 Linux kernel support policy with a sovereign alternative.
+
+### Exp 022 Update (February 27, 2026): First Live NPU Lattice QCD Production Run
+
+hotSpring completed a full 32⁴ quenched SU(3) β-scan with the AKD1000
+running ESN adaptive steering in real-time via PCIe. 10 NPU-steered β
+points, 5,900 measurement trajectories, 5,978 NPU calls. ESN weights
+bootstrapped from prior runs (cross-run learning). 63% thermalization
+savings. Susceptibility peak χ=32.41 at β=5.7797 confirming the
+deconfinement transition. Same wall time as previous non-NPU run (14h)
+but 2.5× more measurement statistics.

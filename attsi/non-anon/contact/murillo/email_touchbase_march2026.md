@@ -12,7 +12,7 @@ Hi Professor Murillo,
 
 Hope you're doing well. Just wanted to confirm we're still on for coffee Tuesday — looking forward to it.
 
-Since we last talked, I've been running production lattice QCD on my workstation alongside the plasma MD work. I've put together a short results summary that covers the GPU lattice calculations and a few things I found along the way. I'll bring a copy, but I've also attached it here in case you want to glance at it beforehand.
+Since we last talked, I've been running production lattice QCD on my workstation alongside the plasma MD work. I've put together a short results summary that covers the GPU lattice calculations and a few things I found along the way. I've attached it here in case you want to glance at it beforehand.
 
 I'm also starting a dynamical fermion run tonight — same 32⁴ lattice, but now with staggered quarks and a CG solver on the GPU. The quenched runs showed β_c ≈ 5.69 for the deconfinement transition; with dynamical fermions we expect the transition to soften into a crossover with a shifted critical coupling. The NPU coprocessor is now running 11 inference heads in parallel with the GPU, including adaptive scan steering and quenched-phase monitoring. Should have results by the weekend.
 

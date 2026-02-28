@@ -1,7 +1,7 @@
 # gen3/data/ — Reproduction Studies, Faculty Profiles, and Evolution Evidence
 
 **Status**: Active — 5 springs producing validated science  
-**Last Updated**: February 20, 2026
+**Last Updated**: February 27, 2026
 
 ---
 
@@ -26,9 +26,9 @@ Phase A → Phase B comparison is itself a research contribution: can Pure Rust 
 
 ### Reproduction Plans
 
-**`MURILLO_REPRODUCTION_PLAN.md`** — Detailed plan for reproducing Murillo Group computational physics. Documents the Phase A → Phase C pipeline that produced hotSpring's 195/195 checks: Sarkas MD (60 observable checks across 12 DSF cases), TTM (6/6 equilibration), surrogate learning (15/15 benchmark functions), nuclear EOS (full AME2020 dataset, 2,042 nuclei). Phase C GPU MD runs on a $600 RTX 4070 for $0.044 — 1,000-10,000x cheaper than institutional HPC.
+**`MURILLO_REPRODUCTION_PLAN.md`** — Detailed plan for reproducing Murillo Group computational physics. Documents the full pipeline: Sarkas MD (60/60), TTM (6/6), surrogate learning (15/15), nuclear EOS (2,042 nuclei), GPU MD (9/9 PP Yukawa), transport coefficients (13/13 Green-Kubo), screened Coulomb (23/23 Sturm). Plus Bazavov lattice QCD (6 papers, 32⁴ production scan), Kachkovskiy spectral theory (4 papers, 45/45). Total: 22 papers, ~700 checks.
 
-**Status**: Phase A COMPLETE (86/86), Phase C GPU MD COMPLETE (9/9 PP Yukawa at N=10,000), Phase F COMPLETE (195/195 total). Stanton-Murillo transport partially validated. Lattice QCD infrastructure (SU(3), HMC, Dirac CG) built and validated (12/12).
+**Status**: ALL PHASES COMPLETE. Exp 022 (live NPU, 32⁴ production β-scan) finished Feb 27, 2026. DF64 discovery (9.9× f64 throughput). Coffee meeting with Murillo: March 3. Technical summary prepared for sharing.
 
 ### Infrastructure
 
@@ -40,31 +40,36 @@ Phase A → Phase B comparison is itself a research contribution: can Pure Rust 
 
 Key finding: ML-driven evolution already covered ~60-70% of scientific computing needs because the underlying math is shared. The springs confirmed this — the 6 isomorphic primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating) serve physics, biology, chemistry, and geophysics, not just neural networks.
 
-Remaining P0-P1 gaps (driven by faculty extension papers):
-- FFT (Bazavov lattice QCD, groundSpring spectral reconstruction)
+**Closed P0-P1 gaps** (Feb 2026):
+- ~~FFT~~ — CLOSED (ToadStool Fft1DF64/Fft3DF64, roundtrip 1e-10)
+- ~~Complex arithmetic~~ — CLOSED (used in lattice QCD SU(3) and FFT)
+- ~~Lanczos eigensolve + SpMV~~ — CLOSED (validated on GPU for Anderson/Hofstadter)
+
+Remaining P1-P2 gaps:
 - ODE solver (Waters c-di-GMP signaling dynamics)
-- Lanczos eigensolve + SpMV (Kachkovskiy spectral theory)
 - HMM Viterbi (Liu comparative genomics)
 - Evolutionary optimization (Dolson counterdiabatic evolution)
+- Batched eigendecomposition (deformed nuclear HFB)
+- 2D numerical methods (nuclear structure)
 
 ### Benchmarks
 
 **`HOTSPRING_PHASE_B_EVIDENCE.md`** — Phase B technical results: BarraCUDA vs Python/SciPy numbers for nuclear EOS computation. 478x L1 throughput, 44.8x energy reduction. GPU FP64 validated to 4.55e-13 MeV precision.
 
-**`neuromorphic_benchmark_datasheet_v1.md`** — BrainChip Akida neuromorphic benchmark results. Shared with Professor Murillo early 2026. k-mer filtering 2.3x faster and 53x more power-efficient vs CPU.
+**`neuromorphic_benchmark_datasheet_v1.md`** — BrainChip Akida neuromorphic benchmark results. Updated Feb 27 with hotSpring physics NPU results (Exp 020-022: ESN adaptive steering, 9,017× energy efficiency, cross-run learning, live AKD1000 production). Originally shared with Murillo early 2026; now also includes wetSpring V60 pure Rust driver measurements.
 
 ---
 
-## Current Science Production (February 20, 2026)
+## Current Science Production (February 27, 2026)
 
 | Spring | Experiments | Checks | Papers Reproduced | Domain |
 |--------|-----------|--------|------------------|--------|
-| hotSpring | 21 experiments | 664+ | 14 published + lattice QCD + spectral | Plasma physics, nuclear structure, NPU |
+| hotSpring | 22 experiments | ~700 | 22 papers (Murillo, Bazavov, Kachkovskiy) | Plasma, nuclear, lattice QCD, spectral, NPU |
 | airSpring | 100+ experiments | 3,123+ | 20+ published + 100-station atlas | ET₀, soil hydrology, crop phenology |
 | wetSpring | 197 experiments | 4,688+ | 52 papers, 39/39 three-tier | 16S, LC-MS, PFAS, Anderson QS, metagenomics |
 | groundSpring | 5 experiments | 71 | 5 noise characterization baselines | Sensors, weather, seismic, microbiome |
 | neuralSpring | 25+ experiments | 2,250+ | 25 papers + 5 WDM surrogates | ML primitives, spectral, surrogates |
-| **Total** | | **10,796+** | **70+** | **7 scientific domains** |
+| **Total** | | **10,832+** | **70+** | **7 scientific domains** |
 
 All spring repositories are public under AGPL-3.0. No institutional access required. No proprietary software. Runs on consumer hardware purchased from Newegg and Facebook Marketplace.
 

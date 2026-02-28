@@ -1,9 +1,9 @@
 # BarraCUDA: Scientific Computing Gap Analysis
 
-**Status**: Discovery document (updated with Phase C results)  
+**Status**: Historical discovery document (Phase C) + Feb 27 status annotations  
 **Purpose**: Map what computational physics reveals as new evolution targets for BarraCUDA  
-**Context**: First analysis of BarraCUDA through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE. Updated Feb 14, 2026 with Phase C GPU MD results — several gaps are now CLOSED.  
-**Last Updated**: February 14, 2026
+**Context**: First analysis of BarraCUDA through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE. Originally Feb 7, updated Feb 14 with Phase C GPU MD. As of Feb 27: FFT gap is CLOSED (ToadStool Fft1DF64/Fft3DF64), lattice QCD is production (6 papers, 32⁴), DF64 discovery provides 9.9× f64 throughput, NPU integration adds a third substrate. Most P0/P1 gaps are resolved.  
+**Last Updated**: February 27, 2026
 
 ---
 
@@ -49,7 +49,7 @@ These BarraCUDA ops exist because ML needed them, but they serve scientific comp
 
 ### 1. Complex Number Arithmetic
 
-**Priority**: CRITICAL (blocks FFT, blocks most of computational physics)
+**Priority**: ~~CRITICAL~~ **CLOSED** (Feb 2026 — complex f64 arithmetic implemented, used in lattice QCD SU(3) and FFT)
 
 **What's missing**: BarraCUDA operates entirely in real-valued arithmetic. Physics needs native complex numbers (a + bi).
 
@@ -74,7 +74,7 @@ These BarraCUDA ops exist because ML needed them, but they serve scientific comp
 
 ### 2. Complex FFT / IFFT
 
-**Priority**: CRITICAL (blocks PPPM/Ewald summation, blocks structure factors, blocks correlation functions)
+**Priority**: ~~CRITICAL~~ **CLOSED** (Feb 2026 — ToadStool Fft1DF64/Fft3DF64, roundtrip error 1e-10)
 
 **What's missing**: A full complex-to-complex Fast Fourier Transform.
 

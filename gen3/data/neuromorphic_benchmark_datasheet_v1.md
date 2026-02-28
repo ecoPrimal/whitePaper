@@ -7,7 +7,7 @@
 - **NPU**: 3x BrainChip Akida AKD1000 (80 NPUs per board, 10MB on-chip SRAM)
 
 **Test Environment:** ToadStool Universal Compute Framework
-**Date:** January 2026
+**Date:** January–February 2026 (updated Feb 27, 2026)
 
 ---
 
@@ -186,6 +186,53 @@ NPU:      0.6 J  █
 
 ---
 
+## Real Hardware Measurements: hotSpring Physics NPU (Exp 020-022, February 2026)
+
+**Update:** The following measurements are from AKD1000 hardware integrated into the
+hotSpring computational physics pipeline. The NPU runs Echo State Network inference
+for adaptive steering of lattice QCD simulations alongside GPU HMC computation.
+
+### Physics Screening on AKD1000 (Exp 020)
+
+| Workload | ESN Architecture | Accuracy | Throughput | Energy vs CPU |
+|----------|-----------------|----------|-----------|---------------|
+| Thermalization detection | 10→50→1 | 87.5% | 3,000/s | 9,017× less |
+| Rejection prediction | 5→50→1 | 96.2% | 3,000/s | 9,017× less |
+| Phase classification | 8→50→1 | 100% (n≥10) | 3,000/s | 9,017× less |
+| β_c regression | 8→50→1 | ε=0.0098 | 3,000/s | 9,017× less |
+
+### Cross-Substrate ESN Comparison (Exp 021)
+
+| Substrate | Optimal Regime | Per-Step Latency | Streaming Speed |
+|-----------|---------------|-----------------|-----------------|
+| NPU (AKD1000) | RS ≤ 200 | **2.8 µs** | 1,000× faster than GPU |
+| CPU (f64) | RS < 512 | ~10,400 µs (RS=512) | Baseline |
+| GPU (RTX 3090) | RS ≥ 512 | ~3,170 µs (RS=512) | 8.2× CPU at RS=1024 |
+
+### Production 32⁴ Lattice QCD with Live NPU (Exp 022 — Completed Feb 27)
+
+Three-substrate pipeline: RTX 3090 (DF64 HMC) + AKD1000 (ESN steering) + Titan V (f64 oracle)
+
+| Metric | Value |
+|--------|-------|
+| Beta points (NPU-steered) | 10 (3 seed + 7 adaptive) |
+| Total measurement trajectories | 5,900 |
+| Total NPU calls | 5,978 |
+| Thermalization early-exits | 10/10 β points (100%) |
+| Thermalization trajectories saved | 1,260 / 2,000 (**63%**) |
+| Rejection prediction accuracy | 80.4% (4,744/5,900 correct) |
+| ESN β_c convergence | 7.0000 → 5.6869 → 5.5657 (known: 5.692) |
+| Cross-run learning | Bootstrapped from 749 prior points, weights exported |
+| Wall time | 14.19 hours |
+| Susceptibility peak | χ=32.41 at β=5.7797 (transition region) |
+
+**Key finding:** Same wall time as Exp 013 (native f64, no NPU) but 2.5× more measurement
+statistics, placed more intelligently by NPU adaptive steering. The 30 mW neuromorphic
+chip saved 2.8 hours of GPU thermalization time and concentrated measurements in the
+physically interesting transition region.
+
+---
+
 ## Real Hardware Measurements: wetSpring V60 (February 26, 2026)
 
 **Update:** The following measurements are from a live AKD1000 using a **pure Rust driver**
@@ -232,15 +279,17 @@ driver roadmap: direct `/dev/akida0` access, zero vendor code in the path.
 
 1. **Neuromorphic computing is production-ready** for specific workload classes (pattern matching, small inference, classification)
 
-2. **Power efficiency gains are dramatic** (50-400x), enabling new deployment scenarios
+2. **Power efficiency gains are dramatic** (50-400x for standard ML; 9,017× for physics screening), enabling new deployment scenarios
 
-3. **Latency improvements are significant** for single-sample inference vs GPU batch processing
+3. **Physics-domain NPU is validated**: ESN adaptive steering of lattice QCD ran in production on live AKD1000 hardware (Exp 022, 32⁴ lattice, 14 hours, 5,978 NPU calls)
 
-4. **Heterogeneous computing is essential** - no single architecture wins all workloads
+4. **Heterogeneous computing is essential** — the same wall time yields 2.5× more science when a 30 mW NPU steers a 338W GPU
 
-5. **Orchestration matters** - unified scheduling across CPU/GPU/NPU maximizes utilization and efficiency
+5. **Cross-run learning works**: ESN weights trained on run N bootstrap run N+1, producing improving adaptive steering across experiments
 
 6. **Pure Rust NPU access is achieved** — Phase C sovereign driver validated on real AKD1000 with 18.8K Hz ESN inference, 37 MB/s DMA, and 136 gen/sec online evolution (wetSpring V60, February 2026)
+
+7. **Orchestration matters** — unified scheduling across CPU/GPU/NPU maximizes utilization and efficiency
 
 ---
 

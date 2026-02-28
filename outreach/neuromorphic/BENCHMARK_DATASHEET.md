@@ -1,10 +1,10 @@
 # AKD1000 Benchmark Datasheet
 ## Measured Performance — hotSpring metalForge
 
-**Date:** February 19-25, 2026
+**Date:** February 19-27, 2026
 **Hardware:** BrainChip AKD1000 (BC.00.000.002), PCIe 2.0 x1, slot 08:00.0
 **Host:** AMD Threadripper 3970X, 128 GB DDR4, Intel i9-12900K (secondary)
-**SDK:** Akida 2.19.1
+**SDK:** Akida 2.19.1 (hotSpring); ToadStool `akida-driver` 0.1.0 pure Rust (wetSpring)
 **Driver:** `akida_pcie` → `/dev/akida0`
 **Crate:** hotspring-barracuda v0.6.14
 
@@ -199,7 +199,9 @@ microwatt power. No scheduling conflict. No memory pressure. No thermal impact.
 
 ---
 
-## 12. Three-Substrate Production Results (Experiment 015)
+## 12. Three-Substrate Production Results
+
+### 12.1 Experiment 015 (Validation Run — 3 Strategic β Points)
 
 Full pipeline: RTX 3090 (DF64 HMC) + AKD1000 (ESN steering) + Titan V (f64 oracle)
 
@@ -214,9 +216,31 @@ Full pipeline: RTX 3090 (DF64 HMC) + AKD1000 (ESN steering) + Titan V (f64 oracl
 | Time per trajectory | 15.5 s | 7.6 s | **2.04× faster** |
 | Measurements per β point | 200 | 500 | **2.5× more data** |
 | GPU power draw | 368-374 W | 338-340 W | **8% lower** |
-| Estimated wall time (full scan) | 13.6 h | ~7-8 h | **40-50% faster** |
-| Estimated energy | 4.08 kWh | ~2.2 kWh | **46% less** |
-| Estimated cost | $0.58 | ~$0.31 | **47% cheaper** |
+
+### 12.2 Experiment 022 (Production Run — 10 NPU-Steered β Points, Live AKD1000)
+
+Full pipeline with live NPU hardware via PCIe. Cross-run ESN bootstrapping from prior
+trajectories. Completed February 27, 2026.
+
+| Metric | Exp 013 (no NPU) | Exp 022 (live NPU) | Improvement |
+|--------|:-----------------:|:-------------------:|:-----------:|
+| Lattice | 32⁴ | 32⁴ | Same |
+| Beta points | 7 (manual) | 10 (3 seed + 7 NPU-steered) | **43% more coverage** |
+| Total measurements | 2,200 | 5,900 | **2.68× more data** |
+| Thermalization trajectories | 1,400 | 540 (out of 2,000 budgeted) | **63% saved** |
+| Time per trajectory | 15.5 s (native f64) | 7.6 s (DF64) | **2.04× faster** |
+| Total NPU calls | 0 | 5,978 | New capability |
+| Rejection prediction accuracy | N/A | 80.4% | New capability |
+| ESN β_c estimate | N/A | 5.5657 (known: 5.692, error 2.2%) | New capability |
+| Wall time | 13.6 h | 14.2 h | Comparable |
+| Cost (electricity) | $0.58 | ~$0.61 | Comparable |
+| Susceptibility peak | Not measured | χ=32.41 at β=5.7797 | New observable |
+| Cross-run learning | N/A | Bootstrapped from 749 prior points | New capability |
+
+**Key insight:** Same wall time, same hardware cost — but 2.5× more measurement
+statistics placed more intelligently by NPU adaptive steering. The 30 mW chip saved
+2.8 hours of GPU thermalization compute and concentrated measurements in the physically
+interesting deconfinement transition region.
 
 ---
 
@@ -326,6 +350,7 @@ This is the first public benchmark of an AKD1000 using a non-vendor driver.
 ## Measurement Conditions
 
 - hotSpring AKD1000 measurements: February 19-25, 2026 (SDK: Akida 2.19.1, Python 3.10)
+- hotSpring Exp 022 production run: February 26-27, 2026 (live NPU via `akida_pcie` kernel module)
 - wetSpring AKD1000 measurements: February 26, 2026 (Driver: ToadStool `akida-driver` 0.1.0, pure Rust)
 - AKD1500 projections based on Datasheet v1.2 (June 2025) — no hardware
 - Device permissions: `/dev/akida0` (chmod 666)
