@@ -100,8 +100,8 @@ The springs are organized into two tiers:
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: Phase 59 — 30 sovereign Rust modules, 1 runtime dependency
-**Checks**: 4,688+ validation checks (1,578 GPU) across 197 experiments. 1,008 Rust tests, 86 named tolerances, 184 binaries (169 validate + 15 benchmark). 52/52 papers, 39/39 three-tier. ToadStool S68, 79 primitives consumed.
+**Grade**: Phase 67 — 30 sovereign Rust modules, 1 runtime dependency
+**Checks**: 5,421+ validation checks (1,578 GPU) across 221 experiments. 1,081+ Rust tests, 92 named tolerances, 189 binaries (174 validate + 15 benchmark). 52/52 papers, 50/50 three-tier. ToadStool S68, 79 primitives consumed. 10 new Python baselines (Track 4 soil + NPU spectral).
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -120,10 +120,11 @@ The springs are organized into two tiers:
 | 7 (GPU pipeline) | Full DADA2 + chimera + taxonomy on GPU | 88/88 | 10 samples, QF WGSL, streaming |
 | V53-V58 | Anderson QS, Track 4 soil, drug repurposing, cross-spring S68 | 3,043+ | 52/52 papers, 79 primitives, 0 local WGSL |
 | V59 | Science extensions + three-tier controls | 1,094+ | NCBI sovereign, cold seep, dynamic W(t), NPU sentinel, Exp190-192 |
+| V66-V67 | Deep audit + experiment buildout + evolution | 733+ | 50/50 three-tier, BandwidthTier, ComputeDispatch, 10 Python baselines, Exp216-220 |
 
 **Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth), real NCBI sovereign pipeline (EFetch/SRA → FASTA → diversity → Anderson), cold seep metagenome classification, dynamic Anderson W(t) perturbation models.
 
-**Papers reproduced**: 52/52 across 4 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), deep-sea metagenomics (Track 1c), Jones PFAS (Track 2). 39/39 three-tier eligible papers have full CPU + GPU + metalForge validation. See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers reproduced**: 52/52 across 4 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), deep-sea metagenomics (Track 1c), Jones PFAS (Track 2). 50/50 three-tier eligible papers have full CPU + GPU + metalForge validation (11 extension papers promoted in V67). See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
 **BarraCUDA primitives consumed**: 79 via ToadStool S68 `compile_shader_universal` — including FusedMapReduceF64, BrayCurtisF64, BatchedEighGpu, GemmF64, anderson_3d, lanczos, lanczos_eigenvalues, level_spacing_ratio, and all diversity/spectral primitives. Zero local WGSL, zero local derivative/regression math.
 
@@ -203,46 +204,42 @@ The springs are organized into two tiers:
 
 ---
 
-### 1.5 neuralSpring — Machine Learning Primitives & Isomorphic Patterns
+### 1.5 neuralSpring — Machine Learning Primitives, Isomorphic Patterns & Sovereign Structure Prediction
 
-**Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction
-**Grade**: Phase 0 + Phase 0+ + Rust validation + GPU pipeline
-**Checks**: 190/190 Python + 549/549 Rust + 66 GPU = 805 total
+**Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction, structure prediction (coralForge)
+**Grade**: Phase 0 → 0+ → 0++ → Rust → BarraCUDA CPU → GPU Tensor → metalForge WGSL → Pipeline → Cross-dispatch → Mixed-hardware → Multi-GPU → coralForge. **Most complete validation pipeline of any spring.**
+**Checks**: 282/282 Python + 2918+ Rust+GPU = **3,200+ total** (685 lib + 9 integration + 43 forge tests, 197 binaries, 185/185 validate\_all)
 **Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: neuralSpring proves the **Isomorphism Theorem** — all neural architectures decompose into 6 fundamental primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating), and BarraCUDA's WGSL shader library covers all 6. Phase 0+ extends this by reproducing 5 published studies (Raissi PINNs, Lu DeepONet, LeCun LeNet-5, LSTM on real ERA5 data, quantized inference), demonstrating that the validated primitives produce correct results on real scientific problems.
+**What it validates**: neuralSpring proves the **Isomorphism Theorem** — all neural architectures decompose into 6 fundamental primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating), and BarraCUDA's WGSL shader library covers all 6. Phase 0++ extended to 15 papers across 4 faculty groups and 5 disciplines. **coralForge** is the sovereign structure prediction engine — pure Rust f64 implementations of AlphaFold2/AlphaFold3 primitives (Evoformer, IPA, diffusion, pairformer, confidence), validated against NumPy baselines and accelerated via BarraCUDA/ToadStool. Pure Rust is **83.6× faster** than Python/NumPy (geomean, 11 domains).
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
 | 0 (Synthetic) | 5 experiments: surrogate, transformer, LSTM, transfer, isomorphic | 48/48 | 6 primitives explain all architectures |
-| 0+ (Scholarly) | 5 published studies reproduced | 27/27 | PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference |
-| 0++ (Extended) | 6 additional Python reproductions | 115/115 | Autoencoder, GAN, reservoir, attention variants |
-| 1 (Rust) | 9 BarraCUDA validation binaries + native modules | 549/549 | 242 BarraCUDA primitives + 167 native + 123 CPU ports + 17 unit |
-| 1+ (GPU) | Fused pipeline, shader checks | 66 | 43-78x speedup via single-encoder dispatch |
+| 0+ (Scholarly) | 5 published studies reproduced | 31/31 | PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference |
+| 0++ (Extended) | 15 papers across 4 faculty, 5 disciplines | 127/127 | Evolutionary, phylogenetic, game theory, spectral, population genetics |
+| 1a (Rust) | 40 modules + gpu\_ops/ + gpu\_dispatch | 685 lib + 9 integration + 43 forge | 197 validation/bench binaries |
+| 2 (bC CPU) | BarraCUDA CPU ports — 24/25 papers (96%) | 203 | Machine-precision Rust math |
+| 3 (GPU Tensor) | 23/25 papers (92%), metalForge 15/25, pipeline 15/25 | 272+ | CPU→GPU portability proven |
+| 4 (Dispatch) | 47 CPU→GPU ops, dispatch parity 30/30, mixed-hardware 47/47 | 124+ | ~97% math on GPU |
+| 5 (Multi-GPU) | RTX 4070 + TITAN V (NVK) — 384/384 bit-identical | 384 | Architecture-independent |
+| coralForge | AlphaFold2/3 Evoformer, IPA, diffusion, pairformer, confidence | 62 Py + 55 Rs | Sovereign structure prediction |
+| WDM | 5 warm dense matter surrogates | 186/186 | Physics surrogates validated |
+| baseCamp | 5 biophysical AI sub-theses | 128/128 | GPU pure 5/5 |
 
-**Studies reproduced**:
+**Studies reproduced**: All 25 papers from Phase 0++ + 5 Phase 0/0+ studies + 5 WDM surrogates + 3 publication experiments + coralForge nF-01/02/03 (AlphaFold2 Evoformer + AlphaFold3 diffusion/pairformer/confidence).
 
-| Study | Paper | Result |
-|-------|-------|--------|
-| PINN Burgers | Raissi et al. (2019) J Comp Physics | L2 error 5.1% (Adam-only; paper: 0.06% with L-BFGS) |
-| DeepONet | Lu et al. (2021) Nat Mach Intel | 1.2% mean L2 on operator learning |
-| LeNet-5 MNIST | LeCun et al. (1998) | 98.89% accuracy (paper: ~99%) |
-| LSTM ERA5 | Real Open-Meteo data | NSE=0.849, RMSE=3.46°C on 4 years Michigan |
-| Quantized inference | INT8/INT4 methodology | INT8: 0.017% loss, INT4: 0.79% loss |
+**BarraCUDA primitives validated**: 130+ import sites across 20+ submodules. 47 GPU-promoted dispatch ops (7 domain files). 44 upstream rewires. 21/21 WGSL shaders absorbed + 15 coralForge df64 shaders. 42 metalForge WGSL shaders. All gaps from original audit closed: HMM Viterbi (done), Gillespie (done), Lanczos (done via hotSpring lineage), pairwise distance (PairwiseL2Gpu), LogSumExp (upstream).
 
-**Papers queued**: 13 candidates — Dolson counterdiabatic evolution (Nature Physics 2020), Liu PhyloNet-HMM, Waters cooperation game theory, Kachkovskiy spectral/optimization. See `neuralSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**BarraCUDA gaps remaining**: None critical. L-BFGS optimizer and compute_graph (lazy execution) are future Phase 5 items. All 17 shortcomings (S-01..S-17) resolved upstream.
 
-**BarraCUDA primitives validated**: GEMM, Attention, LayerNorm, BatchNorm, RMSNorm, ReLU, GELU, Conv2d, MaxPool, LSTM cell, autograd, quantized GEMV (Q4/Q8), MSE loss, Adam optimizer.
+**Critical gen3 connection**: Dolson's Iram et al. (2020) Nature Physics on counterdiabatic driving of evolution — **reproduced and validated** (Paper 011). coralForge extends the isomorphism to protein structure prediction: the same 6 primitives that serve language models serve AlphaFold.
 
-**BarraCUDA gaps identified**: Evolutionary optimization (GA/ES), HMM Viterbi, Gillespie simulation, L-BFGS optimizer, Lanczos eigensolve + SpMV (Kachkovskiy spectral, Hessian analysis).
-
-**Critical gen3 connection**: Dolson's Iram et al. (2020) Nature Physics on counterdiabatic driving of evolution is the closest published analog to `CONSTRAINED_EVOLUTION_FORMAL.md`. Reproducing it would externally validate the ecoPrimals methodology.
-
-**Participates in**: biomeOS PathwayLearner (validated ML primitives), Squirrel (quantized inference), NUCLEUS (isomorphic kernel sharing), all springs (surrogates, transfer learning).
+**Participates in**: biomeOS PathwayLearner (validated ML primitives), Squirrel (quantized inference), NUCLEUS (isomorphic kernel sharing), all springs (surrogates, transfer learning), coralForge sovereign protein pipeline.
 
 ---
 

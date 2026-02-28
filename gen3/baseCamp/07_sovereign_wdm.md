@@ -1,7 +1,7 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** February 27, 2026
-**Status:** **Validated** — hotSpring v0.6.14 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites. **neuralSpring S88**: all 15 sovereign folding WGSL shaders evolved to df64 core streaming (f64 buffers + df64 compute), confirming the df64 pattern generalizes from nuclear physics to ML/protein folding. 37/37 GPU checks, 158/158 validate\_all
+**Date:** February 28, 2026
+**Status:** **Validated** — hotSpring v0.6.14 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites. **neuralSpring S90**: all 15 coralForge WGSL shaders evolved to df64 core streaming (f64 buffers + df64 compute), confirming the df64 pattern generalizes from nuclear physics to ML/protein folding. 37/37 GPU checks, 185/185 validate\_all. coralForge (AlphaFold2/3) Evoformer + IPA + diffusion + pairformer + confidence validated: Py 62/62, Rs 55/55. Phase B GPU gaps all closed. 197 binaries, 685 lib tests, 3200+ checks
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
@@ -285,7 +285,7 @@ demonstrates that:
 neuralSpring contributes validated ML surrogates, spectral analysis, and
 df64-validated protein folding primitives directly to WDM science:
 
-- **df64 core streaming** (Session 88): All 15 sovereign folding WGSL shaders
+- **df64 core streaming** (Session 88): All 15 coralForge WGSL shaders
   evolved to the hotSpring/ToadStool three-zone pattern (f64 buffer I/O →
   df64 compute → f64 output). Validates that df64 generalizes from nuclear
   physics to ML workloads. Two precision tiers: arithmetic 3.6e-8 to 5.6e-7,
@@ -302,9 +302,11 @@ df64-validated protein folding primitives directly to WDM science:
 - **Spectral analysis**: neuralSpring's `eigh_f64` eigendecomposition and
   `spectral_entropy` (rewired to `barracuda::stats::shannon_from_frequencies`
   in Session 81) apply directly to plasma eigenmode analysis
-- **Session 88+ status**: 668 lib tests, 175 binaries, 174/175 validators,
-  129+ named tolerances, 42 upstream rewires, 31 Python baselines (all
-  deterministically seeded), 3,034+ total validation checks
+- **Session 90 status**: 669 lib tests, 179 binaries, 179/179 validators,
+  131+ named tolerances, 42 upstream rewires, 36 Python baselines (all
+  deterministically seeded), 3,162+ total validation checks. nF-02 AlphaFold2
+  Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
+  ODE batch integration, FST variance decomposition, introgression HMM chain
 
 ### 6.2 groundSpring Integration
 
