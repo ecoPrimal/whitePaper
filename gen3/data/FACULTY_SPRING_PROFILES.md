@@ -23,21 +23,25 @@ Each professor is profiled with:
 https://engineering.msu.edu/faculty/michael-murillo  
 **Connection**: MSDS professor (master's program)
 
-**Spring Status**: 195/195 Phase A checks PASS, Phase C GPU MD validated (9/9 Yukawa)
+**Spring Status**: ALL PHASES COMPLETE — 22 papers, ~700 checks, 39/39 suites. Exp 022 (live NPU, 32⁴ production) finished Feb 27.
 
-**Reproduced Papers**:
+**Coffee meeting scheduled: Tuesday March 3, 2026.** Technical summary prepared: `hotSpring/whitePaper/TECHNICAL_SUMMARY_FEB2026.md`.
+
+**Reproduced Papers (Murillo Group)**:
 | Paper | Status | Checks |
 |-------|--------|--------|
-| Silvestri, Diaw, Murillo (2024) "Surrogate learning" — Nature Machine Intelligence | Reproduced | hotSpring Phase A |
-| Sarkas MD — Yukawa OCP | Reproduced + GPU | Phase A + Phase C |
-| Two-Temperature Model (TTM) | Reproduced | Phase A |
+| Sarkas MD — Yukawa OCP (12 DSF cases) | Reproduced + GPU | 60/60 + 9/9 GPU |
+| Two-Temperature Model (TTM) | Reproduced | 6/6 |
+| Silvestri, Diaw, Murillo (2024) "Surrogate learning" — Nature MI | Reproduced + BarraCUDA | 15/15 (478× faster) |
+| Stanton & Murillo (2016) — Transport coefficients | Reproduced + GPU | 13/13 Green-Kubo |
+| Murillo & Weisheit (1998) — Screened Coulomb | Reproduced | 23/23 Sturm bisection |
+| Nuclear EOS (AME2020, 2,042 nuclei) | Reproduced + BarraCUDA | L1/L2/L3 |
 
-**Candidate Papers for Future Reproduction**:
-- Stanton & Murillo (2016) "Ionic transport in high-energy-density matter" — J. Phys. A
-- Murillo & Weisheit (1998) "Dense plasmas, screened interactions, and atomic ionization" — Physics Reports
+**Candidate Papers for Future Reproduction (Tier 4 — WDM)**:
 - Diaw & Murillo (2023) "Generalized Hydrodynamics Model for Strongly Coupled Plasmas"
+- Murillo (2025) "Computational barriers" (arXiv:2505.02494) — WDM roadmap paper
 
-**BarraCUDA primitives exercised**: GEMM, particle integration (Velocity Verlet), pair forces (Yukawa), MLP surrogate, RBF interpolation
+**BarraCUDA primitives exercised**: GEMM, Velocity Verlet, Yukawa/Coulomb force kernels, MLP surrogate, RBF interpolation, Green-Kubo transport, Sturm bisection, DF64 arithmetic, SU(3) lattice gauge, HMC, ESN reservoir, NPU streaming
 
 ---
 
@@ -225,20 +229,27 @@ bazavov@msu.edu
 3. **Inverse problems** — spectral reconstruction from lattice data
 4. **Parallel algorithms** — molecular dynamics on lattice gauge configurations
 
-**Candidate Papers for Reproduction**:
+**Reproduced Papers**:
+| Paper | Status | Checks |
+|-------|--------|--------|
+| Bazavov [HotQCD] (2014) "QCD equation of state" — Nuclear Physics A | **Reproduced** | hotSpring |
+| Wilson (1974) / Bazavov — Pure gauge SU(3) quenched | **Reproduced + 32⁴ production** | Exp 013 + 022 |
+| Kogut & Susskind (1975) — Dynamical fermion HMC | **Reproduced** | hotSpring |
+| Bazavov et al. (2015) "Abelian Higgs model" — Phys Rev D | **Reproduced** | hotSpring |
+| Bazavov et al. (2025) "Muon g-2 HVP" — Phys Rev D | **Reproduced** | hotSpring |
+| Bazavov et al. (2016) "Freeze-out curvature" — Phys Rev D | **Reproduced** | hotSpring |
 
+**Production Results**: Exp 013 (32⁴, native f64, 13.6h, β_c=5.69) and Exp 022 (32⁴, DF64+NPU, 14.2h, 10 NPU-steered β points, 5,900 measurements). Deconfinement transition confirmed. DF64 discovery: 9.9× native f64 throughput.
+
+**Candidate Papers for Future Reproduction**:
 | Paper | Domain | Spring Relevance |
 |-------|--------|-----------------|
-| Bazavov [HotQCD] (2014) "The QCD equation of state." Nuclear Physics A | Equation of state | hotSpring: Lattice QCD EOS ↔ Sarkas plasma EOS. Both compute thermodynamic properties of strongly coupled systems via particle methods |
-| Bazavov et al. (2025) "Hadronic vacuum polarization for the muon g-2: Complete short and intermediate windows." Phys Rev D | Precision physics | groundSpring: Subpercent precision from noisy lattice data. Statistical analysis, jackknife/bootstrap error estimation |
-| Bazavov et al. (2016) "Polyakov loop in 2+1 flavor QCD from low to high temperatures." Phys Rev D | Phase transitions | hotSpring: Deconfinement transition in QCD ↔ phase transitions in dense plasmas |
-| Bazavov et al. (2016) "Curvature of the freeze-out line in heavy ion collisions." Phys Rev D | Heavy ion physics | groundSpring: Inverse problem — inferring freeze-out conditions from experimental observables |
-| Bazavov et al. (2015) "Gauge-invariant implementation of the Abelian Higgs model on optical lattices." Phys Rev D | Quantum simulation | neuralSpring: Mapping quantum field theories onto computational lattices — analog computing concepts |
-| (2025) Spectral reconstruction inverse problem in lattice QCD (arXiv 2501.12259) | Inverse problems | groundSpring: Spectral reconstruction = signal recovery from incomplete/noisy data. Direct connection to seismic inversion and sensor noise decomposition |
+| Bazavov et al. (2016) "Polyakov loop 2+1 flavor" — Phys Rev D | Phase transitions | Dynamical fermion extension of current quenched work |
+| (2025) Spectral reconstruction inverse problem (arXiv 2501.12259) | Inverse problems | groundSpring: spectral recovery from noisy lattice data |
 
-**BarraCUDA relevance**: Lattice gauge theory requires: GEMM (link multiplication), FFT (momentum-space operations), parallel molecular dynamics (HMC algorithm), reduction operations (gauge averaging), stochastic estimators. Massive GPU workload — ideal BarraCUDA target.
+**BarraCUDA primitives exercised**: SU(3) GEMM (link multiplication), HMC molecular dynamics, Dirac CG solver, plaquette/Polyakov/susceptibility observables, DF64 arithmetic, PRNG (Philox), WGSL shaders (25).
 
-**Critical connection to hotSpring**: Bazavov's lattice QCD and Murillo's plasma physics are both studying strongly coupled many-body systems. The computational methods overlap significantly — both use molecular dynamics, both need equation of state calculations, both deal with long-range correlations. A shared BarraCUDA kernel library could serve both.
+**Critical connection to hotSpring**: Bazavov's lattice QCD and Murillo's plasma physics are both studying strongly coupled many-body systems. The computational methods overlap significantly — both use molecular dynamics, both need equation of state calculations, both deal with long-range correlations. The shared BarraCUDA kernel library now serves both.
 
 ---
 
@@ -256,17 +267,24 @@ ikachkov@msu.edu
 3. **Transport in quantum spin systems** — energy/information propagation through spin chains
 4. **Almost commuting operators** — approximate symmetries in quantum systems (C*-algebra framework)
 
-**Candidate Papers for Reproduction**:
+**Reproduced Papers**:
+| Paper | Status | Checks |
+|-------|--------|--------|
+| Anderson localization (1D/2D/3D, quasiperiodic) | **Reproduced** | 45/45 |
+| Hofstadter butterfly (Harper equation) | **Reproduced** | hotSpring |
+| Kachkovskiy & Saenz (2016) — spectral theory validation | **Reproduced** | hotSpring |
+| GPU Lanczos eigenvalue solver | **Validated** | hotSpring |
+
+**Candidate Papers for Future Reproduction**:
 
 | Paper | Domain | Spring Relevance |
 |-------|--------|-----------------|
-| Bourgain & Kachkovskiy (2018) "Anderson localization for two interacting quasiperiodic particles." GAFA | Localization theory | groundSpring: Anderson localization = signal trapped by noise. Two-particle case adds interaction — directly models how coupled noisy sensors affect each other |
-| Jitomirskaya & Kachkovskiy (2018) "All couplings localization for quasiperiodic operators with Lipschitz monotone potentials." JEMS | Quasiperiodic systems | groundSpring + hotSpring: Quasiperiodic = structured noise with incommensurate frequencies. Maps to sensor drift, seasonal + sub-seasonal climate patterns, lattice vibrations |
-| Filonov & Kachkovskiy (2018) "On the structure of band edges of 2d periodic elliptic operators." Acta Math | Band structure | hotSpring: Band edges determine electronic/phononic transport properties. Same eigenvalue mathematics as Bazavov's spectral reconstruction |
-| Kachkovskiy (2016) "On transport properties of isotropic quasiperiodic XY spin chains." CMP | Quantum transport | hotSpring: Spin chain transport ↔ Murillo's plasma energy transport. Both ask: how does energy propagate through a coupled many-body system? |
-| Kachkovskiy & Safarov (2016) "Distance to normal elements in C*-algebras of real rank zero." JAMS | Operator theory | neuralSpring: Approximate commutativity = approximate symmetry. Relevant to understanding when neural network layers approximately commute (skip connections, residual nets) |
+| Bourgain & Kachkovskiy (2018) "Anderson localization for two interacting quasiperiodic particles." GAFA | Localization theory | Two-particle extension of current 1D work |
+| Jitomirskaya & Kachkovskiy (2018) "All couplings localization" — JEMS | Quasiperiodic systems | Stronger localization proofs → validation targets |
+| Filonov & Kachkovskiy (2018) "Band edges of 2D periodic operators" — Acta Math | Band structure | 2D eigenvalue mathematics |
+| Kachkovskiy (2016) "Transport properties of quasiperiodic XY spin chains" — CMP | Quantum transport | Spin chain transport ↔ Murillo plasma transport |
 
-**BarraCUDA relevance**: Eigenvalue solvers (iterative diagonalization, Lanczos), matrix exponentiation (time evolution of quantum systems), sparse matrix-vector products (Hamiltonian action on wavefunctions), FFT (momentum-space transformations). The spectral methods require f64 precision — same requirement as hotSpring's plasma MD and Bazavov's lattice QCD.
+**BarraCUDA relevance**: Eigenvalue solvers (Lanczos — validated on GPU), sparse matrix-vector products, Hofstadter butterfly computation, Anderson localization IPR. The spectral methods require f64 precision — same requirement as hotSpring's plasma MD and Bazavov's lattice QCD.
 
 **Why this matters**: Kachkovskiy provides the *mathematical* layer that sits between Murillo's physics (transport in classical plasmas) and Bazavov's physics (transport in quantum field theories). His spectral theory is the eigenvalue mathematics both of them use but neither of them proves. Anderson localization — the core of his research — is the rigorous mathematical framework for "when does signal propagate vs. when does noise trap it?" That's groundSpring's central question stated in the language of quantum mechanics.
 

@@ -1,7 +1,7 @@
 # Neuromorphic Coprocessor for Scientific Computing
 ## Technical Brief — AKD1000 Integration in hotSpring
 
-**Date:** February 25, 2026
+**Date:** February 27, 2026
 **Version:** hotSpring v0.6.14 / metalForge v0.3
 **Hardware:** BrainChip AKD1000 (PCIe, BC.00.000.002)
 **Repository:** [github.com/syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring)
@@ -21,6 +21,7 @@ stack (BarraCuda). The project covers four physics domains:
 | Lattice QCD (SU(3), quenched + dynamical) | 6 | 32⁴ production |
 | Nuclear structure (HFB, SEMF) | 6 | L1/L2/L3 |
 | Spectral theory (Anderson, Hofstadter) | 4 | 45/45 |
+| **Total** | **22** | **~700 checks, 39/39 suites** |
 
 Current crate statistics:
 - **664 tests** (629 library + 31 integration + 4 doc), 0 failures
@@ -28,7 +29,7 @@ Current crate statistics:
 - **~150 centralized tolerances** with physics justification and DOI provenance
 - **0 hardcoded cross-primal references** — pure capability-based discovery
 - **25 WGSL shaders** (lattice QCD, DF64 arithmetic, PRNG, observables)
-- **17 experiment journals** documenting every measurement
+- **22 experiment journals** documenting every measurement
 
 The stack is vendor-agnostic: WGSL compiles to SPIR-V (Vulkan), Metal,
 DX12, or WebGPU. We run on NVIDIA (proprietary + NVK open-source),
@@ -80,10 +81,15 @@ compute cycles from physics.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-This pipeline ran in production (Experiment 015): 2,100 HMC trajectories
-across 3 strategic β values, with the NPU steering adaptive measurement
-allocation via ESN phase prediction. Results validated within 2% of native
-f64 baseline.
+This pipeline ran in production across two experiments:
+
+- **Experiment 015** (validation): 2,100 HMC trajectories across 3 strategic
+  β values. Results validated within 2% of native f64 baseline.
+- **Experiment 022** (production, completed Feb 27): 32⁴ lattice, 10
+  NPU-steered β points, 5,900 measurement trajectories, 5,978 live NPU
+  calls via PCIe. ESN weights bootstrapped from prior runs (cross-run
+  learning). 63% thermalization savings. Susceptibility peak χ=32.41
+  at β=5.7797 confirming deconfinement transition.
 
 ### 3.2 Software Architecture
 
@@ -184,14 +190,17 @@ Echo State Network predicts deconfinement transition coupling (β_c) from
 plaquette + Polyakov loop time series. The NPU runs the ESN readout layer
 while the GPU computes HMC trajectories.
 
-| Metric | Value |
-|--------|-------|
-| ESN topology | 50-neuron reservoir, 8-dim input, 1 output |
-| Weight budget | 2,950 parameters (1,475 bytes at int4) |
-| Training time | 0.5 ms (on CPU, ridge regression) |
-| β_c estimate from 3 points | 5.5051 (known: 5.6925, error: 3.3%) |
-| Hardware inference | 668 cycles, 656 μs (PCIe dominated) |
-| Power | < measurement noise above 900 mW board floor |
+| Metric | Exp 015 (3 pts) | Exp 022 (10 pts, live NPU) |
+|--------|:----------------:|:--------------------------:|
+| ESN topology | 50-neuron, 8-dim, 1 output | Same + cross-run bootstrap |
+| Weight budget | 2,950 parameters (1,475 B) | Same |
+| β_c estimate | 5.5051 (error 3.3%) | 5.5657 (error 2.2%) |
+| Hardware inference | 668 cycles, 656 μs | Same (PCIe dominated) |
+| Total NPU calls | ~600 | 5,978 |
+| Thermalization savings | Not measured | 63% (1,260 / 2,000 skipped) |
+| Rejection prediction | Not measured | 80.4% accuracy |
+| Cross-run learning | No | Yes — bootstrapped from 749 prior points |
+| Power | < noise above 900 mW floor | Same |
 
 ### 5.2 Validated: Multi-Observable Prediction
 
@@ -319,7 +328,7 @@ low-power neuromorphic coprocessing.
 
 | Spring | NPU Use Case | Input Features | Output | Status |
 |--------|-------------|----------------|--------|--------|
-| **hotSpring** | Adaptive β steering (QCD) | Plaquette, Polyakov loop, susceptibility | β_c estimate, measurement allocation | ✅ Validated (Exp 015) |
+| **hotSpring** | Adaptive β steering (QCD) | Plaquette, Polyakov loop, susceptibility | β_c estimate, measurement allocation | ✅ **Production (Exp 022, live NPU)** |
 | **hotSpring** | Transport prediction (MD) | Velocity features (8-dim) | D*, η*, λ* | ✅ ESN trained, deployment queued |
 | **wetSpring** | QS Phase Classifier | Hill activation, c-di-GMP, community diversity | Anderson regime (3-class) | ✅ **Live on AKD1000** (Exp194, 18.8K Hz) |
 | **wetSpring** | Bloom Sentinel | Shannon, Simpson, richness, evenness, Bray-Curtis, temp | Bloom phase (4-class) | ✅ **Live on AKD1000** (Exp194, 18.8K Hz) |
@@ -707,7 +716,8 @@ and every finding is documented with raw data.
 - **AKD1000 hardware profile**: `metalForge/npu/akida/HARDWARE.md`
 - **Beyond-SDK findings**: `metalForge/npu/akida/BEYOND_SDK.md`
 - **Exploration roadmap**: `metalForge/npu/akida/EXPLORATION.md`
-- **Experiment 015 (mixed pipeline)**: `experiments/015_MIXED_PIPELINE_BENCHMARK.md`
+- **Experiment 015 (mixed pipeline validation)**: `experiments/015_MIXED_PIPELINE_BENCHMARK.md`
+- **Experiment 022 (live NPU production)**: `experiments/022_MIXED_PIPELINE_NPU_PRODUCTION.md`
 - **Cross-spring evolution map**: `experiments/016_CROSS_SPRING_EVOLUTION_MAP.md`
 - **Changelog**: `barracuda/CHANGELOG.md` (v0.5.0 → v0.6.14)
 

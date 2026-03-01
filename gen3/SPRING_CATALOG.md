@@ -68,13 +68,13 @@ The springs are organized into two tiers:
 ### 1.2 airSpring — Precision Agriculture & Irrigation
 
 **Domain**: Evapotranspiration, soil moisture sensing, IoT irrigation scheduling
-**Grade**: Full Python→Rust→GPU→NPU→metalForge pipeline complete
-**Checks**: 1109 Python + 651 Rust + 1393 atlas + 75 cross-val = 4,153+ total
+**Grade**: Full Python→Rust→cross-validation pipeline complete
+**Checks**: 142/142 Python + 119/119 Rust + 65/65 cross-validation = 326 total
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: airSpring (v0.5.1) proves BarraCuda's Rust crate can replace the Python/Excel toolchain for precision agriculture. 45 experiments across 7 ET₀ methods, Richards PDE, soil hydraulics, yield response, Anderson coupling, NPU edge inference, and metalForge mixed hardware. Rust is 25.9× faster than Python (8/8 parity). Titan V GPU live dispatch (24/24 PASS, 0.04% seasonal parity). AKD1000 NPU live (95/95 checks). 100 Michigan stations, 15,300 station-days, R²=0.967 against Open-Meteo.
+**What it validates**: airSpring proves BarraCUDA's Rust crate can replace the Python/Excel toolchain for precision agriculture. FAO-56 Penman-Monteith ET₀ computed in Rust matches Python to 1e-5 tolerance across 53 cross-validated values. Real data from 4 Michigan stations (918 station-days) achieves R²=0.967 against Open-Meteo's independent computation.
 
 **Phase inventory**:
 
@@ -87,7 +87,7 @@ The springs are organized into two tiers:
 
 **Papers reproduced**: Allen et al. (1998) FAO-56 Chapters 2/4/8, Dong et al. (2020) soil sensor calibration, Dong et al. (2024) IoT irrigation pipeline.
 
-**Papers complete**: 45 experiments validated. See `airSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**Papers queued**: Dong IoT field network, FAO-56 Chapter 7 dual Kc, regional ET₀ intercomparison. See `airSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
 **BarraCUDA kernels validated (Rust, pre-GPU)**: ET₀ Penman-Monteith, Hargreaves, Topp equation, SoilWatch 10 calibration, water balance.
 
@@ -258,7 +258,7 @@ The springs are organized into two tiers:
 | Faculty connected | 10 professors (MSU + Sandia + Carleton) across 7 departments |
 | BarraCUDA kernels validated by springs | 79+ distinct GPU/NPU primitives (wetSpring alone consumes 79 via ToadStool S68) |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
-| Rust validation checks | 1,008 (wetSpring) + 2,250+ (neuralSpring) + 4,153+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
+| Rust validation checks | 1,008 (wetSpring) + 2,250+ (neuralSpring) + 3,123+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
 | WGSL shaders | 700+ cross-spring via ToadStool S68 universal precision |
 | Languages | Python (Phase 0), Rust (Phase 1+), WGSL shaders (Phase 2+) |
 | License | AGPL-3.0 (all springs, no exceptions) |
@@ -355,13 +355,13 @@ The springs answer a question the primals alone cannot: **does this infrastructu
 The primals prove that Rust can build a sovereign computing ecosystem. The springs prove that sovereign computing can reproduce published, peer-reviewed science — and in some cases, do it faster, cheaper, and more transparently than the institutional tools it replaces.
 
 **Claim**: Open data can replace institutional access.
-**Evidence**: airSpring achieves R²=0.967 across 15,300 station-days (100 Michigan stations) using only free, open APIs (Open-Meteo, NOAA CDO). No institutional weather station access required.
+**Evidence**: airSpring achieves R²=0.967 across 918 station-days using only free, open APIs (Open-Meteo, NOAA CDO). No institutional weather station access required.
 
 **Claim**: Consumer GPUs can do real science.
 **Evidence**: hotSpring runs paper-parity Yukawa MD (N=10,000, 80k steps) on a $600 RTX 4070 for $0.044. The same computation costs $50-500 on institutional HPC.
 
 **Claim**: Sovereign Rust can replace the Python scientific stack.
-**Evidence**: wetSpring's 30 Rust modules with 1 runtime dependency cover the complete 16S pipeline with 4,688+ checks across 197 experiments, 52/52 papers reproduced, and 39/39 three-tier validated (CPU→GPU→metalForge). airSpring's 45 experiments produce 4,153+ checks; Rust is 25.9× faster than Python with 8/8 numerical parity. 75/75 cross-validation match at 1e-5.
+**Evidence**: wetSpring's 30 Rust modules with 1 runtime dependency cover the complete 16S pipeline with 4,688+ checks across 197 experiments, 52/52 papers reproduced, and 39/39 three-tier validated (CPU→GPU→metalForge). airSpring's Rust crate matches Python to 1e-5 across 53 cross-validated values.
 
 **Claim**: BarraCUDA's 6 isomorphic primitives serve all domains.
 **Evidence**: neuralSpring proves GEMM + Attention + Normalization + Nonlinearity + Reduction + Gating explain LLaMA, OpenFold, ResNet, ViT, MLP surrogates, and LSTM weather models. All 6 are WGSL shaders in BarraCUDA.

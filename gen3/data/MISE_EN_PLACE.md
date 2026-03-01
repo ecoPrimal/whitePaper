@@ -1,8 +1,8 @@
 # Mise en Place - Control Experiment Setup
 
-**Status**: Active preparation  
+**Status**: Historical — all preparation complete, all phases executed  
 **Purpose**: Set up the Python scientific computing stack to reproduce Murillo Group work as our control experiment. BarraCUDA evolves in parallel on ToadStool's timeline.  
-**Last Updated**: February 14, 2026
+**Last Updated**: February 27, 2026 (status update; original content preserved as fossil record)
 
 **Implementation**: `ecoPrimals/hotSpring/` - the working project directory with conda environments, clone scripts, benchmark protocols, and all control experiment work.
 

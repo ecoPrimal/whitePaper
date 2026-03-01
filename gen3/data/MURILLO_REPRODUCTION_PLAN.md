@@ -1,8 +1,8 @@
 # Murillo Group Reproduction Studies
 
-**Status**: Phase A COMPLETE (86/86), Phase C GPU MD COMPLETE (9/9 PP Yukawa)  
-**Purpose**: Reproduce published computational physics work from the Murillo Group (MSU) on the basement HPC, then re-execute the core computation on BarraCUDA's Pure Rust vendor-agnostic GPU compute layer  
-**Last Updated**: February 14, 2026
+**Status**: ALL PHASES COMPLETE — 22 papers, ~700 checks, 39/39 validation suites. Exp 022 (live NPU, 32⁴ production) finished Feb 27.  
+**Purpose**: Reproduce published computational physics work from the Murillo Group (MSU) on consumer hardware, then re-execute on BarraCUDA's Pure Rust vendor-agnostic GPU compute layer  
+**Last Updated**: February 27, 2026
 
 ---
 
@@ -278,7 +278,19 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 | **Phase B: Nuclear EOS** (BarraCUDA L1 + L2) | **DONE — L1 chi2=2.27 (478x faster), L2 chi2=16.11** |
 | **Phase B: GPU FP64 validation** | **DONE — 4.55e-13 MeV max error** |
 | **Phase C: GPU MD** (9 PP Yukawa, f64 WGSL) | **DONE — 9/9 pass, 0.000% drift, 3.7x GPU speedup** |
-| **Total acceptance checks** | **131/131** |
+| **Phase D: Native f64 builtins + N-scaling** | **DONE — 2-6× throughput. N=10k in 5.3 min. 0.000% drift** |
+| **Phase E: Paper-parity long run** (9 cases, 80k steps) | **DONE — 9/9, 3.66 hrs, $0.044. Cell-list 4.1× faster** |
+| **Paper 5: Stanton-Murillo Transport** | **DONE — 13/13 Green-Kubo D*/η*/λ*. GPU transport pipeline** |
+| **Paper 6: Murillo-Weisheit Screened Coulomb** | **DONE — 23/23 Sturm bisection, Δ≈10⁻¹²** |
+| **Papers 7-10, 13: Bazavov Lattice QCD** | **DONE — HotQCD EOS, pure gauge, dynamical, Abelian Higgs** |
+| **Papers 14-22: Kachkovskiy Spectral Theory** | **DONE — 45/45 Anderson, Hofstadter, GPU Lanczos** |
+| **DF64 Core Streaming Discovery** | **DONE — 9.9× native f64 throughput on FP32 cores (3.24 TFLOPS)** |
+| **Exp 013: Production 32⁴ β-scan** | **DONE — β_c=5.69 (known 5.692). 13.6h, $0.58. Deconfinement** |
+| **Exp 020-021: NPU Characterization + Cross-Substrate** | **DONE — 6 SDK assumptions overturned. ESN 9,017× less energy** |
+| **Exp 022: Live NPU Mixed Pipeline (32⁴)** | **DONE — 10 β pts, 5,900 meas, 63% therm savings, 5,978 NPU calls** |
+| **Total papers reproduced** | **22** |
+| **Total acceptance checks** | **~700** |
+| **Total validation suites** | **39/39** |
 
 ### Post-NUCLEUS (Phase A - Python Reproduction)
 
@@ -343,9 +355,12 @@ This connects directly to the ecoPrimals thesis: sovereignty through constraint.
 
 ## Notes
 
-- Professor Murillo was in California (ignition conference, week of Feb 10). Follow up when he returns (week of Feb 17).
-- The neuromorphic benchmark datasheet (v1) has already been shared. Updated benchmarks from ToadStool's current runs will be shared as v2 when available.
-- All reproduction studies are documented with sufficient detail for publication. See `hotSpring/whitePaper/STUDY.md`.
-- The FFT gap in BarraCUDA remains the primary blocker for the 3 PPPM Coulomb cases (kappa=0). NTT→FFT evolution is the natural next step.
-- **Phase C GPU MD is a novel contribution**: full Sarkas-equivalent Yukawa MD running on consumer GPU via f64 WGSL shaders. No CUDA. No HPC. This capability does not exist in the Murillo Group's toolchain.
-- The hotSpring repo (`github.com/syntheticChemistry/hotSpring`) is public and AGPL-3.0 licensed. Ready for sharing.
+- Professor Murillo returned from the ignition conference (California, week of Feb 10).
+- **Coffee meeting scheduled: Tuesday March 3, 2026.** Check-in email going out Feb 27.
+- hotSpring repo link shared previously. Technical summary prepared: `hotSpring/whitePaper/TECHNICAL_SUMMARY_FEB2026.md` — standalone, physics-focused, no ecoPrimals language. Suitable for sharing with Murillo or Bazavov.
+- The FFT gap is **closed** (ToadStool `Fft1DF64`/`Fft3DF64`, roundtrip 1e-10).
+- DF64 is a novel discovery with publication potential: "Double-float arithmetic for lattice gauge theory on consumer GPU" (*Computer Physics Communications* or *Physical Review E*).
+- NPU adaptive steering is a novel methodology with publication potential: "Neuromorphic co-processing for Monte Carlo simulation" (*Neuromorphic Computing and Engineering*).
+- The hotSpring repo (`github.com/syntheticChemistry/hotSpring`) is public and AGPL-3.0 licensed.
+- **Exp 022 completed Feb 27, 2026**: First production lattice QCD run with live neuromorphic hardware (AKD1000 via PCIe). ESN weights exported for cross-run learning. 10 NPU-steered β points, 5,900 measurements, 63% thermalization savings.
+- **WDM extension (Tier 4)** is the natural next step — Murillo's roadmap paper (arXiv:2505.02494) identifies computational accessibility as the bottleneck. hotSpring already has the primitives (MD, Green-Kubo, FFT, DF64). The gap is real physics: partial ionization, quantum corrections.
