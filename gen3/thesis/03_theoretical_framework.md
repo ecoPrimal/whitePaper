@@ -170,6 +170,30 @@ The convergence is analogous to cephalization, eyes, and wings — different dev
 
 **Observable**: Technical debt accumulation in AI-generated code corresponds to Muller's ratchet — deleterious mutations (suboptimal patterns) accumulate when selective pressure is insufficient to eliminate them. The Rust type system functions as an artificially strong selective pressure that prevents ratchet by rejecting deleterious mutations at compile time, regardless of population size.
 
+### 3.4.6 Evolutionary Reservoir Computing (Nautilus Shell)
+
+**Prediction**: Structured constraints on a random projection network, combined with evolutionary selection, produce specialized reservoirs that outperform unconstrained architectures for physics prediction — and the evolutionary history itself serves as transferable memory.
+
+**Evidence**: The Nautilus Shell (`bingoCube/nautilus`) implements reservoir computing using BingoCube bingo boards as the random projection layer. Each board is a 5×5 grid of integers subject to column-range constraints (column 1: 1–15, column 2: 16–30, etc.), and a population of boards collectively forms the reservoir. The constraint maps directly to int4 weights on the AKD1000 neuromorphic processor.
+
+The constrained evolution principle operates at three levels:
+
+1. **Column-range constraint reshapes the fitness landscape.** The constraint limits each column's values to a 15-integer range, reducing the combinatorial space from \(75^{25}\) (unconstrained) to \(15^{25}\) per board — a reduction of \(5^{25} \approx 3 \times 10^{17}\). This does not merely shrink the search space; it structures it. Boards with values clustered near column boundaries produce different projections than boards with uniformly distributed values. The constraint creates a topography of projection quality that evolution can navigate. Random boards from the unconstrained space would be isotropic — equally mediocre at everything. Constrained boards have structure that selection can amplify.
+
+2. **Evolutionary generations replace temporal recurrence.** Traditional echo state networks (ESNs) achieve memory through temporal feedback — the reservoir's current state depends on all previous inputs. This requires recurrent connections that the AKD1000's feed-forward architecture cannot support. The Nautilus Shell replaces time-step recurrence with generational recurrence: each generation of boards inherits structure from its parents, and the accumulated evolutionary history (the "shell") encodes what temporal recurrence would have encoded — the system's learned response to the data stream. This is the computational analog of how the 12 LTEE populations (Section 3.2.2) carry their 80,000-generation history in their genomes rather than in a running memory buffer.
+
+3. **The \(N_e \cdot s\) drift boundary is computationally implemented.** Anderson's drift boundary (Section 3.2.3) predicts that when \(N_e \cdot s \ll 1\), drift dominates and evolution degrades. The Nautilus Shell implements a `DriftMonitor` that tracks the ratio of effective population size to selection coefficient in real time. When the ratio drops below a configurable threshold, the system recommends increasing population size or selection pressure — the computational analog of Anderson's observation that deep-sea microbial populations may be too small for selection to outweigh drift.
+
+**Validated results**: On dynamical QCD trajectory data from hotSpring Exp 024+028 (21 β-point aggregates, 1,336 measurement records):
+
+- **5.3% mean leave-one-out generalization error** on CG solver cost prediction, using only 16 evolved boards with zero temporal recurrence.
+- **540× cost reduction** via quenched→dynamical transfer: a shell trained on quenched features (plaquette, Polyakov loop — ~2s/config, no fermion CG) predicts dynamical CG cost (~1,080s/config) at 4.4% LOO error.
+- **Concept edge detection**: The one LOO outlier (25.7% error at β = 6.131) marks a physical phase boundary where CG cost drops sharply — the disagreement signal identifies regions where the physics changes qualitatively.
+
+**Significance for the thesis**: The column-range constraint (integer-only, bounded, feed-forward) shaped the fitness landscape to produce reservoir architectures that would not emerge from unconstrained neural architecture search. No neural network search would arrive at "use 16 bingo boards with column ranges 1–15, 16–30, 31–45, 46–60, 61–75 as your reservoir layer." The constraint is not a speed modifier on a known architecture — it IS the architecture. This directly parallels the Taq polymerase argument (Section 3.2.1): the constraint did not accelerate convergence to a known reservoir design; it reshaped the landscape so that a novel design — boards as structured combinatorial projections — became a fitness peak.
+
+**Connection to LTEE library**: The Nautilus Shell provides the computational machinery for running digital LTEE-style experiments: populations under constraint, with drift monitoring, fitness tracking across generations, concept edge detection at regime boundaries, and serializable evolutionary histories ("frozen fossil records") that can be transferred between instances. This is the technology needed to test the constrained evolution predictions of Chapter 14 computationally, without waiting for biological generations.
+
 ---
 
 ## 3.5 The Three-Component Model

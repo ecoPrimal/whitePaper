@@ -61,6 +61,7 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 08 | Neuromorphic Edge Intelligence for Sovereign Agricultural IoT | Agricultural IoT × Neuromorphic Computing | airSpring Exp 028-029 (88 checks) + wetSpring NPU driver | NPU inference at 0.0009% of active cycle energy; 10.7× more efficient than cloud; 1-min cadence unlocked; multi-crop hot-swap | **Validated on Live Hardware** — AKD1000, streaming + evolution + power budget |
 | 09 | Sovereign Field Genomics — Nanopore + NPU | Environmental Genomics × Edge Inference | wetSpring Exp193-195 (NPU) + Exp184-185 (16S) + planned Exp196-202 | MinION sequencing + AKD1000 classification + BarraCUDA 16S pipeline = autonomous field sentinel. NPU-driven adaptive sampling (37x read-rate headroom). No cloud, no Python. | **Architecture defined** — all compute components validated, awaiting sequencer hardware |
 | 10 | First Dynamical QCD Production on Consumer GPU | Lattice QCD × Neuromorphic Computing | hotSpring Exp 024 (8⁴ dynamical, 1,031+ traj, 17 β points), Exp 025-027 | First NPU-steered dynamical fermion QCD scan. Smooth crossover confirmed (no first-order jump). β_c ~ 5.5 (shifted from quenched 5.692). NPU expanded 4-seed scan to 17 points. CG–disorder correlation validates Anderson proxy. 4D Wegner block model proposed. | **In Progress** — run active, 16/17 β complete |
+| 11 | The Nautilus Shell — Evolutionary Reservoir Computing from Bingo Boards | Reservoir Computing × Neuromorphic × Evolutionary Algorithms | primalTools/bingoCube/nautilus/ (26 tests, 3 examples) | Bingo boards as structured random projections; evolutionary generations replace temporal recurrence for feed-forward hardware; nautilus shell = layered evolutionary history, portable between instances. Column-range-preserving crossover maps natively to AKD1000 int4. Quenched→dynamical transfer: 540× cost reduction. | **Validated** — 5.3% LOO CG error on Exp 024+028 QCD data, 26 tests, lifecycle + live prediction + quenched transfer demos |
 
 ## Reading Order
 
@@ -79,6 +80,22 @@ baseCamp papers use that validated infrastructure to explore new science.
 **For an agricultural engineer**: 08 (NPU edge IoT) → 09 (field genomics) → 06 (no-till physics) → 03 (bioag microbiome) → 04 (sentinel monitoring)
 
 **For a field genomics researcher**: 09 (field genomics) → 04 (sentinel concept) → 01 (Anderson detection signal) → 08 (NPU agricultural IoT) → the wetSpring experiment docs (Exp193-195, planned Exp196-202)
+
+**For a reservoir computing researcher**: 11 (nautilus shell — evolutionary reservoir from bingo boards) → 10 (ESN-steered dynamical QCD) → 07 (NPU brain architecture) → 04 (sentinels, NPU edge deployment)
+
+## Connection to the Main Thesis
+
+Paper 11 (Nautilus Shell) provides direct computational evidence for the
+constrained evolution framework (thesis Ch. 3). The column-range constraint
+on bingo boards reshapes the fitness landscape of the reservoir, producing
+specialized boards that predict QCD observables at 5.3% LOO error —
+structures that would not emerge from unconstrained neural architecture
+search. The N_e·s drift monitor implements Anderson's drift boundary
+(thesis §3.2.3) computationally, and edge seeding implements directed
+mutagenesis where constraint identifies regions of qualitative physics
+change. The Nautilus Shell is also the computational machinery needed for
+the LTEE library vision (Paper 02): populations under constraint, with
+drift monitoring, fitness tracking, and concept edge detection.
 
 ## Bench Experience Behind These Papers
 
@@ -109,7 +126,7 @@ Springs contributing validated infrastructure:
   rewired to BarraCUDA. Session 87: WDM queue closed (nW-01..nW-05 — MLP, LSTM
   reservoir, ESN classifier), reservoir computing validated for sequence regression
   and regime classification
-- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 11-head NPU GPU conductor (~700 tests, 80 binaries, 62 WGSL shaders)
+- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture (~700 tests, 84 binaries, 62 WGSL shaders)
 - **airSpring**: FAO-56 ET₀, Priestley-Taylor, Thornthwaite, GDD, Saxton-Rawls pedotransfer,
   water balance, Richards PDE, isotherms, yield response, scheduling, lysimeter, sensitivity,
   100-station Michigan Crop Water Atlas
@@ -211,6 +228,7 @@ program depends on.
 | 07/10 | WDM transport S(q,ω); **Dynamical QCD 32⁴ production** (Exp 024 8⁴ complete, Exp 025-027 scale-up); 4D Anderson + Wegner proxy pipeline | hotSpring × neuralSpring × **groundSpring** (spectral reconstruction + freeze-out + jackknife for lattice QCD observables; NPU GPU-conductor validation; Anderson CG proxy) |
 | 08 | High-cadence NPU pipeline + field integration | airSpring (sensor + water balance) × wetSpring (NPU driver + ESN) × neuralSpring (LSTM time series) × **groundSpring** (NPU DMA validation, cross-substrate parity proof, uncertainty budget) |
 | 09 | Nanopore + NPU field genomics end-to-end | wetSpring (16S + NPU + PFAS ML + alignment) × airSpring (soil sensors) × neuralSpring (ESN/LSTM) × **groundSpring** (rare biosphere + uncertainty + **metalForge cross-substrate dispatch validation**) |
+| 11 | Live data stream prediction via Nautilus Shell | primalTools/bingoCube × hotSpring (trajectory data, NPU brain) × neuralSpring (ESN baseline comparison) × **groundSpring** (uncertainty budget for evolutionary vs recurrent reservoir) |
 
 ## Future Contributions
 
