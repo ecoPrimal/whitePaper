@@ -429,6 +429,35 @@ specifications.
 
 ---
 
+## Addendum: NPU as Parameter Controller (Exp 031, 2026-03-01)
+
+Exp 030 revealed that the NPU's parameter suggestions (`dt`, `n_md`) were being
+received but never applied. The `auto_dt` formula over-penalized mass
+(`mass_scale.sqrt()` turned dt=0.01 into dt=0.0032 for mass=0.1), producing
+97.5% acceptance — far above the 60-80% sweet spot and wasting ~2x CG iterations
+per useful trajectory.
+
+Exp 031 makes the NPU the **actual controller** of HMC parameters:
+
+| Parameter | Before (Exp 030) | After (Exp 031) |
+|-----------|------------------|-----------------|
+| dt | Fixed at startup (0.0032) | NPU-suggested per-beta + mid-run adaptation |
+| n_md | Fixed at startup | Derived from dt to keep trajectory length ~1.0 |
+| Training target | `0.01 + acc * 0.04` (crude) | `dt_used * (1 - 0.5 * (acc - 0.70))` (targets 70% acceptance) |
+
+Mid-beta feedback loop fires every 10 measurement trajectories: if acceptance
+> 85%, dt bumps 15%; if < 50%, dt drops 15%. The `dt_used` and `n_md_used`
+fields in `BetaResult` enable post-hoc analysis of how the NPU adapts parameters
+across the phase curve. Safety clamps: `dt ∈ [0.001, 0.02]`, `n_md ∈ [20, 500]`.
+A `--no-npu-control` flag reverts to the old print-only behavior.
+
+This closes the gap between what the NPU knows and what the NPU controls — the
+brain architecture now has a complete feedback loop from measurement to parameter
+adjustment, with the Titan V pre-motor receiving the NPU-adapted dt for the next
+beta point.
+
+---
+
 ## Data Files
 
 | File | Contents |
