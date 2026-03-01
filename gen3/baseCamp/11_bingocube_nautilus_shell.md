@@ -411,7 +411,7 @@ shell.merge_shell(&shell_b);
 
 ### 7.4 Validation Results
 
-20 unit tests covering:
+31 unit tests covering:
 - Deterministic board response (same input → same output)
 - Different boards produce different projections
 - Ensemble response concatenation
@@ -633,3 +633,62 @@ physics boundaries.
 - **The nautilus shell metaphor**: Each generation wraps the previous,
   preserving heritage while adding adaptation. The shell is the portable
   unit of learned structure — the evolutionary equivalent of saved weights.
+
+---
+
+## 12. Recent Evolution (2026-03-01)
+
+### 12.1 Self-Regulating Drift Monitor
+
+The `DriftMonitor` is now wired directly into `evolve_generation()`. Each
+generation, the shell records fitness data and checks the effective population
+size times selection coefficient (N_e · s). When drift dominates:
+
+- **`DriftAction::IncreaseSelection`** — halves elite survivors or increases
+  tournament size, sharpening selection pressure
+- **`DriftAction::IncreasePop { factor }`** — injects fresh random boards to
+  expand the gene pool
+
+Each `GenerationRecord` now tracks `ne_s` and `drift_action` for a complete
+audit trail. `DriftAction` derives `Serialize`/`Deserialize` for persistence.
+
+### 12.2 Integrated Edge Seeding
+
+Concept edges (input regions where predictions fail) are detected via
+leave-one-out cross-validation (`detect_concept_edges()`). Once registered
+via `set_concept_edges()`, the shell automatically replaces the bottom 25%
+of boards each generation with new boards whose column values are biased
+toward the detected edge features. This implements directed mutagenesis —
+evolution explores where it matters most.
+
+### 12.3 AKD1000 Int4 Weight Export
+
+`export_akd1000_weights()` produces an `Akd1000Export` struct:
+
+- **Quantization**: symmetric min-max to [-8, 7] (int4 range)
+- **Scales/biases**: per-target dequantization factors
+- **Validation**: `predict_dequantized()` for software-hardware comparison,
+  `quantization_mse()` measures precision loss (validated: MSE = 0.004)
+
+### 12.4 Full Brain Rehearsal
+
+A new `full_brain_rehearsal` example validates the complete pipeline:
+
+1. Drift-monitored evolution (15 gens, N_e·s stable 2.4–22.4)
+2. Concept edge detection at phase boundary
+3. Edge-seeded re-evolution
+4. AKD1000 int4 export + quantization validation
+5. Save/restore with **bit-perfect** prediction match (delta < 10⁻¹⁶)
+6. Instance transfer + merge (2 instances, 30 combined entries)
+7. Reset for production
+
+### 12.5 Validation Summary
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Unit tests | 20 | 31 |
+| Examples | 3 | 5 |
+| LOO CG error | 5.3% | 5.3% (unchanged — new features don't degrade accuracy) |
+| Blind Exp 029 prediction | — | 2.6% CG error (never trained on dynamical data) |
+| AKD1000 quantization MSE | — | 0.004 |
+| State persistence | Partial | Bit-perfect (including drift actions) |
