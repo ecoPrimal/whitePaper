@@ -1,6 +1,6 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** February 28, 2026
+**Date:** March 1, 2026
 **Status:** **Validated** — hotSpring v0.6.14 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites. **neuralSpring S90**: all 15 coralForge WGSL shaders evolved to df64 core streaming (f64 buffers + df64 compute), confirming the df64 pattern generalizes from nuclear physics to ML/protein folding. 37/37 GPU checks, 185/185 validate\_all. coralForge (AlphaFold2/3) Evoformer + IPA + diffusion + pairformer + confidence validated: Py 62/62, Rs 55/55. Phase B GPU gaps all closed. 197 binaries, 685 lib tests, 3200+ checks
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient

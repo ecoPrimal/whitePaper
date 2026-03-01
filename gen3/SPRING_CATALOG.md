@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: February 26, 2026
+**Last Updated**: March 1, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -100,8 +100,8 @@ The springs are organized into two tiers:
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: Phase 67 — 30 sovereign Rust modules, 1 runtime dependency
-**Checks**: 5,421+ validation checks (1,578 GPU) across 221 experiments. 1,081+ Rust tests, 92 named tolerances, 189 binaries (174 validate + 15 benchmark). 52/52 papers, 50/50 three-tier. ToadStool S68, 79 primitives consumed. 10 new Python baselines (Track 4 soil + NPU spectral).
+**Grade**: V86 — 30 sovereign Rust modules, 1 runtime dependency
+**Checks**: 5,421+ validation checks (1,578 GPU) across 260+ experiments. 1,247 Rust tests, 92 named tolerances, 189 binaries (174 validate + 15 benchmark). 52/52 papers, 50/50 three-tier. ToadStool S68, 79 primitives consumed. 10 new Python baselines (Track 4 soil + NPU spectral). Cross-spring evolution validated (23/23 checks across 5 Springs). ESN bridge to ToadStool esn_v2 (BioEsn + multi-head). Deep debt elimination: all modules under 652 lines, 0 magic numbers, 0 unsafe, 0 mocks in production. Specs: `CROSS_SPRING_EVOLUTION.md`.
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -121,6 +121,7 @@ The springs are organized into two tiers:
 | V53-V58 | Anderson QS, Track 4 soil, drug repurposing, cross-spring S68 | 3,043+ | 52/52 papers, 79 primitives, 0 local WGSL |
 | V59 | Science extensions + three-tier controls | 1,094+ | NCBI sovereign, cold seep, dynamic W(t), NPU sentinel, Exp190-192 |
 | V66-V67 | Deep audit + experiment buildout + evolution | 733+ | 50/50 three-tier, BandwidthTier, ComputeDispatch, 10 Python baselines, Exp216-220 |
+| V86 | Cross-Spring Evolution & Deep Debt (March 1, 2026) | Exp260-262 | Cross-spring validation 23/23 across 5 Springs; ESN bridge to ToadStool esn_v2 (BioEsn + multi-head); 4 module refactors, 11 new tests (1,247 total); 75 files changed, -4,753 net lines (deep debt elimination) |
 
 **Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth), real NCBI sovereign pipeline (EFetch/SRA → FASTA → diversity → Anderson), cold seep metagenome classification, dynamic Anderson W(t) perturbation models.
 
