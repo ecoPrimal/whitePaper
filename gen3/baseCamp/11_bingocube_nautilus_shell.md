@@ -411,7 +411,7 @@ shell.merge_shell(&shell_b);
 
 ### 7.4 Validation Results
 
-31 unit tests covering:
+20 unit tests covering:
 - Deterministic board response (same input → same output)
 - Different boards produce different projections
 - Ensemble response concatenation
@@ -692,3 +692,20 @@ A new `full_brain_rehearsal` example validates the complete pipeline:
 | Blind Exp 029 prediction | — | 2.6% CG error (never trained on dynamical data) |
 | AKD1000 quantization MSE | — | 0.004 |
 | State persistence | Partial | Bit-perfect (including drift actions) |
+
+---
+
+## 13. ToadStool S80 Absorption
+
+As of ToadStool Session 80 (March 2, 2026), the Nautilus Shell has been
+absorbed into `barracuda::nautilus` as a standalone module:
+
+- **7 files, 22 tests** — board, evolution, population, readout, shell, brain
+- **CPU-only** — no GPU dependency; ridge regression via `solve_f64_cpu`
+- **JSON-RPC API** — 8 `ai.nautilus.*` methods in the ToadStool daemon
+  (status, observe, train, predict, screen, edges, shell.export, shell.import)
+- **Feature-gated** — `nautilus` feature in toadstool-cli
+
+bingoCube remains the canonical implementation for inter-primal use (beardog,
+songbird handshakes). ToadStool's absorption provides standalone AI capability
+without cross-primal dependencies — consistent with the self-knowledge principle.
