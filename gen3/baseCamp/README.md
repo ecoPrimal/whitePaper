@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 2, 2026 (updated S80)
+**Date:** March 2, 2026 (updated S86)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -235,19 +235,23 @@ program depends on.
 
 ## Future Contributions
 
-### Immediate (S80+)
+### Immediate (S86+)
 
+- **ComputeDispatch at 144/280+ (S86)**: 33 ops migrated across S84–S86.
+  Full audit revealed ~139 remaining legacy files including subdirectory
+  ops (bio/, md/, lattice/, complex/, linalg/). Next targets: simple
+  elementwise (sin, cos, exp, log — ~12 ops) and complex/ suite (~10 ops).
+- **Production stub evolution (S86)**: wgpu_backend.rs magic numbers →
+  real `device.limits()` queries. deployment.rs 10 placeholder stubs →
+  capability-discovery documentation. experimental.rs stub → real
+  FPGA/neuromorphic/quantum probes.
+- **Hydrology refactored (S84)**: hydrology.rs (690L) smart-split into
+  hydrology/ directory: mod.rs (CPU scalar) + gpu.rs (GPU batch).
 - **Nautilus Absorption (DONE S80)**: `barracuda::nautilus` absorbed from
   bingoCube — 7 files, 22 tests, CPU-only. 8 `ai.nautilus.*` JSON-RPC
   methods in ToadStool daemon. Feature-gated `nautilus` in CLI.
 - **BatchedEncoder (DONE S80)**: Fused multi-op GPU pipeline — single
   `queue.submit()` for MLP/Transformer forward passes.
-- **Batch Nelder-Mead GPU (DONE S80)**: N parallel optimizations via
-  batched simplex shaders. Available for isotherm fitting, multi-start
-  optimization.
-- **GpuDriverProfile Workarounds (DONE S80)**: Taylor-series sin/cos
-  preamble for NVK driver. `asin`/`acos` protected.
-- **ComputeDispatch at 95/250 (S80)**: 19 more ops migrated.
 
 ### Previous Immediate (V60 → V61)
 
