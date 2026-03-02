@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** February 27, 2026
+**Date:** March 2, 2026
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -126,7 +126,7 @@ Springs contributing validated infrastructure:
   rewired to BarraCUDA. Session 87: WDM queue closed (nW-01..nW-05 — MLP, LSTM
   reservoir, ESN classifier), reservoir computing validated for sequence regression
   and regime classification
-- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture (~700 tests, 84 binaries, 62 WGSL shaders)
+- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture (711 tests, 84 binaries, 62 WGSL shaders, 0 clippy warnings, 0 files >1000 lines)
 - **airSpring**: FAO-56 ET₀, Priestley-Taylor, Thornthwaite, GDD, Saxton-Rawls pedotransfer,
   water balance, Richards PDE, isotherms, yield response, scheduling, lysimeter, sensitivity,
   100-station Michigan Crop Water Atlas
