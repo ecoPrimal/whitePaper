@@ -2,7 +2,7 @@
 
 **Status**: Soft release — suitable for academic handoff  
 **Audience**: Faculty, PhD evaluators, potential collaborators  
-**Last Updated**: February 28, 2026
+**Last Updated**: March 2, 2026
 
 ---
 
@@ -20,10 +20,10 @@ The papers here formalize the methodology, the architecture, and the biological 
 |--------|--------|------|--------|
 | hotSpring | Computational plasma physics, lattice QCD, spectral theory, NPU | [syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring) | 664+ |
 | airSpring | Precision agriculture, ET₀, soil hydrology, crop phenology | [syntheticChemistry/airSpring](https://github.com/syntheticChemistry/airSpring) | 3,123+ |
-| wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 4,688+ |
+| wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 7,083+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 236+ |
 | neuralSpring | ML primitives, isomorphic patterns, coralForge structure prediction | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 3,200+ |
-| **Total** | | | **11,911+** |
+| **Total** | | | **14,306+** |
 
 ---
 
