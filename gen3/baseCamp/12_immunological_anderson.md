@@ -1,8 +1,13 @@
 # baseCamp Paper 12: Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge
 
-**Date:** March 2, 2026
-**Status:** Proposal — literature grounded, Gonzales publication catalog complete,
-pathway mapping complete, Anderson mapping drafted. No wetSpring experiments yet.
+**Date:** March 2, 2026 (Sessions 105–108)
+**Status:** Computational implementation COMPLETE — all nS-601..605 experiments validated.
+Gonzales modeling (Hill dose-response, PK decay, pruritus time-series), 3D tissue lattice
+(multi-layer Hamiltonian, barrier promotion spectrum, three-compartment disorder), and
+Fajgenbaum MATRIX scoring (6 drug candidates, pathway × geometry × disorder) fully
+implemented and cross-validated (Python 48/48 + Rust 240/240 + 27 unit tests, GPU 4,
+dispatch 3, mixed hardware 7). S108: module refactored (1023→3 files: mod.rs + lattice.rs
++ matrix.rs), provenance wired, scripts synced, doc sweep complete.
 **Domain:** Immunology × condensed matter physics × pharmacology × drug repurposing
 **Novelty:** No prior work applies Anderson localization to cytokine signal
 propagation in tissue; no prior work adds spatial geometry to drug repurposing scoring
@@ -213,7 +218,131 @@ The geometry factor g() encodes:
 
 ---
 
-## 5. Cross-Paper Connections
+## 5. Computational Results (Session 107)
+
+### 5.1 nS-601: Gonzales Dose-Response Modeling
+
+All 6 Gonzales cytokine pathways (G2) modeled via generalized Hill equation
+`response = E_max × [drug]^n / ([drug]^n + IC50^n)`. Validated n=1 (standard)
+and n=2 (cooperative) forms. Cytokine-specific barrier heights computed as
+`W = ln(IC50) × scale`:
+
+| Pathway | IC50 (nM) | Barrier W | Interpretation |
+|---------|-----------|-----------|----------------|
+| JAK1    | 10        | 2.303     | Lowest barrier — most potent target |
+| IL-2    | 36        | 3.584     | |
+| IL-6    | 36        | 3.584     | |
+| IL-31   | 63        | 4.143     | Key pruritus pathway |
+| IL-4    | 159       | 5.069     | |
+| IL-13   | 249       | 5.517     | Highest barrier — least sensitive |
+
+**Result:** Barrier height ordering JAK1 < IL-31 < IL-13 confirmed
+computationally. All 6 dose-response sweeps monotonically increasing.
+Saturation at 1000× IC50 > 99.9%. Python 5/5 checks, Rust 80+ cross-language
+parity checks — all PASS.
+
+### 5.2 nS-602: Pruritus Time-Series (Gonzales 2016 G3)
+
+Treatment effect modeled as exponential recovery from initial suppression:
+`score(t) = nadir + (baseline - nadir) × (1 - exp(-decay_rate × t))`
+
+- Baseline: 8.0 (untreated clinical score)
+- Suppression: 70% (oclacitinib peak effect)
+- Nadir: 2.4 at t=0 post-dose
+- Asymptote → baseline at t→∞
+
+Time-series validated at 0, 24, 72, 168, 336, 672 hours: monotonically
+recovering toward baseline. Cross-language parity to 1e-10.
+
+### 5.3 nS-603: Lokivetmab Pharmacokinetics (Fleck/Gonzales 2021 G4)
+
+- **PK decay:** `C(t) = C_0 × exp(-k × t)` where `k = ln(2)/half_life`
+- **Duration regression:** `duration = 10.10 × ln(dose) + 35.00`
+  - G4 data is perfectly log-linear (equal spacing in ln-dose and duration)
+  - Exact fit: R² = 1.0, zero residual at all 3 dose levels
+  - Monotonically increasing with dose (validated 0.05–4.0 mg/kg)
+
+| Dose (mg/kg) | Actual (days) | Predicted (days) | Error |
+|:------------:|:-------------:|:----------------:|:-----:|
+| 0.125        | 14.0          | 14.0             | 0.00  |
+| 0.5          | 28.0          | 28.0             | 0.00  |
+| 2.0          | 42.0          | 42.0             | 0.00  |
+
+**Errata:** Prior version reported intercept = 33.28 with constant ~1.7-day
+bias (R² = 0.971). The G4 dose-duration data is perfectly collinear in
+log-space — 3 points, 2 parameters, zero residual is expected. The bias
+was a regression initialization error (intercept off by 1.72). Corrected
+to slope = 10.10, intercept = 35.00.
+
+### 5.4 nS-604: Three-Compartment Tissue Lattice (3D Systems)
+
+McCandless (2014) G6 three-compartment extension implemented:
+
+| Compartment | Healthy Cell Fractions | Pielou J | Disorder W |
+|-------------|----------------------|:--------:|:----------:|
+| Immune (Th2, mast, eo, DC) | [0.25, 0.25, 0.25, 0.25] | 1.000 | 10.00 |
+| Skin (keratinocytes, LC) | [0.80, 0.10, 0.05, 0.05] | 0.511 | 5.11 |
+| Neural (sensory, motor) | [0.50, 0.50] | 1.000 | 10.00 |
+
+Cross-compartment variance = 5.31 (healthy) vs 0.03 (inflamed) — inflammation
+homogenizes disorder across compartments, enabling cross-compartment cytokine
+propagation.
+
+**Tissue lattice Hamiltonian:** Multi-layer Anderson matrices with configurable
+layer sizes and per-layer disorder. Symmetric, real eigenvalues, finite.
+
+**Barrier promotion spectrum:** 5-step sweep from intact (d=2.0) to fully
+breached (d=3.0). Level spacing ratio r transitions through the Anderson
+critical region. All d_eff ∈ [2, 3], all r ∈ [0, 1].
+
+### 5.5 nS-605: Fajgenbaum MATRIX Drug Repurposing
+
+Anderson-augmented scoring: `combined = pathway × geometry × (1 - 0.3 × W)`.
+Six drug candidates evaluated against AD flare and chronic profiles.
+
+**AD Flare Profile** (barrier_breach=0.4, d_eff=2.7, W=0.75):
+
+| Rank | Drug | Pathway | Geometry | Combined |
+|:----:|------|:-------:|:--------:|:--------:|
+| 1 | **Tofacitinib** | 0.920 | 0.775 | **0.713** |
+| 2 | Rapamycin | 0.850 | 0.774 | 0.658 |
+| 3 | Nemolizumab | 0.900 | 0.663 | 0.596 |
+| 4 | Tanezumab | 0.780 | 0.660 | 0.515 |
+| 5 | Trametinib | 0.650 | 0.775 | 0.503 |
+| 6 | Crisaborole | 0.700 | 0.713 | 0.499 |
+
+**Key findings:**
+- Tofacitinib ranks #1 for both flare and chronic AD — direct pathway match
+  (human equivalent of Apoquel) combined with small molecule geometry advantage
+- Large mAbs (Tanezumab 148kDa, Nemolizumab 145kDa) penalized by geometry factor
+  despite strong pathway scores
+- Crisaborole (topical, 0.251kDa) benefits from chronic barrier breach
+  (chronic geom 0.730 > flare geom 0.713)
+- Trametinib ranks #5 — MEK pathway mismatch reduces overall score
+- Score factorization `combined = pathway × geometry_eff` verified for all
+  candidates to 1e-10
+
+**Integrated score:** Dose-response at 100 nM × MATRIX = 0.909 × 0.713 = 0.648
+for Tofacitinib — demonstrating full pipeline from concentration to repurposing
+recommendation.
+
+### 5.6 Validation Summary
+
+| Tier | Checks | Status |
+|------|:------:|:------:|
+| Python baseline (original) | 20/20 | PASS |
+| Python baseline (extended) | 28/28 | PASS |
+| Rust cross-language (original) | 53/53 | PASS |
+| Rust cross-language (extended) | 187/187 | PASS |
+| Rust unit tests | 27/27 | PASS |
+| BarraCUDA GPU | 4/4 | PASS |
+| Compute dispatch | 3/3 | PASS |
+| Mixed hardware (NUCLEUS) | 7/7 | PASS |
+| **Total** | **329** | **ALL PASS** |
+
+---
+
+## 6. Cross-Paper Connections
 
 ### Paper 01 → Paper 12
 Anderson QS in microbial communities → Anderson cytokine signaling in tissue.
@@ -239,7 +368,7 @@ Same physics, opposite direction. Duality documented.
 
 ---
 
-## 6. Gonzales Lab Collaboration Potential
+## 7. Gonzales Lab Collaboration Potential
 
 Whether or not the RA III position is obtained, the Gonzales lab is a natural
 collaborator for ecoPrimals:
@@ -273,7 +402,7 @@ collaborator for ecoPrimals:
 
 ---
 
-## 7. Open Questions for Spring Evolution
+## 8. Open Questions for Spring Evolution
 
 1. What is W for inflamed vs healthy dermal tissue? (Need: single-cell
    transcriptomics data to compute Pielou evenness of cell populations)
@@ -289,7 +418,7 @@ collaborator for ecoPrimals:
 
 ---
 
-## 8. Reading Order for This Paper
+## 9. Reading Order for This Paper
 
 **For an immunologist**: §2 (Anderson mapping) → §3 (Fajgenbaum bridge) → §1 (source literature) → §4 (Spring experiments)
 
