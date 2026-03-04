@@ -158,6 +158,16 @@ The original formulation of the constrained optimization thesis, preserved as a 
 4. **`SPRING_CATALOG.md`** — The science evidence
 5. **`P_NP_ENZYME_THESIS.md`** — The theoretical extension
 
+### For someone interested in the philosophy — artists, builders, sovereign creators:
+
+1. **`atlasHugged/01_THE_CITY_OF_OMELAS.md`** — The story: five questions for John Galt
+2. **`atlasHugged/04_THE_HUMAN_SEARCH.md`** — The framework: iteration, recursion, time — how everything learns
+3. **`atlasHugged/02_THE_ORTHOGONAL_SYNTHESIS.md`** — The philosophy: Smith, Paine, Rand, Marx — one structural requirement
+4. **`atlasHugged/05_THE_LOAVES_AND_THE_FISHES.md`** — The theology: preconditions, omniscience, give first
+5. **`atlasHugged/06_THE_TEMPTATION_OF_KINGDOMS.md`** — The pattern: river keeper to cloud provider
+6. **`atlasHugged/03_THE_NEW_CITY.md`** — The architecture: the meme that buys a car
+7. **`atlasHugged/07_THE_MOBILITY_EDGE.md`** — The propagation: Anderson localization, the filter as net, how the city grows
+
 ### For someone evaluating commercial potential:
 
 1. **`SPRING_CATALOG.md`** — Validated science across 5 domains

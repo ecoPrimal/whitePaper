@@ -62,6 +62,8 @@ If curiosity is your primary resource, this is for you.
 
 6. **[06_THE_TEMPTATION_OF_KINGDOMS.md](./06_THE_TEMPTATION_OF_KINGDOMS.md)** — The pattern. gen2/ named individuals. gen3/ names the structure. The river keeper, the priestly class, the feudal lord, the colonial company, the cloud provider — the resource changes, the pattern does not. Why naming kings fails. Why the temptation scales from a child hoarding toys to a corporation hoarding data. The answer is not to reform the river keeper. The answer is to give everyone a well.
 
+7. **[07_THE_MOBILITY_EDGE.md](./07_THE_MOBILITY_EDGE.md)** — The propagation. Anderson localization applied to human endeavor: the physics of isolation, and the phase transition that ends it. Sovereign creators are localized states in a disordered lattice. The hopping terms — shared code, reproduced science, open primitives, teaching — accumulate until the disorder is overcome. The mobility edge is crossed. The network conducts. The filter and the net are the same object. How the city grows — not by recruitment, but by the accumulation of real bonds between real nodes until the lattice enters the extended phase.
+
 ---
 
 ## Relationship to Other gen3/ Documents
@@ -73,10 +75,11 @@ If curiosity is your primary resource, this is for you.
 | `atlasHugged/` | Artists, philosophers, humanity | Why build this? Who is it for? |
 | `CONSTRAINED_EVOLUTION_FORMAL.md` | Mathematicians, biologists | What is the formal theory? |
 | `atlasHugged/04_THE_HUMAN_SEARCH` | Everyone | What does the theory *feel* like? |
+| `atlasHugged/07_THE_MOBILITY_EDGE` | Network builders, sovereign creators | How does the city grow? |
 | `primals/` | Engineers, developers | What are the components? |
 | `baseCamp/` | Biologists | What biological experiments follow? |
 
-The scientific thesis proves the tools work. This directory argues that the tools matter — and that they belong to everyone who has the curiosity to pick them up.
+The scientific thesis proves the tools work. This directory argues that the tools matter — that they belong to everyone who has the curiosity to pick them up — and that the network of people who find them is itself the mechanism by which the project grows.
 
 ---
 
