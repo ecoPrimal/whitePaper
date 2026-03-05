@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 5, 2026 (standalone barraCuda v0.3.1, wetSpring V96, hotSpring v0.6.17+, neuralSpring V82, groundSpring V76)
+**Date:** March 5, 2026 (standalone barraCuda v0.3.3, wetSpring V96, hotSpring v0.6.17+, neuralSpring V82, groundSpring V78)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -180,8 +180,8 @@ No proprietary data. No restricted access. No institutional dependencies.
 ┌─ hotSpring v0.6.17 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain
 ├─ neuralSpring V80 ── spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers
 ├─ wetSpring V95 ───── diversity, Bray-Curtis, rarefaction, NMF, ridge
-├─ groundSpring V74 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance architecture, clippy pedantic CI, full validation benchmark
-├─ airSpring v0.6.9 ── regression, moving window, hydrology (FAO-56 ET₀), f64 canonical universal precision
+├─ groundSpring V78 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, wgpu 28, DF64 precision tiers, fused Welford mean+variance, 3 new ET₀ (Makkink/Turc/Hamon), cross-spring benchmark evolution
+├─ airSpring v0.7.0 ── regression, moving window, hydrology (FAO-56 ET₀), f64 canonical universal precision, barraCuda 0.3.3 (wgpu 28), 3/6 local ops absorbed upstream
 ├─ wateringHole V69 ── Boltzmann sampling (Metropolis-Hastings MCMC)
 ├─ bingoCube/nautilus ─ NautilusBrain → BioNautilusBrain (concept edge, drift)
 └─ multi-spring ────── special functions, bootstrap, correlation

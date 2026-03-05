@@ -69,7 +69,7 @@ The springs are organized into two tiers:
 
 **Domain**: Evapotranspiration (8 methods), soil moisture sensing, IoT irrigation scheduling, Richards PDE, coupled hydrology, yield response, ecological diversity, immunological Anderson coupling
 **Grade**: Full Python→Rust→GPU→metalForge→NUCLEUS pipeline complete
-**Checks**: 1,237/1,237 Python + 852 lib + 33 integration + 62 forge tests + 75/75 cross-validation + 78 experiments
+**Checks**: 1,237/1,237 Python + 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28) + 75/75 cross-validation + 78 experiments
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0-or-later
@@ -82,7 +82,7 @@ The springs are organized into two tiers:
 |-------|------|--------|------------|
 | 0 (Python control) | 57 papers: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, 8 ET₀, SCS-CN, Green-Ampt, VG, Anderson | 1,237/1,237 | Paper examples matched exactly |
 | 0+ (Real data) | 100 Michigan stations, 15,300 station-days | R²=0.97 | Open-Meteo ERA5 validates open data approach |
-| 1 (Rust) | 86 binaries, 852 lib + 33 integration tests | 852+33 | 19 eco modules + 25 GPU orchestrators |
+| 1 (Rust) | 86 binaries, 827 lib + 62 forge tests | 827+62 | 19 eco modules + 25 GPU orchestrators (barraCuda 0.3.3, wgpu 28) |
 | 2 (Cross-validation) | Python↔Rust value comparison | 75/75 | All values match within 1e-5 |
 | 3 (GPU live) | Titan V + RTX 4070 dispatch | 78/78 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
 | 3.4 (Local GPU) | 6 f64-canonical ops via compile_shader_universal | 6 ops | SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle |
