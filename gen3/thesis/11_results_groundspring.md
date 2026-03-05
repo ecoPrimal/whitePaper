@@ -2,7 +2,7 @@
 
 ## 11.1 Validation Summary
 
-groundSpring asks: how much can we trust the numbers? It quantifies measurement noise, error propagation, and uncertainty across four scientific domains — agricultural sensors, meteorological observations, microbiome sequencing, and geophysics. 71 checks pass across 5 experiments, all in Python (Phase 0). groundSpring is the only spring with no Rust implementation yet; it serves as the uncertainty foundation that informs tolerances for every other spring.
+groundSpring asks: how much can we trust the numbers? It quantifies measurement noise, error propagation, and uncertainty across ten scientific domains — agricultural sensors, meteorological observations, microbiome sequencing, geophysics, biological signaling, spectral theory, eco-evolutionary dynamics, inverse problems, warm dense matter, and immunological physics. 376 checks pass across 33 experiments, with full Python baselines (Phase 0), Rust validation (Phase 1), and GPU acceleration (Phase 2) via 81 barraCuda delegations (47 CPU + 34 GPU). 786+ workspace tests, 375 Python tests, 28/28 mathematical parity proven. groundSpring serves as the uncertainty foundation that informs tolerances for every other spring.
 
 ### Table 11.1 — Experiment Summary
 
@@ -13,7 +13,13 @@ groundSpring asks: how much can we trust the numbers? It quantifies measurement 
 | 003: Error propagation FAO-56 | ET₀ uncertainty | 8 | **8/8** |
 | 004: Sequencing depth & taxonomic noise | Microbiome | 16 | **16/16** |
 | 005: Seismic wave propagation | Geophysics | 10 | **10/10** |
-| **Total** | | **71** | **All pass** |
+| 006–011: Bio signaling + spectral | Signal specificity, RAWR, Anderson, Almost-Mathieu, bistable, multisignal | 68 | **68/68** |
+| 012–018: Transport + eco-evo | Spin chain, resampling, drift, uncertainty bridge, rare biosphere, quasispecies, band edge | 57 | **57/57** |
+| 019–021: Inverse problems | Jackknife, freeze-out, spectral recon (Bazavov) | 25 | **25/25** |
+| 022–028: Cross-spring + hardware | ET₀→Anderson, no-till, aggregate, precision drift, size convergence, vendor parity, NPU | 60 | **60/60** |
+| 029–032: NUCLEUS integration | Real GHCND, real NCBI 16S, NUCLEUS stack, IRIS seismic | 55 | **55/55** |
+| 033: Tissue Anderson | Immunological Anderson (Paper 12, Gonzales) | 29 | **29/29** |
+| **Total** | **10 domains** | **376** | **All pass** |
 
 ---
 
@@ -125,4 +131,4 @@ groundSpring is the immune system of the spring framework. It does not produce h
 
 The humidity dominance result (65.6% of ET₀ variance) demonstrates that measurement noise is not uniform — it has structure, and that structure should inform experimental design. This parallels the constrained evolution thesis: the constraint (noise) shapes what is observable, and understanding the constraint is prerequisite to understanding the fitness landscape.
 
-groundSpring's Python-only status is itself a data point: the uncertainty quantification domain does not require GPU acceleration (the computations are Monte Carlo simulations over small parameter spaces). The constrained evolution methodology does not force GPU promotion where it is not needed — the system specializes to the constraint, not to a template.
+groundSpring's evolution from Phase 0 (Python-only, 5 experiments) to Phase 2 (Rust + GPU, 33 experiments, 81 barraCuda delegations) demonstrates that GPU acceleration can benefit even uncertainty quantification — Monte Carlo simulations over parameter spaces, stochastic ODE integration, and spectral analysis all show 2–47× speedups on GPU. The evolution path validated the constrained evolution thesis: the constraint (noise) shapes what is observable, and the compute substrate evolves to match the problem's demands, not a fixed template. The three-tier validation architecture (CPU → barracuda-CPU → barracuda-GPU) proves that mathematical parity is maintained at each tier while performance improves.

@@ -1,7 +1,7 @@
 # baseCamp Paper 12: Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge
 
 **Date:** March 2, 2026 (Sessions 105–108)
-**Status:** Computational implementation COMPLETE — all nS-601..605 experiments validated.
+**Status:** Computational implementation COMPLETE — all nS-601..605 experiments validated. wetSpring V92D+: Exp273-279 (157/157 immunological Anderson) + Gonzales reproductions (Exp280-286: 202/202) full three-tier. Paper-math chain complete: Exp291 Paper Control v4 (45/45) includes Gonzales P42-P47 (IC50, PK, IL-31, pruritus, three-compartment, selectivity). CPU v22 validates Hill/PK/Anderson in 0.8ms. GPU v9 proves portability. Streaming v9 confirms W↔P(QS) r=-0.924. metalForge v14 validates cross-system.
 Gonzales modeling (Hill dose-response, PK decay, pruritus time-series), 3D tissue lattice
 (multi-layer Hamiltonian, barrier promotion spectrum, three-compartment disorder), and
 Fajgenbaum MATRIX scoring (6 drug candidates, pathway × geometry × disorder) fully

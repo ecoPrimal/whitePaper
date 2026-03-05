@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
 **Date:** March 2, 2026  
-**Foundation:** baseCamp papers 01–12, ToadStool/BarraCuda S87 handoff
+**Foundation:** baseCamp papers 01–12, ToadStool/BarraCuda S93 handoff, airSpring v0.6.8 deep debt audit
 
 ---
 

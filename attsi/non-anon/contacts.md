@@ -21,6 +21,16 @@
 - airSpring status: 326 checks, R²=0.967 across 918 station-days real data
 - Relationship: New lab job 2026
 
+**Andrea J. Gonzales** — Assistant Professor, Pharmacology & Toxicology, MSU (prev. Zoetis 18yr)
+- https://phmtox.msu.edu/
+- Domain: Comparative pharmacology, JAK inhibitors (Apoquel), anti-cytokine mAbs (Cytopoint), atopic dermatitis, One Health
+- Papers reproduced: 6 publications (G1-G6) — IL-31 pruritus model, oclacitinib JAK1 selectivity, lokivetmab PD, cell-type targets
+- airSpring status: Paper 12 foundation — Exp 066-069 (94/94 checks), CytokineBrain, tissue diversity, barrier model, cross-species
+- wetSpring status: **All 6 papers fully reproduced + three-tier validated** — Exp273-279 (157/157 immuno-Anderson) + Exp280-286 (202/202 Gonzales reproductions) = **359/359 checks**
+- Also in: neuralSpring (ESN regime classifier, LSTM time series)
+- Relationship: **Job interview March 2026** (RA III, Molecular Biology, Gonzales Lab)
+- Details: `contact/gonzales/`
+
 ## wetSpring — Track 1: Life Science
 
 **Jesse Cahill** — Senior Member of Technical Staff, Sandia National Laboratories (Bioscience)
