@@ -69,12 +69,12 @@ The springs are organized into two tiers:
 
 **Domain**: Evapotranspiration (8 methods), soil moisture sensing, IoT irrigation scheduling, Richards PDE, coupled hydrology, yield response, ecological diversity, immunological Anderson coupling
 **Grade**: Full Python→Rust→GPU→metalForge→NUCLEUS pipeline complete
-**Checks**: 1,237/1,237 Python + 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28) + 75/75 cross-validation + 78 experiments
+**Checks**: 1,237/1,237 Python + 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28) + 381/381 validation + 146/146 evolution + 78 experiments
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0-or-later
 
-**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 14.5× geometric mean Rust speedup over Python (21 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops. NUCLEUS primal with 30 science capabilities.
+**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 19.8× geometric mean Rust speedup over Python (24 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops + fused Welford (hotSpring S58) + fused Pearson (neuralSpring S69). Cross-spring shader provenance: hotSpring (precision/DF64), wetSpring (bio/diversity), neuralSpring (ML/stats), groundSpring (MC/uncertainty). NUCLEUS primal with 30 science capabilities.
 
 **Phase inventory**:
 
