@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 5, 2026 (standalone barraCuda v0.3.1, wetSpring V96, hotSpring v0.6.17+, neuralSpring V81+, groundSpring V76)
+**Date:** March 5, 2026 (standalone barraCuda v0.3.1, wetSpring V96, hotSpring v0.6.17+, neuralSpring V82, groundSpring V76)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -128,14 +128,14 @@ Springs contributing validated infrastructure:
 
 - **wetSpring**: Anderson QS, 16S pipeline, DADA2, taxonomy, NPU live, field genomics architecture, bio brain (8,300+ checks, 281 experiments, 1,261 lib+forge tests, 285 binaries, 47 CPU + 45 GPU bio modules, Phase 96, standalone `barraCuda` v0.3.1, 150+ primitives consumed, 164 named tolerances, 94.69% line coverage, zero local WGSL, zero TODO/FIXME/HACK in 453 source files. `classify_quantized` evolved to `Option<usize>` (no silent fallbacks). Capability-based IPC discovery. Platform-agnostic benchmarks. `vault` feature-gated. Python baseline environment pinned. Chuna papers queued to hotSpring (43-45) and neuralSpring (26).)
 - **neuralSpring**: ML primitives (LSTM, HMM, transfer learning, spectral analysis,
-  ESN reservoir computing), 25 papers + 5 WDM surrogates validated at 4,100+ checks,
-  869 lib tests, 234 binaries, 139+ named tolerances, 46 upstream rewires to
+  ESN reservoir computing), 26 papers + 5 WDM surrogates validated at 4,100+ checks,
+  880 lib tests, 238 binaries, 139+ named tolerances, 46 upstream rewires to
   barraCuda delegates. barraCuda v0.3.1 standalone (`../barraCuda/crates/barracuda`).
-  Session 121: WDM surrogates rewired to `barracuda::nn::SimpleMlp` (~300 LOC local
-  MLP eliminated), HMM Viterbi chain rewired to f64 `barracuda::ops::bio::hmm_viterbi`
-  ComputeDispatch (single-dispatch replaces per-step f32 Tensor loop). 80/80 S121
-  rewire validation + 28/28 cross-spring modern bench (5-spring provenance). Zero clippy
-  warnings (pedantic+nursery, all-features). 213/213 validate\_all. V81 handoff.
+  Session 124: airSpring V069 naming rewire (`ToadStool`=dispatch, `BarraCUDA`=math),
+  HMM forward chain absorbed to `HmmBatchForwardF64` ComputeDispatch (single-dispatch
+  f64 log-domain GPU, fallback to per-step Tensor), Paper 026 Chuna LSTM glucose
+  prediction (Py 5/5 + Rs 8/8 + bC 4/4 + gT 4/4). Zero clippy warnings
+  (pedantic+nursery, all-features). 217/217 validate\_all. V82 handoff.
   Cross-spring provenance mapped: hotSpring precision → wetSpring bio → neuralSpring
   domain → barraCuda fused ops → consumed by all Springs
 - **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture (711 tests, 84 binaries, 62 WGSL shaders, 0 clippy warnings, 0 files >1000 lines). **25 papers** (Papers 43-45 added March 5: Chuna gradient flow integrators, conservative dielectric functions, kinetic-fluid coupling).
@@ -438,6 +438,26 @@ program depends on.
   pedantic warnings. 146/146 cross-spring evolution benchmark + 32/32 provenance.
 - **Directly enables**: ToadStool f64 absorption of 6 local ops (tightens tolerances
   by 6+ orders of magnitude), fused seasonal pipeline, full GPU-first workload chain.
+
+### Immediate (airSpring v0.6.9 — DONE)
+
+- **f64-Canonical Universal Precision (DONE)**: Evolved `local_elementwise.wgsl` (f32)
+  to `local_elementwise_f64.wgsl` (f64 canonical) compiled via `compile_shader_universal()`.
+  F64 native on pro GPUs (Titan V), F32 downcast on consumer GPUs (RTX 4070). "Math is
+  universal, precision is silicon."
+- **Deep Debt Audit (3 rounds — DONE)**: Provenance normalization (47 benchmark JSONs →
+  `_provenance` key), `json_f64_required` structured failure (exit(1) not panic),
+  `SubmitParams` refactor for wgpu dispatch, env-configurable RPC timeout
+  (`BIOMEOS_RPC_TIMEOUT_SECS`), `bench_cpu_vs_python` multi-file refactor, BarraCuda
+  `variance`/`std_dev` primitive wiring (zero local math duplication), streaming JSON I/O,
+  all `#[allow]` annotations with reason strings.
+- **Cross-Spring Evolution Benchmark (DONE)**: Exp 078 validates universal precision
+  evolution across 6 f64-canonical ops, confirming `compile_shader_universal()` correctness.
+- **Validation (DONE)**: 852 lib + 33 integration + 62 forge tests (947 total), 86 binaries,
+  78 experiments, 95.66% line coverage, zero clippy pedantic+nursery warnings, zero unsafe,
+  zero mocks in production. All provenance normalized with commit-level traceability.
+- **Directly enables**: BarraCuda absorption of 6 f64-canonical local ops (ready for
+  `batched_elementwise_f64` ops 14-19), cross-spring `compile_shader_universal()` pattern.
 
 ### Medium-term
 

@@ -67,33 +67,34 @@ The springs are organized into two tiers:
 
 ### 1.2 airSpring — Precision Agriculture & Irrigation
 
-**Domain**: Evapotranspiration, soil moisture sensing, IoT irrigation scheduling
-**Grade**: Full Python→Rust→cross-validation pipeline complete
-**Checks**: 142/142 Python + 119/119 Rust + 65/65 cross-validation = 326 total
+**Domain**: Evapotranspiration (8 methods), soil moisture sensing, IoT irrigation scheduling, Richards PDE, coupled hydrology, yield response, ecological diversity, immunological Anderson coupling
+**Grade**: Full Python→Rust→GPU→metalForge→NUCLEUS pipeline complete
+**Checks**: 1,237/1,237 Python + 852 lib + 33 integration + 62 forge tests + 75/75 cross-validation + 78 experiments
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
-**License**: AGPL-3.0
+**License**: AGPL-3.0-or-later
 
-**What it validates**: airSpring proves BarraCUDA's Rust crate can replace the Python/Excel toolchain for precision agriculture. FAO-56 Penman-Monteith ET₀ computed in Rust matches Python to 1e-5 tolerance across 53 cross-validated values. Real data from 4 Michigan stations (918 station-days) achieves R²=0.967 against Open-Meteo's independent computation.
+**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 14.5× geometric mean Rust speedup over Python (21 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops. NUCLEUS primal with 30 science capabilities.
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| 0 (Python control) | FAO-56, Dong 2020 soil, Dong 2024 IoT, water balance | 142/142 | Paper examples matched exactly |
-| 0+ (Real data) | 4 Michigan stations, 918 station-days | R²=0.967 | Open-Meteo ERA5 validates open data approach |
-| 1 (Rust) | 7 binaries, 233 tests (161 unit + 72 integration) | 119/119 | Hargreaves ET₀, 10-crop Kc, sensor calibration |
-| 2 (Cross-validation) | Python↔Rust value comparison | 65/65 | All values match within 1e-5 |
+| 0 (Python control) | 57 papers: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, 8 ET₀, SCS-CN, Green-Ampt, VG, Anderson | 1,237/1,237 | Paper examples matched exactly |
+| 0+ (Real data) | 100 Michigan stations, 15,300 station-days | R²=0.97 | Open-Meteo ERA5 validates open data approach |
+| 1 (Rust) | 86 binaries, 852 lib + 33 integration tests | 852+33 | 19 eco modules + 25 GPU orchestrators |
+| 2 (Cross-validation) | Python↔Rust value comparison | 75/75 | All values match within 1e-5 |
+| 3 (GPU live) | Titan V + RTX 4070 dispatch | 78/78 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
+| 3.4 (Local GPU) | 6 f64-canonical ops via compile_shader_universal | 6 ops | SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle |
+| 3.5+ (NPU/metalForge/NUCLEUS) | AKD1000, 27 workloads, 30 capabilities | 95+66+35 | Full cross-substrate pipeline |
 
-**Papers reproduced**: Allen et al. (1998) FAO-56 Chapters 2/4/8, Dong et al. (2020) soil sensor calibration, Dong et al. (2024) IoT irrigation pipeline.
+**Papers reproduced**: 57 papers including Allen et al. (1998) FAO-56, Dong et al. (2020/2024), Kumari et al. (2025), coupled SCS-CN + Green-Ampt, Van Genuchten inverse, 8 ET₀ intercomparison.
 
-**Papers queued**: Dong IoT field network, FAO-56 Chapter 7 dual Kc, regional ET₀ intercomparison. See `airSpring/specs/PAPER_REVIEW_QUEUE.md`.
+**BarraCuda primitives consumed**: 42 touchpoints (14 batched_elementwise ops, 11 dedicated GPU shaders, 8 CPU primitives, 6 local f64-canonical ops, 3 pipeline stages). Zero local math duplication.
 
-**BarraCUDA kernels validated (Rust, pre-GPU)**: ET₀ Penman-Monteith, Hargreaves, Topp equation, SoilWatch 10 calibration, water balance.
+**BarraCuda contributions**: 3 upstream bug fixes (TS-001/003/004), Richards PDE absorbed (S40), stats metrics absorbed (S64), 6 f64-canonical local ops pending absorption.
 
-**BarraCUDA gaps identified**: Richards equation PDE solver, crop growth model, batch ET₀ GPU dispatch (template ready).
-
-**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target).
+**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target), NUCLEUS (30 ecology capabilities), metalForge (27 workloads), bingoCube/nautilus (evolutionary reservoir).
 
 ---
 
