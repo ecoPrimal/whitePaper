@@ -6,7 +6,7 @@
 **Novelty:** No prior work applies Anderson localization to explain no-till vs
 conventional tillage outcomes; no prior work models tillage as dimensional collapse
 of a QS-active system
-**Cross-Spring:** wetSpring (Anderson QS + 16S) × airSpring v0.6.9 (soil moisture + ET₀ + GPU van Genuchten θ/K + pedotransfer + uncertainty stack, 852 lib tests, 78 experiments) ×
+**Cross-Spring:** wetSpring (Anderson QS + 16S) × airSpring v0.7.0 (soil moisture + ET₀ + GPU van Genuchten θ/K + pedotransfer + uncertainty stack, 827 lib + 186 forge tests, 78 experiments, barraCuda 0.3.3 wgpu 28) ×
 groundSpring V62 (uncertainty, spectral theory, rare biosphere, jackknife — `ToadStool` S79, DF64 precision strategy, f64-capable device selection) × neuralSpring (LSTM time series)
 
 ---
@@ -389,9 +389,9 @@ Extend the Anderson lattice experiments to model soil pore geometry:
 |-----------|--------|------------|
 | Anderson eigenvalue computation | wetSpring | Extends Exp107-143 |
 | 16S diversity pipeline | wetSpring | Sovereign Rust pipeline |
-| Soil moisture θ(t) | airSpring v0.6.9 | FAO-56 water balance (1237 Python + 852 Rust lib tests + 1498 atlas, 86 binaries). Saxton-Rawls pedotransfer (Exp 023 + GPU op=13) + Anderson coupling (Exp 045: θ→S_e→d_eff→QS regime, 55+95 checks) + GPU math portability (Exp 047: 46/46 all 13 modules) + GPU uncertainty (jackknife/bootstrap/diversity) + 6 f64-canonical local GPU ops |
-| ET₀ seasonal pattern | airSpring v0.6.9 | Validated (1237/1237 Python, 852 Rust lib tests + 1498 atlas checks, 95.66% llvm-cov, 14.5× Rust speedup, 8 ET₀ methods including Blaney-Criddle on GPU) |
-| van Genuchten θ(h)/K(h) GPU | airSpring v0.6.9 | `eco::van_genuchten` module + `gpu::van_genuchten` (ops 9-10), `barracuda::optimize::brent` (R-S66 wired). GPU path via `BatchedVanGenuchten` enables batch soil hydraulics at atlas scale |
+| Soil moisture θ(t) | airSpring v0.7.0 | FAO-56 water balance (1237 Python + 827 Rust lib + 186 forge tests, 86 binaries). Saxton-Rawls pedotransfer (Exp 023 + GPU op=13) + Anderson coupling (Exp 045: θ→S_e→d_eff→QS regime, 55+95 checks) + GPU math portability (Exp 047: 46/46 all 13 modules) + GPU uncertainty (jackknife/bootstrap/diversity) + 6 f64-canonical local GPU ops (3/6 absorbed upstream), fused Welford + Pearson wired |
+| ET₀ seasonal pattern | airSpring v0.7.0 | Validated (1237/1237 Python, 827 Rust lib + 186 forge tests, 20.6× Rust speedup (24/24 parity), 8 ET₀ methods including Blaney-Criddle on GPU) |
+| van Genuchten θ(h)/K(h) GPU | airSpring v0.7.0 | `eco::van_genuchten` module + `gpu::van_genuchten` (ops 9-10), `barracuda::optimize::brent` (R-S66 wired). GPU path via `BatchedVanGenuchten` enables batch soil hydraulics at atlas scale |
 | Sampling uncertainty | groundSpring V62 | Exp004 (genus saturation at 5,000 reads). Exp016 (rare biosphere — detecting rare soil taxa at low abundance). Exp019 (jackknife — subpercent error bars for soil microbiome metrics). Exp015 (uncertainty bridge — sensor noise → Anderson ξ → QS regime uncertainty, the pipeline that makes Anderson predictions testable from real soil sampling data). **Exp022** (ET₀→Anderson propagation: humidity-dominated CV 0.043 → ξ CV 0.040, confirming environment→localization uncertainty budget). **Exp023** (no-till vs tilled 16S sampling: H′=3.88 vs 1.57, saturation at 500 reads, quantifies diversity loss from tillage). **Exp024** (aggregate stability noise: d_eff regimes distinguishable, noise floor 0.12–0.14, proves soil structure uncertainty doesn't mask Anderson regime classification). wetSpring GPU rarefaction uses dedicated `BatchedMultinomialGpu` for diversity curves. **V62**: `ToadStool` S79 (`f97fc2ae`), pollster eliminated, f64-capable device selection (`WgpuDevice::new_f64_capable`), DF64 precision strategy wired — 710 workspace tests, 23/23 cross-spring benchmark, 39/39 GPU tier validation |
 | LSTM time series prediction | neuralSpring | Study 004 (ERA5 LSTM, NSE=0.849). Session 88+: 668 lib tests, 175 binaries, 174/175 validators, 129+ tolerances, 42 upstream rewires. nW-03 LSTM reservoir (R²=0.98) validates pooled-readout sequence processing — same architecture predicts r(t) from soil parameters. nW-05 ESN classifier (96.5% accuracy) validates regime classification — same architecture classifies QS regimes (extended/marginal/localized) from (J, d_eff) inputs |
 

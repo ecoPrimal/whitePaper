@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
 **Date:** March 2, 2026  
-**Foundation:** baseCamp papers 01–12, ToadStool/BarraCuda S93 handoff, airSpring v0.6.9 deep debt audit (3 rounds)
+**Foundation:** baseCamp papers 01–12, barraCuda v0.3.3 standalone (wgpu 28), airSpring v0.7.0 (fused Welford + Pearson, 20.6× CPU speedup)
 
 ---
 
