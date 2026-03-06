@@ -1,7 +1,7 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** March 1, 2026
-**Status:** **Validated** — hotSpring v0.6.15 completes all plasma MD and lattice QCD reproduction. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Transport coefficients D*, η*, λ* via GPU Green-Kubo. 664 hotSpring tests, 39/39 validation suites. **neuralSpring S90**: all 15 coralForge WGSL shaders evolved to df64 core streaming (f64 buffers + df64 compute), confirming the df64 pattern generalizes from nuclear physics to ML/protein folding. 37/37 GPU checks, 185/185 validate\_all. coralForge (AlphaFold2/3) Evoformer + IPA + diffusion + pairformer + confidence validated: Py 62/62, Rs 55/55. Phase B GPU gaps all closed. 197 binaries, 685 lib tests, 3200+ checks
+**Date:** March 6, 2026 (updated)
+**Status:** **Validated + Kokkos Parity + Precision Stability** — hotSpring v0.6.19, **724 lib tests**, 95 binaries, 71 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
@@ -384,35 +384,16 @@ the cost projection in Section 8 from speculation to validated science.
 ## 7. Reproduction Targets
 
 See `hotSpring/specs/PAPER_REVIEW_QUEUE.md` Tier 4 for the full list
-of WDM reproduction targets (Papers 32-42) and the Chuna Extension
-(Papers 43-45).
+of WDM reproduction targets (Papers 32-42).
 
 ### Priority Order
 
 1. **Paper 33 (atoMEC)**: Average-atom model — ideal Phase 0 Python control
 2. **Paper 32 (FPEOS)**: EOS tables — data validation, interpolation
 3. **Paper 35 (WDM transport)**: Extend Stanton-Murillo to WDM conditions
-4. **Paper 44 (Chuna dielectric)**: Conservative dielectric functions from
-   BGK — completed Mermin susceptibility, f-sum rule, DSF shape. Extends
-   Papers 1/5 with analytic theory for the DSF observable.
-5. **Paper 38 (S(q,ω))**: Dynamic structure factor — FFT + MD
-6. **Paper 45 (Chuna kinetic-fluid)**: Multi-species kinetic-fluid coupling
-   for HED — hybrid kinetic-hydro multi-fidelity simulation.
-7. **Paper 36 (Dragon OF-DFT)**: Orbital-free DFT — new primitive
-8. **Paper 40 (XRTS diagnostics)**: Model-free temperature extraction
-
-### Chuna Extension (March 5, 2026)
-
-Thomas Chuna (PhD student, Murillo Group, MSU) — referred by Murillo.
-Published on plasma dielectric theory and HED kinetic-fluid coupling.
-
-- **Paper 44**: The "completed Mermin" susceptibility is the correct
-  analytic theory for the dynamic structure factor that Sarkas computes
-  via MD simulation (Paper 1). Reproducing it bridges simulation → theory
-  and provides the framework for XRTS diagnostics (Paper 38/40).
-- **Paper 45**: The kinetic-fluid coupling pattern — different fidelity
-  levels in different spatial regions — parallels the brain architecture
-  (CPU/GPU/NPU for different computational domains).
+4. **Paper 38 (S(q,ω))**: Dynamic structure factor — FFT + MD
+5. **Paper 36 (Dragon OF-DFT)**: Orbital-free DFT — new primitive
+6. **Paper 40 (XRTS diagnostics)**: Model-free temperature extraction
 
 ---
 

@@ -486,7 +486,7 @@ overnight as of Feb 28).
 | CPU | Anderson + Potts proxy | 256 GB / 32 cores | ~5% |
 | NPU | 15-head inference + monitoring | AKD1000 | Active |
 
-### Scaling roadmap
+### Scaling roadmap — hypercubic (L⁴)
 
 | Lattice | VRAM (est.) | CG/traj | Wall/traj | GPU util |
 |---------|-------------|---------|-----------|----------|
@@ -495,9 +495,25 @@ overnight as of Feb 28).
 | 32⁴ | 3.5 GB | ~228,000 | 8–15 min | ~80% |
 | 48⁴ | 18 GB | ~400,000 | 30–60 min | ~95% |
 
+### Scaling roadmap — asymmetric (N_s³ × N_t, MILC-style)
+
+Asymmetric lattices are physically more meaningful for finite-temperature
+studies (T = 1/(a × N_t)) and far more memory-efficient:
+
+| Lattice | Sites | VRAM | DF64 time/traj | Physics |
+|---------|:-----:|:----:|:--------------:|---------|
+| 32³ × 4 | 131K | 0.31 GB | ~1 s | β_c(4) ≈ 5.692 |
+| 64³ × 8 | 2.10M | 5.0 GB | ~15 s | β_c(8) ≈ 6.06, MILC-comparable |
+| 48³ × 12 | 1.33M | 3.2 GB | ~10 s | β_c(12) ≈ 6.34 |
+| 96³ × 12 | 10.6M | 25.3 GB | ~77 s | MILC production scale |
+
+The existing `Lattice` struct already supports arbitrary `dims: [Nx, Ny, Nz, Nt]`.
+Multiple N_t values enable continuum extrapolation (N_t → ∞, a → 0).
+
 The RTX 3090 has 24 GB VRAM and 936 GB/s memory bandwidth. We are
 currently using less than 1% of both. Scaling to 32⁴ brings utilization
-to production levels; 48⁴ would saturate the card.
+to production levels; asymmetric 96³×12 would saturate the card while
+producing continuum-relevant physics.
 
 At larger volumes, the brain architecture's overlap becomes more
 valuable: the Titan V pre-thermalization saves ~2–5 minutes per β
