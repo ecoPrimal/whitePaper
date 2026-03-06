@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 5, 2026 (standalone barraCuda v0.3.3, airSpring v0.7.0, wetSpring V97c, hotSpring v0.6.17+, neuralSpring V82, groundSpring V79)
+**Date:** March 6, 2026 (standalone barraCuda `cf1602c`, airSpring v0.7.0, wetSpring V97c, hotSpring v0.6.17+, neuralSpring V82, groundSpring V85, coralReef `849fedd`)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -156,7 +156,7 @@ Springs contributing validated infrastructure:
   20.6× CPU speedup (24/24 parity). 146/146 cross-spring evolution, 34 ShaderProvenance entries.
   27 GPU tests fail upstream (wgpu 28 + NVK/Titan V), CPU fallback in SeasonalReducer.
   Zero clippy pedantic+nursery warnings, cargo-deny clean.
-- **groundSpring**: Uncertainty quantification, noise labels, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, spectral recon, WDM precision/convergence/vendor-parity, NPU Anderson regime classification, mixed-hardware pipeline dispatch (`PCIe` topology, NUCLEUS atomics, fallback chains) (34 experiments, 395/395 Rust checks + 187 metalForge checks, 10 domains, 807 workspace tests; live hardware: RTX 4070, Titan V, AKD1000 NPU; 2.2× GPU speedup). V79: Exp 035 Multi-Method ET₀ cross-validation (5 methods: PM, Hargreaves, Makkink, Turc, Hamon), seismic delegation strengthening. barraCuda v0.3.3, toadStool S94b fully synchronized, clippy pedantic CI, 13-tier named tolerance architecture (`tol::` module, `eps::` module), zero bare tolerance literals, full validation benchmark (34/34 binaries, −10% with barraCuda CPU delegation), cross-spring provenance documented. 97.25% library line coverage. 85 active delegations (51 CPU + 34 GPU). 29/29 mathematical parity. biomeOS Neural API + NestGate data pipelines (NCBI, NOAA, IRIS). All files < 1000 lines, zero unsafe, zero production mocks, zero `unwrap()` in production, zero TODO/FIXME in Rust source
+- **groundSpring**: Uncertainty quantification, noise labels, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, spectral recon, WDM precision/convergence/vendor-parity, NPU Anderson regime classification, mixed-hardware pipeline dispatch (`PCIe` topology, NUCLEUS atomics, fallback chains) (35 experiments, 395/395 Rust checks + 187 metalForge checks, 10 domains, 824 workspace tests; live hardware: RTX 4070, Titan V, AKD1000 NPU; 2.2× GPU speedup). V85: coralReef sovereign compilation — 2 critical bugs fixed in coralReef (`849fedd`): CFG edge loss in `translate_if` + multi-predecessor RA merge. f64 shared-memory reduction shaders now compile to native SM70 (Titan V) and SM89 (RTX 4070) binaries — the exact pattern that returns 0 through naga/SPIR-V/NVK. 6/6 shader compilation (basic f64 through 8-step unrolled reduction). Gap: coralDriver (Phase 7) needed for GPU submission. V84: dual-GPU probe (RTX 4070 + Titan V), DF64/tensor/FHE green, f64 reduction returns 0 via wgpu, CoralCompiler tokio fix. 91 active delegations (54 CPU + 37 GPU). barraCuda `cf1602c`, toadStool S96c (`d77fc546`), coralReef `849fedd`. 97.25% library line coverage. 29/29 mathematical parity. biomeOS Neural API + NestGate data pipelines (NCBI, NOAA, IRIS). All files < 1000 lines, zero unsafe, zero production mocks, zero `unwrap()` in production, zero TODO/FIXME in Rust source
 
 Every experiment can be reproduced with the corresponding Spring's binaries:
 
@@ -181,7 +181,7 @@ No proprietary data. No restricted access. No institutional dependencies.
 ┌─ hotSpring v0.6.17 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain
 ├─ neuralSpring V80 ── spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers
 ├─ wetSpring V97c ──── diversity, Bray-Curtis, rarefaction, NMF, ridge, fused Welford/Pearson chain
-├─ groundSpring V79 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, wgpu 28, DF64 precision tiers, fused Welford mean+variance, 5-method ET₀ cross-validation (PM/Hargreaves/Makkink/Turc/Hamon — Exp 035), seismic delegation strengthening, 85 delegations
+├─ groundSpring V85 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, wgpu 28, DF64 precision tiers, fused Welford mean+variance, fused correlation_full GPU, BootstrapMeanGpu, coralReef sovereign compilation (2 CFG/RA bugs fixed, f64 reduction compiles to native SM70/SM89), dual-GPU probe (DF64 green, f64 shared-mem returns 0 via naga), 91 delegations (54 CPU + 37 GPU), 824 Rust tests + 672 coralReef tests. V85: barraCuda cf1602c, toadStool S96c, coralReef 849fedd (CFG edge loss fix, multi-pred RA merge, 6/6 shader compilation)
 ├─ airSpring v0.7.0 ── regression, moving window, hydrology (FAO-56 ET₀), f64 canonical universal precision, barraCuda 0.3.3 (wgpu 28), 3/6 local ops absorbed upstream
 ├─ wateringHole V69 ── Boltzmann sampling (Metropolis-Hastings MCMC)
 ├─ bingoCube/nautilus ─ NautilusBrain → BioNautilusBrain (concept edge, drift)
