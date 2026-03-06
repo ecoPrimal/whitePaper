@@ -458,6 +458,16 @@ beta point.
 
 ---
 
+## Addendum: Deep Debt Resolution (v0.6.18, 2026-03-06)
+
+hotSpring v0.6.18 completed a comprehensive technical debt audit (Exp 041):
+Clippy 0 warnings (pedantic+nursery), file-size compliance (<1000 lines), unwrap/expect
+removal from production sites, SPDX 100% AGPL-3.0-only. Brain B2 (memory pressure)
+and D1 (force anomaly) evolved from placeholder to real runtime estimates. 685 lib
+tests pass. See `hotSpring/experiments/041_DEEP_DEBT_RESOLUTION_AUDIT.md`.
+
+---
+
 ## Data Files
 
 | File | Contents |
