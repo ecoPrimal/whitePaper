@@ -12,6 +12,15 @@
 - Also in: neuralSpring (surrogate learning)
 - Relationship: MSDS professor (CMSE 890, Spring 2025)
 
+**Thomas (TC) Chuna** — PhD Student, Physics & CMSE, MSU (Murillo Group)
+- https://murillogroupmsu.com/thomas-chuna/
+- Domain: Lattice QCD gradient flow (MILC), plasma dielectric functions, kinetic-fluid coupling, ML closures
+- Papers reproduced: arXiv:2101.05320 (gradient flow, 11/11), Phys. Rev. E 111 035206 (BGK dielectric, 20/20), J. Comput. Phys. 2024 (kinetic-fluid, 10/10)
+- hotSpring status: **41/41 Chuna overnight checks pass** (v0.6.23). Dynamical N_f=4 staggered flow extended.
+- Referred by: Professor Murillo (coffee, March 4, 2026)
+- Relationship: Murillo recommended as reviewer for hotSpring lattice QCD + plasma physics
+- Details: `contact/chuna/`
+
 ## airSpring
 
 **Younsuk Dong** — Assistant Professor, Biosystems & Agricultural Engineering, MSU
