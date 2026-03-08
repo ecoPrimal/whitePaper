@@ -131,6 +131,30 @@
 - Previously at: Institute for Advanced Study, UC Irvine
 - Relationship: Sold the NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
 
+## MSU Drug Discovery Program (via Gonzales referral, March 2026)
+
+**Erika Lisabeth** — Director, Assay Development and Drug Repurposing Core (ADDRC), Pharmacology & Toxicology, MSU
+- https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
+- Domain: HTS assay development, drug repurposing, chemical probes, EphA3 RTK (cancer), NF-κB
+- Equipment: plate readers, high-content microscopes, liquid-handling robots, GREENScreen informatics, 8,000+ compound library
+- PhD: Chemistry/Biochemistry, UCSD; Postdoc: Sanford Burnham Prebys
+- Spring relevance: **nS-605 Fajgenbaum MATRIX** — ADDRC is the institutional HTS platform for the Anderson-augmented drug repurposing scores. Pipeline: MATRIX scores → ADDRC screening → Gonzales iPSC validation.
+- Relationship: Referred by Gonzales (March 2026 interview)
+- Papers to look for: Lisabeth et al. Brucella host-cellular pathways (2024, small molecule screen), EphA3 kinase mutations (postdoc)
+
+**Richard Neubig** — Professor Emeritus, Director Drug Discovery Program, Pharmacology & Toxicology, MSU
+- https://phmtox.msu.edu/people/rneubig
+- Domain: GPCR signaling, Rho/MRTF/SRF gene transcription inhibitors, melanoma metastasis, **skin fibrosis**
+- Founded UMich Center for Chemical Genomics, established MSU Drug Discovery
+- Harvard MD + Harvard PhD (Pharmacology), ASPET awards, co-founder FibrosIX Inc
+- Spring relevance: Skin fibrosis → connects to AD barrier models (Paper 12 dimensional promotion). Rho/MRTF pathway may cross-talk with JAK/STAT. GPCRs are >25% of current drug targets.
+- Papers to reproduce: TBD — screen for Rho pathway inhibitors relevant to skin/AD
+
+**Edmund Ellsworth** — Interim Director Drug Discovery, Director Medicinal Chemistry, MSU
+- https://drugdiscovery.msu.edu/about-us/people/index.aspx
+- Domain: Synthetic organic chemistry, heterocyclic chemistry, niclosamide delivery, terpene biosynthesis
+- Spring relevance: Downstream medicinal chemistry optimization after HTS hits from ADDRC. Not direct spring target yet.
+
 ## Industry / MSUBI
 
 Pivot Bio — microbiome/nitrogen fixation (bench scale → 10L reactor, 2019–2024)

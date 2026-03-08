@@ -67,12 +67,12 @@ Every check is implemented as an assertion in either a Python script or a Rust b
 
 | Spring | Domain | Checks | Phases | Faculty | Repository |
 |--------|--------|--------|--------|---------|------------|
-| hotSpring | Computational plasma physics, nuclear structure, lattice QCD, spectral theory | 195 | A–F + lattice + spectral + NPU | Murillo, Bazavov, Kachkovskiy, R. Anderson | syntheticChemistry/hotSpring |
-| airSpring | Evapotranspiration, soil moisture, IoT irrigation | 326 | 0 (Python) + 0+ (real data) + 1 (Rust) + 2 (cross-validation) | Dong | syntheticChemistry/airSpring |
-| wetSpring | 16S metagenomics, QS models, phylogenetics, PFAS, deep-sea metagenomics | 1,368 | 56 experiments (1,168 CPU + 200 GPU) | Waters, Liu, Cahill, Smallwood, Jones, R. Anderson | syntheticChemistry/wetSpring |
-| groundSpring | Sensor noise, inverse problems, error propagation, seismic | 71 | 0 (5 experiments across 4 domains) | Bazavov, Waters, Liu, Dolson, Kachkovskiy, R. Anderson | syntheticChemistry/groundSpring |
-| neuralSpring | PINN, DeepONet, LeNet-5, LSTM, evo comp, spectral, population genomics | 922 | 0 + 0+ + 0++ (25 papers) + 1–3 (Rust/GPU) | Dolson, Liu, Waters, Bazavov, Kachkovskiy, R. Anderson | syntheticChemistry/neuralSpring |
-| **Total** | | **2,882** | | **10 professors** | |
+| hotSpring | Plasma physics, nuclear structure, lattice QCD, spectral theory, NPU brain | 697+ | A–F + lattice + spectral + NPU + brain | Murillo, Bazavov, Kachkovskiy, R. Anderson | syntheticChemistry/hotSpring |
+| airSpring | Evapotranspiration (8 methods), soil moisture, IoT, Richards PDE, immunological Anderson | 2,631+ | 0–3.5+ (Python→Rust→GPU→metalForge→NUCLEUS) | Dong | syntheticChemistry/airSpring |
+| wetSpring | 16S metagenomics, Anderson QS, phylogenetics, PFAS, immunological signaling, drug repurposing | 5,421+ | 286 experiments, 52/52 papers, V97c | Waters, Liu, Cahill, Smallwood, Jones, R. Anderson, Gonzales, Lisabeth, Neubig | syntheticChemistry/wetSpring |
+| groundSpring | Sensor noise, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, uncertainty | 236+ | 35 experiments across 10 domains, V91 | Bazavov, Waters, Liu, Dolson, Kachkovskiy, R. Anderson | syntheticChemistry/groundSpring |
+| neuralSpring | PINN, DeepONet, LSTM, evo comp, spectral, population genomics, dose-response, coralForge (AlphaFold) | 3,200+ | 25+ papers + 5 WDM surrogates + coralForge, V82 | Dolson, Liu, Waters, Bazavov, Kachkovskiy, R. Anderson, Gonzales | syntheticChemistry/neuralSpring |
+| **Total** | **8 scientific domains** | **11,161+** | | **13 professors, 8 departments** | |
 
 ## 7.5 The Faculty Connection
 
@@ -83,7 +83,7 @@ Each spring is grounded in published work by faculty the author has a documented
 3. **Validation path**: Faculty can evaluate the reproduction and confirm or correct the results.
 4. **PhD relevance**: Each spring is a potential chapter in a faculty member's research program, not an isolated computational exercise.
 
-As of February 2026, 10 professors across 7 departments and 3 institutions (MSU, Sandia, Carleton College) are mapped to the springs, with 60+ candidate papers identified for future reproduction.
+As of March 2026, 13 professors across 8 departments and 3 institutions (MSU, Sandia, Carleton College) are mapped to the springs, with 60+ candidate papers identified for future reproduction. The March 2026 addition of the MSU Drug Discovery Program (Lisabeth, Neubig, Ellsworth) via Gonzales's referral extended the faculty network into pharmacology and high-throughput screening.
 
 ## 7.6 Cost Model
 
@@ -91,13 +91,13 @@ Every spring tracks compute cost honestly:
 
 | Spring | Total Compute Cost | Key Hardware | Cost Basis |
 |--------|-------------------|-------------|------------|
-| hotSpring | ~$0.20 (18 papers) | RTX 4070 ($600) + AKD1000 NPU ($300) | Wall-clock × $0.12/kWh |
-| airSpring | ~$0.01 | CPU only | Negligible |
-| wetSpring | ~$0.05 | RTX 4070 for GPU pipeline | Wall-clock × $0.12/kWh |
-| groundSpring | ~$0.01 | CPU only | Negligible |
-| neuralSpring | ~$0.10 | RTX 4070 for GPU validation | Wall-clock × $0.12/kWh |
+| hotSpring | ~$0.60 (25 papers) | RTX 3090 + RTX 4070 + Titan V + AKD1000 NPU | Wall-clock × $0.12/kWh |
+| airSpring | ~$0.05 | RTX 4070 + Titan V + CPU | Wall-clock × $0.12/kWh |
+| wetSpring | ~$0.10 | RTX 4070 for GPU pipeline | Wall-clock × $0.12/kWh |
+| groundSpring | ~$0.03 | RTX 4070 + Titan V + AKD1000 NPU | Wall-clock × $0.12/kWh |
+| neuralSpring | ~$0.15 | RTX 4070 for GPU validation | Wall-clock × $0.12/kWh |
 
-Total compute cost for 2,882 checks across 5 scientific domains: approximately **$0.37**. The most expensive single computation (hotSpring paper-parity Yukawa MD: 9 cases, N=10,000, 80k steps) cost $0.044 in electricity.
+Total compute cost for 11,161+ checks across 8 scientific domains: approximately **$0.93**. The most expensive single computation (hotSpring 32⁴ quenched β-scan: 12 temperatures, 13.6 hours on RTX 3090) cost $0.58 in electricity.
 
 This cost model is part of the thesis argument: if constrained evolution produces a system that can reproduce published science at $0.01–$0.10 per paper on consumer hardware, the methodology has economic implications for scientific computing accessibility.
 
@@ -117,8 +117,8 @@ No institutional access is required. No Code Ocean account. No Fortran compiler.
 
 The springs serve double duty:
 
-1. **They validate the infrastructure.** The 2,882 checks prove that BarraCUDA's kernels, evolved under the Pure Rust / WGSL / f64 constraint, compute real science correctly.
+1. **They validate the infrastructure.** The 11,161+ checks prove that BarraCUDA's kernels, evolved under the Pure Rust / WGSL / f64 constraint, compute real science correctly across 8 domains.
 
-2. **They are evidence for the methodology.** The fact that a single developer produced 2,882 validated science checks across 5 domains and 80+ papers in ~20 days, using the constrained evolution methodology (AI generation → Rust compilation → test validation), is itself a datum in support of the thesis. The springs are both the experimental apparatus and the experimental result.
+2. **They are evidence for the methodology.** The fact that a single developer produced 11,161+ validated science checks across 8 domains and 70+ papers in ~69 days, using the constrained evolution methodology (AI generation → Rust compilation → test validation), is itself a datum in support of the thesis. The springs are both the experimental apparatus and the experimental result.
 
-This reflexivity is not circular. The science validation is objective: either Yukawa MD energy drift is 0.000% or it isn't. Either FAO-56 ET₀ matches the textbook value or it doesn't. The methodology claim is separate: it asserts that the constrained evolution approach enabled the production of the validated code at this velocity. The science stands independent of how it was produced.
+This reflexivity is not circular. The science validation is objective: either Yukawa MD energy drift is 0.000% or it isn't. Either FAO-56 ET₀ matches the textbook value or it doesn't. Either the deconfinement transition occurs at β_c=5.69 or it doesn't. The methodology claim is separate: it asserts that the constrained evolution approach enabled the production of the validated code at this velocity. The science stands independent of how it was produced.

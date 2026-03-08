@@ -103,7 +103,7 @@ The springs are organized into two tiers:
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
 **Grade**: V86 — 30 sovereign Rust modules, 1 runtime dependency
 **Checks**: 5,421+ validation checks (1,578 GPU) across 260+ experiments. 1,247 Rust tests, 92 named tolerances, 189 binaries (174 validate + 15 benchmark). 52/52 papers, 50/50 three-tier. ToadStool S68, 79 primitives consumed. 10 new Python baselines (Track 4 soil + NPU spectral). Cross-spring evolution validated (23/23 checks across 5 Springs). ESN bridge to ToadStool esn_v2 (BioEsn + multi-head). Deep debt elimination: all modules under 652 lines, 0 magic numbers, 0 unsafe, 0 mocks in production. Specs: `CROSS_SPRING_EVOLUTION.md`.
-**Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology)
+**Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — cytokine signaling, AD, dose-response), Erika Lisabeth (ADDRC Director, MSU — HTS, drug repurposing, EphA3), Richard Neubig (Drug Discovery Director, MSU — GPCR, Rho/MRTF/SRF skin fibrosis)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
 
@@ -211,7 +211,7 @@ The springs are organized into two tiers:
 **Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction, structure prediction (coralForge)
 **Grade**: Phase 0 → 0+ → 0++ → Rust → BarraCUDA CPU → GPU Tensor → metalForge WGSL → Pipeline → Cross-dispatch → Mixed-hardware → Multi-GPU → coralForge. **Most complete validation pipeline of any spring.**
 **Checks**: 282/282 Python + 2918+ Rust+GPU = **3,200+ total** (685 lib + 9 integration + 43 forge tests, 197 binaries, 185/185 validate\_all)
-**Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics)
+**Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — Hill equation, PK modeling, CytokineBrain)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
 
@@ -245,18 +245,52 @@ The springs are organized into two tiers:
 
 ---
 
+### 1.6 healthSpring — Human Health: PK/PD, Microbiome, Biosignal, Endocrinology
+
+**Domain**: Pharmacokinetics, dose-response, population modeling, gut microbiome analytics, ECG biosignal processing, testosterone replacement therapy, endocrinology
+**Grade**: V3 — 4 tracks, 17 experiments, Tier 0 + Tier 1 complete
+**Checks**: 192 Python + 179 binary + 103 lib = **474 healthSpring checks** (1,162+ including upstream)
+**Faculty**: Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical — clinical TRT reference)
+**Repository**: Local (healthSpring/)
+**License**: AGPL-3.0-or-later
+
+**What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis.
+
+**Phase inventory**:
+
+| Phase | What | Checks | Key Result |
+|-------|------|--------|------------|
+| Tier 0 (Python) | 17 experiments across 4 tracks | 192/192 | All controls pass |
+| Tier 1 (Rust CPU) | healthspring-barracuda crate (pkpd, microbiome, biosignal, endocrine) | 282 | 103 lib tests + 179 binary checks |
+| Tier 2 (GPU) | Planned — population PK, Anderson eigensolve, FFT biosignal | — | Pending barraCuda absorption |
+
+**Track inventory**:
+
+| Track | Domain | Experiments | Key Models |
+|-------|--------|-------------|------------|
+| 1 — PK/PD | Pharmacokinetics, dose-response | Exp001-005 | Hill equation, 1/2-compartment PK, allometric mAb, population Monte Carlo |
+| 2 — Microbiome | Gut ecology, colonization resistance | Exp010-012 | Shannon/Simpson/Pielou/Chao1, Anderson gut lattice, C. diff resistance score |
+| 3 — Biosignal | ECG detection | Exp020 | Pan-Tompkins QRS, derivative/squaring/MWI pipeline |
+| 4 — Endocrinology | Testosterone PK, TRT outcomes | Exp030-037 | IM/pellet depot PK, age decline, metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K patients), testosterone-gut axis (cross-track 2×4) |
+
+**Upstream dependencies**: wetSpring (diversity, Anderson lattice), neuralSpring (Hill/IC50, PK models, allometric scaling), groundSpring (planned uncertainty budget)
+
+**Participates in**: gen3/baseCamp Paper 13, ToadStool validation (planned GPU compute), NestGate (planned NCBI data pipeline), biomeOS NUCLEUS (planned distributed pipeline)
+
+---
+
 ## 2. The Spring Network
 
 ### 2.1 By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Total springs | 5 |
-| Total quantitative checks | **11,161+** passing |
-| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing |
+| Total springs | 6 (5 established + healthSpring) |
+| Total quantitative checks | **11,635+** passing (11,161 established + 474 healthSpring) |
+| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing, **human health (PK/PD, microbiome, biosignal, endocrinology)** |
 | Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
-| Papers queued for review | 60+ candidates across all springs |
-| Faculty connected | 10 professors (MSU + Sandia + Carleton) across 7 departments |
+| Papers queued for review | 60+ candidates across all springs + 8 Mok-derived experiments |
+| Faculty connected | 14 professors (MSU + Sandia + Carleton + Allure Medical) across 9 departments |
 | BarraCUDA kernels validated by springs | 79+ distinct GPU/NPU primitives (wetSpring alone consumes 79 via ToadStool S68) |
 | BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
 | Rust validation checks | 1,008 (wetSpring) + 2,250+ (neuralSpring) + 3,123+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
@@ -284,6 +318,7 @@ neuralSpring (ML primitives)
     ├──→ airSpring: "transfer learning bridges Michigan→NM with 200 samples"
     ├──→ hotSpring: "isomorphic GEMM serves plasma and nuclear"
     ├──→ wetSpring: "LSTM validates lstm_cell.wgsl on real weather"
+    ├──→ **healthSpring**: "Hill/IC50, PK models, allometric scaling → human therapeutics"
     └──→ biomeOS: "PathwayLearner uses validated attention primitives"
 
 hotSpring (GPU compute patterns)
@@ -300,6 +335,7 @@ wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
     ├──→ airSpring: "kriging spatial interpolation; dynamic Anderson W(t) models soil moisture coupling"
     ├──→ hotSpring: "Anderson localization applied to biology — shared spectral primitives, W_c determination"
     ├──→ neuralSpring: "ESN/LSTM anomaly detection for sentinel microbes; NPU int8 quantization validated"
+    ├──→ **healthSpring**: "diversity indices, Anderson lattice → gut colonization resistance, 16S pipeline"
     └──→ groundSpring: "sequencing noise calibrates rarefaction; 86 named tolerances with provenance"
 ```
 
@@ -312,6 +348,7 @@ wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
 | wetSpring | ToadStool/BarraCUDA (GPU diversity, spectral) | biomeOS (microbiome monitoring), Squirrel (classifiers) |
 | groundSpring | All springs (uncertainty budget) | neuralSpring (noise labels for training) |
 | neuralSpring | ToadStool/BarraCUDA (ML kernels) | biomeOS (PathwayLearner), Squirrel (inference), NUCLEUS (optimization) |
+| **healthSpring** | ToadStool/BarraCUDA (population PK, Anderson gut, biosignal) | NestGate (NCBI clinical data), biomeOS NUCLEUS (distributed health pipeline) |
 
 ### 2.4 Faculty → Spring Mapping
 
@@ -328,6 +365,10 @@ wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
 | Chuck Smallwood | Sandia (Bioscience) | Time at Sandia | wetSpring |
 | A. Daniel Jones | BMB/Chemistry, MSU | PFAS job | wetSpring |
 | Rika Anderson | Biology, Carleton College | Literature search | hotSpring, wetSpring, groundSpring, neuralSpring |
+| Andrea J. Gonzales | Pharmacology & Toxicology, MSU | March 2026 interview | wetSpring, neuralSpring, airSpring, **healthSpring** |
+| Erika Lisabeth | Pharmacology & Toxicology, MSU (ADDRC) | Gonzales referral | wetSpring |
+| Richard Neubig | Pharmacology & Toxicology, MSU (Drug Discovery) | Gonzales referral | wetSpring, neuralSpring |
+| **Charles Mok** | **Allure Medical, Shelby Township MI** | **Clinical TRT reference (2018 book)** | **healthSpring** |
 
 Full profiles: `data/FACULTY_SPRING_PROFILES.md`
 
@@ -371,5 +412,8 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 **Evidence**: wetSpring found and fixed the `log_f64` bug in ToadStool. hotSpring found and fixed 5 silent bugs in Sarkas upstream. groundSpring identified humidity as the bottleneck for ET₀ accuracy. Each discovery fed back into the system.
 
 ---
+
+**Claim**: Clinical practice literature can be computationally verified.
+**Evidence**: healthSpring's Track 4 (Mok testosterone) extracts quantifiable claims from a 196-page clinical book and validates each against the cited primary literature — creating a closed-loop claim verification pipeline that generalizes to any medical reference.
 
 **Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 11,161+ checks across 5 domains in 27 days — the constrained evolution methodology works. 7 of 11 BarraCUDA gaps have been resolved by the springs themselves (ODE, Lanczos, SpMV, HMM, Smith-Waterman, Gillespie, FFT). A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**

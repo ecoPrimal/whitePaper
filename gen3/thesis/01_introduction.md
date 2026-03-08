@@ -14,7 +14,7 @@ The question is not purely academic. The past decade has seen an explosion in AI
 
 An alternative approach, suggested by the biological evidence, is to place AI-generated code within a *strongly constrained* environment — a type system, ownership model, or formal verification framework that eliminates broad classes of invalid solutions at compile time, before the code ever runs. This mirrors the hot spring: the constraint determines what can survive, and what survives is specialized for the constraint.
 
-This dissertation argues that the second approach — constrained evolution — is not merely more efficient but produces qualitatively different results. The system described here (ecoPrimals: 3.8 million lines of compiled code across 12 primals, 628 GPU shaders, 104,000+ tests) was built by a single developer with AI assistance in approximately 10 months. But the claim is not that constraints made development "faster." The claim is that constraints shaped what the system *became* — that architectural patterns, kernel designs, and composition models emerged from constraint that would not have been discovered in unconstrained development, just as Taq polymerase would not have evolved in *E. coli*.
+This dissertation argues that the second approach — constrained evolution — is not merely more efficient but produces qualitatively different results. The system described here (ecoPrimals: 757,000 lines of Rust across 11 primals, 914 WGSL shaders, 104,000+ tests) was built by a single developer with AI assistance in approximately 10 months. But the claim is not that constraints made development "faster." The claim is that constraints shaped what the system *became* — that architectural patterns, kernel designs, and composition models emerged from constraint that would not have been discovered in unconstrained development, just as Taq polymerase would not have evolved in *E. coli*.
 
 ## 1.3 Thesis Statement
 
@@ -28,11 +28,11 @@ This dissertation makes five primary contributions:
 
 2. **A sovereign scientific computing platform** — the ecoPrimals ecosystem — comprising 12 Rust "primals" (autonomous subsystems) including BarraCUDA, a vendor-agnostic GPU compute engine that achieves f64 precision on consumer GPUs via WGSL/Vulkan without CUDA dependency (Chapters 5–6). The NTT→FFT structural evolution within BarraCUDA provides a concrete, quantitative case study of constrained evolution in computational systems.
 
-3. **An empirical validation framework** (the "springs") that validates the computing infrastructure against published, peer-reviewed science across five domains: computational plasma physics, precision agriculture, life science and analytical chemistry, measurement noise and uncertainty, and machine learning primitives (Chapters 7–12). 2,882 quantitative checks pass across 80+ reproduced papers.
+3. **An empirical validation framework** (the "springs") that validates the computing infrastructure against published, peer-reviewed science across eight domains: computational plasma physics, precision agriculture, life science and analytical chemistry, measurement noise and uncertainty, machine learning primitives, and others (Chapters 7–12). 11,161+ quantitative checks pass across 70+ reproduced papers.
 
 4. **A proposed biological validation** of the constrained evolution principle via whole-genome sequencing of Lenski's LTEE frozen fossil record (75,000+ generations, physically housed at MSU), analyzed with the same computational tools validated by the springs (Chapter 14).
 
-5. **An extension to computational complexity theory** — the "enzyme argument" for P != NP — proposing that the existence of enzymes (nature's generative solutions to chemical NP problems encoded in DNA) constitutes biological evidence that generation is not reducible to verification (Chapter 4).
+5. **An empirical observation** that nature universally solves hard problems through accept-and-generate — building generators (enzymes, genomes, immune systems) and letting selection verify the output — applied as a design principle for the constrained evolution methodology (Chapter 4).
 
 ## 1.5 Disciplinary Position
 
@@ -52,9 +52,9 @@ The author's background — BS Microbiology with bench experience in high-throug
 
 **Part I (Chapters 1–2)** establishes the context: this introduction and a comprehensive literature review spanning evolutionary biology, type theory, evolutionary computation, and AI-assisted development.
 
-**Part II (Chapters 3–4)** presents the theoretical framework: the constrained evolution principle formalized with fitness landscape models, and the P != NP enzyme argument as a theoretical extension.
+**Part II (Chapters 3–4)** presents the theoretical framework: the constrained evolution principle formalized with fitness landscape models, and the accept-and-generate observation as a design principle.
 
-**Part III (Chapters 5–6)** describes the system: the ecoPrimals architecture (12 primals, capability-based composition, NUCLEUS deployment model) and BarraCUDA (628 WGSL shaders, f64 GPU compute, vendor-agnostic scientific computing).
+**Part III (Chapters 5–6)** describes the system: the ecoPrimals architecture (11 primals, capability-based composition, NUCLEUS deployment model) and BarraCUDA (914 WGSL shaders, f64 GPU compute, vendor-agnostic scientific computing).
 
 **Part IV (Chapters 7–12)** presents the experimental validation: the spring methodology and five domain-specific results chapters, each structured as a self-contained validation study with public, reproducible repositories.
 

@@ -2,7 +2,7 @@
 
 ## 5.1 Overview
 
-This chapter describes the ecoPrimals architecture: a sovereign computing platform comprising 12 primals that coordinate through capability-based composition. The central claim: **the architecture emerged from constraint, not from design**. Tower Atomic (Pure Rust HTTPS), the bonding model, and the NUCLEUS deployment pattern were not planned — they emerged when the Pure Rust constraint eliminated OpenSSL and forced exploration of the composition pattern.
+This chapter describes the ecoPrimals architecture: a sovereign computing platform comprising 11 primals that coordinate through capability-based composition. The central claim: **the architecture emerged from constraint, not from design**. Tower Atomic (Pure Rust HTTPS), the bonding model, and the NUCLEUS deployment pattern were not planned — they emerged when the Pure Rust constraint eliminated OpenSSL and forced exploration of the composition pattern.
 
 **Reference**: `gen3/ECOSYSTEM_ARCHITECTURE.md`, `gen3/PRIMAL_CATALOG.md`.
 
@@ -32,7 +32,7 @@ This chapter describes the ecoPrimals architecture: a sovereign computing platfo
 | **skunkBat** | Defense | Threat detection, metadata-only reconnaissance, graduated response |
 | **sourDough** | Fermentation | Data pipeline orchestration, batch processing, workflow DAGs |
 
-BarraCUDA (628 WGSL shaders, 48,698 lines WGSL, f64, vendor-agnostic) is ToadStool's GPU compute subsystem — not a standalone primal but the single largest crate in the ecosystem (792 Rust source files).
+BarraCUDA (914 WGSL shaders, f64, vendor-agnostic) is ToadStool's GPU compute subsystem — not a standalone primal but the single largest crate in the ecosystem (792 Rust source files).
 
 ### 5.2.3 Measured Scale by Primal
 
@@ -120,12 +120,12 @@ Zero metadata leakage: beacons encrypted with ChaCha20-Poly1305 are indistinguis
 | WGSL shader files | 628 | `find *.wgsl` |
 | #[test] annotations (primals) | 102,889 | `grep -c` |
 | #[test] annotations (springs) | 1,294 | `grep -c` |
-| Validation checks (springs) | 2,882 | Automated CI |
+| Validation checks (springs) | 11,161+ | Automated CI |
 | C dependencies | Zero (application layer) | `cargo tree` |
 | IPC | JSON-RPC 2.0, Unix sockets | — |
 | Platforms | Linux, macOS, Android, Windows, FreeBSD, illumos, WASM | — |
 
-Squirrel (681,933 lines) is the largest primal by Rust volume; BearDog has the most cryptographic surface area (91 methods); ToadStool houses the most WGSL (628 shaders via BarraCUDA). The disparity between phase 1 and phase 2 primals reflects evolutionary maturity — the five foundation primals have undergone ~10 months of constrained evolution; the seven post-NUCLEUS primals are younger.
+Squirrel (681,933 lines) is the largest primal by Rust volume; BearDog has the most cryptographic surface area (91 methods); ToadStool houses the most WGSL (914 shaders via BarraCUDA). The disparity between phase 1 and phase 2 primals reflects evolutionary maturity — the five foundation primals have undergone ~10 months of constrained evolution; the seven post-NUCLEUS primals are younger.
 
 ---
 

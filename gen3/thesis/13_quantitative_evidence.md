@@ -47,18 +47,18 @@ No one designed BarraCUDA for physics. The FHE constraint required NTT; NTT requ
 
 ### 13.3.1 Method
 
-All 12 primals implement JSON-RPC 2.0 IPC independently. We analyze the structural similarity of these independent implementations — the computational analog of convergent evolution in isolated populations.
+All 11 primals implement JSON-RPC 2.0 IPC independently. We analyze the structural similarity of these independent implementations — the computational analog of convergent evolution in isolated populations.
 
 ### 13.3.2 Convergent Features
 
 | Feature | Primals Converging | Independent Implementations |
 |---------|-------------------|---------------------------|
-| JSON-RPC 2.0 message format | 12/12 | 12 distinct parsers |
-| Unix domain socket transport | 12/12 | 12 distinct socket handlers |
-| Capability advertisement on connect | 11/12 | 11 distinct advertisement protocols |
-| Async Tokio runtime | 12/12 | 12 distinct runtime configurations |
-| Structured error types (enum + Display) | 12/12 | 12 distinct error hierarchies |
-| Zero unsafe blocks | 12/12 | Enforced by constraint, not by convention |
+| JSON-RPC 2.0 message format | 11/11 | 11 distinct parsers |
+| Unix domain socket transport | 11/11 | 11 distinct socket handlers |
+| Capability advertisement on connect | 10/11 | 10 distinct advertisement protocols |
+| Async Tokio runtime | 11/11 | 11 distinct runtime configurations |
+| Structured error types (enum + Display) | 11/11 | 11 distinct error hierarchies |
+| Zero unsafe blocks | 11/11 | Enforced by constraint, not by convention |
 
 ### 13.3.3 Non-Identical Solutions
 
@@ -110,24 +110,24 @@ The prediction: these metrics follow power-law dynamics (rapid early improvement
 
 ---
 
-## 13.5 The 2,882-Check Velocity
+## 13.5 The 11,161-Check Velocity
 
-### 13.5.1 Current Inventory (Measured February 2026)
+### 13.5.1 Current Inventory (Measured March 7, 2026)
 
 | Spring | Domain | Checks | Papers Reproduced |
 |--------|--------|-------:|------------------:|
-| hotSpring | Plasma physics, nuclear, lattice QCD, spectral | 195 | 18 |
-| airSpring | ET₀, soil sensors, IoT irrigation | 326 | 5 |
-| wetSpring | 16S metagenomics, QS, phylogenetics, PFAS, deep-sea | 1,368 | 30+ |
-| groundSpring | Sensor noise, error propagation, sequencing depth, seismic | 71 | 5 |
-| neuralSpring | PINN, DeepONet, LeNet-5, LSTM, evo comp, spectral | 922 | 25 |
-| **Total** | **5 domains, 10 professors** | **2,882** | **80+** |
+| hotSpring | Plasma physics, nuclear, lattice QCD, spectral, NPU brain | 697+ | 25 |
+| airSpring | ET₀ (8 methods), soil, IoT, Richards PDE, immunological Anderson | 2,631+ | 57 |
+| wetSpring | 16S metagenomics, Anderson QS, PFAS, drug repurposing, immunology | 5,421+ | 52 |
+| groundSpring | Sensor noise, spectral theory, transport, quasispecies, rare biosphere | 236+ | 21 |
+| neuralSpring | PINN, DeepONet, LSTM, evo comp, dose-response, coralForge | 3,200+ | 25+ |
+| **Total** | **8 domains, 13 professors** | **11,161+** | **70+** |
 
 ### 13.5.2 Interpretation
 
-2,882 validated science checks across 5 scientific domains in ~20 days of active development, by a single developer. The comparable institutional pace for reproducing a single computational paper is weeks to months (Mesnard & Barba, 2017). The velocity is not explained by AI alone (the AI was available to everyone; the methodology was not). It is explained by the constrained evolution methodology: the Rust type system eliminated broad classes of bugs, the phased validation protocol provided clear direction, and the AI provided high-frequency generation of candidates.
+11,161+ validated science checks across 8 scientific domains in ~69 days of development, by a single developer. The comparable institutional pace for reproducing a single computational paper is weeks to months (Mesnard & Barba, 2017). The velocity is not explained by AI alone (the AI was available to everyone; the methodology was not). It is explained by the constrained evolution methodology: the Rust type system eliminated broad classes of bugs, the phased validation protocol provided clear direction, and the AI provided high-frequency generation of candidates.
 
-The growth from an initial 2,513 to 2,882 checks (a 14.7% increase) occurred primarily through the addition of Anderson's deep-sea metagenomics papers (133 checks in wetSpring) and extended Phase 0++ reproductions in neuralSpring — demonstrating that the spring framework supports incremental growth as new faculty connections and papers are identified.
+The growth from the initial 2,882 checks (February 2026) to 11,161+ (March 2026) — a 3.9× increase in ~5 weeks — occurred through three mechanisms: (1) deepening existing springs (wetSpring from 1,368 to 5,421+ through Track 4 soil, Track 5 immunological Anderson, and PFAS extensions), (2) broadening into new domains (immunology, pharmacology, drug repurposing via Gonzales and MSU Drug Discovery), and (3) cross-spring validation (the same Anderson framework validated independently in hotSpring, wetSpring, airSpring, and groundSpring). The growth rate itself is evidence for the constrained evolution model: the infrastructure specializes to its constraint environment (Rust + WGSL + validated kernels), and each new domain added to the springs exercises existing kernels rather than requiring new ones. Cross-domain kernel reuse (Section 13.6) is the mechanism behind superlinear growth.
 
 ---
 
@@ -156,9 +156,9 @@ Kernels evolved under one domain's constraints (hotSpring's plasma physics) prov
 
 The quantitative evidence shows:
 1. **NTT→FFT**: ~93 shared structural lines between cryptographic and physics transforms, with character-identical main compute kernels — emerged from constraint, not design
-2. **Convergent IPC**: 12 primals independently converging on JSON-RPC, async Tokio, capability-based patterns through 12 different implementations
-3. **Cross-domain kernels**: 6 BarraCUDA primitives serve 5 scientific domains without modification
-4. **Velocity**: 2,882 checks across 80+ papers in ~20 days exceeds institutional reproduction rates by an order of magnitude
-5. **Fastidious specialization**: Phase 1 primals average 6.4× more code and 3.4× more tests than Phase 2 primals, reflecting evolutionary maturity
+2. **Convergent implementation patterns**: 11 primals sharing directed architectural choices (JSON-RPC, capability-based) but independently converging on undirected implementation details (error granularity, retry logic, capability versioning) — the constraint environment shapes solutions beyond what the developer specifies
+3. **Cross-domain kernels**: 6 BarraCUDA primitives serve 8 scientific domains without modification — the same GEMM that does SU(3) matrix multiplication does spectral cosine matching in metagenomics and attention in neural networks
+4. **Velocity**: 11,161+ checks across 70+ papers in ~69 days exceeds institutional reproduction rates by an order of magnitude, with 3.9× growth in the most recent 5 weeks driven by cross-domain kernel reuse
+5. **Fastidious specialization**: Phase 1 primals average 6.4× more code and 3.4× more tests than Phase 2 primals, reflecting evolutionary maturity under constraint
 
-These are not analogies. They are measurements from 3.8 million lines of compiled code across 12 primals and 5 springs. The constrained evolution principle predicts all five observations; no alternative hypothesis (e.g., "good engineering" or "fast AI") predicts the full pattern.
+These are not analogies. They are measurements from 757,000 lines of Rust, 914 WGSL shaders, across 11 primals and 5 springs. The constrained evolution principle predicts all five observations. Alternative hypotheses ("good engineering") predict convergence and velocity but not cross-domain fitness from unrelated constraints (NTT→FFT). "Fast AI" predicts velocity but not the specific pattern of implementation convergence within directed architecture. The full pattern — convergence, specialization, cross-domain fitness, superlinear growth via kernel reuse — is predicted by the constrained evolution model.

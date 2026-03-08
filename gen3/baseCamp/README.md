@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 8, 2026 (standalone barraCuda v0.3.3 at `a898dee`, airSpring v0.7.5, wetSpring V98+ (173/173 full chain, upstream rewire), hotSpring v0.6.17+, neuralSpring V88, groundSpring V97, toadStool S130+ `bfe7977b`, coralReef Iteration 10 `d29a734`)
+**Date:** March 8, 2026 (standalone barraCuda v0.3.3 at `a898dee`, airSpring v0.7.5, wetSpring V98+ (173/173 full chain, upstream rewire), hotSpring v0.6.17+, neuralSpring V88, groundSpring V98, toadStool S130+ `bfe7977b`, coralReef Iteration 10 `d29a734`)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -63,6 +63,7 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 10 | First Dynamical QCD Production on Consumer GPU | Lattice QCD × Neuromorphic Computing | hotSpring Exp 024 (8⁴ dynamical, 1,031+ traj, 17 β points), Exp 028-031 | First NPU-steered dynamical fermion QCD scan. Smooth crossover confirmed. β_c ~ 5.5. NPU expanded 4-seed scan to 17 points. CG–disorder correlation validates Anderson proxy. **Exp 031: NPU controls dt/n_md with mid-beta adaptation, targeting 70% acceptance.** | **Complete + Evolving** — 17 β points, Exp 031 adds NPU parameter control. |
 | 11 | The Nautilus Shell — Evolutionary Reservoir Computing from Bingo Boards | Reservoir Computing × Neuromorphic × Evolutionary Algorithms | primalTools/bingoCube/nautilus/ (31 tests, 5 examples); **ToadStool S80**: barracuda::nautilus (7 files, 22 tests, 8 JSON-RPC methods) | Bingo boards as structured random projections; evolutionary generations replace temporal recurrence for feed-forward hardware; nautilus shell = layered evolutionary history, portable between instances. Column-range-preserving crossover maps natively to AKD1000 int4. Self-regulating drift monitor + edge seeding. AKD1000 int4 weight export. Quenched→dynamical transfer: 540× cost reduction. | **Validated** — 5.3% LOO CG error, 2.6% blind prediction on Exp 029, 31 tests. **S80**: Standalone absorption into ToadStool/BarraCUDA (7 files, 22 tests, 8 ai.nautilus.* JSON-RPC methods). |
 | 12 | Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge | Immunology × Condensed Matter Physics × Pharmacology × Drug Repurposing | wetSpring Exp273-286 (359/359), neuralSpring nS-601–605 (329/329), airSpring Exp066-069 (94/94), groundSpring Exp008/012/015/018 | Cytokine (IL-31/IL-4/IL-13) propagation through inflamed skin tissue follows Anderson localization; AD barrier disruption = dimensional promotion (inverse of Paper 06 tillage collapse); Fajgenbaum MATRIX drug-disease scoring gains geometry dimension via Anderson transport; **groundSpring** provides 2D/3D spectral validation (Exp 008), cytokine transport modeling (Exp 012), uncertainty bridge (Exp 015), band edge for epidermal periodicity (Exp 018), ConceptEdge for AD flare detection, DriftAction for treatment steering. **MSU Drug Discovery pipeline**: Anderson-augmented MATRIX scores (nS-605) → ADDRC HTS (8,000+ compounds, Lisabeth) → Gonzales iPSC validation → Ellsworth medicinal chemistry. Neubig Rho/MRTF/SRF skin fibrosis → cross-talk with JAK/STAT open question | **Validated** (Gonzales G1-G6 + Fajgenbaum MATRIX complete); **Evolving** (ADDRC pipeline, Rho cross-talk, skin-layer lattice). Source: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Richard Neubig (Drug Discovery Director) |
+| 13 | Sovereign Human Health Computing — PK/PD, Microbiome, Biosignal, and Endocrine Modeling | Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology | healthSpring Exp001-005 (PK/PD), Exp010-012 (microbiome), Exp020 (biosignal), Exp030-037 (endocrinology). 103 Rust lib tests, 179 binary checks, 192 Python checks. | **4-track human health spring**: (1) PK/PD — Hill dose-response, 1/2-compartment PK, mAb cross-species transfer, population PK Monte Carlo; (2) Microbiome — diversity indices, Anderson gut lattice, C. diff colonization resistance; (3) Biosignal — Pan-Tompkins QRS detection; (4) Endocrinology — testosterone PK (IM + pellet), age decline (Harman 2001), TRT metabolic/cardiovascular/diabetes outcomes (Saad/Sharma/Kapoor registries), population TRT Monte Carlo (10K patients), **testosterone-gut axis** (Pielou evenness → Anderson ξ → metabolic response, cross-track 2×4). Anderson gut lattice extends Paper 01/06 framework to clinical colonization resistance. PK/PD extends Paper 12 veterinary→human bridge via allometric scaling. Mok testosterone work validates clinical claims against published registry data — a novel "claim verification" pipeline. | **Validated** — Tier 0+1 complete (17 experiments, all 4 tracks green: 192 Python + 179 binary + 103 lib = 1,162+ including upstream). Tier 2 (GPU) pending barraCuda absorption. Source: Dr. Andrea J. Gonzales (PK/PD lineage), Dr. Charles Mok (clinical TRT reference, Allure Medical), Saad/Traish (long-term TRT registries) |
 
 ## Reading Order
 
@@ -89,6 +90,12 @@ baseCamp papers use that validated infrastructure to explore new science.
 **For an immunologist or veterinary pharmacologist**: 12 (Anderson in immunological signaling) → 01 (underlying Anderson-QS physics) → 06 (dimensional collapse/promotion duality) → 05 (cross-species signaling)
 
 **For a drug repurposing researcher**: 12 §3 (Fajgenbaum bridge — geometry-aware scoring) → 12 §2 (Anderson mapping) → 01 (framework) → 04 (sentinels as diagnostic analog)
+
+**For a clinical pharmacologist or endocrinologist**: 13 (healthSpring — PK/PD, population modeling, TRT) → 12 (immunological Anderson, drug geometry) → 01 (Anderson framework)
+
+**For a biomedical engineer**: 13 §Track 3 (Pan-Tompkins QRS, biosignal) → 13 §Track 2 (gut microbiome Anderson) → 08 (NPU edge IoT) → 04 (sentinel concept)
+
+**For a gastroenterologist or microbiome researcher**: 13 §Track 2 (Anderson gut lattice, C. diff colonization resistance) → 01 (Anderson-QS physics) → 06 (no-till soil — same physics, different substrate)
 
 ## Connection to the Main Thesis
 
@@ -142,20 +149,17 @@ Springs contributing validated infrastructure:
 - **airSpring**: FAO-56 ET₀ (8 methods), Priestley-Taylor, Thornthwaite, GDD, Saxton-Rawls
   pedotransfer, water balance, Richards PDE, isotherms, yield response, scheduling, lysimeter,
   sensitivity, SCS-CN runoff, Green-Ampt infiltration, Anderson coupling, diversity indices,
-  100-station Michigan Crop Water Atlas, NUCLEUS primal (35 capabilities), metalForge dispatch,
+  100-station Michigan Crop Water Atlas, NUCLEUS primal (30 capabilities), metalForge dispatch,
   AirSpringBrain (Nautilus evolutionary reservoir: ET₀/soil/crop heads), MonitoredAtlasStream
   (DriftMonitor regime change detection), Paper 12 immunological Anderson (tissue diversity +
   CytokineBrain + barrier state + cross-species), Monte Carlo ET₀ uncertainty propagation,
   Bootstrap/Jackknife CI for seasonal ET₀, Standardized Precipitation Index (SPI) drought
   analysis with gamma MLE + regularized incomplete gamma + WMO classification.
-  **v0.7.5 (March 8, 2026)**: 1284 Python + 865 lib + 186 forge tests + 95 binaries,
-  87 experiments. All 20 ops upstream via `BatchedElementwiseF64`, `local_dispatch` retired.
-  `PrecisionRoutingAdvice` wired, upstream provenance registry integrated. New: Exp 084
-  CPU/GPU parity (21/21), Exp 085 toadStool dispatch (19/19), Exp 086 metalForge NUCLEUS mesh
-  (17/17), Exp 087 graph coordination (22/22). Full NUCLEUS integration: Tower+Node+Nest live,
-  7 primals, 2 deployment graphs, 35 JSON-RPC capabilities.
-  381/381 validation checks, 146/146 cross-spring evolution.
-  14.5× CPU speedup (21/21 parity). Zero clippy pedantic+nursery warnings, cargo-deny clean.
+  **v0.7.5 (March 8, 2026)**: 1284 Python + 854 lib + 186 forge tests + 89 binaries,
+  81 experiments. All 20 ops upstream via `BatchedElementwiseF64`, `local_dispatch` retired.
+  `PrecisionRoutingAdvice` wired, upstream provenance registry integrated. New `eco::drought_index`
+  module. 381/381 validation checks, 146/146 cross-spring evolution.
+  20.6× CPU speedup (24/24 parity). Zero clippy pedantic+nursery warnings, cargo-deny clean.
 - **groundSpring**: Uncertainty quantification, noise labels, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, spectral recon, WDM precision/convergence/vendor-parity, NPU Anderson regime classification, mixed-hardware pipeline dispatch (`PCIe` topology, NUCLEUS atomics, fallback chains) (35 experiments, 936 workspace tests; live hardware: RTX 4070, Titan V, AKD1000 NPU; 2.2× GPU speedup). V97: Three-tier parity proven — 102 delegations (61 CPU + 41 GPU), runtime f64 reduction smoke test detects naga/SPIR-V zeros on F64NativeNoSharedMem hardware, 29/29 validation binaries PASS at all 3 tiers. 382 Python provenance tests (zero drift). 29/29 mathematical parity. All files < 1000 lines, zero unsafe, zero production mocks, zero `unwrap()` in production, zero TODO/FIXME in Rust source
 
 Every experiment can be reproduced with the corresponding Spring's binaries:
@@ -181,8 +185,8 @@ No proprietary data. No restricted access. No institutional dependencies.
 ┌─ hotSpring v0.6.17 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain
 ├─ neuralSpring V87 ── spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers
 ├─ wetSpring V97d ──── diversity, Bray-Curtis, rarefaction, NMF, ridge, fused Welford/Pearson chain
-├─ groundSpring V97 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, AutocorrelationF64, CovarianceF64, PeakDetectF64, ESD, Marchenko-Pastur, FFT (Fft1DF64), Shannon delegation. 102 delegations (61 CPU + 41 GPU), 936 Rust tests, 382 provenance tests, 21 benchmarks. Runtime f64 reduction smoke test + `get_device_f64_safe()` guards all 21 GPU dispatch paths. Three-tier parity proven: 29/29 validation binaries PASS at default CPU, barracuda-CPU, and barracuda-GPU tiers
-├─ airSpring v0.7.5 ── regression, moving window, hydrology (FAO-56 ET₀), 20 ops upstream (Write→Absorb→Lean complete), PrecisionRoutingAdvice, upstream provenance registry, MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index (eco::drought_index, leaned: regularized_gamma_p), gpu::autocorrelation, mean_variance_to_buffer, biomeOS NUCLEUS integration (35 JSON-RPC capabilities, Tower/Node live, Exp 083 43/43). Exp 084-087: CPU/GPU parity (18 modules, 21/21), toadStool dispatch (14 methods, 19/19), metalForge NUCLEUS mesh (17/17), graph coordination (22/22). 87 experiments, 865 lib + 186 forge tests, 95 binaries
+├─ groundSpring V98 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, AutocorrelationF64, CovarianceF64, PeakDetectF64, ESD, Marchenko-Pastur, FFT (Fft1DF64), Shannon delegation. 102 delegations (61 CPU + 41 GPU), 936 Rust tests, 382 provenance tests, 21 benchmarks. Upstream rewire: barraCuda `a898dee`, toadStool S130+, coralReef Iteration 10. Runtime f64 reduction smoke test + `get_device_f64_safe()` guards all 21 GPU dispatch paths. Three-tier parity proven: 29/29 validation binaries PASS at default CPU, barracuda-CPU, and barracuda-GPU tiers
+├─ airSpring v0.7.5 ── regression, moving window, hydrology (FAO-56 ET₀), 20 ops upstream (Write→Absorb→Lean complete), PrecisionRoutingAdvice, upstream provenance registry, MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index (eco::drought_index, leaned: regularized_gamma_p delegated upstream)
 ├─ wateringHole V69 ── Boltzmann sampling (Metropolis-Hastings MCMC)
 ├─ bingoCube/nautilus ─ NautilusBrain → BioNautilusBrain (concept edge, drift)
 └─ multi-spring ────── special functions, bootstrap, correlation
@@ -251,11 +255,12 @@ Paper 12 (Immuno-Anderson)
 
 | Spring | Contributes To | Key Primitives |
 |--------|---------------|----------------|
-| wetSpring | 01, 03, 04, 05, 06 | Anderson QS, diversity, Bray-Curtis, FASTA, NCBI, NPU int8 |
+| wetSpring | 01, 03, 04, 05, 06, **13** | Anderson QS, diversity, Bray-Curtis, FASTA, NCBI, NPU int8 |
 | hotSpring | 01, 07 | Spectral theory (Lanczos, Anderson 3D), GPU MD, lattice QCD |
-| airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson, **MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index**, **CPU/GPU parity (18 modules), toadStool dispatch (14 JSON-RPC methods), NUCLEUS mesh routing, biomeOS deployment graphs** |
-| neuralSpring | 01, 02, 04, 05, 06, 07 | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning |
-| groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
+| airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson, **MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index** |
+| neuralSpring | 01, 02, 04, 05, 06, 07, **13** | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning |
+| groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12, 13** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
+| **healthSpring** | **13** | **Hill dose-response, 1/2-compartment PK, population PK Monte Carlo, allometric scaling, Anderson gut lattice, diversity indices (Shannon/Simpson/Pielou/Chao1), colonization resistance, Pan-Tompkins QRS, testosterone PK (IM + pellet), age decline, TRT metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K), testosterone-gut axis (cross-track 2×4)** |
 
 groundSpring now contributes to ALL 10 active baseCamp papers (01-09, 12) —
 reflecting the expansion from 5 experiments (sensor noise only) to 34 experiments
@@ -285,6 +290,7 @@ program depends on.
 | 09 | Nanopore + NPU field genomics end-to-end | wetSpring (16S + NPU + PFAS ML + alignment) × airSpring (soil sensors) × neuralSpring (ESN/LSTM) × **groundSpring** (rare biosphere + uncertainty + **metalForge cross-substrate dispatch validation**) |
 | 11 | Live data stream prediction via Nautilus Shell | primalTools/bingoCube × hotSpring (trajectory data, NPU brain) × neuralSpring (ESN baseline comparison) × **groundSpring** (uncertainty budget for evolutionary vs recurrent reservoir) |
 | 12 | Skin-layer Anderson lattice (2D epidermis + 3D dermis), barrier disruption dimensional promotion, ADDRC compound selection via Anderson-augmented MATRIX, Rho/MRTF/SRF cross-talk with JAK/STAT, Gonzales iPSC validation pipeline | wetSpring (Anderson spectral Exp270-286) × neuralSpring (nS-601–605: Hill, PK, IL-31, tissue, MATRIX) × **airSpring** (GpuDiversity: Pielou evenness as tissue disorder W; CytokineBrain: Nautilus reservoir for AD flare prediction; DriftMonitor: regime change detection in cytokine time series; cross-species Exp066-069) × **groundSpring** (Exp 008 2D/3D spectral, Exp 012 cytokine transport, Exp 015 uncertainty bridge, Exp 018 band edge for epidermal periodicity; ConceptEdge for AD flare detection; DriftAction for treatment response steering) |
+| 13 | Testosterone PK (IM + pellet), TRT metabolic/cardiovascular/diabetes outcomes, population TRT Monte Carlo (10K IIV patients), testosterone-gut axis (Pielou → Anderson ξ → metabolic response), clinical claim verification pipeline from Mok (2018) against Saad/Traish/Sharma/Kapoor registries | **healthSpring** (PK/PD Exp001-005, microbiome Exp010-012, biosignal Exp020, endocrine Exp030-037 — all 17 experiments complete at Tier 0+1) × **wetSpring** (diversity → gut health → TRT response stratification) × **neuralSpring** (Hill/PK models, population surrogates) × **groundSpring** (uncertainty budgets for clinical predictions) × **NestGate** (NCBI: PubMed for TRT literature, SRA for androgen receptor expression) |
 
 ## Future Contributions
 

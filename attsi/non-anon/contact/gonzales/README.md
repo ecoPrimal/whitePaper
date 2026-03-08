@@ -188,5 +188,41 @@ dose-response × MATRIX end-to-end chain.
 
 | Date | Type | Notes |
 |------|------|-------|
-| March 2026 | Job interview | RA III Molecular Biology, Gonzales Lab, MSU Pharmacology & Toxicology. Focus: iPSC-derived skin models, drug screening, molecular biology assays. Interview went well. |
+| March 2026 | Job interview | RA III Molecular Biology, Gonzales Lab, MSU Pharmacology & Toxicology. Focus: iPSC-derived skin models, drug screening, molecular biology assays. |
+| March 2026 | Interview outcome | **Went great.** She appreciates the data science / analytics dimension. Wants me to meet Erika Lisabeth (Director, ADDRC — Assay Development and Drug Repurposing Core) in MSU Drug Discovery. This connects our Fajgenbaum MATRIX scoring directly to institutional HTS infrastructure. |
 | March 2026 | Email (draft) | Post-interview thank-you. First exposure to computational work — attaching `computational_brief.md`. She has not seen any ecoPrimals/spring/Anderson work yet. Tone: her science first, computation as differentiator alongside bench contribution. |
+
+### MSU Drug Discovery Connection (via Gonzales referral)
+
+Gonzales referred me to the MSU Drug Discovery program, specifically:
+
+**Erika Lisabeth, PhD** — Director, ADDRC (Assay Development and Drug Repurposing Core)
+- Same department: Pharmacology & Toxicology, MSU
+- https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
+- UCSD PhD (chemistry/biochemistry), Sanford Burnham Prebys postdoc
+- Domain: HTS assay development, drug repurposing, chemical probes
+- Equipment: plate readers, high-content microscopes, liquid-handling robots, GREENScreen informatics
+- Published: screened 8,000+ small molecules for Brucella host-cellular pathways (2024)
+- Research: EphA3 receptor tyrosine kinase (cancer), NF-κB degradation pathway
+
+**The pipeline this creates:**
+
+```
+Anderson-augmented MATRIX scores (nS-605)
+    → ADDRC high-throughput screening (Lisabeth, 8,000+ compound library)
+    → iPSC skin model validation (Gonzales, canine/feline/human)
+    → Medicinal chemistry optimization (Ellsworth, MSU Drug Discovery)
+```
+
+This is exactly the computation → screening → validation workflow described
+in `computational_brief.md` and `spring_validation_brief.md`, but now with
+institutional infrastructure behind it. The ADDRC is literally a drug
+repurposing core — our nS-605 Fajgenbaum MATRIX extension was built for
+this use case.
+
+**Also in MSU Drug Discovery:**
+
+| Person | Role | Relevance |
+|--------|------|-----------|
+| **Richard Neubig, MD PhD** | Prof Emeritus, Director Drug Discovery Program | GPCR signaling, Rho/MRTF/SRF inhibitors for **skin fibrosis** and melanoma. Founded UMich Center for Chemical Genomics, established MSU Drug Discovery. Skin fibrosis connects to AD barrier models. |
+| **Edmund Ellsworth, PhD** | Interim Director Drug Discovery, Director Medicinal Chemistry | Synthetic/heterocyclic chemistry, niclosamide delivery, terpene biosynthesis. Medicinal chemistry optimization downstream of HTS hits. |

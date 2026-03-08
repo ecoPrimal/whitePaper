@@ -10,14 +10,14 @@ This chapter synthesizes the strengths, limitations, and broader implications of
 
 ### 15.2.1 Novel Framework
 
-The thesis bridges biology and computer science through a formal principle — constrained evolution — grounded in three empirical biological precedents (Taq polymerase, Lenski LTEE, Anderson population genomics) and tested in a large computational system. The P != NP enzyme argument (Chapter 4) extends the framework to complexity theory.
+The thesis bridges biology and computer science through a formal principle — constrained evolution — grounded in three empirical biological precedents (Taq polymerase, Lenski LTEE, Anderson population genomics) and tested in a large computational system. The accept-and-generate observation (Chapter 4) grounds the methodology in nature's universal strategy for hard problems.
 
 ### 15.2.2 Empirical Rigor
 
-- **2,882 quantitative checks** across 5 scientific domains (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring) and 80+ papers in ~20 days
+- **11,161+ quantitative checks** across 8 scientific domains (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring, and others) and 70+ papers in ~69 days
 - **Public and reproducible**: All springs are open-source; repositories, specs, and baselines are auditable
 - **Cross-domain validation**: Plasma physics, agriculture, life science, uncertainty quantification, ML primitives
-- **Concrete case studies**: NTT→FFT structural evolution (80% identity), convergent IPC (12 primals), cross-domain kernel reuse
+- **Concrete case studies**: NTT→FFT structural evolution (80% identity), convergent IPC (11 primals), cross-domain kernel reuse
 
 ### 15.2.3 Methodology Receipt
 
@@ -87,7 +87,7 @@ The MODES toolbox and counterdiabatic driving study open-ended evolution in arti
 
 ### 15.6.1 The Convergent Evolution Evidence
 
-Twelve primals implemented JSON-RPC 2.0, Unix sockets, async Tokio, and zero unsafe blocks *independently*. They converged on the same patterns through different code — different error hierarchies, connection pooling, timeout logic. This is cephalization/eyes/wings: same function, different developmental pathways, because the constraint rewarded the function without prescribing the mechanism.
+Eleven primals implemented JSON-RPC 2.0, Unix sockets, async Tokio, and zero unsafe blocks *independently*. They converged on the same patterns through different code — different error hierarchies, connection pooling, timeout logic. This is cephalization/eyes/wings: same function, different developmental pathways, because the constraint rewarded the function without prescribing the mechanism.
 
 "Good engineering" would predict *designed* consistency. Constrained evolution predicts *emergent* convergence. The evidence supports the latter.
 
@@ -117,7 +117,7 @@ Capability hunting is the ecological analog of resource foraging: organisms don'
 
 ### 15.7.3 Scientific Computing Accessibility
 
-The cost model ($0.044 per paper-parity plasma run, ~$0.37 total for 2,882 checks) demonstrates that sovereign scientific computing on consumer hardware is viable. The f64 discovery reframes the accessibility question: the hardware is already in researchers' machines. The barrier is software (CUDA lock-in), not silicon. If the methodology generalizes, it has implications for reproducibility, institutional HPC dependency, and Global South participation in computational science.
+The cost model ($0.044 per paper-parity plasma run, ~$0.93 total for 11,161+ checks) demonstrates that sovereign scientific computing on consumer hardware is viable. The f64 discovery reframes the accessibility question: the hardware is already in researchers' machines. The barrier is software (CUDA lock-in), not silicon. If the methodology generalizes, it has implications for reproducibility, institutional HPC dependency, and Global South participation in computational science.
 
 ### 15.7.4 Biological Validation (Chapter 14)
 

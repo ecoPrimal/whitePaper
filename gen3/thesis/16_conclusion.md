@@ -16,13 +16,13 @@ This chapter restates the five contributions with supporting evidence, outlines 
 
 ### 16.2.2 Contribution 2: Sovereign Scientific Computing Platform
 
-**Claim**: The ecoPrimals ecosystem — 12 primals, capability-based composition, NUCLEUS deployment model, 1.7M lines Rust, 106K tests, zero unsafe — demonstrates that constrained evolution produces coherent, layered systems. BarraCUDA (628 WGSL shaders, f64, vendor-agnostic) achieves paper-parity plasma physics at $0.044 per run on consumer hardware.
+**Claim**: The ecoPrimals ecosystem — 11 primals, capability-based composition, NUCLEUS deployment model, 757K lines Rust, 106K tests, zero unsafe — demonstrates that constrained evolution produces coherent, layered systems. BarraCUDA (914 WGSL shaders, f64, vendor-agnostic) achieves paper-parity plasma physics at $0.044 per run on consumer hardware.
 
 **Evidence**: Chapters 5–6; ECOSYSTEM_ARCHITECTURE.md, PRIMAL_CATALOG.md; hotSpring Phase C (9/9 Yukawa MD), Phase B (nuclear EOS), Phase A (Python control).
 
 ### 16.2.3 Contribution 3: Empirical Validation Framework
 
-**Claim**: The spring methodology (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring) validates computing infrastructure against published, peer-reviewed science across five domains. 2,882 quantitative checks pass across 80+ papers in ~20 days. All springs are public and reproducible.
+**Claim**: The spring methodology (hotSpring, airSpring, wetSpring, groundSpring, neuralSpring) validates computing infrastructure against published, peer-reviewed science across eight domains. 11,161+ quantitative checks pass across 70+ papers in ~69 days. All springs are public and reproducible.
 
 **Evidence**: Chapters 7–12; SPRING_CATALOG.md; methodology receipt (agent invocations, tokens, streak).
 
@@ -32,9 +32,9 @@ This chapter restates the five contributions with supporting evidence, outlines 
 
 **Evidence**: Chapter 14; Blount et al. (2008, 2012), Tenaillon et al. (2016).
 
-### 16.2.5 Contribution 5: P != NP Enzyme Argument
+### 16.2.5 Contribution 5: Accept-and-Generate as Design Principle
 
-**Claim**: The existence of enzymes — nature's generative solutions to chemical NP problems encoded in DNA — constitutes biological evidence that generation is not reducible to verification. If P = NP, enzymes would be unnecessary. The genome is evidence for P != NP. The constrained evolution methodology (AI + compiler + developer) is the computational analog.
+**Claim**: Nature universally solves hard problems by building generators (enzymes, genomes, immune systems) and letting selection verify the output. The existence of the genome — an archive of generators accumulated over 4 billion years — is evidence that nature's strategy is accept-and-generate, not derive-and-confirm. Whether a theoretical shortcut exists (the P vs NP question) is a question about abstract mathematical objects. What nature actually does is measurable. The constrained evolution methodology (AI generates, compiler verifies, developer selects) applies nature's strategy to computational systems.
 
 **Evidence**: Chapter 4; P_NP_ENZYME_THESIS.md; Levinthal (1969), Cook (1971).
 
@@ -90,7 +90,7 @@ They connect back to constrained evolution where the biology demands it.
 
 This dissertation began with a microbiologist who had worked with bacterial populations under selective pressure and saw the same dynamics in AI-assisted code generation. The question was not "can AI write code?" but "does the *environment* in which AI writes code determine what gets built?"
 
-The answer, across 3.8 million lines of compiled code, 628 shaders, 104,000+ tests, and 2,882 scientific checks, is yes. The Rust type system did not merely accelerate development. It reshaped the fitness landscape. Tower Atomic, the NTT→FFT evolution, the convergent IPC patterns, and the bonding model emerged because the constraint made certain solutions possible and others impossible. The system reflects its environment.
+The answer, across 757,000 lines of Rust, 914 WGSL shaders, 104,000+ tests, and 11,161+ scientific checks, is yes. The Rust type system did not merely accelerate development. It reshaped the fitness landscape. Tower Atomic, the NTT→FFT evolution, the convergent IPC patterns, and the bonding model emerged because the constraint made certain solutions possible and others impossible. The system reflects its environment.
 
 ### 16.4.2 The General Principle
 

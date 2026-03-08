@@ -14,7 +14,7 @@
 
 Strategic environmental constraints — in both biological and computational systems — do not merely accelerate convergence to known solutions. They reshape fitness landscapes, driving specialization toward constraint-specific optima through independent evolutionary trajectories. This principle, observed in thermophilic adaptation, controlled laboratory evolution, natural population genomics, and AI-assisted software development within a strong type system, constitutes a general theory of constrained evolution applicable across domains.
 
-This thesis presents the theory, the computational system built under its principles (3.8 million lines of compiled code, 628 GPU shaders, 104,000+ tests across 12 primals), and the empirical scientific validation proving the system computes real physics, biology, chemistry, and mathematics correctly (2,882 quantitative checks across 80+ papers in 5 scientific domains in ~20 days).
+This thesis presents the theory, the computational system built under its principles (757,000 lines of Rust, 914 WGSL shaders, 104,000+ tests across 11 primals), and the empirical scientific validation proving the system computes real physics, biology, chemistry, and mathematics correctly (11,161+ quantitative checks across 70+ papers in 8 scientific domains in ~69 days).
 
 ---
 
@@ -33,7 +33,7 @@ This thesis presents the theory, the computational system built under its princi
 | Chapter | Title | Status |
 |---------|-------|--------|
 | 03 | [Theoretical Framework: Constrained Evolution](03_theoretical_framework.md) | Draft |
-| 04 | [The P != NP Enzyme Argument](04_pnp_enzyme.md) | Outlined |
+| 04 | [Accept and Generate — Nature's Strategy for Hard Problems](04_pnp_enzyme.md) | Draft |
 
 ### Part III — The System
 

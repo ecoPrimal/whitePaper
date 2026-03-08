@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
 **Date:** March 2, 2026  
-**Foundation:** baseCamp papers 01–12, barraCuda v0.3.3 standalone (wgpu 28), airSpring v0.7.0 (fused Welford + Pearson, 20.6× CPU speedup)
+**Foundation:** baseCamp papers 01–12, barraCuda v0.3.3 standalone (wgpu 28), airSpring v0.7.3 (Write→Absorb→Lean complete, PrecisionRouting, 20 ops upstream, 14.5× CPU speedup)
 
 ---
 

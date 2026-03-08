@@ -89,18 +89,20 @@ From these three biological lines of evidence, a general principle emerges:
 | Muller's ratchet | Technical debt accumulation | AI-generated code that compiles but is suboptimal |
 | Taq polymerase (constraint-specific innovation) | Novel architectural pattern | Tower Atomic (BearDog + Songbird composition for Pure Rust HTTPS) |
 
-### 3.3.2 Rust as Physics
+### 3.3.2 Rust as Constraint Environment
 
-Rust's constraints model the physics of the machine:
+Rust's type system enforces invariants that correspond to physical properties of the machine:
 
-- **Ownership** = gravity. Resources fall to exactly one owner and are cleaned up deterministically.
-- **Borrowing** = conservation laws. References cannot outlive their data; mutable access is exclusive.
-- **Send/Sync** = thermodynamics. Data either can or cannot safely cross thread boundaries.
-- **No null** = completeness. Every value has a defined state; `Option<T>` makes absence explicit.
+- **Ownership**: Resources have exactly one owner; cleanup is deterministic. This models the physical reality that memory has a single location and must be freed exactly once.
+- **Borrowing**: References cannot outlive their data; mutable access is exclusive. This models the physical reality that concurrent mutation of the same memory location produces undefined hardware behavior.
+- **Send/Sync**: Data either can or cannot safely cross thread boundaries. This models the physical reality that thread safety depends on data structure, not programmer intent.
+- **No null**: Every value has a defined state; `Option<T>` makes absence explicit. This models the physical reality that reading uninitialized memory produces garbage.
 
-These are not arbitrary restrictions. They are the rules of the physical machine — memory, concurrency, resource ownership — made explicit at compile time. Code that compiles under Rust's constraints respects the actual physics of the hardware. Code that doesn't, doesn't compile.
+These correspondences are a *model*, not an identity. Rust's ownership system is an abstraction over hardware memory management, not a literal encoding of physics. The model is useful because violations of the model correspond to real hardware failures — use-after-free, data races, null pointer dereference — that the compiler catches before execution.
 
-**The critical distinction**: Python/JavaScript operate at an abstraction level *above* hardware physics — the runtime handles (or mishandles) memory and concurrency. Rust operates *at* the physics level — the developer's code directly expresses memory and concurrency semantics, and the compiler verifies them. This is the difference between designing a bridge in a simulation that ignores gravity versus designing a bridge under actual gravitational constraint.
+**The critical distinction**: Python and JavaScript interpose a runtime between the programmer and the machine. The runtime handles memory and concurrency through garbage collection and the GIL, hiding the physical constraints. Rust exposes these constraints at compile time, making the programmer's code subject to selection against them. The biological analog: a greenhouse (Python's runtime) buffers the organism from environmental pressure. An open field (Rust's type system) exposes the organism directly. Both environments support life. Only the open field drives adaptation to the actual environment.
+
+**Epistemic honesty**: The mapping from biological fitness landscapes (with measurable \(N_e\), \(s\), mutation rate) to computational fitness landscapes (over program spaces) is analogical, not formal. Biological fitness landscapes have measurable topology — peaks, valleys, saddles, neutral networks (Gavrilets, 2004). The "fitness landscape" over Rust programs does not have the same measurable structure. The mapping is productive — it generates testable predictions (Section 3.4) — but it should be evaluated by whether its predictions hold, not by whether the analogy is exact.
 
 ### 3.3.3 The Binary as Genome
 
@@ -134,17 +136,23 @@ The evolutionary loop:
 
 The constrained evolution framework generates testable predictions:
 
-### 3.4.1 Convergent Evolution
+### 3.4.1 Convergent Patterns and Directed Architecture
 
-**Prediction**: Independent primals under the same environmental constraint (Rust + JSON-RPC + capability-based) will converge on similar patterns through different implementations.
+**Prediction**: Independent primals under the same environmental constraint will converge on similar structural patterns, even where those patterns were not explicitly prescribed.
 
-**Evidence**: All 12 primals converge on:
-- JSON-RPC 2.0 for IPC (independently implemented)
-- Async Tokio for concurrency (independently structured)
-- Capability-based service discovery (independently designed)
-- Pure Rust dependency trees (independently maintained)
+**Evidence**: All 12 primals share:
+- JSON-RPC 2.0 for IPC (12 independent implementations)
+- Async Tokio for concurrency (12 independent runtime configurations)
+- Capability-based service discovery (11/12 independent advertisement protocols)
+- Pure Rust dependency trees (12 independent dependency graphs)
+- Structured error types with `enum + Display` (12 independent error hierarchies)
+- Zero unsafe blocks (12/12)
 
-The convergence is analogous to cephalization, eyes, and wings — different developmental pathways producing similar functional outcomes because the physics of the environment (memory safety, type contracts, IPC latency) rewards these structures.
+**Honest limitation**: The convergence on JSON-RPC and capability-based architecture was *directed* — the developer specified these as architectural goals. This is directed design, not independent convergence. The biological analog is artificial selection (breeding for a trait), not natural convergent evolution (independent lineages arriving at eyes).
+
+**Where true convergence appears**: The convergence that *was not directed* is in the implementation details. Each primal independently evolved its own error granularity (BearDog: ~40 variants; Songbird: ~25), connection pooling, timeout/retry logic, message batching, and capability versioning. These structural similarities — the preference for fine-grained enums over strings, the pattern of capability versioning, the retry backoff strategies — emerged from the constraint environment (Rust's type system + async runtime), not from developer prescription. This is the relevant evidence: *within* a directed architecture, the constraint drives convergent implementation patterns that were not specified.
+
+The distinction matters. Claiming "convergent evolution" for prescribed architecture overstates the evidence. Observing convergent implementation patterns within prescribed architecture is the honest claim, and it is sufficient — it demonstrates that the constraint environment shapes solutions beyond what the developer directs.
 
 ### 3.4.2 Specialization Over Time (Fastidiousness)
 
@@ -283,6 +291,8 @@ This is a trade-off, not a failure. The specialization provides fitness within t
 
 ### 3.7.3 The AI Quality Question
 
-The system was built with 69,000 AI agent invocations. A legitimate concern is whether AI-generated code meets the quality standard of human-written code. The constrained evolution framework addresses this partially (the type system eliminates broad classes of bugs) but not completely (logical errors persist). The springs provide the secondary check: if the code reproduces published science correctly across 5 domains, the logical errors that remain are bounded by the precision of the scientific validation.
+The system was built with AI agent assistance (Cursor IDE, Claude). A legitimate concern is whether AI-generated code meets the quality standard of human-written code. The constrained evolution framework addresses this partially (the type system eliminates broad classes of bugs at compile time) but not completely (logical errors — code that compiles but does the wrong thing — persist). The springs provide the secondary check: if the code reproduces published science correctly across 8 domains and 70+ papers, the logical errors that remain are bounded by the precision of the scientific validation.
 
-104,000+ test annotations and 2,882 quantitative checks are the empirical answer to the quality question. They do not prove the absence of bugs. They bound the severity.
+The lokivetmab PK regression bug (neuralSpring nS-603) illustrates both the risk and the mitigation. The initial implementation reported R²=0.971 for a 3-point log-linear fit that should yield R²=1.0 exactly. The 1.7-day constant bias was caught not by the compiler but by the validation methodology — the check existed, the tolerance was defined, and the discrepancy was diagnosed as a regression initialization error. The bug was logical (the code compiled), and the springs caught it. This is the boundary: the type system catches structural errors; the springs catch scientific errors; logical errors that produce numerically plausible but incorrect results are the residual risk.
+
+11,161+ validation checks across 8 scientific domains are the empirical answer to the quality question. They do not prove the absence of bugs. They bound the severity.

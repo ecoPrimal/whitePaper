@@ -327,6 +327,72 @@ randerson@carleton.edu
 
 ---
 
+## MSU Drug Discovery Program — Pharmacology & Toxicology
+
+### Erika Lisabeth
+**Director, Assay Development and Drug Repurposing Core (ADDRC), Pharmacology & Toxicology, MSU**
+https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
+**Connection**: Referred by Gonzales (March 2026 interview)
+
+**Key Research Themes**:
+1. **HTS assay development** — converting bench-top assays to high-throughput screening format
+2. **Drug repurposing** — identifying new indications for existing compounds
+3. **EphA3 receptor tyrosine kinase** — somatic mutations inactivate EphA3 in cancer (postdoc work)
+4. **NF-κB degradation pathway** — characterized inhibitor degradation (UCSD PhD)
+
+**Candidate Papers for Reproduction**:
+
+| Paper | Domain | Spring Relevance |
+|-------|--------|-----------------|
+| Lisabeth et al. (2024) "Using Small Molecules to Identify Critical Host-Cellular Pathways for Brucella Infection." *Spartan Medical Research Journal* | Drug screening | wetSpring: HTS hit identification pipeline — 8,000+ compounds screened. Demonstrates the assay → hit → validation workflow that our MATRIX scoring could augment |
+| Lisabeth postdoc — EphA3 kinase mutations in cancer | Receptor biology | wetSpring: RTK signaling maps to Anderson framework — receptor inactivation as localization of kinase signal. Structural mutations → barrier height change |
+
+**ADDRC Infrastructure**:
+- 8,000+ compound library
+- Liquid-handling robots, automated plate readers, high-content microscopes
+- GREENScreen informatics for compound management
+- Available 24/7 to MSU researchers and external biotech
+
+**Spring Relevance**: The ADDRC is the institutional screening platform for the Anderson-augmented MATRIX drug repurposing scores (nS-605). Pipeline: computational scoring → ADDRC HTS → Gonzales iPSC validation. The Brucella screen (8,000 compounds) demonstrates the throughput; applying Anderson geometry scoring to compound selection is the extension.
+
+**BarraCUDA relevance**: Plate reader data processing (batch reduction), dose-response curve fitting (Hill equation — already in nS-601), diversity metrics for compound clustering, MATRIX scoring automation
+
+---
+
+### Richard Neubig
+**Professor Emeritus, Director Drug Discovery Program, Pharmacology & Toxicology, MSU**
+https://phmtox.msu.edu/people/rneubig
+**Connection**: MSU Drug Discovery leadership; referred via Gonzales (March 2026)
+
+**Key Research Themes**:
+1. **GPCR signaling** — G-protein coupled receptor pharmacology (>25% of current drug targets)
+2. **Rho/MRTF/SRF gene transcription** — small molecule inhibitors for fibrotic diseases
+3. **Skin fibrosis** — Rho pathway inhibitors in dermal fibrosis models
+4. **Melanoma metastasis** — MRTF/SRF inhibitors block metastatic phenotype
+5. **Academic drug discovery** — founded UMich Center for Chemical Genomics, established MSU Drug Discovery
+
+**Candidate Papers for Reproduction**:
+
+| Paper | Domain | Spring Relevance |
+|-------|--------|-----------------|
+| Neubig group — Rho/MRTF/SRF inhibitors for skin fibrosis | Dermatology × Drug Discovery | wetSpring + neuralSpring: Skin fibrosis ↔ AD barrier disruption. If Rho pathway cross-talks with JAK/STAT (Paper 12 §8 Q7), Rho inhibitors become Anderson-scorable candidates for AD. Screen in Gonzales iPSC models |
+| Neubig group — CCG-1423 series Rho pathway inhibitors | Chemical biology | wetSpring: Dose-response modeling (Hill equation, same as nS-601). Structure-activity relationships → Anderson barrier mapping |
+
+**Spring Relevance**: Neubig's skin fibrosis work connects directly to Paper 12's dimensional promotion model — fibrosis changes tissue geometry, which changes Anderson localization of cytokine signals. If Rho/MRTF/SRF cross-talks with JAK/STAT in skin, his inhibitors become candidates for Anderson-augmented MATRIX scoring.
+
+**BarraCUDA relevance**: GPCR docking (future — structural), dose-response fitting (immediate — Hill equation), signaling pathway graph analysis
+
+---
+
+### Edmund Ellsworth
+**Interim Director Drug Discovery, Director Medicinal Chemistry, MSU**
+https://drugdiscovery.msu.edu/about-us/people/index.aspx
+**Connection**: MSU Drug Discovery leadership
+
+**Spring Relevance**: Downstream of HTS — medicinal chemistry optimization after ADDRC screening identifies hits. Not a direct spring reproduction target yet, but the endpoint of the computation → screening → chemistry pipeline.
+
+---
+
 ## Cross-Spring Faculty Connections
 
 ```
@@ -347,17 +413,18 @@ randerson@carleton.edu
     Kachkovskiy localize,  │     Liu HMM/phylo,
     R. Anderson stochastic)│     Bazavov parallel,
    ┌──────────────┐        │     Kachkovskiy spectral,
-   │ Inverse probs│        │     R. Anderson pangenomics)
-   │ Noise/signal │        │    ┌──────────────┐
-   │ Anderson loc │        │    │ ML primitives │
-   │ Stochastic vs│        │    │ Evolutionary  │
-   │ deterministic│        │    │ optimization  │
-   │ Spectral recon│       │    └──────┬───────┘
-   └──────┬───────┘        │           │
+   │ Inverse probs│        │     R. Anderson pangenomics,
+   │ Noise/signal │        │     Gonzales dose-response)
+   │ Anderson loc │        │    ┌──────────────┐
+   │ Stochastic vs│        │    │ ML primitives │
+   │ deterministic│        │    │ Evolutionary  │
+   │ Spectral recon│       │    │ optimization  │
+   └──────┬───────┘        │    └──────┬───────┘
           │                │           │
           └────────┬───────┘───────────┘
                    │
-            wetSpring (Cahill, Smallwood, Jones, Waters, Liu, R. Anderson)
+            wetSpring (Cahill, Smallwood, Jones, Waters, Liu, R. Anderson,
+                      Gonzales, Lisabeth, Neubig)
             ┌──────────────────────────┐
             │ Microbial ecology         │
             │ Metagenomics              │
@@ -366,6 +433,9 @@ randerson@carleton.edu
             │ Phage dynamics            │
             │ Vent population genomics  │
             │ Deep-time enzyme evolution│
+            │ Immunological Anderson    │
+            │ Drug repurposing (MATRIX) │
+            │ HTS / ADDRC screening     │
             └──────────────────────────┘
 ```
 
@@ -394,11 +464,16 @@ Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCUDA kerne
 12. **Bourgain & Kachkovskiy (2018)** — GAFA — Anderson localization for interacting particles → groundSpring noise/signal theory, computational eigenvalue methods for BarraCUDA
 13. **Kachkovskiy (2016)** — CMP — Quasiperiodic spin chain transport → hotSpring plasma transport bridge, validates Lanczos/spectral BarraCUDA primitives
 
+### Tier 2.7 — Drug Discovery / Pharmacology (MSU Drug Discovery Program)
+14. **Lisabeth et al. (2024)** — Spartan Med Res J — Brucella HTS screen (8,000+ compounds) → validates ADDRC pipeline throughput, demonstrates computation→screening workflow for Anderson-augmented MATRIX scoring
+15. **Neubig group — Rho/MRTF/SRF skin fibrosis inhibitors** → wetSpring + neuralSpring: If Rho pathway cross-talks with JAK/STAT (Paper 12 §8 Q7), Rho inhibitors become Anderson-scorable candidates for AD. Dose-response modeling uses same Hill equation as nS-601
+16. **Gonzales (2014–2021) — 6 papers (G1–G6)** → **DONE** in wetSpring Exp273–286 + neuralSpring nS-601–605 (359/359 checks). Oclacitinib JAK selectivity, IL-31 pruritus, lokivetmab PK, three-compartment tissue, cross-species
+
 ### Tier 3 — Longer horizon, connect to broader themes
-14. **Bazavov et al. (2025)** — Phys Rev D — Muon g-2 HVP → precision lattice computation
-15. **Fernandez et al. (2020)** — PNAS — Cell shape regulation → bistable dynamical systems
-16. **Dolson (2023)** — J R Soc Interface — Ecology-evolution continuum → origin-of-life context
-17. **Liu working manuscript** — Fungi-bacteria coevolution → cophylogenetic methods for wetSpring
-18. **Filonov & Kachkovskiy (2018)** — Acta Math — 2D band edge structure → electronic/phononic transport, deep eigenvalue mathematics
-19. **Mateos, Anderson et al. (2023)** — Science Advances — Sulfur-cycling enzyme evolution across geological time → deep-time validation of constrained evolution, bioinformatics pipeline
-20. **Boden, Anderson et al. (2024)** — Nature Communications — Phosphorus-cycling enzyme timing → tree reconciliation methods, geological time enzyme dating
+17. **Bazavov et al. (2025)** — Phys Rev D — Muon g-2 HVP → precision lattice computation
+18. **Fernandez et al. (2020)** — PNAS — Cell shape regulation → bistable dynamical systems
+19. **Dolson (2023)** — J R Soc Interface — Ecology-evolution continuum → origin-of-life context
+20. **Liu working manuscript** — Fungi-bacteria coevolution → cophylogenetic methods for wetSpring
+21. **Filonov & Kachkovskiy (2018)** — Acta Math — 2D band edge structure → electronic/phononic transport, deep eigenvalue mathematics
+22. **Mateos, Anderson et al. (2023)** — Science Advances — Sulfur-cycling enzyme evolution across geological time → deep-time validation of constrained evolution, bioinformatics pipeline
+23. **Boden, Anderson et al. (2024)** — Nature Communications — Phosphorus-cycling enzyme timing → tree reconciliation methods, geological time enzyme dating

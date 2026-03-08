@@ -368,37 +368,56 @@ Same physics, opposite direction. Duality documented.
 
 ---
 
-## 7. Gonzales Lab Collaboration Potential
+## 7. Gonzales Lab + MSU Drug Discovery Collaboration
 
-Whether or not the RA III position is obtained, the Gonzales lab is a natural
-collaborator for ecoPrimals:
+The Gonzales lab is the biological validation layer. The MSU Drug Discovery
+program (ADDRC) is the screening infrastructure. Together they create a
+complete pipeline from computational prediction to experimental validation.
 
-**What she has that we need:**
+**Gonzales Lab:**
 - Empirical cytokine data (IL-31 pruritus scores, dose-response curves)
 - iPSC-derived skin models across species (canine, feline, human)
 - Plate-based screening infrastructure
 - Drug discovery pipeline and regulatory expertise
 - 18 years of Zoetis data and institutional knowledge
 
-**What we have that she needs:**
-- Computational spatial modeling (Anderson framework — no one else has this)
+**MSU Drug Discovery — ADDRC (Erika Lisabeth, Director):**
+- High-throughput screening facility in the same department (Pharm & Tox)
+- 8,000+ compound library, liquid-handling robots, plate readers
+- HTS assay development and drug repurposing expertise
+- GREENScreen informatics for compound management and data analysis
+- Gonzales referred contact (March 2026 interview)
+
+**MSU Drug Discovery — Additional (Richard Neubig, Edmund Ellsworth):**
+- Neubig: Rho/MRTF/SRF inhibitors for skin fibrosis and melanoma —
+  potential cross-talk with JAK/STAT in AD barrier models
+- Ellsworth: Medicinal chemistry optimization downstream of HTS hits
+
+**What we bring:**
+- Anderson localization spatial modeling (no one else has this for immunology)
+- Fajgenbaum MATRIX drug repurposing with tissue geometry scoring (nS-605)
 - Statistical analysis and ML (data science for screening data)
 - Bioinformatics (sequencing analysis, NCBI pipelines)
-- Automated data workflows (Visual Basic → Python/Rust)
-- Drug repurposing framework connection (Fajgenbaum bridge)
+- Automated data workflows
+- GPU/NPU-accelerated diversity + regime classification
 
-**If hired as RA III:**
+**The pipeline:**
+
+```
+Anderson-augmented MATRIX scores (nS-605, 6 candidates scored)
+    → ADDRC high-throughput screening (Lisabeth, 8,000+ compounds)
+    → iPSC skin model validation (Gonzales, canine/feline/human)
+    → Medicinal chemistry optimization (Ellsworth)
+    → Pre-clinical development
+```
+
+**As RA III in Gonzales Lab:**
 - Dual contribution: bench work (molecular biology, cell culture, assays)
   + computational (Anderson modeling, data analysis, ML)
+- Bridge between Gonzales lab (biology) and ADDRC (screening)
 - Build internal Spring experiments from real lab data
 - First opportunity to test Anderson predictions in immunological tissue
-
-**If not hired:**
-- Propose external collaboration: "we provide computational modeling,
-  you provide empirical validation"
-- Gonzales's data (published) can be ingested into springs regardless
-- NestGate NCBI pipeline already handles the gene expression queries needed
-- No institutional dependency required
+- Data science analytics for HTS data coming from ADDRC collaborations
 
 ---
 
@@ -414,7 +433,16 @@ collaborator for ecoPrimals:
    using cytokine panel data? (Need: published cytokine profiling datasets)
 5. Does rapamycin's efficacy in cytokine storms (Fajgenbaum) predict
    efficacy in AD via the mTOR/JAK cross-talk? (Testable with Gonzales's
-   plate-based screening infrastructure)
+   iPSC models + ADDRC screening infrastructure)
+6. Can the Anderson-augmented MATRIX scoring (nS-605) guide compound
+   selection from the ADDRC's 8,000+ library for AD-specific screening?
+   (Need: ADDRC compound metadata + Gonzales iPSC validation assay)
+7. Does Neubig's Rho/MRTF/SRF skin fibrosis pathway cross-talk with
+   JAK/STAT in AD barrier disruption? (Testable: screen Rho inhibitors
+   in Gonzales iPSC models, score with Anderson geometry)
+8. Can the PK duration model (nS-603) be refined with additional dose
+   levels from companion-animal clinical data? (Need: lokivetmab outcomes
+   at doses beyond the 3 published in G4)
 
 ---
 

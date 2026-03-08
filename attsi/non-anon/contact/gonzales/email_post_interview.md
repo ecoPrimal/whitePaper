@@ -5,11 +5,17 @@ Dept. of Pharmacology & Toxicology, MSU. Position focuses on iPSC-derived
 skin models, drug screening, molecular biology assays. She has NOT seen any
 of the computational work yet. This is the first time she'll see it.
 
+**Interview outcome:** Went great. She appreciates the data science /
+analytics dimension. Wants me to meet Erika Lisabeth (Director, ADDRC) in
+MSU Drug Discovery — the drug repurposing and HTS screening core in the
+same department.
+
 **Goal:** Thank-you that demonstrates computational capability and genuine
 engagement with her research. Show that he's already thinking about how to
 contribute to the lab — not just as a bench tech, but as someone who
-bridges bench and computation. Don't overwhelm. Lead with her science, not
-the infrastructure.
+bridges bench and computation. Mention looking forward to meeting the Drug
+Discovery team. Don't overwhelm. Lead with her science, not the
+infrastructure.
 
 **Attachment:** `computational_brief.md` — the technical brief. It's
 written for her, models her published data, and links to the public repos.
@@ -78,6 +84,13 @@ I'd be excited to bring this kind of computational support to the lab
 alongside the bench work. Being able to model your screening data, run
 the bioinformatics, and handle the statistical analysis while also
 contributing at the bench is how I'd want to make myself most useful.
+
+I'm also looking forward to meeting Dr. Lisabeth and the Drug Discovery
+team. The drug repurposing work I've done computationally connects
+directly to what the ADDRC does with high-throughput screening — having
+computational scoring guide which compounds get screened, and then
+validating the predictions with your iPSC models, is exactly the kind of
+pipeline I'd want to help build.
 
 Thank you again for your time. I look forward to hearing from you.
 
