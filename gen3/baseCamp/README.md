@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 7, 2026 (standalone barraCuda v0.3.3 at `2a6c072`, airSpring v0.7.0, wetSpring V97e, hotSpring v0.6.17+, neuralSpring V88, groundSpring V96, toadStool S130, coralReef Iteration 7)
+**Date:** March 8, 2026 (standalone barraCuda v0.3.3 at `a898dee`, airSpring v0.7.5, wetSpring V98+ (173/173 full chain, upstream rewire), hotSpring v0.6.17+, neuralSpring V88, groundSpring V97, toadStool S130+ `bfe7977b`, coralReef Iteration 10 `d29a734`)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -58,7 +58,7 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 05 | Cross-Species Signaling in Symbiotic Systems | Symbiotic Ecology | Exp142, 144-146 (cold seep + luxR phylogeny) | Mixed-species QS in lichen, rhizobia, coral; 299K QS genes across 170 metagenomes; eavesdropper enrichment confirmed | **Validated** — cold seep + phylogeny complete |
 | 06 | Anderson Localization as the Mechanism Behind No-Till Soil Health | Soil Microbial Ecology × Physics | Track 4: Exp170-182 (321 checks), 9 papers, full three-tier | Tillage = dimensional collapse of QS-active 3D pore network; CPU + GPU + metalForge validated | **Validated** — Track 4 complete |
 | 07 | Sovereign Warm Dense Matter Simulation on Consumer GPU | Plasma Physics × Distributed Computing | hotSpring Tier 4 + neuralSpring surrogates + groundSpring uncertainty | WDM transport on $600 GPU; deconfinement at β_c=5.69 on $1,500 GPU; **11-head NPU GPU conductor** (Exp 023) | **Validated** — hotSpring v0.6.15 |
-| 08 | Neuromorphic Edge Intelligence for Sovereign Agricultural IoT | Agricultural IoT × Neuromorphic Computing | airSpring Exp 028-029 (88 checks) + wetSpring NPU driver | NPU inference at 0.0009% of active cycle energy; 10.7× more efficient than cloud; 1-min cadence unlocked; multi-crop hot-swap | **Validated on Live Hardware** — AKD1000, streaming + evolution + power budget. airSpring v0.7.0: 827 lib + 186 forge tests, barraCuda 0.3.3 (wgpu 28), fused Welford + Pearson wired, 20.6× CPU speedup (24/24 parity), 381/381 validation |
+| 08 | Neuromorphic Edge Intelligence for Sovereign Agricultural IoT | Agricultural IoT × Neuromorphic Computing | airSpring Exp 028-029 (88 checks) + wetSpring NPU driver | NPU inference at 0.0009% of active cycle energy; 10.7× more efficient than cloud; 1-min cadence unlocked; multi-crop hot-swap | **Validated on Live Hardware** — AKD1000, streaming + evolution + power budget. airSpring v0.7.3: 848 lib + 186 forge tests, all 20 ops upstream, `PrecisionRoutingAdvice` wired |
 | 09 | Sovereign Field Genomics — Nanopore + NPU | Environmental Genomics × Edge Inference | wetSpring Exp193-195 (NPU) + Exp184-185 (16S) + planned Exp196-202 | MinION sequencing + AKD1000 classification + BarraCUDA 16S pipeline = autonomous field sentinel. NPU-driven adaptive sampling (37x read-rate headroom). No cloud, no Python. | **Architecture defined** — all compute components validated, awaiting sequencer hardware |
 | 10 | First Dynamical QCD Production on Consumer GPU | Lattice QCD × Neuromorphic Computing | hotSpring Exp 024 (8⁴ dynamical, 1,031+ traj, 17 β points), Exp 028-031 | First NPU-steered dynamical fermion QCD scan. Smooth crossover confirmed. β_c ~ 5.5. NPU expanded 4-seed scan to 17 points. CG–disorder correlation validates Anderson proxy. **Exp 031: NPU controls dt/n_md with mid-beta adaptation, targeting 70% acceptance.** | **Complete + Evolving** — 17 β points, Exp 031 adds NPU parameter control. |
 | 11 | The Nautilus Shell — Evolutionary Reservoir Computing from Bingo Boards | Reservoir Computing × Neuromorphic × Evolutionary Algorithms | primalTools/bingoCube/nautilus/ (31 tests, 5 examples); **ToadStool S80**: barracuda::nautilus (7 files, 22 tests, 8 JSON-RPC methods) | Bingo boards as structured random projections; evolutionary generations replace temporal recurrence for feed-forward hardware; nautilus shell = layered evolutionary history, portable between instances. Column-range-preserving crossover maps natively to AKD1000 int4. Self-regulating drift monitor + edge seeding. AKD1000 int4 weight export. Quenched→dynamical transfer: 540× cost reduction. | **Validated** — 5.3% LOO CG error, 2.6% blind prediction on Exp 029, 31 tests. **S80**: Standalone absorption into ToadStool/BarraCUDA (7 files, 22 tests, 8 ai.nautilus.* JSON-RPC methods). |
@@ -142,21 +142,21 @@ Springs contributing validated infrastructure:
 - **airSpring**: FAO-56 ET₀ (8 methods), Priestley-Taylor, Thornthwaite, GDD, Saxton-Rawls
   pedotransfer, water balance, Richards PDE, isotherms, yield response, scheduling, lysimeter,
   sensitivity, SCS-CN runoff, Green-Ampt infiltration, Anderson coupling, diversity indices,
-  100-station Michigan Crop Water Atlas, NUCLEUS primal (30 capabilities), metalForge dispatch,
+  100-station Michigan Crop Water Atlas, NUCLEUS primal (35 capabilities), metalForge dispatch,
   AirSpringBrain (Nautilus evolutionary reservoir: ET₀/soil/crop heads), MonitoredAtlasStream
   (DriftMonitor regime change detection), Paper 12 immunological Anderson (tissue diversity +
-  CytokineBrain + barrier state + cross-species), 6 local WGSL compute shaders
-  (`local_elementwise_f64.wgsl`: SCS-CN, Stewart yield, Makkink, Turc, Hamon, Blaney-Criddle)
-  via `gpu::local_dispatch::LocalElementwise` (f64 canonical, compile_shader_universal).
-  **v0.7.0 (March 5, 2026)**: Rewired to standalone barraCuda 0.3.3 (wgpu 28). 1237 Python +
-  827 lib + 186 forge tests + 86 binaries, 78 experiments. 381/381 validation checks.
-  25 Tier A + 6 GPU-local (3/6 absorbed upstream: Makkink, Turc, Hamon),
-  fused Welford mean-variance + fused Pearson correlation wired from upstream,
-  DF64 precision tier documented, Fp64Strategy::Concurrent for cross-validation.
-  20.6× CPU speedup (24/24 parity). 146/146 cross-spring evolution, 34 ShaderProvenance entries.
-  27 GPU tests fail upstream (wgpu 28 + NVK/Titan V), CPU fallback in SeasonalReducer.
-  Zero clippy pedantic+nursery warnings, cargo-deny clean.
-- **groundSpring**: Uncertainty quantification, noise labels, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, spectral recon, WDM precision/convergence/vendor-parity, NPU Anderson regime classification, mixed-hardware pipeline dispatch (`PCIe` topology, NUCLEUS atomics, fallback chains) (35 experiments, 807 workspace tests; live hardware: RTX 4070, Titan V, AKD1000 NPU; 2.2× GPU speedup). V91: Complete ecosystem rewire — 100 delegations (59 CPU + 41 GPU) including `AutocorrelationF64`, `CovarianceF64`, `PeakDetectF64`, `empirical_spectral_density`, `marchenko_pastur_bounds`. 91.55% line coverage. 21 benchmark workloads. Cross-spring shader evolution documented. Deep debt eliminated: zero unsafe (temp-env RAII), 11 validation binaries migrated to `barracuda::stats`. barraCuda v0.3.3, toadStool S128, coralReef Phase 9. All files < 1000 lines, zero unsafe, zero production mocks, zero `unwrap()` in production, zero TODO/FIXME in Rust source
+  CytokineBrain + barrier state + cross-species), Monte Carlo ET₀ uncertainty propagation,
+  Bootstrap/Jackknife CI for seasonal ET₀, Standardized Precipitation Index (SPI) drought
+  analysis with gamma MLE + regularized incomplete gamma + WMO classification.
+  **v0.7.5 (March 8, 2026)**: 1284 Python + 865 lib + 186 forge tests + 95 binaries,
+  87 experiments. All 20 ops upstream via `BatchedElementwiseF64`, `local_dispatch` retired.
+  `PrecisionRoutingAdvice` wired, upstream provenance registry integrated. New: Exp 084
+  CPU/GPU parity (21/21), Exp 085 toadStool dispatch (19/19), Exp 086 metalForge NUCLEUS mesh
+  (17/17), Exp 087 graph coordination (22/22). Full NUCLEUS integration: Tower+Node+Nest live,
+  7 primals, 2 deployment graphs, 35 JSON-RPC capabilities.
+  381/381 validation checks, 146/146 cross-spring evolution.
+  14.5× CPU speedup (21/21 parity). Zero clippy pedantic+nursery warnings, cargo-deny clean.
+- **groundSpring**: Uncertainty quantification, noise labels, spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, spectral recon, WDM precision/convergence/vendor-parity, NPU Anderson regime classification, mixed-hardware pipeline dispatch (`PCIe` topology, NUCLEUS atomics, fallback chains) (35 experiments, 936 workspace tests; live hardware: RTX 4070, Titan V, AKD1000 NPU; 2.2× GPU speedup). V97: Three-tier parity proven — 102 delegations (61 CPU + 41 GPU), runtime f64 reduction smoke test detects naga/SPIR-V zeros on F64NativeNoSharedMem hardware, 29/29 validation binaries PASS at all 3 tiers. 382 Python provenance tests (zero drift). 29/29 mathematical parity. All files < 1000 lines, zero unsafe, zero production mocks, zero `unwrap()` in production, zero TODO/FIXME in Rust source
 
 Every experiment can be reproduced with the corresponding Spring's binaries:
 
@@ -181,8 +181,8 @@ No proprietary data. No restricted access. No institutional dependencies.
 ┌─ hotSpring v0.6.17 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain
 ├─ neuralSpring V87 ── spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers
 ├─ wetSpring V97d ──── diversity, Bray-Curtis, rarefaction, NMF, ridge, fused Welford/Pearson chain
-├─ groundSpring V96 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, AutocorrelationF64, CovarianceF64, PeakDetectF64, ESD, Marchenko-Pastur, FFT (Fft1DF64), Shannon delegation. 102 delegations (61 CPU + 41 GPU), 925 Rust tests, 261 provenance tests, 21 benchmarks. PrecisionRoutingAdvice wired into 11 GPU dispatch paths. Synced against barraCuda `2a6c072`, toadStool S130, coralReef Iteration 7
-├─ airSpring v0.7.0 ── regression, moving window, hydrology (FAO-56 ET₀), f64 canonical universal precision, barraCuda 0.3.3 (wgpu 28), 3/6 local ops absorbed upstream
+├─ groundSpring V97 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, AutocorrelationF64, CovarianceF64, PeakDetectF64, ESD, Marchenko-Pastur, FFT (Fft1DF64), Shannon delegation. 102 delegations (61 CPU + 41 GPU), 936 Rust tests, 382 provenance tests, 21 benchmarks. Runtime f64 reduction smoke test + `get_device_f64_safe()` guards all 21 GPU dispatch paths. Three-tier parity proven: 29/29 validation binaries PASS at default CPU, barracuda-CPU, and barracuda-GPU tiers
+├─ airSpring v0.7.5 ── regression, moving window, hydrology (FAO-56 ET₀), 20 ops upstream (Write→Absorb→Lean complete), PrecisionRoutingAdvice, upstream provenance registry, MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index (eco::drought_index, leaned: regularized_gamma_p), gpu::autocorrelation, mean_variance_to_buffer, biomeOS NUCLEUS integration (35 JSON-RPC capabilities, Tower/Node live, Exp 083 43/43). Exp 084-087: CPU/GPU parity (18 modules, 21/21), toadStool dispatch (14 methods, 19/19), metalForge NUCLEUS mesh (17/17), graph coordination (22/22). 87 experiments, 865 lib + 186 forge tests, 95 binaries
 ├─ wateringHole V69 ── Boltzmann sampling (Metropolis-Hastings MCMC)
 ├─ bingoCube/nautilus ─ NautilusBrain → BioNautilusBrain (concept edge, drift)
 └─ multi-spring ────── special functions, bootstrap, correlation
@@ -253,7 +253,7 @@ Paper 12 (Immuno-Anderson)
 |--------|---------------|----------------|
 | wetSpring | 01, 03, 04, 05, 06 | Anderson QS, diversity, Bray-Curtis, FASTA, NCBI, NPU int8 |
 | hotSpring | 01, 07 | Spectral theory (Lanczos, Anderson 3D), GPU MD, lattice QCD |
-| airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson |
+| airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson, **MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index**, **CPU/GPU parity (18 modules), toadStool dispatch (14 JSON-RPC methods), NUCLEUS mesh routing, biomeOS deployment graphs** |
 | neuralSpring | 01, 02, 04, 05, 06, 07 | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning |
 | groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
 
