@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 8, 2026 (standalone barraCuda v0.3.3 at `a898dee`, airSpring v0.7.5, wetSpring V98+ (173/173 full chain, upstream rewire), hotSpring v0.6.17+, neuralSpring V88, groundSpring V98, toadStool S130+ `bfe7977b`, coralReef Iteration 10 `d29a734`)
+**Date:** March 9, 2026 (standalone barraCuda v0.3.3 at `a898dee`, airSpring v0.7.5, wetSpring V98+ (173/173 full chain, upstream rewire), hotSpring v0.6.17+, neuralSpring V88, groundSpring V98, toadStool S130+ `bfe7977b`, coralReef Iteration 10 `d29a734`)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -63,13 +63,15 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 10 | First Dynamical QCD Production on Consumer GPU | Lattice QCD × Neuromorphic Computing | hotSpring Exp 024 (8⁴ dynamical, 1,031+ traj, 17 β points), Exp 028-031 | First NPU-steered dynamical fermion QCD scan. Smooth crossover confirmed. β_c ~ 5.5. NPU expanded 4-seed scan to 17 points. CG–disorder correlation validates Anderson proxy. **Exp 031: NPU controls dt/n_md with mid-beta adaptation, targeting 70% acceptance.** | **Complete + Evolving** — 17 β points, Exp 031 adds NPU parameter control. |
 | 11 | The Nautilus Shell — Evolutionary Reservoir Computing from Bingo Boards | Reservoir Computing × Neuromorphic × Evolutionary Algorithms | primalTools/bingoCube/nautilus/ (31 tests, 5 examples); **ToadStool S80**: barracuda::nautilus (7 files, 22 tests, 8 JSON-RPC methods) | Bingo boards as structured random projections; evolutionary generations replace temporal recurrence for feed-forward hardware; nautilus shell = layered evolutionary history, portable between instances. Column-range-preserving crossover maps natively to AKD1000 int4. Self-regulating drift monitor + edge seeding. AKD1000 int4 weight export. Quenched→dynamical transfer: 540× cost reduction. | **Validated** — 5.3% LOO CG error, 2.6% blind prediction on Exp 029, 31 tests. **S80**: Standalone absorption into ToadStool/BarraCUDA (7 files, 22 tests, 8 ai.nautilus.* JSON-RPC methods). |
 | 12 | Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge | Immunology × Condensed Matter Physics × Pharmacology × Drug Repurposing | wetSpring Exp273-286 (359/359), neuralSpring nS-601–605 (329/329), airSpring Exp066-069 (94/94), groundSpring Exp008/012/015/018 | Cytokine (IL-31/IL-4/IL-13) propagation through inflamed skin tissue follows Anderson localization; AD barrier disruption = dimensional promotion (inverse of Paper 06 tillage collapse); Fajgenbaum MATRIX drug-disease scoring gains geometry dimension via Anderson transport; **groundSpring** provides 2D/3D spectral validation (Exp 008), cytokine transport modeling (Exp 012), uncertainty bridge (Exp 015), band edge for epidermal periodicity (Exp 018), ConceptEdge for AD flare detection, DriftAction for treatment steering. **MSU Drug Discovery pipeline**: Anderson-augmented MATRIX scores (nS-605) → ADDRC HTS (8,000+ compounds, Lisabeth) → Gonzales iPSC validation → Ellsworth medicinal chemistry. Neubig Rho/MRTF/SRF skin fibrosis → cross-talk with JAK/STAT open question | **Validated** (Gonzales G1-G6 + Fajgenbaum MATRIX complete); **Evolving** (ADDRC pipeline, Rho cross-talk, skin-layer lattice). Source: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Richard Neubig (Drug Discovery Director) |
-| 13 | Sovereign Human Health Computing — PK/PD, Microbiome, Biosignal, and Endocrine Modeling | Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology | healthSpring Exp001-005 (PK/PD), Exp010-012 (microbiome), Exp020 (biosignal), Exp030-037 (endocrinology). 103 Rust lib tests, 179 binary checks, 192 Python checks. | **4-track human health spring**: (1) PK/PD — Hill dose-response, 1/2-compartment PK, mAb cross-species transfer, population PK Monte Carlo; (2) Microbiome — diversity indices, Anderson gut lattice, C. diff colonization resistance; (3) Biosignal — Pan-Tompkins QRS detection; (4) Endocrinology — testosterone PK (IM + pellet), age decline (Harman 2001), TRT metabolic/cardiovascular/diabetes outcomes (Saad/Sharma/Kapoor registries), population TRT Monte Carlo (10K patients), **testosterone-gut axis** (Pielou evenness → Anderson ξ → metabolic response, cross-track 2×4). Anderson gut lattice extends Paper 01/06 framework to clinical colonization resistance. PK/PD extends Paper 12 veterinary→human bridge via allometric scaling. Mok testosterone work validates clinical claims against published registry data — a novel "claim verification" pipeline. | **Validated** — Tier 0+1 complete (17 experiments, all 4 tracks green: 192 Python + 179 binary + 103 lib = 1,162+ including upstream). Tier 2 (GPU) pending barraCuda absorption. Source: Dr. Andrea J. Gonzales (PK/PD lineage), Dr. Charles Mok (clinical TRT reference, Allure Medical), Saad/Traish (long-term TRT registries) |
+| 13 | Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines | Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × Clinical Translation | healthSpring Exp001-006 (PK/PD), Exp010-013 (microbiome), Exp020-023 (biosignal), Exp030-038 (endocrinology), Exp040-064 (validation + diagnostics + GPU + visualization + dispatch + clinical TRT + IPC). 221 unit tests, 526+ binary checks, 104 cross-validation checks. | **4-track human health spring + per-person translation**: (1) PK/PD — Hill dose-response, 1/2-compartment PK, mAb cross-species transfer, population PK Monte Carlo, **PBPK 5-tissue physiological**; (2) Microbiome — diversity indices, Anderson gut lattice, C. diff colonization resistance, **FMT engraftment**; (3) Biosignal — Pan-Tompkins QRS detection, **HRV metrics, PPG SpO2, EDA, multi-channel fusion**; (4) Endocrinology — testosterone PK (IM + pellet), age decline (Harman 2001), TRT metabolic/cardiovascular/diabetes outcomes (Saad/Sharma/Kapoor registries), population TRT Monte Carlo (10K patients), testosterone-gut axis (cross-track 2×4), **HRV×TRT cardiovascular** (cross-track D3); (V) **barraCuda CPU parity** (15 analytical contracts); (VI) **Patient-parameterized clinical TRT scenarios** (5 archetypes, 8 nodes + 8 edges each, clinical mode preset); (VII) **petalTongue SAME DAVE motor channel + IPC push**. GPU dispatch layer, metalForge NUCLEUS atomics (33 tests), toadStool pipeline (17 tests). CPU vs GPU parity matrix (27/27), mixed dispatch (22/22), PCIe P2P (26/26). | **Validated** — V9, Tier 0+1+2+3 complete (37 experiments, 104 cross-validation + 526+ binary + 221 unit). **Per-person clinical scenarios**: 5 patient archetypes with petalTongue clinical mode. **SAME DAVE integration**: motor command channel, IPC bridge, mode presets. Source: Gonzales (PK/PD), Mok (clinical TRT), Saad/Traish (registries) |
 
 ## Reading Order
 
 **For a microbiologist**: 01 (Anderson-QS, the headline result) → 05 (cross-species) → 03 (bioag) → 06 (no-till)
 
-**For an immunologist or pharmacologist**: 12 (immunological Anderson — cytokine propagation, Fajgenbaum bridge) → 01 (Anderson-QS foundation) → 05 (cross-species signaling) → 04 (sentinels — ESN regime classification)
+**For an immunologist or pharmacologist**: 12 (immunological Anderson — cytokine propagation, Fajgenbaum bridge) → 13 (human health PK/PD, endocrine, microbiome) → 01 (Anderson-QS foundation) → 05 (cross-species signaling) → 04 (sentinels — ESN regime classification)
+
+**For a clinical pharmacologist / endocrinologist**: 13 (human health 4-track: PK/PD, microbiome, biosignal, endocrine) → 12 (veterinary→human bridge, allometric scaling) → 01 (Anderson framework for gut lattice)
 
 **For an ecologist**: 05 (symbiotic signaling) → 02 (LTEE extensions) → 04 (sentinels) → 06 (no-till)
 
@@ -126,6 +128,62 @@ These explorations draw directly on the author's lab experience:
   Informed Sub-thesis 04 (contamination biosensing).
 - **Microbial Ecology Lab (undergrad)**: Rumen bacteria isolation, RDP analysis.
   Informed the diversity-disorder mapping in Sub-thesis 01.
+
+## The Shotgun Sequencing of Networking
+
+Each baseCamp paper is anchored to a specific faculty member whose published
+work was reproduced. This is deliberate: rather than selecting random papers
+from the literature, every reproduction targets a professor the author has
+worked with, studied under, or been referred to. The anchor provides two
+things — domain expertise the author does not have, and a person who can
+say whether the results are right.
+
+The strategy is the shotgun sequencing of networking:
+
+1. **Reproduce their work.** Pick a professor. Read their papers. Implement
+   the math in Rust. Validate against their published results. Do this
+   without contacting them.
+
+2. **Make it public.** Push the code (AGPL-3.0), the validation checks, and
+   the documentation to GitHub. The work speaks before any email is sent.
+
+3. **Send the results.** A short, specific message: "I reproduced your
+   paper, here's what I got, does this look right?" Lead with their
+   physics, not the infrastructure. Point to the repo. Don't attach PDFs.
+
+4. **Keep building.** Don't wait for a reply. Start the next paper, the
+   next spring, the next track. If they respond, the conversation has
+   substance — validated results, not a pitch. If they don't, the work
+   still exists and the code still runs.
+
+This produces a network topology where each node (professor) is connected
+through verified reproduction of their own science, not through cold
+outreach or institutional affiliation. The springs are the probes — each
+one validates a different domain and creates a different faculty anchor:
+
+| Spring | Faculty Anchor | Connection |
+|--------|---------------|------------|
+| hotSpring | Murillo (plasma), Bazavov (lattice QCD), Kachkovskiy (spectral) | CMSE professors |
+| hotSpring | Chuna (gradient flow, dielectric, kinetic-fluid) | Murillo referral → replied March 9 |
+| wetSpring | Waters (quorum sensing), Liu (phylogenetics) | Undergrad professor, CMSE professor |
+| wetSpring | Cahill, Smallwood (algae, metagenomics) | Sandia fellowship |
+| wetSpring | Jones (PFAS, mass spectrometry) | Current employer |
+| airSpring | Dong (precision agriculture, ET₀) | New lab 2026 |
+| neuralSpring | Dolson (evolutionary computation) | CMSE professor |
+| healthSpring | Gonzales (pharmacology, drug discovery) | Job interview March 2026 |
+| healthSpring | Mok (TRT, endocrinology) | Father |
+| Paper 12 | Lisabeth (ADDRC), Neubig (Drug Discovery) | Gonzales referral |
+
+The approach mirrors experimental biology: cast a wide net of targeted
+probes (like shotgun sequencing reads), align the responses to a reference
+(the validated math), and assemble the coverage into something coherent.
+Each probe is independent. Each response adds signal. The assembly happens
+in baseCamp.
+
+The work is public. The contacts are private. The strategy is documented
+here because it is itself a methodology contribution — a systematic way
+for an independent researcher to build credibility through verified
+reproduction rather than institutional affiliation.
 
 ## Data and Reproducibility
 
@@ -260,7 +318,7 @@ Paper 12 (Immuno-Anderson)
 | airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson, **MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index** |
 | neuralSpring | 01, 02, 04, 05, 06, 07, **13** | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning |
 | groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12, 13** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
-| **healthSpring** | **13** | **Hill dose-response, 1/2-compartment PK, population PK Monte Carlo, allometric scaling, Anderson gut lattice, diversity indices (Shannon/Simpson/Pielou/Chao1), colonization resistance, Pan-Tompkins QRS, testosterone PK (IM + pellet), age decline, TRT metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K), testosterone-gut axis (cross-track 2×4)** |
+| **healthSpring** | **13** | **Hill dose-response, 1/2-compartment PK, PBPK 5-tissue, population PK Monte Carlo, allometric scaling, Anderson gut lattice, diversity indices (Shannon/Simpson/Pielou/Chao1), colonization resistance, FMT engraftment, Pan-Tompkins QRS, HRV/PPG SpO2/EDA fusion, testosterone PK (IM + pellet), age decline, TRT metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K), testosterone-gut axis, HRV×TRT cross-track. GPU Tier 2+3: 3 WGSL shaders, GpuContext, fused pipeline, mixed dispatch, PCIe P2P. V9: patient-parameterized clinical TRT scenarios (5 archetypes), petalTongue SAME DAVE motor channel + IPC push, clinical mode presets. Per-person translation: population models → individual patient insight** |
 
 groundSpring now contributes to ALL 10 active baseCamp papers (01-09, 12) —
 reflecting the expansion from 5 experiments (sensor noise only) to 34 experiments
@@ -290,7 +348,7 @@ program depends on.
 | 09 | Nanopore + NPU field genomics end-to-end | wetSpring (16S + NPU + PFAS ML + alignment) × airSpring (soil sensors) × neuralSpring (ESN/LSTM) × **groundSpring** (rare biosphere + uncertainty + **metalForge cross-substrate dispatch validation**) |
 | 11 | Live data stream prediction via Nautilus Shell | primalTools/bingoCube × hotSpring (trajectory data, NPU brain) × neuralSpring (ESN baseline comparison) × **groundSpring** (uncertainty budget for evolutionary vs recurrent reservoir) |
 | 12 | Skin-layer Anderson lattice (2D epidermis + 3D dermis), barrier disruption dimensional promotion, ADDRC compound selection via Anderson-augmented MATRIX, Rho/MRTF/SRF cross-talk with JAK/STAT, Gonzales iPSC validation pipeline | wetSpring (Anderson spectral Exp270-286) × neuralSpring (nS-601–605: Hill, PK, IL-31, tissue, MATRIX) × **airSpring** (GpuDiversity: Pielou evenness as tissue disorder W; CytokineBrain: Nautilus reservoir for AD flare prediction; DriftMonitor: regime change detection in cytokine time series; cross-species Exp066-069) × **groundSpring** (Exp 008 2D/3D spectral, Exp 012 cytokine transport, Exp 015 uncertainty bridge, Exp 018 band edge for epidermal periodicity; ConceptEdge for AD flare detection; DriftAction for treatment response steering) |
-| 13 | Testosterone PK (IM + pellet), TRT metabolic/cardiovascular/diabetes outcomes, population TRT Monte Carlo (10K IIV patients), testosterone-gut axis (Pielou → Anderson ξ → metabolic response), clinical claim verification pipeline from Mok (2018) against Saad/Traish/Sharma/Kapoor registries | **healthSpring** (PK/PD Exp001-005, microbiome Exp010-012, biosignal Exp020, endocrine Exp030-037 — all 17 experiments complete at Tier 0+1) × **wetSpring** (diversity → gut health → TRT response stratification) × **neuralSpring** (Hill/PK models, population surrogates) × **groundSpring** (uncertainty budgets for clinical predictions) × **NestGate** (NCBI: PubMed for TRT literature, SRA for androgen receptor expression) |
+| 13 | Per-person clinical translation: PatientTrtProfile → 8-node scenario graph → petalTongue clinical mode (5 archetypes). Testosterone PK (IM + pellet), TRT metabolic/cardiovascular/diabetes outcomes, population TRT Monte Carlo (10K IIV patients), testosterone-gut axis (Pielou → Anderson ξ → metabolic response), clinical claim verification pipeline from Mok (2018) against Saad/Traish/Sharma/Kapoor registries. **V9**: GPU Tier 2+3 live, mixed dispatch, PCIe P2P. SAME DAVE motor channel + IPC push. | **healthSpring** (37 experiments, Tier 0+1+2+3 complete) × **barraCuda** (GpuContext, WGSL shaders, fused dispatch, DispatchPlan) × **toadStool** (Pipeline::execute_gpu/auto, Stage::to_gpu_op) × **petalTongue** (absorbed DataChannel, ClinicalRange, renderers + SAME DAVE motor channel + clinical mode + IPC bridge) × **wetSpring** (diversity → gut health → TRT response stratification) × **neuralSpring** (Hill/PK models, population surrogates) × **groundSpring** (uncertainty budgets for clinical predictions) × **NestGate** (NCBI: PubMed for TRT literature, SRA for androgen receptor expression) |
 
 ## Future Contributions
 

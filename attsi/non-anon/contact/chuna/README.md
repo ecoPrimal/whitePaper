@@ -52,13 +52,15 @@ Chuna validation suite:
 |------|---------|
 | `README.md` | This file — outreach plan |
 | `review_package.md` | Technical review package: what we achieved, how, results |
-| `email_draft_chuna.md` | Draft email for first contact |
+| `email_draft_chuna.md` | Draft email for first contact (sent March 8) |
+| `reply_mar09_2026.md` | Reply to Chuna's 4 questions (March 9) |
 
 ## Timeline
 
 - **Week of March 8**: Finalize review package, overnight validation run
-- **Week of March 10**: Send email (via Murillo introduction or direct)
-- **Response**: Allow 1-2 weeks — he's a PhD student with his own work
+- **March 8**: Initial email sent (Option A — Murillo introduction)
+- **March 9**: **Chuna replied** — asked 4 questions (enrollment status, project goals, publication selection rationale, CMSE 890 poster). Tone: collegial, direct, "finite time to read." Reply drafted: `reply_mar09_2026.md`
+- **Next**: Send reply, await follow-up. If positive, offer to walk through gradient flow convergence data.
 
 ## Tone
 

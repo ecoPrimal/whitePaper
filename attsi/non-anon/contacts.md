@@ -19,6 +19,7 @@
 - hotSpring status: **41/41 Chuna overnight checks pass** (v0.6.23). Dynamical N_f=4 staggered flow extended.
 - Referred by: Professor Murillo (coffee, March 4, 2026)
 - Relationship: Murillo recommended as reviewer for hotSpring lattice QCD + plasma physics
+- **Status**: Replied March 9, 2026 — asked 4 questions (enrollment, goals, publication selection, CMSE 890 poster). Tone: collegial, direct, time-conscious. Reply drafted in `contact/chuna/reply_mar09_2026.md`.
 - Details: `contact/chuna/`
 
 ## airSpring
@@ -154,6 +155,17 @@
 - https://drugdiscovery.msu.edu/about-us/people/index.aspx
 - Domain: Synthetic organic chemistry, heterocyclic chemistry, niclosamide delivery, terpene biosynthesis
 - Spring relevance: Downstream medicinal chemistry optimization after HTS hits from ADDRC. Not direct spring target yet.
+
+## healthSpring
+
+**Charles Mok, MD** — Founder / Medical Director, Allure Medical (Shelby Township, MI)
+- Domain: Testosterone replacement therapy, cosmetic surgery, vascular (endovenous laser ablation), anti-aging medicine
+- Book: *If Your Testosterone Is Low, You're Gonna Get Fat* (Allure Medical Publishing, 2018, 196 pages, ~200 cited studies)
+- Papers validated: 9 experiments (Exp030–038) — IM injection PK, pellet depot PK, age decline, weight trajectory, cardiovascular, diabetes, population Monte Carlo, gut axis, HRV
+- healthSpring status: **233/233 checks** (96 Python + 86 Rust binary + 51 lib unit tests)
+- Cross-track: D1 (gut diversity × TRT response), D2 (Anderson gut confinement × metabolic syndrome), D3 (HRV × TRT cardiovascular), D4 (population PK + microbiome covariate)
+- Relationship: Father
+- Details: `contact/mok/`
 
 ## Industry / MSUBI
 
