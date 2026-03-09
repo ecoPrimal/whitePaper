@@ -3,200 +3,180 @@
 **Date**: March 8, 2026
 **Author**: Kevin Mok (mokkevin@msu.edu)
 **Repository**: [github.com/syntheticChemistry/hotSpring](https://github.com/syntheticChemistry/hotSpring) (AGPL-3.0)
-**Hardware**: RTX 4070 (12 GB, $600) + Titan V (12 GB HBM2) — consumer workstation, no cluster
 
 ---
 
-## Executive Summary
+## Hardware
 
-All three of Chuna's published papers have been independently reproduced in
-pure Rust with WGSL GPU shaders. **41/41 automated validation checks pass**
-on consumer hardware. The entire codebase is open, sovereign (no CUDA, no
-vendor SDK), and runs anywhere a Vulkan driver exists.
+The initial Murillo Group reproduction work (Sarkas MD, TTM, surrogate learning,
+Stanton-Murillo transport) was done on **Eastgate** — an i9-12900K workstation with
+an RTX 4070 (12 GB, $600). That proved consumer GPUs could do the plasma MD physics.
 
-| Paper | Ref | Checks | Hardware |
-|-------|-----|:------:|----------|
-| 43 — Gradient Flow Integrators | Bazavov & Chuna, arXiv:2101.05320 | **11/11** | RTX 4070 |
-| 44 — Conservative BGK Dielectric | Chuna & Murillo, Phys. Rev. E 111, 035206 | **20/20** | RTX 4070 |
-| 45 — Multi-Species Kinetic-Fluid | Haack et al., J. Comput. Phys. (2024) | **10/10** | RTX 4070 |
+To extend into lattice QCD, dynamical fermions, and Chuna's gradient flow work,
+I built **biomeGate** — a semi-mobile mini HPC:
+
+| Component | biomeGate | ICER |
+|-----------|-----------|------|
+| CPU | Threadripper 3970X (32c/64t) | Cluster nodes |
+| GPU (primary) | **RTX 3090** (24 GB, Ampere) | — |
+| GPU (secondary) | **Titan V** (12 GB HBM2, native f64) | — |
+| NPU | BrainChip AKD1000 (80 NPs, PCIe) | — |
+| RAM | 256 GB DDR4 | — |
+| Storage | 5 TB NVMe | — |
+| Total cost | ~$4,000 (used parts) | $M+ institutional |
+| Software | Rust + WGSL (Vulkan, no CUDA) | MILC (C), Python, Fortran |
+| Access | My basement | Institutional allocation |
+
+The Chuna paper validations run on biomeGate. The RTX 3090 handles the GPU
+compute (24 GB allows 48⁴ lattices GPU-resident). The Titan V provides native
+f64 cross-validation via NVK (open-source Vulkan driver, Mesa 25.1.5).
 
 ---
 
-## Paper 43: SU(3) Gradient Flow Integrators
+## What We Reproduced — Three Papers, One Binary
 
-### What We Reproduced
+All three of Chuna's published papers are reproduced and validated in a single
+binary (`validate_chuna_overnight`) that runs end-to-end in ~5 hours
+(~4 hours for the 16⁴ lattice; 8⁴ configs + Papers 44/45 complete in ~1 hour):
 
-Full Wilson gradient flow on SU(3) lattices with five integrators:
-Euler, RK2, LSCFRK3W6 (Lüscher), LSCFRK3W7 (Chuna-recommended), and
-LSCFRK4CK (Carpenter-Kennedy 4th-order).
-
-### How We Derived the Integrators
-
-The 3-stage 3rd-order LSCFRK coefficients were **derived from first principles**
-rather than read from the paper. A compile-time function `const fn derive_lscfrk3(c2, c3)`
-solves the four Taylor order conditions (laws of calculus, not arbitrary choices):
-
-```
-Given c₂, c₃ (the two free parameters):
-  a₂₁ = c₂
-  a₃₁ = c₃ − (c₃(c₃ − c₂))/(2c₂)
-  a₃₂ = (c₃(c₃ − c₂))/(2c₂)
-  b₁  = 1 − (3c₂ + 3c₃ − 2)/(6c₂c₃)  [via order-3 condition]
-  ... etc
+```bash
+cargo run --release --bin validate_chuna_overnight
 ```
 
-| Integrator | c₂ | c₃ | Our derivation matches paper? |
-|-----------|------|------|:---:|
-| LSCFRK3W6 | 1/4 | 2/3 | ✅ |
-| LSCFRK3W7 | 1/3 | 3/4 | ✅ |
-| CK4 | — | — | ✅ (numerical roots) |
+### Paper 43: Gradient Flow Integrators (Bazavov & Chuna, arXiv:2101.05320)
 
-### Validation Results (11 checks)
+**What Chuna did on ICER**: SU(3) gradient flow using LSCFRK integrators on
+MILC-generated configurations. Scale setting via t₀ and w₀.
 
-| Check | Result | Detail |
-|-------|:------:|--------|
-| W6/W7/CK4 convergence (8⁴) | ✅ | ε sweep 0.02→0.001, order verification |
-| 8⁴ β=6.0 thermalization (100 HMC) | ✅ | Plaquette converges to expected range |
-| 16⁴ β=6.0 thermalization (500 HMC) | ✅ | Extended lattice validates scaling |
-| Flow energy monotonic decrease | ✅ | E(t) monotonically decreasing for all integrators |
-| t₀ scale extraction | ✅ | t²⟨E(t)⟩ = 0.3 reference scale |
-| w₀ scale extraction | ✅ | W7 ~2× more efficient than W6 for w₀ |
+**What we did at home**:
 
-### Extension: Dynamical N_f=4 Staggered Flow
+- Implemented 5 integrators: Euler, RK2, LSCFRK3W6 (Lüscher), LSCFRK3W7
+  (Chuna-recommended), LSCFRK4CK (Carpenter-Kennedy 4th-order)
+- **Derived the LSCFRK3 coefficients from first principles** — a compile-time
+  Rust function solves the four Taylor order conditions. Our values match the
+  paper exactly. We didn't copy coefficients; we derived them.
+- Convergence sweep (ε = 0.02 → 0.001): measured orders 2.06/2.08/2.11 on 8⁴
+  (finite-size suppressed from nominal 3/3/4; consistent trend, passes >1.5 threshold)
+- t₀ and w₀ scale extraction works on 8⁴ and 16⁴ thermalized lattices
+- W7 is ~2× more efficient than W6 for w₀, confirming the paper's recommendation
 
-We extended Paper 43 to run gradient flow on **dynamically thermalized**
-configurations — matching Chuna's actual MILC setup rather than just quenched:
+**Performance**:
 
-- 8⁴ lattice, β=5.4, m=0.1, N_f=4 staggered (1 pseudofermion field × 4 tastes)
-- 50-trajectory thermalization via dynamical HMC with GPU CG solver
-- W7 (LSCFRK3W7) gradient flow on dynamical configuration
-- Reports t₀, w₀ on dynamical background
+| Substrate | 8⁴ W7 flow (t=0→1) | Speedup |
+|-----------|:------------------:|:-------:|
+| CPU (single core) | 5.56s | 1× |
+| GPU (RTX 3090) | 0.14s | **38.5×** |
 
-This closes the gap between our quenched-only validation and the actual physics
-in arXiv:2101.05320.
+**Extension (in progress)**: We also run gradient flow on **dynamical N_f=4
+staggered** configurations (50-trajectory thermalization via adaptive Omelyan
+HMC + CG solver, then W7 flow). This matches Chuna's actual MILC setup — not
+just quenched configs. The adaptive step controller tunes dt based on rolling
+acceptance, starting from a volume-aware heuristic. Flow monotonicity is
+confirmed on dynamical backgrounds; full thermalization validation is ongoing.
 
----
+### Paper 44: Conservative BGK Dielectric (Chuna & Murillo, Phys. Rev. E 111, 035206)
 
-## Paper 44: Conservative BGK Dielectric Functions
+**What Chuna did on ICER**: Derived completed Mermin susceptibility from
+multicomponent BGK. f-sum rule, DSF, conductivity under NIF hot-spot conditions.
 
-### What We Reproduced
+**What we did at home**:
 
-The full hierarchy from Chuna & Murillo (2024):
+- Standard Mermin dielectric function (number conservation)
+- Completed Mermin (number + momentum, Eq. 26 correction)
+- Multi-component Mermin (electron-ion, per-species susceptibility)
+- All three on CPU (Rust) and GPU (WGSL f64 shaders)
 
-1. **Standard Mermin** dielectric function (number conservation only)
-2. **Completed Mermin** (number + momentum conservation, Eq. 26 correction)
-3. **Multi-component Mermin** (electron-ion, species-indexed susceptibility)
+**Key results**:
+- Debye screening exact to 1e-12
+- DSF positivity ≥98% (standard), ≥99% (completed)
+- f-sum rule converging to −πωₚ²/2
+- GPU-CPU parity: L² = 5.5e-7 (standard), 100% agreement (multi-component)
 
-All three levels implemented on CPU (Rust) and GPU (WGSL f64 shaders).
+**Performance**: Rust CPU is **322× faster than Python** for the kinetic-fluid
+CPU reference (same algorithm, same physics).
 
-### Key Physics Validated
+**Bug found**: 6 instances of incorrect complex×scalar multiplication in the
+WGSL shader (`vec2 * vec2` is element-wise in WGSL, not complex multiplication).
+After fixing, multi-component GPU agreement went from 4% → 100%. This is a WGSL
+language footgun worth documenting.
 
-| Observable | Expected | Our Result |
-|-----------|----------|------------|
-| f-sum rule (standard) | ∫ Im[1/ε] dω → converging | ✅ Converging |
-| Debye screening limit | κ_D exact | ✅ 1e-12 agreement |
-| DSF positivity | S(k,ω) ≥ 0 | ✅ ≥98% positive |
-| High-freq ε → 1 | lim(ω→∞) ε = 1 | ✅ |
-| Completed Mermin DSF | ≥99% positive | ✅ |
-| Multi-component total κ_D² | Sum of species | ✅ |
-| Multi-component f-sum | Converging | ✅ |
-| GPU-CPU parity (standard) | L² < 1e-5 | ✅ L² = 5.5e-7 |
-| GPU-CPU parity (multi-comp) | Agreement | ✅ **100% agreement** |
+### Paper 45: Multi-Species Kinetic-Fluid Coupling (Haack, Murillo, Sagert & Chuna, J. Comput. Phys. 2024)
 
-### Critical Fix: `cscale` Shader Bug
+**What Chuna did on ICER**: Hybrid kinetic-fluid model coupling BGK and Euler
+solvers in different spatial regions. Reduces cost while preserving fidelity.
 
-During validation, we discovered that 6 instances of complex scalar multiplication
-in the multi-component WGSL shader were incorrect:
+**What we did at home**:
 
-```wgsl
-// WRONG: element-wise multiplication zeros imaginary part
-let result = complex_val * vec2<f64>(scalar, 0.0);
+- Multi-species BGK relaxation with mass/momentum/energy conservation, H-theorem
+- 1D Euler shock tube (Sod problem) with HLL Riemann solver
+- Full coupled kinetic-fluid interface with 3-iteration sub-iteration convergence
+- GPU shaders for collision (`bgk_relaxation_f64.wgsl`) and Euler (`euler_hll_f64.wgsl`)
 
-// CORRECT: explicit scalar multiplication preserves both components
-fn cscale(z: vec2<f64>, s: f64) -> vec2<f64> {
-    return vec2<f64>(z.x * s, z.y * s);
-}
-```
+**Key results**:
+- BGK mass conservation: exact (Δm = 0)
+- Euler mass conservation: 1.4e-15
+- Sod shock front resolved (contact + shock captured)
+- Interface density matching between kinetic and fluid domains
+- GPU-CPU parity within 15% on interface coupling
 
-This is a WGSL language footgun — `vec2 * vec2` is element-wise, not complex
-multiplication. After the fix, multi-component GPU-CPU agreement went from **4% → 100%**.
-
-### Precision Note
-
-The multi-component Mermin shader is routed through `create_pipeline_f64_entry_precise`
-(no FMA fusion from the sovereign compiler). FMA fusion changes rounding in complex
-arithmetic enough to corrupt results for this sensitive calculation. Standard Mermin
-tolerates FMA fusion; multi-component does not.
+The interface sub-iteration is physics-based (convergence tolerance 0.01), not
+hand-tuned. This matters — hand-tuned thresholds aren't recoverable in future runs.
 
 ---
 
-## Paper 45: Multi-Species Kinetic-Fluid Coupling
+## Cost Comparison: ICER vs Home
 
-### What We Reproduced
+| | ICER | biomeGate |
+|--|------|-----------|
+| Hardware | HPC cluster ($M+) | ~$4,000 (used parts) |
+| Access | Institutional allocation queue | Always available |
+| Software stack | MILC (C) + Python + Fortran + CUDA | Rust + WGSL (one `cargo build`) |
+| Vendor lock-in | CUDA (NVIDIA only) | Vulkan (any GPU vendor) |
+| Gradient flow (8⁴, W7) | MILC production | **38.5× GPU speedup**, 0.14s |
+| Kinetic-fluid coupling | Python | **322× Rust speedup** |
+| Full validation (3 papers) | Hours across jobs | **~5 hours, single binary** (8⁴ papers in ~1 hr) |
+| Overnight run | Batch queue | Runs immediately |
+| Electricity | Institutional | ~$0.10 per full run |
+| Reproducibility | Depends on cluster env | `cargo run` on any Vulkan GPU |
 
-The three-phase validation from Haack, Murillo, Sagert & Chuna (2024):
-
-1. **Multi-species BGK relaxation** — velocity-space kinetic equation with
-   mass/momentum/energy conservation and H-theorem
-2. **1D Euler shock tube** — Sod problem with HLL Riemann solver
-3. **Coupled kinetic-fluid interface** — kinetic (BGK) domain coupled to
-   hydrodynamic (Euler) domain via density matching at the interface
-
-### GPU Pipeline
-
-| Stage | Shader | Precision |
-|-------|--------|-----------|
-| BGK collision | `bgk_relaxation_f64.wgsl` | f64 |
-| Euler update | `euler_hll_f64.wgsl` | f64 |
-| Kinetic advection | CPU (1D upwind) | f64 |
-| Interface coupling | CPU (3-iteration sub-iteration) | f64 |
-
-### Validation Results (10 checks)
-
-| Check | Result | Detail |
-|-------|:------:|--------|
-| BGK mass conservation | ✅ | Δm = 0 (exact) |
-| Euler mass conservation | ✅ | Δm = 1.4e-15 |
-| Shock front resolved | ✅ | Sod problem contact + shock captured |
-| Coupled mass conservation | ✅ | Both domains |
-| Coupled momentum conservation | ✅ | |
-| Coupled energy conservation | ✅ | |
-| Interface density continuity | ✅ | GPU-CPU parity ~15% |
-| BGK H-theorem | ✅ | Entropy non-decreasing |
-| Euler Rankine-Hugoniot | ✅ | Jump conditions satisfied |
-| GPU pipeline end-to-end | ✅ | Full coupled run completes |
-
-### Interface Sub-Iteration
-
-The kinetic-fluid interface uses a **3-iteration convergence loop** with
-density mismatch tolerance 0.01. This is a physics-based solution — not
-hand-tuned. Both CPU reference and GPU pipeline use identical sub-iteration
-logic.
+The point is not that biomeGate is faster than ICER in absolute terms — a large
+cluster with many nodes will always win on throughput. The point is that **the
+same physics runs correctly on hardware anyone can buy**, with no institutional
+dependencies, no vendor SDK, and no access queue.
 
 ---
 
-## What This Demonstrates
+## DF64: An Additional Precision Tier
 
-### ICER → Home
+Consumer GPUs (RTX 3090, 4070) have fp64:fp32 ratios of ~1:64 — the fp64 ALUs
+are throttled. We use **DF64 (double-float)**: f32-pair arithmetic on the abundant
+FP32 cores, delivering 14-digit precision at **9.9× the throughput of native f64**.
 
-| Capability | ICER (Chuna) | Home (hotSpring) |
-|-----------|--------------|------------------|
-| Hardware | HPC cluster | RTX 4070 ($600) |
-| Software | MILC (C), Python, Fortran | Rust + WGSL (no vendor SDK) |
-| Gradient flow | MILC production | 14/14 tests, W6/W7/CK4 |
-| Dielectric | Python/MATLAB | CPU + GPU, 25+ tests |
-| Kinetic-fluid | Python/MATLAB | CPU + GPU, 16+ tests |
-| Overnight run | Hours on ICER | **41/41 checks** on consumer GPU |
-| Dynamical flow | MILC on ICER | N_f=4 staggered on RTX 4070 |
-| Code license | Mixed/proprietary | AGPL-3.0 (fully open) |
+| Tier | Digits | Hardware | Throughput (RTX 3090) |
+|------|:------:|----------|:---------------------:|
+| f32 | 7 | FP32 cores (native) | ~29 TFLOPS |
+| **DF64** | **14** | **FP32 cores (paired)** | **~3.2 TFLOPS** |
+| f64 | 15-16 | FP64 ALU (1:64 throttle) | ~0.3 TFLOPS |
 
-### What We Extended Beyond the Papers
+Most scientific calculations need more than 7 digits but don't require a full 16.
+DF64 fills that gap, turning idle FP32 silicon into useful precision. The Titan V
+(genuine 1:2 fp64) serves as ground truth for cross-validation.
 
-1. **GPU acceleration** for all three papers — not in any of the original publications
-2. **Multi-component Mermin** (Paper 44) — electron-ion extension with per-species GPU pipeline
-3. **Dynamical N_f=4 gradient flow** (Paper 43) — flow on thermalized dynamical configs
+We've audited 9 cancellation-prone computation families across f32/DF64/f64
+(Experiment 046). The physics is stable at all precision tiers for the algorithms
+we use (stable BCS v², direct asymptotic plasma W(z)).
+
+---
+
+## What We Extended Beyond the Papers
+
+1. **GPU acceleration** for all three papers — none of the originals used GPU compute
+2. **Multi-component Mermin** (Paper 44) — electron-ion extension, not in the original
+3. **Dynamical N_f=4 staggered flow** (Paper 43) — gradient flow on dynamical configs
 4. **Cross-paper validation** — single binary validates all three papers together
-5. **Precision stability analysis** — audited across f32/DF64/f64/FHE (Exp 046)
+5. **Precision stability audit** — stable algorithms at f32/DF64/f64 (Experiment 046)
+6. **322× Rust-over-Python speedup** — same algorithm, same physics, compiled language
+7. **38.5× GPU speedup** for gradient flow — WGSL shader reuses HMC infrastructure
 
 ---
 
@@ -206,7 +186,7 @@ logic.
 git clone https://github.com/syntheticChemistry/hotSpring
 cd hotSpring/barracuda
 
-# Full overnight validation (all 3 papers, ~30-60 min)
+# Full validation (all 3 papers, ~5 hours; skip 16⁴ for ~1 hour)
 cargo run --release --bin validate_chuna_overnight
 
 # Individual papers
@@ -217,36 +197,49 @@ cargo run --release --bin validate_kinetic_fluid       # Paper 45
 # Convergence benchmark (Paper 43 extension)
 cargo run --release --bin bench_flow_convergence
 
-# DSF vs MD comparison (Paper 44 extension)
+# DSF vs MD comparison (Paper 44, against Murillo Group plasma DB)
 cargo run --release --bin validate_dsf_vs_md
 ```
 
-Requirements: Rust (stable), a Vulkan-capable GPU with `SHADER_F64` support.
-No CUDA toolkit, no Python, no MILC, no vendor SDK.
+**Requirements**: Rust (stable), a Vulkan-capable GPU with `SHADER_F64`.
+No CUDA toolkit, no Python, no MILC, no vendor SDK. Works on NVIDIA (proprietary
+or NVK), AMD (RADV), and Intel (ANV) drivers.
 
 ---
 
-## Deep Debt Resolution (v0.6.23)
+## What We're Asking
 
-The codebase underwent a comprehensive quality audit:
+1. **Does the physics look right?** We reproduced your three papers on consumer
+   hardware. Do our convergence data, scale-setting values, dielectric curves,
+   and conservation results match what you'd expect from your ICER/MILC runs?
 
-| Metric | Status |
-|--------|--------|
-| Clippy warnings | **Zero** (pedantic + nursery) |
-| Library panics | **Zero** |
-| `unsafe` blocks | **Zero** |
-| `unwrap()`/`expect()` in library | **Zero** |
-| TODO/FIXME/HACK | **Zero** |
-| Files >1000 lines | **Zero** (largest: 990) |
-| License | AGPL-3.0-only on every file |
-| Tests | 738 (lib) |
-| Binaries | 101 |
-| WGSL shaders | 84 |
+2. **Did we derive the integrators correctly?** We solved the four Taylor order
+   conditions independently. Our coefficients match your paper. Can you confirm?
+
+3. **Is the approach viable?** Pure Rust + WGSL, dispatched through Vulkan.
+   No MILC, no Fortran, no CUDA. Does this seem like a credible path for the
+   physics you work on?
+
+---
+
+## Detailed Paper Artifacts
+
+Each paper has a standalone baseCamp document in the repository with the full
+math, equations, numerical values, data provenance, and source file listings:
+
+| Paper | baseCamp document |
+|-------|-------------------|
+| 43 | `whitePaper/baseCamp/chuna_gradient_flow.md` |
+| 44 | `whitePaper/baseCamp/chuna_bgk_dielectric.md` |
+| 45 | `whitePaper/baseCamp/chuna_kinetic_fluid.md` |
+
+These are the reproducible artifact equivalents of the papers — everything
+needed to verify the physics, trace the data, and understand the algorithms.
 
 ---
 
 ## References
 
-- Bazavov, A. & Chuna, T. "Efficient integration of gradient flow..." arXiv:2101.05320 (2021)
-- Chuna, T. & Murillo, M.S. "Conservative dielectric functions..." Phys. Rev. E 111, 035206 (2024)
-- Haack, J.R., Murillo, M.S., Sagert, I. & Chuna, T. "Multi-species kinetic-fluid coupling..." J. Comput. Phys. (2024)
+- Bazavov, A. & Chuna, T. "Efficient integration of gradient flow in lattice gauge theory and properties of low-storage commutator-free Lie group methods." arXiv:2101.05320 (2021)
+- Chuna, T. & Murillo, M.S. "Conservative dielectric functions and electrical conductivities from the multicomponent Bhatnagar-Gross-Krook equation." Phys. Rev. E 111, 035206 (2024)
+- Haack, J.R., Murillo, M.S., Sagert, I. & Chuna, T. "Multi-species kinetic-fluid coupling for high-energy density simulations." J. Comput. Phys. (2024)

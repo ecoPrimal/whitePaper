@@ -2,92 +2,143 @@
 
 **Context**: Murillo referred us during coffee (March 4, 2026). He said
 Chuna is the person who would evaluate our work. Chuna authored/co-authored
-all three papers we reproduced. The repo is public. Lead with his physics,
-not our infrastructure.
+all three papers we reproduced. The repo is public. Murillo will be CC'd.
+
+Lead with his physics, not our infrastructure. The story: his work runs
+correctly, fast, and cheap — on hardware anyone can buy. This is the
+application of a system we built. We're asking him to verify the physics.
 
 ---
 
-## Option A: Direct Introduction (recommended if Murillo makes the intro)
+## Option A: Introduction via Murillo (recommended)
 
 **Subject:** Reproducing your gradient flow and dielectric work — Murillo suggested I reach out
+
+**CC:** Murillo
 
 ---
 
 Hi Thomas,
 
-I'm Kevin Mok — Professor Murillo suggested I get in touch with you. I'm
-finishing my MS in Data Science at MSU and I've been building a Rust + GPU
-pipeline for computational physics as a personal project.
+I'm Kevin Mok — Professor Murillo suggested I get in touch with you. I
+finished my MS in Data Science at MSU last May (Murillo's CMSE 890 was
+my last semester). Before that I did a BS in Microbiology here, and I
+spent five years in a bench lab at the Bioeconomy Institute. I've been
+building a computational physics pipeline in Rust in my basement since
+graduation — consumer GPUs, no cloud, no cluster.
 
-Over the past couple weeks I've been reproducing your published work:
+I reproduced all three of your published papers on a home workstation
+I built from used parts. Here's what I got:
 
-- **arXiv:2101.05320** (gradient flow): Implemented the full LSCFRK family
-  on SU(3) lattices — W6, W7, and CK4. I derived the 3-stage 3rd-order
-  coefficients from the Taylor order conditions independently (compile-time
-  derivation in Rust) and they match your published values. Five integrators
-  validated, convergence scaling matches the paper, and I've extended to
-  dynamical N_f=4 staggered configurations (50-trajectory thermalization +
-  W7 flow).
+**Paper 43 — Gradient Flow (arXiv:2101.05320)**
 
-- **Phys. Rev. E 111, 035206** (dielectric): Standard Mermin, completed
-  Mermin (Eq. 26 correction), and a multi-component extension for
-  electron-ion plasmas. The f-sum rule, Debye screening, DSF positivity,
-  and passive medium compliance all validate. GPU shader implementation
-  runs at f64 precision.
+| | Result |
+|--|--------|
+| Integrators | W6, W7, CK4 — LSCFRK3 coefficients derived from first principles (compile-time Rust, not copied) |
+| Convergence | ε = 0.02 → 0.001, measured orders 2.06/2.08/2.11 on 8⁴ (finite-size suppressed) |
+| Plaquette | β=6.0 ⟨P⟩ = 0.5929 (literature ~0.594) |
+| GPU speedup | **38.5×** (RTX 3090 vs single-core CPU, 8⁴ W7 flow) |
+| Extension | Dynamical N_f=4 staggered flow (adaptive Omelyan HMC) — in progress |
 
-- **J. Comput. Phys. (2024)** (kinetic-fluid): Three-phase validation —
-  BGK relaxation with conservation laws, Sod shock tube via HLL Riemann
-  solver, and the full coupled kinetic-fluid interface. The interface uses
-  a sub-iteration convergence loop for density matching (not hand-tuned).
-  GPU pipeline for the collision and Euler stages.
+**Paper 44 — Conservative BGK Dielectric (Phys. Rev. E 111, 035206)**
 
-All three papers pass **41 automated validation checks** on a consumer
-RTX 4070 — no ICER, no MILC, no CUDA. Pure Rust and WGSL shaders
-dispatched through Vulkan. The repo is public:
+| | Result |
+|--|--------|
+| Scope | Standard, completed (Eq. 26), multi-component Mermin (electron-ion) |
+| Debye screening | Exact to 1e-12 |
+| DSF positivity | ≥99% (completed Mermin) |
+| f-sum rule | Converging to −πωₚ²/2 |
+| GPU-CPU parity | L² = 5.5e-7 |
+| DSF vs MD | Completed Mermin within 0.8% of MD peak (Murillo Group plasma DB, κ=2 Γ=31) |
+| Speedup | **322× Rust over Python**, same algorithm |
 
-  https://github.com/syntheticChemistry/hotSpring
+**Paper 45 — Kinetic-Fluid Coupling (J. Comput. Phys. 2024)**
 
-The relevant binary is `validate_chuna_overnight`, which runs all three
-papers end-to-end. The code is in `barracuda/src/`.
+| | Result |
+|--|--------|
+| Scope | BGK relaxation + Euler/HLL + coupled interface (3-iteration sub-iteration) |
+| BGK mass conservation | Exact (Δm = 0) |
+| Euler mass conservation | 1.4e-15 |
+| H-theorem | Entropy monotonically non-decreasing |
+| Interface | Physics-based convergence, not hand-tuned |
 
-I'd welcome any feedback on whether the physics looks right — especially
-the gradient flow convergence data and the completed Mermin dielectric.
-You know this math far better than I do.
+**Hardware & Cost**
 
-Happy to meet on campus or over Zoom if that's easier.
+| | ICER | My basement |
+|--|------|-------------|
+| Hardware | HPC cluster | RTX 3090 + Titan V, Threadripper 3970X, ~$4K used parts |
+| Full validation (3 papers) | Batch queue | ~5 hours, single binary, ~$0.10 electricity |
+| Software | MILC (C) + Python + Fortran + CUDA | Rust + WGSL (`cargo build`), Vulkan — no vendor SDK |
+
+Everything is in two public repos — the validation application and the
+compute engine:
+
+  https://github.com/syntheticChemistry/hotSpring  (validation)
+  https://github.com/ecoPrimals/barraCuda          (compute engine — pulled automatically)
+
+To run it:
+
+```
+cd hotSpring/barracuda
+cargo run --release --bin validate_chuna_overnight
+```
+
+The review document is `CHUNA_REVIEW.md` at the repo root — it has all
+the numbers above plus links to detailed per-paper artifacts in
+`whitePaper/baseCamp/` (full math, equations, data provenance, source
+file listings, reproduction instructions).
+
+I'd welcome your feedback on whether the physics looks right. You and
+Professor Bazavov know this math far better than I do. If the results
+check out, it means anyone with a Vulkan GPU and `cargo` can reproduce
+this science at home.
+
+Happy to meet on campus or over Zoom whenever works.
 
 Kevin Mok
 mokkevin@msu.edu
 
 ---
 
-## Option B: Cold Email (if Murillo doesn't make intro)
+## Option B: Cold Email (fallback if Murillo doesn't make intro directly)
 
-**Subject:** Your gradient flow integrators — reproduced in Rust/GPU
+**Subject:** Your gradient flow integrators — reproduced on a home GPU
+
+**CC:** Murillo
 
 ---
 
 Hi Thomas,
 
-I'm a grad student in CMSE finishing my MS in Data Science. I've been
-building a GPU physics pipeline as a personal project, and I recently
-reproduced three of your papers — the LSCFRK gradient flow integrators
+I'm Kevin Mok — I finished my MS in Data Science at MSU last May
+(Professor Murillo's CMSE 890 was my last semester). I've been building
+a Rust + GPU pipeline for computational physics in my basement since
+graduation.
+
+I reproduced three of your papers — the LSCFRK gradient flow integrators
 (arXiv:2101.05320), the conservative BGK dielectric (Phys. Rev. E 111,
-035206), and the kinetic-fluid coupling (J. Comput. Phys. 2024).
+035206), and the kinetic-fluid coupling (J. Comput. Phys. 2024) — on
+a home workstation (RTX 3090 + Titan V, Threadripper 3970X, ~$4K in
+used parts). Murillo's name came up because I'd already reproduced his
+group's Sarkas MD and transport work — he said you're the person to
+evaluate the gradient flow and dielectric results.
 
-Professor Murillo mentioned your name when I showed him the lattice QCD
-and plasma work I've been running on consumer hardware. He thought you'd
-be the right person to evaluate whether the physics is correct.
-
-All three papers pass 41 automated checks on an RTX 4070 using Rust +
-WGSL shaders (no MILC, no CUDA). I derived the LSCFRK3 coefficients
-independently from the order conditions and extended the gradient flow
-to dynamical N_f=4 staggered configurations.
+Quick numbers: 38.5× GPU speedup on gradient flow, 322× Rust over
+Python on the kinetic-fluid coupling, Debye screening exact to 1e-12,
+completed Mermin DSF within 0.8% of MD. The LSCFRK3 coefficients were
+derived independently from the order conditions — not copied from MILC
+or the paper.
 
 Repo: https://github.com/syntheticChemistry/hotSpring
+Engine: https://github.com/ecoPrimals/barraCuda (pulled automatically by cargo)
+Review: `CHUNA_REVIEW.md` at the repo root (data sheet + links to
+per-paper baseCamp artifacts with full math and reproduction steps)
 
-I'd genuinely appreciate your feedback on the results — especially
-anything that looks wrong or suspicious. Happy to meet whenever works.
+I'd genuinely appreciate your feedback — especially anything that looks
+wrong or suspicious. If it passes your review, anyone with a GPU can
+do this science at home. No cluster, no vendor SDK, ~$0.10 per run.
+
+Happy to meet whenever works.
 
 Kevin
 mokkevin@msu.edu
@@ -96,37 +147,51 @@ mokkevin@msu.edu
 
 ## Notes
 
-- **Lead with his papers, not our infrastructure**. He doesn't care about
-  ecoPrimals or primal evolution. He cares about gradient flow coefficients,
-  f-sum rules, and conservation laws.
+- **Murillo is CC'd**. He gave us the referral. Having him on the thread
+  adds credibility and context. He's seen the earlier Murillo Group
+  reproduction work (Sarkas, TTM, transport — on the RTX 4070).
 
-- **Don't oversell**. "I reproduced your work and I'd like your feedback"
-  is more effective than "I replaced ICER with a $600 GPU." He'll see the
-  hardware comparison in the repo.
+- **Bazavov is co-author on Paper 43**. Mentioning him by name shows
+  we know the faculty network and adds weight — he's MSU CMSE faculty.
 
-- **Be specific about the physics**. Mentioning Eq. 26 (completed Mermin),
-  the LSCFRK derivation, and the sub-iteration coupling shows we actually
-  read his papers, not just ran his code.
+- **"I finished my MS"** — degree was awarded May 2, 2025 (3.916 GPA).
+  This is post-graduation independent work, not a class project.
 
-- **Mention the independent derivation**. The fact that we derived the
-  integrator coefficients from scratch (not copied from his code or MILC)
-  is the strongest credibility signal. He'll want to verify this.
+- **Lead with his papers, not the infrastructure**. He cares about
+  gradient flow coefficients, f-sum rules, and conservation laws — not
+  about Rust vs C or our internal architecture.
 
-- **The extension to dynamical flow is the hook**. His paper used MILC on
-  ICER for this. We did it on a consumer GPU. That's the part he'll want
-  to look at most closely.
+- **The inline data sheet is the pitch**. He can scan the tables in
+  30 seconds and know whether this is worth his time. Everything else
+  is in baseCamp if he wants to dig.
 
-- **Option A is strongly preferred** if Murillo will make the introduction.
-  A cold email from a random grad student about "I reproduced your thesis
-  work" could come across wrong without context.
+- **The independent derivation is the strongest signal**. We derived the
+  integrator coefficients from scratch — compile-time Rust, solvable order
+  conditions. He'll want to verify this.
 
-- **Allow him time**. He's a PhD student. 1-2 weeks for a response is normal.
-  One follow-up after 2 weeks is fine; more than that is pushy.
+- **The dynamical flow extension is the hook**. His paper is primarily
+  quenched + MILC for dynamical. We did dynamical on a home GPU. That's
+  the part he'll look at most closely.
 
-- **Don't attach PDFs or data**. Point to the repo. Let him explore at his
-  own pace. The `validate_chuna_overnight` binary is the single entry point.
+- **The cost story speaks for itself**. Don't oversell "I replaced ICER."
+  Just state the hardware, the price, and the electricity cost. He'll
+  draw the conclusion.
 
-- **If he runs the code**: He'll need Rust (stable) and a Vulkan GPU with
-  SHADER_F64. If he only has CUDA GPUs, the code still works — wgpu routes
-  through the Vulkan layer on NVIDIA proprietary drivers. No additional
-  setup needed.
+- **DF64 is in CHUNA_REVIEW.md** as an additional precision tier. Don't
+  lead with it in the email — it's a technical detail he'll discover if
+  he digs in. The email should be about his physics, not our precision
+  architecture.
+
+- **Option A is strongly preferred** since Murillo is making the
+  introduction and will be CC'd.
+
+- **Allow him time**. He's a PhD student. 1-2 weeks for a response is
+  normal. One follow-up after 2 weeks is fine; more than that is pushy.
+
+- **Don't attach PDFs or data**. Point to the repo. Let him explore at
+  his own pace. `validate_chuna_overnight` is the single entry point.
+  `CHUNA_REVIEW.md` is the data sheet. `whitePaper/baseCamp/chuna_*.md`
+  is where he digs.
+
+- **If he runs the code**: Rust (stable) + a Vulkan GPU with SHADER_F64.
+  On NVIDIA, the proprietary driver's Vulkan layer works. No extra setup.

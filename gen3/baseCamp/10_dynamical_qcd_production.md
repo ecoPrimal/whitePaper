@@ -1,9 +1,9 @@
 # baseCamp 10: First Dynamical QCD Production on Consumer GPU
 
-**Date:** March 8, 2026
-**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 41/41 overnight checks pass** (v0.6.23). Dynamical N_f=4 staggered gradient flow wired.
-**Spring:** hotSpring (v0.6.23)
-**Hardware:** RTX 3090 (GPU) + BrainChip AKD1000 (NPU)
+**Date:** March 9, 2026
+**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 44/44 overnight checks pass** (v0.6.24). Dynamical N_f=4 ext 3/3 complete. coralReef sovereign compilation: 44/46 shaders, full `GpuBackend` impl.
+**Spring:** hotSpring (v0.6.24)
+**Hardware:** RTX 3090 (GPU) + BrainChip AKD1000 (NPU) + Titan V (DRM testing)
 **License:** AGPL-3.0-only
 
 ---
