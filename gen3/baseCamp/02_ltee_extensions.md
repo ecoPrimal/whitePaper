@@ -180,8 +180,8 @@ validated, Exp001-070) can process all three sample types. Additionally:
 
 ### 5.2 neuralSpring Integration
 
-neuralSpring adds ML primitives for LTEE analysis (Session 88+: 668 lib tests,
-175 binaries, 174/175 validators, 3,034+ checks, 5 WDM surrogates complete):
+neuralSpring adds ML primitives for LTEE analysis (S135: 966 lib tests,
+232 binaries, 220/220 validate_all, 3,034+ checks, 5 WDM surrogates complete):
 
 - **HMM / PhyloNet-HMM** (Liu Papers 016-018): Introgression detection applied
   to LTEE genomes — identify horizontal transfer events and adaptive introgression

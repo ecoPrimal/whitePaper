@@ -201,7 +201,7 @@ The echo state network (ESN) approach validated in neuralSpring and wetSpring
 task: detecting anomalous patterns in time series without explicit model
 specification.
 
-**Session 88+ directly validates this pipeline**: neuralSpring now has two
+**S134 directly validates this pipeline**: neuralSpring now has two
 reservoir computing surrogates with full Python→Rust cross-language parity:
 
 - **nW-05 ESN regime classifier** (`wdm_esn.rs`): 2-step ESN with tanh
@@ -231,9 +231,9 @@ real-time anomaly detection with minimal computational overhead.
 
 neuralSpring also contributes spectral analysis primitives (`eigh_f64`, IPR,
 level spacing ratio) for characterizing community structure shifts — the same
-primitives validated against Kachkovskiy Papers 022-023 (129+ tolerances,
-42 upstream rewires). Session 88+ total: 668 lib tests, 175 binaries, 174/175
-validators, 3,034+ checks across 25 papers + 5 WDM surrogates.
+primitives validated against Kachkovskiy Papers 022-023 (150+ tolerances,
+46 upstream rewires). S135 total: 966 lib tests, 232 binaries, 220/220
+validate_all, 3,034+ checks across 25 papers + 5 WDM surrogates.
 
 Training: 12-24 months of baseline community sampling (monthly 16S)
 establishes the natural variation envelope. The ESN learns the dynamics

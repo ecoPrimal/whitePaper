@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V9)
+**Spring**: healthSpring (V13)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × Clinical Translation
 **License**: AGPL-3.0-or-later
 **Date**: March 9, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated** — Tier 0+1+2+3 complete (37 experiments, 4 tracks + diagnostics + GPU + visualization + clinical TRT + SAME DAVE integration). Patient-parameterized clinical scenarios (5 archetypes). petalTongue motor command channel + IPC bridge.
+**Status**: **Validated** — Tier 0+1+2+3 complete (47 experiments, 4 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction). Deep audit V13: Anderson eigensolver (QL algorithm), smart refactoring, math deduplication, centralized RNG, capability-based discovery, 4 doc-tests. Patient-parameterized clinical scenarios (5 archetypes). 317 tests, 630 binary checks, 104 cross-validation checks.
 
 ---
 
@@ -13,9 +13,11 @@
 
 Sovereign scientific computing can replace Python/NONMEM/proprietary tool chains for human health applications — pharmacokinetics, microbiome analytics, real-time biosignal processing, and endocrine outcome modeling — using pure Rust validated against published data, **with live GPU acceleration** via barraCuda WGSL shaders and heterogeneous dispatch via toadStool/metalForge.
 
-Population-level validation means nothing without per-person translation. V9 closes this loop: a `PatientTrtProfile` generates a patient-specific clinical scenario — parameterized by age, weight, testosterone level, comorbidities — rendered in petalTongue's clinical mode via the SAME DAVE motor command channel. The clinician sees the patient, not the infrastructure.
+Population-level validation means nothing without per-person translation. The pipeline closes this loop: a `PatientTrtProfile` generates a patient-specific clinical scenario — parameterized by age, weight, testosterone level, comorbidities — rendered in petalTongue's clinical mode via the SAME DAVE motor command channel. The clinician sees the patient, not the infrastructure.
 
 GPU-native execution is validated: a single consumer GPU handles population-scale health computations (10M elements, 207 M/s throughput) with the same WGSL shaders portable to edge devices, TPU, and NPU. Mixed hardware dispatch via NUCLEUS topology routes workloads to CPU, GPU, or NPU based on scale and substrate availability.
+
+V13 deepened code quality: a tridiagonal QL eigensolver corrected the Anderson/IPR pipeline to use true eigenvectors, math duplication was eliminated, the LCG PRNG was centralized, and all files were brought under the 1000-line limit via domain-coherent refactoring.
 
 The springs validate science. healthSpring makes the drug.
 
@@ -50,6 +52,8 @@ Extends wetSpring's Anderson localization framework from soil to gut.
 | 013 | FMT microbiota transplant for rCDI | Engraftment fraction → diversity restoration via Bray-Curtis |
 
 **Lineage**: Paper 01/06 Anderson QS framework → Paper 12 immunological Anderson → healthSpring gut colonization.
+
+**V13 fix**: Anderson/IPR computation now uses true eigenvectors from QL diagonalization, not Hamiltonian diagonal.
 
 ### Track 3: Biosignal Processing (Exp020–023)
 
@@ -88,6 +92,14 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 |-----|-------|-----------|
 | 040 | barraCuda CPU parity (15 analytical contracts) | Hill, Bateman, allometric, Shannon, Simpson, population PK |
 
+### Integrated Diagnostics (Exp050–052)
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 050 | Integrated 4-track patient diagnostic | Cross-track composite risk score |
+| 051 | Population diagnostic Monte Carlo (1,000 patients) | Population-level diagnostic distribution |
+| 052 | petalTongue scenario schema validation | DataChannel, ClinicalRange conformance |
+
 ### CPU vs GPU Parity & Mixed Dispatch (Exp060–062)
 
 | Exp | Title | Key Result |
@@ -96,14 +108,32 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 | 061 | Mixed hardware dispatch (NUCLEUS topology) | 22/22 dispatch route checks (CPU+GPU+NPU) |
 | 062 | PCIe P2P transfer validation (Gen3/4/5) | 26/26 bandwidth and overhead checks |
 
-### Clinical Translation (Exp063–064) — V9 NEW
+### Clinical Translation (Exp063–065)
 
 | Exp | Title | Key Result |
 |-----|-------|-----------|
-| 063 | Patient-parameterized TRT scenarios (5 archetypes) | Per-person: 8 nodes + 8 edges, clinical mode preset, UiConfig |
-| 064 | IPC push to petalTongue | Unix socket JSON-RPC, live scenario update without restart |
+| 063 | Patient-parameterized TRT scenarios (5 archetypes) | Per-person: 8 nodes + 8 edges, clinical mode preset |
+| 064 | IPC push to petalTongue | Unix socket JSON-RPC, live scenario update |
+| 065 | Live streaming dashboard | ECG, HRV, PK via StreamSession with backpressure |
 
-**Novel contribution**: Exp063 demonstrates the per-person translation pipeline — population models parameterized for an individual patient, rendered as a clinical scenario graph. This is the usable output of all upstream validation: the clinician sees a patient-specific trajectory, not a population average.
+### Compute & Benchmark (Exp066–072)
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 066 | barraCuda CPU benchmark | Hill, PopPK, Diversity timing vs Python |
+| 067 | GPU parity extended | Additional kernel validation |
+| 068 | GPU benchmark | Throughput at scale |
+| 069 | toadStool dispatch matrix | Stage assignment validation |
+| 070 | PCIe P2P bypass | NPU→GPU direct transfer |
+| 071 | Mixed system pipeline | CPU+GPU+NPU coordinated execution |
+| 072 | Compute dashboard | toadStool streaming → petalTongue live gauges |
+
+### petalTongue Evolution (Exp073–074)
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 073 | Clinical TRT live dashboard | PK trough streaming, HRV improvement, cardiac risk replace |
+| 074 | Interaction roundtrip | Mock petalTongue: render, append, replace, gauge, capabilities, subscribe — 12/12 |
 
 ---
 
@@ -111,9 +141,13 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 
 | Metric | Value |
 |--------|-------|
-| Experiments | 37 |
-| Rust binary checks | 526+ |
-| Rust unit tests | 221 (171 barracuda + 33 metalForge + 17 toadStool) |
+| Experiments | 47 |
+| Rust binary checks | 630 |
+| Rust lib tests | 250 (barraCuda) |
+| Rust forge tests | 33 (metalForge) |
+| Rust toadStool tests | 30 |
+| Doc-tests | 4 |
+| **Total tests** | **317** |
 | Cross-validation checks | 104 |
 | GPU parity checks | 27/27 (Exp060) |
 | GPU fused pipeline checks | 11/11 (Exp054) |
@@ -121,7 +155,8 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 | PCIe transfer checks | 26/26 (Exp062) |
 | Patient archetypes | 5 (Exp063) |
 | Unsafe blocks | 0 |
-| Clippy warnings | 0 |
+| Clippy warnings | 0 (`-D clippy::all -W clippy::pedantic`) |
+| Max file size | 819 lines (under 1000-line limit) |
 
 ---
 
@@ -152,23 +187,25 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 | Population PK MC | **5M** | 1.15x (5M) | 365 M/s |
 | Fused pipeline (overhead) | — | **31.7x** vs individual | — |
 
-### Field Deployment Thesis
+---
 
-A single consumer GPU where people are — clinic laptop, Raspberry Pi + eGPU, edge node — handles population-scale health computations without cloud infrastructure. The same WGSL pipeline maps to TPU (Coral) and NPU (Akida) as hardware matures.
+## V13 Deep Audit Evolution
 
-### metalForge NUCLEUS Atomics
-
-Hierarchical compute topology: Tower (cluster) → Node (machine) → Nest (device). PCIe P2P DMA planning for GPU↔NPU bypass. 33 tests. `DispatchPlan` assigns stages to substrates with transfer planning.
-
-### toadStool Pipeline
-
-Stage-based compute pipeline: Generate → Transform (Hill, ExpDecay, Square) → Reduce (Sum, Mean, Max, Min, Variance) → Filter. CPU reference + GPU dispatch. 17 tests. `execute_auto()` routes per stage via metalForge.
+| Change | Impact |
+|--------|--------|
+| Anderson eigensolver | QL algorithm for correct eigenvalue/eigenvector computation from tridiagonal Hamiltonian |
+| Smart clinical.rs refactor | 1177 → 374 + 819 lines, domain-coherent split |
+| LCG PRNG centralization | New `rng.rs` module, 4 files updated |
+| Math deduplication | `evenness_to_disorder` and `lognormal_params` delegate to canonical source |
+| Capability-based discovery | Glob-based Songbird socket search replaces hardcoded path |
+| Flaky test fix | AtomicU64 paths + kernel connection queuing replaces Barrier synchronization |
+| Doc-tests | 4 added (shannon_index, hill_dose_response, auc_trapezoidal, state_to_f64) |
 
 ---
 
-## Per-Person Clinical Translation (V9)
+## Per-Person Clinical Translation
 
-The critical V9 addition: the pipeline from validated population models to individual patient scenarios.
+The critical addition: the pipeline from validated population models to individual patient scenarios.
 
 ### Pipeline
 
@@ -192,8 +229,6 @@ The SAME DAVE model (Sensory Afferent, Motor Efferent) provides self-aware contr
 | Awakening control | Efferent | `awakening_enabled: false` → skip startup animation |
 | Zoom control | Efferent | `initial_zoom: "fit"` → FitToView motor command |
 | IPC push | Afferent | JSON-RPC → scenario update without restart |
-
-Classification nodes (analogous to nodes of Ranvier in Schwann cells) allow smart signal routing along unidirectional channels, enabling bidirectional system control through specialized afferent and efferent pathways.
 
 ---
 

@@ -211,14 +211,14 @@ network weight matrices that gen3 Sub-01 uses on microbial communities:
 - **Cross-validation**: If Anderson localization governs both microbial QS
   geometry (gen3) and neural network weight spectra (neuralSpring), the
   framework gains biological AND computational evidence simultaneously
-- **ESN regime classifier** (nW-05, Session 88+): neuralSpring's ESN classifier
+- **ESN regime classifier** (nW-05, S134): neuralSpring's ESN classifier
   validates the reservoir computing pattern used for regime detection — the
   same architecture can classify Anderson regimes (extended/localized/marginal)
   from community time-series features, directly applicable to QS regime
   monitoring (Sub-thesis 04, 06)
-- **Current status**: neuralSpring Session 88+ — 668 lib tests, 175 binaries,
-  174/175 validators, 3,034+ total checks, 5 WDM surrogates complete (nW-01..05),
-  129+ named tolerances, 42 upstream rewires, `spectral_entropy` delegated to
+- **Current status**: neuralSpring S135 — 966 lib tests, 232 binaries,
+  220/220 validate_all, 3,034+ total checks, 5 WDM surrogates complete (nW-01..05),
+  150+ named tolerances, 46 upstream rewires, `spectral_entropy` delegated to
   `barracuda::stats::shannon_from_frequencies`
 
 ## 8. groundSpring Connections

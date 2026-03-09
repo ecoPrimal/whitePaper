@@ -290,7 +290,7 @@ df64-validated protein folding primitives directly to WDM science:
   df64 compute → f64 output). Validates that df64 generalizes from nuclear
   physics to ML workloads. Two precision tiers: arithmetic 3.6e-8 to 5.6e-7,
   transcendental 1.7e-4 to 3.4e-4. 37/37 GPU checks on RTX 4070
-- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 88+)
+- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (S134)
   - nW-01: MLP transport surrogate (D*, η*, λ*) — 30/30 Rust checks
   - nW-02: MLP EOS surrogate P(ρ,T), E(ρ,T) — 36/36 + 15/15 GPU checks
   - nW-03: LSTM reservoir S(q,ω) peak predictor — 27/27 Rust checks, R²=0.98
@@ -302,8 +302,8 @@ df64-validated protein folding primitives directly to WDM science:
 - **Spectral analysis**: neuralSpring's `eigh_f64` eigendecomposition and
   `spectral_entropy` (rewired to `barracuda::stats::shannon_from_frequencies`
   in Session 81) apply directly to plasma eigenmode analysis
-- **Session 90 status**: 669 lib tests, 179 binaries, 179/179 validators,
-  131+ named tolerances, 42 upstream rewires, 36 Python baselines (all
+- **S135 status**: 966 lib tests, 232 binaries, 220/220 validate_all,
+  150+ named tolerances, 46 upstream rewires, 36 Python baselines (all
   deterministically seeded), 3,162+ total validation checks. nF-02 AlphaFold2
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
