@@ -1,7 +1,7 @@
 # Sub-Thesis 15: Self-Routing Precision Brain for Heterogeneous GPU Compute
 
 **Date:** March 10, 2026
-**Status:** **Validated** — hotSpring v0.6.27, 842 lib tests, bench_precision_eval clean exit, both GPUs profiled. coralReef Iter 29 sovereign validation: 45/46 compile, 12/12 NVVM bypass. Exp 050. toadStool S144 absorbed NVVM poisoning into `nvvm_safety.rs`.
+**Status:** **Validated** — hotSpring v0.6.28, 842 lib tests, bench_precision_eval clean exit, both GPUs profiled. coralReef Iter 30 sovereign validation: 45/46 compile, 12/12 NVVM bypass, FMA lowering (`FmaPolicy::Separate`) unlocks F64Precise via sovereign path. Exp 050-051. toadStool S145 absorbed PrecisionBrain with `PrecisionHint` routing + `NvkZeroGuard`. barraCuda `a012076` absorbed PrecisionBrain/HardwareCalibration/PrecisionTier from hotSpring v0.6.25.
 **Domain:** GPU computing, precision engineering, hardware discovery
 **Novelty:** Data-driven self-routing precision brain that discovers hardware
 capabilities at startup, routes physics workloads to optimal precision tier
