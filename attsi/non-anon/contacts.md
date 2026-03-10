@@ -170,6 +170,21 @@
 - Relationship: Father
 - Details: `contact/mok/`
 
+## Environmental Engineering / Anaerobic Digestion (MSU BAE)
+
+**Wei Liao** — Professor, Biosystems & Agricultural Engineering, MSU; Director, ADREC
+- https://sites.google.com/msu.edu/liao-research-group/home
+- https://sites.google.com/msu.edu/adrec/home
+- liaow@msu.edu | Room 202, 524 S. Shaw Ln | (517) 432-7205
+- Domain: Anaerobic digestion, integrated biorefining, algae/carbon capture, wastewater treatment
+- ADREC: Michigan State Anaerobic Digestion Research & Education Center (4090 College Rd, Lansing)
+- Key personnel: Sibel Uludag-Demirer (demirers@msu.edu) — electrocoagulation, BMP studies
+- Papers targeted: Wang et al. 2020 (ML digestion prediction), Yang et al. 2016 (phylogenetic community-performance), Chen et al. 2016 (culture conditions → microbial response), Zhong et al. 2016 (fungal fermentation on digestate), Rojas-Sossa et al. 2017/2019 (substrate → community)
+- Spring relevance: **Paper 16** — Anaerobic-Aerobic QS Phase Transition (wetSpring + healthSpring + airSpring). Digester microbial ecology is the experimental counterpart to gut microbiome modeling and soil aerobic/anaerobic zonation.
+- Connection: **Interviewed with ADREC before Sandia internship (2024)**. Author's MSUBI bioreactor experience (5 years — Pivot Bio, MycoWorks, fermentation, BSL2 fungi/anaerobes) is the direct counterpart to ADREC's reactor engineering.
+- **Status**: Contact directory prepared. Outreach pending — reproduce Wang 2020 first, then contact with results.
+- Details: `contact/liao/`
+
 ## Industry / MSUBI
 
 Pivot Bio — microbiome/nitrogen fixation (bench scale → 10L reactor, 2019–2024)
