@@ -126,11 +126,14 @@
 - ikachkov@msu.edu | Room C300, Wells Hall | (517) 844-1455
 - Domain: Spectral theory of periodic & quasiperiodic Schrödinger operators, Anderson localization, transport in quantum spin systems
 - Papers reproduced: 11 papers — Anderson (1958), Aubry-André (1980), Jitomirskaya (1999), Herman (1983), Lanczos (1950), Abrahams et al. (1979), Slevin-Ohtsuki (1999), Hofstadter (1976), Avila-Jitomirskaya (2009), Kachkovskiy-Safarov (2016), Bourgain-Kachkovskiy (2018)
-- hotSpring spectral track: 10+ checks
-- Also in: neuralSpring (16/16 checks), groundSpring (queued)
+- Validated: **417+ checks** across hotSpring (45/45), groundSpring (44+), wetSpring (312+), neuralSpring (16/16)
+- Hardware: Known to have RTX 5080 — GPU spectral computing is the value proposition
 - NSF funded: DMS-1758326
 - Previously at: Institute for Advanced Study, UC Irvine
-- Relationship: Sold the NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
+- Connection: Sold NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
+- Co-authors: Jean Bourgain (Fields Medalist, IAS), Svetlana Jitomirskaya (UCI), Nikolay Filonov (Steklov)
+- **Status**: Contact directory prepared. Outreach pending — in-person (Wells Hall) preferred over email.
+- Details: `contact/kachkovskiy/`
 
 ## MSU Drug Discovery Program (via Gonzales referral, March 2026)
 
