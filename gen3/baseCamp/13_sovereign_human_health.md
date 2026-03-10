@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V13)
-**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × Clinical Translation
+**Spring**: healthSpring (V14.1)
+**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation
 **License**: AGPL-3.0-or-later
-**Date**: March 9, 2026
+**Date**: March 10, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated** — Tier 0+1+2+3 complete (47 experiments, 4 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction). Deep audit V13: Anderson eigensolver (QL algorithm), smart refactoring, math deduplication, centralized RNG, capability-based discovery, 4 doc-tests. Patient-parameterized clinical scenarios (5 archetypes). 317 tests, 630 binary checks, 104 cross-validation checks.
+**Status**: **Validated** — Tier 0+1+2+3 complete (48 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME). V14: NLME population PK (FOCE + SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), NLME diagnostics (CWRES, VPC, GOF), WFDB parser, Kokkos-equivalent benchmarks, full petalTongue pipeline (28 nodes, 29 edges, 121 channels, 14 scenarios). Industry benchmark mapping. V14.1: Deep debt — biosignal modular refactor (6 submodules), `#![deny(clippy::pedantic)]` enforcement, DFT deduplication, idiomatic Rust. 356 tests, 853 binary checks, 104 cross-validation checks.
 
 ---
 
@@ -17,7 +17,7 @@ Population-level validation means nothing without per-person translation. The pi
 
 GPU-native execution is validated: a single consumer GPU handles population-scale health computations (10M elements, 207 M/s throughput) with the same WGSL shaders portable to edge devices, TPU, and NPU. Mixed hardware dispatch via NUCLEUS topology routes workloads to CPU, GPU, or NPU based on scale and substrate availability.
 
-V13 deepened code quality: a tridiagonal QL eigensolver corrected the Anderson/IPR pipeline to use true eigenvectors, math duplication was eliminated, the LCG PRNG was centralized, and all files were brought under the 1000-line limit via domain-coherent refactoring.
+V14 adds sovereign replacements for three commercial pharmacometric tools: NONMEM (FOCE estimation), Monolix (SAEM estimation), and WinNonlin (NCA metrics). NLME diagnostics (CWRES, VPC, GOF) complete the population PK pipeline. A WFDB parser enables direct PhysioNet biosignal ingestion. Kokkos-equivalent benchmarks validate GPU-portable patterns. The full petalTongue pipeline now spans 5 tracks with 28 nodes, 121 channels, and 14 scenarios — making the complete healthSpring pipeline human-visible and actionable.
 
 The springs validate science. healthSpring makes the drug.
 
@@ -86,6 +86,23 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 
 **Novel contribution**: Exp037 bridges gut microbiome diversity with TRT metabolic outcomes via Anderson localization — a testable hypothesis for clinical investigation. Exp038 validates HRV as a surrogate endpoint for cardiovascular benefit of TRT.
 
+### Track 5: NLME Population Pharmacokinetics (Exp075–076)
+
+Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 075 | NLME cross-validation (FOCE/SAEM, NCA, diagnostics) | FOCE 30% theta recovery, SAEM 50%, NCA λz/AUC∞ 5%, CWRES <2.0, GOF R²≥0 |
+| 076 | Full pipeline petalTongue validation (5 tracks, 28 nodes) | 197/197 structural checks, 121 channels, all 7 DataChannel types |
+
+**Novel contribution**: First sovereign pure-Rust NLME stack. FOCE + SAEM estimation with NCA and full diagnostics (CWRES, VPC, GOF) — no NONMEM, no Monolix, no WinNonlin, no Fortran, no Python. Deterministic reproducibility (same seed → identical results). VPC Monte Carlo simulation is a GPU promotion candidate (embarrassingly parallel).
+
+**WFDB parser**: `barracuda/src/wfdb.rs` — streaming PhysioNet Format 212/16 decoder with beat annotation parsing. Enables direct ingestion from MIT-BIH, MIMIC-III, and other PhysioNet databases.
+
+**Kokkos-equivalent benchmarks**: `barracuda/benches/kokkos_parity.rs` — reduction, scatter, Monte Carlo, ODE batch, NLME iteration. Validates GPU-portable patterns ahead of shader promotion.
+
+**Industry benchmark mapping**: SnapGene, Chromeleon, NONMEM, Monolix, WinNonlin profiled. Sovereign replacements mapped to ecoPrimals stack. See `healthSpring/specs/PAPER_REVIEW_QUEUE.md`.
+
 ### Validation Track (Exp040)
 
 | Exp | Title | Key Result |
@@ -141,21 +158,23 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 
 | Metric | Value |
 |--------|-------|
-| Experiments | 47 |
-| Rust binary checks | 630 |
-| Rust lib tests | 250 (barraCuda) |
+| Experiments | 48 |
+| Rust binary checks | 853 |
+| Rust lib tests | 289 (barraCuda) |
 | Rust forge tests | 33 (metalForge) |
 | Rust toadStool tests | 30 |
 | Doc-tests | 4 |
-| **Total tests** | **317** |
+| **Total tests** | **356** |
 | Cross-validation checks | 104 |
+| petalTongue pipeline | 28 nodes, 29 edges, 121 channels, 14 scenarios |
+| NLME validation | FOCE + SAEM + NCA + CWRES + VPC + GOF (Exp075, 19 checks) |
 | GPU parity checks | 27/27 (Exp060) |
 | GPU fused pipeline checks | 11/11 (Exp054) |
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
 | Patient archetypes | 5 (Exp063) |
 | Unsafe blocks | 0 |
-| Clippy warnings | 0 (`-D clippy::all -W clippy::pedantic`) |
+| Clippy warnings | 0 (`#![deny(clippy::pedantic)]` in all lib crates, `-W clippy::nursery`) |
 | Max file size | 819 lines (under 1000-line limit) |
 
 ---
@@ -186,6 +205,22 @@ Clinical claim verification pipeline: extracting quantifiable claims from Dr. Ch
 | Hill dose-response | **100K** | 2.0x (5M) | 207 M/s |
 | Population PK MC | **5M** | 1.15x (5M) | 365 M/s |
 | Fused pipeline (overhead) | — | **31.7x** vs individual | — |
+
+---
+
+## V14 NLME + Full Pipeline Evolution
+
+| Change | Impact |
+|--------|--------|
+| NLME population PK (FOCE + SAEM) | Sovereign NONMEM/Monolix replacement in `pkpd/nlme.rs`. 30 subjects, theta/omega/sigma recovery. |
+| NCA | Sovereign WinNonlin replacement in `pkpd/nca.rs`. λz, AUC∞, MRT, CL, Vss. |
+| NLME diagnostics (CWRES, VPC, GOF) | `pkpd/diagnostics.rs`. CWRES ~N(0,1), VPC 50 simulations, GOF scatter. |
+| WFDB parser | `wfdb.rs` — PhysioNet Format 212/16 streaming decode + beat annotations. |
+| Kokkos-equivalent benchmarks | `benches/kokkos_parity.rs` — 5 GPU-portable patterns validated on CPU. |
+| Full petalTongue pipeline | 28 nodes (was 22), 29 edges (was 22), 121 channels (was 65), 14 scenarios (was 13). |
+| Exp075 | NLME cross-validation: 19 binary checks (FOCE/SAEM/NCA/CWRES/GOF). |
+| Exp076 | Full pipeline validation: 197 binary checks across all 5 tracks + full study. |
+| Industry benchmarks | SnapGene, Chromeleon, NONMEM, Monolix, WinNonlin profiled and mapped. |
 
 ---
 

@@ -126,11 +126,14 @@
 - ikachkov@msu.edu | Room C300, Wells Hall | (517) 844-1455
 - Domain: Spectral theory of periodic & quasiperiodic Schrödinger operators, Anderson localization, transport in quantum spin systems
 - Papers reproduced: 11 papers — Anderson (1958), Aubry-André (1980), Jitomirskaya (1999), Herman (1983), Lanczos (1950), Abrahams et al. (1979), Slevin-Ohtsuki (1999), Hofstadter (1976), Avila-Jitomirskaya (2009), Kachkovskiy-Safarov (2016), Bourgain-Kachkovskiy (2018)
-- hotSpring spectral track: 10+ checks
-- Also in: neuralSpring (16/16 checks), groundSpring (queued)
+- Validated: **417+ checks** across hotSpring (45/45), groundSpring (44+), wetSpring (312+), neuralSpring (16/16)
+- Hardware: Known to have RTX 5080 — GPU spectral computing is the value proposition
 - NSF funded: DMS-1758326
 - Previously at: Institute for Advanced Study, UC Irvine
-- Relationship: Sold the NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
+- Connection: Sold NucBox M6 on Facebook Marketplace; brief GPU conversation; noticed equations on whiteboard
+- Co-authors: Jean Bourgain (Fields Medalist, IAS), Svetlana Jitomirskaya (UCI), Nikolay Filonov (Steklov)
+- **Status**: Contact directory prepared. Outreach pending — in-person (Wells Hall) preferred over email.
+- Details: `contact/kachkovskiy/`
 
 ## MSU Drug Discovery Program (via Gonzales referral, March 2026)
 
@@ -166,6 +169,21 @@
 - Cross-track: D1 (gut diversity × TRT response), D2 (Anderson gut confinement × metabolic syndrome), D3 (HRV × TRT cardiovascular), D4 (population PK + microbiome covariate)
 - Relationship: Father
 - Details: `contact/mok/`
+
+## Environmental Engineering / Anaerobic Digestion (MSU BAE)
+
+**Wei Liao** — Professor, Biosystems & Agricultural Engineering, MSU; Director, ADREC
+- https://sites.google.com/msu.edu/liao-research-group/home
+- https://sites.google.com/msu.edu/adrec/home
+- liaow@msu.edu | Room 202, 524 S. Shaw Ln | (517) 432-7205
+- Domain: Anaerobic digestion, integrated biorefining, algae/carbon capture, wastewater treatment
+- ADREC: Michigan State Anaerobic Digestion Research & Education Center (4090 College Rd, Lansing)
+- Key personnel: Sibel Uludag-Demirer (demirers@msu.edu) — electrocoagulation, BMP studies
+- Papers targeted: Wang et al. 2020 (ML digestion prediction), Yang et al. 2016 (phylogenetic community-performance), Chen et al. 2016 (culture conditions → microbial response), Zhong et al. 2016 (fungal fermentation on digestate), Rojas-Sossa et al. 2017/2019 (substrate → community)
+- Spring relevance: **Paper 16** — Anaerobic-Aerobic QS Phase Transition (wetSpring + healthSpring + airSpring). Digester microbial ecology is the experimental counterpart to gut microbiome modeling and soil aerobic/anaerobic zonation.
+- Connection: **Interviewed with ADREC before Sandia internship (2024)**. Author's MSUBI bioreactor experience (5 years — Pivot Bio, MycoWorks, fermentation, BSL2 fungi/anaerobes) is the direct counterpart to ADREC's reactor engineering.
+- **Status**: Contact directory prepared. Outreach pending — reproduce Wang 2020 first, then contact with results.
+- Details: `contact/liao/`
 
 ## Industry / MSUBI
 

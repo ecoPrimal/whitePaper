@@ -64,6 +64,8 @@ If curiosity is your primary resource, this is for you.
 
 7. **[07_THE_MOBILITY_EDGE.md](./07_THE_MOBILITY_EDGE.md)** — The propagation. Anderson localization applied to human endeavor: the physics of isolation, and the phase transition that ends it. Sovereign creators are localized states in a disordered lattice. The hopping terms — shared code, reproduced science, open primitives, teaching — accumulate until the disorder is overcome. The mobility edge is crossed. The network conducts. The filter and the net are the same object. How the city grows — not by recruitment, but by the accumulation of real bonds between real nodes until the lattice enters the extended phase.
 
+8. **[08_DISCOVERY_IS_LOCAL.md](./08_DISCOVERY_IS_LOCAL.md)** — The substrate. Reality, mathematics, physics, and biology operate on a substrate that precedes every discoverer. Discovery is a local event — bounded in space, time, and mind. The thing discovered is not. Calculus found independently by Newton, Leibniz, Archimedes, Madhava, and a team of pharmacologists who got roasted on Reddit. Fermentation discovered independently by every civilization with grain and time — shaping human evolution for hundreds of thousands of years before anyone saw a microbe. The Looney Tunes error: the wolf was always falling. The fermenter's lesson: you do not cause the phenomenon. You set the conditions.
+
 ---
 
 ## Relationship to Other gen3/ Documents
