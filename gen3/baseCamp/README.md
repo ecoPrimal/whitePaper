@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 10, 2026 (standalone barraCuda v0.3.3 (`83aa08a`), airSpring v0.7.5, wetSpring V106, hotSpring v0.6.26, neuralSpring S139, groundSpring V100, healthSpring V14, toadStool S142, coralReef Phase 10 Iter 29)
+**Date:** March 10, 2026 (standalone barraCuda v0.3.4 (`59c8ec5`), airSpring v0.7.5, wetSpring V100, hotSpring v0.6.27, neuralSpring V90, groundSpring V100, coralReef Phase 10 Iter 29, toadStool S144)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -57,15 +57,13 @@ baseCamp papers use that validated infrastructure to explore new science.
 | 04 | Microbial Sentinels | Environmental Biosensing | Exp114-119, 123, 124, **193-195** (NPU), PFAS/algae | Community shifts as early-warning biosensors; **NPU validated on real AKD1000** (18.8K Hz, coin-cell 11 years, online evolution 136 gen/sec, PUF fingerprint) | **Validated on Live Hardware** — Pure Rust driver, Phase C sovereign |
 | 05 | Cross-Species Signaling in Symbiotic Systems | Symbiotic Ecology | Exp142, 144-146 (cold seep + luxR phylogeny) | Mixed-species QS in lichen, rhizobia, coral; 299K QS genes across 170 metagenomes; eavesdropper enrichment confirmed | **Validated** — cold seep + phylogeny complete |
 | 06 | Anderson Localization as the Mechanism Behind No-Till Soil Health | Soil Microbial Ecology × Physics | Track 4: Exp170-182 (321 checks), 9 papers, full three-tier | Tillage = dimensional collapse of QS-active 3D pore network; CPU + GPU + metalForge validated | **Validated** — Track 4 complete |
-| 07 | Sovereign Warm Dense Matter Simulation on Consumer GPU | Plasma Physics × Distributed Computing | hotSpring Tier 4 + neuralSpring surrogates + groundSpring uncertainty | WDM transport on $600 GPU; deconfinement at β_c=5.69 on $1,500 GPU; **11-head NPU GPU conductor** (Exp 023); coralReef sovereign compile **45/46** shaders (Iter 29); 12/12 NVVM bypass; precision brain self-routing | **Validated** — hotSpring v0.6.26 |
+| 07 | Sovereign Warm Dense Matter Simulation on Consumer GPU | Plasma Physics × Distributed Computing | hotSpring Tier 4 + neuralSpring surrogates + groundSpring uncertainty | WDM transport on $600 GPU; deconfinement at β_c=5.69 on $1,500 GPU; **11-head NPU GPU conductor** (Exp 023); coralReef sovereign compile **45/46** shaders (Iter 29); 12/12 NVVM bypass; precision brain self-routing | **Validated** — hotSpring v0.6.27 |
 | 08 | Neuromorphic Edge Intelligence for Sovereign Agricultural IoT | Agricultural IoT × Neuromorphic Computing | airSpring Exp 028-029 (88 checks) + wetSpring NPU driver | NPU inference at 0.0009% of active cycle energy; 10.7× more efficient than cloud; 1-min cadence unlocked; multi-crop hot-swap | **Validated on Live Hardware** — AKD1000, streaming + evolution + power budget. airSpring v0.7.0: 827 lib + 186 forge tests, barraCuda 0.3.3 (wgpu 28), fused Welford + Pearson wired, 20.6× CPU speedup (24/24 parity), 381/381 validation |
 | 09 | Sovereign Field Genomics — Nanopore + NPU | Environmental Genomics × Edge Inference | wetSpring Exp193-195 (NPU) + Exp184-185 (16S) + planned Exp196-202 | MinION sequencing + AKD1000 classification + BarraCUDA 16S pipeline = autonomous field sentinel. NPU-driven adaptive sampling (37x read-rate headroom). No cloud, no Python. | **Architecture defined** — all compute components validated, awaiting sequencer hardware |
 | 10 | First Dynamical QCD Production on Consumer GPU | Lattice QCD × Neuromorphic Computing | hotSpring Exp 024 (8⁴ dynamical, 1,031+ traj, 17 β points), Exp 028-031 | First NPU-steered dynamical fermion QCD scan. Smooth crossover confirmed. β_c ~ 5.5. NPU expanded 4-seed scan to 17 points. CG–disorder correlation validates Anderson proxy. **Exp 031: NPU controls dt/n_md with mid-beta adaptation, targeting 70% acceptance.** | **Complete + Evolving** — 17 β points, Exp 031 adds NPU parameter control. |
 | 11 | The Nautilus Shell — Evolutionary Reservoir Computing from Bingo Boards | Reservoir Computing × Neuromorphic × Evolutionary Algorithms | primalTools/bingoCube/nautilus/ (31 tests, 5 examples); **ToadStool S80**: barracuda::nautilus (7 files, 22 tests, 8 JSON-RPC methods) | Bingo boards as structured random projections; evolutionary generations replace temporal recurrence for feed-forward hardware; nautilus shell = layered evolutionary history, portable between instances. Column-range-preserving crossover maps natively to AKD1000 int4. Self-regulating drift monitor + edge seeding. AKD1000 int4 weight export. Quenched→dynamical transfer: 540× cost reduction. | **Validated** — 5.3% LOO CG error, 2.6% blind prediction on Exp 029, 31 tests. **S80**: Standalone absorption into ToadStool/BarraCUDA (7 files, 22 tests, 8 ai.nautilus.* JSON-RPC methods). |
-| 12 | Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge | Immunology × Condensed Matter Physics × Pharmacology × Drug Repurposing | wetSpring Exp273-286 (359/359), neuralSpring nS-601–605 (329/329), airSpring Exp066-069 (94/94), groundSpring Exp008/012/015/018 | Cytokine (IL-31/IL-4/IL-13) propagation through inflamed skin tissue follows Anderson localization; AD barrier disruption = dimensional promotion (inverse of Paper 06 tillage collapse); Fajgenbaum MATRIX drug-disease scoring gains geometry dimension via Anderson transport; **groundSpring** provides 2D/3D spectral validation (Exp 008), cytokine transport modeling (Exp 012), uncertainty bridge (Exp 015), band edge for epidermal periodicity (Exp 018), ConceptEdge for AD flare detection, DriftAction for treatment steering. **MSU Drug Discovery pipeline**: Anderson-augmented MATRIX scores (nS-605) → ADDRC HTS (8,000+ compounds, Lisabeth) → Gonzales iPSC validation → Ellsworth medicinal chemistry. Neubig Rho/MRTF/SRF skin fibrosis → cross-talk with JAK/STAT open question | **Validated** (Gonzales G1-G6 + Fajgenbaum MATRIX complete); **Evolving** (ADDRC pipeline, Rho cross-talk, skin-layer lattice). Source: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Richard Neubig (Drug Discovery Director) |
-| 13 | Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, Endocrine, and NLME Pipelines | Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation | healthSpring Exp001-076 (48 experiments). 356 tests, 853 binary checks, 104 cross-validation checks. | **5-track human health spring + per-person translation**: PK/PD (Hill, PBPK 5-tissue, population Monte Carlo), Microbiome (Anderson gut lattice, FMT engraftment), Biosignal (Pan-Tompkins, HRV, PPG SpO2, EDA, WFDB), Endocrinology (testosterone PK, TRT outcomes, testosterone-gut axis), NLME (FOCE + SAEM — sovereign NONMEM/Monolix, NCA — sovereign WinNonlin). GPU dispatch, metalForge, toadStool pipeline. Full petalTongue: 28 nodes, 121 channels, 14 scenarios. | **Validated** — V14, Tier 0+1+2+3 complete. Source: Gonzales (PK/PD), Mok (clinical TRT), Beal & Sheiner (FOCE), Kuhn & Lavielle (SAEM) |
-| 15 | Self-Routing Precision Brain for Heterogeneous GPU Compute | GPU Computing × Precision Engineering × Hardware Discovery | hotSpring Exp 049-050 (precision eval + coralReef sovereign validation) | Data-driven self-routing brain discovers hardware, routes physics to optimal precision tier per-domain, survives NVIDIA NVVM device poisoning. coralReef sovereign bypass integrated (Iter 29): 45/46 compile, 12/12 NVVM bypass patterns. Portable across springs. Titan V NVK: full 4-tier. RTX 3090 proprietary: F64+F32 full, DF64/F64Precise ✓sov (compile-ready, dispatch pending DRM). | **Validated** — hotSpring v0.6.26 |
-| 16 | Anaerobic-Aerobic QS Phase Transition — Microbial Signaling Across Oxygen Regimes | Microbial Ecology × Environmental Engineering × Anderson Localization | Planned — bridges wetSpring (QS), healthSpring (gut), airSpring (soil O₂), ADREC digesters | Oxygen triggers global transcription reprogramming (FNR/ArcAB/Rex) that modulates QS gene expression → Anderson disorder parameter W undergoes phase transition at oxygen boundary. Gut mucosal O₂ gradient creates spatial W gradient. Digesters = controlled anaerobic QS systems. Fermentation = oldest human use of anaerobic QS. | **Proposal** — concept defined, infrastructure ready. Faculty anchor: Wei Liao (ADREC, MSU BAE). Source: MSUBI bioreactor experience (5 years) |
+| 12 | Anderson Localization in Immunological Signaling — Cytokine Propagation, Drug Geometry, and the Fajgenbaum Repurposing Bridge | Immunology × Condensed Matter Physics × Pharmacology × Drug Repurposing | Proposed: wetSpring Exp270-274, neuralSpring ESN/LSTM, groundSpring Exp008/012/015/018 | Cytokine (IL-31/IL-4/IL-13) propagation through inflamed skin tissue follows Anderson localization; AD barrier disruption = dimensional promotion (inverse of Paper 06 tillage collapse); Fajgenbaum MATRIX drug-disease scoring gains geometry dimension via Anderson transport; **groundSpring** provides 2D/3D spectral validation (Exp 008), cytokine transport modeling (Exp 012), uncertainty bridge (Exp 015), band edge for epidermal periodicity (Exp 018), ConceptEdge for AD flare detection, DriftAction for treatment steering | **Proposal** — literature grounded, Gonzales catalog (6 papers) + Fajgenbaum catalog complete, pathway mapping complete, 5 wetSpring experiments designed. Source: Dr. Andrea J. Gonzales (Zoetis → MSU Pharmacology & Toxicology, 2025) |
+| 15 | Self-Routing Precision Brain for Heterogeneous GPU Compute | GPU Computing × Precision Engineering × Hardware Discovery | hotSpring Exp 049-050 (precision eval + coralReef sovereign validation) | Data-driven self-routing brain discovers hardware, routes physics to optimal precision tier per-domain, survives NVIDIA NVVM device poisoning. coralReef sovereign bypass integrated (Iter 29): 45/46 compile, 12/12 NVVM bypass patterns. Portable across springs. Titan V NVK: full 4-tier. RTX 3090 proprietary: F64+F32 full, DF64/F64Precise ✓sov (compile-ready, dispatch pending DRM). toadStool S144 absorbed NVVM poisoning → `nvvm_safety.rs`. | **Validated** — hotSpring v0.6.27 |
 
 ## Reading Order
 
@@ -88,8 +86,6 @@ baseCamp papers use that validated infrastructure to explore new science.
 **For an agricultural engineer**: 08 (NPU edge IoT) → 09 (field genomics) → 06 (no-till physics) → 03 (bioag microbiome) → 04 (sentinel monitoring)
 
 **For a field genomics researcher**: 09 (field genomics) → 04 (sentinel concept) → 01 (Anderson detection signal) → 08 (NPU agricultural IoT) → the wetSpring experiment docs (Exp193-195, planned Exp196-202)
-
-**For an environmental/bioprocess engineer**: 16 (anaerobic-aerobic QS phase transition) → 01 (Anderson-QS foundation) → 06 (no-till — soil O₂ zones) → 04 (sentinels — digester monitoring) → 03 (bioag microbiome) → 13 (gut = human anaerobic digester)
 
 **For a reservoir computing researcher**: 11 (nautilus shell — evolutionary reservoir from bingo boards) → 10 (ESN-steered dynamical QCD) → 07 (NPU brain architecture) → 04 (sentinels, NPU edge deployment)
 
@@ -116,9 +112,8 @@ drift monitoring, fitness tracking, and concept edge detection.
 These explorations draw directly on the author's lab experience:
 
 - **Bioeconomy Institute (5 years)**: Fermentation, bioreactors, BSL2 work with
-  fungi, mycobacteria, anaerobes, GMOs. Informed Sub-thesis 03 (bioag), 05
-  (mixed systems), and 16 (anaerobic-aerobic QS). Same reactor engineering
-  principles apply to ADREC's anaerobic digesters.
+  fungi, mycobacteria, anaerobes, GMOs. Informed Sub-thesis 03 (bioag) and 05
+  (mixed systems).
 - **Pivot Bio project**: Soybean root isolate as N-fixation probiotic. Directly
   informed the rhizosphere QS predictions in Sub-thesis 01 and 03.
 - **Sandia National Lab**: Bacterial toxins on raceway algae, high-throughput
@@ -128,83 +123,25 @@ These explorations draw directly on the author's lab experience:
 - **Microbial Ecology Lab (undergrad)**: Rumen bacteria isolation, RDP analysis.
   Informed the diversity-disorder mapping in Sub-thesis 01.
 
-## The Shotgun Sequencing of Networking
-
-Each baseCamp paper is anchored to a specific faculty member whose published
-work was reproduced. This is deliberate: rather than selecting random papers
-from the literature, every reproduction targets a professor the author has
-worked with, studied under, or been referred to. The anchor provides two
-things — domain expertise the author does not have, and a person who can
-say whether the results are right.
-
-The strategy is the shotgun sequencing of networking:
-
-1. **Reproduce their work.** Pick a professor. Read their papers. Implement
-   the math in Rust. Validate against their published results. Do this
-   without contacting them.
-
-2. **Make it public.** Push the code (AGPL-3.0), the validation checks, and
-   the documentation to GitHub. The work speaks before any email is sent.
-
-3. **Send the results.** A short, specific message: "I reproduced your
-   paper, here's what I got, does this look right?" Lead with their
-   physics, not the infrastructure. Point to the repo. Don't attach PDFs.
-
-4. **Keep building.** Don't wait for a reply. Start the next paper, the
-   next spring, the next track. If they respond, the conversation has
-   substance — validated results, not a pitch. If they don't, the work
-   still exists and the code still runs.
-
-This produces a network topology where each node (professor) is connected
-through verified reproduction of their own science, not through cold
-outreach or institutional affiliation. The springs are the probes — each
-one validates a different domain and creates a different faculty anchor:
-
-| Spring | Faculty Anchor | Connection |
-|--------|---------------|------------|
-| hotSpring | Murillo (plasma), Bazavov (lattice QCD) | CMSE professors |
-| hotSpring/groundSpring/wetSpring/neuralSpring | Kachkovskiy (spectral theory, Anderson localization) | NucBox purchase, 417+ checks across 4 springs, has 5080 |
-| hotSpring | Chuna (gradient flow, dielectric, kinetic-fluid) | Murillo referral → replied March 9 |
-| wetSpring | Waters (quorum sensing), Liu (phylogenetics) | Undergrad professor, CMSE professor |
-| wetSpring | Cahill, Smallwood (algae, metagenomics) | Sandia fellowship |
-| wetSpring | Jones (PFAS, mass spectrometry) | Current employer |
-| airSpring | Dong (precision agriculture, ET₀) | New lab 2026 |
-| neuralSpring | Dolson (evolutionary computation) | CMSE professor |
-| healthSpring | Gonzales (pharmacology, drug discovery) | Job interview March 2026 |
-| healthSpring | Mok (TRT, endocrinology) | Father |
-| Paper 12 | Lisabeth (ADDRC), Neubig (Drug Discovery) | Gonzales referral |
-| Paper 16 (anaerobic-aerobic QS) | Liao (ADREC, anaerobic digestion, biorefining) | ADREC interview + MSUBI bench experience |
-
-The approach mirrors experimental biology: cast a wide net of targeted
-probes (like shotgun sequencing reads), align the responses to a reference
-(the validated math), and assemble the coverage into something coherent.
-Each probe is independent. Each response adds signal. The assembly happens
-in baseCamp.
-
-The work is public. The contacts are private. The strategy is documented
-here because it is itself a methodology contribution — a systematic way
-for an independent researcher to build credibility through verified
-reproduction rather than institutional affiliation.
-
-
 ## Data and Reproducibility
 
 Experimental data is generated by Spring binaries (public, AGPL-3.0).
 NCBI queries use the Entrez E-utilities API (via NestGate `NCBILiveProvider`).
 Springs contributing validated infrastructure:
 
-- **wetSpring**: Anderson QS, 16S pipeline, DADA2, taxonomy, NPU live, field genomics architecture, bio brain (9,200+ checks, 334 experiments, 1,605 tests (1,288 lib + 218 forge + 72 integration + 27 doc), 318 binaries, 47 CPU + 47 GPU bio modules, V106, standalone `barraCuda` v0.3.3 (wgpu 28, Fp64Strategy), 150+ primitives consumed + fused Welford/Pearson, 180 named tolerances, zero local WGSL, zero TODO/FIXME/HACK, `#![forbid(unsafe_code)]` on all 320 crate roots, clippy pedantic+nursery ZERO WARNINGS. V106: deep debt cleanup (112 stale `#[expect()]` removed, BIOM streaming, NMF_CONVERGENCE). V105: petalTongue visualization evolution (33 scenario builders, 9 DataChannel types, LivePipelineSession).)
+- **wetSpring**: Anderson QS, 16S pipeline, DADA2, taxonomy, NPU live, field genomics architecture, bio brain (8,400+ checks, 286 experiments, 1,047 lib + 200 forge tests, 290 binaries, 47 CPU + 45 GPU bio modules, Phase 97c, standalone `barraCuda` v0.3.3 (wgpu 28, Fp64Strategy), 150+ primitives consumed + fused Welford/Pearson, 164 named tolerances, zero local WGSL, zero TODO/FIXME/HACK. V97c: full fused ops chain (Exp306-310, 111 checks), GPU Hybrid-aware graceful degradation, Python parity benchmarks. Chuna papers queued to hotSpring (43-45) and neuralSpring (26).)
 - **neuralSpring**: ML primitives (LSTM, HMM, transfer learning, spectral analysis,
   ESN reservoir computing), 26 papers + 5 WDM surrogates validated at 4,100+ checks,
-  1048 lib tests, 71 forge, 9 integration, 220/220 validate_all, 233 binaries.
-  92% line coverage. 80+ named tolerances (centralized registry with justifications).
-  46 upstream BarraCUDA rewires. 0 clippy (pedantic+nursery, all-features), 0 doc warnings.
-  BarraCUDA v0.3.3. S139: full audit + deep debt, 16 petalTongue scenario builders,
-  streaming FASTA/FASTQ/VCF parsers, CPU BLAST-like search pipeline, Kokkos parity
-  benchmark harness, `config.rs` centralized identity, ecosystem dashboard.
+  880 lib tests, 238 binaries, 139+ named tolerances, 46 upstream rewires to
+  barraCuda delegates. barraCuda v0.3.1 standalone (`../barraCuda/crates/barracuda`).
+  Session 124: airSpring V069 naming rewire (`ToadStool`=dispatch, `BarraCUDA`=math),
+  HMM forward chain absorbed to `HmmBatchForwardF64` ComputeDispatch (single-dispatch
+  f64 log-domain GPU, fallback to per-step Tensor), Paper 026 Chuna LSTM glucose
+  prediction (Py 5/5 + Rs 8/8 + bC 4/4 + gT 4/4). Zero clippy warnings
+  (pedantic+nursery, all-features). 217/217 validate\_all. V82 handoff.
   Cross-spring provenance mapped: hotSpring precision → wetSpring bio → neuralSpring
   domain → barraCuda fused ops → consumed by all Springs
-- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture, **self-routing precision brain** (842 tests, 111+ binaries, 84 WGSL shaders, 0 clippy warnings, 0 files >1000 lines, 50 experiments). **25 papers** (Papers 43-45: Chuna gradient flow integrators, conservative dielectric functions, kinetic-fluid coupling — **44/44 overnight checks pass**). coralReef sovereign pipeline: **45/46** standalone shaders compile to native SM70/SM86 SASS (Iter 29). 12/12 NVVM bypass patterns. Full `GpuBackend` impl. **Exp 049**: Precision brain + NVVM device poisoning discovery. **Exp 050**: coralReef Iter 29 sovereign validation (`deformed_potentials_f64` SSARef fix confirmed). Dual-GPU cooperative patterns (Split BCS 2.2×, PCIe 1.2 GB/s). v0.6.26, barraCuda v0.3.3 (`83aa08a`), toadStool S142, coralReef P10 Iter 29.
+- **hotSpring**: MD simulation, nuclear EOS, lattice QCD, transport, 4-layer brain architecture, **self-routing precision brain** (842 tests, 111+ binaries, 84 WGSL shaders, 0 clippy warnings, 0 files >1000 lines, 50 experiments). **25 papers** (Papers 43-45: Chuna gradient flow integrators, conservative dielectric functions, kinetic-fluid coupling — **44/44 overnight checks pass**). coralReef sovereign pipeline: **45/46** standalone shaders compile to native SM70/SM86 SASS (Iter 29). 12/12 NVVM bypass patterns. Full `GpuBackend` impl. **Exp 049**: Precision brain + NVVM device poisoning discovery. **Exp 050**: coralReef Iter 29 sovereign validation (`deformed_potentials_f64` SSARef fix confirmed). Dual-GPU cooperative patterns (Split BCS 2.2×, PCIe 1.2 GB/s). v0.6.27, barraCuda v0.3.4 (`59c8ec5`), toadStool S144, coralReef P10 Iter 29.
 - **airSpring**: FAO-56 ET₀ (8 methods), Priestley-Taylor, Thornthwaite, GDD, Saxton-Rawls
   pedotransfer, water balance, Richards PDE, isotherms, yield response, scheduling, lysimeter,
   sensitivity, SCS-CN runoff, Green-Ampt infiltration, Anderson coupling, diversity indices,
@@ -244,12 +181,11 @@ No proprietary data. No restricted access. No institutional dependencies.
 **Validated March 3, 2026** — all springs rewired to standalone `barraCuda`:
 
 ```
-┌─ hotSpring v0.6.26 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain, precision brain, coralReef sovereign compile (45/46, Iter 29), 12/12 NVVM bypass
-├─ neuralSpring S139 ─ spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers, 16 petalTongue scenarios, streaming parsers, BLAST pipeline
-├─ wetSpring V106 ──── diversity, Bray-Curtis, rarefaction, NMF, ridge, fused Welford/Pearson chain
-├─ groundSpring V100 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, 102 delegations (61 CPU + 41 GPU), three-tier parity proven (29/29)
-├─ airSpring v0.7.5 ── regression, moving window, hydrology (FAO-56 ET₀), 20 ops upstream (Write→Absorb→Lean complete), MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index
-├─ healthSpring V14 ── Hill, PBPK, population PK, Anderson gut, NLME (FOCE+SAEM), NCA, biosignal, TRT, testosterone-gut axis
+┌─ hotSpring v0.6.27 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain, precision brain, coralReef sovereign compile (45/46, Iter 29), 12/12 NVVM bypass
+├─ neuralSpring V80 ── spectral phase (Bulk/EdgeOfChaos/Chaotic), shared validation helpers
+├─ wetSpring V97c ──── diversity, Bray-Curtis, rarefaction, NMF, ridge, fused Welford/Pearson chain
+├─ groundSpring V79 ── Kimura fixation, error threshold, jackknife, 13-tier tolerance, wgpu 28, DF64 precision tiers, fused Welford mean+variance, 5-method ET₀ cross-validation (PM/Hargreaves/Makkink/Turc/Hamon — Exp 035), seismic delegation strengthening, 85 delegations
+├─ airSpring v0.7.0 ── regression, moving window, hydrology (FAO-56 ET₀), f64 canonical universal precision, barraCuda 0.3.3 (wgpu 28), 3/6 local ops absorbed upstream
 ├─ wateringHole V69 ── Boltzmann sampling (Metropolis-Hastings MCMC)
 ├─ bingoCube/nautilus ─ NautilusBrain → BioNautilusBrain (concept edge, drift)
 └─ multi-spring ────── special functions, bootstrap, correlation
@@ -312,27 +248,17 @@ Paper 12 (Immuno-Anderson)
  groundSpring (transport,
    uncertainty bridge,
    spectral validation)
-
-Paper 16 (Anaerobic-Aerobic QS)
- wetSpring (QS framework,
-   16S pipeline, diversity)
- healthSpring (gut anaerobic)
- airSpring (soil O₂ zones)
- neuralSpring (ESN digester)
- groundSpring (spectral,
-   uncertainty budgets)
 ```
 
 **What each spring contributes:**
 
 | Spring | Contributes To | Key Primitives |
 |--------|---------------|----------------|
-| wetSpring | 01, 03, 04, 05, 06, **16** | Anderson QS, diversity, Bray-Curtis, FASTA, NCBI, NPU int8 |
+| wetSpring | 01, 03, 04, 05, 06 | Anderson QS, diversity, Bray-Curtis, FASTA, NCBI, NPU int8 |
 | hotSpring | 01, 07 | Spectral theory (Lanczos, Anderson 3D), GPU MD, lattice QCD |
-| airSpring | 03, 06, **08**, **12**, **16** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson, **MC ET₀ uncertainty, Bootstrap/Jackknife CI, SPI drought index**, **soil O₂ zonation (aerobic/anaerobic QS boundary)** |
-| neuralSpring | 01, 02, 04, 05, 06, 07, **13**, **16** | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning, **digester time-series prediction** |
-| groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12, 13** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
-| **healthSpring** | **13**, **16** | **Hill, PBPK 5-tissue, population PK Monte Carlo, Anderson gut lattice, FMT engraftment, Pan-Tompkins QRS, HRV/PPG SpO2/EDA, WFDB, testosterone PK, TRT outcomes, testosterone-gut axis, NLME (FOCE+SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), GPU dispatch, petalTongue pipeline (28 nodes, 121 channels, 14 scenarios), gut as anaerobic QS system** |
+| airSpring | 03, 06, **08**, **12** | FAO-56 ET₀, soil moisture, Richards PDE, **NPU int8 eco classifiers, IoT sensor pipeline**, GpuDiversity (tissue W), CytokineBrain (AD flare prediction), barrier state (VG analogue), cross-species Anderson |
+| neuralSpring | 01, 02, 04, 05, 06, 07 | ESN/LSTM anomaly detection, WDM surrogates, HMM, transfer learning |
+| groundSpring | **01, 02, 03, 04, 05, 06, 07, 08, 09, 12** | Spectral theory validation (Anderson, Almost-Mathieu, band edge, transport), uncertainty budgets, sensor noise calibration, rare biosphere, jackknife error bars, freeze-out inverse, spectral recon, drift vs selection, quasispecies threshold, WDM precision/convergence/vendor-parity, **NPU Anderson regime classification (AKD1000)**, metalForge cross-substrate validation, **immunological Anderson mapping (Exp 008/012/015/018 → cytokine propagation)** |
 
 groundSpring now contributes to ALL 10 active baseCamp papers (01-09, 12) —
 reflecting the expansion from 5 experiments (sensor noise only) to 34 experiments
@@ -361,9 +287,7 @@ program depends on.
 | 08 | High-cadence NPU pipeline + field integration | airSpring (sensor + water balance) × wetSpring (NPU driver + ESN) × neuralSpring (LSTM time series) × **groundSpring** (NPU DMA validation, cross-substrate parity proof, uncertainty budget) |
 | 09 | Nanopore + NPU field genomics end-to-end | wetSpring (16S + NPU + PFAS ML + alignment) × airSpring (soil sensors) × neuralSpring (ESN/LSTM) × **groundSpring** (rare biosphere + uncertainty + **metalForge cross-substrate dispatch validation**) |
 | 11 | Live data stream prediction via Nautilus Shell | primalTools/bingoCube × hotSpring (trajectory data, NPU brain) × neuralSpring (ESN baseline comparison) × **groundSpring** (uncertainty budget for evolutionary vs recurrent reservoir) |
-| 12 | Skin-layer Anderson lattice (2D epidermis + 3D dermis), barrier disruption dimensional promotion, ADDRC compound selection via Anderson-augmented MATRIX, Rho/MRTF/SRF cross-talk with JAK/STAT, Gonzales iPSC validation pipeline | wetSpring (Anderson spectral Exp270-286) × neuralSpring (nS-601–605: Hill, PK, IL-31, tissue, MATRIX) × **airSpring** (GpuDiversity, CytokineBrain, DriftMonitor, cross-species Exp066-069) × **groundSpring** (Exp 008/012/015/018 spectral + transport + uncertainty + band edge) |
-| 13 | NLME GPU shaders (FOCE per-subject gradient, VPC Monte Carlo). NLME at scale (10K+ subjects). Multi-drug NLME for combination therapy. Population PK on GPU (100K patients). | **healthSpring** (48 experiments, V14) × **barraCuda** (GpuContext, WGSL shaders) × **toadStool** (pipeline dispatch) × **petalTongue** (28-node pipeline, 121 channels) × **wetSpring** (diversity → gut health) × **groundSpring** (uncertainty budgets) |
-| 16 | Reproduce Wang 2020 ML digester prediction (neuralSpring benchmark). Apply 16S pipeline to public anaerobic digester datasets. Map FNR/ArcAB/Rex-regulated QS genes. Model oxygen-dependent Anderson W. Test gut mucosal O₂ gradient → spatial W prediction. | **wetSpring** (Anderson-QS, 16S, diversity) × **healthSpring** (Anderson gut lattice, anaerobic gut) × **airSpring** (soil O₂ zonation, Paper 06) × **neuralSpring** (ESN/LSTM time series, Wang 2020 benchmark) × **groundSpring** (spectral W modeling, uncertainty) |
+| 12 | Skin-layer Anderson lattice (2D epidermis + 3D dermis), barrier disruption dimensional promotion, Gonzales cytokine data ingestion, Fajgenbaum geometry-aware drug scoring | wetSpring (Anderson spectral Exp270-274) × neuralSpring (ESN regime classifier, LSTM dose-response) × **airSpring** (GpuDiversity: Pielou evenness as tissue disorder W; CytokineBrain: Nautilus reservoir for AD flare prediction; DriftMonitor: regime change detection in cytokine time series; Paper 06 dimensional promotion/collapse duality) × **groundSpring** (Exp 008 2D/3D spectral, Exp 012 cytokine transport, Exp 015 uncertainty bridge, Exp 018 band edge for epidermal periodicity; ConceptEdge for AD flare detection; DriftAction for treatment response steering) |
 
 ## Future Contributions
 
