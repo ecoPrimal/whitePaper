@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V14.1)
+**Spring**: healthSpring (V15)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation
 **License**: AGPL-3.0-or-later
 **Date**: March 10, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated** — Tier 0+1+2+3 complete (48 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME). V14: NLME population PK (FOCE + SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), NLME diagnostics (CWRES, VPC, GOF), WFDB parser, Kokkos-equivalent benchmarks, full petalTongue pipeline (28 nodes, 29 edges, 121 channels, 14 scenarios). Industry benchmark mapping. V14.1: Deep debt — biosignal modular refactor (6 submodules), `#![deny(clippy::pedantic)]` enforcement, DFT deduplication, idiomatic Rust. 356 tests, 853 binary checks, 104 cross-validation checks.
+**Status**: **Validated** — Tier 0+1+2+3 complete (48 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME). V14: NLME population PK (FOCE + SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), NLME diagnostics (CWRES, VPC, GOF), WFDB parser, Kokkos-equivalent benchmarks, full petalTongue pipeline (28 nodes, 29 edges, 121 channels, 14 scenarios). Industry benchmark mapping. V14.1: Deep debt — biosignal modular refactor (6 submodules), `#![deny(clippy::pedantic)]` enforcement, DFT deduplication, idiomatic Rust. V15: Upstream rewire — precision routing (`PrecisionRouting` mirroring toadStool S128), `rng`/`eigensolver` delegate to canonical `barracuda::rng`/`barracuda::special`, cross-spring shader evolution documented, upstream parity benchmarks. 368 tests, 48 experiments, 4 cross-validation tests.
 
 ---
 
