@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 11, 2026 (standalone barraCuda v0.3.4 (`a012076`), airSpring v0.7.5, wetSpring V100, hotSpring v0.6.28, neuralSpring V90, groundSpring V100, coralReef Phase 10 Iter 30, toadStool S145)
+**Date:** March 11, 2026 (standalone barraCuda v0.3.5 (`8d63c77`), airSpring v0.7.5, wetSpring V100, hotSpring v0.6.29, neuralSpring V90, groundSpring V100, coralReef Phase 10 Iter 31, toadStool S146)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
