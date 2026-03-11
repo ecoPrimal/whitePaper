@@ -1,7 +1,7 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** March 10, 2026 (updated)
-**Status:** **Validated + Kokkos Parity + Precision Stability + Precision Brain** — hotSpring v0.6.25, **840 lib tests**, 111+ binaries, 84 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
+**Date:** March 11, 2026 (updated)
+**Status:** **Validated + Live Kokkos Parity + Precision Stability + Precision Brain** — hotSpring v0.6.28, **847 lib tests**, 112+ binaries, 84 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). **Live Kokkos benchmark** (Exp 053): 9/9 Yukawa cases, **12.4× gap** (barraCuda 212 steps/s vs Kokkos-CUDA 2,630 steps/s at N=2000) — gap dominated by native f64 fallback (1:32 on Ampere), DF64 safe-path fix expected to close to ~2×. DF64 transcendental poisoning bug discovered and fixed. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
@@ -290,7 +290,7 @@ df64-validated protein folding primitives directly to WDM science:
   df64 compute → f64 output). Validates that df64 generalizes from nuclear
   physics to ML workloads. Two precision tiers: arithmetic 3.6e-8 to 5.6e-7,
   transcendental 1.7e-4 to 3.4e-4. 37/37 GPU checks on RTX 4070
-- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (S134)
+- **WDM surrogates** (nW-01 through nW-05): **All 5 complete** (Session 88+)
   - nW-01: MLP transport surrogate (D*, η*, λ*) — 30/30 Rust checks
   - nW-02: MLP EOS surrogate P(ρ,T), E(ρ,T) — 36/36 + 15/15 GPU checks
   - nW-03: LSTM reservoir S(q,ω) peak predictor — 27/27 Rust checks, R²=0.98
@@ -302,8 +302,8 @@ df64-validated protein folding primitives directly to WDM science:
 - **Spectral analysis**: neuralSpring's `eigh_f64` eigendecomposition and
   `spectral_entropy` (rewired to `barracuda::stats::shannon_from_frequencies`
   in Session 81) apply directly to plasma eigenmode analysis
-- **S135 status**: 966 lib tests, 232 binaries, 220/220 validate_all,
-  150+ named tolerances, 46 upstream rewires, 36 Python baselines (all
+- **Session 90 status**: 669 lib tests, 179 binaries, 179/179 validators,
+  131+ named tolerances, 42 upstream rewires, 36 Python baselines (all
   deterministically seeded), 3,162+ total validation checks. nF-02 AlphaFold2
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
