@@ -75,10 +75,11 @@ Neural:       Request → Learn → Optimize → Execute → Feedback → Adapt
    - Capability declaration
    - Optional enhancements
 
-9. **[08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md)** — Building high-level APIs
-   - API design patterns
-   - Coordination templates
-   - Learning integration
+9. **[08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md)** — Continuous niches & the game engine
+   - Transactional vs continuous niche spectrum
+   - Continuous coordination mode (fifth mode for biomeOS)
+   - Game engine as first continuous niche
+   - Neural API learning at 60 Hz
 
 ---
 
@@ -157,7 +158,9 @@ Study:
 | Component | Status | Effort |
 |-----------|--------|--------|
 | **Conceptual Design** | ✅ Complete | This whitepaper |
+| **Niche API Patterns** | ✅ Complete | 08_NICHE_API_PATTERNS.md |
 | **Graph Execution** | 🟡 Planned | 2-3 weeks |
+| **Continuous Coordination** | 🟡 Planned | 3-4 weeks |
 | **Pathway Learning** | 🟡 Planned | 3-4 weeks |
 | **Bidirectional Feedback** | 🟡 Planned | 4-6 weeks |
 | **Pattern Discovery** | 🔵 Research | 6-8 weeks |
@@ -169,8 +172,10 @@ Study:
 1. **Review whitepaper series** (all teams)
 2. **Refine architecture** based on feedback
 3. **Begin Phase 1** (Graph Execution)
-4. **Prototype with RootPulse** as first niche API
-5. **Iterate and evolve**
+4. **Implement Continuous coordination** (biomeOS — see 08_NICHE_API_PATTERNS.md)
+5. **Prototype with Game Engine** as first continuous niche API
+6. **Prototype with RootPulse** as first transactional niche API
+7. **Iterate and evolve**
 
 ---
 

@@ -27,7 +27,9 @@ ToadStool was split from Squirrel to own the hardware-specific concerns: GPU det
 
 ## BarraCUDA — The Math Engine
 
-BarraCUDA is **not a separate primal**. It is a crate within ToadStool — the largest crate, with 792 Rust source files and 628 WGSL shaders.
+**Gen3 evolution note**: BarraCUDA has since been promoted to primal #14 ([barraCuda](14_barracuda.md)), and coralReef to primal #13 ([coralReef](13_coralreef.md)). The text below documents the original architecture when BarraCUDA lived inside ToadStool.
+
+BarraCUDA was originally a crate within ToadStool — the largest crate, with 792 Rust source files and 628 WGSL shaders.
 
 ### What BarraCUDA Does
 

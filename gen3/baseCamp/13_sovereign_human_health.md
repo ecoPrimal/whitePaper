@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V15)
+**Spring**: healthSpring (V20)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation
 **License**: AGPL-3.0-or-later
 **Date**: March 10, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated** — Tier 0+1+2+3 complete (48 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME). V14: NLME population PK (FOCE + SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), NLME diagnostics (CWRES, VPC, GOF), WFDB parser, Kokkos-equivalent benchmarks, full petalTongue pipeline (28 nodes, 29 edges, 121 channels, 14 scenarios). Industry benchmark mapping. V14.1: Deep debt — biosignal modular refactor (6 submodules), `#![deny(clippy::pedantic)]` enforcement, DFT deduplication, idiomatic Rust. V15: Upstream rewire — precision routing (`PrecisionRouting` mirroring toadStool S128), `rng`/`eigensolver` delegate to canonical `barracuda::rng`/`barracuda::special`, cross-spring shader evolution documented, upstream parity benchmarks. 368 tests, 48 experiments, 4 cross-validation tests.
+**Status**: **Validated** — Tier 0+1+2+3 complete (61 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME + paper queue + GPU V16 + CPU parity + GPU scaling + dispatch + NUCLEUS). V19: Full-stack portability validation — Exp085 GPU scaling bench (47/47, linear scaling across 4 scales × 3 ops, fused pipeline, metalForge routing), Exp086 toadStool V16 streaming dispatch (24/24, all V16 StageOps through execute_cpu + streaming callbacks, GPU-mappability), Exp087 mixed NUCLEUS V16 dispatch (35/35, Tower/Node/Nest topology, PCIe P2P bypass NPU→GPU, plan_dispatch for mixed pipelines). V18: CPU parity (Exp084, Rust 84× faster). V17: GPU portability (3 WGSL shaders, Exp083 25/25). V16: Paper queue (30/30). V15: Upstream rewire. V14: NLME + petalTongue. 395 tests, 61 experiments, 194 Python cross-validation checks.
 
 ---
 
@@ -25,7 +25,7 @@ The springs validate science. healthSpring makes the drug.
 
 ## Tracks
 
-### Track 1: Pharmacokinetic / Pharmacodynamic Modeling (Exp001–006)
+### Track 1: Pharmacokinetic / Pharmacodynamic Modeling (Exp001–006, 077)
 
 Pure Rust PK/PD tools extending neuralSpring nS-601–605 (veterinary) to human therapeutics via allometric scaling.
 
@@ -37,10 +37,13 @@ Pure Rust PK/PD tools extending neuralSpring nS-601–605 (veterinary) to human 
 | 004 | mAb PK cross-species transfer (lokivetmab → human) | Allometric scaling (BW^0.75 CL, BW^1.0 Vd) |
 | 005 | Population PK Monte Carlo (1,000 virtual patients) | Lognormal IIV, CL-AUC correlation r = -0.92 |
 | 006 | PBPK 5-tissue physiological compartments | Mass conservation, hepatic clearance, tissue Kp |
+| 077 | Michaelis-Menten nonlinear PK (phenytoin) | Capacity-limited elimination, dose-dependent half-life, supralinear AUC |
 
 **Lineage**: Paper 12 veterinary→human bridge (Gonzales iPSC, Neubig drug discovery) → healthSpring human therapeutics.
 
-### Track 2: Gut Microbiome and Colonization Resistance (Exp010–013)
+**V16**: Exp077 adds Michaelis-Menten (capacity-limited) PK — the first nonlinear elimination model. Phenytoin reference parameters from Ludden 1977. GPU-ready via `michaelis_menten_batch_f64.wgsl` (per-patient parallel Euler ODE).
+
+### Track 2: Gut Microbiome and Colonization Resistance (Exp010–013, 078–080)
 
 Extends wetSpring's Anderson localization framework from soil to gut.
 
@@ -50,12 +53,17 @@ Extends wetSpring's Anderson localization framework from soil to gut.
 | 011 | Anderson localization in gut lattice (1D ξ) | Localization length predicts colonization resistance |
 | 012 | C. difficile colonization resistance score | Composite: diversity + ξ + Firmicutes ratio |
 | 013 | FMT microbiota transplant for rCDI | Engraftment fraction → diversity restoration via Bray-Curtis |
+| 078 | Antibiotic perturbation model (ciprofloxacin) | Exponential kill + recovery dynamics, Dethlefsen reference |
+| 079 | SCFA production (acetate, propionate, butyrate) | Michaelis-Menten fermentation kinetics, fiber-to-SCFA validation |
+| 080 | Gut-brain serotonin axis | 5-HT production from tryptophan via gut microbiota, Yano 2015 reference |
 
 **Lineage**: Paper 01/06 Anderson QS framework → Paper 12 immunological Anderson → healthSpring gut colonization.
 
 **V13 fix**: Anderson/IPR computation now uses true eigenvectors from QL diagonalization, not Hamiltonian diagonal.
 
-### Track 3: Biosignal Processing (Exp020–023)
+**V16**: Exp078 models antibiotic disruption and recovery of the gut microbiome. Exp079 validates SCFA production via Michaelis-Menten kinetics (GPU-ready via `scfa_batch_f64.wgsl`). Exp080 adds the gut-brain serotonin axis (tryptophan → 5-HT cross-track hypothesis D5 linking microbiome to neurochemistry).
+
+### Track 3: Biosignal Processing (Exp020–023, 081–082)
 
 Real-time physiological signal analysis on sovereign hardware.
 
@@ -65,8 +73,12 @@ Real-time physiological signal analysis on sovereign hardware.
 | 021 | HRV metrics (SDNN, RMSSD, pNN50) | Time-domain HRV from R-peak intervals |
 | 022 | PPG SpO2 R-value calibration | Beer-Lambert AC/DC ratio → SpO2 |
 | 023 | Multi-channel fusion (ECG + PPG + EDA) | FusedHealthAssessment: HR + SpO2 + stress index |
+| 081 | EDA electrodermal stress detection | Tonic/phasic decomposition, skin conductance response peaks |
+| 082 | Arrhythmia beat classification (template matching) | Cross-correlation beat typing: Normal, PVC, PAC, BBB |
 
 **NPU target**: Pan-Tompkins is a streaming signal pipeline ideal for Akida AKD1000 (<1ms, microwatt).
+
+**V16**: Exp081 validates sovereign EDA analysis (tonic/phasic decomposition + SCR detection). Exp082 adds template-matching beat classification — GPU-ready via `beat_classify_batch_f64.wgsl` (per-beat normalized cross-correlation).
 
 ### Track 4: Endocrinology — Testosterone PK and TRT Outcomes (Exp030–038)
 
@@ -145,6 +157,23 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | 071 | Mixed system pipeline | CPU+GPU+NPU coordinated execution |
 | 072 | Compute dashboard | toadStool streaming → petalTongue live gauges |
 
+### Paper Queue Validation (Exp077–082)
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 077 | Michaelis-Menten nonlinear PK (phenytoin) | Capacity-limited elimination, dose-dependent t½, supralinear AUC |
+| 078 | Antibiotic perturbation model (ciprofloxacin) | Exponential kill + recovery, Dethlefsen reference |
+| 079 | SCFA production (acetate/propionate/butyrate) | MM fermentation kinetics, Cummings 1987 validation |
+| 080 | Gut-brain serotonin axis | Tryptophan → 5-HT, microbiota-mediated, Yano 2015 |
+| 081 | EDA electrodermal stress detection | Tonic/phasic decomposition, SCR peak detection |
+| 082 | Arrhythmia beat classification | Template-matching: Normal/PVC/PAC/BBB, MIT-BIH reference |
+
+### GPU V16 Portability (Exp083)
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 083 | GPU V16 parity (3 shaders + metalForge + toadStool) | 25/25: CPU determinism, physiological ranges, scalar parity, routing, shaders |
+
 ### petalTongue Evolution (Exp073–074)
 
 | Exp | Title | Key Result |
@@ -158,20 +187,22 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 
 | Metric | Value |
 |--------|-------|
-| Experiments | 48 |
-| Rust binary checks | 853 |
-| Rust lib tests | 289 (barraCuda) |
+| Experiments | 61 |
+| Rust lib tests | 302 (barraCuda) |
 | Rust forge tests | 33 (metalForge) |
-| Rust toadStool tests | 30 |
+| Rust toadStool tests | 36 |
 | Doc-tests | 4 |
-| **Total tests** | **356** |
-| Cross-validation checks | 104 |
+| **Total tests** | **395** |
+| Python cross-validation checks | 194 (167 + 17 Exp084 + 10 Exp085) |
+| Criterion benchmarks | 14 |
+| CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
 | petalTongue pipeline | 28 nodes, 29 edges, 121 channels, 14 scenarios |
 | NLME validation | FOCE + SAEM + NCA + CWRES + VPC + GOF (Exp075, 19 checks) |
-| GPU parity checks | 27/27 (Exp060) |
+| GPU parity checks | 27/27 (Exp060) + 25/25 (Exp083) |
 | GPU fused pipeline checks | 11/11 (Exp054) |
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
+| WGSL compute shaders | 6 (3 V15 + 3 V17) |
 | Patient archetypes | 5 (Exp063) |
 | Unsafe blocks | 0 |
 | Clippy warnings | 0 (`#![deny(clippy::pedantic)]` in all lib crates, `-W clippy::nursery`) |
@@ -188,6 +219,9 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | `hill_dose_response_f64.wgsl` | HillSweep | Element-wise, power via f32 exp/log | Exp053 |
 | `population_pk_f64.wgsl` | PopulationPkBatch | Embarrassingly parallel MC (u32 PRNG) | Exp053 |
 | `diversity_f64.wgsl` | DiversityBatch | Workgroup-level reduction | Exp053 |
+| `michaelis_menten_batch_f64.wgsl` | MichaelisMentenBatch | Per-patient Euler ODE + Wang hash PRNG | Exp083 |
+| `scfa_batch_f64.wgsl` | ScfaBatch | Element-wise MM kinetics (3-output) | Exp083 |
+| `beat_classify_batch_f64.wgsl` | BeatClassifyBatch | Per-beat normalized cross-correlation | Exp083 |
 
 ### Architecture
 
@@ -221,6 +255,92 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Exp075 | NLME cross-validation: 19 binary checks (FOCE/SAEM/NCA/CWRES/GOF). |
 | Exp076 | Full pipeline validation: 197 binary checks across all 5 tracks + full study. |
 | Industry benchmarks | SnapGene, Chromeleon, NONMEM, Monolix, WinNonlin profiled and mapped. |
+
+---
+
+## V19 Full-Stack Portability Evolution
+
+| Change | Impact |
+|--------|--------|
+| Exp085 GPU scaling bench (47/47) | 4 scales (64→4096) × 3 V16 ops: MM PK (linear scaling confirmed, 64→96K µs), SCFA (sub-µs at 100, 13 µs at 10K), Beat classify (1.4→129 µs). Fused 3-op pipeline: 6ms CPU. metalForge routes small→CPU, large→GPU. |
+| Exp086 toadStool V16 dispatch (24/24) | All V16 StageOps through `execute_cpu` + `execute_streaming` with per-stage callbacks. Streaming matches CPU result. All V16 stages map to `GpuOp` via `to_gpu_op()`. Mixed V15+V16 pipeline (Generate→Hill→Reduce). |
+| Exp087 mixed NUCLEUS V16 dispatch (35/35) | Eastgate Tower topology (CPU+GPU+NPU, PCIe Gen4). V16 workload routing at 8 scales. PCIe P2P bypass GPU↔NPU (31.5 GB/s, 5.1 µs for 160KB). NPU→GPU dispatch plan for biosignal→classification pipeline. GPU-only pipeline: 0 transitions. Full 5-stage mixed pipeline: GPU→GPU→GPU→NPU→CPU with 2 transitions. |
+| Python control (10/10) | Cross-validates MM AUC, SCFA ratios, beat correlation, and scaling linearity from Rust timing results. |
+
+---
+
+## V20 petalTongue V16 Visualization Evolution
+
+V20 makes healthSpring's validated science **visible**. Six V16 primitives and the compute pipeline now have `petalTongue` scenario builders producing real-data visualizations.
+
+| Change | Impact |
+|--------|--------|
+| **V16 scenario builder** | 6 nodes with real math: MM PK dose curves, antibiotic recovery, SCFA saturation, serotonin pathway, EDA decomposition, arrhythmia templates |
+| **Compute pipeline scenarios** | GPU scaling curves, NUCLEUS topology, mixed dispatch plan — all as petalTongue DataChannels |
+| **Full study extended** | 28 → 34 nodes, 29 → 38 edges, all 7 DataChannel types in unified graph |
+| **Exp088 unified dashboard** | 326 validation checks across all scenarios, JSON dump + IPC push, quick-start guide |
+| **Exp089 patient explorer** | CLI-parameterized diagnostic + V16 analysis, streams to petalTongue, combined diagnostic+V16 scenario |
+| **dump_scenarios extended** | 14 → 16 scenario JSONs (added healthspring-v16.json, healthspring-compute.json) |
+
+---
+
+## V18 CPU Parity Benchmark Evolution
+
+| Change | Impact |
+|--------|--------|
+| Exp084 V16 CPU parity bench | 14 matching benchmark cases across 6 V16 primitives: Python baseline (17/17 checks) vs Rust CPU (33/33 checks). |
+| Rust 84× overall speedup | Aggregate mean across all 14 bench cases: Python total 52,034 µs vs Rust 622 µs. |
+| SCFA 160×, Antibiotic 233× | Michaelis-Menten math: compiled Rust eliminates interpreter overhead entirely. |
+| Beat classification 149× | Template matching via normalized cross-correlation: 1000 beats in 204 µs (Rust) vs 30,377 µs (Python). |
+| Serotonin 149×, Tryptophan 155× | Sigmoid diversity-factor computation: Rust inlines and optimizes exp/sigmoid chains. |
+| MM PK simulate 33× | Euler ODE integration: 10,000 steps in 110 µs (Rust) vs 3,626 µs (Python). |
+| EDA SCL/phasic — numpy faster | numpy `convolve` uses compiled C/BLAS internally; naive Rust rolling average is 3× slower. Target for SIMD optimization in barraCuda. |
+| `bench_results_v16_rust_cpu.json` | Machine-readable timing results for downstream CI comparison. |
+| `bench_results_v16_python.json` | Python baseline timings with provenance (Python version, numpy version). |
+| `compare_v16_benchmarks.py` | Side-by-side speedup table generator for Rust vs Python timing data. |
+
+---
+
+## V17 GPU Portability Evolution
+
+| Change | Impact |
+|--------|--------|
+| `michaelis_menten_batch_f64.wgsl` | Per-patient Michaelis-Menten ODE via Euler integration on GPU. Wang hash + xorshift32 PRNG for lognormal Vmax variation. |
+| `scfa_batch_f64.wgsl` | Batch SCFA production (acetate/propionate/butyrate) via element-wise Michaelis-Menten fermentation kinetics. |
+| `beat_classify_batch_f64.wgsl` | Per-beat template-matching classification via normalized cross-correlation. Normal/PVC/PAC/BBB typing. |
+| metalForge 3 new `Workload` variants | `MichaelisMentenBatch`, `ScfaBatch`, `BeatClassifyBatch` — cross-system routing with GPU/CPU threshold selection. |
+| toadStool 3 new `StageOp` variants | Streaming pipeline dispatch for all V16 primitives — CPU fallback + GPU promotion. |
+| Exp083 GPU V16 parity | 25/25 validation checks: CPU determinism, physiological ranges, scalar API parity, metalForge routing, shader compilation, memory estimates. |
+| `GpuContext` fused support | All 6 `GpuOp` variants dispatchable through `execute_fused()` unidirectional pipeline. |
+| `bytemuck` param structs | `MmParams`, `ScfaGpuParams`, `BeatClassifyParams` — zero-copy GPU uniform upload. |
+
+---
+
+## V16 Paper Queue Complete Evolution
+
+| Change | Impact |
+|--------|--------|
+| Exp077 Michaelis-Menten PK | Capacity-limited (nonlinear) elimination model. Phenytoin reference (Ludden 1977). Dose-dependent half-life, supralinear AUC. |
+| Exp078 Antibiotic perturbation | Gut microbiome disruption + recovery dynamics. Exponential kill model, Dethlefsen ciprofloxacin reference. |
+| Exp079 SCFA production | Fiber-to-SCFA fermentation via Michaelis-Menten kinetics. Acetate, propionate, butyrate validated against Cummings 1987. |
+| Exp080 Gut-brain serotonin | Tryptophan → 5-HT production via gut microbiota. Cross-track hypothesis D5 (Yano 2015). |
+| Exp081 EDA stress detection | Tonic/phasic decomposition, skin conductance response peak detection. |
+| Exp082 Arrhythmia classification | Template-matching beat typing: Normal, PVC, PAC, BBB. MIT-BIH annotation reference. |
+| 6 Python control scripts | Exp077–082 each have `control_*.py` cross-validation. 167 total Python checks. |
+| 14 Criterion benchmarks | `benches/paper_queue.rs` — MM PK, antibiotic, SCFA, serotonin, EDA, arrhythmia at 3 scales. |
+| Paper queue 30/30 | All 30 reviewed papers now have validated experiments. |
+
+---
+
+## V15 Upstream Rewire Evolution
+
+| Change | Impact |
+|--------|--------|
+| `PrecisionRouting` | Mirrors toadStool S128 precision dispatch. CPU f64, GPU split/emulated f64, NPU quantized. |
+| `rng` delegate | LCG/xorshift delegate to canonical `barracuda::rng`. |
+| `eigensolver` delegate | QL diagonalization delegates to `barracuda::special`. |
+| Cross-spring shader docs | WGSL shader evolution path documented across springs. |
+| Upstream parity benchmarks | Kokkos patterns validated against canonical upstream. |
 
 ---
 

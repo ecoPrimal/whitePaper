@@ -12,9 +12,11 @@ This document catalogs every primal in the ecoPrimals ecosystem as of February 2
 
 The primals are organized into two tiers:
 
-- **Foundation Primals** (§1): The bedrock of the ecosystem. Six primals - BearDog, Songbird, NestGate, ToadStool, Squirrel, and biomeOS - are production-ready, extensively tested, and form the NUCLEUS deployment architecture. These are the current focus: getting NUCLEUS stable as a deployable composition.
+- **Foundation Primals** (§1): The bedrock of the ecosystem. Eight primals — BearDog, Songbird, NestGate, ToadStool, Squirrel, biomeOS, coralReef, and barraCuda — are production-ready, extensively tested, and form the NUCLEUS deployment architecture. coralReef and barraCuda were promoted from ToadStool sub-crates to independent primals (#13, #14) as the Sovereign Compute Pipeline matured.
 
-- **Post-NUCLEUS Primals** (§2): Primals designed for capabilities that emerge after NUCLEUS is deployed. These primals (petalTongue, rhizoCrypt, sweetGrass, LoamSpine, skunkBat) compose into higher-order patterns like RootPulse and the Memory & Attribution Stack. Each has been started and has functional code and tests, but they receive less focus until NUCLEUS is stable. They represent the next evolutionary phase.
+- **Post-NUCLEUS Primals** (§2): Primals designed for capabilities that emerge after NUCLEUS is deployed. These primals (petalTongue, rhizoCrypt, sweetGrass, LoamSpine, skunkBat, sourDough) compose into higher-order patterns like RootPulse and the Memory & Attribution Stack. Each has been started and has functional code and tests, but they receive less focus until NUCLEUS is stable. They represent the next evolutionary phase.
+
+**Total**: 14 primals across two phases. See `gen3/primals/` for individual profiles.
 
 ---
 
@@ -402,8 +404,8 @@ These primals represent capabilities that emerge after NUCLEUS is deployed. They
 
 | Metric | Value |
 |--------|-------|
-| Foundation primals (production) | 6 (BearDog, Songbird, NestGate, ToadStool, Squirrel, biomeOS) |
-| Post-NUCLEUS primals (started) | 5 (petalTongue, rhizoCrypt, sweetGrass, LoamSpine, skunkBat) |
+| Foundation primals (production) | 8 (BearDog, Songbird, NestGate, ToadStool, Squirrel, biomeOS, coralReef, barraCuda) |
+| Post-NUCLEUS primals (started) | 6 (petalTongue, rhizoCrypt, sweetGrass, LoamSpine, skunkBat, sourDough) |
 | Total tests | ~12,000+ passing across ecosystem |
 | Development time | ~6-8 months |
 | Developer count | 1 (with AI assistance) |
@@ -417,7 +419,7 @@ These primals represent capabilities that emerge after NUCLEUS is deployed. They
 
 **Tower Atomic - Pure Rust HTTPS**: BearDog + Songbird achieve TLS 1.3 with 93% validation rate across 87 production sites, zero C dependencies, 366ms average latency. No other Pure Rust project has achieved this at comparable scale.
 
-**BarraCUDA - Universal Compute**: ToadStool's tensor library runs identical math on CPU, GPU (NVIDIA + AMD), and neuromorphic hardware (BrainChip Akida). 124 operations with WGSL shaders. Akida benchmarks: 48-202x faster than CPU, 53-100x power efficiency for specific workloads.
+**Sovereign Compute Pipeline**: barraCuda (primal #14) writes WGSL math shaders, coralReef (primal #13) compiles to native GPU binaries, ToadStool dispatches on hardware. 786 production WGSL shaders across 10 scientific domains. Both coralReef and barraCuda were promoted from ToadStool sub-crates to independent primals as the pipeline matured. See `gen3/primals/13_coralreef.md` and `gen3/primals/14_barracuda.md`.
 
 **Dark Forest - Zero Metadata Security**: biomeOS's discovery protocol leaks zero metadata to observers. Beacons are indistinguishable from random noise. Better than Signal or Tor for metadata privacy (Signal leaks sender/receiver metadata; Tor leaks timing metadata; Dark Forest leaks nothing).
 

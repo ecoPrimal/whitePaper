@@ -1,6 +1,6 @@
 # Paper 16: Anaerobic-Aerobic QS Phase Transition — Microbial Signaling Across Oxygen Regimes
 
-**Status**: Proposal — concept defined, no experiments yet
+**Status**: Stage 1 in progress — computational foundation complete (V108). **neuralSpring Paper 027 benchmark COMPLETE (S142)**: ESN methane yield predictor, 36/36 CPU + 23/23 bC/gT PASS
 **Date**: March 10, 2026
 **Faculty Anchor**: Wei Liao (ADREC, MSU BAE)
 **Springs**: wetSpring (QS framework), healthSpring (anaerobic gut), airSpring (soil O₂ zones), neuralSpring (ML), groundSpring (spectral)
@@ -135,7 +135,7 @@ microbiology. The QS-disorder framework provides the physics.
 - Identify FNR/ArcAB/Rex regulated QS genes from literature
 - Build Anderson lattice models with oxygen-dependent W
 - Predict localization length shift for model communities
-- Reproduce Wang et al. 2020 ML digester prediction (neuralSpring benchmark)
+- ~~Reproduce Wang et al. 2020 ML digester prediction (neuralSpring benchmark)~~ **DONE (S142)** — `digestion_prediction.rs`, ESN 512-neuron reservoir, R²=0.84 test, Py 9/9, Rust 11 lib tests, CPU 36/36, bC/gT 23/23 PASS. GPU↔CPU diff ≤7.1e-5.
 
 ### Stage 2: Public Data (no wetlab)
 
@@ -164,12 +164,62 @@ microbiology. The QS-disorder framework provides the physics.
 | wetSpring | Anderson-QS framework, 16S pipeline, diversity analytics, Bray-Curtis GPU | **Ready** |
 | healthSpring | Anderson gut lattice model (Exp032), anaerobic gut as test case | **Ready** |
 | airSpring | Soil aerobic/anaerobic zonation, Paper 06 pore network model | **Ready** |
-| neuralSpring | ESN/LSTM for digester time series, regime classification | **Ready** |
+| neuralSpring | ESN/LSTM for digester time series, regime classification. **Paper 027 (Wang/Liao 2020) COMPLETE**: `digestion_prediction.rs`, ESN methane yield predictor, bC/gT validated | **Ready + Benchmark Complete** |
 | groundSpring | Spectral theory for oxygen-dependent W, uncertainty budgets | **Ready** |
 | barraCuda | GPU diversity, GPU Anderson, GPU Bray-Curtis | **Ready** |
 
 The infrastructure is entirely validated. What's missing is the science:
 anaerobic-specific QS data and the experiments to test the predictions.
+
+---
+
+## V108 Computational Foundation (March 10, 2026)
+
+wetSpring V108 completes the Stage 1 computational foundation for Paper 16.
+Five papers from Wei Liao's group at MSU BAE / ADREC are now fully reproduced:
+
+| Paper | Experiment | Checks | Key Model |
+|-------|:----------:|:------:|-----------|
+| Yang et al. 2016 (co-digestion) | Exp336 | 12 | Modified Gompertz, Shannon diversity |
+| Chen et al. 2016 (culture conditions) | Exp337 | 14 | Anderson W shifts with conditions, evenness/methane correlation |
+| Rojas-Sossa et al. 2017 (coffee residues) | Exp338 | 10 | Substrate inhibition → higher W |
+| Rojas-Sossa et al. 2019 (AFEX corn stover) | Exp339 | 11 | Pretreatment → lower disorder |
+| Zhong et al. 2016 (fungal fermentation) | Exp340 | 10 | Monod kinetics, aerobic-anaerobic W shift |
+
+Full 6-tier validation chain (Exp341-346, 136 additional checks):
+
+| Tier | Experiment | Checks | Result |
+|------|:----------:|:------:|--------|
+| Paper math control v6 | Exp341 | 38 | All 63 papers, mathematical invariants GREEN |
+| BarraCuda CPU v26 | Exp342 | 33 | Pure Rust math for Gompertz/Monod/Haldane/diversity |
+| Python parity v5 | Exp343 | 13 | SciPy/NumPy reference values match |
+| CPU vs GPU v10 | Exp344 | 14 | GPU portability for Track 6 math |
+| Pure GPU streaming v12 | Exp345 | 12 | Unidirectional pipeline, zero CPU round-trips |
+| metalForge v18 | Exp346 | 16 | Cross-substrate CPU=GPU=NPU |
+
+**Key validated capabilities for Stage 2:**
+
+- Modified Gompertz biogas model: `H(t) = P * exp(-exp((Rm*e/P)*(λ-t) + 1))`
+- First-order kinetics: `B(t) = B_max * (1 - exp(-k*t))`
+- Monod growth: `μ = μ_max * S / (Ks + S)`
+- Haldane inhibition: `μ = μ_max * S / (Ks + S + S²/Ki)`, `S_opt = √(Ks * Ki)`
+- Anderson W mapping: `W = W_max * (1 - evenness)`, `W_digester > W_soil` confirmed
+- P(QS) comparison via `norm_cdf` operational for aerobic vs anaerobic
+
+**neuralSpring S142 — Paper 027 (Wang/Liao 2020):**
+
+| Component | Checks | Key Result |
+|-----------|:------:|------------|
+| Python control (`digestion_prediction.py`) | 9/9 PASS | R²=0.91 train, R²=0.85 test, RMSE=8.1 mL/gVS |
+| Rust module (`digestion_prediction.rs`) | 11 lib tests | Process model + ESN predictor + JSON parity |
+| CPU validator (`validate_digestion_prediction`) | 36/36 PASS | Analytical parity + physical expectations |
+| bC/gT validator (`validate_barracuda_digestion`) | 23/23 PASS | GPU↔CPU diff ≤7.1e-5, physics preserved |
+
+ESN architecture: 512-neuron reservoir, 2-step recurrence, additive process model
+with T×OLR interaction. Same architecture as nW-05 (WDM classifier), different
+domain (bioprocess engineering) — isomorphic thesis proof (Exp 005 extension).
+
+**Next**: Stage 2 — apply 16S pipeline to real Liao group community datasets from NCBI SRA.
 
 ---
 

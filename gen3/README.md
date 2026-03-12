@@ -12,7 +12,7 @@ This collection represents the theoretical and technical foundations of the **ec
 
 The papers here formalize the methodology, the architecture, and the biological reasoning that informed the system's design. They are working papers — rigorous in intent, honest about their limitations, and grounded in real implementation rather than speculation.
 
-**The springs are public.** The five scientific validation repositories — hotSpring, airSpring, wetSpring, groundSpring, neuralSpring — are all published under AGPL-3.0 on GitHub. Anyone can clone them, run the experiments, and verify the claims. The primals (Rust infrastructure) remain private for now; gen3/ is the bridge document that explains the infrastructure to those who will eventually receive access.
+**The springs are public.** The five scientific validation repositories — hotSpring, airSpring, wetSpring, groundSpring, neuralSpring — are all published under AGPL-3.0 on GitHub. Two additional springs — healthSpring and ludoSpring — are in active local development. Anyone can clone the public repos, run the experiments, and verify the claims. The primals (Rust infrastructure) remain private for now; gen3/ is the bridge document that explains the infrastructure to those who will eventually receive access.
 
 ### Public Spring Repositories
 
@@ -23,7 +23,8 @@ The papers here formalize the methodology, the architecture, and the biological 
 | wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 7,083+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 236+ |
 | neuralSpring | ML primitives, isomorphic patterns, coralForge structure prediction | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 3,200+ |
-| **Total** | | | **14,306+** |
+| ludoSpring | Game science, HCI, procedural generation, cross-spring | Local (ludoSpring/) | 554+ |
+| **Total** | | | **14,860+** |
 
 ---
 

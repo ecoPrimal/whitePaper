@@ -73,7 +73,7 @@ The full basement HPC via NUCLEUS is not deployed yet. All 2,882 science checks 
 
 ---
 
-## The Twelve Primals at a Glance
+## The Fourteen Primals at a Glance
 
 | # | Primal | Phase | Domain | Rust Lines | Tests | Profile |
 |--:|--------|:-----:|--------|----------:|------:|---------|
@@ -81,7 +81,7 @@ The full basement HPC via NUCLEUS is not deployed yet. All 2,882 science checks 
 | 2 | [NestGate](02_nestgate.md) | 1 | Storage | 645,445 | 14,807 | Foundation |
 | 3 | [Songbird](03_songbird.md) | 1 | Networking | 401,900 | 7,314 | Foundation |
 | 4 | [Squirrel](04_squirrel.md) | 1 | AI Coordination | 681,933 | 25,359 | Foundation |
-| 5 | [ToadStool](05_toadstool.md) | 1 | Compute (+ BarraCUDA) | 788,209 | 13,503 | Foundation |
+| 5 | [ToadStool](05_toadstool.md) | 1 | Compute dispatch | 788,209 | 13,503 | Foundation |
 | 6 | [biomeOS](06_biomeos.md) | 2 | Orchestration | 321,534 | 14,179 | Foundation |
 | 7 | [petalTongue](07_petaltongue.md) | 2 | Representation / UI | 160,970 | 6,186 | Post-NUCLEUS |
 | 8 | [sourDough](08_sourdough.md) | 2 | Scaffolding | 50,746 | 3,622 | Post-NUCLEUS |
@@ -89,8 +89,19 @@ The full basement HPC via NUCLEUS is not deployed yet. All 2,882 science checks 
 | 10 | [LoamSpine](10_loamspine.md) | 2 | Permanence | 44,453 | 1,952 | Post-NUCLEUS |
 | 11 | [rhizoCrypt](11_rhizocrypt.md) | 2 | Working Memory | 27,565 | 278 | Post-NUCLEUS |
 | 12 | [skunkBat](12_skunkbat.md) | 2 | Defense | 7,366 | 48 | Post-NUCLEUS |
+| 13 | [coralReef](13_coralreef.md) | 1 | Shader compilation | ~120,000 | 1,487 | Foundation |
+| 14 | [barraCuda](14_barracuda.md) | 1 | GPU math / WGSL | ~200,000 | 3,348 | Foundation |
 
-**Totals**: 3,773,630 Rust lines, 102,889 #[test] annotations.
+**Totals**: ~4,093,630 Rust lines, ~107,724 #[test] annotations, 786 WGSL shaders.
+
+### The ToadStool Split (gen3 Evolution)
+
+The gen3 catalogue originally described BarraCUDA as "not a separate primal" — a crate inside ToadStool (#5). As the springs drove BarraCUDA's shader count past 700 and coralReef evolved sovereign compilation, both earned primal status:
+
+- **coralReef** (#13) owns shader compilation: WGSL/SPIR-V → native GPU binary, f64 transcendental lowering, userspace dispatch
+- **barraCuda** (#14) owns the math: 786 WGSL shaders across 10 scientific domains, DF64 emulation, five-spring ingestion
+
+ToadStool (#5) retains hardware discovery, workload queuing, and GPU/NPU/CPU orchestration. The three form the **Sovereign Compute Pipeline**: barraCuda writes → coralReef compiles → ToadStool dispatches.
 
 ---
 

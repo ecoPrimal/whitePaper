@@ -279,15 +279,47 @@ The springs are organized into two tiers:
 
 ---
 
+### 1.7 ludoSpring — Game Science, HCI, Procedural Generation
+
+**Domain**: Game design, human-computer interaction, procedural content generation, real-time interactive systems, computational game science
+**Grade**: V6 — 44 experiments, 410 checks, 11 tracks, 2 playable prototypes, 3 external control groups, 4 cross-spring experiments
+**Checks**: 410 validation checks + 144 unit/integration tests = **554 ludoSpring checks**
+**Faculty**: Csikszentmihalyi (Flow, 1990), Fitts (1954), Yannakakis & Togelius (2018), Lazzaro (Four Keys, 2004), Hunicke (DDA, 2005), Perlin (1985), Gumin (WFC, 2016), Lindenmayer (1968), Tufte (1983)
+**Repository**: Local (ludoSpring/)
+**License**: AGPL-3.0-or-later
+
+**What it validates**: ludoSpring proves the ecoPrimals Python→Rust→GPU pipeline produces validated science in interactive systems — the most demanding real-time domain humans build. 13 foundational HCI models validated against published research. Game genres are interaction architectures, not aesthetic categories: FPS = molecular explorer, roguelike = parameter space exploration, RTS = systems biology dashboard. External control groups prove the metrics framework is content-agnostic. **Key finding**: Flow state (Csikszentmihalyi) discriminates game quality; engagement alone measures activity, not optimal experience. 110× 60Hz raycaster headroom on CPU, 0.93× fastnoise-lite (C). **Cross-spring**: Anderson QS explorer (Perlin noise as disorder landscape, QS propagation with localization transition), live NCBI data integration, Tower Atomic (BearDog+Songbird) validated. Game metrics generalize to scientific exploration sessions.
+
+**Phase inventory**:
+
+| Phase | What | Checks | Key Result |
+|-------|------|--------|------------|
+| Python baseline | 7 reference implementations (stdlib only) | 22 parity | Faithful port reference |
+| Rust CPU (Tracks 1-5) | 22 validation experiments, 13 HCI models | 183 | All models match published data |
+| Playable prototypes (Track 6) | Doom terminal, roguelike explorer, benchmarks | 16 | Every mechanic traces to published paper |
+| Telemetry (Track 7) | Protocol, Veloren, Fish Folk, A/B Street adapters | 37 | Cross-engine portability via NDJSON |
+| Compute dispatch (Track 8) | CPU-GPU parity, routing, mixed hw, NUCLEUS | 49 | Architecture validated for GPU promotion |
+| Benchmarks (Track 9) | Python parity, noise, raycaster, tick budget | 45 | 110× 60Hz, 0.93× fastnoise-lite |
+| External controls (Track 10) | Foreign roguelike, 3-way noise, quality discrim. | 36 | Flow discriminates quality across archetypes |
+| Cross-spring (Track 11) | NCBI QS, Tower Atomic, QS gene dataset, Anderson QS explorer | 44 | Game metrics validate on scientific exploration; Anderson localization visible |
+
+**Models validated**: Fitts's law (1954), Hick's law (1952), Steering law (1997), GOMS/KLM (1983), Flow theory (1990), Dynamic Difficulty Adjustment (2005), Four Keys to Fun (2004), Engagement metrics (2018), Perlin noise (1985/2002), Wave Function Collapse (2016), L-systems (1968), BSP trees (1980), Tufte data-ink (1983).
+
+**BarraCuda primitives consumed**: `activations::sigmoid`, `stats::dot`, `rng::lcg_step`, `rng::state_to_f64`. 8 modules at Tier A GPU readiness (pure math, embarrassingly parallel).
+
+**Participates in**: gen3/baseCamp Paper 17, ToadStool validation (GPU dispatch architecture), petalTongue visualization (3 dashboard binaries, 7 channel types), biomeOS NUCLEUS (Tower Atomic validated — exp042), metalForge (cross-substrate dispatch for game-science pipelines), wetSpring (Anderson QS explorer — exp044), nestgate (NCBI QS data — exp041/043).
+
+---
+
 ## 2. The Spring Network
 
 ### 2.1 By the Numbers
 
 | Metric | Value |
 |--------|-------|
-| Total springs | 6 (5 established + healthSpring) |
-| Total quantitative checks | **11,635+** passing (11,161 established + 474 healthSpring) |
-| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing, **human health (PK/PD, microbiome, biosignal, endocrinology)** |
+| Total springs | 7 (5 established + healthSpring + ludoSpring) |
+| Total quantitative checks | **12,189+** passing (11,161 established + 474 healthSpring + 554 ludoSpring) |
+| Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing, **human health (PK/PD, microbiome, biosignal, endocrinology)**, **game science (HCI, PCG, interactive systems)** |
 | Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
 | Papers queued for review | 60+ candidates across all springs + 8 Mok-derived experiments |
 | Faculty connected | 14 professors (MSU + Sandia + Carleton + Allure Medical) across 9 departments |
@@ -337,6 +369,14 @@ wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
     ├──→ neuralSpring: "ESN/LSTM anomaly detection for sentinel microbes; NPU int8 quantization validated"
     ├──→ **healthSpring**: "diversity indices, Anderson lattice → gut colonization resistance, 16S pipeline"
     └──→ groundSpring: "sequencing noise calibrates rarefaction; 86 named tolerances with provenance"
+
+ludoSpring (game science — 410 checks, 44 experiments, 13 HCI models)
+    │
+    ├──→ barraCuda: "sigmoid, dot, lcg_step, state_to_f64 consumed; 8 Tier A GPU modules identified"
+    ├──→ petalTongue: "3 dashboard binaries, 7 GameChannelType channels, live streaming"
+    ├──→ healthSpring: "Fitts/Hick for medical UI evaluation; engagement for patient compliance"
+    ├──→ wetSpring: "Perlin noise as Anderson disorder landscape; game telemetry protocol for lab UIs"
+    └──→ all springs: "Flow theory + DDA for any adaptive interactive system"
 ```
 
 ### 2.3 Spring → Primal Connections
@@ -349,6 +389,7 @@ wetSpring (biology + chemistry — 4,688+ checks, 197 experiments, 52/52 papers)
 | groundSpring | All springs (uncertainty budget) | neuralSpring (noise labels for training) |
 | neuralSpring | ToadStool/BarraCUDA (ML kernels) | biomeOS (PathwayLearner), Squirrel (inference), NUCLEUS (optimization) |
 | **healthSpring** | ToadStool/BarraCUDA (population PK, Anderson gut, biosignal) | NestGate (NCBI clinical data), biomeOS NUCLEUS (distributed health pipeline) |
+| **ludoSpring** | ToadStool/BarraCUDA (game math: noise, raycaster, metrics) | petalTongue (live dashboards), biomeOS NUCLEUS (Tower Atomic validated), wetSpring (Anderson QS cross-spring), nestgate (NCBI QS data), all springs (HCI models for any interactive system) |
 
 ### 2.4 Faculty → Spring Mapping
 
