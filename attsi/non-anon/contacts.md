@@ -19,7 +19,7 @@
 - hotSpring status: **41/41 Chuna overnight checks pass** (v0.6.23). Dynamical N_f=4 staggered flow extended.
 - Referred by: Professor Murillo (coffee, March 4, 2026)
 - Relationship: Murillo recommended as reviewer for hotSpring lattice QCD + plasma physics
-- **Status**: Replied March 9, 2026 — asked 4 questions (enrollment, goals, publication selection, CMSE 890 poster). Tone: collegial, direct, time-conscious. Reply drafted in `contact/chuna/reply_mar09_2026.md`.
+- **Status**: **Meeting scheduling** — replied March 9 (4 questions), we answered same day. March 11: wants to set up a meeting. He's in **Germany** (5hr ahead of ET), prefers 9am-12pm ET mornings. Reply drafted in `contact/chuna/reply_mar12_2026.md`. Available any day but Tuesday next week.
 - Details: `contact/chuna/`
 
 ## airSpring

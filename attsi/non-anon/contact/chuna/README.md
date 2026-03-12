@@ -69,8 +69,12 @@ queue, no vendor lock-in.
 
 - **March 6-8**: Review package finalized, overnight validation runs, baseCamp artifacts created
 - **March 8**: `CHUNA_REVIEW.md` placed in hotSpring repo, email draft with inline data sheet
-- **Week of March 10**: Send email via Murillo introduction (CC'd)
-- **Response**: Allow 1-2 weeks — he's a PhD student with his own work
+- **March 8**: Email sent via Murillo introduction (CC'd)
+- **March 9**: Chuna replied — 4 questions (enrollment, goals, pub selection, CMSE 890 poster). Tone: collegial, direct. "finite time to read, finite time to write."
+- **March 9**: Our reply sent — concise answers, wet lab background, AGPL-3.0 open, flexible schedule. (`reply_mar09_2026.md`)
+- **March 11**: Chuna replied — wants to set up a meeting. **He's in Germany** (5hr ahead of ET). Prefers 9am-12pm ET mornings. Apologized for delay.
+- **March 12**: Reply drafted (`reply_mar12_2026.md`) — available every day but Tuesday, mornings work, AGPL-3.0 noted.
+- **Next**: He picks day/time → confirm → prep CHUNA_REVIEW.md + convergence data for meeting
 
 ## Tone
 
