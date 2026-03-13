@@ -185,6 +185,17 @@
 - **Status**: Contact directory prepared. Outreach pending — reproduce Wang 2020 first, then contact with results.
 - Details: `contact/liao/`
 
+## Developer Methodology — Cold Outreach
+
+**Geoffrey Huntley** — Software Developer, AI Methodology Writer (Australia, remote)
+- https://ghuntley.com
+- Domain: AI-assisted software development methodology, developer tooling, open source
+- Blog post "You are using Cursor AI incorrectly..." (Feb 2025) was the seed insight for constrained evolution methodology
+- Connection: **Cold call** — no personal connection. His thesis → our methodology → 11 primals, 6 springs, 27,000+ tests
+- Value: Developer audience amplification (his readers are software engineers with GPUs who know Rust)
+- **Status**: Contact directory prepared. Outreach pending — strongest after Chuna validates physics.
+- Details: `contact/huntley/`
+
 ## Industry / MSUBI
 
 Pivot Bio — microbiome/nitrogen fixation (bench scale → 10L reactor, 2019–2024)
