@@ -1,6 +1,6 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 11, 2026 (V113 update)
+**Date:** March 13, 2026 (V113 + ludoSpring V10 update)
 **Foundation:** baseCamp papers 01–16, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5
 
 ---
@@ -190,10 +190,10 @@ The bottleneck is always data acquisition, not compute.
 
 ---
 
-## ludoSpring Extensions (V6, March 11, 2026)
+## ludoSpring Extensions (V10, March 13, 2026)
 
-**Source:** ludoSpring V6 — 44 experiments, 410 checks, Paper 17 in baseCamp
-**Connects to:** baseCamp #17 (Game Design as Rigorous Science), Papers 01, 12, 13, 16
+**Source:** ludoSpring V10 — 54 experiments, 795 checks, 138 tests, Papers 17-19 in baseCamp
+**Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
 
@@ -203,37 +203,55 @@ alone does not — has implications for every spring that builds interactive sys
 medical UIs (healthSpring), lab dashboards (petalTongue), scientific visualization
 (all springs).
 
-V6 adds 4 cross-spring experiments proving the game-science metrics generalize to
-bioinformatics exploration and primal infrastructure coordination.
+V10 adds 10 new experiments (exp045-054) proving: ingestible ruleset architecture
+(RPGPT), distributed human computation (Games@Home), provenance trio integration,
+extraction shooter fraud detection (12 fraud types, zone topology), and composable
+primal architecture (biomeOS + songbird + petalTongue via JSON-RPC 2.0).
 
-### Cross-Spring Extension Axes
+### Completed Extension Axes
 
-| Extension | Springs Involved | New Experiments | Compute | Status |
-|-----------|-----------------|-----------------|---------|--------|
-| NCBI QS gene pipeline | ludoSpring + nestgate | exp041 (12/12) | CPU, ~80s (rate-limited) | **DONE** |
-| Tower Atomic boot | ludoSpring + biomeOS + BearDog + Songbird | exp042 (10/10) | CPU only, <1s | **DONE** |
-| QS gene dataset (20 genera) | ludoSpring + wetSpring | exp043 (10/10) | CPU, ~80s (rate-limited) | **DONE** |
-| Anderson QS interactive explorer | ludoSpring + wetSpring | exp044 (12/12) | CPU only, <1s | **DONE** |
-| Immune response as game | ludoSpring + healthSpring | exp045 | CPU only, <1s | Planned |
-| Patient engagement metrics | ludoSpring + healthSpring | exp046 | CPU only, <1s | Planned |
-| Phase transition visualization | ludoSpring + wetSpring | exp047 | CPU only, <1s | Planned |
-| Interactive microbial landscape | ludoSpring + wetSpring | exp048 | GPU (noise fields) | Planned |
-| Engagement-driven scientific viz | ludoSpring + petalTongue | exp049 | CPU only | Planned |
-| Sovereign game science on consumer HW | ludoSpring + barraCuda + metalForge | exp050 | GPU benchmarks | Planned |
-| **RPGPT: Ruleset-as-certificate** | ludoSpring + loamSpine | Paper 18, Phase 1 | CPU only | **Architecture defined** |
-| **RPGPT: Turn-based session DAG** | ludoSpring + rhizoCrypt | Paper 18, Phase 2 | CPU only | **Architecture defined** |
-| **RPGPT: AI narration loop** | ludoSpring + Squirrel + loamSpine | Paper 18, Phase 3 | CPU only | **Architecture defined** |
-| **RPGPT: Creative attribution** | ludoSpring + sweetGrass + sunCloud | Paper 18, Phase 4 | CPU only | **Architecture defined** |
+| Extension | Springs Involved | Experiments | Checks | Status |
+|-----------|-----------------|-------------|--------|--------|
+| NCBI QS gene pipeline | ludoSpring + nestgate | exp041 | 12 | **DONE** |
+| Tower Atomic boot | ludoSpring + biomeOS + BearDog + Songbird | exp042 | 10 | **DONE** |
+| QS gene dataset (20 genera) | ludoSpring + wetSpring | exp043 | 10 | **DONE** |
+| Anderson QS interactive explorer | ludoSpring + wetSpring | exp044 | 12 | **DONE** |
+| RPGPT: Ruleset control systems | ludoSpring + loamSpine | exp045 | 49 | **DONE** |
+| RPGPT: Text adventure DAG | ludoSpring + rhizoCrypt | exp046 | 33 | **DONE** |
+| RPGPT: MTG card provenance | ludoSpring + loamSpine + sweetGrass | exp047 | 23 | **DONE** |
+| Games@Home: Stack resolution folding | ludoSpring | exp048 | 36 | **DONE** |
+| Games@Home: Novel data combinatorics | ludoSpring | exp049 | 33 | **DONE** |
+| Games@Home: Game tree design metric | ludoSpring | exp050 | 30 | **DONE** |
+| Games@Home: Distributed computation | ludoSpring | exp051 | 28 | **DONE** |
+| Provenance trio integration | ludoSpring + rhizoCrypt + loamSpine + sweetGrass | exp052 | 37 | **DONE** |
+| Extraction shooter fraud detection | ludoSpring + rhizoCrypt + loamSpine | exp053 | 65 | **DONE** |
+| Composable raid visualization | ludoSpring + biomeOS + songbird + petalTongue (IPC) | exp054 | 40 | **DONE** |
+
+### Key Architectural Lessons (V10)
+
+**Composable vs chimeric dependencies**: Infrastructure primals (biomeOS, songbird,
+petalTongue) are NOT Cargo dependencies. They communicate via JSON-RPC 2.0 over Unix
+sockets. Data primals (rhizoCrypt, loamSpine, sweetGrass) ARE direct Cargo dependencies
+because they provide pure data structures with no runtime side effects.
+
+**Anti-cheat = chain-of-custody**: Proven concretely in exp053 with 12 fraud types.
+The same orphan-item detector catches duped loot in an extraction shooter, phantom
+samples in field genomics, and phantom swords in an RPG. Same DAG, same code path.
+
+**Fraud detection as GPU workload**: Zone adjacency and `LoS` matrices are graph
+operations suitable for GPU parallelization. Batched spatial fraud analysis is a
+natural candidate for barraCuda GPU dispatch.
 
 ### GPU Promotion Path
 
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (current) — all 40 experiments on CPU
+1. **Local validation** (current) — all 54 experiments on CPU
 2. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU
 3. **coralReef shader compilation** — sovereign WGSL→native for game workloads
 4. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
+5. **Fraud batching** — spatial fraud detectors as GPU compute shaders (new from exp053)
 
 ### NUCLEUS Integration Path
 
@@ -243,6 +261,7 @@ ludoSpring's game loop (60Hz) maps directly to biomeOS's continuous graph execut
 2. **Node Atomic** — ToadStool dispatches GPU noise/raycaster workloads
 3. **Nest Atomic** — NestGate stores telemetry sessions, fetches NCBI data for cross-spring experiments
 4. **Full NUCLEUS** — game_logic + metrics nodes tick against live primal data at 60Hz
+5. **Composable deployment** — biomeOS `DeploymentGraph` with `Continuous` coordination pattern validated in exp054
 
 ### Connection to Existing Papers
 
@@ -253,7 +272,8 @@ ludoSpring's game loop (60Hz) maps directly to biomeOS's continuous graph execut
 | 13 (Sovereign Health) | Engagement for patient compliance; flow for therapy design |
 | 16 (Anaerobic-Aerobic QS) | Phase transition visualization through terrain generation |
 | 17 (Game Design as Science) | All 13 HCI models apply directly to RPGPT session quality measurement |
-| **18 (RPGPT)** | **Sovereign RPG engine: ingestible rulesets, provenance-backed world state, anti-cheat = chain-of-custody** |
+| **18 (RPGPT)** | **exp045-047 validate ruleset ingestion, session DAG, card provenance. exp053 proves anti-cheat = chain-of-custody with 12 fraud types.** |
+| **19 (Games@Home)** | **exp048-051 validate stack-as-folding, novel data, game tree metrics, distributed computation isomorphism. exp054 validates composable multi-player coordination architecture.** |
 
 ---
 
@@ -326,3 +346,63 @@ RPGPT scaffolds evolution goals that benefit all domains:
 2. **Session DAG** — Turn structure, dice rolls, conditions, phases in rhizoCrypt
 3. **AI narration loop** — Squirrel reads DAG + ruleset cert; ludoSpring measures quality
 4. **Attribution + economics** — sweetGrass tracks player/AI creative contributions
+
+---
+
+## Novel Ferment Transcript Economics (Paper 20, March 13, 2026)
+
+**Source:** ludoSpring exp061_fermenting (89/89 checks) + provenance trio + BearDog + sunCloud
+**Connects to:** baseCamp #17 (Game Design), #18 (RPGPT), #19 (Games@Home), Papers 01, 12, 13
+
+### The Evolution from Concept to Code
+
+| Phase | Date | What | Status |
+|-------|------|------|--------|
+| Ethos | Jul 2025 | `LATENT_VALUE_ECONOMY.md` — value from significance | Concept |
+| Model | Jul 2025 | `SUNCLOUD_ECONOMIC_MODEL.md` — radiating attribution | Concept |
+| Certificate | Jul 2025 | `LOAM_CERTIFICATE_LAYER.md` — memory-bound objects | Concept |
+| scyBorg | Mar 2026 | `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — triple copyleft | Guidance |
+| Fermenting | Mar 2026 | `exp061_fermenting` — working lifecycle + trading + memory | **Validated** |
+| NFT Economics | Mar 2026 | Paper 20 — sunCloud + trio + cross-domain | **Published** |
+
+### What Was Built (exp061)
+
+- **Certificate lifecycle**: mint, inspect, trade, loan, return, consume
+- **Trading protocol**: offer, accept, reject, cancel, atomic swap (loam-spine-core)
+- **Object memory**: event timeline with PROV-O export (sweet-grass-core)
+- **Composable IPC**: JSON-RPC wire types for live trio deployment
+- **Deployment graph**: `provenance_node_atomic.toml` (Tower + Trio)
+
+### What Needs Building
+
+| Component | Team | Priority |
+|-----------|------|----------|
+| BearDog signing on every operation | BearDog | High |
+| Public chain anchor entry type | loamSpine | Medium |
+| Owner inventory query | loamSpine | Medium |
+| Cross-session derivation links | rhizoCrypt | Medium |
+| License-aware attribution notices | sweetGrass | Medium |
+| Radiating attribution calculator | sweetGrass + sunCloud | Low |
+| Physical-digital bridge (NFC/QR) | biomeOS | Low |
+| Marketplace protocol | biomeOS | Low |
+
+### Cross-Domain Applications
+
+Same architecture, same code, different vocabulary:
+
+| Domain | Object | History | Anchor Trigger |
+|--------|--------|---------|---------------|
+| Gaming | Tournament sword | Kills, trades, cosmetics | Sale or exhibition |
+| Collectibles | Trading card | Tournament play, condition | Resale |
+| Science | DNA sample | Collection → lab → analysis | Custody transfer |
+| Medical | Patient record | Access log, treatment chain | Regulatory audit |
+| Creative | Digital artwork | Creation process, remix chain | Sale |
+| Legal | Property deed | Ownership transfers, liens | Recording |
+
+### sunCloud Activation Path
+
+1. Object accumulates history (local, free)
+2. Owner optionally anchors to public chain (32-byte hash)
+3. Anchor activates radiating attribution
+4. sunCloud reads sweetGrass chain, distributes proportionally
+5. Every contributor in the chain receives credit forever

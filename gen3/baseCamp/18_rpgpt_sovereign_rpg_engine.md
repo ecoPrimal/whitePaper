@@ -1,7 +1,7 @@
 # Paper 18: RPGPT — Sovereign RPG Engine with Ingestible Rulesets and Provenance-Backed World State
 
-**Status**: Architecture defined — structural sketch validated, provenance trio evolution goals documented
-**Date**: March 11, 2026
+**Status**: Architecture validated — exp045 validates ruleset control systems (49 checks: PF2e, FATE, Cairn), exp046 validates text adventure DAG (33 checks), exp047 validates MTG card provenance (23 checks). exp053 proves anti-cheat = chain-of-custody thesis with 12 fraud types across 3 tiers.
+**Date**: March 13, 2026
 **Faculty Anchor**: Gygax & Arneson (1974, tabletop RPG structure), Cook (Pathfinder 2e, 3-action economy), Csikszentmihalyi (1990, Flow), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science + HCI metrics), rhizoCrypt (ephemeral DAG — game state), sweetGrass (creative attribution), loamSpine (permanence — rulesets, characters, world lore), Squirrel (AI/MCP — narration), biomeOS (orchestration), BearDog (anti-cheat signing)
 **Open Systems**: Pathfinder 2e (ORC License), FATE Core (CC-BY), Powered by the Apocalypse (CC-BY), Cypher System (Open License), Cairn (CC-BY-SA)
@@ -235,6 +235,18 @@ This is not a chatbot — the rhizoCrypt DAG gives it structure. You can:
 | 17 (Game Design as Science) | All 13 HCI models apply directly to RPGPT session design and quality measurement |
 
 ---
+
+## Experimental Validation (ludoSpring V3)
+
+The architecture described above is no longer theoretical — three experiments validate the core claims:
+
+| Experiment | Checks | What it validates |
+|------------|--------|-------------------|
+| exp045 — Ruleset Control Systems | 49/49 | PF2e 3-action economy, FATE Aspects, Cairn inventory-as-HP ingested as machine-readable rulesets. `game::ruleset` module validates DiceSystem, DegreeOfSuccess, Proficiency, Condition decay, ActionEconomy for all three systems. |
+| exp046 — Text Adventure DAG | 33/33 | Session DAG with branching narrative: player choices create vertices, narrative forks are DAG branches, NPC state accumulates across turns. Validates the rhizoCrypt gaming session model. |
+| exp047 — MTG Card Provenance | 23/23 | Card mint (loamSpine cert) → trade (ownership transfer) → transform (enchant/modify) lifecycle. sweetGrass tracks creative attribution for card design. Validates item lineage through provenance trio. |
+
+Additionally, exp053 (Extraction Shooter Provenance, 65 checks) proves the core thesis of this paper — **anti-cheat is chain-of-custody** — with 12 concrete fraud types detected purely through DAG provenance analysis. The same orphan-item detector that catches duped extraction shooter loot catches phantom swords in an RPG.
 
 ## What We Build
 
