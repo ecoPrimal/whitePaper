@@ -232,18 +232,19 @@ rootpulse review --ai
 ## 🏗️ Implementation Status
 
 ### Primals (Phase 1 & 2)
-✅ **rhizoCrypt** — v0.13.0, **production ready** (A+ grade, 96/100) 🏆  
-✅ **LoamSpine** — v0.7.0, production ready  
-✅ **NestGate** — v0.1.1, production ready  
-✅ **BearDog** — v0.9.0, production ready  
-✅ **SweetGrass** — v0.1.0, under development  
-✅ **Songbird** — v0.1.0, production ready  
-✅ **Squirrel** — v2.1.0, production ready  
-✅ **ToadStool** — v0.1.0, production ready
+✅ **rhizoCrypt** — v0.13.0-dev, production ready (862 tests, 87.78% coverage)  
+✅ **LoamSpine** — v0.8.0, production ready (700 tests, 90.6% coverage)  
+✅ **NestGate** — production ready (A++ TOP 1%)  
+✅ **BearDog** — v0.15.0, production ready (A+ LEGENDARY)  
+✅ **SweetGrass** — v0.7.3, production ready (746 tests, 94% coverage)  
+✅ **Songbird** — v3.6, production ready (S+)  
+✅ **Squirrel** — production ready (A++)  
+✅ **ToadStool** — S153, production ready (A++ GOLD, 20,015+ tests)
 
 ### BiomeOS Integration
-⏳ **Coordination patterns** — Needs definition  
-⏳ **Workflow engine** — Needs implementation  
+✅ **Coordination patterns** — `rootpulse_commit.toml` (6-phase), `provenance_pipeline.toml`  
+✅ **Workflow engine** — Graph executor + ContinuousExecutor validated  
+✅ **Provenance trio** — End-to-end validated (March 13, 2026)  
 ⏳ **CLI frontend** — Needs development
 
 ### Timeline

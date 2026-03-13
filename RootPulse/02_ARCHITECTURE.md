@@ -523,13 +523,13 @@ description = "Distributed version control via primal coordination"
 version = "1.0.0"
 
 [primals.required]
-loamspine = "^0.7.0"
+loamspine = "^0.8.0"
 nestgate = "^0.1.0"
-beardog = "^0.9.0"
+beardog = "^0.15.0"
 
 [primals.optional]
-sweetgrass = "^0.1.0"  # Semantic attribution
-songbird = "^0.1.0"    # Federation discovery
+sweetgrass = "^0.7.3"  # Semantic attribution
+songbird = "^3.6.0"    # Federation discovery
 squirrel = "^2.1.0"    # AI features
 toadstool = "^0.1.0"   # Distributed CI/CD
 

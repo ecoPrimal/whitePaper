@@ -946,7 +946,7 @@ All three Phase 2 primals are **production-ready**:
 **Created**: December 27, 2025  
 **Updated**: December 28, 2025 (Phase 2 validation complete!)  
 **Status**: ✅ **PRODUCTION READY** — All APIs validated!  
-**Integration**: SweetGrass v0.5.0, RhizoCrypt v0.4.0, LoamSpine v0.3.0  
+**Integration**: SweetGrass v0.7.3, rhizoCrypt v0.13.0-dev, LoamSpine v0.8.0 (provenance trio validated March 13, 2026)  
 **Showcase**: Complete automated tour available in `sweetGrass/showcase/`
 
 ---

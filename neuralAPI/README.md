@@ -159,8 +159,9 @@ Study:
 |-----------|--------|--------|
 | **Conceptual Design** | ✅ Complete | This whitepaper |
 | **Niche API Patterns** | ✅ Complete | 08_NICHE_API_PATTERNS.md |
-| **Graph Execution** | 🟡 Planned | 2-3 weeks |
-| **Continuous Coordination** | 🟡 Planned | 3-4 weeks |
+| **Graph Execution** | ✅ Complete | 03_GRAPH_EXECUTION.md + biomeos-graph crate |
+| **Continuous Coordination** | ✅ Complete | ContinuousExecutor + game_engine_tick.toml |
+| **RootPulse Case Study** | ✅ Complete | 09_ROOTPULSE_CASE_STUDY.md |
 | **Pathway Learning** | 🟡 Planned | 3-4 weeks |
 | **Bidirectional Feedback** | 🟡 Planned | 4-6 weeks |
 | **Pattern Discovery** | 🔵 Research | 6-8 weeks |
