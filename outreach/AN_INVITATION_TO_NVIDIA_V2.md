@@ -12,6 +12,36 @@ expand the market of people writing GPU-accelerated science by orders of
 magnitude. The last mile — making it fast on YOUR silicon — is still your
 competitive edge. It's just no longer a scarcity.
 
+### Why "Atheistic" and Not "Agnostic"
+
+The distinction is deliberate.
+
+**Hardware agnostic** means: "I don't know which hardware is best, so I
+support all of them." This is passive. It acknowledges that hardware matters
+at the math level and hedges across vendors. Kokkos is agnostic. OpenCL is
+agnostic. They abstract hardware but still think in hardware terms — warps,
+wavefronts, thread blocks.
+
+**Hardware atheistic** means: "Hardware does not exist in the math domain."
+The mathematics is its own provable domain. A Wilson loop is a Wilson loop.
+A Hill dose-response is a Hill dose-response. These are mathematical objects
+with correctness proofs that exist independently of any silicon. The shader
+is the mathematics — not a translation of mathematics into hardware concepts.
+
+This is a semantic play, not a theological one. There is no theism in code.
+But conceptually, CUDA positions a vendor as the one true path to GPU compute
+— the orthodox church of parallel processing. Agnostic says "maybe there are
+other paths." Atheistic says "there are no gods here. This is mathematics.
+The substrate is a compilation target, not a belief system."
+
+The practical consequence: hardware-atheistic code doesn't optimize for any
+hardware. It optimizes the *algorithm*. Global optimizations (algorithmic
+complexity, numerical stability, precision routing) live in Layer 1 and apply
+everywhere. Hardware optimizations (register allocation, memory coalescing,
+occupancy tuning) live in Layer 2 and are local to a substrate. By separating
+them, both layers improve faster — mathematicians optimize math, hardware
+engineers optimize hardware. Neither needs to be the other.
+
 ---
 
 ## The Old Framing (Wrong)
