@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 14, 2026 (V113 + ludoSpring V14 update)
-**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5, ludoSpring V14 (66 experiments, 1349 checks, 212 tests, all modules ≥ 90% coverage)
+**Date:** March 14, 2026 (V113 + ludoSpring V15 update)
+**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5, ludoSpring V15 (66 experiments, 1371 checks, 218 tests, all modules ≥ 90% coverage, GPU dispatch buildout)
 
 ---
 
@@ -190,9 +190,9 @@ The bottleneck is always data acquisition, not compute.
 
 ---
 
-## ludoSpring Extensions (V14, March 14, 2026)
+## ludoSpring Extensions (V15, March 14, 2026)
 
-**Source:** ludoSpring V14 — 66 experiments, 1349 checks, 212 tests, Papers 17-20 in baseCamp
+**Source:** ludoSpring V15 — 66 experiments, 1371 checks, 218 tests, Papers 17-20 in baseCamp
 **Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
@@ -203,10 +203,13 @@ alone does not — has implications for every spring that builds interactive sys
 medical UIs (healthSpring), lab dashboards (petalTongue), scientific visualization
 (all springs).
 
-V14 is a deep audit and quality evolution release. All 22 library modules achieve
-≥ 90% test coverage. Clippy pedantic + nursery clean. Zero files over 1000 LOC.
-Python baselines embed runtime provenance. Tolerances centralized with citations.
-Zero-copy NDJSON streaming in telemetry parser. SPDX headers on all files.
+V15 builds on V14's deep audit with a full GPU dispatch and mixed hardware buildout:
+Tier A WGSL compute shaders (Perlin 2D, fBm, engagement batch, DDA raycaster) with
+CPU parity validation. metalForge evolved to capability-based routing (SubstrateKind,
+Capability enum, route(), fallback_chain — matching sibling spring pattern). NPU→GPU
+direct PCIe transfer model. toadStool JSON-RPC 2.0 dispatch client wire format.
+biomeOS DeploymentGraph (5-node topology, 60Hz budget). All modules ≥ 90% test
+coverage. Clippy pedantic + nursery clean. `#![forbid(unsafe_code)]` everywhere.
 
 V10-V13 added 22 new experiments (exp045-066) proving: ingestible ruleset architecture
 (RPGPT), distributed human computation (Games@Home), provenance trio integration,
@@ -242,6 +245,10 @@ scaffolds, cross-domain fraud unification, radiating attribution).
 | Cross-domain fraud unification | ludoSpring | exp065 | 74 | **DONE** |
 | Radiating attribution | ludoSpring + sunCloud | exp066 | 41 | **DONE** |
 | Deep audit: coverage ≥ 90% all modules | ludoSpring | 212 tests | — | **DONE (V14)** |
+| GPU dispatch: Tier A WGSL shaders | ludoSpring + barraCuda (exp030) | exp030 +8 | 24 | **DONE (V15)** |
+| metalForge capability routing | ludoSpring (metalForge/forge) | 9 tests | — | **DONE (V15)** |
+| Mixed hardware: NPU→GPU PCIe bypass | ludoSpring (exp032) | exp032 +6 | 18 | **DONE (V15)** |
+| NUCLEUS: capability routing + toadStool dispatch + biomeOS graph | ludoSpring (exp033) | exp033 +8 | 19 | **DONE (V15)** |
 
 ### Key Architectural Lessons (V10)
 
@@ -263,8 +270,8 @@ natural candidate for barraCuda GPU dispatch.
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (current) — all 66 experiments on CPU, 212 tests, ≥ 90% coverage
-2. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU
+1. **Local validation** (current) — all 66 experiments, 218 tests, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
+   2. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU. Wire format validated (exp033: JSON-RPC 2.0 compute.submit). metalForge capability routing ready for absorption.
 3. **coralReef shader compilation** — sovereign WGSL→native for game workloads
 4. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
 5. **Fraud batching** — spatial fraud detectors as GPU compute shaders (new from exp053)
