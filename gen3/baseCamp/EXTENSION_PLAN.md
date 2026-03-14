@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 13, 2026 (V113 + ludoSpring V10 update)
-**Foundation:** baseCamp papers 01–16, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5
+**Date:** March 14, 2026 (V113 + ludoSpring V14 update)
+**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5, ludoSpring V14 (66 experiments, 1349 checks, 212 tests, all modules ≥ 90% coverage)
 
 ---
 
@@ -190,10 +190,10 @@ The bottleneck is always data acquisition, not compute.
 
 ---
 
-## ludoSpring Extensions (V10, March 13, 2026)
+## ludoSpring Extensions (V14, March 14, 2026)
 
-**Source:** ludoSpring V10 — 54 experiments, 795 checks, 138 tests, Papers 17-19 in baseCamp
-**Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), Papers 01, 12, 13, 16
+**Source:** ludoSpring V14 — 66 experiments, 1349 checks, 212 tests, Papers 17-20 in baseCamp
+**Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
 
@@ -203,10 +203,18 @@ alone does not — has implications for every spring that builds interactive sys
 medical UIs (healthSpring), lab dashboards (petalTongue), scientific visualization
 (all springs).
 
-V10 adds 10 new experiments (exp045-054) proving: ingestible ruleset architecture
+V14 is a deep audit and quality evolution release. All 22 library modules achieve
+≥ 90% test coverage. Clippy pedantic + nursery clean. Zero files over 1000 LOC.
+Python baselines embed runtime provenance. Tolerances centralized with citations.
+Zero-copy NDJSON streaming in telemetry parser. SPDX headers on all files.
+
+V10-V13 added 22 new experiments (exp045-066) proving: ingestible ruleset architecture
 (RPGPT), distributed human computation (Games@Home), provenance trio integration,
-extraction shooter fraud detection (12 fraud types, zone topology), and composable
-primal architecture (biomeOS + songbird + petalTongue via JSON-RPC 2.0).
+extraction shooter fraud detection (12 fraud types, zone topology), composable
+primal architecture (biomeOS + songbird + petalTongue via JSON-RPC 2.0), Lysogeny
+open recreation catalog (6 game mechanics from open math), Novel Ferment Transcript
+(full NFT lifecycle), and cross-spring provenance (BearDog signing, field sample/medical
+scaffolds, cross-domain fraud unification, radiating attribution).
 
 ### Completed Extension Axes
 
@@ -226,6 +234,14 @@ primal architecture (biomeOS + songbird + petalTongue via JSON-RPC 2.0).
 | Provenance trio integration | ludoSpring + rhizoCrypt + loamSpine + sweetGrass | exp052 | 37 | **DONE** |
 | Extraction shooter fraud detection | ludoSpring + rhizoCrypt + loamSpine | exp053 | 65 | **DONE** |
 | Composable raid visualization | ludoSpring + biomeOS + songbird + petalTongue (IPC) | exp054 | 40 | **DONE** |
+| Lysogeny catalog (6 mechanics) | ludoSpring | exp055-060 | 237 | **DONE** |
+| Fermenting (NFT lifecycle) | ludoSpring + trio | exp061 | 89 | **DONE** |
+| BearDog-signed provenance chain | ludoSpring + BearDog | exp064 | 39 | **DONE** |
+| Field sample provenance (wetSpring) | ludoSpring + wetSpring scaffold | exp062 | 39 | **DONE** |
+| Consent-gated medical (healthSpring) | ludoSpring + healthSpring scaffold | exp063 | 35 | **DONE** |
+| Cross-domain fraud unification | ludoSpring | exp065 | 74 | **DONE** |
+| Radiating attribution | ludoSpring + sunCloud | exp066 | 41 | **DONE** |
+| Deep audit: coverage ≥ 90% all modules | ludoSpring | 212 tests | — | **DONE (V14)** |
 
 ### Key Architectural Lessons (V10)
 
@@ -247,7 +263,7 @@ natural candidate for barraCuda GPU dispatch.
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (current) — all 54 experiments on CPU
+1. **Local validation** (current) — all 66 experiments on CPU, 212 tests, ≥ 90% coverage
 2. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU
 3. **coralReef shader compilation** — sovereign WGSL→native for game workloads
 4. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
@@ -274,6 +290,7 @@ ludoSpring's game loop (60Hz) maps directly to biomeOS's continuous graph execut
 | 17 (Game Design as Science) | All 13 HCI models apply directly to RPGPT session quality measurement |
 | **18 (RPGPT)** | **exp045-047 validate ruleset ingestion, session DAG, card provenance. exp053 proves anti-cheat = chain-of-custody with 12 fraud types.** |
 | **19 (Games@Home)** | **exp048-051 validate stack-as-folding, novel data, game tree metrics, distributed computation isomorphism. exp054 validates composable multi-player coordination architecture.** |
+| **20 (Novel Ferment)** | **exp061 validates full NFT lifecycle. exp064 proves BearDog signing. exp065 proves cross-domain fraud unification (>80% structural similarity). exp066 proves radiating attribution (conservation of shares).** |
 
 ---
 
@@ -375,16 +392,16 @@ RPGPT scaffolds evolution goals that benefit all domains:
 
 ### What Needs Building
 
-| Component | Team | Priority |
-|-----------|------|----------|
-| BearDog signing on every operation | BearDog | High |
-| Public chain anchor entry type | loamSpine | Medium |
-| Owner inventory query | loamSpine | Medium |
-| Cross-session derivation links | rhizoCrypt | Medium |
-| License-aware attribution notices | sweetGrass | Medium |
-| Radiating attribution calculator | sweetGrass + sunCloud | Low |
-| Physical-digital bridge (NFC/QR) | biomeOS | Low |
-| Marketplace protocol | biomeOS | Low |
+| Component | Team | Priority | Status |
+|-----------|------|----------|--------|
+| BearDog signing on every operation | BearDog | High | **Model validated (exp064)** — wire format proven, needs live IPC swap |
+| Radiating attribution calculator | sweetGrass + sunCloud | High | **Model validated (exp066)** — decay, role weighting, conservation proven |
+| Public chain anchor entry type | loamSpine | Medium | Pending |
+| Owner inventory query | loamSpine | Medium | Pending |
+| Cross-session derivation links | rhizoCrypt | Medium | Pending |
+| License-aware attribution notices | sweetGrass | Medium | Pending |
+| Physical-digital bridge (NFC/QR) | biomeOS | Low | Pending |
+| Marketplace protocol | biomeOS | Low | Pending |
 
 ### Cross-Domain Applications
 
