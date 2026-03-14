@@ -6,7 +6,7 @@
 **Novelty:** No prior work applies Anderson localization to explain no-till vs
 conventional tillage outcomes; no prior work models tillage as dimensional collapse
 of a QS-active system
-**Cross-Spring:** wetSpring (Anderson QS + 16S) × airSpring v0.7.3 (soil moisture + ET₀ + GPU van Genuchten θ/K + pedotransfer + uncertainty stack, 848 lib + 186 forge tests, 78 experiments, 20 ops upstream, PrecisionRoutingAdvice, barraCuda 0.3.3 wgpu 28) ×
+**Cross-Spring:** wetSpring (Anderson QS + 16S) × airSpring v0.7.6 (soil moisture + ET₀ + GPU van Genuchten θ/K + pedotransfer + uncertainty stack, 834 lib + 41 integration + 186 forge tests, 87 experiments, 20 ops upstream, PrecisionRoutingAdvice, barraCuda 0.3.5 wgpu 28, deep debt execution complete: GPU stream smoother fixed, all --all-features compile) ×
 groundSpring V62 (uncertainty, spectral theory, rare biosphere, jackknife — `ToadStool` S79, DF64 precision strategy, f64-capable device selection) × neuralSpring (LSTM time series)
 
 ---
