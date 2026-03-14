@@ -1,7 +1,7 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
-**Date:** March 11, 2026 (updated)
-**Status:** **Validated + Live Kokkos Parity + Precision Stability + Precision Brain** — hotSpring v0.6.28, **847 lib tests**, 112+ binaries, 84 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). **Live Kokkos benchmark** (Exp 053): 9/9 Yukawa cases, **12.4× gap** (barraCuda 212 steps/s vs Kokkos-CUDA 2,630 steps/s at N=2000) — gap dominated by native f64 fallback (1:32 on Ampere), DF64 safe-path fix expected to close to ~2×. DF64 transcendental poisoning bug discovered and fixed. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
+**Date:** March 14, 2026 (updated)
+**Status:** **Validated + Live Kokkos Parity + Precision Stability + Precision Brain + VFIO PBDMA Context Load** — hotSpring v0.6.31, **848 lib tests**, 115 binaries, 85 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). **Live Kokkos benchmark** (Exp 053): 9/9 Yukawa cases, **12.4× gap** (barraCuda 212 steps/s vs Kokkos-CUDA 2,630 steps/s at N=2000) — gap dominated by native f64 fallback (1:32 on Ampere), DF64 safe-path fix expected to close to ~2×. DF64 transcendental poisoning bug discovered and fixed. **VFIO PBDMA context load** (Exp 058): 3 critical Volta register discoveries (preempt 0x002638, ACK 0x002A00, SIGNATURE validation), PBDMA2 loads RAMFC with zero errors; USERD DMA read remaining. coralReef P10 Iter 44+. Dual Titan V mmiotrace planned. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
@@ -378,6 +378,42 @@ uncertainty budget must prove that (a) f32 alone is insufficient (Exp 025),
 (b) the system sizes used actually converge (Exp 026), and (c) results are
 reproducible across GPU vendors (Exp 027). These three experiments convert
 the cost projection in Section 8 from speculation to validated science.
+
+### 6.4 VFIO Sovereign Dispatch Breakthrough (Exp 058)
+
+The sovereign VFIO compute path on Volta (Titan V, GV100) achieved a
+critical milestone: **PBDMA context load** — the hardware PFIFO scheduler
+successfully loads our RAMFC channel context into PBDMA2. This is the first
+successful context load on the sovereign dispatch path without any kernel
+GPU driver.
+
+Three register-level discoveries made this possible:
+
+1. **GV100 runlist preempt** (`0x002638`): Write `BIT(runl_id)` to force
+   scheduler re-evaluation. Volta's per-runlist preempt is at 0x002638,
+   not the older per-channel preempt at 0x002634.
+2. **Runlist completion ACK** (`0x002A00`): After runlist submission, the
+   scheduler fires PFIFO_INTR bit 30. Software MUST read 0x002A00 and
+   write `BIT(runl_id)` to acknowledge. Without this, the scheduler will
+   not dispatch channels to PBDMAs.
+3. **SIGNATURE validation**: PBDMA enforces `RAMFC::SIGNATURE = 0xFACE`.
+   Used as a diagnostic (write 0xDEAD → observe error → confirm fresh
+   context load).
+
+**Current status**: PBDMA2 has our context loaded with zero errors. The
+GPFIFO address, USERD address, channel ID, and all RAMFC fields are
+correctly mapped into PBDMA operational registers. One gap remains: the
+PBDMA does not read GP_PUT from USERD in system memory (suspected IOMMU
+DMA path issue).
+
+**Hardware plan**: GTX 1050 (headless display) + 2x Titan V — one on
+nouveau as an mmiotrace oracle, one on VFIO as the target. The oracle
+will capture nouveau's complete PBDMA dispatch sequence for replication
+on the VFIO target.
+
+**coralReef pin**: Phase 10, Iteration 44+ (Experiment Q: VramFullDispatch)
+
+See: `hotSpring/experiments/058_VFIO_PBDMA_CONTEXT_LOAD.md`
 
 ---
 
