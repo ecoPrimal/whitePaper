@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 15, 2026 (V113 + ludoSpring V16 update)
-**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5, ludoSpring V16 (66 experiments, 1371 checks, 240 tests, all modules ≥ 90% coverage, GPU dispatch buildout, niche-deployable)
+**Date:** March 15, 2026 (V113 + ludoSpring V18 update)
+**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.7.5, ludoSpring V18 (66 experiments, 1371 checks, 244 tests + 12 proptest, all modules ≥ 90% coverage, niche self-knowledge, NeuralBridge typed IPC, platform-agnostic paths)
 
 ---
 
@@ -190,9 +190,9 @@ The bottleneck is always data acquisition, not compute.
 
 ---
 
-## ludoSpring Extensions (V16, March 15, 2026)
+## ludoSpring Extensions (V18, March 15, 2026)
 
-**Source:** ludoSpring V16 — 66 experiments, 1371 checks, 240 tests, Papers 17-20 in baseCamp
+**Source:** ludoSpring V18 — 66 experiments, 1371 checks, 244 tests + 12 proptest, Papers 17-20 in baseCamp
 **Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
@@ -203,7 +203,7 @@ alone does not — has implications for every spring that builds interactive sys
 medical UIs (healthSpring), lab dashboards (petalTongue), scientific visualization
 (all springs).
 
-V16 evolves ludoSpring into a first-class biomeOS niche citizen per the Spring-as-Niche
+V18 evolves ludoSpring into a first-class biomeOS niche citizen per the Spring-as-Niche
 Deployment Standard. The `game` capability domain (12 methods) is registered with
 semantic mappings via Neural API. Deploy graphs (`ludospring_deploy.toml`,
 `ludospring_gaming_niche.toml`) and niche YAML (`ludospring-game.yaml`) are ready
@@ -278,8 +278,8 @@ natural candidate for barraCuda GPU dispatch.
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (complete) — all 66 experiments, 240 tests, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
-2. **Niche deployment** (complete, V16) — UniBin binary, deploy graphs, niche YAML, Neural API domain registration, `lifecycle.status`, operation dependencies + cost estimates, dispatch metrics
+1. **Local validation** (complete) — all 66 experiments, 244 tests, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
+2. **Niche deployment** (complete, V18) — UniBin binary, deploy graphs, niche YAML, Neural API domain registration, `lifecycle.status`, operation dependencies + cost estimates, dispatch metrics
 3. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU. Wire format validated (exp033: JSON-RPC 2.0 compute.submit). metalForge capability routing ready for absorption.
 4. **coralReef shader compilation** — sovereign WGSL→native for game workloads
 5. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
