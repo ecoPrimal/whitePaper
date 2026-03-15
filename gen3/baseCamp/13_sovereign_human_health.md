@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V22)
+**Spring**: healthSpring (V23)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × biomeOS Niche Deployment
-**License**: AGPL-3.0-only
+**License**: AGPL-3.0-or-later
 **Date**: March 15, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated + Deployed as biomeOS Niche** — V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche. `healthspring_primal` binary serves 55+ capabilities via JSON-RPC 2.0 over Unix socket. 5 workflow graphs define the diagnostic pipeline as biomeOS graph compositions (ConditionalDag patient assessment, Sequential TRT/microbiome, Continuous 250 Hz biosignal). 414 tests (337 ecoPrimal + 33 forge + 30 toadStool + 8 IPC + 3 doc-tests + 3 integration), 61 experiments, 194 Python checks. Prior: Tier 0+1+2+3 complete, V21 deep debt (named tolerances, provenance DOIs, XDG discovery, determinism tests), V19 full-stack portability, V18 CPU parity (84× faster), V17 GPU portability, V16 paper queue (30/30), V15 upstream rewire, V14 NLME + petalTongue.
+**Status**: **Production-hardened biomeOS Niche** — V23 deep debt remediation resolves all V22 audit findings. `clippy::nursery` enforced, all `#[allow()]` eliminated, `UniBin`-compliant primal binary (clap subcommands), 13 new dispatch handlers wired (NLME, QS, WFDB, clinical), three-tier data fetch implemented, tolerances centralized, 10 experiments on `ValidationHarness`. 435 tests, 61 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
