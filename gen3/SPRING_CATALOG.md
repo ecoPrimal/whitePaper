@@ -140,53 +140,29 @@ The springs are organized into two tiers:
 
 ### 1.4 groundSpring — Measurement Noise & Uncertainty
 
-**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems, spectral theory, quasispecies, rare biosphere, jackknife, freeze-out
-**Grade**: Phase 0 + Phase 1 (Rust) complete across 8 scientific domains
-**Checks**: 236/236 Rust validation checks (all PASS), 280 Rust tests, 21/21 mathematical parity (Python == Rust)
-**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization, Almost-Mathieu, transport, band edge), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution, drift, uncertainty bridge, rare biosphere)
+**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems, spectral theory, quasispecies, rare biosphere, tissue Anderson, warm dense matter, ESN regime classification
+**Grade**: Phase 0 (Python) + Phase 1 (Rust) + Phase 2 (GPU) + Phase 3 (Hardware) + Phase 4 (NUCLEUS) — V104
+**Checks**: 395/395 Rust validation checks (all PASS), 936 Rust tests, 287 Python tests, 102 barraCuda delegations (61 CPU + 41 GPU)
+**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization, Almost-Mathieu, transport, band edge), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution, drift, uncertainty bridge, rare biosphere), Andrea J. Gonzales (Paper 12 — immunological Anderson, tissue geometry, drug scoring)
 **Repository**: git@github.com:syntheticChemistry/groundSpring.git
-**License**: AGPL-3.0
+**License**: AGPL-3.0-or-later
 
-**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains. Phase 1 adds spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, and spectral reconstruction.
+**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains. 37 Rust modules across 5 pillars: Signal vs Noise, Inverse Problems, Sensing Systems, Temporal Dynamics, Spatial Propagation. 102 barraCuda delegations cover stats, spectral, ops, linalg, optimize, bio, and ESN domains. metalForge provides cross-substrate dispatch (CPU, GPU via RTX 4070/Titan V, NPU via AKD1000).
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| 0 (Python) | 5 experiments across 4 domains | 71/71 | Unified noise characterization framework |
-| 1 (Rust) | 21 experiments across 8 domains, dual-mode CI | 236/236 | 24 library modules, 27 barracuda delegations (22 CPU + 5 GPU) |
+| 0 (Python) | 29 experiments across 5 pillars | 287 tests | Unified noise characterization framework |
+| 1 (Rust) | 35 experiments across 8 domains | 395/395 | 37 library modules, 102 barracuda delegations |
+| 2 (GPU) | metalForge cross-substrate | 12 binaries | RTX 4070, Titan V, AKD1000 NPU validated |
+| 4 (NUCLEUS) | biomeOS niche deployment | 4 binaries | measurement.* domain, JSON-RPC 2.0, capability discovery |
 
-**Experiment catalog**:
+**BarraCuda delegation**: 102 active (61 CPU + 41 GPU). 1 Tier B remaining (PRNG alignment). All Tier C absorbed. P1 batch primitives ready for absorption (uncertainty_budget, regime_classification, Tikhonov defaults, freeze-out scan).
 
-| # | Domain | Checks | Key Finding |
-|---|--------|--------|-------------|
-| 001 | Agricultural sensors | 36 | EC5 bias-dominated (77%); site calibration removes most error |
-| 002 | ERA5 observation gap | 13 | Representation noise dominates model-observation gap |
-| 003 | FAO-56 ET₀ error propagation | 15 | Humidity dominates at 66% of total variance |
-| 004 | Sequencing noise rarefaction | 15 | Genus saturation at 5,000 reads; phyla robust at 100 reads |
-| 005 | Seismic source inversion | 9 | ±2km horizontal, ±8.5km depth from ±0.5s noise |
-| 006 | Signal specificity | 12 | Waters bistable, multi-signal QS |
-| 007 | RAWR resampling | 11 | Liu resampling convergence |
-| 008 | Anderson localization | 8 | Kachkovskiy 1D/2D/3D |
-| 009 | Almost-Mathieu localization | 8 | Kachkovskiy spectral theory |
-| 010 | Bistable switching | 9 | Waters ODE dynamics |
-| 011 | Multi-signal QS | 8 | Waters quorum sensing |
-| 012 | Spin chain transport | 18 | Kachkovskiy transport |
-| 013 | Resampling convergence | 8 | Liu RAWR |
-| 014 | Drift vs selection | 7 | R. Anderson evolution |
-| 015 | Uncertainty bridge | 8 | R. Anderson |
-| 016 | Rare biosphere | 10 | R. Anderson |
-| 017 | Quasispecies threshold | 6 | Dolson |
-| 018 | Band edge structure | 10 | Kachkovskiy |
-| 019 | Jackknife estimation | 9 | Bazavov |
-| 020 | Freeze-out inverse | 8 | Bazavov |
-| 021 | Spectral reconstruction | 8 | Bazavov |
-
-**Papers completed**: Waters (signal specificity, bistable, multi-signal QS), Liu (RAWR, resampling convergence), Kachkovskiy (Anderson, Almost-Mathieu, transport, band edge), Dolson (quasispecies), R. Anderson (drift, uncertainty bridge, rare biosphere), Bazavov (jackknife, freeze-out, spectral recon).
+**Papers completed**: 7 faculty, 30+ papers reproduced. Waters (signal specificity, bistable, multi-signal QS), Liu (RAWR, resampling convergence), Kachkovskiy (Anderson, Almost-Mathieu, transport, band edge), Dolson (quasispecies), R. Anderson (drift, uncertainty bridge, rare biosphere), Bazavov (jackknife, freeze-out, spectral recon), Gonzales (tissue Anderson, drug scoring).
 
 **Papers queued**: Remaining candidates. See `groundSpring/specs/PAPER_REVIEW_QUEUE.md`.
-
-**BarraCUDA gaps NOW**: FFT (resolved in hotSpring), batched_multinomial (Tier C), eigenvector solver (Tier C), grid search GPU (now implemented CPU). Most gaps resolved. **Cholesky solve batch** is the main NEW gap.
 
 **Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning. Spectral theory (Anderson, Almost-Mathieu, band edge) shared with hotSpring and wetSpring. Transport, quasispecies, rare biosphere feed wetSpring and neuralSpring. **Bazavov experiments (019-021) connect directly to hotSpring lattice QCD**: freeze-out inverse validates thermodynamic observable extraction, spectral reconstruction validates ill-posed inversion from Euclidean correlators, and jackknife provides the standard error estimation used in every lattice QCD publication. Combined pipeline: hotSpring (GPU simulation) → groundSpring (inverse problem + error bars) → neuralSpring (surrogate acceleration).
 
