@@ -1,17 +1,17 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V20)
-**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation
-**License**: AGPL-3.0-or-later
-**Date**: March 10, 2026
+**Spring**: healthSpring (V22)
+**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × biomeOS Niche Deployment
+**License**: AGPL-3.0-only
+**Date**: March 15, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Validated** — Tier 0+1+2+3 complete (61 experiments, 5 tracks + diagnostics + GPU + visualization + clinical TRT + streaming + interaction + NLME + paper queue + GPU V16 + CPU parity + GPU scaling + dispatch + NUCLEUS). V19: Full-stack portability validation — Exp085 GPU scaling bench (47/47, linear scaling across 4 scales × 3 ops, fused pipeline, metalForge routing), Exp086 toadStool V16 streaming dispatch (24/24, all V16 StageOps through execute_cpu + streaming callbacks, GPU-mappability), Exp087 mixed NUCLEUS V16 dispatch (35/35, Tower/Node/Nest topology, PCIe P2P bypass NPU→GPU, plan_dispatch for mixed pipelines). V18: CPU parity (Exp084, Rust 84× faster). V17: GPU portability (3 WGSL shaders, Exp083 25/25). V16: Paper queue (30/30). V15: Upstream rewire. V14: NLME + petalTongue. 395 tests, 61 experiments, 194 Python cross-validation checks.
+**Status**: **Validated + Deployed as biomeOS Niche** — V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche. `healthspring_primal` binary serves 55+ capabilities via JSON-RPC 2.0 over Unix socket. 5 workflow graphs define the diagnostic pipeline as biomeOS graph compositions (ConditionalDag patient assessment, Sequential TRT/microbiome, Continuous 250 Hz biosignal). 414 tests (337 ecoPrimal + 33 forge + 30 toadStool + 8 IPC + 3 doc-tests + 3 integration), 61 experiments, 194 Python checks. Prior: Tier 0+1+2+3 complete, V21 deep debt (named tolerances, provenance DOIs, XDG discovery, determinism tests), V19 full-stack portability, V18 CPU parity (84× faster), V17 GPU portability, V16 paper queue (30/30), V15 upstream rewire, V14 NLME + petalTongue.
 
 ---
 
 ## Thesis
 
-Sovereign scientific computing can replace Python/NONMEM/proprietary tool chains for human health applications — pharmacokinetics, microbiome analytics, real-time biosignal processing, and endocrine outcome modeling — using pure Rust validated against published data, **with live GPU acceleration** via barraCuda WGSL shaders and heterogeneous dispatch via toadStool/metalForge.
+Sovereign scientific computing can replace Python/NONMEM/proprietary tool chains for human health applications — pharmacokinetics, microbiome analytics, real-time biosignal processing, and endocrine outcome modeling — using pure Rust validated against published data, **with live GPU acceleration** via barraCuda WGSL shaders and heterogeneous dispatch via toadStool/metalForge. **V22**: healthSpring now operates as a biomeOS niche — a composed set of primals and workflow graphs orchestrated by the Neural API, with all science capabilities exposed via JSON-RPC 2.0 and discoverable via capability routing.
 
 Population-level validation means nothing without per-person translation. The pipeline closes this loop: a `PatientTrtProfile` generates a patient-specific clinical scenario — parameterized by age, weight, testosterone level, comorbidities — rendered in petalTongue's clinical mode via the SAME DAVE motor command channel. The clinician sees the patient, not the infrastructure.
 
@@ -109,9 +109,9 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 
 **Novel contribution**: First sovereign pure-Rust NLME stack. FOCE + SAEM estimation with NCA and full diagnostics (CWRES, VPC, GOF) — no NONMEM, no Monolix, no WinNonlin, no Fortran, no Python. Deterministic reproducibility (same seed → identical results). VPC Monte Carlo simulation is a GPU promotion candidate (embarrassingly parallel).
 
-**WFDB parser**: `barracuda/src/wfdb.rs` — streaming PhysioNet Format 212/16 decoder with beat annotation parsing. Enables direct ingestion from MIT-BIH, MIMIC-III, and other PhysioNet databases.
+**WFDB parser**: `ecoPrimal/src/wfdb.rs` — streaming PhysioNet Format 212/16 decoder with beat annotation parsing. Enables direct ingestion from MIT-BIH, MIMIC-III, and other PhysioNet databases.
 
-**Kokkos-equivalent benchmarks**: `barracuda/benches/kokkos_parity.rs` — reduction, scatter, Monte Carlo, ODE batch, NLME iteration. Validates GPU-portable patterns ahead of shader promotion.
+**Kokkos-equivalent benchmarks**: `ecoPrimal/benches/kokkos_parity.rs` — reduction, scatter, Monte Carlo, ODE batch, NLME iteration. Validates GPU-portable patterns ahead of shader promotion.
 
 **Industry benchmark mapping**: SnapGene, Chromeleon, NONMEM, Monolix, WinNonlin profiled. Sovereign replacements mapped to ecoPrimals stack. See `healthSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
@@ -188,11 +188,11 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Metric | Value |
 |--------|-------|
 | Experiments | 61 |
-| Rust lib tests | 302 (barraCuda) |
+| Rust lib tests | 365 (barraCuda) |
 | Rust forge tests | 33 (metalForge) |
 | Rust toadStool tests | 36 |
 | Doc-tests | 4 |
-| **Total tests** | **395** |
+| **Total tests** | **458** |
 | Python cross-validation checks | 194 (167 + 17 Exp084 + 10 Exp085) |
 | Criterion benchmarks | 14 |
 | CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
@@ -428,4 +428,22 @@ No proprietary clinical data is used. Mok clinical reference provides hypotheses
 
 ---
 
-**License**: AGPL-3.0-or-later
+## V22 — biomeOS Niche Deployment
+
+V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche:
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Primal binary | `ecoPrimal/src/bin/healthspring_primal.rs` | 55+ capabilities via JSON-RPC 2.0 over Unix socket |
+| IPC dispatch | `ecoPrimal/src/ipc/dispatch.rs` | Method → science function routing for 6 domains |
+| Niche manifest | `graphs/healthspring_niche.toml` | Declares the niche: primals + workflow graphs |
+| Patient assessment | `graphs/healthspring_patient_assessment.toml` | ConditionalDag: 4 parallel science tracks → composite |
+| TRT scenario | `graphs/healthspring_trt_scenario.toml` | Sequential TRT clinical workflow |
+| Microbiome analysis | `graphs/healthspring_microbiome_analysis.toml` | Sequential diversity → Anderson → SCFA pipeline |
+| Biosignal monitor | `graphs/healthspring_biosignal_monitor.toml` | Continuous 250 Hz real-time monitoring |
+
+healthSpring is now a niche, not a node. The primal provides capabilities; the graphs define composition. biomeOS's Neural API orchestrates and optimizes via the Pathway Learner. See `wateringHole/SPRING_NICHE_SETUP_GUIDE.md` for how other springs can follow this pattern.
+
+---
+
+**License**: AGPL-3.0-only

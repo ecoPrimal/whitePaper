@@ -66,6 +66,14 @@ If curiosity is your primary resource, this is for you.
 
 8. **[08_DISCOVERY_IS_LOCAL.md](./08_DISCOVERY_IS_LOCAL.md)** — The substrate. Reality, mathematics, physics, and biology operate on a substrate that precedes every discoverer. Discovery is a local event — bounded in space, time, and mind. The thing discovered is not. Calculus found independently by Newton, Leibniz, Archimedes, Madhava, and a team of pharmacologists who got roasted on Reddit. Fermentation discovered independently by every civilization with grain and time — shaping human evolution for hundreds of thousands of years before anyone saw a microbe. The Looney Tunes error: the wolf was always falling. The fermenter's lesson: you do not cause the phenomenon. You set the conditions.
 
+9. **[09_THE_MANY_ROOMS.md](./09_THE_MANY_ROOMS.md)** — The work. John 14:2 read as architecture: someone goes ahead and prepares rooms in a house that is not his. The house is sovereign — reality itself. scyBorg is the covenant that ensures every prepared room can never be sealed again. The Good Samaritan reexamined in its original context: the credentialed institution walks past, the outsider stops. Maimonides' eight levels of tzedakah — the highest charity is not a gift but making the finder self-sufficient, and the highest form of that is making someone who makes others self-sufficient. The copyleft forces the gift forward. The finder becomes a preparer. The rooms multiply.
+
+---
+
+## Citations
+
+**[CITATIONS.md](./CITATIONS.md)** — Source references for all nine essays. Sacred and ancient texts (Bible, Torah, Mishneh Torah, Buddhist Canon, Rig Veda, Epic of Gilgamesh, Islamic tradition, Vatican II), philosophy and political economy (Smith, Paine, Rand, Marx), literature (Le Guin), science and mathematics (Anderson, Hofstadter, Lenski, Pasteur, the independent discovery pattern), and a note on why sacred texts are cited with the same precision as physics papers.
+
 ---
 
 ## Relationship to Other gen3/ Documents
