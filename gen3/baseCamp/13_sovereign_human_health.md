@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V23)
+**Spring**: healthSpring (V24)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 15, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Production-hardened biomeOS Niche** — V23 deep debt remediation resolves all V22 audit findings. `clippy::nursery` enforced, all `#[allow()]` eliminated, `UniBin`-compliant primal binary (clap subcommands), 13 new dispatch handlers wired (NLME, QS, WFDB, clinical), three-tier data fetch implemented, tolerances centralized, 10 experiments on `ValidationHarness`. 435 tests, 61 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Audit-hardened biomeOS Niche** — V24 executes on V23 audit: toadStool Hill/AUC duplication eliminated (delegates to `pkpd::*`), `gpu/context.rs` smart refactor (968→350 LOC, per-op prep extracted to `fused.rs`), hardcoded primal names evolved to capability-based runtime discovery, Songbird announcement wired, 12+ tolerance constants added, ValidationHarness migrations (exp050/070/080), CI clippy::nursery aligned, Python provenance headers added. 435 tests, 61 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, zero duplicate math, zero hardcoded primal names, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
