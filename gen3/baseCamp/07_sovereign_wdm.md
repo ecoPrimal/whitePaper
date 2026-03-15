@@ -8,7 +8,7 @@ reproduction on consumer GPU via vendor-agnostic shaders; no prior work
 frames distributed consumer GPU networks as alternatives to institutional
 HPC for plasma physics
 **Cross-Spring:** hotSpring (MD + transport + lattice QCD) × neuralSpring
-(surrogate learning + LSTM) × groundSpring V62 (uncertainty propagation — `ToadStool` S79, DF64 precision strategy, f64-capable device selection)
+(surrogate learning + LSTM) × groundSpring V102 (uncertainty propagation — niche deployment, measurement domain, 102 barracuda delegations)
 
 ---
 
@@ -308,10 +308,9 @@ df64-validated protein folding primitives directly to WDM science:
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
 
-### 6.2 groundSpring V62 Integration
+### 6.2 groundSpring V102 Integration
 
-groundSpring V62 (`ToadStool` S79 `f97fc2ae`, pollster eliminated, f64-capable
-device selection via `WgpuDevice::new_f64_capable`, DF64 precision strategy wired,
+groundSpring V102 (niche deployment, measurement domain, 102 barracuda delegations,
 710 workspace tests, 23/23 cross-spring benchmark, 39/39 GPU tier validation)
 provides the inverse problem and uncertainty machinery for WDM science.
 
