@@ -1,7 +1,7 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: Validated — 54 experiments, 795 checks, 138 tests, 3 playable prototypes, 3 external control groups, 4 cross-spring experiments, 3 RPGPT, 4 Games@Home, 1 trio integration, 1 extraction shooter, 1 composable viz
-**Date**: March 13, 2026
+**Status**: Validated — 66 experiments, 1371 checks, 234 tests + 12 proptest, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, niche-deployable, deep audit (V17)
+**Date**: March 15, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
