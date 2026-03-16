@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V29)
+**Spring**: healthSpring (V30)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 16, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Deep Debt Solutions** — V29: 7 tracks complete, 603 tests, 73 experiments, 55+ wired JSON-RPC capabilities, 113/113 cross-validation checks (all 7 tracks), 42 Python baselines with provenance. V29: full audit remediation — all inline magic numbers centralized (70+ named tolerance constants), `mean()` delegated to `barracuda::stats::mean` (zero duplicate math), `GpuContext::execute()` wired to barraCuda Tier A ops, IPC error extraction centralized, Python tolerance mirror for baseline reproducibility, 4 experiment binaries refactored to domain-coherent helpers. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Cross-Spring Absorption** — V30: 7 tracks complete, 611 tests, 73 experiments, 55+ wired JSON-RPC capabilities, 113/113 cross-validation checks (all 7 tracks), 42 Python baselines with provenance. V30: dual-format capability parsing (neuralSpring/ludoSpring interop), zero-panic validation binaries (~100 sites evolved), typed `compute_dispatch` client for toadStool, 4 barraCuda health delegations (Write→Absorb→Lean), `deny.toml`. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
