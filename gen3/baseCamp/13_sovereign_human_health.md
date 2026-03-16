@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V27)
+**Spring**: healthSpring (V29)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 15, 2026
+**Date**: March 16, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Deep Evolution Sprint** — V27: 7 tracks complete (Tracks 6–7 add comparative medicine + drug discovery). 601 tests, 73 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. V27 absorptions: ODE→WGSL codegen (3 `OdeSystem` implementations via barraCuda `BatchedOdeRK4` — Michaelis-Menten, oral 1-compartment, 2-compartment), uncertainty module (bootstrap/jackknife/bias-variance from groundSpring), IPC cast safety (`sz`/`sz_or`/`sza` helpers, `len_f64` — zero raw `as usize` in IPC), `core::` imports for `no_std` readiness. Capability registry with `registered_capabilities()`. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, zero duplicate math, zero hardcoded primal names, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Deep Debt Solutions** — V29: 7 tracks complete, 603 tests, 73 experiments, 55+ wired JSON-RPC capabilities, 113/113 cross-validation checks (all 7 tracks), 42 Python baselines with provenance. V29: full audit remediation — all inline magic numbers centralized (70+ named tolerance constants), `mean()` delegated to `barracuda::stats::mean` (zero duplicate math), `GpuContext::execute()` wired to barraCuda Tier A ops, IPC error extraction centralized, Python tolerance mirror for baseline reproducibility, 4 experiment binaries refactored to domain-coherent helpers. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
