@@ -1,7 +1,7 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: Validated — 66 experiments, 1371 checks, 234 tests + 12 proptest, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, niche-deployable, deep audit (V17)
-**Date**: March 15, 2026
+**Status**: Validated — 75 experiments, 1692 checks, 407 tests + 12 proptest, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT + 9 dialogue plane, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, 24 IPC capabilities, deep primal integration, deep debt evolution (V19)
+**Date**: March 16, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
@@ -71,7 +71,7 @@ the metrics framework is content-agnostic.
 | BSP trees | Fuchs, Kedem, Naylor (1980) | `procedural::bsp` | 017 |
 | Tufte data-ink | Tufte (1983, 1990) | `metrics::tufte_gaming` | 003, 016, 022 |
 
-### 16 Tracks, 54 Experiments, 795 Checks
+### 22 Tracks, 75 Experiments, 1692 Checks
 
 | Track | Description | Experiments | Checks |
 |-------|-------------|-------------|--------|
@@ -91,6 +91,12 @@ the metrics framework is content-agnostic.
 | 14 — Provenance Trio | rhizoCrypt DAG + loamSpine certs + sweetGrass braids in game sessions | 052 | 37 |
 | 15 — Extraction Shooter | 12 fraud types, zone topology, spatial detection, consumable lifecycle | 053 | 65 |
 | 16 — Composable Viz | biomeOS graph + songbird discovery + petalTongue DataBinding — zero chimeric deps | 054 | 40 |
+| 17 — Lysogeny | Open recreation of proprietary game mechanics from prior-art math | 055–060 | 237 |
+| 18 — Fermenting | Full NFT lifecycle: mint, trade, loan, consume, achievements, atomic swap, trio IPC | 061 | 89 |
+| 19 — Cross-Spring Provenance | BearDog signing, field samples, consent-gated medical, cross-domain fraud, radiating attribution | 062–066 | 228 |
+| 20 — RPGPT Dialogue Plane | NPC knowledge, lie detection, memory DAG, ruleset swap, voices, trust, factions, plane transitions | 067–075 | 321 |
+| 21 — Deep Primal Integration | Squirrel AI, NestGate storage, petalTongue scene push, deep provenance trio, GPU compute | (code, not experiments) | — |
+| 22 — Deep Debt Evolution | Magic numbers, clone reduction, Result evolution, module decomposition, refactoring | (code quality) | — |
 
 ### Key Results
 
@@ -135,16 +141,21 @@ Four experiments bridge ludoSpring game science with the broader ecosystem:
 
 ## Cross-Spring Requirements
 
-| Spring | Contribution | Status |
-|--------|-------------|--------|
-| ludoSpring | 13 HCI models, 54 experiments, 795 checks | **Validated** |
+| Spring/Primal | Contribution | Status |
+|---------------|-------------|--------|
+| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 24 IPC capabilities | **Validated** (V19) |
 | barraCuda | Math primitives (sigmoid, dot, lcg_step, state_to_f64) | **Consumed** |
-| toadStool | GPU dispatch for noise, raycaster, metrics | **Architecture validated** (exp030-033) |
+| toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders | **Architecture validated** (exp030-033) + IPC wired |
 | metalForge | Cross-substrate routing (CPU/GPU/NPU) | **Architecture validated** (exp032-033) |
-| petalTongue | Live visualization (3 dashboard binaries, 7 channel types) | **Wired** |
-| biomeOS | NUCLEUS atomic coordination for game workloads | **Validated** (exp033 architecture + exp042 Tower Atomic live) |
-| wetSpring | Anderson QS model (W disorder parameter) | **Cross-validated** (exp044 confirms W model) |
-| nestgate | NCBI E-utilities data pipeline | **Validated direct** (exp041/043 — nestgate module wiring pending) |
+| petalTongue | Live visualization (3 dashboards, 15 channel types, scene push, interaction stream) | **Deep integration** (V18) |
+| Squirrel | AI narration, NPC dialogue, internal voices (ai.chat, ai.inference, context mgmt) | **IPC wired** (V18) |
+| NestGate | Content-addressed storage (game state, NPC snapshots, rulesets) | **IPC wired** (V18) |
+| rhizoCrypt | Session DAG, vertex queries, Merkle proofs, batch append, session list | **Deep integration** (V18-V19) |
+| loamSpine | Certificates (NPC personality, ruleset, character), spines, loans | **Deep integration** (V18-V19) |
+| sweetGrass | Attribution braids, dehydration records, lineage, contribution shares | **Deep integration** (V18-V19) |
+| biomeOS | NUCLEUS atomic coordination, deploy graphs, Neural API | **Validated** (exp033 + exp042) |
+| wetSpring | Anderson QS model (W disorder parameter) | **Cross-validated** (exp044) |
+| nestgate (data) | NCBI E-utilities data pipeline | **Validated direct** (exp041/043) |
 
 ---
 
