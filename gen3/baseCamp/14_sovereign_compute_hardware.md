@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 9, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete.
+**Date:** March 16, 2026
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug persistent PCIe broker daemon; D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
