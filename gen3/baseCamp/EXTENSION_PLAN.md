@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 15, 2026 (V113 + ludoSpring V18 update)
-**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.8.2 (87 experiments, 863 lib + 280 integration + 61 forge, 14.3× speedup, BYOB niche, primal_names centralization, typed IPC errors, cross-spring timeseries IPC, smart file refactoring (device_info/, atlas_stream/)), ludoSpring V18 (66 experiments, 1371 checks, 244 tests + 12 proptest, all modules ≥ 90% coverage, niche self-knowledge, NeuralBridge typed IPC, platform-agnostic paths)
+**Date:** March 16, 2026 (V120 + ludoSpring V20 update)
+**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.8.2 (87 experiments, 863 lib + 280 integration + 61 forge, 14.3× speedup, BYOB niche, primal_names centralization, typed IPC errors, cross-spring timeseries IPC, smart file refactoring (device_info/, atlas_stream/)), ludoSpring V20 (75 experiments, 1692 checks, 394 tests + 12 proptest, all modules ≥ 90% coverage, 19 IPC methods aligned, typed provenance pipeline, tolerance decomposition (6 submodules), RulesetCert validation, capability_domains registry, discover_by_capability())
 
 ---
 
@@ -192,7 +192,7 @@ The bottleneck is always data acquisition, not compute.
 
 ## ludoSpring Extensions (V18, March 15, 2026)
 
-**Source:** ludoSpring V18 — 66 experiments, 1371 checks, 244 tests + 12 proptest, Papers 17-20 in baseCamp
+**Source:** ludoSpring V20 — 75 experiments, 1692 checks, 394 tests + 12 proptest, Papers 17-22 in baseCamp
 **Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
@@ -278,7 +278,7 @@ natural candidate for barraCuda GPU dispatch.
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (complete) — all 66 experiments, 244 tests, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
+1. **Local validation** (complete) — all 75 experiments, 394 tests + 12 proptest, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
 2. **Niche deployment** (complete, V18) — UniBin binary, deploy graphs, niche YAML, Neural API domain registration, `lifecycle.status`, operation dependencies + cost estimates, dispatch metrics
 3. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU. Wire format validated (exp033: JSON-RPC 2.0 compute.submit). metalForge capability routing ready for absorption.
 4. **coralReef shader compilation** — sovereign WGSL→native for game workloads
