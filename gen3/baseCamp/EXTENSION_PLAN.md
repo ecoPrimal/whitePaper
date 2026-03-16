@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
 **Date:** March 15, 2026 (V113 + ludoSpring V18 update)
-**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.8.2 (87 experiments, 848 lib + 280 integration + 61 forge, 14.3× speedup, BYOB niche), ludoSpring V18 (66 experiments, 1371 checks, 244 tests + 12 proptest, all modules ≥ 90% coverage, niche self-knowledge, NeuralBridge typed IPC, platform-agnostic paths)
+**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.8.2 (87 experiments, 863 lib + 280 integration + 61 forge, 14.3× speedup, BYOB niche, primal_names centralization, typed IPC errors, cross-spring timeseries IPC, smart file refactoring (device_info/, atlas_stream/)), ludoSpring V18 (66 experiments, 1371 checks, 244 tests + 12 proptest, all modules ≥ 90% coverage, niche self-knowledge, NeuralBridge typed IPC, platform-agnostic paths)
 
 ---
 

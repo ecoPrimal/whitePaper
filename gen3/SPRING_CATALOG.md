@@ -221,37 +221,41 @@ The springs are organized into two tiers:
 
 ---
 
-### 1.6 healthSpring — Human Health: PK/PD, Microbiome, Biosignal, Endocrinology
+### 1.6 healthSpring — Human Health: PK/PD, Microbiome, Biosignal, Endocrinology, Comparative Medicine, Drug Discovery
 
-**Domain**: Pharmacokinetics, dose-response, population modeling, gut microbiome analytics, ECG biosignal processing, testosterone replacement therapy, endocrinology
-**Grade**: V3 — 4 tracks, 17 experiments, Tier 0 + Tier 1 complete
-**Checks**: 192 Python + 179 binary + 103 lib = **474 healthSpring checks** (1,162+ including upstream)
+**Domain**: Pharmacokinetics, dose-response, population modeling, gut microbiome analytics, ECG biosignal processing, testosterone replacement therapy, endocrinology, comparative medicine, drug discovery, NLME
+**Grade**: V27 — 7 tracks, 73 experiments, 601 tests, Tier 0+1+2+3 complete
+**Checks**: 601 Rust tests + 194 Python cross-validation = **795 healthSpring checks**
 **Faculty**: Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical — clinical TRT reference)
 **Repository**: Local (healthSpring/)
 **License**: AGPL-3.0-or-later
 
-**What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis.
+**What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis. V25 extends to comparative medicine (species-agnostic PK, cross-species Anderson, canine AD models) and drug discovery (MATRIX scoring, ADDRC HTS, compound screening, iPSC validation). V27 absorbs ODE→WGSL codegen from wetSpring (3 `OdeSystem` impls via barraCuda `BatchedOdeRK4`), uncertainty quantification from groundSpring (bootstrap/jackknife/bias-variance/Monte Carlo), and hardens IPC cast safety.
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| Tier 0 (Python) | 17 experiments across 4 tracks | 192/192 | All controls pass |
-| Tier 1 (Rust CPU) | healthspring-barracuda crate (pkpd, microbiome, biosignal, endocrine) | 282 | 103 lib tests + 179 binary checks |
-| Tier 2 (GPU) | Planned — population PK, Anderson eigensolve, FFT biosignal | — | Pending barraCuda absorption |
+| Tier 0 (Python) | 73 experiments across 7 tracks | 194 | All controls pass |
+| Tier 1 (Rust CPU) | healthSpring ecoPrimal crate (pkpd, microbiome, biosignal, endocrine, comparative, discovery, NLME) | 601 | All lib + binary tests pass |
+| Tier 2 (GPU) | 6 WGSL shaders + 3 ODE→WGSL codegen systems, fused pipeline | 42/42 parity | GPU scaling confirmed (Exp085) |
+| Tier 3 (metalForge) | NUCLEUS dispatch with PCIe P2P bypass | 35/35 | Mixed hardware validated (Exp087) |
 
 **Track inventory**:
 
 | Track | Domain | Experiments | Key Models |
 |-------|--------|-------------|------------|
-| 1 — PK/PD | Pharmacokinetics, dose-response | Exp001-005 | Hill equation, 1/2-compartment PK, allometric mAb, population Monte Carlo |
-| 2 — Microbiome | Gut ecology, colonization resistance | Exp010-012 | Shannon/Simpson/Pielou/Chao1, Anderson gut lattice, C. diff resistance score |
-| 3 — Biosignal | ECG detection | Exp020 | Pan-Tompkins QRS, derivative/squaring/MWI pipeline |
-| 4 — Endocrinology | Testosterone PK, TRT outcomes | Exp030-037 | IM/pellet depot PK, age decline, metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K patients), testosterone-gut axis (cross-track 2×4) |
+| 1 — PK/PD | Pharmacokinetics, dose-response | Exp001-006, 077 | Hill equation, 1/2-compartment PK, PBPK, allometric mAb, population Monte Carlo, Michaelis-Menten |
+| 2 — Microbiome | Gut ecology, colonization resistance | Exp010-013, 078-080 | Shannon/Simpson/Pielou/Chao1, Anderson gut lattice, C. diff, FMT, antibiotics, SCFA, serotonin |
+| 3 — Biosignal | ECG, HRV, SpO2, EDA, arrhythmia | Exp020-023, 081-082 | Pan-Tompkins, HRV time/freq, PPG SpO2, EDA stress, multi-channel fusion |
+| 4 — Endocrinology | Testosterone PK, TRT outcomes | Exp030-038 | IM/pellet depot PK, age decline, metabolic/CV/diabetes outcomes, testosterone-gut axis |
+| 5 — NLME | Population PK estimation | Exp075-076 | FOCE/SAEM (sovereign NONMEM/Monolix), NCA, CWRES/VPC/GOF diagnostics |
+| 6 — Comparative Medicine | Cross-species health | Exp100-106 | Species-agnostic PK, cross-species Anderson, canine AD, feline hyperthyroid |
+| 7 — Drug Discovery | Compound screening | Exp090-094 | MATRIX scoring, ADDRC HTS, iPSC validation, Rho/MRTF fibrosis |
 
-**Upstream dependencies**: wetSpring (diversity, Anderson lattice), neuralSpring (Hill/IC50, PK models, allometric scaling), groundSpring (planned uncertainty budget)
+**Upstream dependencies**: wetSpring (diversity, Anderson lattice, ODE→WGSL pattern), neuralSpring (Hill/IC50, PK models, allometric scaling), groundSpring (uncertainty budget — bootstrap, jackknife, bias-variance)
 
-**Participates in**: gen3/baseCamp Paper 13, ToadStool validation (planned GPU compute), NestGate (planned NCBI data pipeline), biomeOS NUCLEUS (planned distributed pipeline)
+**Participates in**: gen3/baseCamp Paper 13, ToadStool validation (GPU compute live), NestGate (NCBI data pipeline), biomeOS NUCLEUS (distributed pipeline live), metalForge (PCIe P2P dispatch)
 
 ---
 
@@ -294,7 +298,7 @@ The springs are organized into two tiers:
 | Metric | Value |
 |--------|-------|
 | Total springs | 7 (5 established + healthSpring + ludoSpring) |
-| Total quantitative checks | **12,189+** passing (11,161 established + 474 healthSpring + 554 ludoSpring) |
+| Total quantitative checks | **12,510+** passing (11,161 established + 795 healthSpring + 554 ludoSpring) |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing, **human health (PK/PD, microbiome, biosignal, endocrinology)**, **game science (HCI, PCG, interactive systems)** |
 | Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
 | Papers queued for review | 60+ candidates across all springs + 8 Mok-derived experiments |

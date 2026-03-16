@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V24)
-**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × biomeOS Niche Deployment
+**Spring**: healthSpring (V27)
+**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 15, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Audit-hardened biomeOS Niche** — V24 executes on V23 audit: toadStool Hill/AUC duplication eliminated (delegates to `pkpd::*`), `gpu/context.rs` smart refactor (968→350 LOC, per-op prep extracted to `fused.rs`), hardcoded primal names evolved to capability-based runtime discovery, Songbird announcement wired, 12+ tolerance constants added, ValidationHarness migrations (exp050/070/080), CI clippy::nursery aligned, Python provenance headers added. 435 tests, 61 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, zero duplicate math, zero hardcoded primal names, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Deep Evolution Sprint** — V27: 7 tracks complete (Tracks 6–7 add comparative medicine + drug discovery). 601 tests, 73 experiments, 55+ wired JSON-RPC capabilities, 194 Python checks. V27 absorptions: ODE→WGSL codegen (3 `OdeSystem` implementations via barraCuda `BatchedOdeRK4` — Michaelis-Menten, oral 1-compartment, 2-compartment), uncertainty module (bootstrap/jackknife/bias-variance from groundSpring), IPC cast safety (`sz`/`sz_or`/`sza` helpers, `len_f64` — zero raw `as usize` in IPC), `core::` imports for `no_std` readiness. Capability registry with `registered_capabilities()`. Zero TODO/FIXME, zero unsafe, zero `#[allow()]`, zero duplicate math, zero hardcoded primal names, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
