@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
 **Date:** March 16, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug persistent PCIe broker daemon; D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta.
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta. DRM consumer fencing lesson: never unbind DRM driver while desktop apps hold render node fds (causes kernel oops on GV100).
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -516,6 +516,39 @@ result is science that no institution controls.
 
 ---
 
+## 9. Operational Lessons (biomeGate, March 2026)
+
+Production deployment on biomeGate (2× Titan V + RTX 5060) revealed critical
+operational patterns for any multi-GPU sovereign compute setup:
+
+**Boot protocol:** Non-display GPUs must boot on vfio-pci, not nouveau/amdgpu.
+Desktop compositors (Xorg, mutter) and applications (Cursor IDE, Firefox)
+aggressively open every `/dev/dri/renderD*` they discover. If nouveau exposes
+a GV100 render node, Cursor WILL use it. Unbinding nouveau while Cursor holds
+the fd causes an unrecoverable kernel hang (GV100 nouveau teardown bug).
+
+**Shutdown protocol:** VFIO file descriptor closure on GV100 triggers a blocking
+PCI PM reset. Must disable `reset_method` sysfs attribute before closing fds.
+The coral-glowplug daemon handles this automatically.
+
+**IOMMU group completeness:** VFIO requires ALL devices in an IOMMU group to be
+bound to vfio-pci. For Titan V, the companion HDA audio device shares the group
+and must be unbound from snd_hda_intel first.
+
+**HBM2 lifecycle:** BIOS trains HBM2 at boot; training survives D3hot power state.
+With vfio-pci boot, VRAM remains accessible without any driver initialization.
+For cards where HBM2 is lost (second Titan V in some configurations), a controlled
+nouveau warm cycle resurrects it — but only when no DRM consumers exist.
+
+**Reproducibility for new GPUs:** Adding a new GPU takes <10 minutes: add BDF to
+TOML config, restart daemon, verify `lspci -ks {BDF}` shows vfio-pci, reboot to
+confirm persistence, shutdown to confirm no oops. The auto-discovery mode scans
+the PCI bus for discrete GPUs automatically.
+
+---
+
 *Sovereign compute hardware: 3 precision tiers, 24 AMD E2E tests passing,
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
-No proprietary drivers. No cloud dependencies. Built in a basement in Lansing.*
+No proprietary drivers. No cloud dependencies. coral-glowplug daemon survives
+reboot, manages GPU lifecycle from boot to clean shutdown. Built in a basement
+in Lansing.*
