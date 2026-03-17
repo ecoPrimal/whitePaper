@@ -14,16 +14,20 @@ interview strategy, or internal planning.
 
 | File | Audience | Summary |
 |------|----------|---------|
-| `CAPABILITY_PARITY_BRIEF.md` | Faculty, lab managers, grant reviewers, collaborators | Honest parity assessment across 8 domains: bioinformatics, pharmacometrics, drug repurposing, analytical chemistry, biosignal, provenance, GPU computing. What we match, exceed, and lack vs proprietary tools. Rebuild instructions included. |
+| `CAPABILITY_PARITY_BRIEF.md` | Technical evaluators, grant reviewers | Honest parity assessment across 8 domains: what we match, exceed, and lack vs proprietary tools. Rebuild instructions. |
+| `FOR_FACULTY_AND_PIS.md` | Principal investigators, lab managers | What ecoPrimals actually replaces in a lab. Costs, speed benchmarks, gap analysis, infrastructure integration paths (Genomics Core, HTS, ICER, clinical trials). Faculty evaluation network. |
+| `FOR_STUDENTS_AND_CORE_FACILITIES.md` | Graduate students, lab techs, core facility staff | 5-minute setup guide. Full 16S pipeline walkthrough. Common lab data formats. Student project ideas (real science). Troubleshooting. Hardware requirements. |
+| `FOR_HARDWARE_BUILDERS_AND_HOBBYISTS.md` | Gamers, hardware hobbyists, r/homelab, distributed compute enthusiasts | The f64 Vulkan discovery. What your GPU actually does. Build topology (solo → household → mesh). Hardware acquisition strategy. NPU edge computing. Games@Home distributed compute. Comparison to mining/BOINC. |
+| `FOR_COMPLIANCE_AND_INSTITUTIONAL_REVIEW.md` | Legal counsel, IRB, QA auditors, grant compliance, regulatory bodies | FDA 21 CFR Part 11 mapping. ISO 17025/15189 clause-by-clause. HIPAA Privacy/Security Rule alignment. GDPR data subject rights. IRB readiness. Licensing (AGPL-3.0). Dependency audit. Validation evidence summary. |
 
 ## Planned
 
 | Document | Audience | Content |
 |----------|----------|---------|
-| `MSU_ASSET_ACCELERATION.md` | MSU faculty, ICER, Genomics Core | How MSU infrastructure (ICER HPC, Genomics Core, RTSF, ADDRC) plugs into validated pipelines |
-| `GRANT_TECHNICAL_APPENDIX.md` | Grant reviewers (NIH, NSF, USDA, DOE) | Validation evidence organized by agency program; every claim has a `cargo run` proof |
-| `KNOME_TEACHING_BRIEF.md` | Curriculum committees, MSDS faculty | K-Nome as pedagogy: mentored evolutionary programming for real science pipelines |
-| `DRUG_DISCOVERY_PIPELINE.md` | Gonzales lab, ADDRC, Drug Discovery Program | End-to-end: iPSC → ADDRC HTS → MATRIX scoring → Anderson geometry → validation |
+| `MSU_ASSET_ACCELERATION.md` | MSU faculty, ICER, Genomics Core | How MSU infrastructure plugs into validated pipelines |
+| `GRANT_TECHNICAL_APPENDIX.md` | Grant reviewers (NIH, NSF, USDA, DOE) | Validation evidence organized by agency program |
+| `KNOME_TEACHING_BRIEF.md` | Curriculum committees, MSDS faculty | K-Nome as pedagogy for real science pipelines |
+| `DRUG_DISCOVERY_PIPELINE.md` | Gonzales lab, ADDRC, Drug Discovery Program | End-to-end iPSC → HTS → MATRIX → Anderson → validation |
 
 ## Guidelines
 
