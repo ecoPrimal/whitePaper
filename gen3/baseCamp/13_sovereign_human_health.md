@@ -434,8 +434,8 @@ V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche:
 
 | Component | File | Purpose |
 |-----------|------|---------|
-| Primal binary | `ecoPrimal/src/bin/healthspring_primal.rs` | 55+ capabilities via JSON-RPC 2.0 over Unix socket |
-| IPC dispatch | `ecoPrimal/src/ipc/dispatch.rs` | Method → science function routing for 6 domains |
+| Primal binary | `ecoPrimal/src/bin/healthspring_primal/` | 57+ capabilities via JSON-RPC 2.0 over Unix socket |
+| IPC dispatch | `ecoPrimal/src/ipc/dispatch/` | Method → science function routing for 6 domains |
 | Niche manifest | `graphs/healthspring_niche.toml` | Declares the niche: primals + workflow graphs |
 | Patient assessment | `graphs/healthspring_patient_assessment.toml` | ConditionalDag: 4 parallel science tracks → composite |
 | TRT scenario | `graphs/healthspring_trt_scenario.toml` | Sequential TRT clinical workflow |
@@ -444,6 +444,21 @@ V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche:
 
 healthSpring is now a niche, not a node. The primal provides capabilities; the graphs define composition. biomeOS's Neural API orchestrates and optimizes via the Pathway Learner. See `wateringHole/SPRING_NICHE_SETUP_GUIDE.md` for how other springs can follow this pattern.
 
+## V32 — Cross-Spring Ecosystem Convergence
+
+V32 absorbs proven patterns from all ecoPrimals components:
+
+| Feature | Source | Impact |
+|---------|--------|--------|
+| Structured `tracing` | All 6 sibling springs | `eprintln!` → `tracing::info!/warn!/error!` with env-filter (`RUST_LOG`) |
+| `health.liveness` + `health.readiness` | coralReef Iter 51 | Lightweight probes for orchestrator health monitoring |
+| Resilient provenance trio IPC | sweetGrass v0.7.18 | Circuit breaker (5s cooldown) + exponential backoff retry |
+| `IpcError` ecosystem type | biomeOS/airSpring/groundSpring | Structured error enum with `RpcError` and `Timeout` variants |
+| `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
+| Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
+
+618 tests, 57+ JSON-RPC capabilities, 73 experiments, zero clippy warnings, zero unsafe.
+
 ---
 
-**License**: AGPL-3.0-only
+**License**: AGPL-3.0-or-later
