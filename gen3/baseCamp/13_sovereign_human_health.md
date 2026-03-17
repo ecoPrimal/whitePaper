@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V33)
+**Spring**: healthSpring (V35)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 16, 2026
+**Date**: March 17, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Protocol Evolution + Centralized Cast Algebra** — V33: 7 tracks complete, 635 tests, 73 experiments, 57+ wired JSON-RPC capabilities, 113/113 cross-validation checks (all 7 tracks), 42 Python baselines with provenance. V33: `IpcError::is_recoverable()` (neuralSpring S161), `DispatchOutcome` enum (groundSpring V113 / biomeOS v2.46), `ipc::protocol` module with generic discovery helpers, centralized `cast` module (groundSpring V113), FFT cast consolidation. V32: Structured `tracing`, `health.liveness`/`health.readiness` probes (coralReef Iter 51), resilient provenance trio IPC. V31: `OrExit<T>`, `IpcError`, enriched `capability.list`, `#![forbid(unsafe_code)]`. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **IPC Resilience + Sovereign Dispatch** — V35: 7 tracks complete, 613 tests, 113/113 cross-validation checks, 6 WGSL shaders, 79 JSON-RPC capabilities. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience patterns: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. Composition guidance: `GROUNDSPRING_V114_PRIMAL_COMPOSITION_GUIDANCE_MAR17_2026.md`. V34: Deep debt evolution. V33: `IpcError::is_recoverable()`, `ipc::protocol` module, centralized `cast` module. V32: Structured `tracing`, `health.liveness`/`health.readiness` probes, resilient provenance trio IPC. V31: `OrExit<T>`, `IpcError`, enriched `capability.list`, `#![forbid(unsafe_code)]`. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
@@ -193,7 +193,7 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Rust toadStool tests | 36 |
 | Doc-tests | 4 |
 | **Total tests** | **458** |
-| Python cross-validation checks | 194 (167 + 17 Exp084 + 10 Exp085) |
+| Python cross-validation checks | 113/113 |
 | Criterion benchmarks | 14 |
 | CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
 | petalTongue pipeline | 28 nodes, 29 edges, 121 channels, 14 scenarios |
@@ -434,7 +434,7 @@ V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche:
 
 | Component | File | Purpose |
 |-----------|------|---------|
-| Primal binary | `ecoPrimal/src/bin/healthspring_primal/` | 57+ capabilities via JSON-RPC 2.0 over Unix socket |
+| Primal binary | `ecoPrimal/src/bin/healthspring_primal/` | 79 capabilities via JSON-RPC 2.0 over Unix socket |
 | IPC dispatch | `ecoPrimal/src/ipc/dispatch/` | Method → science function routing for 6 domains |
 | Niche manifest | `graphs/healthspring_niche.toml` | Declares the niche: primals + workflow graphs |
 | Patient assessment | `graphs/healthspring_patient_assessment.toml` | ConditionalDag: 4 parallel science tracks → composite |
@@ -457,7 +457,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-618 tests, 57+ JSON-RPC capabilities, 73 experiments, zero clippy warnings, zero unsafe.
+613 tests, 79 JSON-RPC capabilities, 6 WGSL shaders, zero clippy warnings, zero unsafe. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. See `GROUNDSPRING_V114_PRIMAL_COMPOSITION_GUIDANCE_MAR17_2026.md` for composition guidance.
 
 ---
 
