@@ -11,7 +11,7 @@
 Each professor is profiled with:
 1. **Connection** — how we know them and what spring(s) their work maps to
 2. **Key Papers** — candidate publications for Phase A reproduction in the springs
-3. **BarraCUDA Relevance** — which GPU primitives their work exercises
+3. **BarraCuda Relevance** — which GPU primitives their work exercises
 4. **Status** — what has already been reproduced vs. what is candidate work
 
 ---
@@ -32,16 +32,16 @@ https://engineering.msu.edu/faculty/michael-murillo
 |-------|--------|--------|
 | Sarkas MD — Yukawa OCP (12 DSF cases) | Reproduced + GPU | 60/60 + 9/9 GPU |
 | Two-Temperature Model (TTM) | Reproduced | 6/6 |
-| Silvestri, Diaw, Murillo (2024) "Surrogate learning" — Nature MI | Reproduced + BarraCUDA | 15/15 (478× faster) |
+| Silvestri, Diaw, Murillo (2024) "Surrogate learning" — Nature MI | Reproduced + BarraCuda | 15/15 (478× faster) |
 | Stanton & Murillo (2016) — Transport coefficients | Reproduced + GPU | 13/13 Green-Kubo |
 | Murillo & Weisheit (1998) — Screened Coulomb | Reproduced | 23/23 Sturm bisection |
-| Nuclear EOS (AME2020, 2,042 nuclei) | Reproduced + BarraCUDA | L1/L2/L3 |
+| Nuclear EOS (AME2020, 2,042 nuclei) | Reproduced + BarraCuda | L1/L2/L3 |
 
 **Candidate Papers for Future Reproduction (Tier 4 — WDM)**:
 - Diaw & Murillo (2023) "Generalized Hydrodynamics Model for Strongly Coupled Plasmas"
 - Murillo (2025) "Computational barriers" (arXiv:2505.02494) — WDM roadmap paper
 
-**BarraCUDA primitives exercised**: GEMM, Velocity Verlet, Yukawa/Coulomb force kernels, MLP surrogate, RBF interpolation, Green-Kubo transport, Sturm bisection, DF64 arithmetic, SU(3) lattice gauge, HMC, ESN reservoir, NPU streaming
+**BarraCuda primitives exercised**: GEMM, Velocity Verlet, Yukawa/Coulomb force kernels, MLP surrogate, RBF interpolation, Green-Kubo transport, Sturm bisection, DF64 arithmetic, SU(3) lattice gauge, HMC, ESN reservoir, NPU streaming
 
 ---
 
@@ -68,7 +68,7 @@ https://www.egr.msu.edu/bae/water/irrigation/
 - Allen et al. (1998) FAO-56 — extended crop coefficient studies
 - Regional ET₀ model comparisons across Michigan microclimates
 
-**BarraCUDA primitives exercised**: MLP surrogate (FAO-56 approximation), time-series LSTM (weather forecasting), data pipeline batch processing
+**BarraCuda primitives exercised**: MLP surrogate (FAO-56 approximation), time-series LSTM (weather forecasting), data pipeline batch processing
 
 ---
 
@@ -85,7 +85,7 @@ https://www.egr.msu.edu/bae/water/irrigation/
 - Phage lifecycle dynamics and predator-prey oscillations in bioreactor systems
 - Algal pond crash forensics — temporal metagenomics
 
-**BarraCUDA relevance**: Time-series anomaly detection (pond crash prediction), population dynamics ODE solvers
+**BarraCuda relevance**: Time-series anomaly detection (pond crash prediction), population dynamics ODE solvers
 
 ---
 
@@ -99,7 +99,7 @@ https://www.egr.msu.edu/bae/water/irrigation/
 - Smallwood et al. — Raceway pond metagenomic surveillance pipelines
 - Microbial community stability metrics under perturbation
 
-**BarraCUDA relevance**: Sequence alignment (GEMM-heavy), dimensionality reduction, diversity index computation
+**BarraCuda relevance**: Sequence alignment (GEMM-heavy), dimensionality reduction, diversity index computation
 
 ---
 
@@ -115,7 +115,7 @@ https://www.canr.msu.edu/news/center-for-pfas-research-faculty-spotlight-a-danie
 - High-resolution mass spec peak identification and quantification
 - Environmental PFAS fate-and-transport modeling
 
-**BarraCUDA relevance**: Signal processing (FFT, peak detection), spectral analysis shaders, anomaly detection in analytical chemistry data
+**BarraCuda relevance**: Signal processing (FFT, peak detection), spectral analysis shaders, anomaly detection in analytical chemistry data
 
 ---
 
@@ -148,7 +148,7 @@ watersc3@msu.edu
 | Waters (2021) "Au naturale: use of biologically derived cyclic di-nucleotides for cancer immunotherapy." Open Biol | Applied immunology | wetSpring: Bridge from fundamental microbiology to therapeutic applications |
 | Srivastava et al. (2011) "Integration of Cyclic di-GMP and Quorum Sensing in the Control of vpsT and aphA." J Bacteriology | Pathway integration | neuralSpring: Multi-input regulatory network = attention mechanism analog |
 
-**BarraCUDA relevance**: ODE/PDE solvers (reaction-diffusion for signaling), stochastic simulation (Gillespie algorithm for quorum sensing), bifurcation analysis, graph computation (regulatory networks → neuralAPI pathway graphs)
+**BarraCuda relevance**: ODE/PDE solvers (reaction-diffusion for signaling), stochastic simulation (Gillespie algorithm for quorum sensing), bifurcation analysis, graph computation (regulatory networks → neuralAPI pathway graphs)
 
 ---
 
@@ -172,13 +172,13 @@ dolsonem@msu.edu
 | Paper | Domain | Spring Relevance |
 |-------|--------|-----------------|
 | Iram, Dolson et al. (2020) "Controlling the speed and trajectory of evolution with counterdiabatic driving." Nature Physics | Evolutionary control theory | neuralSpring: Constrained evolution formalized — directly validates gen3/CONSTRAINED_EVOLUTION_FORMAL.md thesis. Can we reproduce the counterdiabatic protocol computationally? |
-| Dolson & Vostinar et al. (2019) "The MODES Toolbox: Measurements of Open-Ended Dynamics in Evolving Systems." Artificial Life | Evolutionary metrics | neuralSpring: Metrics for measuring whether BarraCUDA's constrained evolution produces open-ended innovation |
+| Dolson & Vostinar et al. (2019) "The MODES Toolbox: Measurements of Open-Ended Dynamics in Evolving Systems." Artificial Life | Evolutionary metrics | neuralSpring: Metrics for measuring whether BarraCuda's constrained evolution produces open-ended innovation |
 | Dolson & Ofria (2018) "Ecological Theory Provides Insights about Evolutionary Computation." GECCO | Theory bridge | neuralSpring: Ecological dynamics in evolutionary algorithms — maps to primal competition/cooperation in biomeOS |
 | Dolson et al. (2023) "The ecology-evolution continuum and the origin of life." J R Soc Interface | Origins of life | wetSpring + groundSpring: Emergence of organization from chemical noise |
 | Dolson et al. (2022) "Artificial selection methods from evolutionary computing show promise for directed evolution of microbes." eLife | Directed evolution | wetSpring: Computational → wet lab bridge. Directed evolution of microbial communities |
 | Foreback, Bohm, Dolson (2025) "Leveraging Heterogeneous Controller Representations for Evolutionary Swarm Robotics." IEEE | Swarm intelligence | neuralSpring: Heterogeneous representations ↔ primal diversity. Different primals as different controller architectures |
 
-**BarraCUDA relevance**: Fitness landscape evaluation (GEMM), population simulation (parallel agents), evolutionary optimization (genetic algorithm shaders), diversity metrics computation
+**BarraCuda relevance**: Fitness landscape evaluation (GEMM), population simulation (parallel agents), evolutionary optimization (genetic algorithm shaders), diversity metrics computation
 
 **Critical connection to gen3/**: Dolson's work on counterdiabatic driving of evolution is the closest published analog to the constrained evolution methodology described in `CONSTRAINED_EVOLUTION_FORMAL.md`. Reproducing Iram et al. (2020) would provide external validation of the theoretical framework.
 
@@ -208,7 +208,7 @@ kjl@msu.edu
 | Alamin & Liu (2024) "Phylogenetic Placement of Aligned Genomes and Metagenomes with Non-tree-like Evolutionary Histories." IEEE/ACM TCBB | Metagenomics | wetSpring: Metagenomic placement = classifying environmental samples. Directly applicable to pond/soil microbiome analysis |
 | Zheng et al. (2023) "The Impact of Species Tree Estimation Error on Cophylogenetic Reconstruction." BCB (top 10%) | Cophylogenetics | wetSpring: Host-microbe coevolution — fungal endosymbiont studies with Bonito lab |
 
-**BarraCUDA relevance**: Sequence alignment (GEMM-heavy Smith-Waterman), HMM forward/backward/Viterbi (matrix operations), phylogenetic likelihood computation (parallel tree evaluation), bootstrap resampling (embarrassingly parallel)
+**BarraCuda relevance**: Sequence alignment (GEMM-heavy Smith-Waterman), HMM forward/backward/Viterbi (matrix operations), phylogenetic likelihood computation (parallel tree evaluation), bootstrap resampling (embarrassingly parallel)
 
 **Working manuscripts to watch**:
 - "A phylogenomic study of adaptive co-evolution between early diverging fungi and obligate bacterial endosymbionts" — direct wetSpring relevance
@@ -247,9 +247,9 @@ bazavov@msu.edu
 | Bazavov et al. (2016) "Polyakov loop 2+1 flavor" — Phys Rev D | Phase transitions | Dynamical fermion extension of current quenched work |
 | (2025) Spectral reconstruction inverse problem (arXiv 2501.12259) | Inverse problems | groundSpring: spectral recovery from noisy lattice data |
 
-**BarraCUDA primitives exercised**: SU(3) GEMM (link multiplication), HMC molecular dynamics, Dirac CG solver, plaquette/Polyakov/susceptibility observables, DF64 arithmetic, PRNG (Philox), WGSL shaders (25).
+**BarraCuda primitives exercised**: SU(3) GEMM (link multiplication), HMC molecular dynamics, Dirac CG solver, plaquette/Polyakov/susceptibility observables, DF64 arithmetic, PRNG (Philox), WGSL shaders (25).
 
-**Critical connection to hotSpring**: Bazavov's lattice QCD and Murillo's plasma physics are both studying strongly coupled many-body systems. The computational methods overlap significantly — both use molecular dynamics, both need equation of state calculations, both deal with long-range correlations. The shared BarraCUDA kernel library now serves both.
+**Critical connection to hotSpring**: Bazavov's lattice QCD and Murillo's plasma physics are both studying strongly coupled many-body systems. The computational methods overlap significantly — both use molecular dynamics, both need equation of state calculations, both deal with long-range correlations. The shared BarraCuda kernel library now serves both.
 
 ---
 
@@ -284,7 +284,7 @@ ikachkov@msu.edu
 | Filonov & Kachkovskiy (2018) "Band edges of 2D periodic operators" — Acta Math | Band structure | 2D eigenvalue mathematics |
 | Kachkovskiy (2016) "Transport properties of quasiperiodic XY spin chains" — CMP | Quantum transport | Spin chain transport ↔ Murillo plasma transport |
 
-**BarraCUDA relevance**: Eigenvalue solvers (Lanczos — validated on GPU), sparse matrix-vector products, Hofstadter butterfly computation, Anderson localization IPR. The spectral methods require f64 precision — same requirement as hotSpring's plasma MD and Bazavov's lattice QCD.
+**BarraCuda relevance**: Eigenvalue solvers (Lanczos — validated on GPU), sparse matrix-vector products, Hofstadter butterfly computation, Anderson localization IPR. The spectral methods require f64 precision — same requirement as hotSpring's plasma MD and Bazavov's lattice QCD.
 
 **Why this matters**: Kachkovskiy provides the *mathematical* layer that sits between Murillo's physics (transport in classical plasmas) and Bazavov's physics (transport in quantum field theories). His spectral theory is the eigenvalue mathematics both of them use but neither of them proves. Anderson localization — the core of his research — is the rigorous mathematical framework for "when does signal propagate vs. when does noise trap it?" That's groundSpring's central question stated in the language of quantum mechanics.
 
@@ -319,7 +319,7 @@ randerson@carleton.edu
 | Anderson et al. (2014) "Evolutionary strategies of viruses and cells in hydrothermal systems revealed through metagenomics." PLoS ONE 9:e109696 | Viral ecology | wetSpring: Phage-host interactions in vent ecosystems — connects to Cahill phage biocontrol and Waters phage defense work |
 | Anderson, Sogin, Baross (2015) "Biogeography and ecology of the rare and abundant microbial lineages in deep-sea hydrothermal vents." FEMS Microbiol Ecol 91:fiu016 | Microbial biogeography | wetSpring + groundSpring: Rare vs abundant lineages — noise floor of microbial diversity. When does a lineage constitute signal vs sampling noise? |
 
-**BarraCUDA relevance**: Sequence alignment (GEMM), diversity indices (reduction), dN/dS selection tests (pairwise comparison), phylogenetic tree construction (parallel likelihood), rarefaction curves (bootstrap resampling), pangenome analysis (set operations). All of these are already validated in wetSpring's sovereign pipeline.
+**BarraCuda relevance**: Sequence alignment (GEMM), diversity indices (reduction), dN/dS selection tests (pairwise comparison), phylogenetic tree construction (parallel likelihood), rarefaction curves (bootstrap resampling), pangenome analysis (set operations). All of these are already validated in wetSpring's sovereign pipeline.
 
 **Why this is the corollary to Taq polymerase**: The constrained evolution thesis (§1.1) uses *Thermus aquaticus* from Yellowstone hot springs as its founding biological example — thermal constraint produced Taq polymerase, which enabled PCR and modern molecular biology. Anderson's lab has published the **population genomics** of another extremophile (*Sulfolobus islandicus*) living in the **exact same Yellowstone hot springs**. Her 2017 paper with Campbell shows how thermal constraint drives population differentiation, susceptibility to mobile genetic elements, and structured genomic variation in these hot spring populations. This is not a metaphor for the constrained evolution thesis — this is the empirical data that would appear in §1.1 if we were writing a full literature review. Additionally, her 2021 mSystems paper explicitly discusses stochastic vs deterministic evolution under environmental constraint, cites Lenski's LTEE (the same experiment that anchors §1.2), and introduces Muller's ratchet as a consequence of extreme energy limitation — all themes directly present in `CONSTRAINED_EVOLUTION_FORMAL.md`.
 
@@ -355,7 +355,7 @@ https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
 
 **Spring Relevance**: The ADDRC is the institutional screening platform for the Anderson-augmented MATRIX drug repurposing scores (nS-605). Pipeline: computational scoring → ADDRC HTS → Gonzales iPSC validation. The Brucella screen (8,000 compounds) demonstrates the throughput; applying Anderson geometry scoring to compound selection is the extension.
 
-**BarraCUDA relevance**: Plate reader data processing (batch reduction), dose-response curve fitting (Hill equation — already in nS-601), diversity metrics for compound clustering, MATRIX scoring automation
+**BarraCuda relevance**: Plate reader data processing (batch reduction), dose-response curve fitting (Hill equation — already in nS-601), diversity metrics for compound clustering, MATRIX scoring automation
 
 ---
 
@@ -380,7 +380,7 @@ https://phmtox.msu.edu/people/rneubig
 
 **Spring Relevance**: Neubig's skin fibrosis work connects directly to Paper 12's dimensional promotion model — fibrosis changes tissue geometry, which changes Anderson localization of cytokine signals. If Rho/MRTF/SRF cross-talks with JAK/STAT in skin, his inhibitors become candidates for Anderson-augmented MATRIX scoring.
 
-**BarraCUDA relevance**: GPCR docking (future — structural), dose-response fitting (immediate — Hill equation), signaling pathway graph analysis
+**BarraCuda relevance**: GPCR docking (future — structural), dose-response fitting (immediate — Hill equation), signaling pathway graph analysis
 
 ---
 
@@ -441,7 +441,7 @@ https://drugdiscovery.msu.edu/about-us/people/index.aspx
 
 ## Priority Reproduction Candidates (Next Phase)
 
-Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCUDA kernel coverage
+Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCuda kernel coverage
 
 ### Tier 1 — High priority, clear reproduction path
 1. **Iram, Dolson et al. (2020)** — Nature Physics — Counterdiabatic evolution control → validates constrained evolution thesis
@@ -450,7 +450,7 @@ Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCUDA kerne
 4. **Bazavov [HotQCD] (2014)** — Nuclear Physics A — QCD EOS → extends hotSpring beyond plasma
 
 ### Tier 2 — Strong candidates, may need data access
-5. **Dolson et al. (2019)** — MODES Toolbox — Open-ended evolution metrics → apply to BarraCUDA's own evolution
+5. **Dolson et al. (2019)** — MODES Toolbox — Open-ended evolution metrics → apply to BarraCuda's own evolution
 6. **Massie et al. (2012)** — PNAS — c-di-GMP signaling specificity → quantitative signaling model
 7. **Liu et al. (2009)** — Science — SATé phylogenetic estimation → large-scale divide-and-conquer benchmark
 8. **Hsueh et al. (2022)** — Nature Microbiology — Phage defense deaminase → evolutionary arms race dynamics
@@ -461,8 +461,8 @@ Ranked by: (1) direct spring relevance, (2) reproducibility, (3) BarraCUDA kerne
 11. **Moulana, Anderson et al. (2020)** — mSystems — Constrained evolution of *Sulfurovum* pangenomes → gene gain/loss driven by geochemistry = functional evolution under environmental constraint
 
 ### Tier 2.5 — Mathematical foundations, strengthens multiple springs
-12. **Bourgain & Kachkovskiy (2018)** — GAFA — Anderson localization for interacting particles → groundSpring noise/signal theory, computational eigenvalue methods for BarraCUDA
-13. **Kachkovskiy (2016)** — CMP — Quasiperiodic spin chain transport → hotSpring plasma transport bridge, validates Lanczos/spectral BarraCUDA primitives
+12. **Bourgain & Kachkovskiy (2018)** — GAFA — Anderson localization for interacting particles → groundSpring noise/signal theory, computational eigenvalue methods for BarraCuda
+13. **Kachkovskiy (2016)** — CMP — Quasiperiodic spin chain transport → hotSpring plasma transport bridge, validates Lanczos/spectral BarraCuda primitives
 
 ### Tier 2.7 — Drug Discovery / Pharmacology (MSU Drug Discovery Program)
 14. **Lisabeth et al. (2024)** — Spartan Med Res J — Brucella HTS screen (8,000+ compounds) → validates ADDRC pipeline throughput, demonstrates computation→screening workflow for Anderson-augmented MATRIX scoring

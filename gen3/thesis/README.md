@@ -40,7 +40,7 @@ This thesis presents the theory, the computational system built under its princi
 | Chapter | Title | Status |
 |---------|-------|--------|
 | 05 | [System Architecture: Sovereign Scientific Computing](05_system_architecture.md) | Draft (data populated) |
-| 06 | [BarraCUDA: Vendor-Agnostic GPU Compute](06_barracuda.md) | Draft (data populated) |
+| 06 | [BarraCuda: Vendor-Agnostic GPU Compute](06_barracuda.md) | Draft (data populated) |
 
 ### Part IV — Experimental Validation
 
@@ -101,7 +101,7 @@ The thesis expands this into a full academic work with:
 
 **If you are evaluating the science**: Start with Chapter 07 (Methodology) and the results chapter for your domain. Each spring is a self-contained validation study with public repositories you can clone and run.
 
-**If you are evaluating the system**: Start with Chapter 05 (System Architecture) and Chapter 06 (BarraCUDA), then Chapter 13 (Quantitative Evidence) for the NTT→FFT constrained evolution case study.
+**If you are evaluating the system**: Start with Chapter 05 (System Architecture) and Chapter 06 (BarraCuda), then Chapter 13 (Quantitative Evidence) for the NTT→FFT constrained evolution case study.
 
 **If you are interested in the biology**: Start with Chapter 03 (Theoretical Framework) sections on Taq, Lenski, and Anderson, then Chapter 14 (Biological Validation) for the LTEE sequencing proposal.
 

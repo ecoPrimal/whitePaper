@@ -12,7 +12,7 @@ This collection represents the theoretical and technical foundations of the **ec
 
 The papers here formalize the methodology, the architecture, and the biological reasoning that informed the system's design. They are working papers — rigorous in intent, honest about their limitations, and grounded in real implementation rather than speculation.
 
-**The springs are public.** The five scientific validation repositories — hotSpring, airSpring, wetSpring, groundSpring, neuralSpring — are all published under AGPL-3.0 on GitHub. Two additional springs — healthSpring and ludoSpring — are in active local development. Anyone can clone the public repos, run the experiments, and verify the claims. The primals (Rust infrastructure) remain private for now; gen3/ is the bridge document that explains the infrastructure to those who will eventually receive access.
+**The springs are public.** All seven scientific validation repositories are published under AGPL-3.0 on GitHub. Three infrastructure primals — ToadStool (compute), BarraCuda (math), and coralReef (shader compiler) — are also public under AGPL-3.0 on the [ecoPrimals](https://github.com/ecoPrimals) org. Anyone can clone the public repos, run the experiments, and verify the claims. The remaining primals are private; gen3/ is the bridge document that explains the infrastructure to those who will eventually receive access.
 
 ### Public Spring Repositories
 
@@ -23,8 +23,17 @@ The papers here formalize the methodology, the architecture, and the biological 
 | wetSpring | Life science & analytical chemistry | [syntheticChemistry/wetSpring](https://github.com/syntheticChemistry/wetSpring) | 7,083+ |
 | groundSpring | Measurement noise & uncertainty | [syntheticChemistry/groundSpring](https://github.com/syntheticChemistry/groundSpring) | 236+ |
 | neuralSpring | ML primitives, isomorphic patterns, coralForge structure prediction | [syntheticChemistry/neuralSpring](https://github.com/syntheticChemistry/neuralSpring) | 3,200+ |
-| ludoSpring | Game science, HCI, procedural generation, cross-spring | Local (ludoSpring/) | 554+ |
-| **Total** | | | **14,860+** |
+| healthSpring | Human health: PK/PD, microbiome, biosignal, endocrinology | [syntheticChemistry/healthSpring](https://github.com/syntheticChemistry/healthSpring) | 474+ |
+| ludoSpring | Game science, HCI, procedural generation, cross-spring | [syntheticChemistry/ludoSpring](https://github.com/syntheticChemistry/ludoSpring) | 554+ |
+| **Total** | | | **15,334+** |
+
+### Public Primal Repositories
+
+| Primal | Domain | Repo |
+|--------|--------|------|
+| ToadStool | Universal compute orchestration | [ecoPrimals/toadStool](https://github.com/ecoPrimals/toadStool) |
+| BarraCuda | Pure mathematics — WGSL shaders, precision, naga IR | [ecoPrimals/barraCuda](https://github.com/ecoPrimals/barraCuda) |
+| coralReef | Sovereign GPU shader compiler | [ecoPrimals/coralReef](https://github.com/ecoPrimals/coralReef) |
 
 ---
 
@@ -36,7 +45,7 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 |------|-------|
 | **~Jan 30, 2026** | Coffee with Professor Murillo (MSU). Discussion of reservoir computing, neuromorphic hardware, and shared interest in computational physics. Neuromorphic benchmark datasheet v1 already shared. |
 | **Feb 1-7** | hotSpring Phase A begins. Reproduce Murillo Group published work (Sarkas MD, TTM, surrogate learning) in Python. 86/86 checks pass. 5 silent bugs found in upstream Sarkas. |
-| **Feb 7-10** | hotSpring Phase B-C. BarraCUDA GPU validation — nuclear EOS on consumer GPU. Phase C: full Yukawa MD on RTX 4070 via f64 WGSL shaders. 9/9 PP cases, 0.000% energy drift. |
+| **Feb 7-10** | hotSpring Phase B-C. BarraCuda GPU validation — nuclear EOS on consumer GPU. Phase C: full Yukawa MD on RTX 4070 via f64 WGSL shaders. 9/9 PP cases, 0.000% energy drift. |
 | **Feb 10-14** | hotSpring Phase D-F. Paper-parity long runs (N=10,000, 80k steps, $0.044). Full AME2020 nuclear dataset (2,042 nuclei). 195/195 total. gen3/ papers written. |
 | **Feb 14-15** | airSpring. Reproduce FAO-56, Dong (2020, 2024) sensor calibration. Python + Rust + cross-validation. 326 checks. Real data pipeline: 918 station-days, R²=0.967. |
 | **Feb 25-26** | airSpring v0.4.5–v0.4.8. 22 experiments (was 5). Richards PDE, biochar isotherms, dual Kc, cover crops, yield response, lysimeter, sensitivity, Priestley-Taylor, Thornthwaite, GDD, pedotransfer. 100-station Michigan Crop Water Atlas. 594 Python + 491 Rust + 570 validation + 1393 atlas + 75 cross-val = 3,123+ checks. 27 binaries. 11 Tier A GPU modules. |
@@ -46,7 +55,7 @@ The springs did not exist 3 weeks ago. Their rapid evolution is itself evidence 
 | **Feb 17** | groundSpring Phase 0. 5 experiments across 4 scientific domains. 71/71 checks. |
 | **Feb 25-26** | groundSpring Phase 1. 21 experiments across 8 scientific domains. 236/236 Rust validation checks, 280 tests, 21/21 math parity (Python == Rust). Phase 1 (Rust) complete with dual-mode CI. 24 library modules. 27 barracuda delegations (22 CPU + 5 GPU). Papers: Waters, Liu, Kachkovskiy, Dolson, R. Anderson, Bazavov. Contributes to ALL 7 baseCamp papers — the only spring with universal coverage. Bazavov experiments (019-021) connect directly to hotSpring lattice QCD pipeline. |
 | **Feb 17-18** | neuralSpring Phase 0 + 0+. 10 experiments: 5 synthetic, 5 scholarly reproductions (PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference). 75/75 Python checks. |
-| **Feb 18-20** | neuralSpring Rust validation. 9 BarraCUDA validation binaries, 549 Rust checks, 66 GPU shader checks. Fused pipeline: 43-78x speedup. |
+| **Feb 18-20** | neuralSpring Rust validation. 9 BarraCuda validation binaries, 549 Rust checks, 66 GPU shader checks. Fused pipeline: 43-78x speedup. |
 | **Feb 19-20** | Bazavov extension: lattice QCD infrastructure (SU(3), HMC, Dirac CG) in hotSpring. Kachkovskiy spectral theory mapped to 3 springs. |
 | **Feb 20-22** | GPU streaming HMC, GPU-resident CG (15,360× readback reduction), dynamical fermion QCD, production β-scan (32⁴ on RTX 3090 — deconfinement at β_c=5.69). |
 | **Feb 22-24** | DF64 core streaming: FP32 cores deliver 3.24 TFLOPS at 14-digit precision (9.9× native f64). Titan V NVK validation. biomeGate multi-GPU. |
@@ -62,9 +71,9 @@ This velocity is possible because the constrained evolution methodology works. T
 
 The 10,796+ checks were produced on individual gates, running one experiment at a time. The NUCLEUS deployment architecture (see `ECOSYSTEM_ARCHITECTURE.md` §3-4) composes the basement HPC (~$15K, 100+ cores, ~128GB GPU VRAM, 10G backbone) into a coordinated mesh. The bonding model determines how others join:
 
-- **Covalent** (family gates): The basement runs as one machine. All springs execute simultaneously across all GPUs. BarraCUDA's WGSL shaders are vendor-agnostic — validated on both NVIDIA and AMD in the mesh.
-- **Ionic** (faculty labs): A professor's GPU joins under a metered contract. They contribute compute and consume BarraCUDA kernels. Sovereignty is preserved — their hardware, their data, scoped access.
-- **Metallic** (institutional HPC): MSU's ICER deploys NUCLEUS atomics. Every idle campus GPU becomes a BarraCUDA node. The lattice QCD that requires CERN-scale allocation runs on a distributed campus fleet instead.
+- **Covalent** (family gates): The basement runs as one machine. All springs execute simultaneously across all GPUs. BarraCuda's WGSL shaders are vendor-agnostic — validated on both NVIDIA and AMD in the mesh.
+- **Ionic** (faculty labs): A professor's GPU joins under a metered contract. They contribute compute and consume BarraCuda kernels. Sovereignty is preserved — their hardware, their data, scoped access.
+- **Metallic** (institutional HPC): MSU's ICER deploys NUCLEUS atomics. Every idle campus GPU becomes a BarraCuda node. The lattice QCD that requires CERN-scale allocation runs on a distributed campus fleet instead.
 
 The springs are the acceptance tests. The 10,796+ checks prove the kernels are correct. When a new node joins the mesh — covalent, ionic, or metallic — it runs the same validated shaders on its own hardware. The science doesn't change. The scale does.
 
@@ -112,7 +121,7 @@ Context for evaluation: who built this, with what background, on what hardware, 
 
 **`data/`** — *Reproduction Plans, Faculty Profiles, Evolution Evidence*
 
-Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 10 professors across 7 departments, 60+ candidate papers for reproduction, and BarraCUDA kernel gap analysis. The Murillo reproduction plan (`MURILLO_REPRODUCTION_PLAN.md`) documents how a reproduction study works in practice — from finding open-source code and public data through Phase A (Python control), Phase B (BarraCUDA validation), Phase C (GPU compute), to paper-parity results on consumer hardware.
+Faculty-to-spring mapping (`FACULTY_SPRING_PROFILES.md`) with 10 professors across 7 departments, 60+ candidate papers for reproduction, and BarraCuda kernel gap analysis. The Murillo reproduction plan (`MURILLO_REPRODUCTION_PLAN.md`) documents how a reproduction study works in practice — from finding open-source code and public data through Phase A (Python control), Phase B (BarraCuda validation), Phase C (GPU compute), to paper-parity results on consumer hardware.
 
 ### PhD Thesis (Working Draft)
 
@@ -124,7 +133,7 @@ A full-length PhD thesis expanding the constrained evolution methodology into a 
 
 **`../coralForge/`** — *coralForge: Sovereign Structure Prediction White Paper*
 
-AlphaFold2/AlphaFold3 primitives in pure Rust f64, validated against NumPy baselines, accelerated via BarraCUDA WGSL shaders. 7 documents covering design, architecture, isomorphism proof, implementation, validation, evolution roadmap, and LTEE wet lab application. coralForge is the structural analysis layer for the LTEE sequencing proposal (Ch. 14) and baseCamp Paper 02/10. 154 validated checks (Py 62 + Rs 55 + GPU 37). See `../coralForge/README.md`.
+AlphaFold2/AlphaFold3 primitives in pure Rust f64, validated against NumPy baselines, accelerated via BarraCuda WGSL shaders. 7 documents covering design, architecture, isomorphism proof, implementation, validation, evolution roadmap, and LTEE wet lab application. coralForge is the structural analysis layer for the LTEE sequencing proposal (Ch. 14) and baseCamp Paper 02/10. 154 validated checks (Py 62 + Rs 55 + GPU 37). See `../coralForge/README.md`.
 
 ### Origin
 
@@ -174,7 +183,7 @@ The original formulation of the constrained optimization thesis, preserved as a 
 1. **`SPRING_CATALOG.md`** — Validated science across 5 domains
 2. **`PRIMAL_CATALOG.md`** — 12,000+ tests, production-grade Rust infrastructure
 3. **`about/HARDWARE.md`** — $15K basement HPC doing what costs $50-500/run on institutional HPC
-4. **`data/BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`** — What BarraCUDA can already do and what's next
+4. **`data/BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`** — What BarraCuda can already do and what's next
 
 ---
 
@@ -202,7 +211,7 @@ Full profiles with candidate papers: `data/FACULTY_SPRING_PROFILES.md`
 
 ## What gen3/ Is For
 
-gen3/ is the document you're reading when someone hands you a link and says "look at what this person built." The springs are public — you can verify everything. The primals are private for now — gen3/ explains what they are and what they can do. When the primals go public, this document becomes the introduction to the codebase.
+gen3/ is the document you're reading when someone hands you a link and says "look at what this person built." The springs are public — you can verify everything. The remaining primals are private — gen3/ explains what they are and what they can do. Three infrastructure primals (ToadStool, BarraCuda, coralReef) are already public on the [ecoPrimals](https://github.com/ecoPrimals) org.
 
 If you're a professor reading this because a student named Kevin Mok sent you a link: the public spring repositories contain real, runnable experiments that reproduce published computational science. The code is yours to read, run, and critique. The question gen3/ asks is whether this body of work — the methodology, the infrastructure, the science validation, and the rate at which it was produced — constitutes a contribution worth developing further.
 

@@ -1,27 +1,27 @@
-# BarraCUDA: Scientific Computing Gap Analysis
+# BarraCuda: Scientific Computing Gap Analysis
 
 **Status**: Historical discovery document (Phase C) + Feb 27 status annotations  
-**Purpose**: Map what computational physics reveals as new evolution targets for BarraCUDA  
-**Context**: First analysis of BarraCUDA through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE. Originally Feb 7, updated Feb 14 with Phase C GPU MD. As of Feb 27: FFT gap is CLOSED (ToadStool Fft1DF64/Fft3DF64), lattice QCD is production (6 papers, 32⁴), DF64 discovery provides 9.9× f64 throughput, NPU integration adds a third substrate. Most P0/P1 gaps are resolved.  
+**Purpose**: Map what computational physics reveals as new evolution targets for BarraCuda  
+**Context**: First analysis of BarraCuda through the lens of scientific computing (Sarkas MD, surrogate learning, TTM, ABM) rather than ML/AI/FHE. Originally Feb 7, updated Feb 14 with Phase C GPU MD. As of Feb 27: FFT gap is CLOSED (ToadStool Fft1DF64/Fft3DF64), lattice QCD is production (6 papers, 32⁴), DF64 discovery provides 9.9× f64 throughput, NPU integration adds a third substrate. Most P0/P1 gaps are resolved.  
 **Last Updated**: February 27, 2026
 
 ---
 
 ## The Discovery
 
-BarraCUDA evolved under three selective pressures: **machine learning**, **fully homomorphic encryption**, and **universal GPU portability**. This analysis is the first time we've looked at it through the lens of **computational physics** - specifically, what would it take to run Sarkas molecular dynamics, the Two-Temperature Model, surrogate learning, and agent-based epidemiology entirely on BarraCUDA.
+BarraCuda evolved under three selective pressures: **machine learning**, **fully homomorphic encryption**, and **universal GPU portability**. This analysis is the first time we've looked at it through the lens of **computational physics** - specifically, what would it take to run Sarkas molecular dynamics, the Two-Temperature Model, surrogate learning, and agent-based epidemiology entirely on BarraCuda.
 
 The finding: **ML-driven evolution covered ~60-70% of what scientific computing needs**, because the underlying math is shared. The remaining 30-40% is genuinely new territory - and it's illuminating to see exactly where the gap is.
 
-**Update (Feb 14, 2026)**: Phase C GPU MD validated that the actual coverage is higher than predicted. For Yukawa OCP molecular dynamics, **100% of the mathematical operations needed already existed** in BarraCUDA from ML/FHE development (exp, sqrt, pow, sum_reduce, mean_reduce, histc). Only new *compositions* were needed (force kernels, integrators, thermostats), not new *math*. Several gaps listed below are now CLOSED.
+**Update (Feb 14, 2026)**: Phase C GPU MD validated that the actual coverage is higher than predicted. For Yukawa OCP molecular dynamics, **100% of the mathematical operations needed already existed** in BarraCuda from ML/FHE development (exp, sqrt, pow, sum_reduce, mean_reduce, histc). Only new *compositions* were needed (force kernels, integrators, thermostats), not new *math*. Several gaps listed below are now CLOSED.
 
 ---
 
 ## What Already Exists (And Why)
 
-These BarraCUDA ops exist because ML needed them, but they serve scientific computing directly:
+These BarraCuda ops exist because ML needed them, but they serve scientific computing directly:
 
-| Scientific Need | BarraCUDA Op | Why ML Built It |
+| Scientific Need | BarraCuda Op | Why ML Built It |
 |----------------|-------------|-----------------|
 | Coulomb screening (erfc) | `erfc.wgsl`, `erf.wgsl` | GELU activation uses erf |
 | Pairwise forces | `pairwise_distance.wgsl`, `cdist.wgsl` | Contrastive learning, triplet loss |
@@ -41,7 +41,7 @@ These BarraCUDA ops exist because ML needed them, but they serve scientific comp
 | Spatial transforms | `affine_grid.wgsl`, `grid_sample.wgsl` | Image warping, spatial transformers |
 | Window functions | `window_function.wgsl` | STFT windowing (Hann, Hamming, etc.) |
 
-**The convergence is real.** ML and physics share the same mathematical substrate. BarraCUDA didn't know it was building a scientific computing engine, but that's what constrained evolution produces - the same ops emerge because the same math is needed.
+**The convergence is real.** ML and physics share the same mathematical substrate. BarraCuda didn't know it was building a scientific computing engine, but that's what constrained evolution produces - the same ops emerge because the same math is needed.
 
 ---
 
@@ -51,7 +51,7 @@ These BarraCUDA ops exist because ML needed them, but they serve scientific comp
 
 **Priority**: ~~CRITICAL~~ **CLOSED** (Feb 2026 — complex f64 arithmetic implemented, used in lattice QCD SU(3) and FFT)
 
-**What's missing**: BarraCUDA operates entirely in real-valued arithmetic. Physics needs native complex numbers (a + bi).
+**What's missing**: BarraCuda operates entirely in real-valued arithmetic. Physics needs native complex numbers (a + bi).
 
 **Operations needed**:
 
@@ -152,7 +152,7 @@ Each needs: potential V(r), force F(r) = -dV/dr, virial contribution for pressur
 **What's missing**: Bessel functions of the first kind (J), second kind (Y), modified first kind (I), and modified second kind (K).
 
 **Why they matter**:
-- **TTM**: The Two-Temperature Model evolves temperatures in **cylindrical coordinates**. Cylindrical coordinate solutions to diffusion/wave equations are expressed in Bessel functions. Without them, you can't do the TTM on BarraCUDA.
+- **TTM**: The Two-Temperature Model evolves temperatures in **cylindrical coordinates**. Cylindrical coordinate solutions to diffusion/wave equations are expressed in Bessel functions. Without them, you can't do the TTM on BarraCuda.
 - **FMM3D alternative**: The Fast Multipole Method uses spherical harmonics and Bessel functions for multipole expansions. If we want to replace FMM3D (Fortran), we need these.
 - **Electromagnetic wave propagation**: Bessel functions describe waveguide modes, antenna patterns, scattering cross-sections.
 
@@ -174,7 +174,7 @@ Each needs: potential V(r), force F(r) = -dV/dr, virial contribution for pressur
 - Gravitational potential modeling
 - 3D rotational invariant features (potential ML crossover: SE(3) equivariant networks)
 
-**Note**: This has a potential ML/physics crossover. Equivariant neural networks (used in molecular property prediction) use spherical harmonics. If BarraCUDA gets these, it serves both physics and next-gen ML architectures.
+**Note**: This has a potential ML/physics crossover. Equivariant neural networks (used in molecular property prediction) use spherical harmonics. If BarraCuda gets these, it serves both physics and next-gen ML architectures.
 
 ---
 
@@ -280,7 +280,7 @@ The gap analysis revealed operations that serve *both* physics and future ML arc
 | Sparse operations | Integral equations | Sparse transformers, mixture of experts |
 | High-quality PRNG | Monte Carlo sampling | Diffusion models, stochastic depth |
 
-**These aren't just physics additions - they're the next frontier of ML compute too.** BarraCUDA evolving these capabilities would serve both domains simultaneously.
+**These aren't just physics additions - they're the next frontier of ML compute too.** BarraCuda evolving these capabilities would serve both domains simultaneously.
 
 ---
 
@@ -288,7 +288,7 @@ The gap analysis revealed operations that serve *both* physics and future ML arc
 
 The most instructive gap is the FFT. Here's why:
 
-BarraCUDA already has NTT (Number Theoretic Transform) for FHE:
+BarraCuda already has NTT (Number Theoretic Transform) for FHE:
 - Butterfly computation pattern ✓
 - Twiddle factor application ✓
 - Bit-reversal permutation ✓
@@ -304,7 +304,7 @@ To get FFT from NTT:
 2. Replace roots of unity mod p with roots of unity on the unit circle: exp(-2πi·k/N)
 3. Keep the butterfly structure, the bit-reversal, the recursive decomposition
 
-**The NTT shader is the FFT shader's ancestor.** This is covalent evolution in the BarraCUDA codebase.
+**The NTT shader is the FFT shader's ancestor.** This is covalent evolution in the BarraCuda codebase.
 
 ---
 
@@ -338,7 +338,7 @@ To get FFT from NTT:
 
 ### Total New Shaders Estimated: ~25-40
 
-Added to the existing 226+, this would bring BarraCUDA to ~260+ WGSL shaders covering ML, FHE, **and** scientific computing. A universal compute engine.
+Added to the existing 226+, this would bring BarraCuda to ~260+ WGSL shaders covering ML, FHE, **and** scientific computing. A universal compute engine.
 
 ---
 

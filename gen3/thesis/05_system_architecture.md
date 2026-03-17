@@ -16,7 +16,7 @@ This chapter describes the ecoPrimals architecture: a sovereign computing platfo
 |--------|--------|----------------|
 | **BearDog** | Cryptography | 91 methods: Ed25519, X25519, AES-GCM, BLAKE3, X.509, genetic lineage, Dark Forest |
 | **Songbird** | Networking | TLS 1.3, BirdSong discovery, Pure Rust Tor (3,345 lines), NAT traversal |
-| **ToadStool** | Compute | Universal workload execution, BarraCUDA (124 ops), CPU/GPU/NPU/WASM |
+| **ToadStool** | Compute | Universal workload execution, BarraCuda (124 ops), CPU/GPU/NPU/WASM |
 | **NestGate** | Storage | Content-addressed blobs (BLAKE3), ZFS, quota, discovery |
 | **Squirrel** | AI Coordination | MCP, model routing, multi-provider inference, vendor-agnostic |
 | **biomeOS** | Orchestrator | Neural API, capability discovery, NUCLEUS composition, Dark Forest |
@@ -32,7 +32,7 @@ This chapter describes the ecoPrimals architecture: a sovereign computing platfo
 | **skunkBat** | Defense | Threat detection, metadata-only reconnaissance, graduated response |
 | **sourDough** | Fermentation | Data pipeline orchestration, batch processing, workflow DAGs |
 
-BarraCUDA (914 WGSL shaders, f64, vendor-agnostic) is ToadStool's GPU compute subsystem — not a standalone primal but the single largest crate in the ecosystem (792 Rust source files).
+BarraCuda (914 WGSL shaders, f64, vendor-agnostic) is ToadStool's GPU compute subsystem — not a standalone primal but the single largest crate in the ecosystem (792 Rust source files).
 
 ### 5.2.3 Measured Scale by Primal
 
@@ -125,7 +125,7 @@ Zero metadata leakage: beacons encrypted with ChaCha20-Poly1305 are indistinguis
 | IPC | JSON-RPC 2.0, Unix sockets | — |
 | Platforms | Linux, macOS, Android, Windows, FreeBSD, illumos, WASM | — |
 
-Squirrel (681,933 lines) is the largest primal by Rust volume; BearDog has the most cryptographic surface area (91 methods); ToadStool houses the most WGSL (914 shaders via BarraCUDA). The disparity between phase 1 and phase 2 primals reflects evolutionary maturity — the five foundation primals have undergone ~10 months of constrained evolution; the seven post-NUCLEUS primals are younger.
+Squirrel (681,933 lines) is the largest primal by Rust volume; BearDog has the most cryptographic surface area (91 methods); ToadStool houses the most WGSL (914 shaders via BarraCuda). The disparity between phase 1 and phase 2 primals reflects evolutionary maturity — the five foundation primals have undergone ~10 months of constrained evolution; the seven post-NUCLEUS primals are younger.
 
 ---
 

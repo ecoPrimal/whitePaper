@@ -16,7 +16,7 @@ Python-based basecalling (Guppy/Dorado), cloud-connected analysis pipelines
 genomics architecture that replaces every component with sovereign Rust
 equivalents and adds neuromorphic edge classification:
 
-1. **BarraCUDA** processes raw nanopore signal through a validated 16S pipeline
+1. **BarraCuda** processes raw nanopore signal through a validated 16S pipeline
    (DADA2, chimera, taxonomy — 5,743+ checks across 229 experiments)
 2. **AKD1000 NPU** classifies community profiles in real time (18.8K Hz,
    <10 mW, coin-cell battery life) using ESN reservoir computing
@@ -57,7 +57,7 @@ design a RISC-V SoC for mobile genomics. Both solve basecalling. Neither
 addresses the downstream classification that turns sequence data into
 actionable intelligence.
 
-That is what the AKD1000 + BarraCUDA stack provides.
+That is what the AKD1000 + BarraCuda stack provides.
 
 ---
 
@@ -79,7 +79,7 @@ That is what the AKD1000 + BarraCUDA stack provides.
 │       │ FAST5/POD5 raw signal                           │
 │       ▼                                                 │
 │  ┌──────────────────┐                                   │
-│  │ BarraCUDA        │ basecall + 16S + taxonomy         │
+│  │ BarraCuda        │ basecall + 16S + taxonomy         │
 │  │ (host CPU/GPU)   │ sovereign Rust, no Python         │
 │  └────┬─────────────┘                                   │
 │       │ classified reads + community profile            │
@@ -137,7 +137,7 @@ Applications:
 **Springs:** wetSpring (16S, ESN, NPU), airSpring (sensor), groundSpring (uncertainty)
 **Hardware:** MinION Mk1D + AKD1000
 
-MinION sequences water eDNA on-site. BarraCUDA 16S pipeline processes reads.
+MinION sequences water eDNA on-site. BarraCuda 16S pipeline processes reads.
 ESN bloom classifier (wetSpring Exp118, 123, 194) runs on AKD1000.
 Real-time classification: pre-bloom / active / post-bloom / toxic.
 
@@ -170,7 +170,7 @@ profiles.
 **Hardware:** MinION Mk1D + AKD1000
 
 Nanopore 16S profiling of microbial community response to PFAS exposure,
-paired with BarraCUDA's validated PFAS ML pipeline (Exp041-042). Emerging
+paired with BarraCuda's validated PFAS ML pipeline (Exp041-042). Emerging
 technology: biological nanopores with cyclodextrin can detect individual
 PFAS molecules (SciEngine 2025) — same pore technology, chemical sensing mode.
 
@@ -226,7 +226,7 @@ on NPU. Songbird uplinks results via acoustic modem.
 
 ---
 
-## 5. The BarraCUDA Math Stack
+## 5. The BarraCuda Math Stack
 
 All downstream modules are validated. Two new modules are needed:
 
@@ -267,7 +267,7 @@ All downstream modules are validated. Two new modules are needed:
 
 | Feature | Current Field Sequencing | Sovereign Field Genomics |
 |---------|------------------------|-------------------------|
-| Basecalling | Python (Guppy/Dorado) | BarraCUDA Rust (planned) |
+| Basecalling | Python (Guppy/Dorado) | BarraCuda Rust (planned) |
 | Classification | Cloud ML or laptop | NPU: 18.8K Hz, <10 mW |
 | Adaptive sampling | CPU/GPU alignment (readfish) | NPU: sub-ms latency, 37x headroom |
 | Pipeline | QIIME2/Galaxy + internet | Sovereign Rust, zero dependencies |
@@ -281,7 +281,7 @@ All downstream modules are validated. Two new modules are needed:
 
 | Exp | Name | Spring | What It Proves |
 |-----|------|--------|---------------|
-| 196 | Nanopore Signal Bridge | wetSpring | BarraCUDA reads FAST5/POD5, bridges to 16S pipeline |
+| 196 | Nanopore Signal Bridge | wetSpring | BarraCuda reads FAST5/POD5, bridges to 16S pipeline |
 | 197 | NPU Adaptive Sampling | wetSpring | NPU classifies partial reads, drives MinKNOW accept/reject |
 | 198 | Field Bloom Sentinel E2E | wetSpring | MinION → basecall → 16S → ESN → NPU → alert |
 | 199 | Soil 16S Field Pipeline | wetSpring × airSpring | MinION soil eDNA → 16S → Anderson disorder tracking |

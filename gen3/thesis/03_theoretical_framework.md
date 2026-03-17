@@ -170,7 +170,7 @@ The distinction matters. Claiming "convergent evolution" for prescribed architec
 
 **Prediction**: Constrained evolution produces structures that are fit for domains beyond the original constraint.
 
-**Evidence**: BarraCUDA's Number Theoretic Transform (NTT), evolved under FHE (fully homomorphic encryption) constraints, shares 80% structural identity with the Fast Fourier Transform (FFT) needed for physics simulation. The Cooley-Tukey butterfly structure — bit-reversal permutation, index computation, butterfly function — is character-for-character identical between NTT and FFT in 80% of the codebase. The cryptographic constraint selected for a mathematical structure that happened to be the skeleton of the physics operation.
+**Evidence**: BarraCuda's Number Theoretic Transform (NTT), evolved under FHE (fully homomorphic encryption) constraints, shares 80% structural identity with the Fast Fourier Transform (FFT) needed for physics simulation. The Cooley-Tukey butterfly structure — bit-reversal permutation, index computation, butterfly function — is character-for-character identical between NTT and FFT in 80% of the codebase. The cryptographic constraint selected for a mathematical structure that happened to be the skeleton of the physics operation.
 
 ### 3.4.5 Muller's Ratchet Boundary
 

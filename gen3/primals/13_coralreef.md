@@ -20,7 +20,7 @@ The compiler produces native binaries for NVIDIA SM70–SM89 and AMD RDNA2 (GFX1
 
 ## Why It Exists
 
-When BarraCUDA discovered that consumer GPUs expose native f64 via Vulkan's `SHADER_F64` extension, the ecosystem needed a way to compile f64 shaders to native GPU code without depending on NVIDIA's CUDA/NVCC toolchain or AMD's ROCm/HIP stack. The Pure Rust constraint prohibited both.
+When BarraCuda discovered that consumer GPUs expose native f64 via Vulkan's `SHADER_F64` extension, the ecosystem needed a way to compile f64 shaders to native GPU code without depending on NVIDIA's CUDA/NVCC toolchain or AMD's ROCm/HIP stack. The Pure Rust constraint prohibited both.
 
 coralReef was split from ToadStool to own shader compilation as a separate concern from compute dispatch. ToadStool discovers hardware and manages workload queues. coralReef takes WGSL source and produces the binary that ToadStool dispatches. The boundary is clean: ToadStool never parses shaders; coralReef never talks to hardware schedulers.
 
@@ -67,7 +67,7 @@ coralReef implements 16 f64 transcendental functions as lowering passes:
 
 `sqrt`, `rcp`, `exp2`, `log2`, `sin`, `cos`, `exp`, `log`, `pow`, `tan`, `atan`, `asin`, `acos`, `sinh`, `cosh`, `tanh`, plus `Complex64` operations.
 
-These are not library calls — they are instruction sequences emitted directly into the native binary, matching the precision that BarraCUDA's WGSL shaders require for scientific computing.
+These are not library calls — they are instruction sequences emitted directly into the native binary, matching the precision that BarraCuda's WGSL shaders require for scientific computing.
 
 ### Userspace GPU Dispatch (coralDriver)
 
@@ -84,7 +84,7 @@ Driver preference is configurable: `nouveau → amdgpu → nvidia-drm` (sovereig
 ## How It Connects
 
 ```
-BarraCUDA ──(WGSL source)──▶ coralReef ──(native binary)──▶ ToadStool
+BarraCuda ──(WGSL source)──▶ coralReef ──(native binary)──▶ ToadStool
                                 │                               │
                                 ▼                               ▼
                          coralDriver ──(DRM ioctl)──▶ GPU hardware
@@ -92,9 +92,9 @@ BarraCUDA ──(WGSL source)──▶ coralReef ──(native binary)──▶ 
 
 ### Key Relationships
 
-- **BarraCUDA** produces WGSL shaders that coralReef compiles — 93 cross-spring shaders absorbed, 84 compiling for SM70
+- **BarraCuda** produces WGSL shaders that coralReef compiles — 93 cross-spring shaders absorbed, 84 compiling for SM70
 - **ToadStool** dispatches the native binaries that coralReef produces; `coral-gpu` provides the unified compile-then-dispatch API
-- **Springs** (hotSpring, wetSpring, neuralSpring, airSpring, groundSpring) generate f64 shader workloads that flow through BarraCUDA → coralReef → ToadStool → hardware
+- **Springs** (hotSpring, wetSpring, neuralSpring, airSpring, groundSpring) generate f64 shader workloads that flow through BarraCuda → coralReef → ToadStool → hardware
 
 ## Internal Architecture
 

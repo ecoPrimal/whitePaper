@@ -68,11 +68,17 @@ If curiosity is your primary resource, this is for you.
 
 9. **[09_THE_MANY_ROOMS.md](./09_THE_MANY_ROOMS.md)** — The work. John 14:2 read as architecture: someone goes ahead and prepares rooms in a house that is not his. The house is sovereign — reality itself. scyBorg is the covenant that ensures every prepared room can never be sealed again. The Good Samaritan reexamined in its original context: the credentialed institution walks past, the outsider stops. Maimonides' eight levels of tzedakah — the highest charity is not a gift but making the finder self-sufficient, and the highest form of that is making someone who makes others self-sufficient. The copyleft forces the gift forward. The finder becomes a preparer. The rooms multiply.
 
+10. **[10_I_OWN_NOTHING.md](./10_I_OWN_NOTHING.md)** — The inversion. "You'll own nothing and you'll be happy" — a slogan for the tollbooth economy, where corporations own the water and you rent access. The inversion: I own nothing because I published everything into the commons. The well and the tollbooth. Why the fermenter's economy defeats the rental economy. Why sovereignty is owning the infrastructure and releasing the output. The scyBorg license as the structural guarantee that no one rebuilds the tollbooth on water that was given freely. Atlas didn't shrug — he dug a well.
+
+11. **[11_THE_LOVE_LETTER.md](./11_THE_LOVE_LETTER.md)** — The acknowledgment. Every line of code descends from centuries of human work — the mathematicians, the physicists, the biologists, the programmers, the anonymous contributors. The AI that assists the work is a compression of their collective understanding. The inheritance is humanity's. The synthesis — the creativity, the metal, the direction — is the author's. And because it is his, it is his to give. Simultaneously Randian (sovereign choice), Marxist (no separation from means of production), Smithian (coldest rational self-interest), Paineian (natural right to reality), and Deistic (returning sacred knowledge to the commons). scyBorg as covenant: it either belongs to all, or it belongs to none. The stake is real — capital, time, self. The silicon remembers nothing. The letter remembers everything.
+
+12. **[12_THE_KNOWLEDGE_NUMERIC.md](./12_THE_KNOWLEDGE_NUMERIC.md)** — The methodology. K-NOME: Knowledge-Numeric Observed & Mentored Evolutionary programming. Where the Love Letter's inheritance meets the Human Search's learning grid. The K-N space is where human domain expertise (deep, narrow, embodied) overlaps with AI numeric capability (broad, shallow, compressed). Observation is bidirectional — the project teaches the human, the human teaches the AI, the AI reshapes the project. Mentoring uses the patterns humans evolved for transmitting expertise: analogy, correction, narrative, taste, redirection. The methodology is domain-agnostic — a surgeon, a woodworker, an artist can apply it the same way. K-NOME is not a programming methodology. It is a human-knowledge-transfer methodology that produces software in this instance. The silicon carries the letter. The human writes the next page. The pen is yours.
+
 ---
 
 ## Citations
 
-**[CITATIONS.md](./CITATIONS.md)** — Source references for all nine essays. Sacred and ancient texts (Bible, Torah, Mishneh Torah, Buddhist Canon, Rig Veda, Epic of Gilgamesh, Islamic tradition, Vatican II), philosophy and political economy (Smith, Paine, Rand, Marx), literature (Le Guin), science and mathematics (Anderson, Hofstadter, Lenski, Pasteur, the independent discovery pattern), and a note on why sacred texts are cited with the same precision as physics papers.
+**[CITATIONS.md](./CITATIONS.md)** — Source references for all essays. Sacred and ancient texts (Bible, Torah, Mishneh Torah, Buddhist Canon, Rig Veda, Epic of Gilgamesh, Islamic tradition, Vatican II), philosophy and political economy (Smith, Paine, Rand, Marx), literature (Le Guin), science and mathematics (Anderson, Hofstadter, Lenski, Pasteur, the independent discovery pattern), and a note on why sacred texts are cited with the same precision as physics papers.
 
 ---
 
@@ -82,7 +88,13 @@ If curiosity is your primary resource, this is for you.
 |-----------|----------|----------|
 | `thesis/` | Scientists, committees | Does constrained evolution work? |
 | `about/SOVEREIGN_SCIENCE.md` | Faculty, institutions | How do you engage institutions from sovereignty? |
+| `about/OWN_NOTHING.md` | Strategists, economists | What are the economics of owning nothing? |
+| `about/LICENSING_STRATEGY.md` | Legal, collaborators | How does the IP architecture work? |
 | `atlasHugged/` | Artists, philosophers, humanity | Why build this? Who is it for? |
+| `atlasHugged/09_THE_MANY_ROOMS` | Everyone | What does the work prepare? |
+| `atlasHugged/10_I_OWN_NOTHING` | Everyone | Why give it away? |
+| `atlasHugged/11_THE_LOVE_LETTER` | Everyone | Who does the work belong to? |
+| `atlasHugged/12_THE_KNOWLEDGE_NUMERIC` | Everyone | How does the human teach the silicon? |
 | `CONSTRAINED_EVOLUTION_FORMAL.md` | Mathematicians, biologists | What is the formal theory? |
 | `atlasHugged/04_THE_HUMAN_SEARCH` | Everyone | What does the theory *feel* like? |
 | `atlasHugged/07_THE_MOBILITY_EDGE` | Network builders, sovereign creators | How does the city grow? |

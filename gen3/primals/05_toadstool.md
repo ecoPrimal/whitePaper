@@ -1,23 +1,23 @@
-# ToadStool — Sovereign Compute (+ BarraCUDA)
+# ToadStool — Sovereign Compute (+ BarraCuda)
 
 ## Identity
 
 | Field | Value |
 |-------|-------|
 | Phase | 1 (Foundation) |
-| Domain | GPU/CPU/NPU compute, hardware discovery, BarraCUDA math engine |
+| Domain | GPU/CPU/NPU compute, hardware discovery, BarraCuda math engine |
 | Rust lines | 788,209 |
 | Tests | 13,503 |
 | Crates | 50+ |
-| WGSL shaders (BarraCUDA) | 628 |
+| WGSL shaders (BarraCuda) | 628 |
 | WGSL lines | 48,698 |
 | AGPL-3.0 | Yes |
 
 ## What It Is
 
-ToadStool is the compute layer. Hardware discovery (GPU, NPU, CPU via sysfs/PCIe), workload dispatch, and the home of **BarraCUDA** — the vendor-agnostic GPU math engine that is the single largest subsystem in ecoPrimals.
+ToadStool is the compute layer. Hardware discovery (GPU, NPU, CPU via sysfs/PCIe), workload dispatch, and the home of **BarraCuda** — the vendor-agnostic GPU math engine that is the single largest subsystem in ecoPrimals.
 
-ToadStool owns the hardware. BarraCUDA owns the math. Together they provide scientific computing on any GPU (NVIDIA, AMD, Intel) via WGSL/Vulkan, without CUDA dependency.
+ToadStool owns the hardware. BarraCuda owns the math. Together they provide scientific computing on any GPU (NVIDIA, AMD, Intel) via WGSL/Vulkan, without CUDA dependency.
 
 ## Why It Exists
 
@@ -25,15 +25,15 @@ In gen1, Squirrel handled both job scheduling and compute execution. As the GPU 
 
 ToadStool was split from Squirrel to own the hardware-specific concerns: GPU detection, driver compatibility, memory management, workload queuing. Squirrel kept the AI-specific logic (model routing, MCP); ToadStool took the "run this computation on that hardware" responsibility.
 
-## BarraCUDA — The Math Engine
+## BarraCuda — The Math Engine
 
-**Gen3 evolution note**: BarraCUDA has since been promoted to primal #14 ([barraCuda](14_barracuda.md)), and coralReef to primal #13 ([coralReef](13_coralreef.md)). The text below documents the original architecture when BarraCUDA lived inside ToadStool.
+**Gen3 evolution note**: BarraCuda has since been promoted to primal #14 ([barraCuda](14_barracuda.md)), and coralReef to primal #13 ([coralReef](13_coralreef.md)). The text below documents the original architecture when BarraCuda lived inside ToadStool.
 
-BarraCUDA was originally a crate within ToadStool — the largest crate, with 792 Rust source files and 628 WGSL shaders.
+BarraCuda was originally a crate within ToadStool — the largest crate, with 792 Rust source files and 628 WGSL shaders.
 
-### What BarraCUDA Does
+### What BarraCuda Does
 
-BarraCUDA provides mathematical operations as WGSL shader pipelines:
+BarraCuda provides mathematical operations as WGSL shader pipelines:
 
 | Domain | Operations | Spring Validation |
 |--------|-----------|-------------------|
@@ -46,13 +46,13 @@ BarraCUDA provides mathematical operations as WGSL shader pipelines:
 
 ### The NTT → FFT Evolution
 
-BarraCUDA's NTT (Number Theoretic Transform) was evolved for fully homomorphic encryption — polynomial multiplication in Z_q. When hotSpring needed FFT for plasma physics (PPPM electrostatics), the NTT's Cooley-Tukey butterfly structure turned out to be the FFT's skeleton. The main compute kernel — stage indexing, stride computation, block decomposition, twiddle lookup — is character-for-character identical between `fhe_ntt.wgsl` (263 lines) and `fft_1d.wgsl` (186 lines).
+BarraCuda's NTT (Number Theoretic Transform) was evolved for fully homomorphic encryption — polynomial multiplication in Z_q. When hotSpring needed FFT for plasma physics (PPPM electrostatics), the NTT's Cooley-Tukey butterfly structure turned out to be the FFT's skeleton. The main compute kernel — stage indexing, stride computation, block decomposition, twiddle lookup — is character-for-character identical between `fhe_ntt.wgsl` (263 lines) and `fft_1d.wgsl` (186 lines).
 
-No one designed BarraCUDA for physics. The cryptographic constraint selected for a mathematical structure that was universal.
+No one designed BarraCuda for physics. The cryptographic constraint selected for a mathematical structure that was universal.
 
 ### Vendor-Agnostic Design
 
-BarraCUDA uses WGSL (WebGPU Shading Language) compiled through `wgpu` to Vulkan, Metal, or DirectX 12. The same shader runs on:
+BarraCuda uses WGSL (WebGPU Shading Language) compiled through `wgpu` to Vulkan, Metal, or DirectX 12. The same shader runs on:
 
 - NVIDIA (GeForce, Quadro, Tesla)
 - AMD (Radeon, Instinct)
@@ -66,7 +66,7 @@ The RTX 4070's f64 hardware exists in the silicon. CUDA throttles it to protect 
 
 The constraint (no CUDA) forced exploration of Vulkan, which revealed a capability the conventional approach actively hides. See [DISCOVERY_LOG.md](DISCOVERY_LOG.md) for the full story.
 
-On hardware without native f64, BarraCUDA provides u64 emulation from u32 pairs (used in NTT for FHE).
+On hardware without native f64, BarraCuda provides u64 emulation from u32 pairs (used in NTT for FHE).
 
 ## How It Connects
 
@@ -76,7 +76,7 @@ biomeOS ──compute.dispatch──▶ ToadStool
                     ┌─────────────┼─────────────┐
                     │             │             │
               ┌─────▼─────┐ ┌───▼────┐  ┌────▼────┐
-              │BarraCUDA  │ │ Ollama │  │GPU Queue│
+              │BarraCuda  │ │ Ollama │  │GPU Queue│
               │(628 WGSL) │ │(models)│  │(jobs)   │
               └───────────┘ └────────┘  └─────────┘
 
@@ -92,13 +92,13 @@ Squirrel: AI model inference requests
 - **biomeOS** monitors ToadStool as part of the Node Atomic
 - **BearDog** authenticates compute job submissions
 - **NestGate** stores model weights that ToadStool loads for inference
-- **Springs** (hotSpring, wetSpring, neuralSpring) validate BarraCUDA's kernels against published science
+- **Springs** (hotSpring, wetSpring, neuralSpring) validate BarraCuda's kernels against published science
 
 ## Internal Architecture
 
 50+ crates, the most of any primal:
 
-**BarraCUDA core:**
+**BarraCuda core:**
 - `barracuda` — Main crate: 628 WGSL shaders, Rust dispatch, pipeline management
 - `barracuda-linalg` — Linear algebra ops (GEMM, eigensolvers)
 - `barracuda-numerical` — FFT, NTT, integration, interpolation
@@ -118,8 +118,8 @@ Squirrel: AI model inference requests
 
 ## What Makes It Interesting
 
-ToadStool is the largest primal by total Rust lines (788,209) because BarraCUDA is inside it. The 628 WGSL shaders represent ~49,000 lines of GPU code that runs identically on any vendor's hardware.
+ToadStool is the largest primal by total Rust lines (788,209) because BarraCuda is inside it. The 628 WGSL shaders represent ~49,000 lines of GPU code that runs identically on any vendor's hardware.
 
-The springs are ToadStool's acceptance tests. hotSpring proves the physics kernels work (0.000% energy drift in Yukawa MD). wetSpring proves the biology kernels work (926× GPU speedup for spectral cosine). neuralSpring proves the ML kernels work (76.6× fused pipeline speedup for transformers). Every validated check is evidence that BarraCUDA's constrained evolution produced correct scientific computing.
+The springs are ToadStool's acceptance tests. hotSpring proves the physics kernels work (0.000% energy drift in Yukawa MD). wetSpring proves the biology kernels work (926× GPU speedup for spectral cosine). neuralSpring proves the ML kernels work (76.6× fused pipeline speedup for transformers). Every validated check is evidence that BarraCuda's constrained evolution produced correct scientific computing.
 
-The Ollama integration means ToadStool can serve both scientific compute (BarraCUDA) and AI inference (LLM) on the same GPU, with workload scheduling to avoid contention.
+The Ollama integration means ToadStool can serve both scientific compute (BarraCuda) and AI inference (LLM) on the same GPU, with workload scheduling to avoid contention.

@@ -26,7 +26,7 @@ The neuromorphic benchmark datasheet (`attsi/non-anon/contact/murillo/neuromorph
 
 | Paper | Citation | Experiment | Checks | What It Validated |
 |-------|----------|------------|-------:|-------------------|
-| Sarkas Yukawa OCP MD | Silvestri, Stanton & Murillo | Phase A–C | 9/9 PP cases | BarraCUDA GPU molecular dynamics at f64 precision. 0.000% energy drift over 80,000 steps. |
+| Sarkas Yukawa OCP MD | Silvestri, Stanton & Murillo | Phase A–C | 9/9 PP cases | BarraCuda GPU molecular dynamics at f64 precision. 0.000% energy drift over 80,000 steps. |
 | Two-Temperature Model (TTM) | Stanton & Murillo | Phase B | 6/6 | Laser–plasma electron-ion equilibration dynamics. |
 | Surrogate learning for transport | Diaw, Murillo, Stanton — *Nature Machine Intelligence* (2024) | Phase D | 15/15 | Neural surrogate learning methodology. DeepONet and PINN training on plasma transport. |
 | Ionic transport in HED matter | Stanton & Murillo — *Phys Rev Lett* 116, 075002 (2016) | Phase E | 13/13 | Green–Kubo transport coefficients. Diffusion and viscosity from equilibrium MD. |
@@ -40,7 +40,7 @@ The neuromorphic benchmark datasheet (`attsi/non-anon/contact/murillo/neuromorph
 
 ### What His Work Proved About ecoPrimals
 
-Murillo's plasma physics papers were the first real science run through BarraCUDA. The Sarkas Yukawa OCP MD was the proving ground: if BarraCUDA could maintain 0.000% energy drift over 80,000 steps at f64 on a consumer GPU, it could do computational physics. Every subsequent spring experiment builds on that foundation.
+Murillo's plasma physics papers were the first real science run through BarraCuda. The Sarkas Yukawa OCP MD was the proving ground: if BarraCuda could maintain 0.000% energy drift over 80,000 steps at f64 on a consumer GPU, it could do computational physics. Every subsequent spring experiment builds on that foundation.
 
 The surrogate learning work (Diaw et al.) also bridged hotSpring and neuralSpring — the same neural architecture that learns plasma transport coefficients is the architecture that validates neuralSpring's ML primitives.
 
@@ -74,7 +74,7 @@ Dong runs the precision irrigation lab in MSU's Biosystems & Agricultural Engine
 
 ### What His Work Proved About ecoPrimals
 
-airSpring demonstrated that BarraCUDA and the primal infrastructure work beyond physics — in agricultural science with direct real-world application. The 918 station-days of real Michigan weather data, cross-validated between Python and Rust, showed the system handles noisy real-world sensor data, not just clean simulation.
+airSpring demonstrated that BarraCuda and the primal infrastructure work beyond physics — in agricultural science with direct real-world application. The 918 station-days of real Michigan weather data, cross-validated between Python and Rust, showed the system handles noisy real-world sensor data, not just clean simulation.
 
 The FAO-56 reproduction is also the foundation for groundSpring's error propagation experiments — the humidity-dominance finding (65.6% of ET₀ uncertainty) came from propagating sensor noise through the FAO-56 equation that airSpring validated.
 
@@ -162,7 +162,7 @@ Liu is on the CMSE/CSE faculty in the master's program. His research bridges com
 
 ### What His Work Proved About ecoPrimals
 
-Liu's phylogenetic tools test BarraCUDA's string and tree computation — alignment matrices, HMM transitions, tree traversal. These are structurally different from the f64 physics in hotSpring but use the same WGSL dispatch architecture. The fact that the same BarraCUDA infrastructure handles both plasma MD and phylogenetic HMMs is evidence for the generality of the constrained evolution output.
+Liu's phylogenetic tools test BarraCuda's string and tree computation — alignment matrices, HMM transitions, tree traversal. These are structurally different from the f64 physics in hotSpring but use the same WGSL dispatch architecture. The fact that the same BarraCuda infrastructure handles both plasma MD and phylogenetic HMMs is evidence for the generality of the constrained evolution output.
 
 The RAWR bootstrap work also connects to groundSpring's uncertainty quantification — resampling as a tool for understanding statistical noise in phylogenetic inference.
 
@@ -205,9 +205,9 @@ Bazavov is on the CMSE faculty in the master's program. He's a member of the Hot
 
 ### What His Work Proved About ecoPrimals
 
-Lattice QCD is one of the hardest computational physics problems — Monte Carlo sampling over SU(3) gauge fields with HMC integration. The fact that BarraCUDA handles lattice gauge theory on a consumer GPU (plaquettes matching strong-coupling expansion, HMC acceptance 96–100%) validates the full GPU compute stack at the most demanding level.
+Lattice QCD is one of the hardest computational physics problems — Monte Carlo sampling over SU(3) gauge fields with HMC integration. The fact that BarraCuda handles lattice gauge theory on a consumer GPU (plaquettes matching strong-coupling expansion, HMC acceptance 96–100%) validates the full GPU compute stack at the most demanding level.
 
-The lattice QCD pipeline also exercises BarraCUDA's f64 path differently from MD — gauge links are SU(3) matrices (complex 3×3), not particle positions. Different numerical structures, same underlying WGSL dispatch.
+The lattice QCD pipeline also exercises BarraCuda's f64 path differently from MD — gauge links are SU(3) matrices (complex 3×3), not particle positions. Different numerical structures, same underlying WGSL dispatch.
 
 ### Outreach Status
 
@@ -263,7 +263,7 @@ Not yet contacted. neuralSpring reproductions + the constrained evolution thesis
 
 ### How We Met
 
-Bought the GMKtec NucBox M6 (one of the small form factor nodes in the basement HPC) from Kachkovskiy on Facebook Marketplace. During pickup, noticed spectral theory equations on his whiteboard. Brief conversation about GPUs and computation. This is the most accidental connection in the network — a hardware purchase that linked to a mathematics professor whose research directly applies to BarraCUDA's spectral computations.
+Bought the GMKtec NucBox M6 (one of the small form factor nodes in the basement HPC) from Kachkovskiy on Facebook Marketplace. During pickup, noticed spectral theory equations on his whiteboard. Brief conversation about GPUs and computation. This is the most accidental connection in the network — a hardware purchase that linked to a mathematics professor whose research directly applies to BarraCuda's spectral computations.
 
 ### Papers Reproduced in Springs
 
@@ -294,7 +294,7 @@ Papers queued: Anderson localization (disordered media = measurement noise), ene
 
 ### What His Work Proved About ecoPrimals
 
-The spectral theory track pushed BarraCUDA into linear algebra territory — sparse matrix-vector products, eigenvalue algorithms, transfer matrices. This is structurally different from both the particle MD (Murillo) and the lattice gauge theory (Bazavov). Three different computational physics domains, all running through the same WGSL shader architecture on a consumer GPU.
+The spectral theory track pushed BarraCuda into linear algebra territory — sparse matrix-vector products, eigenvalue algorithms, transfer matrices. This is structurally different from both the particle MD (Murillo) and the lattice gauge theory (Bazavov). Three different computational physics domains, all running through the same WGSL shader architecture on a consumer GPU.
 
 The Anderson localization work also has a conceptual connection to the constrained evolution thesis: localization is what happens when disorder (constraint) prevents transport (exploration). In computational terms, strong typing localizes code to specific domains, preventing the "transport" of bugs across module boundaries.
 
@@ -376,7 +376,7 @@ The Summer 2024 research fellowship at Sandia National Laboratories was in the B
 
 ### What Their Work Proved About ecoPrimals
 
-The Sandia connection is where the bioinformatics pipeline experience came from — not from a textbook, but from a national lab running real sequencing on real production algae. The 16S pipeline in wetSpring (DADA2 + chimera + taxonomy + UniFrac) was built to match the analytical capabilities of the tools used at Sandia, but sovereign — running on BarraCUDA/ToadStool without Galaxy or QIIME2 dependencies.
+The Sandia connection is where the bioinformatics pipeline experience came from — not from a textbook, but from a national lab running real sequencing on real production algae. The 16S pipeline in wetSpring (DADA2 + chimera + taxonomy + UniFrac) was built to match the analytical capabilities of the tools used at Sandia, but sovereign — running on BarraCuda/ToadStool without Galaxy or QIIME2 dependencies.
 
 ### Outreach Status
 
@@ -406,9 +406,9 @@ Jones runs analytical chemistry and mass spectrometry research at MSU, with a fo
 
 ### What His Work Proved About ecoPrimals
 
-The PFAS work is the analytical chemistry anchor for wetSpring. Mass spectrometry data processing (spectral matching, suspect screening, high-resolution mass fingerprinting) exercises BarraCUDA differently from biology or physics — it's numerical pattern matching at high dimensionality. The GPU spectral cosine similarity benchmark (926× speedup) came from this track.
+The PFAS work is the analytical chemistry anchor for wetSpring. Mass spectrometry data processing (spectral matching, suspect screening, high-resolution mass fingerprinting) exercises BarraCuda differently from biology or physics — it's numerical pattern matching at high dimensionality. The GPU spectral cosine similarity benchmark (926× speedup) came from this track.
 
-Jones's PFAS methods also connect to real-world environmental monitoring — these are the tools used to detect forever chemicals in Michigan groundwater. The spring reproduction proves BarraCUDA can run the same analyses at a fraction of the cost.
+Jones's PFAS methods also connect to real-world environmental monitoring — these are the tools used to detect forever chemicals in Michigan groundwater. The spring reproduction proves BarraCuda can run the same analyses at a fraction of the cost.
 
 ### Outreach Status
 

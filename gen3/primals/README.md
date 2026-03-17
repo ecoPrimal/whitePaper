@@ -67,7 +67,7 @@ Total: **12 primals** across two phases.
 
 ### Timeline
 
-The primals are months old. The springs are weeks old. ToadStool and BarraCUDA evolved independently for ~8 months before the first spring existed. The springs then became the selection pressure that drove BarraCUDA's evolution toward specific scientific capabilities — f64 shaders, Yukawa force kernels, FFT from NTT, lattice QCD observables. The springs validated what the primals could do; the primals didn't know they could do science until the springs asked.
+The primals are months old. The springs are weeks old. ToadStool and BarraCuda evolved independently for ~8 months before the first spring existed. The springs then became the selection pressure that drove BarraCuda's evolution toward specific scientific capabilities — f64 shaders, Yukawa force kernels, FFT from NTT, lattice QCD observables. The springs validated what the primals could do; the primals didn't know they could do science until the springs asked.
 
 The full basement HPC via NUCLEUS is not deployed yet. All 2,882 science checks run on a single machine with a $600 consumer GPU. See [DISCOVERY_LOG.md](DISCOVERY_LOG.md) for how capability hunting — rather than monolithic SDKs — drove the key technical discoveries.
 
@@ -96,7 +96,7 @@ The full basement HPC via NUCLEUS is not deployed yet. All 2,882 science checks 
 
 ### The ToadStool Split (gen3 Evolution)
 
-The gen3 catalogue originally described BarraCUDA as "not a separate primal" — a crate inside ToadStool (#5). As the springs drove BarraCUDA's shader count past 700 and coralReef evolved sovereign compilation, both earned primal status:
+The gen3 catalogue originally described BarraCuda as "not a separate primal" — a crate inside ToadStool (#5). As the springs drove BarraCuda's shader count past 700 and coralReef evolved sovereign compilation, both earned primal status:
 
 - **coralReef** (#13) owns shader compilation: WGSL/SPIR-V → native GPU binary, f64 transcendental lowering, userspace dispatch
 - **barraCuda** (#14) owns the math: 786 WGSL shaders across 10 scientific domains, DF64 emulation, five-spring ingestion
@@ -153,7 +153,7 @@ Node and Nest atomics will allow the basement HPC to become a covalent NUCLEUS m
 
 ## Reading Order
 
-**If you're new to ecoPrimals**: Read this README, then BearDog (the simplest to understand), then Songbird (networking), then ToadStool (compute + BarraCUDA), then biomeOS (how they all fit together).
+**If you're new to ecoPrimals**: Read this README, then BearDog (the simplest to understand), then Songbird (networking), then ToadStool (compute + BarraCuda), then biomeOS (how they all fit together).
 
 **If you're evaluating the architecture**: Start with [INTERACTIONS.md](INTERACTIONS.md), then read the foundation primals (1–6).
 

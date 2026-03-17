@@ -2,9 +2,9 @@
 
 ## 7.1 Design Rationale
 
-BarraCUDA claims that Pure Rust GPU compute can replace the Python scientific stack. This claim requires evidence from every scientific domain the ecosystem intends to serve. A single-domain validation (e.g., only plasma physics) would prove the kernels work for plasma physics, not that the approach generalizes. The spring framework provides multi-domain validation through a standardized protocol.
+BarraCuda claims that Pure Rust GPU compute can replace the Python scientific stack. This claim requires evidence from every scientific domain the ecosystem intends to serve. A single-domain validation (e.g., only plasma physics) would prove the kernels work for plasma physics, not that the approach generalizes. The spring framework provides multi-domain validation through a standardized protocol.
 
-**Definition**: A *spring* is a public, AGPL-3.0-licensed repository that takes published, peer-reviewed scientific work and asks: can we reproduce it? First in Python (the original tool), establishing a control. Then in Rust. Then on GPU. If the answers are yes, the science is validated and the BarraCUDA kernel is proven correct for that domain.
+**Definition**: A *spring* is a public, AGPL-3.0-licensed repository that takes published, peer-reviewed scientific work and asks: can we reproduce it? First in Python (the original tool), establishing a control. Then in Rust. Then on GPU. If the answers are yes, the science is validated and the BarraCuda kernel is proven correct for that domain.
 
 The name is ecological: springs feed the ecosystem. Each spring produces validated kernels that flow into the primal infrastructure, just as geological springs feed rivers that sustain ecosystems. The springs are also *tests* — acceptance tests for the infrastructure, not the science. The science is already published and peer-reviewed. The question is whether our infrastructure reproduces it.
 
@@ -24,7 +24,7 @@ Phase 0 is *not* a trivial step. hotSpring Phase 0 discovered 5 silent bugs in t
 
 ### Phase 1 (Rust Port)
 
-Port the Phase 0 Python implementation to Rust using BarraCUDA's CPU-side crate. Cross-validate every numerical output against the Python control:
+Port the Phase 0 Python implementation to Rust using BarraCuda's CPU-side crate. Cross-validate every numerical output against the Python control:
 
 - All Rust values match Python within defined tolerance (typically \(10^{-5}\) for f64 operations)
 - All Rust tests pass independently of Python
@@ -34,7 +34,7 @@ This proves Rust can express the science correctly. airSpring Phase 1 cross-vali
 
 ### Phase 2 (GPU Promotion)
 
-Promote compute-intensive operations to BarraCUDA's WGSL GPU shaders. Validate GPU output against both Python and Rust CPU:
+Promote compute-intensive operations to BarraCuda's WGSL GPU shaders. Validate GPU output against both Python and Rust CPU:
 
 - GPU results match CPU within IEEE 754 f64 tolerance
 - Speedup is measured and reported honestly
@@ -117,7 +117,7 @@ No institutional access is required. No Code Ocean account. No Fortran compiler.
 
 The springs serve double duty:
 
-1. **They validate the infrastructure.** The 11,161+ checks prove that BarraCUDA's kernels, evolved under the Pure Rust / WGSL / f64 constraint, compute real science correctly across 8 domains.
+1. **They validate the infrastructure.** The 11,161+ checks prove that BarraCuda's kernels, evolved under the Pure Rust / WGSL / f64 constraint, compute real science correctly across 8 domains.
 
 2. **They are evidence for the methodology.** The fact that a single developer produced 11,161+ validated science checks across 8 domains and 70+ papers in ~69 days, using the constrained evolution methodology (AI generation → Rust compilation → test validation), is itself a datum in support of the thesis. The springs are both the experimental apparatus and the experimental result.
 

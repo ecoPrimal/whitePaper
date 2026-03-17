@@ -336,7 +336,7 @@ The ecoPrimals ecosystem is itself a product of constrained evolution. Its archi
 
 ### 5.4 Quantitative Evidence: NTT → FFT Evolution
 
-The most concrete evidence for constrained evolution in the ecoPrimals codebase comes from BarraCUDA's GPU compute shaders. The Number Theoretic Transform (NTT), evolved under FHE constraints for polynomial multiplication in ℤ_q, shares **80% structural identity** with the Fast Fourier Transform (FFT), needed for physics simulation in ℂ.
+The most concrete evidence for constrained evolution in the ecoPrimals codebase comes from BarraCuda's GPU compute shaders. The Number Theoretic Transform (NTT), evolved under FHE constraints for polynomial multiplication in ℤ_q, shares **80% structural identity** with the Fast Fourier Transform (FFT), needed for physics simulation in ℂ.
 
 A side-by-side source code comparison (see `whitePaper/barraCUDA/sections/05_CONSTRAINED_EVOLUTION.md`) reveals:
 
@@ -347,7 +347,7 @@ A side-by-side source code comparison (see `whitePaper/barraCUDA/sections/05_CON
 
 The FFT is *shorter* than its NTT ancestor because the target domain (complex floats as native `vec2<f32>`) maps to hardware more naturally than the source domain (64-bit integers emulated from 32-bit pairs). This is the computational analog of an adaptation that simplifies rather than complicates — the Lenski populations' improved glucose transport is simpler and more efficient than the ancestral mechanism.
 
-Critically, no one designed BarraCUDA for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly is the FFT's skeleton. Each step follows by mathematical necessity. This is constrained evolution as described in this paper: the constraint (FHE) reshaped the fitness landscape to select for a structure (butterfly transform) that happened to be fit for an unrelated domain (physics).
+Critically, no one designed BarraCuda for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly is the FFT's skeleton. Each step follows by mathematical necessity. This is constrained evolution as described in this paper: the constraint (FHE) reshaped the fitness landscape to select for a structure (butterfly transform) that happened to be fit for an unrelated domain (physics).
 
 The hotSpring control experiments (see `whitePaper/barraCUDA/sections/04_CONTROL_EXPERIMENTS.md`) validate this with 131 quantitative acceptance criteria across three phases. Phase A (Python control) established 86 checks. Phase C (GPU MD) added 45 more: the f64 WGSL shaders — built from the same `math_f64.wgsl` transcendental functions evolved for ML and nuclear EOS — now run full Yukawa OCP molecular dynamics on a consumer GPU. All 9 PP Yukawa cases pass with 0.000% energy drift. The same math that trains neural networks computes plasma physics forces. The evolution from FHE to physics is empirically confirmed — not by analogy, but by data.
 

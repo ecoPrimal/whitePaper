@@ -12,7 +12,7 @@ This directory contains the evidence behind the gen3/ papers: reproduction plans
 The two-phase validation approach:
 
 1. **Phase A**: Reproduce published work using original tools (Python/NumPy/SciPy/PyTorch) to validate correctness and establish a baseline.
-2. **Phase B+**: Re-execute the same computation on **BarraCUDA** — ToadStool's Pure Rust GPU compute engine (165+ ops, 226+ WGSL shaders) that runs on any GPU vendor without CUDA, ROCm, or vendor SDK.
+2. **Phase B+**: Re-execute the same computation on **BarraCuda** — ToadStool's Pure Rust GPU compute engine (165+ ops, 226+ WGSL shaders) that runs on any GPU vendor without CUDA, ROCm, or vendor SDK.
 
 Phase A → Phase B comparison is itself a research contribution: can Pure Rust + WGSL match or exceed Python + CUDA for real scientific workloads? Answer: yes — 478x throughput at L1, 1,077x spectral cosine matching, 43-78x fused ML inference pipeline.
 
@@ -22,7 +22,7 @@ Phase A → Phase B comparison is itself a research contribution: can Pure Rust 
 
 ### Faculty & Spring Connections
 
-**`FACULTY_SPRING_PROFILES.md`** — Master reference mapping 9 professors to springs and candidate papers for reproduction. Each profile includes: connection to author, key research themes, candidate papers with spring relevance, BarraCUDA kernel coverage, and reproduction priority tiers. Covers Murillo (hotSpring), Dong (airSpring), Waters/Cahill/Smallwood/Jones (wetSpring), Dolson/Liu/Bazavov (neuralSpring/groundSpring), and Kachkovskiy (hotSpring/groundSpring/neuralSpring). 60+ candidate papers ranked across 3 tiers.
+**`FACULTY_SPRING_PROFILES.md`** — Master reference mapping 9 professors to springs and candidate papers for reproduction. Each profile includes: connection to author, key research themes, candidate papers with spring relevance, BarraCuda kernel coverage, and reproduction priority tiers. Covers Murillo (hotSpring), Dong (airSpring), Waters/Cahill/Smallwood/Jones (wetSpring), Dolson/Liu/Bazavov (neuralSpring/groundSpring), and Kachkovskiy (hotSpring/groundSpring/neuralSpring). 60+ candidate papers ranked across 3 tiers.
 
 ### Reproduction Plans
 
@@ -36,7 +36,7 @@ Phase A → Phase B comparison is itself a research contribution: can Pure Rust 
 
 ### Gap Analysis
 
-**`BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`** — Gap analysis from examining BarraCUDA through a computational physics lens rather than ML/AI/FHE. Documents what scientific computing reveals as evolution targets: complex number arithmetic, complex FFT, periodic boundary conditions, physics force kernels, ODE/PDE solvers, eigendecomposition, and sparse matrix operations.
+**`BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`** — Gap analysis from examining BarraCuda through a computational physics lens rather than ML/AI/FHE. Documents what scientific computing reveals as evolution targets: complex number arithmetic, complex FFT, periodic boundary conditions, physics force kernels, ODE/PDE solvers, eigendecomposition, and sparse matrix operations.
 
 Key finding: ML-driven evolution already covered ~60-70% of scientific computing needs because the underlying math is shared. The springs confirmed this — the 6 isomorphic primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating) serve physics, biology, chemistry, and geophysics, not just neural networks.
 
@@ -54,7 +54,7 @@ Remaining P1-P2 gaps:
 
 ### Benchmarks
 
-**`HOTSPRING_PHASE_B_EVIDENCE.md`** — Phase B technical results: BarraCUDA vs Python/SciPy numbers for nuclear EOS computation. 478x L1 throughput, 44.8x energy reduction. GPU FP64 validated to 4.55e-13 MeV precision.
+**`HOTSPRING_PHASE_B_EVIDENCE.md`** — Phase B technical results: BarraCuda vs Python/SciPy numbers for nuclear EOS computation. 478x L1 throughput, 44.8x energy reduction. GPU FP64 validated to 4.55e-13 MeV precision.
 
 **`neuromorphic_benchmark_datasheet_v1.md`** — BrainChip Akida neuromorphic benchmark results. Updated Feb 27 with hotSpring physics NPU results (Exp 020-022: ESN adaptive steering, 9,017× energy efficiency, cross-run learning, live AKD1000 production). Originally shared with Murillo early 2026; now also includes wetSpring V60 pure Rust driver measurements.
 
@@ -100,18 +100,18 @@ With NUCLEUS deployed, each gate runs its own NUCLEUS atomic composition. biomeO
 
 - **Covalent bonding** (family gates): Full genetic trust. Workloads flow freely across gates. Strandgate's 64 cores handle CPU-bound bioinformatics while Northgate's RTX 5090 handles GPU-bound ML. Westgate's 76TB ZFS stores everything. No human orchestration — biomeOS routes workloads to hardware that matches.
 
-- **What this means for the springs**: Instead of running one experiment per gate, all 5 springs run simultaneously across the mesh. hotSpring's Yukawa MD on Northgate's 5090. wetSpring's 16S pipeline on Strandgate's EPYC. neuralSpring's LSTM training on Southgate's 3090. groundSpring's Monte Carlo on Eastgate's 4070. All writing to Westgate's ZFS. The BarraCUDA WGSL shaders run identically on NVIDIA and AMD — validated on both in the mesh.
+- **What this means for the springs**: Instead of running one experiment per gate, all 5 springs run simultaneously across the mesh. hotSpring's Yukawa MD on Northgate's 5090. wetSpring's 16S pipeline on Strandgate's EPYC. neuralSpring's LSTM training on Southgate's 3090. groundSpring's Monte Carlo on Eastgate's 4070. All writing to Westgate's ZFS. The BarraCuda WGSL shaders run identically on NVIDIA and AMD — validated on both in the mesh.
 
 ### Ionic Bonding: Others Join
 
-The bonding model supports **ionic bonding** — contract-scoped access for external collaborators. A professor's lab GPU contributes compute under a metered contract. They get access to specific capabilities (e.g., run BarraCUDA lattice QCD on their parameter sweep) but not to the family's genetic lineage or storage. Usage is auditable. Access is scoped.
+The bonding model supports **ionic bonding** — contract-scoped access for external collaborators. A professor's lab GPU contributes compute under a metered contract. They get access to specific capabilities (e.g., run BarraCuda lattice QCD on their parameter sweep) but not to the family's genetic lineage or storage. Usage is auditable. Access is scoped.
 
 Scenario: Murillo's group has persoanl GPUs. Bazavov's group has personal GPUs. Kachkovskiy has a RTX 5080 GPU. If each runs a NUCLEUS with ionic bonding to the basement mesh:
 
 - Murillo's gates run Sarkas parameter sweeps across the Γ-κ grid
 - Bazavov's gates run lattice QCD temperature scans
 - Kachkovskiy's gates run Anderson localization eigenvalue computations
-- The basement mesh coordinates, stores results, and provides the BarraCUDA kernel library
+- The basement mesh coordinates, stores results, and provides the BarraCuda kernel library
 
 Each group maintains sovereignty over their hardware. The mesh is voluntary. The science is shared. The compute cost is split. AGPL-3.0 ensures all improvements flow back.
 
@@ -119,14 +119,14 @@ Each group maintains sovereignty over their hardware. The mesh is voluntary. The
 
 MSU's Institute for Cyber-Enabled Research (ICER) runs a traditional HPC: identical nodes, centralized scheduler, homogeneous workloads. In the NUCLEUS bonding model, this is **metallic bonding** — an electron sea of delocalized compute. Sub-specialized. Efficient for throughput. No sovereignty per node.
 
-If ICER deployed NUCLEUS atomics on its nodes, every idle GPU on campus becomes a BarraCUDA compute node. The WGSL shaders are vendor-agnostic — they run on whatever GPU ICER has. The lattice QCD workloads that currently require CERN's HPC or Fermilab's allocation could run on Michigan State's campus GPU fleet.
+If ICER deployed NUCLEUS atomics on its nodes, every idle GPU on campus becomes a BarraCuda compute node. The WGSL shaders are vendor-agnostic — they run on whatever GPU ICER has. The lattice QCD workloads that currently require CERN's HPC or Fermilab's allocation could run on Michigan State's campus GPU fleet.
 
 The math:
 
 - CERN's LHCC computing: ~1M CPU cores, ~50K GPUs, $1B+ infrastructure
 - MSU ICER: ~20K cores, ~200 GPUs, ~$50M infrastructure
 - Basement mesh: 100 cores, 8 GPUs, $15K
-- BarraCUDA cost per hotSpring paper: **$0.01-0.10**
+- BarraCuda cost per hotSpring paper: **$0.01-0.10**
 
 NUCLEUS doesn't make the basement as fast as CERN. It makes the *science-per-dollar* comparable, because the constraint isn't raw FLOPS — it's whether the compute produces correct, reproducible, published-quality results. 2,513 checks say it does.
 
@@ -140,7 +140,7 @@ Basement (covalent)
                     └──→ Distributed science mesh
 ```
 
-Each step is additive. Each step preserves sovereignty. Each step uses the same BarraCUDA kernels validated by the springs. The 2,513 checks don't need to be re-run — they're the acceptance tests for every new node that joins.
+Each step is additive. Each step preserves sovereignty. Each step uses the same BarraCuda kernels validated by the springs. The 2,513 checks don't need to be re-run — they're the acceptance tests for every new node that joins.
 
 ---
 

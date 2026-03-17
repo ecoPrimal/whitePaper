@@ -139,15 +139,15 @@ These primals form the NUCLEUS deployment architecture. Each is production-ready
 **Domain**: Universal compute orchestration  
 **Grade**: A++ GOLD STANDARD  
 **Tests**: 1,000+ passing  
-**BarraCUDA**: 124/263 operations with universal WGSL shaders
+**BarraCuda**: 124/263 operations with universal WGSL shaders
 
-**What it does**: ToadStool enables isomorphic workload execution across any compute substrate. Its BarraCUDA library provides universal tensor operations that run identically on CPU, GPU (NVIDIA, AMD), neuromorphic hardware (BrainChip Akida), WebAssembly, and containers. Same math, every substrate.
+**What it does**: ToadStool enables isomorphic workload execution across any compute substrate. Its BarraCuda library provides universal tensor operations that run identically on CPU, GPU (NVIDIA, AMD), neuromorphic hardware (BrainChip Akida), WebAssembly, and containers. Same math, every substrate.
 
 **Primitive catalog**:
 
 | Category | Primitives |
 |----------|-----------|
-| BarraCUDA Core | matmul, relu, softmax, gelu, layer_norm (124 ops, 144 WGSL shaders) |
+| BarraCuda Core | matmul, relu, softmax, gelu, layer_norm (124 ops, 144 WGSL shaders) |
 | CNN | conv2d, batch_norm, pooling, elementwise operations |
 | Attention | Scaled Dot-Product, Multi-Head, Causal, Sparse, Rotary, Cross, ALiBi (all 7 mechanisms) |
 | Training | Focal Loss, Contrastive Loss, Huber Loss, BCE, Hinge, KL Divergence, Lovasz, MAE, Smooth L1 |
@@ -170,9 +170,9 @@ These primals form the NUCLEUS deployment architecture. Each is production-ready
 - Research validation: NVIDIA vs AMD benchmarks with data (725MB+ traces)
 - Multi-primal integration, Python ML integration, gaming evolution demos
 
-**Architecture highlights**: UniBin (single binary, 14+ modes), ecoBin compliant, BarraCUDA Phase 1-6 complete (Core, CNN, Advanced, Attention, Training, Modernized), zero production mocks, universal IPC.
+**Architecture highlights**: UniBin (single binary, 14+ modes), ecoBin compliant, BarraCuda Phase 1-6 complete (Core, CNN, Advanced, Attention, Training, Modernized), zero production mocks, universal IPC.
 
-**Participates in**: Node Atomic (with Tower), NUCLEUS, BarraCUDA compute layer.
+**Participates in**: Node Atomic (with Tower), NUCLEUS, BarraCuda compute layer.
 
 ---
 
@@ -180,10 +180,12 @@ These primals form the NUCLEUS deployment architecture. Each is production-ready
 
 **Domain**: AI model coordination and sovereign inference  
 **Grade**: A++ (98/100)  
-**Tests**: 586+ passing (100%)  
-**Chaos Tests**: 13/15 complete (87%)
+**Version**: 0.1.0-alpha.7  
+**Tests**: 4,819 passing / 0 failed / 140 ignored across 22 crates  
+**Coverage**: 69% line coverage (cargo-llvm-cov)  
+**Safety**: `#![forbid(unsafe_code)]` on all 22 crates; `#![deny(clippy::unwrap_used, clippy::expect_used)]` in production
 
-**What it does**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor.
+**What it does**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor. Built as 22 workspace crates on Edition 2024 (Rust 1.85+). Pure Rust: zero C dependencies in default build (ecoBin compliant). Typed errors via thiserror (no Box<dyn Error> in library code). Structured logging via tracing. Zero-copy patterns: Arc<str>, bytes::Bytes, Arc<dyn Trait> on hot paths.
 
 **Primitive catalog**:
 

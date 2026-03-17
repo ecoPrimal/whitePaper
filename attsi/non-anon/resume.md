@@ -71,7 +71,7 @@ Reported findings to the principal investigator and presented at the University 
 Projects
 App for Heart Disease Analysis
 Streamlit App: datasciencebiolab.streamlit.app
-GitHub Repo: https://github.com/DataScienceBioLab/CMSE
+GitHub Repo: https://github.com/ecoPrimal/CMSE
 
 Skills
 Programming Languages: Python, R, SQL, Visual Basic

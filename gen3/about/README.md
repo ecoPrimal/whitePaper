@@ -127,6 +127,12 @@ Lansing, MI area
 - `SOVEREIGN_SCIENCE.md` - The philosophical frame: why open publication + named review + consumer hardware changes the game. Artificial scarcity in journals, PhD programs, and HPC allocation. Proof of work over citation-sitting.
 - `TRANSCRIPT.md` - Academic transcript (cleaned, organized)
 - `HARDWARE.md` - Basement HPC inventory
+- `HBM2_WATCHLIST.md` - Secondary market HBM2 GPU acquisition targets and strategy
+- `METALMATRIX_VALUATION.md` - Basement HPC valuation, cloud comparison, temporal arbitrage
+- `LICENSING_STRATEGY.md` - scyBorg triple copyleft, lysogeny protocol, symbiotic exceptions
+- `SCYBORG_EXCEPTION_PROTOCOL.md` - Symbiotic exception protocol: diplomatic licensing, reciprocal grants, candidate exceptions
+- `OWN_NOTHING.md` - The strategic inversion: why owning nothing is the strongest position
+- `K_NOME_PROGRAMMING.md` - K-NOME: Knowledge-Numeric Observed & Mentored Evolutionary programming — the named methodology, pre-thesis writeup
 - `cursor-2025-receipt.png` - Cursor IDE usage receipt (source: cursor.com/2025)
 
 Related: `attsi/non-anon/contacts.md` has the contact directory. `gen3/thesis/references.md` has the formal bibliography. `FACULTY.md` connects the two — it's the narrative of how the author's life intersected with the science in the springs. `SOVEREIGN_SCIENCE.md` is why it's structured this way.

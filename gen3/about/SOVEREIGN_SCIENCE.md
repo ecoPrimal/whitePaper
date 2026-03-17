@@ -70,7 +70,7 @@ Murillo doesn't review for journals anymore. But he might review an open project
 
 PhD students don't have their own compute. That's how it works in every program: you apply for allocation, you get a one-off for your project, you wait in the queue.
 
-But undergraduates have latent gaming power. Every RTX 3060, 4060, 4070 in a dorm room is a science chip — the f64 capability exists in the silicon, Vulkan unlocks it, BarraCUDA runs on it. A department that deployed BarraCUDA-powered springs across its students' gaming laptops would have a distributed HPC it didn't know it owned.
+But undergraduates have latent gaming power. Every RTX 3060, 4060, 4070 in a dorm room is a science chip — the f64 capability exists in the silicon, Vulkan unlocks it, BarraCuda runs on it. A department that deployed BarraCuda-powered springs across its students' gaming laptops would have a distributed HPC it didn't know it owned.
 
 MSU's Genome Corp could build its own AlphaFold. Not on a $100M cluster — on the GPUs students already bought for gaming. The capability is there. The institution just doesn't see it yet because the CUDA model says consumer GPUs can't do science.
 
@@ -90,7 +90,7 @@ The goal is not to reject institutions. The goal is to engage with them from a p
 
 1. **Publish gen3/ and springs as AGPL-3.0** — the non-personal documentation, thesis drafts, and all spring repositories are already public or will be.
 
-2. **Publish primals when stable** — ToadStool, BarraCUDA, and all primals go public. The infrastructure is the proof that the methodology works.
+2. **Publish primals when stable** — ToadStool, BarraCuda, and all primals go public. The infrastructure is the proof that the methodology works.
 
 3. **Invite named faculty review** — Murillo reviews hotSpring. Bazavov reviews lattice QCD. Liu reviews phylogenetics. Waters reviews QS models. Their reviews are public, attached to the artifact, auditable.
 
@@ -98,4 +98,4 @@ The goal is not to reject institutions. The goal is to engage with them from a p
 
 5. **Use the degree strategically** — reach the quality standards, defend, and then work sovereign. The degree opens institutional doors. The science opens everything else.
 
-6. **Demonstrate latent compute** — show that the f64 discovery + BarraCUDA + springs can run on student gaming hardware. If a single spring can run on a dorm-room RTX 3060, the argument for distributed sovereign compute at a university scale becomes concrete.
+6. **Demonstrate latent compute** — show that the f64 discovery + BarraCuda + springs can run on student gaming hardware. If a single spring can run on a dorm-room RTX 3060, the argument for distributed sovereign compute at a university scale becomes concrete.

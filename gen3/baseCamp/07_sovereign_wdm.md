@@ -16,7 +16,7 @@ HPC for plasma physics
 
 We demonstrate that warm dense matter (WDM) — the plasma regime central
 to inertial confinement fusion (ICF), planetary interiors, and stellar
-evolution — can be simulated on consumer GPU hardware using the BarraCUDA
+evolution — can be simulated on consumer GPU hardware using the BarraCuda
 compute stack. The 70-author "Roadmap for warm dense matter physics"
 (Murillo et al., arXiv:2505.02494, revised Feb 13, 2026) identifies
 computational accessibility as a critical bottleneck: state-of-the-art
@@ -156,7 +156,7 @@ proof of meaningful work — the same Joules produce both heat and science.
 
 ### 3.3 Why WGSL/Vulkan Matters
 
-BarraCUDA's WGSL shaders run on any GPU exposing Vulkan with
+BarraCuda's WGSL shaders run on any GPU exposing Vulkan with
 SHADER_F64. This includes:
 - NVIDIA (RTX 2070 through 5090, Titan V)
 - AMD (RX 6000+, MI-series)
@@ -190,7 +190,7 @@ network of 100 GPUs can sweep 100 parameter points simultaneously.
 (Berkeley, open C++/Python code). Reproduce EOS tables for hydrogen,
 helium, and carbon at WDM conditions.
 
-**Method**: Port average-atom + MD pipeline to BarraCUDA. Validate
+**Method**: Port average-atom + MD pipeline to BarraCuda. Validate
 against published FPEOS tables. Measure accuracy vs compute cost.
 
 **Success criterion**: Agreement with FPEOS tables to within published
@@ -251,7 +251,7 @@ extensively on transport coefficients in dense plasma. His Stanton-Murillo
 (2016) transport paper is hotSpring Paper 5 — the first complete
 reproduction in our pipeline. His screened Coulomb work is Paper 6.
 
-hotSpring was built to validate BarraCUDA against Murillo's published
+hotSpring was built to validate BarraCuda against Murillo's published
 results. Extending to WDM conditions is the natural next step — using
 the same infrastructure, the same validation methodology, the same
 consumer hardware.

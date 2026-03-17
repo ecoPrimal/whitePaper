@@ -142,7 +142,7 @@ External compute request
    Tower (HTTPS in, authenticated)
         │
         ▼
-   ToadStool (GPU dispatch via BarraCUDA)
+   ToadStool (GPU dispatch via BarraCuda)
         │
         ▼
    Result returned through Tower
@@ -169,7 +169,7 @@ External storage request
 
 All capabilities available. A single machine running full NUCLEUS can:
 - Store data (NestGate)
-- Run computations (ToadStool/BarraCUDA)
+- Run computations (ToadStool/BarraCuda)
 - Serve AI inference (Squirrel + ToadStool)
 - Communicate securely (Songbird + BearDog)
 - Coordinate (biomeOS)
@@ -282,7 +282,7 @@ The E2E test (`sovereign_mesh_e2e.rs`) covers the full Pixel-USB-Tower flow: bea
 
 Node Atomic (Tower + ToadStool) and Nest Atomic (Tower + NestGate) will complete the capability set for the basement HPC. Once deployed:
 
-- **Node** gates can accept authenticated compute requests over HTTPS and dispatch to BarraCUDA
+- **Node** gates can accept authenticated compute requests over HTTPS and dispatch to BarraCuda
 - **Nest** gates can accept authenticated storage requests and route to NestGate's content-addressed store
 - The basement mesh becomes a **covalent NUCLEUS** — machines bonded by family seed (SoloKey FIDO2), each running the atomics that match their hardware profile
 

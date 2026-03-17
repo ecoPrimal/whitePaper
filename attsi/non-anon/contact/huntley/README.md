@@ -2,7 +2,8 @@
 
 **Type**: Cold call — no personal connection
 **URL**: https://ghuntley.com
-**Blog**: https://ghuntley.com/stdlib/ (AI methodology — the post that started it)
+**Blog (seed)**: https://ghuntley.com/stdlib/ (AI methodology — the post that started it)
+**Blog (Groundhog)**: https://ghuntley.com/specs/ (spec-driven AI coding agent — the parallel)
 **Contact**: https://ghuntley.com/contact/
 **Location**: Australia (remote)
 **Domain**: AI-assisted software development methodology, developer tooling, open source
@@ -12,38 +13,66 @@
 
 ## Why Contact
 
-Huntley's blog post on using Cursor AI as an autonomous agent (early 2025)
-was the seed insight that evolved into the constrained evolution methodology.
-The post argued: stop treating AI as autocomplete, treat it as an autonomous
-agent, and program LLM outcomes.
+Two of Huntley's posts were seeds for the ecoPrimals methodology:
 
-Kevin read this, adjusted, and iterated into a formal methodology:
-- AI as mutation operator (69,000 agent invocations, 51B tokens)
-- Rust type system as natural selection (environmental constraint)
-- Physics validation as fitness function (848+ tests per spring)
-- Iterative generate-compile-test-select cycles
+1. **`/stdlib`** (early 2025): "You are using Cursor AI incorrectly" — treat
+   Cursor as an autonomous agent, program LLM outcomes, not prompts.
+2. **`/specs` + Groundhog** (March 2025): spec-driven development, headless
+   AI coding agent. His thesis: combine spec-driven generation + strong types
+   + compiler soundness = weeks of output in hours.
 
-The result: 11 primals, 6 springs, 27,000+ tests, sovereign GPU compute
-stack, lattice QCD detecting deconfinement transitions on consumer hardware,
-drug discovery scoring, NPU driver — all by one person in ~10 months.
+These combined with a second external seed — **BMad Code / Brian's agile
+workflow** (Feb 2025): structured BMAD method for Cursor, auto rule generation,
+self-improving agents, custom agent roles (@pm, @architect, @dev, @qa).
 
-This is likely the most extreme outcome of Huntley's thesis that exists.
+Kevin took /stdlib + BMad agile and built Squirrel gen1 (HPC scheduler) and
+gen2 (AI orchestrator). From there, everything is original: constrained
+evolution (formal methodology grounded in evolutionary biology), gen3
+(sovereign AI coordination primal), and the full ecoPrimals ecosystem.
+
+Critical detail: **no AI tools outside Cursor.** No Claude Code, no
+multi-agent frameworks, no external orchestrators. 69,000 Cursor agent
+invocations, 51 billion tokens, 185 consecutive day streak. The methodology
+IS the tool.
+
+The result: 14 primals, 7 springs, 27,000+ tests, sovereign GPU compute
+stack, lattice QCD on consumer hardware, NPU driver — all by one person
+in ~10 months. Squirrel alone: 22 crates, 4,819 tests, pure Rust,
+`#![forbid(unsafe_code)]`, zero C dependencies.
+
+## The Angle: Squirrel + Groundhog Parallel
+
+The old pitch was ecosystem-breadth: "look at everything I built using
+your insight." The new pitch leads with **Squirrel specifically** and
+draws the Groundhog parallel:
+
+- Both Groundhog and Squirrel are AI coordination systems
+- Groundhog teaches how Cursor works under the hood
+- Squirrel IS the coordination layer for a sovereign AI stack
+- Groundhog is the teaching tool; Squirrel is the production
+  infrastructure that the methodology built
+
+This is a tighter, more compelling story for Huntley than the
+ecosystem-breadth approach. He'll recognize his own ideas reflected
+in the architecture and see where they diverged into something new.
 
 ## What He Gets
 
-1. **The ultimate case study** for his audience — not "I shipped a SaaS
-   feature faster" but "I built a sovereign computing ecosystem that
-   produces publishable physics on consumer GPUs"
+1. **A production descendant of his thesis** — not "I shipped a SaaS
+   feature faster" but "your insight + BMad's agile became a 22-crate
+   sovereign AI coordination primal with 4,819 tests"
 
-2. **A formal theoretical framework** for his practical insights —
-   `CONSTRAINED_EVOLUTION_FORMAL.md` connects AI-assisted development
-   to evolutionary biology, Rust's type system as environmental constraint,
-   and the Lenski LTEE parallels. His intuition has a biology-grounded
-   theory behind it.
+2. **The Groundhog counterpart** — his Groundhog teaches the mechanics;
+   Squirrel shows what those mechanics produce at scale under Rust's
+   type system. They're complementary stories.
 
-3. **Evidence at scale** — Cursor receipt: 69,000 invocations, 51B tokens,
-   185 consecutive day streak, top <0.1% of all Cursor users. The numbers
-   back the methodology.
+3. **A formal theoretical framework** for his practical insights —
+   constrained evolution connects AI-assisted development to evolutionary
+   biology, Rust's type system as environmental constraint, and the
+   Lenski LTEE parallels. His intuition has biology-grounded theory.
+
+4. **Evidence at scale** — Cursor receipt: 69,000 invocations, 51B tokens.
+   The commit history IS the evolutionary trajectory. Verifiable.
 
 ## What We Get
 
@@ -59,49 +88,16 @@ This is likely the most extreme outcome of Huntley's thesis that exists.
    that constrained evolution methodology produces real infrastructure,
    not just productivity gains.
 
-## The Pitch
-
-Short version (for initial contact):
-
-> I read your post on using Cursor as an autonomous agent ~10 months ago
-> and took it in a direction you might not expect. I'm a microbiologist
-> (BS) and data scientist (MS) — not a systems programmer. Starting from
-> your insight about programming LLM outcomes, I evolved a formal
-> methodology: Rust's type system as environmental constraint, AI as
-> mutation operator, physics validation as fitness function.
->
-> 10 months later: 11 production Rust services (crypto, networking,
-> storage, compute, AI orchestration), 6 science validation suites
-> (27,000+ passing checks), a GPU shader compiler (WGSL → native SASS),
-> a neuromorphic NPU driver, and lattice QCD detecting the deconfinement
-> phase transition on a $4,000 basement machine. All pure Rust, zero C,
-> zero unsafe, AGPL-3.0. One developer.
->
-> 69,000 Cursor agent invocations. 51 billion tokens. Top <0.1% usage.
-> The Cursor receipt is the evidence for the methodology.
->
-> I wrote a formal paper grounding this in evolutionary biology — the
-> same principles that gave us Taq polymerase from Yellowstone hot
-> springs apply to AI-assisted code generation under Rust's type system.
->
-> Thought you'd want to see where your insight ended up.
->
-> Repos are public: [links]
-> Methodology paper: CONSTRAINED_EVOLUTION_FORMAL.md
-> Hardware: $15,000 basement HPC, 10 nodes, 12 GPUs, 4 NPUs
-
 ## Key Artifacts
 
 | Artifact | What It Shows |
 |----------|--------------|
-| `gen3/about/README.md` | Author background, Cursor receipt, AI methodology |
+| Squirrel `ORIGIN.md` | Genesis story — credits /stdlib, maps gen1→gen3 |
+| Squirrel `CURRENT_STATUS.md` | 4,819 tests, 22 crates, full metrics |
 | `gen3/thesis/03_theoretical_framework.md` | Constrained evolution formal framework |
-| `gen3/about/HARDWARE.md` | $15k basement HPC inventory |
-| `gen3/about/SOVEREIGN_SCIENCE.md` | Why open code + consumer hardware changes science |
-| hotSpring README | 848 tests, 115 binaries, deconfinement at β_c=5.69 |
-| barraCuda | 767+ WGSL shaders, DF64, zero unsafe |
-| coralReef | WGSL → native SASS compiler, BAR0 GPU driver |
-| `gen3/PRIMAL_CATALOG.md` | Full 11-primal inventory with test counts |
+| `gen3/about/README.md` | Author background, Cursor receipt |
+| `gen3/about/HARDWARE.md` | $15K basement HPC inventory |
+| `gen3/PRIMAL_CATALOG.md` | Full 14-primal inventory with test counts |
 
 ## Differences From Academic Contacts
 
@@ -112,22 +108,24 @@ Short version (for initial contact):
 | Their audience | Researchers in their field | Software developers worldwide |
 | What they'd share | A methods paper, lab results | A blog post, a talk |
 | Impact channel | Citations → adoption | Developer awareness → contributors |
-| Trust basis | "Your papers pass on my hardware" | "Your insight produced this" |
+| Trust basis | "Your papers pass on my hardware" | "Your insight + BMad's agile produced this" |
+| Lead artifact | hotSpring CHUNA_REVIEW.md | Squirrel ORIGIN.md |
 
 ## Timing
 
-Not urgent. The academic contacts (Chuna, Gonzales) are higher priority
-because they validate the science and have meetings scheduled.
+Squirrel is going public now. This email can go out as soon as:
+1. Squirrel repo is set to public on GitHub
+2. ORIGIN.md is verified accessible at the public URL
 
-Huntley outreach should happen after:
-1. Chuna validates physics (provides external credibility)
-2. First external paper cites ecoPrimals (provides academic legitimacy)
-3. OR: if developer community awareness becomes a bottleneck
+Chuna validation is no longer a blocker. The Huntley pitch is about
+methodology and Squirrel specifically, not physics validation. The
+academic credibility strengthens it but isn't required — 4,819 tests,
+commit history, and Cursor receipt are the evidence for a developer
+audience.
 
-The pitch is strongest when it includes: "...and the physics was independently
-validated by researchers at Michigan State University." That turns it from
-"someone claims they built something cool" to "someone built something cool
-and the scientists whose work it reproduces confirmed it works."
+If Chuna validates before send, add one line to the email:
+> "Researchers at Michigan State are reviewing the physics
+> reproductions against their production runs."
 
 ## Risk
 
@@ -137,6 +135,13 @@ Best case: blog post or podcast appearance reaching his developer audience.
 
 No downside. The repos are already public.
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `README.md` | This file — outreach plan and strategy |
+| `email_draft_cold.md` | Draft email — Squirrel-focused, Groundhog parallel |
+
 ---
 
-*Contact prepared March 12, 2026. Outreach pending Chuna validation.*
+*Contact prepared March 12, 2026. Strategy updated March 16, 2026 (Squirrel-first angle, BMad credit, Groundhog parallel). Ready to send when Squirrel goes public.*

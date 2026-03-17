@@ -1,7 +1,7 @@
 # Murillo Group Reproduction Studies
 
 **Status**: ALL PHASES COMPLETE — 22 papers, ~700 checks, 39/39 validation suites. Exp 022 (live NPU, 32⁴ production) finished Feb 27.  
-**Purpose**: Reproduce published computational physics work from the Murillo Group (MSU) on consumer hardware, then re-execute on BarraCUDA's Pure Rust vendor-agnostic GPU compute layer  
+**Purpose**: Reproduce published computational physics work from the Murillo Group (MSU) on consumer hardware, then re-execute on BarraCuda's Pure Rust vendor-agnostic GPU compute layer  
 **Last Updated**: February 27, 2026
 
 ---
@@ -12,17 +12,17 @@ Every reproduction study follows the same pattern:
 
 1. **Phase A - Reproduce in Python**: Run the original code (Sarkas, mystic, etc.) on our hardware to validate correctness. Match published results. This proves the HPC produces correct physics and gives us a performance baseline using the traditional scientific Python stack (NumPy, Numba, SciPy).
 
-2. **Phase B - Execute on BarraCUDA**: Re-implement the compute-intensive kernels as WGSL shaders running through ToadStool's BarraCUDA engine. Same physics, same math, but in Pure Rust with GPU execution on **any vendor** - NVIDIA, AMD, Intel, whatever has a WebGPU-compatible driver. No CUDA lock-in. No Python interpreter. No Numba JIT. No C/Fortran FFI. Just Rust dispatching WGSL shaders to whatever GPU is available.
+2. **Phase B - Execute on BarraCuda**: Re-implement the compute-intensive kernels as WGSL shaders running through ToadStool's BarraCuda engine. Same physics, same math, but in Pure Rust with GPU execution on **any vendor** - NVIDIA, AMD, Intel, whatever has a WebGPU-compatible driver. No CUDA lock-in. No Python interpreter. No Numba JIT. No C/Fortran FFI. Just Rust dispatching WGSL shaders to whatever GPU is available.
 
-**Why this matters**: Scientific computing is overwhelmingly locked to Python + CUDA. Sarkas itself acknowledges this - it's "entirely written in Python without calls to C/Fortran hence avoiding a two-language problem." But it still depends on NumPy (C underneath), Numba (LLVM underneath), and FFTW3 (C/Fortran). BarraCUDA actually solves the problem Sarkas is trying to solve: a single-language compute stack that runs on any hardware. And it does it in a compiled, memory-safe language.
+**Why this matters**: Scientific computing is overwhelmingly locked to Python + CUDA. Sarkas itself acknowledges this - it's "entirely written in Python without calls to C/Fortran hence avoiding a two-language problem." But it still depends on NumPy (C underneath), Numba (LLVM underneath), and FFTW3 (C/Fortran). BarraCuda actually solves the problem Sarkas is trying to solve: a single-language compute stack that runs on any hardware. And it does it in a compiled, memory-safe language.
 
 The Phase A → Phase B comparison is itself a research contribution: **can a Pure Rust GPU compute layer match or exceed the performance of the established Python scientific stack for real plasma physics workloads?**
 
 ---
 
-## BarraCUDA: What We Have
+## BarraCuda: What We Have
 
-ToadStool's BarraCUDA submodule has evolved into a comprehensive GPU compute engine. Current inventory from the latest `git pull`:
+ToadStool's BarraCuda submodule has evolved into a comprehensive GPU compute engine. Current inventory from the latest `git pull`:
 
 | Category | Count | Key Operations |
 |----------|-------|----------------|
@@ -65,7 +65,7 @@ He taught Applied Machine Learning (CMSE 890, Spring 2025), where a conversation
 
 ### What
 
-Reproduce Sarkas plasma simulations on the basement HPC, then port the core MD compute kernels to BarraCUDA for vendor-agnostic GPU execution.
+Reproduce Sarkas plasma simulations on the basement HPC, then port the core MD compute kernels to BarraCuda for vendor-agnostic GPU execution.
 
 ### Phase A: Python Reproduction (Validate Correctness)
 
@@ -94,13 +94,13 @@ The Python stack for each: NumPy arrays → Numba JIT for loops → pyfftw for F
 - CPU performance comparison: EPYC 64c vs i9-14900K vs 5800X3D (same simulation, same parameters)
 - Profiling data: where does Sarkas spend time? (force calc vs FFT vs neighbor list vs integration)
 
-### Phase B: BarraCUDA Port (Vendor-Agnostic GPU Physics)
+### Phase B: BarraCuda Port (Vendor-Agnostic GPU Physics)
 
-Take the profiled hot paths from Phase A and implement them as WGSL shaders dispatched through BarraCUDA. The goal is a Pure Rust MD engine that runs on any GPU.
+Take the profiled hot paths from Phase A and implement them as WGSL shaders dispatched through BarraCuda. The goal is a Pure Rust MD engine that runs on any GPU.
 
-**Kernel mapping** (Sarkas Python → BarraCUDA WGSL):
+**Kernel mapping** (Sarkas Python → BarraCuda WGSL):
 
-| MD Operation | Sarkas (Python) | BarraCUDA (WGSL) | Status |
+| MD Operation | Sarkas (Python) | BarraCuda (WGSL) | Status |
 |-------------|-----------------|-------------------|--------|
 | Pairwise forces | NumPy broadcasting + Numba | Custom f64 Yukawa force shader (PBC, PE) | **DONE** (Phase C, 9/9 validated) |
 | Coulomb screening | SciPy `erfc()` | `erfc.wgsl` + `erf.wgsl` | **Ready** |
@@ -113,20 +113,20 @@ Take the profiled hot paths from Phase A and implement them as WGSL shaders disp
 | Tensor contractions | NumPy `einsum()` | `einsum.wgsl` | **Ready** |
 | Double-precision forces | NumPy float64 | SHADER_F64 + `math_f64.wgsl` (27 transcendental functions) | **DONE** (Phase C, sub-ULP precision) |
 
-**Key engineering challenge**: FFT. Sarkas uses FFTW3 for Particle-Particle Particle-Mesh (PPPM) long-range force decomposition. BarraCUDA has NTT/INTT (number theoretic transform - for FHE), but a true complex FFT shader is needed for PPPM. This is the primary new development required.
+**Key engineering challenge**: FFT. Sarkas uses FFTW3 for Particle-Particle Particle-Mesh (PPPM) long-range force decomposition. BarraCuda has NTT/INTT (number theoretic transform - for FHE), but a true complex FFT shader is needed for PPPM. This is the primary new development required.
 
 **Hardware targets** (Phase B runs on GPUs):
 
 | Gate | GPU | Role |
 |------|-----|------|
-| Northgate | RTX 5090 | Primary BarraCUDA execution, best single-GPU |
+| Northgate | RTX 5090 | Primary BarraCuda execution, best single-GPU |
 | Strandgate | RTX 3090 + RX 6950 XT | Cross-vendor comparison (NVIDIA vs AMD, same shader) |
 | Eastgate | RTX 4070 | Mid-tier comparison |
 
 **Deliverables**:
 - Pure Rust MD force kernel running on GPU via WGSL
 - Same physics producing identical results to Sarkas Python (bit-for-bit or within float tolerance)
-- Performance comparison: Python/NumPy/Numba on 64 CPU cores vs BarraCUDA on RTX 5090 vs RTX 3090 vs RX 6950 XT
+- Performance comparison: Python/NumPy/Numba on 64 CPU cores vs BarraCuda on RTX 5090 vs RTX 3090 vs RX 6950 XT
 - **The headline result**: same plasma simulation running on NVIDIA and AMD from the same shader, no CUDA, no ROCm, no vendor SDK
 - NPU exploration: can Akida accelerate any subproblem (force classification, surrogate potential)?
 
@@ -142,7 +142,7 @@ Take the profiled hot paths from Phase A and implement them as WGSL shaders disp
 
 ### What
 
-Reproduce the optimizer-driven sampling method from "Efficient learning of accurate surrogates for simulations of complex systems" on our hardware, then train the same surrogates entirely through BarraCUDA's neural network stack.
+Reproduce the optimizer-driven sampling method from "Efficient learning of accurate surrogates for simulations of complex systems" on our hardware, then train the same surrogates entirely through BarraCuda's neural network stack.
 
 ### Phase A: Python Reproduction (Validate Results)
 
@@ -166,11 +166,11 @@ The paper uses:
 - Reproduction of paper's key figures on consumer GPU hardware
 - Training time comparison: RTX 5090 vs RTX 3090 (Python/PyTorch baseline)
 
-### Phase B: BarraCUDA Surrogate Training (Pure Rust ML)
+### Phase B: BarraCuda Surrogate Training (Pure Rust ML)
 
-Re-implement the surrogate training pipeline entirely in BarraCUDA. The neural network components already exist:
+Re-implement the surrogate training pipeline entirely in BarraCuda. The neural network components already exist:
 
-| Surrogate Component | Python Stack | BarraCUDA | Status |
+| Surrogate Component | Python Stack | BarraCuda | Status |
 |--------------------|-------------|-----------|--------|
 | Linear layers | PyTorch `nn.Linear` | `linear.wgsl` | **Ready** |
 | Activation functions | PyTorch GELU/ReLU/etc. | `gelu.wgsl`, `silu.wgsl`, `mish.wgsl`, etc. (30+ activations) | **Ready** |
@@ -182,19 +182,19 @@ Re-implement the surrogate training pipeline entirely in BarraCUDA. The neural n
 | RBF networks | SciPy/custom | Custom kernel needed (but `pairwise_distance.wgsl` + `exp.wgsl` = RBF basis) | **Composable** |
 | Graph nets (if needed) | PyG | `gcn_conv.wgsl`, `gat_conv.wgsl`, `sage_conv.wgsl`, `message_passing.wgsl` | **Ready** |
 
-The optimizer-driven sampling loop itself (mystic) is CPU-side logic. The compute-intensive part - training the neural surrogate on each batch of directed samples - is what moves to BarraCUDA.
+The optimizer-driven sampling loop itself (mystic) is CPU-side logic. The compute-intensive part - training the neural surrogate on each batch of directed samples - is what moves to BarraCuda.
 
 **Hardware targets** (Phase B runs on GPUs):
 
 | Gate | GPU | Role |
 |------|-----|------|
-| Northgate | RTX 5090 | Primary BarraCUDA surrogate training |
+| Northgate | RTX 5090 | Primary BarraCuda surrogate training |
 | Strandgate | RTX 3090 + RX 6950 XT | Cross-vendor: same training, NVIDIA vs AMD |
 | Eastgate | RTX 4070 | Mid-tier comparison |
 
 **Deliverables**:
-- Same surrogate model trained via BarraCUDA producing equivalent accuracy to Python/PyTorch
-- Training time comparison: PyTorch on RTX 5090 vs BarraCUDA on RTX 5090 vs BarraCUDA on RX 6950 XT
+- Same surrogate model trained via BarraCuda producing equivalent accuracy to Python/PyTorch
+- Training time comparison: PyTorch on RTX 5090 vs BarraCuda on RTX 5090 vs BarraCuda on RX 6950 XT
 - **The headline result**: scientific ML surrogate trained entirely in Pure Rust, running on any GPU vendor, no Python, no PyTorch, no CUDA
 - Cross-vendor accuracy validation: NVIDIA-trained surrogate vs AMD-trained surrogate produce identical predictions
 
@@ -204,7 +204,7 @@ The optimizer-driven sampling loop itself (mystic) is CPU-side logic. The comput
 
 ### What
 
-Run Murillo Group's agent-based influenza models on the basement HPC, then explore BarraCUDA GPU-accelerated agent simulation.
+Run Murillo Group's agent-based influenza models on the basement HPC, then explore BarraCuda GPU-accelerated agent simulation.
 
 ### Phase A: Python Reproduction (CPU Scaling)
 
@@ -225,11 +225,11 @@ Agent-based models are inherently parallelizable and memory-intensive. Strandgat
 - CPU scaling: how does performance change from 8 → 16 → 32 → 64 cores?
 - Comparison vs i9-14900K (fewer cores, higher clock)
 
-### Phase B: BarraCUDA Agent Simulation (GPU-Parallel Agents)
+### Phase B: BarraCuda Agent Simulation (GPU-Parallel Agents)
 
-Agent-based models map naturally to GPU compute: each agent is an independent work item, interactions are local (pairwise distance), and state updates are parallel. BarraCUDA already has the primitives:
+Agent-based models map naturally to GPU compute: each agent is an independent work item, interactions are local (pairwise distance), and state updates are parallel. BarraCuda already has the primitives:
 
-| ABM Operation | BarraCUDA | Notes |
+| ABM Operation | BarraCuda | Notes |
 |--------------|-----------|-------|
 | Agent distance/contact | `pairwise_distance.wgsl`, `cdist.wgsl` | Spatial proximity = contact network |
 | State transitions | `masked_fill.wgsl`, `where_op.wgsl` | Conditional state updates (S→I→R) |
@@ -238,7 +238,7 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 | Spatial grid | `scatter.wgsl`, `gather.wgsl` | Agent-to-grid mapping |
 | Graph structure | `message_passing.wgsl`, `gcn_conv.wgsl` | Contact network as graph |
 
-**The question**: can hundreds of thousands of agents be simulated per GPU dispatch, with contact networks evaluated via `message_passing.wgsl`? If so, BarraCUDA turns ABMs from a CPU-scaling problem into a GPU-throughput problem.
+**The question**: can hundreds of thousands of agents be simulated per GPU dispatch, with contact networks evaluated via `message_passing.wgsl`? If so, BarraCuda turns ABMs from a CPU-scaling problem into a GPU-throughput problem.
 
 **Hardware targets**:
 
@@ -249,8 +249,8 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 | Strandgate | RX 6950 XT | Cross-vendor ABM on AMD |
 
 **Deliverables**:
-- GPU-accelerated agent simulation via BarraCUDA
-- Population scaling: how many agents can BarraCUDA handle per timestep on RTX 5090 vs 64 CPU cores?
+- GPU-accelerated agent simulation via BarraCuda
+- Population scaling: how many agents can BarraCuda handle per timestep on RTX 5090 vs 64 CPU cores?
 - Cross-domain analysis: structural parallels between ABM and primal coordination
 - NPU exploration: can Akida's spiking networks model agent decision-making (state transition as spike event)?
 
@@ -262,20 +262,20 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 
 | Task | Status |
 |------|--------|
-| BarraCUDA op inventory and capability mapping | **Done** |
+| BarraCuda op inventory and capability mapping | **Done** |
 | Identify all Murillo Group repos and data sources | **Done** |
 | Locate Zenodo datasets + Code Ocean capsule | **Done** (Code Ocean gated — rebuilt from scratch) |
-| Document BarraCUDA → Sarkas kernel mapping | **Done** |
+| Document BarraCuda → Sarkas kernel mapping | **Done** |
 | Read Sarkas docs/tutorials thoroughly | **Done** |
 | Read Nature MI paper in full | **Done** |
 | Download Zenodo datasets locally | **Done** |
 | Clone all Murillo Group repos | **Done** |
-| Identify FFT gap in BarraCUDA (needed for PPPM) | **Identified** |
+| Identify FFT gap in BarraCuda (needed for PPPM) | **Identified** |
 | **Phase A: Sarkas MD** (12 DSF cases, 60 checks) | **DONE — 60/60 pass** |
 | **Phase A: TTM** (3 species, local + hydro) | **DONE — 6/6 pass** |
 | **Phase A: Surrogate learning** (9 benchmarks + EOS) | **DONE — 15/15 pass** |
 | **Phase A: Nuclear EOS** (Python L1 + L2) | **DONE — L1 chi2=6.62, L2 chi2=1.93** |
-| **Phase B: Nuclear EOS** (BarraCUDA L1 + L2) | **DONE — L1 chi2=2.27 (478x faster), L2 chi2=16.11** |
+| **Phase B: Nuclear EOS** (BarraCuda L1 + L2) | **DONE — L1 chi2=2.27 (478x faster), L2 chi2=16.11** |
 | **Phase B: GPU FP64 validation** | **DONE — 4.55e-13 MeV max error** |
 | **Phase C: GPU MD** (9 PP Yukawa, f64 WGSL) | **DONE — 9/9 pass, 0.000% drift, 3.7x GPU speedup** |
 | **Phase D: Native f64 builtins + N-scaling** | **DONE — 2-6× throughput. N=10k in 5.3 min. 0.000% drift** |
@@ -304,16 +304,16 @@ Agent-based models map naturally to GPU compute: each agent is an independent wo
 | Agent-based model code acquisition | Murillo collaboration |
 | Agent-based model CPU scaling | ABM code available |
 
-### Post-NUCLEUS (Phase B - BarraCUDA Execution)
+### Post-NUCLEUS (Phase B - BarraCuda Execution)
 
 | Task | Depends On |
 |------|-----------|
 | MD force kernel WGSL shader | Sarkas profiling (know the hot path) |
-| FFT WGSL shader (for PPPM) | New BarraCUDA development |
-| MD validation (BarraCUDA vs Sarkas results match) | Force kernel + FFT ready |
+| FFT WGSL shader (for PPPM) | New BarraCuda development |
+| MD validation (BarraCuda vs Sarkas results match) | Force kernel + FFT ready |
 | MD cross-vendor benchmark (NVIDIA vs AMD) | MD validation |
-| Surrogate training via BarraCUDA neural stack | Phase A surrogate results |
-| Surrogate cross-vendor training (same model, different GPU) | BarraCUDA surrogate working |
+| Surrogate training via BarraCuda neural stack | Phase A surrogate results |
+| Surrogate cross-vendor training (same model, different GPU) | BarraCuda surrogate working |
 | ABM GPU agent simulation | Phase A ABM results |
 | ABM population scaling on GPU vs CPU | ABM GPU working |
 
@@ -345,11 +345,11 @@ See `MISE_EN_PLACE.md` for the full checklist. Key items:
 
 Sarkas solved one problem: making MD accessible by writing it in pure Python instead of C/Fortran. But it still depends on NumPy (C underneath), Numba (LLVM underneath), pyfftw (FFTW3, C/Fortran underneath), and it's locked to CPUs.
 
-BarraCUDA solves the next problem: making GPU compute accessible by writing it in Pure Rust with WGSL shaders that run on **any** GPU vendor. No CUDA. No ROCm. No HIP. No OpenCL. No vendor SDK. One set of shaders, every GPU.
+BarraCuda solves the next problem: making GPU compute accessible by writing it in Pure Rust with WGSL shaders that run on **any** GPU vendor. No CUDA. No ROCm. No HIP. No OpenCL. No vendor SDK. One set of shaders, every GPU.
 
-If we can demonstrate that real plasma physics (Sarkas-equivalent simulations) and real scientific ML (surrogate training) run correctly and competitively on BarraCUDA, that's not just a reproduction study - it's a demonstration that **scientific computing doesn't have to be locked to interpretive languages or proprietary GPU stacks**.
+If we can demonstrate that real plasma physics (Sarkas-equivalent simulations) and real scientific ML (surrogate training) run correctly and competitively on BarraCuda, that's not just a reproduction study - it's a demonstration that **scientific computing doesn't have to be locked to interpretive languages or proprietary GPU stacks**.
 
-This connects directly to the ecoPrimals thesis: sovereignty through constraint. BarraCUDA constrained itself to WGSL/WebGPU (portable, vendor-neutral) and emerged with 226+ shaders that can run plasma physics on an AMD card or an NVIDIA card from the same binary. The same pattern that produced Taq polymerase from a hot spring produces universal GPU compute from a portability constraint.
+This connects directly to the ecoPrimals thesis: sovereignty through constraint. BarraCuda constrained itself to WGSL/WebGPU (portable, vendor-neutral) and emerged with 226+ shaders that can run plasma physics on an AMD card or an NVIDIA card from the same binary. The same pattern that produced Taq polymerase from a hot spring produces universal GPU compute from a portability constraint.
 
 ---
 

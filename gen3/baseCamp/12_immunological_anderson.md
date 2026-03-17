@@ -335,7 +335,7 @@ recommendation.
 | Rust cross-language (original) | 53/53 | PASS |
 | Rust cross-language (extended) | 187/187 | PASS |
 | Rust unit tests | 27/27 | PASS |
-| BarraCUDA GPU | 4/4 | PASS |
+| BarraCuda GPU | 4/4 | PASS |
 | Compute dispatch | 3/3 | PASS |
 | Mixed hardware (NUCLEUS) | 7/7 | PASS |
 | **Total** | **329** | **ALL PASS** |

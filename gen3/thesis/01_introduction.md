@@ -26,7 +26,7 @@ This dissertation makes five primary contributions:
 
 1. **A formal theory of constrained evolution** that bridges biological and computational systems, grounded in three empirical biological precedents (Taq polymerase, Lenski LTEE, Anderson population genomics) and formalized with a fitness landscape model applicable to both domains (Chapters 3–4).
 
-2. **A sovereign scientific computing platform** — the ecoPrimals ecosystem — comprising 12 Rust "primals" (autonomous subsystems) including BarraCUDA, a vendor-agnostic GPU compute engine that achieves f64 precision on consumer GPUs via WGSL/Vulkan without CUDA dependency (Chapters 5–6). The NTT→FFT structural evolution within BarraCUDA provides a concrete, quantitative case study of constrained evolution in computational systems.
+2. **A sovereign scientific computing platform** — the ecoPrimals ecosystem — comprising 12 Rust "primals" (autonomous subsystems) including BarraCuda, a vendor-agnostic GPU compute engine that achieves f64 precision on consumer GPUs via WGSL/Vulkan without CUDA dependency (Chapters 5–6). The NTT→FFT structural evolution within BarraCuda provides a concrete, quantitative case study of constrained evolution in computational systems.
 
 3. **An empirical validation framework** (the "springs") that validates the computing infrastructure against published, peer-reviewed science across eight domains: computational plasma physics, precision agriculture, life science and analytical chemistry, measurement noise and uncertainty, machine learning primitives, and others (Chapters 7–12). 11,161+ quantitative checks pass across 70+ reproduced papers.
 
@@ -54,7 +54,7 @@ The author's background — BS Microbiology with bench experience in high-throug
 
 **Part II (Chapters 3–4)** presents the theoretical framework: the constrained evolution principle formalized with fitness landscape models, and the accept-and-generate observation as a design principle.
 
-**Part III (Chapters 5–6)** describes the system: the ecoPrimals architecture (11 primals, capability-based composition, NUCLEUS deployment model) and BarraCUDA (914 WGSL shaders, f64 GPU compute, vendor-agnostic scientific computing).
+**Part III (Chapters 5–6)** describes the system: the ecoPrimals architecture (11 primals, capability-based composition, NUCLEUS deployment model) and BarraCuda (914 WGSL shaders, f64 GPU compute, vendor-agnostic scientific computing).
 
 **Part IV (Chapters 7–12)** presents the experimental validation: the spring methodology and five domain-specific results chapters, each structured as a self-contained validation study with public, reproducible repositories.
 

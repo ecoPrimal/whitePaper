@@ -1,8 +1,8 @@
-# Chapter 6: BarraCUDA — Vendor-Agnostic GPU Compute
+# Chapter 6: BarraCuda — Vendor-Agnostic GPU Compute
 
 ## 6.1 Overview
 
-BarraCUDA is ToadStool's GPU compute library: Pure Rust, WGSL shaders, Vulkan backend, f64 precision on consumer hardware. It evolved under three selective pressures — machine learning, fully homomorphic encryption, and universal GPU portability — and proved fit for computational physics without being designed for it. The NTT→FFT structural evolution is the principal case study of constrained evolution in the codebase.
+BarraCuda is ToadStool's GPU compute library: Pure Rust, WGSL shaders, Vulkan backend, f64 precision on consumer hardware. It evolved under three selective pressures — machine learning, fully homomorphic encryption, and universal GPU portability — and proved fit for computational physics without being designed for it. The NTT→FFT structural evolution is the principal case study of constrained evolution in the codebase.
 
 **Reference**: `gen3/data/BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`, `gen3/thesis/13_quantitative_evidence.md` §13.2.
 
@@ -49,7 +49,7 @@ BarraCUDA is ToadStool's GPU compute library: Pure Rust, WGSL shaders, Vulkan ba
 
 ### 6.3.2 Cross-Domain Reuse
 
-neuralSpring's Isomorphism Theorem: all neural architectures decompose into 6 primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating). BarraCUDA implements all six. The same primitives serve hotSpring (plasma physics), wetSpring (biology), and neuralSpring (ML) without modification.
+neuralSpring's Isomorphism Theorem: all neural architectures decompose into 6 primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating). BarraCuda implements all six. The same primitives serve hotSpring (plasma physics), wetSpring (biology), and neuralSpring (ML) without modification.
 
 ---
 
@@ -57,7 +57,7 @@ neuralSpring's Isomorphism Theorem: all neural architectures decompose into 6 pr
 
 ### 6.4.1 Background
 
-BarraCUDA's Number Theoretic Transform (NTT) evolved for fully homomorphic encryption — polynomial multiplication in ℤ_q. The Fast Fourier Transform, needed for physics (lattice QCD, spectral methods, PPPM), shares the Cooley-Tukey butterfly structure.
+BarraCuda's Number Theoretic Transform (NTT) evolved for fully homomorphic encryption — polynomial multiplication in ℤ_q. The Fast Fourier Transform, needed for physics (lattice QCD, spectral methods, PPPM), shares the Cooley-Tukey butterfly structure.
 
 ### 6.4.2 Structural Comparison (Measured from Source)
 
@@ -83,7 +83,7 @@ The FFT is *shorter* than NTT because complex floats (`vec2<f32>`) map to GPU ha
 
 ### 6.4.3 Interpretation
 
-No one designed BarraCUDA for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly *is* the FFT's skeleton. **This is Taq polymerase in code**: the hot spring (FHE constraint) produced an enzyme (NTT butterfly) useful far beyond its original environment.
+No one designed BarraCuda for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly *is* the FFT's skeleton. **This is Taq polymerase in code**: the hot spring (FHE constraint) produced an enzyme (NTT butterfly) useful far beyond its original environment.
 
 ---
 
@@ -113,7 +113,7 @@ The Pure Rust constraint eliminated CUDA and forced exploration of Vulkan. Vulka
 
 ### 6.5.4 Methodology: Capability Hunting
 
-The f64 discovery exemplifies a broader pattern in BarraCUDA's development. Rather than accepting vendor SDK boundaries (CUDA says consumer f64 is 1:64; therefore consumer GPUs can't do science), the approach is:
+The f64 discovery exemplifies a broader pattern in BarraCuda's development. Rather than accepting vendor SDK boundaries (CUDA says consumer f64 is 1:64; therefore consumer GPUs can't do science), the approach is:
 
 1. Analyze the need (f64 for MD, lattice QCD, nuclear structure)
 2. Probe the hardware for actual capabilities (Vulkan device features, `SHADER_F64`)

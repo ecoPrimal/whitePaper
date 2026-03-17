@@ -2,7 +2,7 @@
 
 **Date**: February 27, 2026  
 **Purpose**: Document how hotSpring validation provides quantitative evidence for the constrained evolution thesis  
-**Context**: BarraCUDA has now been validated through all phases: A (Python control, 86/86), B (nuclear EOS), C (GPU MD, 9/9), D (native f64 builtins, N-scaling), E (paper-parity long run, 80k steps), plus lattice QCD (6 papers, 32⁴ production), spectral theory (4 papers, 45/45), transport coefficients (13/13 Green-Kubo), screened Coulomb (23/23), and NPU integration (Exp 020-022, live AKD1000). **Total: 22 papers, ~700 checks, 39/39 suites.**
+**Context**: BarraCuda has now been validated through all phases: A (Python control, 86/86), B (nuclear EOS), C (GPU MD, 9/9), D (native f64 builtins, N-scaling), E (paper-parity long run, 80k steps), plus lattice QCD (6 papers, 32⁴ production), spectral theory (4 papers, 45/45), transport coefficients (13/13 Green-Kubo), screened Coulomb (23/23), and NPU integration (Exp 020-022, live AKD1000). **Total: 22 papers, ~700 checks, 39/39 suites.**
 
 ---
 
@@ -69,7 +69,7 @@ Each cycle follows the constrained evolution pattern:
 
 ### 3.2 Convergent Evolution with SciPy
 
-The most striking evidence: BarraCUDA's `eigh_f64` (Jacobi algorithm) evolved from ML linear algebra needs, yet when validated against `numpy.linalg.eigh` (LAPACK) on HFB Hamiltonians, it produces matching eigenvalues to machine precision. The algorithm is different (Jacobi vs Householder+QR), but the mathematical convergence is identical.
+The most striking evidence: BarraCuda's `eigh_f64` (Jacobi algorithm) evolved from ML linear algebra needs, yet when validated against `numpy.linalg.eigh` (LAPACK) on HFB Hamiltonians, it produces matching eigenvalues to machine precision. The algorithm is different (Jacobi vs Householder+QR), but the mathematical convergence is identical.
 
 Similarly, `brent` was implemented for general optimization, but when used for BCS chemical potential (a physics-specific application), it matches `scipy.optimize.brentq` to 10^-10 precision.
 
@@ -84,7 +84,7 @@ Before: hotSpring → nalgebra → LAPACK → Fortran
 After:  hotSpring → barracuda::eigh_f64 (Pure Rust, zero deps)
 ```
 
-This mirrors the biological analogy: a specialized organism (BarraCUDA) eventually internalizes all capabilities needed for its ecological niche.
+This mirrors the biological analogy: a specialized organism (BarraCuda) eventually internalizes all capabilities needed for its ecological niche.
 
 ---
 
@@ -122,7 +122,7 @@ The GPU MD pipeline uses the same mathematical substrate that ML workloads evolv
 
 ### 4.3 What Phase C Proves About Constrained Evolution
 
-1. **ML-evolved math is physics-complete for MD.** Every mathematical operation needed for Yukawa OCP simulation already existed in BarraCUDA from ML/FHE development. No new math functions were required — only new compositions of existing functions.
+1. **ML-evolved math is physics-complete for MD.** Every mathematical operation needed for Yukawa OCP simulation already existed in BarraCuda from ML/FHE development. No new math functions were required — only new compositions of existing functions.
 
 2. **The GPU substrate is the same for ML and physics.** The same `SHADER_F64` capability that accelerated nuclear EOS evaluation (Phase B) runs molecular dynamics force kernels. One GPU, one shader language, two domains.
 
@@ -132,7 +132,7 @@ The GPU MD pipeline uses the same mathematical substrate that ML workloads evolv
 
 ## 5. Performance Comparison as Evolution Metric
 
-| Metric | Python (incumbent) | BarraCUDA (evolved) | Evolution Factor |
+| Metric | Python (incumbent) | BarraCuda (evolved) | Evolution Factor |
 |--------|-------------------|--------------------|-----------------:|
 | L1 accuracy | 6.62 chi2/datum | 2.27 | 2.9x |
 | L2 accuracy | 1.93 chi2/datum | 16.11 | Python leads (sampling) |

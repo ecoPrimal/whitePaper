@@ -169,7 +169,7 @@ This is discussed in biological terms in `CONSTRAINED_EVOLUTION_FORMAL.md` §4.4
 
 **Components**: Tower Atomic + ToadStool (compute)
 
-Node Atomic extends Tower with universal compute orchestration. ToadStool provides isomorphic workload execution across CPU, GPU, neuromorphic hardware, WebAssembly, and containers. Its BarraCUDA library provides 124 tensor operations with WGSL shaders that run identically on any compute substrate.
+Node Atomic extends Tower with universal compute orchestration. ToadStool provides isomorphic workload execution across CPU, GPU, neuromorphic hardware, WebAssembly, and containers. Its BarraCuda library provides 124 tensor operations with WGSL shaders that run identically on any compute substrate.
 
 **Capabilities added**: `compute.*` (workload execution, GPU detection), `ai.local_inference`, `workload.*` (scheduling, orchestration).
 

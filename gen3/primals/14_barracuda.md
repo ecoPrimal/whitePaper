@@ -23,7 +23,7 @@ barraCuda is the math engine of ecoPrimals. Every GPU-accelerated computation â€
 
 barraCuda began as a crate inside ToadStool. As the springs matured, their compute demands grew specific: hotSpring needed Yukawa force kernels and lattice QCD; wetSpring needed biodiversity indices and ODE integrators; neuralSpring needed attention mechanisms and reservoir computing. The math was outgrowing ToadStool's hardware-dispatch mission.
 
-The separation followed the same pattern as every primal split: one responsibility was consuming disproportionate surface area. ToadStool's 50+ crates included BarraCUDA's 628+ shaders, and the shader count was growing faster than the infrastructure code. The boundary became clear: ToadStool owns hardware, barraCuda owns math.
+The separation followed the same pattern as every primal split: one responsibility was consuming disproportionate surface area. ToadStool's 50+ crates included BarraCuda's 628+ shaders, and the shader count was growing faster than the infrastructure code. The boundary became clear: ToadStool owns hardware, barraCuda owns math.
 
 barraCuda is now a standalone primal with its own IPC server, health checks, and capability advertisement. It discovers ToadStool for dispatch and coralReef for sovereign compilation, but it can also dispatch through `wgpu` directly when sovereign compilation is not required.
 

@@ -1,7 +1,7 @@
 # Mise en Place - Control Experiment Setup
 
 **Status**: Historical — all preparation complete, all phases executed  
-**Purpose**: Set up the Python scientific computing stack to reproduce Murillo Group work as our control experiment. BarraCUDA evolves in parallel on ToadStool's timeline.  
+**Purpose**: Set up the Python scientific computing stack to reproduce Murillo Group work as our control experiment. BarraCuda evolves in parallel on ToadStool's timeline.  
 **Last Updated**: February 27, 2026 (status update; original content preserved as fossil record)
 
 **Implementation**: `ecoPrimals/hotSpring/` - the working project directory with conda environments, clone scripts, benchmark protocols, and all control experiment work.
@@ -19,7 +19,7 @@ Mise en place: everything in its place before cooking begins. This document is t
 - **`hotSpring/benchmarks/`** - Cross-gate benchmark results and protocol
 - **`hotSpring/data/`** - Reference data (Dense Plasma Properties DB, Zenodo downloads)
 
-Phase B (BarraCUDA re-execution) evolves in ToadStool independently. See `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md` for the gap analysis that informs ToadStool's roadmap.
+Phase B (BarraCuda re-execution) evolves in ToadStool independently. See `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md` for the gap analysis that informs ToadStool's roadmap.
 
 **What can happen now** (no NUCLEUS needed):
 - Clone repos, download data, install Sarkas, run tutorials on a single gate
@@ -345,7 +345,7 @@ System-level: FFTW3 dev libraries, gfortran (for FMM3D compilation).
 - [x] Plan storage architecture (local now, Westgate later)
 - [x] Plan hardware assignment for cross-gate benchmarks
 - [x] Document all Python environment requirements
-- [x] Map BarraCUDA capabilities to scientific computing needs (see `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`)
+- [x] Map BarraCuda capabilities to scientific computing needs (see `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md`)
 - [x] Identify gaps for Phase B (FFT, complex arithmetic, PBC, force kernels, Bessel functions)
 
 ### Do Now (Any Gate, No NUCLEUS) — Phase A COMPLETE
@@ -381,12 +381,12 @@ System-level: FFTW3 dev libraries, gfortran (for FMM3D compilation).
 - [ ] Run TTM parameter sweeps on Strandgate
 - [ ] Acquire ABM code from Murillo Group (collaboration dependent)
 
-### Phase B (BarraCUDA - Evolves on ToadStool's Timeline)
+### Phase B (BarraCuda - Evolves on ToadStool's Timeline)
 
-BarraCUDA evolves in ToadStool independently. The Phase A control results tell us exactly what to target. See:
+BarraCuda evolves in ToadStool independently. The Phase A control results tell us exactly what to target. See:
 - `BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md` - what new shaders to evolve
 - `MURILLO_REPRODUCTION_PLAN.md` - kernel-to-shader mapping for each study
 
 ---
 
-**The control experiment comes first. Get Sarkas running, get correct physics, get profiling data. That data drives everything - it tells us where BarraCUDA needs to evolve and what performance target to beat.**
+**The control experiment comes first. Get Sarkas running, get correct physics, get profiling data. That data drives everything - it tells us where BarraCuda needs to evolve and what performance target to beat.**

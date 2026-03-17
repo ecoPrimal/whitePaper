@@ -175,7 +175,7 @@ OpenCL (Stone et al., 2010) and Vulkan Compute (Sellers, 2016) offer vendor-agno
 
 ### 2.7.3 Gap Addressed
 
-BarraCUDA demonstrates that f64 scientific computing on consumer GPUs is possible via WGSL/Vulkan without CUDA dependency, achieving paper-parity results on $600 hardware. This addresses the vendor lock-in problem directly and connects to the constrained evolution thesis: the Pure Rust constraint (no C dependencies, no CUDA) forced the exploration of WGSL/Vulkan, producing a vendor-agnostic solution that would not have been discovered under the conventional constraint set.
+BarraCuda demonstrates that f64 scientific computing on consumer GPUs is possible via WGSL/Vulkan without CUDA dependency, achieving paper-parity results on $600 hardware. This addresses the vendor lock-in problem directly and connects to the constrained evolution thesis: the Pure Rust constraint (no C dependencies, no CUDA) forced the exploration of WGSL/Vulkan, producing a vendor-agnostic solution that would not have been discovered under the conventional constraint set.
 
 ---
 

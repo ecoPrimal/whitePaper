@@ -2,7 +2,7 @@
 
 ## 12.1 Validation Summary
 
-neuralSpring validates BarraCUDA's ML primitives against published neural network architectures and evolutionary computation methods. 2,450+ checks pass across 25 reproduced papers + 5 WDM surrogates: 206 Python baselines (Phases 0, 0+, 0++), 31 WDM Python baselines, 1600+ Rust/GPU validations (Phases 1–5e), and 186 WDM Rust validations (nW-01..05). neuralSpring establishes the Isomorphism Theorem — that all neural architectures decompose into 6 fundamental primitives — and validates that BarraCUDA implements all six, with ~90% of production math running on GPU. The WDM surrogate queue (Sessions 79–87) extends validation to reservoir computing: LSTM fixed-weight reservoirs with pooled readout (nW-03) and Echo State Networks with ridge regression readout (nW-05).
+neuralSpring validates BarraCuda's ML primitives against published neural network architectures and evolutionary computation methods. 2,450+ checks pass across 25 reproduced papers + 5 WDM surrogates: 206 Python baselines (Phases 0, 0+, 0++), 31 WDM Python baselines, 1600+ Rust/GPU validations (Phases 1–5e), and 186 WDM Rust validations (nW-01..05). neuralSpring establishes the Isomorphism Theorem — that all neural architectures decompose into 6 fundamental primitives — and validates that BarraCuda implements all six, with ~90% of production math running on GPU. The WDM surrogate queue (Sessions 79–87) extends validation to reservoir computing: LSTM fixed-weight reservoirs with pooled readout (nW-03) and Echo State Networks with ridge regression readout (nW-05).
 
 ### Table 12.1 — Phase Summary
 
@@ -12,8 +12,8 @@ neuralSpring validates BarraCUDA's ML primitives against published neural networ
 | Phase 0+ (Scholarly reproductions) | PINN, DeepONet, LeNet-5, ERA5 LSTM, quantization | 31 | **31/31** |
 | Phase 0++ (Extended reproductions) | Dolson, Liu, Waters, Kachkovskiy, Anderson (15 papers) | 127 | **127/127** |
 | Phase 1a (neuralSpring-native Rust) | Rust port of all Python experiments | 183 | **183/183** |
-| Phase 1b (BarraCUDA CPU primitives) | GEMM, attention, normalization, gating, reduction | 272 | **272/272** |
-| Phase 2 (BarraCUDA CPU ports) | Full model inference in Rust | 203 | **203/203** |
+| Phase 1b (BarraCuda CPU primitives) | GEMM, attention, normalization, gating, reduction | 272 | **272/272** |
+| Phase 2 (BarraCuda CPU ports) | Full model inference in Rust | 203 | **203/203** |
 | Phase 3c (GPU shaders) | Individual shader validation | 108 | **108/108** |
 | Phase 3d (GPU pipeline + cross-dispatch) | End-to-end GPU inference | 94 | **94/94** |
 | Phase 4 (GPU pipelines, PRNG, MHA, eigh) | Advanced GPU validation | 100+ | **All pass** |
@@ -63,7 +63,7 @@ coralForge is the strongest test of the Isomorphism Theorem: structure predictio
 | **Reduction** | `reduce_sum.wgsl` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Gating** | `lstm_cell.wgsl` | — | — | ✓ | — | — | — |
 
-All neural architectures decompose into these 6 primitives. BarraCUDA implements all 6 as WGSL shaders. This means any architecture that can be expressed as a composition of these primitives can run on any Vulkan-capable GPU without CUDA.
+All neural architectures decompose into these 6 primitives. BarraCuda implements all 6 as WGSL shaders. This means any architecture that can be expressed as a composition of these primitives can run on any Vulkan-capable GPU without CUDA.
 
 ---
 
@@ -136,8 +136,8 @@ PINN note: The 5.1% L2 error vs the paper's 0.06% reflects Adam-only training (n
 | Phase | Binary/Suite | Primitives Tested | Checks | Status |
 |-------|-------------|-------------------|-------:|--------|
 | 1a | neuralSpring-native | Full MLP, transformer, LSTM, 31 modules | 183 | PASS |
-| 1b | BarraCUDA CPU primitives | GEMM, attention, norm, relu, reduce, gating, eigh, FFT | 272 | PASS |
-| 2 | BarraCUDA CPU ports | Full model inference chains (24/25 papers) | 203 | PASS |
+| 1b | BarraCuda CPU primitives | GEMM, attention, norm, relu, reduce, gating, eigh, FFT | 272 | PASS |
+| 2 | BarraCuda CPU ports | Full model inference chains (24/25 papers) | 203 | PASS |
 | 3c | GPU shaders | 17 WGSL shaders (13 absorbed upstream, 4 local) | 108 | PASS |
 | 3d | GPU pipeline + cross-dispatch | Multi-kernel chains, CPU↔GPU parity | 94 | PASS |
 | 4 | Advanced GPU | Pipelines, PRNG, MHA, eigendecomposition | 100+ | PASS |
@@ -151,8 +151,8 @@ PINN note: The 5.1% L2 error vs the paper's 0.06% reflects Adam-only training (n
 |------|:------:|-------:|:--------:|
 | Python control (Py) | 25/25 | 206 | 100% |
 | Rust CPU (Rs) | 25/25 | 374+ | 100% |
-| BarraCUDA CPU (bC) | 24/25 | 203 | 96% |
-| BarraCUDA GPU Tensor (gT) | 23/25 | 98+ | 92% |
+| BarraCuda CPU (bC) | 24/25 | 203 | 96% |
+| BarraCuda GPU Tensor (gT) | 23/25 | 98+ | 92% |
 | metalForge WGSL (mF) | 15/25 | 108 | 100%† |
 | GPU Pipeline (gP) | 15/25 | 94 | 100%† |
 | Cross-dispatch (xD) | 15/15 | 49 | 100% |
@@ -163,7 +163,7 @@ PINN note: The 5.1% L2 error vs the paper's 0.06% reflects Adam-only training (n
 
 ### Table 12.6 — GPU Benchmark Results
 
-| Scale | Model | Python (1 thread) | BarraCUDA CPU | GPU | CPU/Py | GPU/Py |
+| Scale | Model | Python (1 thread) | BarraCuda CPU | GPU | CPU/Py | GPU/Py |
 |-------|-------|:------------------:|:-------------:|:---:|:------:|:------:|
 | MLP large (3.1M params) | 4→64→64→10 | 3.0 ms | 2.7 ms | 178 µs | 1.1× | **16.8×** |
 | Transformer medium (103M) | Pre-norm encoder | 59 ms | 15.1 ms | 566 µs | 3.9× | **104×** |
@@ -220,7 +220,7 @@ neuralSpring provides three lines of evidence for the thesis:
 
 1. **The Isomorphism Theorem** demonstrates that architectural diversity in neural networks is illusory — all architectures compose from 6 primitives. The constrained evolution framework predicts this: under strong constraint (linear algebra, differentiable computation), solutions converge on the same structural elements through different compositions. This is cephalization in neural networks.
 
-2. **Cross-faculty validation** (Dolson, Liu, Waters, Kachkovskiy, Anderson — 15 papers, 127 checks) demonstrates that the BarraCUDA primitives evolved under ML constraint are fit for evolutionary computation, phylogenetics, systems biology, spectral theory, and population genomics without modification. This is cross-domain kernel reuse — the same phenomenon as the NTT→FFT evolution, at the application level.
+2. **Cross-faculty validation** (Dolson, Liu, Waters, Kachkovskiy, Anderson — 15 papers, 127 checks) demonstrates that the BarraCuda primitives evolved under ML constraint are fit for evolutionary computation, phylogenetics, systems biology, spectral theory, and population genomics without modification. This is cross-domain kernel reuse — the same phenomenon as the NTT→FFT evolution, at the application level.
 
 3. **The 76.6× fused pipeline speedup** demonstrates that constraints can produce emergent performance. The WGSL constraint forces explicit kernel boundaries; explicit boundaries make fusion opportunities visible; fusion produces superlinear speedup. The performance was not designed — it emerged from the constraint.
 
@@ -263,7 +263,7 @@ FST variance decomposition, introgression HMM chain, Viterbi argmax.
 | WDM surrogates | 5 (nW-01..05: transport, opacity, S(q,ω), transfer, ESN) |
 | Named tolerances | 129+ (all justified, minimal) |
 | WGSL shaders | 21 (13 upstream absorbed, 8 local) |
-| Typed BarraCUDA ops | 12 (all f64 aligned) |
+| Typed BarraCuda ops | 12 (all f64 aligned) |
 | External dependencies | 0 C/C++ crates (pure Rust) |
 | `unsafe` blocks | 0 (`forbid` enforced) |
 | clippy warnings | 0 (pedantic + nursery) |
@@ -368,7 +368,7 @@ across 25 papers + 5 WDM surrogates), not new math.
 
 The WDM surrogate queue validates neuralSpring's ML primitives against
 warm dense matter physics from hotSpring, demonstrating cross-spring
-scientific value and two new BarraCUDA absorption targets.
+scientific value and two new BarraCuda absorption targets.
 
 ### Table 12.10 — WDM Surrogate Results
 

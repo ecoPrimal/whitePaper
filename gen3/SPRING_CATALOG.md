@@ -11,7 +11,7 @@
 
 This document catalogs every spring in the ecoPrimals ecosystem as of February 2026. Where the Primal Catalog (§`PRIMAL_CATALOG.md`) documents the Rust infrastructure that was built, this catalog documents the **scientific validation** that proves the infrastructure computes real physics, biology, chemistry, and mathematics correctly.
 
-The springs exist because BarraCUDA's claim — "Pure Rust GPU compute can replace the Python scientific stack" — requires evidence from every scientific domain the ecosystem intends to serve. Each spring takes published, peer-reviewed work and asks: can we reproduce it? First in Python (the original tool). Then in Rust. Then on GPU. If the answers are yes, the science is validated and the BarraCUDA kernel is proven.
+The springs exist because BarraCuda's claim — "Pure Rust GPU compute can replace the Python scientific stack" — requires evidence from every scientific domain the ecosystem intends to serve. Each spring takes published, peer-reviewed work and asks: can we reproduce it? First in Python (the original tool). Then in Rust. Then on GPU. If the answers are yes, the science is validated and the BarraCuda kernel is proven.
 
 The springs are organized into two tiers:
 
@@ -34,14 +34,14 @@ The springs are organized into two tiers:
 **Repository**: git@github.com:syntheticChemistry/hotSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: hotSpring proves BarraCUDA can do first-principles computational physics on consumer hardware. Sarkas Yukawa MD runs at paper parity (N=10,000, 80k production steps) on a $600 RTX 4070 for $0.044 in electricity. The full AME2020 nuclear dataset (2,042 nuclei, 39x the published paper) runs on a single consumer GPU. Lattice QCD production β-scans (32⁴, 12 temperatures) resolve the deconfinement transition on a $500 RTX 3090 for $0.58. A $300 Akida NPU runs ESN inference at 2.8μs/step — 1000× faster than GPU for streaming workloads. GPU ESN dispatch via WGSL crosses over CPU at reservoir size ≈512 (8.2× faster at 1024).
+**What it validates**: hotSpring proves BarraCuda can do first-principles computational physics on consumer hardware. Sarkas Yukawa MD runs at paper parity (N=10,000, 80k production steps) on a $600 RTX 4070 for $0.044 in electricity. The full AME2020 nuclear dataset (2,042 nuclei, 39x the published paper) runs on a single consumer GPU. Lattice QCD production β-scans (32⁴, 12 temperatures) resolve the deconfinement transition on a $500 RTX 3090 for $0.58. A $300 Akida NPU runs ESN inference at 2.8μs/step — 1000× faster than GPU for streaming workloads. GPU ESN dispatch via WGSL crosses over CPU at reservoir size ≈512 (8.2× faster at 1024).
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
 | A (Python control) | Sarkas MD, TTM, surrogates, nuclear EOS | 86/86 | 5 silent upstream bugs found and fixed |
-| B (BarraCUDA GPU) | Nuclear EOS L1/L2 | Validated | 478× speedup, 44.8× energy reduction |
+| B (BarraCuda GPU) | Nuclear EOS L1/L2 | Validated | 478× speedup, 44.8× energy reduction |
 | C (GPU MD) | Yukawa MD N=2,000 | 9/9 | 0.000% energy drift, 149-259 steps/s |
 | D (f64 + scaling) | N=10,000 native WGSL | Validated | 5.3 min per case, native builtins |
 | E (Paper parity) | N=10,000, 80k steps | 9/9 | 3.66 hours total, $0.044 electricity |
@@ -55,9 +55,9 @@ The springs are organized into two tiers:
 
 **Papers queued**: muon g-2 HVP (2025), WDM & ignition (Papers 32-42). See `hotSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
-**BarraCUDA kernels validated**: Yukawa force, Velocity Verlet, cell-list, thermostats, GEMM, BatchedEighGpu, FusedMapReduce, PPPM Ewald, SSF, SU(3) HMC (gauge force, plaquette, KE — all DF64), staggered Dirac, CG solver (GPU-resident), complex f64, Lanczos, SpMV, ESN reservoir update + readout.
+**BarraCuda kernels validated**: Yukawa force, Velocity Verlet, cell-list, thermostats, GEMM, BatchedEighGpu, FusedMapReduce, PPPM Ewald, SSF, SU(3) HMC (gauge force, plaquette, KE — all DF64), staggered Dirac, CG solver (GPU-resident), complex f64, Lanczos, SpMV, ESN reservoir update + readout.
 
-**BarraCUDA gaps closed** (since Feb 20): ~~FFT~~ (done), ~~complex f64~~ (done), ~~SU(3) matrix ops~~ (done), ~~Lanczos eigensolve + SpMV~~ (done). GPU-resident CG reduces readback by 15,360×. DF64 core streaming delivers 14-digit precision on FP32 cores. Bidirectional streaming pipeline dispatches 90%+ to GPU with async readback.
+**BarraCuda gaps closed** (since Feb 20): ~~FFT~~ (done), ~~complex f64~~ (done), ~~SU(3) matrix ops~~ (done), ~~Lanczos eigensolve + SpMV~~ (done). GPU-resident CG reduces readback by 15,360×. DF64 core streaming delivers 14-digit precision on FP32 cores. Bidirectional streaming pipeline dispatches 90%+ to GPU with async readback.
 
 **metalForge (NPU + cross-substrate)**: 21 experiments including NPU characterization campaign (6 pipeline placements, Akida feedback report drafted), cross-substrate ESN comparison (CPU/GPU/NPU), streaming pipeline topology with substrate routing. NPU achieves 9,017× less energy for transport predictions. GPU can function as ESN reservoir (crossover at RS≈512). See `hotSpring/metalForge/` and `hotSpring/whitePaper/baseCamp/neuromorphic_silicon.md`.
 
@@ -107,7 +107,7 @@ The springs are organized into two tiers:
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: wetSpring proves BarraCUDA can replace the Galaxy/QIIME2/Python bioinformatics stack with sovereign Rust. The complete 16S pipeline (FASTQ→quality→merge→derep→DADA2→chimera→taxonomy→diversity→UniFrac) runs in Rust with 1 runtime dependency (flate2 for gzip). GPU spectral cosine matching achieves **1,077x speedup** over CPU. The sovereign XML parser eliminates `quick-xml`; the sovereign FASTQ parser eliminates `needletail`.
+**What it validates**: wetSpring proves BarraCuda can replace the Galaxy/QIIME2/Python bioinformatics stack with sovereign Rust. The complete 16S pipeline (FASTQ→quality→merge→derep→DADA2→chimera→taxonomy→diversity→UniFrac) runs in Rust with 1 runtime dependency (flate2 for gzip). GPU spectral cosine matching achieves **1,077x speedup** over CPU. The sovereign XML parser eliminates `quick-xml`; the sovereign FASTQ parser eliminates `needletail`.
 
 **Phase inventory**:
 
@@ -128,9 +128,9 @@ The springs are organized into two tiers:
 
 **Papers reproduced**: 52/52 across 4 tracks — Waters c-di-GMP/QS (Track 1), Liu comparative genomics (Track 1b), deep-sea metagenomics (Track 1c), Jones PFAS (Track 2). 50/50 three-tier eligible papers have full CPU + GPU + metalForge validation (11 extension papers promoted in V67). See `wetSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
-**BarraCUDA primitives consumed**: 79 via ToadStool S68 `compile_shader_universal` — including FusedMapReduceF64, BrayCurtisF64, BatchedEighGpu, GemmF64, anderson_3d, lanczos, lanczos_eigenvalues, level_spacing_ratio, and all diversity/spectral primitives. Zero local WGSL, zero local derivative/regression math.
+**BarraCuda primitives consumed**: 79 via ToadStool S68 `compile_shader_universal` — including FusedMapReduceF64, BrayCurtisF64, BatchedEighGpu, GemmF64, anderson_3d, lanczos, lanczos_eigenvalues, level_spacing_ratio, and all diversity/spectral primitives. Zero local WGSL, zero local derivative/regression math.
 
-**BarraCUDA gaps resolved by wetSpring**: ODE solver (bistable, capacitor, qs_ode), Gillespie stochastic sim, HMM Viterbi (phylohmm), Smith-Waterman alignment.
+**BarraCuda gaps resolved by wetSpring**: ODE solver (bistable, capacitor, qs_ode), Gillespie stochastic sim, HMM Viterbi (phylohmm), Smith-Waterman alignment.
 
 **Key discovery**: `log_f64` bug in ToadStool — coefficients halved, causing ~1e-3 precision instead of ~1e-15. Found during Shannon entropy validation, fixed immediately in ToadStool core.
 
@@ -174,8 +174,8 @@ The springs are organized into two tiers:
 |-------|--------|--------|
 | 0 (Python) | 21 experiments, ~211 Python checks | Complete |
 | 1 (Rust CPU) | 236/236 Rust checks, 280 tests, 21/21 parity | Complete |
-| 2a (BarraCUDA CPU) | Pure Rust math faster than Python, 27 delegations (22 CPU + 5 GPU) | Delegation inventory ready; ToadStool absorbing |
-| 2b (BarraCUDA GPU) | GPU implementations match CPU exactly | Pending ToadStool absorption |
+| 2a (BarraCuda CPU) | Pure Rust math faster than Python, 27 delegations (22 CPU + 5 GPU) | Delegation inventory ready; ToadStool absorbing |
+| 2b (BarraCuda GPU) | GPU implementations match CPU exactly | Pending ToadStool absorption |
 | 3 (metalForge) | Cross-substrate dispatch (GPU → NPU → CPU) | Architecture defined |
 
 **Participates in**: All springs (provides uncertainty quantification), all 7 baseCamp papers, neuralSpring (noise labels for training robustness), hotSpring (spectral primitives + lattice QCD inverse problems), wetSpring (quasispecies, rare biosphere, Anderson validation).
@@ -185,13 +185,13 @@ The springs are organized into two tiers:
 ### 1.5 neuralSpring — Machine Learning Primitives, Isomorphic Patterns & Sovereign Structure Prediction
 
 **Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction, structure prediction (coralForge)
-**Grade**: Phase 0 → 0+ → 0++ → Rust → BarraCUDA CPU → GPU Tensor → metalForge WGSL → Pipeline → Cross-dispatch → Mixed-hardware → Multi-GPU → coralForge. **Most complete validation pipeline of any spring.**
-**Checks**: 282/282 Python + 2918+ Rust+GPU = **3,200+ total** (685 lib + 9 integration + 43 forge tests, 197 binaries, 185/185 validate\_all)
+**Grade**: Phase 0 → 0+ → 0++ → Rust → BarraCuda CPU → GPU Tensor → metalForge WGSL → Pipeline → Cross-dispatch → Mixed-hardware → Multi-GPU → coralForge. **Most complete validation pipeline of any spring.**
+**Checks**: 397/397 Python + 4000+ Rust+GPU = **4,500+ total** (1128 lib + 61 playGround + 73 forge tests, 260 binaries, 220/220 validate\_all, zero C deps via Tower Atomic, OrExit<T> zero-panic, deny.toml, structured logging, structured IpcError, typed compute.dispatch)
 **Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — Hill equation, PK modeling, CytokineBrain)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
 
-**What it validates**: neuralSpring proves the **Isomorphism Theorem** — all neural architectures decompose into 6 fundamental primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating), and BarraCUDA's WGSL shader library covers all 6. Phase 0++ extended to 15 papers across 4 faculty groups and 5 disciplines. **coralForge** is the sovereign structure prediction engine — pure Rust f64 implementations of AlphaFold2/AlphaFold3 primitives (Evoformer, IPA, diffusion, pairformer, confidence), validated against NumPy baselines and accelerated via BarraCUDA/ToadStool. Pure Rust is **83.6× faster** than Python/NumPy (geomean, 11 domains).
+**What it validates**: neuralSpring proves the **Isomorphism Theorem** — all neural architectures decompose into 6 fundamental primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating), and BarraCuda's WGSL shader library covers all 6. Phase 0++ extended to 15 papers across 4 faculty groups and 5 disciplines. **coralForge** is the sovereign structure prediction engine — pure Rust f64 implementations of AlphaFold2/AlphaFold3 primitives (Evoformer, IPA, diffusion, pairformer, confidence), validated against NumPy baselines and accelerated via BarraCuda/ToadStool. Pure Rust is **83.6× faster** than Python/NumPy (geomean, 11 domains).
 
 **Phase inventory**:
 
@@ -200,8 +200,8 @@ The springs are organized into two tiers:
 | 0 (Synthetic) | 5 experiments: surrogate, transformer, LSTM, transfer, isomorphic | 48/48 | 6 primitives explain all architectures |
 | 0+ (Scholarly) | 5 published studies reproduced | 31/31 | PINN, DeepONet, LeNet-5, ERA5 LSTM, quantized inference |
 | 0++ (Extended) | 15 papers across 4 faculty, 5 disciplines | 127/127 | Evolutionary, phylogenetic, game theory, spectral, population genetics |
-| 1a (Rust) | 40 modules + gpu\_ops/ + gpu\_dispatch | 685 lib + 9 integration + 43 forge | 197 validation/bench binaries |
-| 2 (bC CPU) | BarraCUDA CPU ports — 24/25 papers (96%) | 203 | Machine-precision Rust math |
+| 1a (Rust) | 47 modules + gpu\_ops/ + gpu\_dispatch | 1115 lib + 9 integration + 73 forge | 260 validation/bench binaries |
+| 2 (bC CPU) | BarraCuda CPU ports — 24/25 papers (96%) | 203 | Machine-precision Rust math |
 | 3 (GPU Tensor) | 23/25 papers (92%), metalForge 15/25, pipeline 15/25 | 272+ | CPU→GPU portability proven |
 | 4 (Dispatch) | 47 CPU→GPU ops, dispatch parity 30/30, mixed-hardware 47/47 | 124+ | ~97% math on GPU |
 | 5 (Multi-GPU) | RTX 4070 + TITAN V (NVK) — 384/384 bit-identical | 384 | Architecture-independent |
@@ -211,13 +211,13 @@ The springs are organized into two tiers:
 
 **Studies reproduced**: All 25 papers from Phase 0++ + 5 Phase 0/0+ studies + 5 WDM surrogates + 3 publication experiments + coralForge nF-01/02/03 (AlphaFold2 Evoformer + AlphaFold3 diffusion/pairformer/confidence).
 
-**BarraCUDA primitives validated**: 130+ import sites across 20+ submodules. 47 GPU-promoted dispatch ops (7 domain files). 44 upstream rewires. 21/21 WGSL shaders absorbed + 15 coralForge df64 shaders. 42 metalForge WGSL shaders. All gaps from original audit closed: HMM Viterbi (done), Gillespie (done), Lanczos (done via hotSpring lineage), pairwise distance (PairwiseL2Gpu), LogSumExp (upstream).
+**BarraCuda primitives validated**: 219+ import sites across 45+ submodules. 47 GPU-promoted dispatch ops (7 domain files). 46 upstream rewires. 25 absorbed workloads, 1 local remaining. 42 metalForge WGSL shaders. All gaps from original audit closed: HMM Viterbi (done), Gillespie (done), Lanczos (done via hotSpring lineage), pairwise distance (PairwiseL2Gpu), LogSumExp (upstream). playGround compute triangle: ToadStool/coralReef IPC clients, hot/cold dispatch benchmarks (7–45× pipeline reuse speedup).
 
-**BarraCUDA gaps remaining**: None critical. L-BFGS optimizer and compute_graph (lazy execution) are future Phase 5 items. All 17 shortcomings (S-01..S-17) resolved upstream.
+**BarraCuda gaps remaining**: None critical. L-BFGS optimizer and compute_graph (lazy execution) are future Phase 5 items. All 17 shortcomings (S-01..S-17) resolved upstream.
 
 **Critical gen3 connection**: Dolson's Iram et al. (2020) Nature Physics on counterdiabatic driving of evolution — **reproduced and validated** (Paper 011). coralForge extends the isomorphism to protein structure prediction: the same 6 primitives that serve language models serve AlphaFold.
 
-**Participates in**: biomeOS PathwayLearner (validated ML primitives), Squirrel (quantized inference), NUCLEUS (isomorphic kernel sharing), all springs (surrogates, transfer learning), coralForge sovereign protein pipeline.
+**Participates in**: biomeOS PathwayLearner (validated ML primitives), Squirrel (MCP adapter — 14 tool definitions, interactive runner), ToadStool (typed IPC client, live coordination verified), coralReef (compiler client, sovereign dispatch path), NUCLEUS (isomorphic kernel sharing), all springs (surrogates, transfer learning), coralForge sovereign protein pipeline, HuggingFace Model Lab (GPT-2 inference on barraCuda).
 
 ---
 
@@ -227,7 +227,7 @@ The springs are organized into two tiers:
 **Grade**: V27 — 7 tracks, 73 experiments, 601 tests, Tier 0+1+2+3 complete
 **Checks**: 601 Rust tests + 194 Python cross-validation = **795 healthSpring checks**
 **Faculty**: Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical — clinical TRT reference)
-**Repository**: Local (healthSpring/)
+**Repository**: git@github.com:syntheticChemistry/healthSpring.git
 **License**: AGPL-3.0-or-later
 
 **What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis. V25 extends to comparative medicine (species-agnostic PK, cross-species Anderson, canine AD models) and drug discovery (MATRIX scoring, ADDRC HTS, compound screening, iPSC validation). V27 absorbs ODE→WGSL codegen from wetSpring (3 `OdeSystem` impls via barraCuda `BatchedOdeRK4`), uncertainty quantification from groundSpring (bootstrap/jackknife/bias-variance/Monte Carlo), and hardens IPC cast safety.
@@ -265,7 +265,7 @@ The springs are organized into two tiers:
 **Grade**: V6 — 44 experiments, 410 checks, 11 tracks, 2 playable prototypes, 3 external control groups, 4 cross-spring experiments
 **Checks**: 410 validation checks + 144 unit/integration tests = **554 ludoSpring checks**
 **Faculty**: Csikszentmihalyi (Flow, 1990), Fitts (1954), Yannakakis & Togelius (2018), Lazzaro (Four Keys, 2004), Hunicke (DDA, 2005), Perlin (1985), Gumin (WFC, 2016), Lindenmayer (1968), Tufte (1983)
-**Repository**: Local (ludoSpring/)
+**Repository**: git@github.com:syntheticChemistry/ludoSpring.git
 **License**: AGPL-3.0-or-later
 
 **What it validates**: ludoSpring proves the ecoPrimals Python→Rust→GPU pipeline produces validated science in interactive systems — the most demanding real-time domain humans build. 13 foundational HCI models validated against published research. Game genres are interaction architectures, not aesthetic categories: FPS = molecular explorer, roguelike = parameter space exploration, RTS = systems biology dashboard. External control groups prove the metrics framework is content-agnostic. **Key finding**: Flow state (Csikszentmihalyi) discriminates game quality; engagement alone measures activity, not optimal experience. 110× 60Hz raycaster headroom on CPU, 0.93× fastnoise-lite (C). **Cross-spring**: Anderson QS explorer (Perlin noise as disorder landscape, QS propagation with localization transition), live NCBI data integration, Tower Atomic (BearDog+Songbird) validated. Game metrics generalize to scientific exploration sessions.
@@ -303,9 +303,9 @@ The springs are organized into two tiers:
 | Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
 | Papers queued for review | 60+ candidates across all springs + 8 Mok-derived experiments |
 | Faculty connected | 14 professors (MSU + Sandia + Carleton + Allure Medical) across 9 departments |
-| BarraCUDA kernels validated by springs | 79+ distinct GPU/NPU primitives (wetSpring alone consumes 79 via ToadStool S68) |
-| BarraCUDA bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
-| Rust validation checks | 1,008 (wetSpring) + 2,250+ (neuralSpring) + 3,123+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
+| BarraCuda kernels validated by springs | 79+ distinct GPU/NPU primitives (wetSpring alone consumes 79 via ToadStool S68) |
+| BarraCuda bugs found by springs | 6 (5 upstream in Sarkas, 1 in ToadStool log_f64) |
+| Rust validation checks | 1,008 (wetSpring) + 4,000+ (neuralSpring) + 3,123+ (airSpring) + ~697 (hotSpring) + 236 (groundSpring) |
 | WGSL shaders | 700+ cross-spring via ToadStool S68 universal precision |
 | Languages | Python (Phase 0), Rust (Phase 1+), WGSL shaders (Phase 2+) |
 | License | AGPL-3.0 (all springs, no exceptions) |
@@ -363,13 +363,13 @@ ludoSpring (game science — 410 checks, 44 experiments, 13 HCI models)
 
 | Spring | Primarily Validates | Also Feeds |
 |--------|-------------------|------------|
-| hotSpring | ToadStool/BarraCUDA (GPU MD, nuclear EOS) | gen3 (constrained evolution evidence) |
-| airSpring | ToadStool/BarraCUDA (Rust science crate) | Penny Irrigation (real-world application) |
-| wetSpring | ToadStool/BarraCUDA (GPU diversity, spectral) | biomeOS (microbiome monitoring), Squirrel (classifiers) |
+| hotSpring | ToadStool/BarraCuda (GPU MD, nuclear EOS) | gen3 (constrained evolution evidence) |
+| airSpring | ToadStool/BarraCuda (Rust science crate) | Penny Irrigation (real-world application) |
+| wetSpring | ToadStool/BarraCuda (GPU diversity, spectral) | biomeOS (microbiome monitoring), Squirrel (classifiers) |
 | groundSpring | All springs (uncertainty budget) | neuralSpring (noise labels for training) |
-| neuralSpring | ToadStool/BarraCUDA (ML kernels) | biomeOS (PathwayLearner), Squirrel (inference), NUCLEUS (optimization) |
-| **healthSpring** | ToadStool/BarraCUDA (population PK, Anderson gut, biosignal) | NestGate (NCBI clinical data), biomeOS NUCLEUS (distributed health pipeline) |
-| **ludoSpring** | ToadStool/BarraCUDA (game math: noise, raycaster, metrics) | petalTongue (live dashboards), biomeOS NUCLEUS (Tower Atomic validated), wetSpring (Anderson QS cross-spring), nestgate (NCBI QS data), all springs (HCI models for any interactive system) |
+| neuralSpring | ToadStool/BarraCuda (ML kernels) | biomeOS (PathwayLearner), Squirrel (inference), NUCLEUS (optimization) |
+| **healthSpring** | ToadStool/BarraCuda (population PK, Anderson gut, biosignal) | NestGate (NCBI clinical data), biomeOS NUCLEUS (distributed health pipeline) |
+| **ludoSpring** | ToadStool/BarraCuda (game math: noise, raycaster, metrics) | petalTongue (live dashboards), biomeOS NUCLEUS (Tower Atomic validated), wetSpring (Anderson QS cross-spring), nestgate (NCBI QS data), all springs (HCI models for any interactive system) |
 
 ### 2.4 Faculty → Spring Mapping
 
@@ -393,7 +393,7 @@ ludoSpring (game science — 410 checks, 44 experiments, 13 HCI models)
 
 Full profiles: `data/FACULTY_SPRING_PROFILES.md`
 
-### 2.5 BarraCUDA Gap Summary (Across All Springs)
+### 2.5 BarraCuda Gap Summary (Across All Springs)
 
 | Gap | Requesting Springs | Priority | Faculty Driver | Status |
 |-----|-------------------|----------|---------------|--------|
@@ -426,8 +426,8 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 **Claim**: Sovereign Rust can replace the Python scientific stack.
 **Evidence**: wetSpring's 30 Rust modules with 1 runtime dependency cover the complete 16S pipeline with 4,688+ checks across 197 experiments, 52/52 papers reproduced, and 39/39 three-tier validated (CPU→GPU→metalForge). airSpring's Rust crate matches Python to 1e-5 across 53 cross-validated values.
 
-**Claim**: BarraCUDA's 6 isomorphic primitives serve all domains.
-**Evidence**: neuralSpring proves GEMM + Attention + Normalization + Nonlinearity + Reduction + Gating explain LLaMA, OpenFold, ResNet, ViT, MLP surrogates, and LSTM weather models. All 6 are WGSL shaders in BarraCUDA.
+**Claim**: BarraCuda's 6 isomorphic primitives serve all domains.
+**Evidence**: neuralSpring proves GEMM + Attention + Normalization + Nonlinearity + Reduction + Gating explain LLaMA, OpenFold, ResNet, ViT, MLP surrogates, and LSTM weather models. All 6 are WGSL shaders in BarraCuda.
 
 **Claim**: Science validation improves the infrastructure.
 **Evidence**: wetSpring found and fixed the `log_f64` bug in ToadStool. hotSpring found and fixed 5 silent bugs in Sarkas upstream. groundSpring identified humidity as the bottleneck for ET₀ accuracy. Each discovery fed back into the system.
@@ -437,4 +437,4 @@ The primals prove that Rust can build a sovereign computing ecosystem. The sprin
 **Claim**: Clinical practice literature can be computationally verified.
 **Evidence**: healthSpring's Track 4 (Mok testosterone) extracts quantifiable claims from a 196-page clinical book and validates each against the cited primary literature — creating a closed-loop claim verification pipeline that generalizes to any medical reference.
 
-**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 11,161+ checks across 5 domains in 27 days — the constrained evolution methodology works. 7 of 11 BarraCUDA gaps have been resolved by the springs themselves (ODE, Lanczos, SpMV, HMM, Smith-Waterman, Gillespie, FFT). A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**
+**Every check count in this catalog is measured, not estimated. Every paper reproduction runs on consumer hardware with no institutional access. Every spring is AGPL-3.0 and publicly available on GitHub. The science is open because the methodology demands it. 11,161+ checks across 5 domains in 27 days — the constrained evolution methodology works. 7 of 11 BarraCuda gaps have been resolved by the springs themselves (ODE, Lanczos, SpMV, HMM, Smith-Waterman, Gillespie, FFT). A $300 NPU runs ESN inference at 2.8μs/step. A $600 GPU runs the same ESN at 8.2× CPU speed when the reservoir is large enough. The silicon does what the silicon does — we just had to look.**

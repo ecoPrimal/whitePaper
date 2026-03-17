@@ -1,99 +1,148 @@
-# 🌳 RootPulse — Emergent Version Control
+# RootPulse — Emergent Version Control
 
-**Where Code Becomes Permanent Through Primal Harmony**
+**Universal temporal tracking through primal coordination**
 
----
-
-## 📚 White Paper Series
-
-This directory contains the complete documentation for **RootPulse**, the distributed version control system that emerges from ecoPrimals coordination.
+**Updated**: March 15, 2026
 
 ---
 
-## 📖 Documents
+## White Paper Series
 
-### Core Concepts
+RootPulse is not a primal. It is a coordination pattern — a set of TOML
+graphs that biomeOS executes over existing primals. Version control,
+game session provenance, scientific experiment tracking, and RPG session
+DAGs all use the same temporal primitives with different graph topologies.
+
+### Documents
+
+**Core Concepts**
+
 1. **[00_INTRODUCTION.md](./00_INTRODUCTION.md)** — What is RootPulse?
 2. **[01_PHILOSOPHY.md](./01_PHILOSOPHY.md)** — Emergence vs monoliths
 3. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Technical design
-4. **[04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md)** — ⭐ Two-tier architecture (DAG + Linear)
+4. **[04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md)** — Two-tier temporal architecture
 
-### Primal Coordination
+**Primal Coordination**
+
 5. **[03_PRIMAL_COMPOSITION.md](./03_PRIMAL_COMPOSITION.md)** — How primals work together
-6. **[05_BIOME_DEPLOYMENT.md](./05_BIOME_DEPLOYMENT.md)** — BiomeOS orchestration
-7. **[06_COORDINATION_PATTERNS.md](./06_COORDINATION_PATTERNS.md)** — Workflow definitions
+6. **[06_COORDINATION_PATTERNS.md](./06_COORDINATION_PATTERNS.md)** — Deploy and workflow graph definitions
 
-### Features & Comparisons
-7. **[07_SUBSTRATE_CRYPTOGRAPHY.md](./07_SUBSTRATE_CRYPTOGRAPHY.md)** — BearDog unified security
-8. **[08_SEMANTIC_ATTRIBUTION.md](./08_SEMANTIC_ATTRIBUTION.md)** — ✅ **SweetGrass integration** 🆕
-9. **[09_VS_GIT.md](./09_VS_GIT.md)** — Comparison with Git
-10. **[10_USE_CASES.md](./10_USE_CASES.md)** — Real-world applications
+**Features**
 
-### Implementation
-12. **[11_ROADMAP.md](./11_ROADMAP.md)** — Implementation phases
-13. **[12_API_REFERENCE.md](./12_API_REFERENCE.md)** — Technical reference
-14. **[13_FAQ.md](./13_FAQ.md)** — Frequently asked questions
+7. **[08_SEMANTIC_ATTRIBUTION.md](./08_SEMANTIC_ATTRIBUTION.md)** — SweetGrass integration (three-layer model)
+8. **[12_API_REFERENCE.md](./12_API_REFERENCE.md)** — JSON-RPC API reference
 
 ---
 
-## 🎯 Quick Start
+## RootPulse is NOT a Primal
 
-**New to RootPulse?** Start here:
-1. Read [00_INTRODUCTION.md](./00_INTRODUCTION.md) — 5-minute overview
-2. Read [01_PHILOSOPHY.md](./01_PHILOSOPHY.md) — Understand emergence
-3. Read [08_VS_GIT.md](./08_VS_GIT.md) — See how it's different
+Pulse is what primals DO together, not what they ARE.
 
-**Want technical details?** Go here:
-1. [02_ARCHITECTURE.md](./02_ARCHITECTURE.md) — System design
-2. [03_PRIMAL_COMPOSITION.md](./03_PRIMAL_COMPOSITION.md) — Primal interactions
-3. [11_API_REFERENCE.md](./11_API_REFERENCE.md) — API details
+Six existing primals compose the temporal coordination stack:
 
-**Want to build it?** Start with:
-1. [10_ROADMAP.md](./10_ROADMAP.md) — Implementation plan
-2. [04_BIOME_DEPLOYMENT.md](./04_BIOME_DEPLOYMENT.md) — BiomeOS integration
+| Primal | Role | Version | Tests |
+|--------|------|---------|------:|
+| **rhizoCrypt** | Ephemeral DAG (present/future) | v0.13.0 | 862 |
+| **LoamSpine** | Immutable history (past) | v0.8.0 | 700 |
+| **sweetGrass** | Semantic attribution | v0.7.3 | 746 |
+| **NestGate** | Content-addressed storage | Production | — |
+| **BearDog** | Cryptographic signing | v0.15.0 | — |
+| **Songbird** | Federated discovery | v3.6 | — |
+
+biomeOS executes graphs over these primals. The graphs define
+coordination patterns. No new primal needed.
 
 ---
 
-## 🌟 Key Insights
+## Two-Tier Temporal Architecture
 
-### Pulse is NOT a New Primal (Temporal Primitives!)
-> **"Pulse is what primals DO together, not what they ARE"**
-
-Pulse emerges from coordinating existing primals for **universal temporal tracking**:
-- 🔐 **rhizoCrypt** — The Present/Future (DAG, branching possibilities)
-- 🦴 **LoamSpine** — The Past (Linear, what has happened)
-- 🏰 **NestGate** — Content-addressed storage
-- 🐻 **BearDog** — Substrate cryptography (SSH + GPG unified)
-- 🌱 **SweetGrass** — Semantic attribution
-- 🎵 **Songbird** — Federated discovery
-
-**No new primal needed. Just temporal coordination patterns.**
-
-**Not just version control** — Universal time tracking:
-- 💻 Code commits (VCS pattern)
-- 🎨 Art creation (moments pattern)
-- 💍 Life events (ceremonial pattern)
-- 🎵 Performances (concert pattern)
-- 🔬 Experiments (scientific pattern)
-- ⚛️ Particle collisions (physics pattern)
-- 🎮 Game states (frame pattern)
-
-### Two-Tier Temporal Architecture (Revolutionary!)
-- **rhizoCrypt (DAG)** — The Present/Future: ever-branching possibilities, lock-free, 10-100x faster
-- **LoamSpine (Linear)** — The Past: what has happened, immutable, provable
-- **Dehydration** — Temporal collapse: flexible timescales (nanoseconds → years)
+- **rhizoCrypt (DAG)** — The present/future: branching, lock-free, 10-100x faster than Git staging
+- **LoamSpine (Linear)** — The past: immutable, provable, append-only
+- **Dehydration** — Temporal collapse from DAG to linear (flexible timescales)
 - **Anchors** — Multiple orderings: crypto, atomic, causal, consensus
 
-**"Time is relative. The DAG flexes. The linear remembers."**
-
-See [04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md) for deep dive!
+See [04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md) for the deep dive.
 
 ---
 
-## 🔑 Core Principles
+## Workflow Graphs (biomeOS)
 
-1. **Emergence Over Monoliths** — Complex systems arise from simple coordination
-2. **Composition Over Creation** — Reuse primitives, don't rebuild
+All RootPulse operations are TOML graphs executed by the Neural API:
+
+| Graph | Coordination | Phases |
+|-------|:------------:|--------|
+| `rootpulse_commit.toml` | Sequential | Health -> Dehydrate -> Sign -> Store -> Commit -> Attribute |
+| `rootpulse_branch.toml` | Sequential | Validate -> Create session -> Create spine -> Attribute |
+| `rootpulse_merge.toml` | Sequential | Health -> Dehydrate -> Sign -> Merge commit -> Seal -> Attribute |
+| `rootpulse_diff.toml` | Sequential | Health -> Get commits -> Compare Merkle -> Diff provenance |
+| `rootpulse_federate.toml` | Sequential | Discover -> Exchange tips -> Fetch -> Verify -> Append -> Attribute |
+
+All graphs use capability-based routing (`dag.dehydrate` -> rhizoCrypt,
+`commit.session` -> LoamSpine, `provenance.create_braid` -> sweetGrass,
+`crypto.sign` -> BearDog). No primal names in the graphs.
+
+---
+
+## Beyond Version Control
+
+The same temporal primitives serve any domain where events need
+sequencing, signing, attribution, and permanence:
+
+| Domain | Pattern | Graph | Who |
+|--------|---------|-------|-----|
+| Code commits | VCS | `rootpulse_commit.toml` | RootPulse |
+| Game sessions | Frame | `game_engine_tick.toml` + provenance at session boundaries | ludoSpring RPGPT |
+| Scientific experiments | Scientific | `provenance_pipeline.toml` | wetSpring, groundSpring |
+| Field samples | Collection | Custom sequential | wetSpring (exp062) |
+| Medical records | Consent-gated | Custom sequential | healthSpring (exp063) |
+| Art/music creation | Moments | Custom sequential | sweetGrass attribution |
+| RPG campaigns | Session DAG | Continuous + transactional | ludoSpring RPGPT |
+
+ludoSpring's RPGPT engine (Paper 18) treats game sessions as rhizoCrypt
+DAGs: turns, rolls, conditions, and branches are vertices. Rulesets are
+LoamSpine certificates. Player/AI attribution flows through sweetGrass.
+Anti-cheat reduces to chain-of-custody verification — the same pattern
+that tracks sample lineage in field genomics. Same primals, same graphs,
+different vocabulary.
+
+---
+
+## Implementation Status (March 15, 2026)
+
+| Component | Status |
+|-----------|--------|
+| Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) | Production ready (2,308 tests combined) |
+| 6-phase commit workflow | Validated end-to-end (March 13, 2026) |
+| Deploy graphs (commit, branch, merge, diff, federate) | All implemented in biomeOS |
+| Capability routing | 124 translations across 12 domains |
+| E2E tests (`provenance_trio_e2e.rs`) | 5 integration tests |
+| Cross-spring validation (ludoSpring exp052) | 37/37 checks passed |
+| Cross-domain provenance (exp062-066) | 228/228 checks (gaming, science, medical) |
+| `rootpulse` CLI frontend | Not yet implemented |
+| NestGate <-> LoamSpine content integration | Needs implementation |
+
+### What RootPulse needs from biomeOS v2.42
+
+1. **Continuous + transactional mixed mode** — RPGPT needs 60 Hz game
+   ticks (continuous) with provenance commits at session boundaries
+   (transactional). Currently these are separate execution paths.
+
+2. **Continuous execution via Neural API** — `graph.start_continuous`,
+   `graph.pause`, `graph.resume`, `graph.stop` JSON-RPC methods so
+   game sessions can be managed programmatically, not just via CLI.
+
+3. **ConditionalDag** — RPGPT needs conditional flows: if Squirrel AI
+   is available, use AI narration; else use template narration.
+
+4. **Unified graph schema** — `[[nodes]]` (Neural API server) vs
+   `[[graph.nodes]]` (ContinuousExecutor) must converge.
+
+---
+
+## Core Principles
+
+1. **Emergence over monoliths** — Complex systems arise from simple coordination
+2. **Composition over creation** — Reuse temporal primitives, don't rebuild
 3. **Sovereignty** — You own your code, your history, your infrastructure
 4. **Provenance** — Cryptographic proofs, not just trust
 5. **Attribution** — Semantic contributions, not line counts
@@ -101,91 +150,24 @@ See [04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md) for deep dive!
 
 ---
 
-## 🎨 The Vision
+## Related Work
 
-**Git** gave us distributed version control.  
-**GitHub** centralized it (ironically).  
-**RootPulse** returns to true decentralization — and goes beyond.
+- **[Neural API](../neuralAPI/)** — Orchestration layer that executes RootPulse graphs
+- **[biomeOS v2.41](../../phase2/biomeOS/)** — Graph executor, capability routing, 5,017 tests
+- **[ludoSpring V18](../../ludoSpring/)** — RPGPT composition, exp052 trio validation
 
-### Beyond Git (Universal Temporal Tracking!)
-- ✅ **Temporal primitives** (not VCS-specific)
-- ✅ **Flexible timescales** (nanoseconds → years)
-- ✅ **Multiple anchors** (crypto, atomic, causal, consensus)
-- ✅ **DAG present/future** (rhizoCrypt = branching possibilities)
-- ✅ **Linear past** (LoamSpine = immutable history)
-- ✅ **Lock-free concurrency** (10-100x faster)
-- ✅ **Unified cryptography** (BearDog = SSH + GPG)
-- ✅ **Semantic attribution** (SweetGrass braids)
-- ✅ **Content-type agnostic** (code, art, data, models, events)
-- ✅ **Cryptographic provenance** (mathematical proofs)
-- ✅ **Real-time collaboration** (multi-agent)
-- ✅ **AI-powered** (Squirrel integration)
-- ✅ **True federation** (Songbird discovery)
-- ✅ **Sovereign** (you own it all)
+### Primal Repositories
+- **rhizoCrypt** — Ephemeral DAG workspace
+- **LoamSpine** — Immutable linear history
+- **sweetGrass** — Semantic attribution
+- **BearDog** — Cryptographic primitives
+- **NestGate** — Content-addressed storage
+- **Songbird** — Federated discovery
 
 ---
 
-## 📊 Status
+## License
 
-**Concept**: ✅ Validated  
-**Architecture**: ✅ Designed  
-**Primals**: ✅ **Ready** (Phase 1 & 2)  
-**Ephemeral Workspace**: ✅ **rhizoCrypt v0.13.0 (A+ grade)** 🎯  
-**Semantic Attribution**: ✅ **SweetGrass v0.7.3 (746 tests, 94% coverage)**  
-**Permanence**: ✅ **LoamSpine v0.8.0 (700 tests, 90.6% coverage)**  
-**BiomeOS**: ✅ Provenance trio orchestration validated  
-**End-to-End**: ✅ Full 6-phase commit workflow validated (March 13, 2026)
-
-**Timeline**: **6-9 months** to production-ready (accelerated with rhizoCrypt)  
-**Complexity**: Medium (primals do the hard work)  
-**Impact**: Revolutionary
-
----
-
-## 🤝 Contributing
-
-RootPulse is part of the ecoPrimals ecosystem. See:
-- [ecoPrimals Repository](../../)
-- [BiomeOS Documentation](../../phase1/biomeOS/)
-- [Primal Specifications](../loamSpine/specs/)
-
----
-
-## 📚 References
-
-### Related Projects
-- **Git** — Inspiration and comparison baseline
-- **Fossil** — Alternative VCS with interesting ideas
-- **Pijul** — Patch-based VCS
-- **Mercurial** — Distributed VCS
-
-### ecoPrimals
-- **rhizoCrypt** — [../rhizoCrypt/](../rhizoCrypt/) (Ephemeral workspace)
-- **LoamSpine** — [../loamSpine/](../loamSpine/) (Immutable history)
-- **SweetGrass** — [../sweetGrass/](../sweetGrass/) (Semantic attribution)
-- **BiomeOS** — [../../phase1/biomeOS/](../../phase1/biomeOS/) (Coordination layer)
-
----
-
-## 📜 License
-
-Part of the ecoPrimals ecosystem.  
+Part of the ecoPrimals ecosystem. AGPL-3.0-or-later.
 See individual primal licenses for details.
-
----
-
-## 🌳 The Name
-
-**RootPulse** (noun):
-1. The heartbeat of a tree's root system
-2. The fundamental rhythm of growth
-3. Where permanence meets life
-
-> *"Just as a tree's roots anchor it while allowing growth, RootPulse anchors your code's history while enabling evolution."*
-
----
-
-**Welcome to the future of version control!** 🚀
-
-🌳 **RootPulse: Version Control That Grows With You**
 

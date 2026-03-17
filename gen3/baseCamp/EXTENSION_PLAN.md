@@ -439,3 +439,66 @@ Same architecture, same code, different vocabulary:
 3. Anchor activates radiating attribution
 4. sunCloud reads sweetGrass chain, distributes proportionally
 5. Every contributor in the chain receives credit forever
+
+---
+
+## Cross-Spring Provenance Experiments (exp062-066, March 13, 2026)
+
+**Source:** ludoSpring V14 — 5 cross-spring provenance experiments extending NFT architecture into wetSpring and healthSpring scaffolds (deep audit: 187 tests, 93.2% coverage)
+**Connects to:** baseCamp #20 (NFT Economics), #21 (Sovereign Sample Provenance), #22 (Zero-Knowledge Medical Provenance)
+
+### What Was Built
+
+| Experiment | Checks | What It Proves |
+|-----------|--------|---------------|
+| exp064: BearDog-Signed Provenance Chain | 39/39 | Ed25519 signing on every trio operation. Chain verification. Tamper detection at exact position. IPC wire format validated. |
+| exp062: Field Sample Provenance | 39/39 | Full sample lifecycle (collect → publish). 6 fraud types. DAG isomorphism with extraction shooter. wetSpring scaffold. |
+| exp063: Consent-Gated Medical Access | 35/35 | Patient-owned records. Consent as scoped lending. 5 fraud types. Zero-knowledge access proofs. healthSpring scaffold. |
+| exp065: Cross-Domain Fraud Unification | 74/74 | Same GenericFraudDetector across gaming/science/medical. 5 generic fraud types. >80% structural similarity. |
+| exp066: Radiating Attribution Calculator | 41/41 | sunCloud value distribution. Decay models. Role weighting. Conservation (shares sum to 1.0). |
+
+**Total**: 228 new checks, 0 failures.
+
+### The Universality Proof (exp065)
+
+The most significant result: the fraud detectors are NOT analogies. exp065 runs the
+same `GenericFraudDetector` code on identically-structured DAGs labeled with three
+different vocabularies (gaming, science, medical). The detected fraud types are
+identical — only the domain names change:
+
+| Generic | Gaming (exp053) | Science (exp062) | Medical (exp063) |
+|---------|----------------|-------------------|-------------------|
+| OrphanObject | OrphanItem | PhantomSample | PhantomAccess |
+| DuplicateIdentity | DuplicateCert | DuplicateAccession | ConsentForgery |
+| UnauthorizedAction | SpeedViolation | UnauthorizedAccess | UnauthorizedAccess |
+| ScopeViolation | ImpossibleKill | MislabeledSpecimen | ScopeViolation |
+| BrokenChain | UnattributedLoot | BrokenColdChain | ExpiredConsent |
+
+This validates the core thesis from Paper 18 (RPGPT): anti-cheat IS chain-of-custody.
+
+### What Needs Building Next
+
+| Component | Team | Priority | Experiment |
+|-----------|------|----------|-----------|
+| Live BearDog IPC signing | BearDog | High | Replace exp064 model signatures with live crypto.sign_ed25519 |
+| wetSpring pipeline adoption | wetSpring | High | Adapt exp062 SampleType/ProcessingStep to field genomics |
+| healthSpring clinical adoption | healthSpring | High | Adapt exp063 RecordType to PK/PD/microbiome/biosignal/TRT tracks |
+| BearDog ZK circuit | BearDog | Medium | Full zero-knowledge proofs for exp063 access control |
+| Cross-institution provenance | songbird + biomeOS | Medium | Multi-lab / multi-provider consent chains |
+| FHIR/HL7 interop | healthSpring + loamSpine | Medium | Map consent certificates to FHIR resources |
+| ISO 17025 compliance matrix | wetSpring + loamSpine | Medium | Formal requirement → trio operation mapping |
+| Patient portal | petalTongue | Low | Consent status + access history visualization |
+| Public anchor for regulatory proof | loamSpine | Low | Blockchain anchoring for ISO/HIPAA compliance |
+
+### Connection to Existing Papers
+
+| Paper | New Connection |
+|-------|---------------|
+| 04 (Sentinels) | Sample monitoring extends sentinel architecture (exp062) |
+| 09 (Field Genomics) | Direct scaffold for wetSpring sample processing (exp062) |
+| 12 (Immuno-Anderson) | Medical access model for immunological data (exp063) |
+| 13 (Sovereign Health) | Consent/access model for clinical tracks (exp063) |
+| 16 (Anaerobic-Aerobic QS) | Sample chain-of-custody for digester studies (exp062) |
+| 17 (Game Design) | Same provenance patterns, different domain vocabulary (exp065) |
+| 18 (RPGPT) | Anti-cheat = chain-of-custody proven computationally (exp065) |
+| 20 (NFT Economics) | Every sample and record is a Novel Ferment Transcript |

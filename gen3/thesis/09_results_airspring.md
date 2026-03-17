@@ -2,7 +2,7 @@
 
 ## 9.1 Validation Summary
 
-airSpring validates BarraCUDA and the ecoPrimals infrastructure against precision agriculture: evapotranspiration modeling (FAO-56 Penman-Monteith, Priestley-Taylor, Hargreaves, Thornthwaite), soil moisture sensor calibration (Dong et al. 2020, 2024), and water balance scheduling. 3,123+ checks pass across four validation phases plus cross-validation, with negligible compute cost.
+airSpring validates BarraCuda and the ecoPrimals infrastructure against precision agriculture: evapotranspiration modeling (FAO-56 Penman-Monteith, Priestley-Taylor, Hargreaves, Thornthwaite), soil moisture sensor calibration (Dong et al. 2020, 2024), and water balance scheduling. 3,123+ checks pass across four validation phases plus cross-validation, with negligible compute cost.
 
 ### Table 9.1 — Phase Summary
 

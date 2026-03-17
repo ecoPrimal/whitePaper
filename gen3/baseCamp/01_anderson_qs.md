@@ -262,7 +262,7 @@ across 4 Kachkovskiy papers, all at benchmark-grade numerical precision —
 establishes that the Anderson framework is not merely borrowed from
 condensed matter physics but independently validated in the ecoPrimals stack.
 
-**Future**: As groundSpring migrates to BarraCUDA GPU (Phase 2b), the same
+**Future**: As groundSpring migrates to BarraCuda GPU (Phase 2b), the same
 Anderson spectral computations will run on GPU via the three-tier pattern
 (Exp190-192) already established in wetSpring — enabling direct cross-spring
 verification of GPU Anderson eigensolves.

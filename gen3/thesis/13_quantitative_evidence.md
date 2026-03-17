@@ -10,7 +10,7 @@ This chapter presents the measurable signatures of constrained evolution in the 
 
 ### 13.2.1 Background
 
-BarraCUDA's Number Theoretic Transform (NTT) was evolved under fully homomorphic encryption (FHE) constraints for polynomial multiplication in \(\mathbb{Z}_q\). The Fast Fourier Transform (FFT), needed for physics simulation (lattice QCD, spectral methods), shares the Cooley-Tukey butterfly structure.
+BarraCuda's Number Theoretic Transform (NTT) was evolved under fully homomorphic encryption (FHE) constraints for polynomial multiplication in \(\mathbb{Z}_q\). The Fast Fourier Transform (FFT), needed for physics simulation (lattice QCD, spectral methods), shares the Cooley-Tukey butterfly structure.
 
 ### 13.2.2 Structural Comparison (Measured from Source)
 
@@ -37,7 +37,7 @@ The FFT is *shorter* than its NTT ancestor because complex floats (native `vec2<
 
 ### 13.2.3 Interpretation
 
-No one designed BarraCUDA for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly *is* the FFT's skeleton. Each step follows by mathematical necessity within the constraint. This is constrained evolution: the constraint (FHE) reshaped the fitness landscape to select for a structure (butterfly transform) that happened to be fit for an unrelated domain (physics).
+No one designed BarraCuda for physics. The FHE constraint required NTT; NTT required the Cooley-Tukey butterfly; the butterfly *is* the FFT's skeleton. Each step follows by mathematical necessity within the constraint. This is constrained evolution: the constraint (FHE) reshaped the fitness landscape to select for a structure (butterfly transform) that happened to be fit for an unrelated domain (physics).
 
 **This is Taq polymerase in code.** The hot spring (FHE constraint) produced an enzyme (NTT butterfly) that proved useful far beyond its original environment (physics simulation), because the constraint selected for a mathematical structure that was universal.
 
@@ -135,7 +135,7 @@ The growth from the initial 2,882 checks (February 2026) to 11,161+ (March 2026)
 
 ### 13.6.1 The Isomorphism Theorem
 
-neuralSpring's Isomorphism Theorem (Chapter 12) demonstrates that all neural architectures decompose into 6 fundamental primitives: GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating. BarraCUDA implements all 6 as WGSL shaders.
+neuralSpring's Isomorphism Theorem (Chapter 12) demonstrates that all neural architectures decompose into 6 fundamental primitives: GEMM, Attention, Normalization, Nonlinearity, Reduction, Gating. BarraCuda implements all 6 as WGSL shaders.
 
 The same primitives serve multiple domains:
 
@@ -157,7 +157,7 @@ Kernels evolved under one domain's constraints (hotSpring's plasma physics) prov
 The quantitative evidence shows:
 1. **NTT→FFT**: ~93 shared structural lines between cryptographic and physics transforms, with character-identical main compute kernels — emerged from constraint, not design
 2. **Convergent implementation patterns**: 11 primals sharing directed architectural choices (JSON-RPC, capability-based) but independently converging on undirected implementation details (error granularity, retry logic, capability versioning) — the constraint environment shapes solutions beyond what the developer specifies
-3. **Cross-domain kernels**: 6 BarraCUDA primitives serve 8 scientific domains without modification — the same GEMM that does SU(3) matrix multiplication does spectral cosine matching in metagenomics and attention in neural networks
+3. **Cross-domain kernels**: 6 BarraCuda primitives serve 8 scientific domains without modification — the same GEMM that does SU(3) matrix multiplication does spectral cosine matching in metagenomics and attention in neural networks
 4. **Velocity**: 11,161+ checks across 70+ papers in ~69 days exceeds institutional reproduction rates by an order of magnitude, with 3.9× growth in the most recent 5 weeks driven by cross-domain kernel reuse
 5. **Fastidious specialization**: Phase 1 primals average 6.4× more code and 3.4× more tests than Phase 2 primals, reflecting evolutionary maturity under constraint
 

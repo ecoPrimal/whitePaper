@@ -303,7 +303,7 @@ sequencing. A MinION nanopore sequencer at the sentinel station enables
 real-time community profiling without lab turnaround:
 
 ```
-MinION (sequences eDNA) → BarraCUDA (16S) → AKD1000 NPU (classify) → Alert
+MinION (sequences eDNA) → BarraCuda (16S) → AKD1000 NPU (classify) → Alert
                                                   ↓
                                     Adaptive sampling feedback
                                     (NPU tells MinION which reads to keep)

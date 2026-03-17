@@ -2,7 +2,7 @@
 
 ## 8.1 Validation Summary
 
-hotSpring validates BarraCUDA and the ecoPrimals infrastructure against computational plasma physics, nuclear structure, lattice QCD, spectral theory, and neuromorphic computing. All 197+ checks pass across 39 validation suites and 21 experiments at ~$0.80 total compute cost. Five silent bugs in the upstream Sarkas MD package were identified and patched during reproduction. The crate has evolved to 78 binaries, 62 WGSL shaders, and ~697 tests.
+hotSpring validates BarraCuda and the ecoPrimals infrastructure against computational plasma physics, nuclear structure, lattice QCD, spectral theory, and neuromorphic computing. All 197+ checks pass across 39 validation suites and 21 experiments at ~$0.80 total compute cost. Five silent bugs in the upstream Sarkas MD package were identified and patched during reproduction. The crate has evolved to 78 binaries, 62 WGSL shaders, and ~697 tests.
 
 ### Table 8.1 — Phase-by-Phase Validation
 
@@ -16,7 +16,7 @@ hotSpring validates BarraCUDA and the ecoPrimals infrastructure against computat
 | D | N-scaling + cell-list + native f64 | 4 | 16 | **16/16** | ~$0.01 |
 | E | Paper-parity long run | 1 | 13 | **13/13** | ~$0.02 |
 | F | Nuclear EOS full-scale (L1/L2/L3) | 3 | 9 | **9/9** | ~$0.02 |
-| Pipeline | BarraCUDA MD + HFB | 2 | 26 | **26/26** | — |
+| Pipeline | BarraCuda MD + HFB | 2 | 26 | **26/26** | — |
 | Lattice | SU(3) pure gauge + Abelian Higgs | 2 | 29 | **29/29** | ~$0.02 |
 | Spectral | Anderson, Hofstadter, Lanczos | 9 | — | all pass | ~$0.001 |
 | NPU | ESN → AKD1000 pipeline | 1 | 3 | **3/3** | — |
@@ -88,14 +88,14 @@ Five silent bugs identified in the Sarkas Yukawa MD codebase during hotSpring re
 
 ### 8.3.1 Surrogate Learning (Diaw et al. 2024, Nature Machine Intelligence)
 
-| Level | Method | Paper χ²/datum | BarraCUDA χ²/datum | Speedup | Tolerance | Status |
+| Level | Method | Paper χ²/datum | BarraCuda χ²/datum | Speedup | Tolerance | Status |
 |-------|--------|:--------------:|:------------------:|--------:|:---------:|--------|
 | L1 | SEMF (52 nuclei) | 6.62 | **2.27** | 478× | < 10 | **PASS** |
 | L2 | HF+BCS (18 focused) | **1.93** | 16.11 (best) | 1.7× | < 5 | Partial |
 | L1 Python (30k evals) | SEMF full | — | **3.93** | — | — | — |
 | L2 Python (3k evals) | HFB hybrid | — | **1.93** | — | — | — |
 
-L1 BarraCUDA surpasses the paper's χ²/datum (2.27 vs 6.62) — the constrained evolution produced a better fit than the original, because the BarraCUDA optimizer explored a different region of the parameter landscape. L2 remains partially validated; the HFB nuclear structure calculation is the most demanding scientific computation in the system.
+L1 BarraCuda surpasses the paper's χ²/datum (2.27 vs 6.62) — the constrained evolution produced a better fit than the original, because the BarraCuda optimizer explored a different region of the parameter landscape. L2 remains partially validated; the HFB nuclear structure calculation is the most demanding scientific computation in the system.
 
 ### 8.3.2 AME2020 Coverage
 
@@ -312,7 +312,7 @@ Six placement options tested for NPU pre-screening in lattice QCD:
 
 hotSpring validates the thesis at five levels:
 
-1. **Infrastructure correctness**: BarraCUDA's Yukawa force kernel, evolved under ML and FHE constraints, reproduces published plasma physics at 0.000% energy drift — confirming that the constrained evolution produced correct scientific computing primitives.
+1. **Infrastructure correctness**: BarraCuda's Yukawa force kernel, evolved under ML and FHE constraints, reproduces published plasma physics at 0.000% energy drift — confirming that the constrained evolution produced correct scientific computing primitives.
 
 2. **Bug discovery as selection pressure**: The 5 silent upstream Sarkas bugs demonstrate that the reproduction pipeline functions as environmental selection — code paths that diverge from expected physical behavior are identified and corrected.
 

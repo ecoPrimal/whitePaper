@@ -2,7 +2,7 @@
 
 ## 10.1 Validation Summary
 
-wetSpring is the largest spring by experiment count and validation checks: 56 experiments, 1,368 checks (1,168 CPU + 200 GPU), all passing. It validates BarraCUDA and the ecoPrimals infrastructure against 16S metagenomics, quorum sensing models, phylogenetic inference, PFAS analytical chemistry, deep-sea metagenomics, and enzyme evolution — spanning six faculty connections across three institutions.
+wetSpring is the largest spring by experiment count and validation checks: 56 experiments, 1,368 checks (1,168 CPU + 200 GPU), all passing. It validates BarraCuda and the ecoPrimals infrastructure against 16S metagenomics, quorum sensing models, phylogenetic inference, PFAS analytical chemistry, deep-sea metagenomics, and enzyme evolution — spanning six faculty connections across three institutions.
 
 ### Table 10.1 — Phase Summary
 
@@ -18,7 +18,7 @@ wetSpring is the largest spring by experiment count and validation checks: 56 ex
 | — | Liu lab phylogenetics | 8 | 137 | **PASS** |
 | — | Jones lab PFAS + spectral | 3 | 49 | **PASS** |
 | — | Anderson deep-sea metagenomics | 6 | 133 | **PASS** |
-| — | BarraCUDA CPU + GPU parity | 5 | 182 | **PASS** |
+| — | BarraCuda CPU + GPU parity | 5 | 182 | **PASS** |
 | GPU | GPU pipeline validation | 8 | 200 | **PASS** |
 | Misc | Faculty proxies, alignment, Felsenstein | 6 | 116 | **PASS** |
 | **Total** | | **56** | **1,368** | **All pass** |
@@ -27,7 +27,7 @@ wetSpring is the largest spring by experiment count and validation checks: 56 ex
 
 ## 10.2 Sovereign 16S Pipeline
 
-wetSpring's headline result: a complete 16S metagenomics pipeline in Pure Rust + BarraCUDA GPU, replacing the Galaxy/QIIME2/DADA2 Python stack.
+wetSpring's headline result: a complete 16S metagenomics pipeline in Pure Rust + BarraCuda GPU, replacing the Galaxy/QIIME2/DADA2 Python stack.
 
 ### Table 10.2 — Pipeline Module Inventory
 
@@ -160,7 +160,7 @@ The 926× spectral cosine speedup demonstrates that GPU promotion of the right k
 
 ## 10.10 Connection to Constrained Evolution Thesis
 
-wetSpring provides the strongest single piece of evidence for the constrained evolution methodology. 1,368 checks across 56 experiments and 6 faculty connections — metagenomics, quorum sensing ODEs, phylogenetic inference, mass spectrometry, enzyme evolution — all validated by the same BarraCUDA kernels evolved under type-theoretic constraint.
+wetSpring provides the strongest single piece of evidence for the constrained evolution methodology. 1,368 checks across 56 experiments and 6 faculty connections — metagenomics, quorum sensing ODEs, phylogenetic inference, mass spectrometry, enzyme evolution — all validated by the same BarraCuda kernels evolved under type-theoretic constraint.
 
 The 926× GPU speedup for spectral cosine matching demonstrates that the constrained evolution methodology not only produces correct results but produces them efficiently. The GPU kernel was evolved under the WGSL constraint, not hand-tuned for mass spectrometry — yet it outperforms CPU by nearly three orders of magnitude.
 

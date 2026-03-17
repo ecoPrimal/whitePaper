@@ -16,7 +16,7 @@ This chapter restates the five contributions with supporting evidence, outlines 
 
 ### 16.2.2 Contribution 2: Sovereign Scientific Computing Platform
 
-**Claim**: The ecoPrimals ecosystem — 11 primals, capability-based composition, NUCLEUS deployment model, 757K lines Rust, 106K tests, zero unsafe — demonstrates that constrained evolution produces coherent, layered systems. BarraCUDA (914 WGSL shaders, f64, vendor-agnostic) achieves paper-parity plasma physics at $0.044 per run on consumer hardware.
+**Claim**: The ecoPrimals ecosystem — 11 primals, capability-based composition, NUCLEUS deployment model, 757K lines Rust, 106K tests, zero unsafe — demonstrates that constrained evolution produces coherent, layered systems. BarraCuda (914 WGSL shaders, f64, vendor-agnostic) achieves paper-parity plasma physics at $0.044 per run on consumer hardware.
 
 **Evidence**: Chapters 5–6; ECOSYSTEM_ARCHITECTURE.md, PRIMAL_CATALOG.md; hotSpring Phase C (9/9 Yukawa MD), Phase B (nuclear EOS), Phase A (Python control).
 
@@ -52,7 +52,7 @@ Deploy NUCLEUS across multiple institutions; validate bonding model (covalent, i
 
 ### 16.3.3 Additional Spring Domains
 
-Extend validation to new domains: materials science, climate modeling, quantum chemistry. Each new spring tests whether BarraCUDA's ML/FHE-evolved primitives generalize. The BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md provides a roadmap.
+Extend validation to new domains: materials science, climate modeling, quantum chemistry. Each new spring tests whether BarraCuda's ML/FHE-evolved primitives generalize. The BARRACUDA_SCIENTIFIC_COMPUTE_GAPS.md provides a roadmap.
 
 ### 16.3.4 Controlled Language Comparison
 

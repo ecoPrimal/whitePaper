@@ -14,11 +14,11 @@ This document logs the key discoveries that shaped the system. These are not des
 
 | Period | Focus | What Was Happening |
 |--------|-------|-------------------|
-| Months 1–8 | Primals | BearDog, NestGate, Songbird, Squirrel, ToadStool, biomeOS evolving under Pure Rust constraint. BarraCUDA growing from ML primitives through FHE to 628 shaders. No science validation yet. |
-| Month 9 | ToadStool + BarraCUDA maturation | Shader-first architecture solidified. GPU dispatch, f64 pipeline, mixed-substrate (GPU/NPU/CPU). Still no springs. |
+| Months 1–8 | Primals | BearDog, NestGate, Songbird, Squirrel, ToadStool, biomeOS evolving under Pure Rust constraint. BarraCuda growing from ML primitives through FHE to 628 shaders. No science validation yet. |
+| Month 9 | ToadStool + BarraCuda maturation | Shader-first architecture solidified. GPU dispatch, f64 pipeline, mixed-substrate (GPU/NPU/CPU). Still no springs. |
 | Months 9–10 (~2 weeks of spring work) | Springs | hotSpring, airSpring, wetSpring, groundSpring, neuralSpring. 2,882 checks across 80+ papers. All on single-machine hardware — not the full NUCLEUS basement HPC. |
 
-The springs are the youngest part of the system. ToadStool/BarraCUDA had months of independent evolution before the springs existed. The springs then became the selection pressure that drove specific shader development — the scientific needs pulled BarraCUDA's evolution in directions the ML/FHE origins wouldn't have reached.
+The springs are the youngest part of the system. ToadStool/BarraCuda had months of independent evolution before the springs existed. The springs then became the selection pressure that drove specific shader development — the scientific needs pulled BarraCuda's evolution in directions the ML/FHE origins wouldn't have reached.
 
 **The full basement HPC via NUCLEUS is not deployed yet.** All 2,882 science checks run on a single machine (RTX 4070, AKD1000 NPU, consumer hardware). The distributed deployment remains future work.
 
@@ -56,7 +56,7 @@ The Titan V is still useful (full f64 throughput is 1:1, not 1:2), but the disco
 
 ### The Need
 
-hotSpring's PPPM electrostatics method requires FFT for charge mesh computation. BarraCUDA had NTT (Number Theoretic Transform) from the FHE work.
+hotSpring's PPPM electrostatics method requires FFT for charge mesh computation. BarraCuda had NTT (Number Theoretic Transform) from the FHE work.
 
 ### The Discovery
 
@@ -66,7 +66,7 @@ The FFT is shorter because complex floats (`vec2<f32>`) map to GPU hardware nati
 
 ### The Implication
 
-No one designed BarraCUDA for physics. The FHE constraint selected for the Cooley-Tukey butterfly — a mathematical structure that was universal. Switching from modular arithmetic to complex arithmetic preserved 80%+ of the code. The cryptographic constraint accidentally produced the physics engine.
+No one designed BarraCuda for physics. The FHE constraint selected for the Cooley-Tukey butterfly — a mathematical structure that was universal. Switching from modular arithmetic to complex arithmetic preserved 80%+ of the code. The cryptographic constraint accidentally produced the physics engine.
 
 ---
 
@@ -80,7 +80,7 @@ hotSpring's lattice QCD phase detection could benefit from neuromorphic inferenc
 
 `hotSpring/metalForge/` contains the mixed-substrate experiments. The pipeline:
 
-1. **GPU** (BarraCUDA): Generate lattice configurations, compute observables
+1. **GPU** (BarraCuda): Generate lattice configurations, compute observables
 2. **NPU** (AKD1000): ESN reservoir computing for phase classification
 3. **CPU**: Validation and statistical analysis
 
@@ -98,7 +98,7 @@ This is the methodology: analyze a need (phase classification), identify a candi
 
 ### The Need
 
-BarraCUDA needed to be vendor-agnostic (no CUDA, no ROCm, no oneAPI). The Pure Rust constraint eliminated all C-based GPU frameworks.
+BarraCuda needed to be vendor-agnostic (no CUDA, no ROCm, no oneAPI). The Pure Rust constraint eliminated all C-based GPU frameworks.
 
 ### The Discovery
 

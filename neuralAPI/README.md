@@ -1,186 +1,144 @@
-# 🧠 Neural API Architecture - Adaptive Multi-Layer Orchestration
+# Neural API Architecture — Adaptive Multi-Layer Orchestration
 
-**Status**: Whitepaper Series  
-**Date**: January 4, 2026  
+**Status**: Whitepaper Series (partially implemented)
+**Updated**: March 15, 2026
+**Original**: January 4, 2026
 **Authors**: ecoPrimals Architecture Team
 
 ---
 
-## 🎯 Overview
+## Overview
 
-The **Neural API** is an architectural evolution of biomeOS that enables adaptive, learning-based orchestration of primals through multi-layer bidirectional coordination.
-
-### **Core Concept**
-
-Traditional orchestration is static: you define workflows, and they execute the same way every time. Neural API is **adaptive**: it learns from usage, discovers patterns, and evolves coordination strategies over time.
+The **Neural API** is the orchestration layer of biomeOS. It executes
+capability graphs over autonomous primals, learns from execution traces,
+and evolves coordination strategies over time. Complex systems — version
+control (RootPulse), sovereign RPG engines (RPGPT), protein folding
+pipelines, cross-spring scientific workflows — emerge as graphs over
+the Neural API. biomeOS doesn't know what these systems are; it only
+knows how to execute capability graphs and learn from them.
 
 ```
-Traditional:  Request → Route → Execute → Response
-Neural:       Request → Learn → Optimize → Execute → Feedback → Adapt
-                        ↑                              ↓
-                        └──────────────────────────────┘
+Traditional:  Request -> Route -> Execute -> Response
+Neural:       Request -> Learn -> Optimize -> Execute -> Feedback -> Adapt
+                         ^                               |
+                         +-------------------------------+
 ```
+
+### The Core Insight
+
+Every spring becomes a BYOB niche: self-describing via `niche.rs`,
+discoverable via capability routing, deployable via a TOML graph.
+Complex systems like RootPulse and RPGPT are not primals — they are
+coordination patterns that emerge from graph execution over existing
+capabilities. The Neural API is what makes emergence possible.
 
 ---
 
-## 📚 Document Series
+## Document Series
 
-### **Conceptual Foundation**
+### Conceptual Foundation
 
 1. **[00_INTRODUCTION.md](./00_INTRODUCTION.md)** — What is Neural API?
-   - Three-layer architecture
-   - Bidirectional learning
-   - Graph execution
+2. **[01_PHILOSOPHY.md](./01_PHILOSOPHY.md)** — Why emergence over engineering?
+3. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Technical layer design
 
-2. **[01_PHILOSOPHY.md](./01_PHILOSOPHY.md)** — Why this approach?
-   - Emergence over engineering
-   - Nature-inspired design
-   - Ecosystem intelligence
+### Technical Deep Dives
 
-3. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Technical design
-   - Layer architecture
-   - Component interactions
-   - Data flow
+4. **[03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)** — Graph coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline, Continuous)
+5. **[04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md)** — Forward execution, backward learning
+6. **[05_PATHWAY_OPTIMIZATION.md](./05_PATHWAY_OPTIMIZATION.md)** — Usage tracking, pattern discovery, optimization
 
----
+### Implementation Guides
 
-### **Technical Deep Dives**
+7. **[06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md)** — biomeOS graph executor, pathway learner, optimization engine
+8. **[07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md)** — Metrics reporting, capability declaration, `niche.rs` convention
+9. **[08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md)** — Transactional vs continuous niches, game engine at 60 Hz
 
-4. **[03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)** — Primal graph coordination
-   - Graph structure
-   - Coordination patterns
-   - Execution engine
+### Practical Application
 
-5. **[04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md)** — Learning mechanism
-   - Forward pass (execution)
-   - Backward pass (learning)
-   - Adaptation strategies
-
-6. **[05_PATHWAY_OPTIMIZATION.md](./05_PATHWAY_OPTIMIZATION.md)** — Performance evolution
-   - Usage tracking
-   - Pattern discovery
-   - Automatic optimization
+10. **[09_ROOTPULSE_CASE_STUDY.md](./09_ROOTPULSE_CASE_STUDY.md)** — First transactional niche (version control)
+11. **[10_ROADMAP.md](./10_ROADMAP.md)** — Implementation timeline and phase tracking
 
 ---
 
-### **Implementation Guides**
+## Emergent Systems via Neural API
 
-7. **[06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md)** — biomeOS requirements
-   - Graph executor
-   - Pathway learner
-   - Optimization engine
+The same graph execution engine powers radically different systems.
+biomeOS doesn't need domain knowledge — it executes capability graphs:
 
-8. **[07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md)** — What primals provide
-   - Metrics reporting
-   - Capability declaration
-   - Optional enhancements
+| Emergent System | Coordination | Springs/Primals | Graph |
+|-----------------|:------------:|-----------------|-------|
+| **RootPulse** (version control) | Sequential | rhizoCrypt + loamSpine + sweetGrass + BearDog + NestGate | `rootpulse_commit.toml` |
+| **RPGPT** (sovereign RPG engine) | Continuous + Sequential | ludoSpring + rhizoCrypt + loamSpine + sweetGrass + BearDog + Squirrel + petalTongue | `game_engine_tick.toml` + provenance at session boundaries |
+| **AlphaFold-class** (protein folding) | Pipeline | neuralSpring (evoformer) + hotSpring (physics) + wetSpring (sequence) + toadStool (GPU) | `neuralspring_spectral_pipeline.toml` |
+| **Cross-spring ecology** | Sequential | airSpring (ET0) + wetSpring (diversity) + neuralSpring (spectral) | `cross_spring_ecology.toml` |
+| **Surgical VR** | Continuous | healthSpring + petalTongue + ludoSpring | `surgical_vr_deploy.toml` |
 
-9. **[08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md)** — Continuous niches & the game engine
-   - Transactional vs continuous niche spectrum
-   - Continuous coordination mode (fifth mode for biomeOS)
-   - Game engine as first continuous niche
-   - Neural API learning at 60 Hz
+The Neural API doesn't distinguish these. A game session and a protein
+folding run are both "graphs of capability calls with timing constraints."
 
 ---
 
-### **Practical Application**
+## Quick Start
 
-10. **[09_ROOTPULSE_CASE_STUDY.md](./09_ROOTPULSE_CASE_STUDY.md)** — Neural API in action
-    - RootPulse as example
-    - Multi-primal coordination
-    - Learning outcomes
+**For biomeOS developers**: [06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md) then [03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)
 
-11. **[10_ROADMAP.md](./10_ROADMAP.md)** — Implementation timeline
-    - Phase 1: Graph execution
-    - Phase 2: Learning
-    - Phase 3: Adaptation
-    - Phase 4: Evolution
+**For primal/spring teams**: [07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md) then [09_ROOTPULSE_CASE_STUDY.md](./09_ROOTPULSE_CASE_STUDY.md)
+
+**For niche developers**: [08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md) then [03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)
 
 ---
 
-## 🎯 Quick Start
+## Implementation Status (March 15, 2026)
 
-### **For Architects**
-Start with:
-1. [00_INTRODUCTION.md](./00_INTRODUCTION.md) - Core concepts
-2. [02_ARCHITECTURE.md](./02_ARCHITECTURE.md) - Technical design
-3. [10_ROADMAP.md](./10_ROADMAP.md) - Implementation plan
+| Component | Status | Location |
+|-----------|--------|----------|
+| **Graph parsing (TOML)** | Implemented | `biomeos-graph` crate |
+| **Sequential execution** | Implemented | `biomeos-atomic-deploy` GraphExecutor |
+| **Parallel execution** | Implemented | Topological sort + wave-based |
+| **ConditionalDag** | Parsed only | Executes as Sequential — needs real branching |
+| **Pipeline (streaming)** | Parsed only | Executes as Sequential — needs streaming |
+| **Continuous (60 Hz)** | Implemented | `biomeos-graph` ContinuousExecutor |
+| **Feedback edges** | Implemented | `feedback_to` + `feedback_map` |
+| **Session lifecycle** | Implemented | Starting/Running/Paused/Stopping/Stopped |
+| **Capability routing** | Implemented | `biomeos-core` registry + `biomeos-atomic-deploy` NeuralRouter |
+| **tarpc forwarding** | Implemented | JSON-RPC primary, tarpc escalation with fallback |
+| **RootPulse graphs** | Implemented | commit, branch, merge, diff, federate |
+| **Game engine graph** | Implemented | `game_engine_tick.toml` (60 Hz, feedback edges) |
+| **MetricsCollector** | Implemented | redb-backed (biomeos-graph) + in-memory (biomeos-core) |
+| **PathwayLearner** | Code exists | **Not wired into execution path** |
+| **Bidirectional feedback** | Not started | Spec only |
+| **Pattern discovery** | Not started | Research phase |
 
-### **For biomeOS Developers**
-Focus on:
-1. [06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md) - What to build
-2. [03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md) - Execution engine
-3. [04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md) - Learning system
+### Critical gaps for ludoSpring RPGPT and cross-spring composition
 
-### **For Primal Teams**
-Read:
-1. [07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md) - What to provide
-2. [04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md) - Metrics API
-3. [09_ROOTPULSE_CASE_STUDY.md](./09_ROOTPULSE_CASE_STUDY.md) - Real example
-
-### **For Niche API Developers**
-Study:
-1. [08_NICHE_API_PATTERNS.md](./08_NICHE_API_PATTERNS.md) - Design patterns
-2. [09_ROOTPULSE_CASE_STUDY.md](./09_ROOTPULSE_CASE_STUDY.md) - Working example
-3. [03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md) - Graph API
-
----
-
-## 🌟 Key Benefits
-
-### **For Users**
-- 🚀 **Faster over time** - System learns and optimizes
-- 🎯 **Simpler APIs** - High-level niche APIs abstract complexity
-- 🔄 **Adaptive** - Responds to changing conditions
-
-### **For Developers**
-- 🧩 **Composable** - Build on graph patterns
-- 📊 **Observable** - Full visibility into learning
-- 🎨 **Flexible** - Support any coordination pattern
-
-### **For the Ecosystem**
-- 🌱 **Emergent** - New patterns discovered automatically
-- 🔗 **Federated** - Learning shared across towers
-- ♾️ **Scalable** - Complexity managed through abstraction
+1. **Dual graph schema** — `[[nodes]]` (Neural API server) vs `[[graph.nodes]]` (ContinuousExecutor). Must unify so `neural_api.execute_graph` handles both.
+2. **No continuous execution via JSON-RPC** — ContinuousExecutor only runs via `biomeos continuous` CLI. Need `graph.start_continuous`, `graph.pause`, `graph.resume`, `graph.stop` methods.
+3. **ConditionalDag not implemented** — RPGPT needs conditional flows (AI availability, ruleset validation). Currently executes like Sequential.
+4. **PathwayLearner disconnected** — Exists but doesn't receive execution metrics or feed back into graph scheduling.
+5. **Mixed coordination** — RPGPT needs continuous ticks (game loop) with transactional subgraphs at session boundaries (provenance commit). Currently these are separate execution modes.
 
 ---
 
-## 🔗 Related Work
+## Related Work
 
-- **[RootPulse](../RootPulse/)** - Version control via primal coordination
-- **[biomeOS Architecture](../../phase2/biomeOS/docs/ARCHITECTURE_LAYERS.md)** - Current two-level model
-- **[Capability Registry](../../phase2/biomeOS/crates/biomeos-core/src/capability_registry.rs)** - Foundation for graph execution
-
----
-
-## 📊 Status
-
-| Component | Status | Effort |
-|-----------|--------|--------|
-| **Conceptual Design** | ✅ Complete | This whitepaper |
-| **Niche API Patterns** | ✅ Complete | 08_NICHE_API_PATTERNS.md |
-| **Graph Execution** | ✅ Complete | 03_GRAPH_EXECUTION.md + biomeos-graph crate |
-| **Continuous Coordination** | ✅ Complete | ContinuousExecutor + game_engine_tick.toml |
-| **RootPulse Case Study** | ✅ Complete | 09_ROOTPULSE_CASE_STUDY.md |
-| **Pathway Learning** | 🟡 Planned | 3-4 weeks |
-| **Bidirectional Feedback** | 🟡 Planned | 4-6 weeks |
-| **Pattern Discovery** | 🔵 Research | 6-8 weeks |
+- **[RootPulse](../RootPulse/)** — First transactional niche (version control via primal coordination)
+- **[biomeOS v2.41](../../phase2/biomeOS/)** — 5,017 tests, 77.61% coverage, 124 capability translations
+- **[Capability Registry](../../phase2/biomeOS/config/capability_registry.toml)** — 12 domains, 120+ translations
 
 ---
 
-## 🚀 Next Steps
+## Next Steps (v2.42)
 
-1. **Review whitepaper series** (all teams)
-2. **Refine architecture** based on feedback
-3. **Begin Phase 1** (Graph Execution)
-4. **Implement Continuous coordination** (biomeOS — see 08_NICHE_API_PATTERNS.md)
-5. **Prototype with Game Engine** as first continuous niche API
-6. **Prototype with RootPulse** as first transactional niche API
-7. **Iterate and evolve**
+1. **Unify graph schema** — single format for transactional and continuous graphs
+2. **Expose continuous execution via Neural API** — JSON-RPC session management
+3. **Implement ConditionalDag** — real conditional branching
+4. **Wire PathwayLearner** — record metrics per execution, surface suggestions
+5. **Write missing chapters** — 02_ARCHITECTURE.md, 04_BIDIRECTIONAL_LEARNING.md, 05_PATHWAY_OPTIMIZATION.md
+6. **Tick-level fallback** — optional primals can skip per-tick without killing the graph
+7. **Mixed coordination** — transactional subgraphs within continuous graphs
 
 ---
-
-🧠 **Neural API: Orchestration that learns, adapts, and evolves**
 
 *"Intelligence emerges not from complexity, but from the right kind of simplicity, repeated and refined."*
 
