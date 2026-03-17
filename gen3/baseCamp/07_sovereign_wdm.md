@@ -8,7 +8,7 @@ reproduction on consumer GPU via vendor-agnostic shaders; no prior work
 frames distributed consumer GPU networks as alternatives to institutional
 HPC for plasma physics
 **Cross-Spring:** hotSpring (MD + transport + lattice QCD) × neuralSpring
-(surrogate learning + LSTM) × groundSpring V102 (uncertainty propagation — niche deployment, measurement domain, 102 barracuda delegations)
+(surrogate learning + LSTM) × groundSpring V112 (uncertainty propagation — OrExit<T> + parse_benchmark(), generic socket_env_var()/address_env_var(), provenance trio, 102 barracuda delegations)
 
 ---
 
@@ -308,10 +308,10 @@ df64-validated protein folding primitives directly to WDM science:
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
 
-### 6.2 groundSpring V102 Integration
+### 6.2 groundSpring V112 Integration
 
-groundSpring V102 (niche deployment, measurement domain, 102 barracuda delegations,
-710 workspace tests, 23/23 cross-spring benchmark, 39/39 GPU tier validation)
+groundSpring V112 (OrExit<T> + parse_benchmark() (28 validation binaries), generic socket_env_var()/address_env_var() discovery, provenance trio (RHIZOCRYPT, LOAMSPINE, SWEETGRASS), 102 barracuda delegations,
+29/29 validation binaries, 140 metalForge checks)
 provides the inverse problem and uncertainty machinery for WDM science.
 
 groundSpring's Bazavov experiments (Exp 019-021) are **direct lattice QCD
