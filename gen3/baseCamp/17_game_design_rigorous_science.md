@@ -1,6 +1,6 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: Validated — 75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT + 9 dialogue plane, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, 24 IPC capabilities (10 local, 14 external), ecosystem absorption V22 (toadStool direct dispatch, dual-format discovery, Python tolerance mirror, Write→Absorb→Lean documented, session decomposition, typed transition verification, pluggable validation, 0 `#[allow()]`, 0 magic numbers, `#![forbid(unsafe_code)]`)
+**Status**: Validated — 75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT + 9 dialogue plane, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, 24 IPC capabilities (10 local, 14 external), cross-ecosystem deep debt V23 (zero `#[allow()]` — `#[expect(reason)]` curated dictionary, zero-panic validation — 14 experiments, `extract_rpc_result()` centralized, `deny.toml wildcards=deny`, XDG socket paths, named unit constants, toadStool direct dispatch, dual-format discovery, Python tolerance mirror, `#![forbid(unsafe_code)]`)
 **Date**: March 16, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
@@ -98,6 +98,7 @@ the metrics framework is content-agnostic.
 | 21 — Deep Primal Integration | Squirrel AI, NestGate storage, petalTongue scene push, deep provenance trio, GPU compute | (code, not experiments) | — |
 | 22 — Deep Debt Evolution | Session decomposition, typed transitions, pluggable validation, toadStool IPC client | (code quality, V21) | — |
 | 23 — Ecosystem Absorption | toadStool direct dispatch, dual-format discovery, Python tolerance mirror, Write→Absorb→Lean | (cross-ecosystem, V22) | — |
+| 24 — Cross-Ecosystem Deep Debt | `#[expect(reason)]` dictionary, zero-panic validation, `extract_rpc_result()`, `deny.toml`, XDG paths, named constants | (ecosystem-wide, V23) | — |
 
 ### Key Results
 
@@ -144,18 +145,18 @@ Four experiments bridge ludoSpring game science with the broader ecosystem:
 
 | Spring/Primal | Contribution | Status |
 |---------------|-------------|--------|
-| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 24 IPC capabilities (10 local, 14 external) | **Validated** (V22) |
+| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 24 IPC capabilities (10 local, 14 external) | **Validated** (V23) |
 | barraCuda | Math primitives (sigmoid, dot, lcg_step, state_to_f64) | **Consumed** |
-| toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders + `compute.dispatch.*` direct dispatch | **Deep integration** (V22) |
+| toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders + `compute.dispatch.*` direct dispatch | **Deep integration** (V23) |
 | metalForge | Cross-substrate routing (CPU/GPU/NPU) | **Architecture validated** (exp032-033) |
 | petalTongue | Live visualization (3 dashboards, 15 channel types, scene push, interaction stream) | **Deep integration** (V18) |
 | Squirrel | AI narration, NPC dialogue, internal voices (ai.query, ai.analyze, ai.suggest) | **IPC aligned** (V20) |
 | NestGate | Content-addressed storage (game state, NPC snapshots, rulesets — storage.store/retrieve) | **IPC aligned** (V20) |
-| rhizoCrypt | Session DAG, vertex queries, Merkle proofs (dag.session.*, dag.vertex.*, dag.frontier.*) | **Deep integration** (V18-V22) |
-| loamSpine | Certificates (NPC personality, ruleset, character), spines (spine.certificate.*, spine.waypoint.*) | **Deep integration** (V18-V22) |
-| sweetGrass | Attribution braids, dehydration records (braid.create, provenance.graph, attribution.chain) | **Deep integration** (V18-V22) |
+| rhizoCrypt | Session DAG, vertex queries, Merkle proofs (dag.session.*, dag.vertex.*, dag.frontier.*) | **Deep integration** (V18-V23) |
+| loamSpine | Certificates (NPC personality, ruleset, character), spines (spine.certificate.*, spine.waypoint.*) | **Deep integration** (V18-V23) |
+| sweetGrass | Attribution braids, dehydration records (braid.create, provenance.graph, attribution.chain) | **Deep integration** (V18-V23) |
 | biomeOS | NUCLEUS atomic coordination, deploy graphs, Neural API | **Validated** (exp033 + exp042) |
-| wetSpring | Anderson QS model (W disorder parameter) + Python tolerance mirror pattern | **Cross-validated** (exp044 + V22) |
+| wetSpring | Anderson QS model (W disorder parameter) + Python tolerance mirror pattern | **Cross-validated** (exp044 + V23) |
 | nestgate (data) | NCBI E-utilities data pipeline | **Validated direct** (exp041/043) |
 
 ---
