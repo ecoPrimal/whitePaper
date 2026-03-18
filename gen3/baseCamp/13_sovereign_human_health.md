@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V36)
+**Spring**: healthSpring (V37)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 18, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Deep Debt + Ecosystem Maturity** — V36: 7 tracks complete, 79 experiments, 617 tests, 113/113 cross-validation checks, 6 WGSL shaders (all 6 GPU ops rewired to barraCuda upstream — Tier A + B complete), 79 JSON-RPC capabilities. Inline tolerances centralized, duplicate math eliminated (`lcg_step` → `barracuda::rng`). IPC routing for coralReef (`compute.shader_compile`) and Squirrel (`model.inference_route`). `cargo-deny` in CI. Zero `#[allow()]` — all migrated to `#[expect()]` with reasons. `f64::total_cmp()` replaces `partial_cmp().unwrap()`. V35: IPC resilience, sovereign dispatch. V34: Deep debt. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy warnings (pedantic + nursery), zero unsafe, zero TODO/FIXME, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Cross-Ecosystem Absorption Sprint** — V37: 706 tests, 79 experiments, 80 JSON-RPC capabilities (incl. `mcp.tools.list`). `mul_add()` FMA sweep (8 sites, IEEE 754 accuracy), centralized `extract_rpc_result()` (6 sites), 18 proptest IPC fuzz tests, structured provenance registry (49 records), MCP tool definitions (23 tools for Squirrel AI), `deny.toml` 14-crate C-dep ban list, leverage guide. V36: All 6 GPU ops rewired (Tier A + B). V35: IPC resilience, sovereign dispatch. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
@@ -457,7 +457,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-617 tests, 79 experiments, 79 JSON-RPC capabilities, 6/6 GPU ops rewired to barraCuda upstream, zero clippy warnings, zero unsafe, zero `#[allow()]`. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. cargo-deny enforced in CI. See `HEALTHSPRING_V36_DEEP_DEBT_ECOSYSTEM_MATURITY_HANDOFF_MAR18_2026.md` for full handoff.
+706 tests, 79 experiments, 80 JSON-RPC capabilities (incl. `mcp.tools.list`), 23 MCP tool schemas, 49 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. `mul_add()` FMA sweep, centralized `extract_rpc_result()`, 18 proptest IPC fuzz tests, `deny.toml` 14-crate C-dep ban, leverage guide. See `HEALTHSPRING_V37_CROSS_ECOSYSTEM_ABSORPTION_HANDOFF_MAR18_2026.md`.
 
 ---
 
