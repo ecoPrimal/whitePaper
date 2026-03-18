@@ -188,7 +188,9 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Metric | Value |
 |--------|-------|
 | Experiments | 79 |
-| **Total tests** | **617** |
+| **Total tests** | **706** |
+| Proptest IPC fuzz tests | 18 |
+| Python baselines (provenance registry) | 49 |
 | Python cross-validation checks | 113/113 |
 | Criterion benchmarks | 14 |
 | CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
@@ -200,12 +202,14 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
 | WGSL compute shaders | 6 (all rewired to upstream barraCuda) |
-| JSON-RPC capabilities | 79 |
+| JSON-RPC capabilities | 80 (incl. `mcp.tools.list`) |
+| MCP tool schemas | 23 (for Squirrel AI coordination) |
+| FMA `mul_add()` sites | 23 (8 new in V37) |
 | Patient archetypes | 5 (Exp063) |
 | Unsafe blocks | 0 (`#![forbid(unsafe_code)]`) |
 | `#[allow()]` in production | 0 (all `#[expect()]` with `reason`) |
 | Clippy warnings | 0 (pedantic + nursery) |
-| cargo-deny | Enforced in CI |
+| cargo-deny | Enforced in CI (14-crate C-dep ban list) |
 | Max file size | 731 lines (under 1000-line limit) |
 
 ---

@@ -1,6 +1,6 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 18, 2026 (V127 + ludoSpring V23 + airSpring V0.9.0 update)
+**Date:** March 18, 2026 (V127 + ludoSpring V23 + airSpring V0.10.0 update)
 **Foundation:** baseCamp papers 01–22, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V127 (376 experiments, 5,707+ checks, 1,448+ tests, 63 papers, V127 audit execution: MCP tool definitions, Python baseline provenance registry, `kahan_sum` upstream delegation, 7 new tolerance constants, `unlicensed = "deny"`, NPU device constant, IPC integration tests, zero local math duplication — paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.9.0 (894 lib + 299 integration tests, `#![deny(cast_*)]` library-strict, cast module with 9 helpers, soil_moisture refactored to 4 submodules, petalTongue 3-tier discovery, primal_dispatch IPC tests, benchmark JSON provenance), ludoSpring V23 (75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, all modules >= 90% coverage, cross-ecosystem deep debt: zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`)
 
 ---
@@ -550,3 +550,57 @@ Cargo.toml `[lints.clippy]` should be the single source of lint configuration. C
 | #08 (NPU IoT) | petalTongue discovery enables real-time NPU dashboard visualization |
 | #12 (Immunological) | Cast safety in GpuDiversity and CytokineBrain numerical paths |
 | #16 (Anaerobic QS) | Three-tier discovery for cross-spring soil O2 zonation pipeline |
+
+## airSpring V0.10.0 Cross-Ecosystem Absorption Learnings (March 18, 2026)
+
+### MCP Tool Definitions — Standard Pattern for All Springs
+
+All springs should expose typed MCP tool definitions for Squirrel AI integration.
+Pattern: `McpTool` struct with `name`, `description`, `input_schema`, plus `list_tools()`
+and `tool_to_method()` dispatch. airSpring exposes 10 ecology tools; wetSpring exposes 8
+life science tools. The struct and test patterns are identical — candidate for upstream
+promotion to `barracuda::ipc::mcp`.
+
+### Python Baseline Provenance Registry — Structured Traceability
+
+`provenance.rs` with `PythonBaseline` records provides compile-time-checked provenance
+for every validation binary. Categories: PythonParity, GpuParity, Analytical, Published.
+Canonical commit epochs prevent drift. Both airSpring (11 records) and wetSpring (14 records)
+use this pattern — candidate for shared upstream type.
+
+### Kahan Compensated Summation — Delegate to barraCuda
+
+`barracuda::shaders::precision::cpu::kahan_sum()` provides O(1) accumulation error.
+Springs should use `eco::numerics::kahan_sum()` wrappers rather than `Iterator::sum()`
+for precision-critical aggregation paths.
+
+### ecoBin deny.toml — 14 C-Dependency Bans
+
+Template for all springs: ban openssl-sys, libz-sys, zstd-sys, curl-sys, ring, native-tls,
+libgit2-sys, libssh2-sys, bzip2-sys, lzma-sys, zlib-ng-sys, libdbus-sys, libsqlite3-sys.
+Plus `unlicensed = "deny"` in `[licenses]`.
+
+### Lint Convention Clarification
+
+- `#[expect(reason)]` ONLY where the lint is **known** to fire (compile error if not)
+- `#[allow(reason)]` for blanket test module suppressions (unwrap_used, expect_used)
+
+### API Safety: assert! → Result in Public Libraries
+
+All public library functions that validate input should return `Result<T, Error>`, not panic.
+Pattern: `wind_speed_at_2m()` evolved from `assert!` to `Result<f64, InvalidInput>`.
+
+### NaN-Safe Float Ordering
+
+`f64::total_cmp` replaces `partial_cmp().unwrap_or(Equal)` everywhere.
+
+### What Papers Gain from V0.10.0
+
+| Paper | What V0.10.0 Adds |
+|-------|-----------------|
+| #01 (FAO-56 ET₀) | MCP tool `airspring_et0` enables Squirrel AI to compute ET₀ interactively |
+| #03 (Microbiome) | `airspring_diversity` MCP tool for ecology-aware AI interpretation |
+| #04 (Water Balance) | Provenance registry tracks exact Python baseline commit for WB validation |
+| #06 (No-Till) | `airspring_dual_kc` MCP tool for cover crop coefficient queries |
+| #09 (Richards) | `airspring_richards` MCP tool + kahan_sum for PDE accumulation precision |
+| #14 (Climate Scenarios) | `airspring_spi_drought` MCP tool for drought analysis |
