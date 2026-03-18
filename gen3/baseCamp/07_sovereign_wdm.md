@@ -8,7 +8,7 @@ reproduction on consumer GPU via vendor-agnostic shaders; no prior work
 frames distributed consumer GPU networks as alternatives to institutional
 HPC for plasma physics
 **Cross-Spring:** hotSpring (MD + transport + lattice QCD) × neuralSpring
-(surrogate learning + LSTM) × groundSpring V113 (uncertainty propagation — GemmF64 transpose (Tikhonov KᵀK/KᵀG), RetryPolicy + CircuitBreaker, 4-format capability parsing, exit_code constants, 102 barracuda delegations)
+(surrogate learning + LSTM) × groundSpring V116 (uncertainty propagation — typed error evolution, ValidationSink trait, Format C/D capability parsing, OnceLock GPU probe cache, RAWR extraction, 102 barracuda delegations)
 
 ---
 
@@ -308,9 +308,9 @@ df64-validated protein folding primitives directly to WDM science:
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
 
-### 6.2 groundSpring V113 Integration
+### 6.2 groundSpring V116 Integration
 
-groundSpring V113 (GemmF64 transpose (Tikhonov KᵀK/KᵀG), RetryPolicy + CircuitBreaker, 4-format capability parsing, exit_code constants. V112: OrExit<T>, parse_benchmark(), socket_env_var(), provenance trio. 102 barracuda delegations,
+groundSpring V116 (40 modules, 960+ tests, typed error evolution (DispatchError, EsnError, ResilienceError), ValidationSink trait, Format C/D capability parsing, OnceLock GPU probe cache, RAWR extraction. 102 barracuda delegations,
 29/29 validation binaries, 140 metalForge checks)
 provides the inverse problem and uncertainty machinery for WDM science.
 
