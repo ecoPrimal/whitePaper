@@ -12,7 +12,7 @@ dispatch 3, mixed hardware 7). S108: module refactored (1023→3 files: mod.rs +
 **Novelty:** No prior work applies Anderson localization to cytokine signal
 propagation in tissue; no prior work adds spatial geometry to drug repurposing scoring
 **Cross-Spring:** wetSpring (Anderson spectral) × neuralSpring (ESN regime classifier,
-LSTM time series) × groundSpring (transport, uncertainty, spectral validation)
+LSTM time series) × groundSpring (transport, uncertainty, spectral validation) × airSpring v0.8.9 (GpuDiversity tissue W, CytokineBrain AD flare, barrier state VG analogue — Exp066-069 94/94, PRIMAL_NAME/PRIMAL_DOMAIN, smart refactored eco/ modules)
 
 ---
 

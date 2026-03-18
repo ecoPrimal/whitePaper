@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V35)
+**Spring**: healthSpring (V36)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 17, 2026
+**Date**: March 18, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **IPC Resilience + Sovereign Dispatch** — V35: 7 tracks complete, 613 tests, 113/113 cross-validation checks, 6 WGSL shaders, 79 JSON-RPC capabilities. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience patterns: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. Composition guidance: `GROUNDSPRING_V114_PRIMAL_COMPOSITION_GUIDANCE_MAR17_2026.md`. V34: Deep debt evolution. V33: `IpcError::is_recoverable()`, `ipc::protocol` module, centralized `cast` module. V32: Structured `tracing`, `health.liveness`/`health.readiness` probes, resilient provenance trio IPC. V31: `OrExit<T>`, `IpcError`, enriched `capability.list`, `#![forbid(unsafe_code)]`. Zero clippy warnings workspace-wide (pedantic + nursery), zero unsafe, zero TODO/FIXME, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **Deep Debt + Ecosystem Maturity** — V36: 7 tracks complete, 79 experiments, 617 tests, 113/113 cross-validation checks, 6 WGSL shaders (all 6 GPU ops rewired to barraCuda upstream — Tier A + B complete), 79 JSON-RPC capabilities. Inline tolerances centralized, duplicate math eliminated (`lcg_step` → `barracuda::rng`). IPC routing for coralReef (`compute.shader_compile`) and Squirrel (`model.inference_route`). `cargo-deny` in CI. Zero `#[allow()]` — all migrated to `#[expect()]` with reasons. `f64::total_cmp()` replaces `partial_cmp().unwrap()`. V35: IPC resilience, sovereign dispatch. V34: Deep debt. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy warnings (pedantic + nursery), zero unsafe, zero TODO/FIXME, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
@@ -187,26 +187,26 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 
 | Metric | Value |
 |--------|-------|
-| Experiments | 61 |
-| Rust lib tests | 365 (barraCuda) |
-| Rust forge tests | 33 (metalForge) |
-| Rust toadStool tests | 36 |
-| Doc-tests | 4 |
-| **Total tests** | **458** |
+| Experiments | 79 |
+| **Total tests** | **617** |
 | Python cross-validation checks | 113/113 |
 | Criterion benchmarks | 14 |
 | CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
 | petalTongue pipeline | 28 nodes, 29 edges, 121 channels, 14 scenarios |
 | NLME validation | FOCE + SAEM + NCA + CWRES + VPC + GOF (Exp075, 19 checks) |
 | GPU parity checks | 27/27 (Exp060) + 25/25 (Exp083) |
+| GPU ops rewired to barraCuda | 6/6 (Tier A + B complete) |
 | GPU fused pipeline checks | 11/11 (Exp054) |
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
-| WGSL compute shaders | 6 (3 V15 + 3 V17) |
+| WGSL compute shaders | 6 (all rewired to upstream barraCuda) |
+| JSON-RPC capabilities | 79 |
 | Patient archetypes | 5 (Exp063) |
-| Unsafe blocks | 0 |
-| Clippy warnings | 0 (`#![deny(clippy::pedantic)]` in all lib crates, `-W clippy::nursery`) |
-| Max file size | 819 lines (under 1000-line limit) |
+| Unsafe blocks | 0 (`#![forbid(unsafe_code)]`) |
+| `#[allow()]` in production | 0 (all `#[expect()]` with `reason`) |
+| Clippy warnings | 0 (pedantic + nursery) |
+| cargo-deny | Enforced in CI |
+| Max file size | 731 lines (under 1000-line limit) |
 
 ---
 
@@ -457,7 +457,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-613 tests, 79 JSON-RPC capabilities, 6 WGSL shaders, zero clippy warnings, zero unsafe. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. See `GROUNDSPRING_V114_PRIMAL_COMPOSITION_GUIDANCE_MAR17_2026.md` for composition guidance.
+617 tests, 79 experiments, 79 JSON-RPC capabilities, 6/6 GPU ops rewired to barraCuda upstream, zero clippy warnings, zero unsafe, zero `#[allow()]`. Sovereign GPU dispatch via `CoralReefDevice`; IPC resilience: `CircuitBreaker`, `RetryPolicy`, `DispatchOutcome`. cargo-deny enforced in CI. See `HEALTHSPRING_V36_DEEP_DEBT_ECOSYSTEM_MATURITY_HANDOFF_MAR18_2026.md` for full handoff.
 
 ---
 

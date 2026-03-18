@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 16, 2026 (V120 + ludoSpring V23 update)
-**Foundation:** baseCamp papers 01–20, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V113 (370 experiments, 9,886+ checks, 63 papers, paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.8.8 (87 experiments, 880 lib + 280 integration + 61 forge, 14.3× speedup, zero-panic 47/47, typed compute_dispatch client, extract_rpc_error, Python tolerance mirror 60 constants, zero C deps)), ludoSpring V23 (75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, all modules ≥ 90% coverage, cross-ecosystem deep debt: zero `#[allow()]` (`#[expect(reason)]` curated dictionary), zero-panic validation (14 experiments), `extract_rpc_result()` centralized, `deny.toml wildcards=deny`, XDG socket paths, named unit constants, toadStool direct dispatch, dual-format discovery, Python tolerance mirror (46 constants), `#![forbid(unsafe_code)]`)
+**Date:** March 18, 2026 (V127 + ludoSpring V23 + airSpring V0.9.0 update)
+**Foundation:** baseCamp papers 01–22, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V127 (376 experiments, 5,707+ checks, 1,448+ tests, 63 papers, V127 audit execution: MCP tool definitions, Python baseline provenance registry, `kahan_sum` upstream delegation, 7 new tolerance constants, `unlicensed = "deny"`, NPU device constant, IPC integration tests, zero local math duplication — paper extension roadmap: EMP 28K atlas + Liao real data + KBS LTER temporal + QS gene profiling + primal pipeline + P1 framework + LAN mesh plan + NVIDIA hardware learning + PrecisionBrain bio routing + petalTongue viz + Anderson QS O₂-modulated model), airSpring v0.9.0 (894 lib + 299 integration tests, `#![deny(cast_*)]` library-strict, cast module with 9 helpers, soil_moisture refactored to 4 submodules, petalTongue 3-tier discovery, primal_dispatch IPC tests, benchmark JSON provenance), ludoSpring V23 (75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, all modules >= 90% coverage, cross-ecosystem deep debt: zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`)
 
 ---
 
@@ -502,3 +502,51 @@ This validates the core thesis from Paper 18 (RPGPT): anti-cheat IS chain-of-cus
 | 17 (Game Design) | Same provenance patterns, different domain vocabulary (exp065) |
 | 18 (RPGPT) | Anti-cheat = chain-of-custody proven computationally (exp065) |
 | 20 (NFT Economics) | Every sample and record is a Novel Ferment Transcript |
+
+---
+
+## airSpring V0.9.0 Audit Execution Learnings (March 18, 2026)
+
+**Source:** airSpring V0.9.0 — 87 experiments, 894 lib + 299 integration tests, comprehensive audit execution
+**Connects to:** baseCamp #03 (Precision Microbiome), #06 (No-Till Anderson), #08 (NPU IoT), #12 (Immunological Anderson), #16 (Anaerobic-Aerobic QS)
+
+### Cast Module Pattern — Upstream Absorption Candidate
+
+airSpring built a `cast` module with 9 type-safe numeric cast helpers (`usize_f64`, `f64_usize`, `u32_usize`, `u64_usize`, `u64_f64`, etc.) that replace raw `as` casts throughout the library. Combined with `#![deny(clippy::cast_precision_loss, clippy::cast_possible_truncation, clippy::cast_sign_loss)]` in `lib.rs`, this enforces safe casting at compile time while allowing pragmatic raw casts in validation binaries via Cargo.toml `[lints]`.
+
+**Cross-ecosystem relevance:** Every spring has the same problem. neuralSpring has `safe_cast` (S162), healthSpring has `cast_helpers`. This is a strong barraCuda upstream absorption candidate — centralize once, all springs lean on it.
+
+### Module Refactoring Pattern — Domain-Responsibility Split
+
+`soil_moisture.rs` (672 LOC) was refactored into 4 submodules:
+
+| Submodule | Responsibility | LOC |
+|-----------|---------------|-----|
+| `topp.rs` | Topp equation (permittivity to water content) | 127 |
+| `texture.rs` | USDA soil texture classification + hydraulic props | 179 |
+| `saxton_rawls.rs` | Saxton and Rawls 2006 pedotransfer functions | 216 |
+| `water.rs` | PAW, SWD, irrigation trigger calculations | 90 |
+
+Public API unchanged — `mod.rs` re-exports everything. Tests stay with their code. This is the correct pattern for splitting large modules across all springs: split by domain responsibility, not just line count.
+
+### Three-Tier Discovery Pattern — Standard for All Primals
+
+All primal discovery now follows: (1) environment override, (2) named socket scan, (3) capability probe. This eliminates hardcoded socket paths from deployment manifests and enables zero-configuration primal discovery via biomeOS socket resolution. Applied to: coralReef (shader), Squirrel (inference), petalTongue (visualization), toadStool (compute), nestGate (data).
+
+### Benchmark JSON Provenance — Traceable Validation
+
+Hardcoded Python baseline values were migrated from Rust source code to benchmark JSON files with provenance metadata (`baseline_script`, `baseline_commit`, `date`, `tolerance`). This makes every validation target traceable to the exact Python run that produced it.
+
+### CI Lint Strategy — Cargo.toml as Single Source
+
+Cargo.toml `[lints.clippy]` should be the single source of lint configuration. CLI flags like `-W clippy::pedantic` conflict with specific `allow` overrides. airSpring's CI now uses `cargo clippy --all-targets -- -D warnings` (no `-W` flags), letting Cargo.toml control all lint levels.
+
+### What Papers Gain
+
+| Paper | What V0.9.0 Adds |
+|-------|-----------------|
+| #03 (Microbiome) | soil_moisture module now cleanly separated for orchard theta(t) extensions |
+| #06 (No-Till) | Benchmark provenance pattern for all Anderson coupling expected values |
+| #08 (NPU IoT) | petalTongue discovery enables real-time NPU dashboard visualization |
+| #12 (Immunological) | Cast safety in GpuDiversity and CytokineBrain numerical paths |
+| #16 (Anaerobic QS) | Three-tier discovery for cross-spring soil O2 zonation pipeline |
