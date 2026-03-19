@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
 **Date:** March 16, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta. DRM consumer fencing lesson: never unbind DRM driver while desktop apps hold render node fds (causes kernel oops on GV100).
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta. DRM consumer fencing lesson: never unbind DRM driver while desktop apps hold render node fds (causes kernel oops on GV100). **Vendor-agnostic hardening (Mar 18, 2026):** coral-ember standalone crate, RegisterMap trait (NVIDIA GV100 + AMD GFX906), AMD MI50 personality/swap path, privilege hardening (capabilities + seccomp + namespaces), coralctl deploy-udev, typed EmberError.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -547,8 +547,37 @@ the PCI bus for discrete GPUs automatically.
 
 ---
 
+## Update: Vendor-Agnostic Hardened GlowPlug (March 18, 2026)
+
+The sovereign compute pipeline's device lifecycle layer has evolved significantly:
+
+**Architecture split**: `coral-ember` (immortal VFIO fd holder) is now a standalone
+workspace crate with modular `sysfs`, `swap`, `hold`, `ipc` modules. `coral-glowplug`
+(device lifecycle broker) has a library surface for external consumption.
+
+**Vendor-agnostic hardware**: `RegisterMap` trait with implementations for NVIDIA
+GV100 (127 registers) and AMD GFX906/MI50. `detect_register_map(vendor_id)` selects
+at runtime. AMD MI50 HBM2 warm cycle uses `amdgpu` driver automatically via
+`hbm2_training_driver()`. The system supports any combination of NVIDIA and AMD GPUs.
+
+**Privilege hardening**: Both systemd services now run with minimal Linux capabilities
+(`CAP_SYS_ADMIN`, `CAP_SYS_RAWIO`, `CAP_DAC_OVERRIDE`), seccomp syscall filtering
+(`@system-service + ioctl + sendmsg/recvmsg`), filesystem isolation (`ProtectSystem=strict`,
+`PrivateTmp`, `ProtectHome`, `MemoryDenyWriteExecute`), and `NoNewPrivileges=true`.
+The `coralctl deploy-udev` command generates `/dev/vfio/*` udev rules from config
+files — zero hardcoded BDFs.
+
+**Typed error handling**: `EmberClient` returns structured `EmberError` variants
+instead of raw strings. Legacy direct-sysfs fallbacks gated behind `no-ember` feature.
+
+This brings the sovereign compute layer from "working prototype" to "production-grade
+hardened system" — the kind of privilege model you'd deploy on a shared compute
+cluster where multiple users need GPU access without root.
+
+---
+
 *Sovereign compute hardware: 3 precision tiers, 24 AMD E2E tests passing,
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
 No proprietary drivers. No cloud dependencies. coral-glowplug daemon survives
-reboot, manages GPU lifecycle from boot to clean shutdown. Built in a basement
-in Lansing.*
+reboot, manages GPU lifecycle from boot to clean shutdown. Vendor-agnostic,
+seccomp-sandboxed, capability-restricted. Built in a basement in Lansing.*
