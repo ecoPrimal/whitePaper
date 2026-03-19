@@ -1,6 +1,6 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: Validated — 75 experiments, 1692 checks, 450+ tests + 19 proptest + 6 IPC integration, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT + 9 dialogue plane, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, 24 IPC capabilities (10 local, 14 external). V26 full harness migration: all 71 validation experiments use `ValidationHarness` + `BaselineProvenance`, 14 GPU tolerance constants centralized in `tolerances::gpu`, `missing_errors_doc`/`missing_panics_doc` lints tightened to warn, zero clippy warnings (pedantic+nursery), zero legacy `ValidationResult`, `#![forbid(unsafe_code)]`
+**Status**: V28 — 75 experiments, 1692 checks, 450+ tests, 19 proptest, 6 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero hardcoded primal names (capability-based discovery via `discover_primals()`), zero TODO/FIXME/HACK. All 71 validation experiments use `ValidationHarness` + `BaselineProvenance`. 14 GPU tolerance constants centralized. Workspace lint centralization (16 crates). `#[expect(reason)]` curated dictionary. IPC integration tests hardened. Configurable output paths. `#![forbid(unsafe_code)]`
 **Date**: March 18, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
@@ -145,7 +145,7 @@ Four experiments bridge ludoSpring game science with the broader ecosystem:
 
 | Spring/Primal | Contribution | Status |
 |---------------|-------------|--------|
-| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 24 IPC capabilities (10 local, 14 external) | **Validated** (V23) |
+| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 26 IPC capabilities (24 game + 2 health probes) | **Validated** (V28) |
 | barraCuda | Math primitives (sigmoid, dot, lcg_step, state_to_f64) | **Consumed** |
 | toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders + `compute.dispatch.*` direct dispatch | **Deep integration** (V23) |
 | metalForge | Cross-substrate routing (CPU/GPU/NPU) | **Architecture validated** (exp032-033) |
