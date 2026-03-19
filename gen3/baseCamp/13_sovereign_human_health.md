@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V38)
-**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × biomeOS Niche Deployment
+**Spring**: healthSpring (V39)
+**Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 18, 2026
-**Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical)
-**Status**: **Deep Debt Completion Sprint** — V38: 719 tests, 79 experiments, 80 JSON-RPC capabilities (incl. `mcp.tools.list`). V38: all 79 experiments standardized to ValidationHarness, ~120+ inline tolerances → named constants, typed IPC dispatch, provenance DOI citations, clippy::nursery across all experiments. `mul_add()` FMA sweep (8 sites, IEEE 754 accuracy), centralized `extract_rpc_result()` (6 sites), 18 proptest IPC fuzz tests, structured provenance registry (49 records), MCP tool definitions (23 tools for Squirrel AI), `deny.toml` 14-crate C-dep ban list, leverage guide. V36: All 6 GPU ops rewired (Tier A + B). V35: IPC resilience, sovereign dispatch. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Date**: March 19, 2026
+**Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
+**Status**: **V39** — 809 tests, 83 experiments, 85 JSON-RPC capabilities, 53 Python baselines. V39: 3 new science domains (toxicology, simulation, discovery::affinity_landscape), cross-spring hormesis framework, 65+ new unit tests, 5 new IPC capabilities, 4 new experiments (exp097–099, exp111). Low-affinity binding, Anderson toxicity IPR, biphasic hormesis, multi-scale causal chain. 8 testable experimental hypotheses for grant proposals. V38: all 79 experiments standardized to ValidationHarness, ~120+ inline tolerances → named constants, typed IPC dispatch, provenance DOI citations, clippy::nursery across all experiments. `mul_add()` FMA sweep (8 sites, IEEE 754 accuracy), centralized `extract_rpc_result()` (6 sites), 18 proptest IPC fuzz tests, structured provenance registry (53 records), MCP tool definitions (23 tools for Squirrel AI), `deny.toml` 14-crate C-dep ban list, leverage guide. V36: All 6 GPU ops rewired (Tier A + B). V35: IPC resilience, sovereign dispatch. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
 
 ---
 
@@ -115,6 +115,21 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 
 **Industry benchmark mapping**: SnapGene, Chromeleon, NONMEM, Monolix, WinNonlin profiled. Sovereign replacements mapped to ecoPrimals stack. See `healthSpring/specs/PAPER_REVIEW_QUEUE.md`.
 
+### Track 8: Low-Affinity Binding / Toxicology / Simulation (Exp097–099, 111) — V39
+
+Computation as preprocessor: exploring the affinity landscape that standard HTS discards.
+
+| Exp | Title | Key Result |
+|-----|-------|-----------|
+| 097 | Affinity landscape (low-affinity selectivity) | 26× cancer selectivity from IC50>10µM via coincidence detection, Gini-based breadth metrics |
+| 098 | Toxicity landscape (Anderson IPR for toxicology) | Distributed binders: IPR 0.003, zero excess burden, linear clearance. Concentrated: IPR 0.695, saturated clearance |
+| 099 | Hormesis (biphasic dose-response) | Competing repair pathways vs damage accumulation. Mithridatism, caloric restriction, hygiene hypothesis, ecological hormesis |
+| 111 | Causal terrarium (multi-scale causal chain) | Molecular binding → 4 stress pathways → tissue integration → organism fitness → Lotka-Volterra ecosystem |
+
+**Lineage**: Paper 14 (Anderson Hormesis) + Lisabeth ADDRC conversation → Track 9 low-affinity binding. Cross-spring: wetSpring V130 `bio::hormesis`, `bio::binding_landscape`.
+**Novel contribution**: First systematic framework for finding function in HTS "inactive" compounds. Anderson IPR applied to multi-organ toxicity prediction. Mechanistic hormesis model predicting biphasic curve shape from stress pathway profiles.
+**Grant alignment**: NCI R21 (H1), NIGMS R21 (H3), NIAID R21 (H8), NIAMS R01 (H4). See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md`.
+
 ### Validation Track (Exp040)
 
 | Exp | Title | Key Result |
@@ -187,11 +202,11 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 
 | Metric | Value |
 |--------|-------|
-| Experiments | 79 |
-| **Total tests** | **719** |
-| ValidationHarness (experiments) | 79/79 |
+| Experiments | 83 |
+| **Total tests** | **809** |
+| ValidationHarness (experiments) | 83/83 |
 | Proptest IPC fuzz tests | 18 |
-| Python baselines (provenance registry) | 49 |
+| Python baselines (provenance registry) | 53 |
 | Python cross-validation checks | 113/113 |
 | Criterion benchmarks | 14 |
 | CPU parity bench cases | 14 (Exp084: Rust 84× faster than Python) |
@@ -203,7 +218,7 @@ Sovereign replacement for NONMEM (FOCE), Monolix (SAEM), and WinNonlin (NCA).
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
 | WGSL compute shaders | 6 (all rewired to upstream barraCuda) |
-| JSON-RPC capabilities | 80 (incl. `mcp.tools.list`) |
+| JSON-RPC capabilities | 85 (incl. `mcp.tools.list`) |
 | MCP tool schemas | 23 (for Squirrel AI coordination) |
 | FMA `mul_add()` sites | 23 (8 new in V37) |
 | Patient archetypes | 5 (Exp063) |
@@ -462,7 +477,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-719 tests, 79 experiments, 80 JSON-RPC capabilities (incl. `mcp.tools.list`), 23 MCP tool schemas, 49 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. `mul_add()` FMA sweep, centralized `extract_rpc_result()`, 18 proptest IPC fuzz tests, `deny.toml` 14-crate C-dep ban, leverage guide. See `HEALTHSPRING_V38_TOADSTOOL_BARRACUDA_EVOLUTION_HANDOFF_MAR18_2026.md`.
+809 tests, 83 experiments, 85 JSON-RPC capabilities (incl. `mcp.tools.list`), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. `mul_add()` FMA sweep, centralized `extract_rpc_result()`, 18 proptest IPC fuzz tests, `deny.toml` 14-crate C-dep ban, leverage guide. See `HEALTHSPRING_V39_TOXICOLOGY_SIMULATION_HORMESIS_HANDOFF_MAR19_2026.md`.
 
 ---
 

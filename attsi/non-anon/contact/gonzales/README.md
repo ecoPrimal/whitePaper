@@ -189,8 +189,10 @@ dose-response × MATRIX end-to-end chain.
 | Date | Type | Notes |
 |------|------|-------|
 | March 2026 | Job interview | RA III Molecular Biology, Gonzales Lab, MSU Pharmacology & Toxicology. Focus: iPSC-derived skin models, drug screening, molecular biology assays. |
-| March 2026 | Interview outcome | **Went great.** She appreciates the data science / analytics dimension. Wants me to meet Erika Lisabeth (Director, ADDRC — Assay Development and Drug Repurposing Core) in MSU Drug Discovery. This connects our Fajgenbaum MATRIX scoring directly to institutional HTS infrastructure. |
-| March 2026 | Email (draft) | Post-interview thank-you. First exposure to computational work — attaching `computational_brief.md`. She has not seen any ecoPrimals/spring/Anderson work yet. Tone: her science first, computation as differentiator alongside bench contribution. |
+| March 2026 | Interview outcome | **Went great.** She appreciates the data science / analytics dimension. Introduced me to Erika Lisabeth (Director, ADDRC) in MSU Drug Discovery. This connects our Fajgenbaum MATRIX scoring directly to institutional HTS infrastructure. |
+| March 2026 | Sent data draft | Sent `computational_brief.md` before the interview. She has now seen the computational modeling of her published data. |
+| March 2026 | Lisabeth introduction | Gonzales introduced me to Lisabeth in person. Had the specificity/binding conversation that became Track 9 (low-affinity binding, hormesis). See `contact/lisabeth/` for details. |
+| March 2026 | Post-interview | Track 9 built: exp097 (affinity landscape), exp098 (toxicity), exp099 (hormesis), exp111 (causal terrarium). 65+ tests, 76 validation checks. 8 testable experimental hypotheses ready for grant writing. See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md`. |
 
 ### MSU Drug Discovery Connection (via Gonzales referral)
 

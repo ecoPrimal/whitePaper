@@ -142,9 +142,11 @@
 - Domain: HTS assay development, drug repurposing, chemical probes, EphA3 RTK (cancer), NF-κB
 - Equipment: plate readers, high-content microscopes, liquid-handling robots, GREENScreen informatics, 8,000+ compound library
 - PhD: Chemistry/Biochemistry, UCSD; Postdoc: Sanford Burnham Prebys
-- Spring relevance: **nS-605 Fajgenbaum MATRIX** — ADDRC is the institutional HTS platform for the Anderson-augmented drug repurposing scores. Pipeline: MATRIX scores → ADDRC screening → Gonzales iPSC validation.
-- Relationship: Referred by Gonzales (March 2026 interview)
+- Spring relevance: **nS-605 Fajgenbaum MATRIX** — ADDRC is the institutional HTS platform for the Anderson-augmented drug repurposing scores. Pipeline: MATRIX scores → ADDRC screening → Gonzales iPSC validation. **Track 9 (V39)**: Low-affinity binding, toxicology, hormesis — the specificity/binding conversation with Lisabeth became healthSpring's newest science domain.
+- Relationship: Referred by Gonzales (March 2026 interview). **Met in person** — Gonzales introduced directly. Had the specificity/binding conversation that inspired Track 9.
 - Papers to look for: Lisabeth et al. Brucella host-cellular pathways (2024, small molecule screen), EphA3 kinase mutations (postdoc)
+- **Status**: Met (March 2026). Binding landscape analysis and computational brief ready (`contact/lisabeth/`). 8 testable hypotheses and 4 R21/R01 grant proposals aligned to ADDRC infrastructure.
+- Details: `contact/lisabeth/`
 
 **Richard Neubig** — Professor Emeritus, Director Drug Discovery Program, Pharmacology & Toxicology, MSU
 - https://phmtox.msu.edu/people/rneubig

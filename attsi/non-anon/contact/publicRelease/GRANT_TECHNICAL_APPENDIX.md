@@ -3,7 +3,7 @@
 **Audience:** Grant reviewers — NIH, NSF, USDA, DOE, ARPA-H  
 **Purpose:** Quantitative evidence supporting capability claims, organized by funding agency's priorities  
 **License:** CC-BY-SA 4.0  
-**Last Updated:** March 17, 2026
+**Last Updated:** March 19, 2026
 
 ---
 
@@ -45,6 +45,16 @@ dimension that standard pathway scoring lacks.
 | 3-compartment tissue lattice (immune + skin + neural) | wetSpring Exp273–286, 157/157 checks | `cargo run --bin validate_anderson_immunological` |
 | Anderson-augmented MATRIX ranking, 329/329 PASS | Full three-tier validation | `cargo test --workspace` |
 
+**Low-Affinity Binding and Toxicology (Novel — Track 9, V39)**
+
+| Claim | Evidence | Verify |
+|-------|----------|--------|
+| 26× cancer selectivity from "inactive" compounds (IC50 > 10 µM) | healthSpring exp097, affinity_landscape module | `cargo run --release --bin exp097_affinity_landscape` |
+| Anderson IPR predicts organ-specific toxicity distribution | healthSpring exp098, toxicology module | `cargo run --release --bin exp098_toxicity_landscape` |
+| Hormesis (biphasic dose-response) predicted from stress pathway profiles | healthSpring exp099, 4 biological examples validated | `cargo run --release --bin exp099_hormesis` |
+| Multi-scale causal chain: molecular → cellular → tissue → ecosystem | healthSpring exp111, simulation module | `cargo run --release --bin exp111_causal_terrarium` |
+| 65+ unit tests across 3 new Rust modules (toxicology, simulation, affinity_landscape) | healthSpring V39, 809 total tests | `cargo test --workspace` |
+
 **Microbiome Science**
 
 | Claim | Evidence | Verify |
@@ -78,12 +88,16 @@ Every computation:
 
 | Program | Alignment |
 |---------|-----------|
-| NIGMS R01 (Pharmacology/Toxicology) | Sovereign pharmacometrics, reproducible PK/PD |
-| NCI R01 (Drug Discovery) | Anderson-augmented MATRIX, ADDRC HTS integration |
-| NIAMS (Skin/Musculoskeletal) | Anderson-AD pipeline, Gonzales catalog |
+| NIGMS R01 (Pharmacology/Toxicology) | Sovereign pharmacometrics, reproducible PK/PD, **hormesis prediction from HTS** |
+| NCI R01 (Drug Discovery) | Anderson-augmented MATRIX, ADDRC HTS integration, **low-affinity cancer selectivity** |
+| NCI R21 (Exploratory) | **"Inactive" compounds as multi-target cancer binders** (H1) |
+| NIGMS R21 (Exploratory) | **Hormetic dose-response prediction from HTS data** (H3) |
+| NIAID R21 (Exploratory) | **Hidden immunomodulators in HTS libraries** (H8) |
+| NIAMS R01 (Skin/Musculoskeletal) | Anderson-AD pipeline, Gonzales catalog, **tissue geometry scoring** |
 | NLM (Data Science) | Reproducible biomedical computing, provenance infrastructure |
+| NIDDK R21 (Digestive) | **Probiotic colonization resistance via Anderson adhesion** (H5) |
 | BD2K/NIH Bridge2AI | Sovereign data infrastructure, signed science |
-| ARPA-H | Drug repurposing (direct MATRIX extension) |
+| ARPA-H | Drug repurposing (direct MATRIX extension), **Anderson-augmented MATRIX** |
 
 ---
 
@@ -268,7 +282,7 @@ access to HPC-class science.
 | ML / Reservoir | neuralSpring | 27 | 4,500+ | All PASS |
 | Computational Physics | hotSpring | 25 | 664+ | All PASS |
 | Uncertainty / Spectral | groundSpring | 10 | 535+ | All PASS |
-| Human Health | healthSpring | 15+ | 474+ | All PASS |
+| Human Health | healthSpring | 15+ | 809+ tests, 83 experiments | All PASS |
 | Game Science / HCI | ludoSpring | 13 HCI models | 1,692+ | All PASS |
 | **Total** | | **175+** | **20,695+** | **All PASS** |
 
