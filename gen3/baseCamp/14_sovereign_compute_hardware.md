@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 16, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, 2× Titan V + RTX 5060):** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). PRIVRING fault lesson: never PMC-toggle GR bit 12 on Volta. DRM consumer fencing lesson: never unbind DRM driver while desktop apps hold render node fds (causes kernel oops on GV100). **Vendor-agnostic hardening (Mar 18, 2026):** coral-ember standalone crate, RegisterMap trait (NVIDIA GV100 + AMD GFX906), AMD MI50 personality/swap path, privilege hardening (capabilities + seccomp + namespaces), coralctl deploy-udev, typed EmberError.
+**Date:** March 20, 2026
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Sovereign GPU breakthroughs (biomeGate, Titan V + Radeon VII + RTX 5060 + BrainChip Akida):** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). **AMD D3cold fully characterized (Mar 20):** Vega 20 SMU 1-round-trip/boot hardware limit, 4 strategies tested, PmResetAndBind deployed. **BrainChip Akida NPU integrated (Mar 20):** unlimited round-trips, SimpleBind, proves GlowPlug handles any PCIe device. **Triangle architecture:** coralReef↔toadStool↔barraCuda trio operates as vendor-agnostic compute triangle. **Zero-sudo coralctl:** `coralreef` group socket permissions. **Vendor-agnostic hardening (Mar 18, 2026):** coral-ember standalone crate, RegisterMap trait (NVIDIA GV100 + AMD GFX906), AMD MI50 personality/swap path, privilege hardening (capabilities + seccomp + namespaces), coralctl deploy-udev, typed EmberError. VendorLifecycle trait: 6 implementations (NVIDIA, AMD Vega 20, AMD RDNA, Intel Xe, BrainChip, Generic). 157 coralReef tests pass.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -576,8 +576,96 @@ cluster where multiple users need GPU access without root.
 
 ---
 
-*Sovereign compute hardware: 3 precision tiers, 24 AMD E2E tests passing,
+## Update: AMD D3cold Resolution + BrainChip Akida NPU (March 20, 2026)
+
+### AMD Vega 20 — Hardware Firmware Limitation
+
+Empirical testing across 4 boot cycles established that the AMD Vega 20 (Radeon VII /
+MI50, GFX906) SMU firmware has a **one-shot reinitialization** property. One full
+vfio→amdgpu driver round-trip works reliably from a clean boot. Subsequent round-trips
+corrupt the SMU mailbox — the firmware cannot recover its internal state machine, and
+the card enters D3cold (`trn=2 ACK should not assert`).
+
+Four distinct strategies were validated: SimpleBind, PCI remove/rescan, PM power cycle
+(D3hot→D0), and post-bind stabilization (`stabilize_after_bind()`). All succeed on
+cycle 1; all fail on cycle 2. This is a silicon/firmware property, not a software bug.
+
+**Deployed mitigations** (all remain in production):
+- `amdgpu.runpm=0` on kernel command line (prevents runtime PM from entering D3)
+- Systemd `ExecStartPre` clears `reset_method` + pins power before ember starts
+- `stabilize_after_bind()` re-pins power/bridge after every driver bind
+- `PmResetAndBind` strategy: PM power cycle before native driver rebind
+
+**Practical guidance**: Plan AMD Vega 20 workloads around one personality per boot
+session. NVIDIA GV100 has no such limitation — unlimited round-trips.
+
+### BrainChip AKD1000 Akida NPU
+
+The BrainChip Akida neuromorphic NPU (PCI `0x1e7c:0xbca1`) was fully integrated into
+the GlowPlug lifecycle. This proves the architecture handles **any PCIe device**, not
+just GPUs:
+
+- `BrainChipLifecycle`: SimpleBind, 3-second settle, basic health check
+- `AkidaPersonality`: No DRM card path, no HBM2, no GPU-specific quirks
+- Unlimited `akida-pcie ↔ vfio-pci` round-trips
+- DRM isolation check skipped for non-GPU drivers
+
+The same pattern applies to FPGAs, TPUs, SmartNICs, DSPs — any PCIe accelerator.
+
+### VendorLifecycle Trait — Final State
+
+Six implementations covering the known PCIe accelerator landscape:
+
+| Lifecycle | Vendor | vfio→native Strategy | Round-trips | Notes |
+|-----------|--------|---------------------|-------------|-------|
+| NvidiaLifecycle | 0x10de | SimpleBind | Unlimited | HBM2 survives bus reset |
+| AmdVega20Lifecycle | 0x1002 (Vega 20) | PmResetAndBind | 1/boot | SMU firmware limitation |
+| AmdRdnaLifecycle | 0x1002 (other) | PmResetAndBind | Untested | Conservative Vega 20 defaults |
+| IntelXeLifecycle | 0x8086 | SimpleBind | Expected unlimited | FLR support expected |
+| BrainChipLifecycle | 0x1e7c | SimpleBind | Unlimited | No GPU quirks |
+| GenericLifecycle | other | SimpleWithRescanFallback | Unknown | Safe-slow defaults |
+
+### Zero-Sudo coralctl
+
+Users join the `coralreef` Linux group for full `coralctl` CLI access via Unix socket
+(`root:coralreef`, mode 0660). No sudo, no pkexec, no SUID — just group membership.
+The privilege boundary is between the user-facing socket and the root-owned systemd
+services.
+
+### Ember Architectural Limitation — Per-Device Isolation Needed
+
+The single-threaded `coral-ember` daemon blocks entirely when one device enters D3cold
+(sysfs I/O enters D-state/uninterruptible sleep). This caused cascading failure: a D3cold
+AMD card made the Akida NPU inaccessible. The fix is per-device thread isolation with
+D3cold pre-check (read `power_state` before any sysfs write).
+
+### Triangle Architecture
+
+The compute trio now operates as a triangle:
+
+```
+                    coralReef
+                   (GlowPlug + Compiler)
+                  /                      \
+                 /                        \
+        toadStool ─────────────────── barraCuda
+     (HW Resources + Dispatch)      (Math + Shaders)
+```
+
+- **coralReef** provides GlowPlug (PCIe lifecycle) and shader compilation to toadStool
+- **toadStool** provides hardware resources and dispatch routing to barraCuda
+- **barraCuda** does the math, compiling shaders through toadStool → coralReef → hardware
+
+The trio's next evolution priority is **vendor-agnostic abstraction**: moving from
+vendor-specific code paths to a unified `VendorProfile` trait that merges RegisterMap
+(hardware introspection) with VendorLifecycle (swap orchestration).
+
+---
+
+*Sovereign compute hardware: 3 precision tiers, 4 device types (NVIDIA GPU, AMD GPU,
+BrainChip NPU, Intel GPU stubs), zero-sudo operation, triangle architecture.
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
 No proprietary drivers. No cloud dependencies. coral-glowplug daemon survives
-reboot, manages GPU lifecycle from boot to clean shutdown. Vendor-agnostic,
-seccomp-sandboxed, capability-restricted. Built in a basement in Lansing.*
+reboot, manages GPU lifecycle from boot to clean shutdown. AMD Vega 20: one
+round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. Built in a basement in Lansing.*
