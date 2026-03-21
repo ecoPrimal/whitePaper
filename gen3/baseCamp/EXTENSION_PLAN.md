@@ -91,21 +91,34 @@ naga WGSL→SPIR-V codegen bug. DRM dispatch bypasses this entirely:
 
 This is the fastest path to working DF64 compute — no naga, no SPIR-V, no Vulkan.
 
-### Hardware Status
+### Hardware Status (Updated March 21, 2026)
 
-- **AMD MI50** (GCN5/GFX906): PM4 dispatch coded, needs GCN5 arch in coral-reef
-  (currently RDNA2-only). VOP3 f64 encoding is compatible. MI50 has 1/4 rate f64
-  (3.5 TFLOPS, 4× faster than RDNA2).
+- **AMD MI50** (GCN5/GFX906): **E2E COMPUTE DISPATCH ACHIEVED** — WGSL → coral-reef
+  → coral-driver PM4 → MI50 → 64/64 readback verified (March 21). 7 GCN5 encoding
+  bugs found and fixed: VOP3 opcode translation (GFX9 vs RDNA2 opcodes differ despite
+  identical field layout), wave64 dispatch, GLOBAL segment, SGPR workgroup IDs,
+  ACQUIRE_MEM L2 flush, s_waitcnt. **Naga bypass validated end-to-end.** MI50 has
+  1/4 rate f64 (3.5 TFLOPS, 4× faster than RDNA2). Next: DF64 Lennard-Jones kernel.
 - **NVIDIA Titan V** (Volta/SM70): new UAPI coded, blocked by missing PMU firmware
   for `CHANNEL_ALLOC`.
 - **NVIDIA K80** (Kepler/SM35): incoming, no PMU needed, validates both DRM and
   sovereign paths. Bridge hardware for the stack.
+
+### Key Discovery: VOP3 Opcode Architecture
+
+GFX9 (GCN5) and RDNA2 share identical VOP3a instruction word layout but use different
+opcode VALUES for VOP3-only instructions. Group A (MAD/FMA/BFE/BFI, RDNA2 320-351)
+shifts by +128 on GFX9. Group B (F64/MUL_HI) has per-instruction mapping. Every entry
+validated via `llvm-mc --mcpu=gfx906`. This is a critical lesson for multi-generation
+AMD backend support — opcode tables are not portable across generations.
 
 ### Implications for Sovereign Compute Thesis
 
 DRM and sovereign are complementary, not competing:
 - DRM provides working reference for MMU page tables and command format
 - Sovereign provides vendor independence and deeper hardware understanding
+- DRM GCN5 E2E success feeds back to sovereign: PM4 format, wave64 dispatch,
+  memory model, and instruction encoding now validated against real hardware
 - K80 bridges both (unlocked firmware → sovereign works; legacy nouveau → DRM works)
 
 ---
