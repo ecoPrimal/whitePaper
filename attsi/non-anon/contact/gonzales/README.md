@@ -159,6 +159,7 @@ All spring repos are public under AGPL-3.0. These are what the `computational_br
 | `computational_brief.md` | **Sendable** — technical brief summarizing our computational modeling of her published data. Covers dose-response, PK decay, pruritus model, 3D tissue lattice, Fajgenbaum MATRIX, and public repo links. | **Attach to thank-you email** |
 | `spring_validation_brief.md` | **Sendable** — detailed validation evidence: what was reproduced from G1–G6, what was extended (Anderson framework, CytokineBrain, Fajgenbaum MATRIX), four-tier validation chain across wetSpring + neuralSpring + airSpring. Shows the 782/782 check breakdown. | Second conversation (if she engages) |
 | `../hotspring_evolution_brief.md` | **Sendable** — general-audience brief showing the full pipeline evolution (CERN → Python → Rust CPU → BarraCUDA GPU → Brain architecture). Demonstrates scale, speed, and infrastructure maturity. Not Gonzales-specific — can be sent to anyone. | If she asks about infrastructure |
+| `references.md` | Professional references for RA III position. Schegmann + Larson (MSUBI bench), Jones + Murphy (PFAS current), Murillo (computation/MSDS). **Emails and phone numbers pending.** | When she needs them |
 
 ---
 
@@ -193,6 +194,7 @@ dose-response × MATRIX end-to-end chain.
 | March 2026 | Sent data draft | Sent `computational_brief.md` before the interview. She has now seen the computational modeling of her published data. |
 | March 2026 | Lisabeth introduction | Gonzales introduced me to Lisabeth in person. Had the specificity/binding conversation that became Track 9 (low-affinity binding, hormesis). See `contact/lisabeth/` for details. |
 | March 2026 | Post-interview | Track 9 built: exp097 (affinity landscape), exp098 (toxicity), exp099 (hormesis), exp111 (causal terrarium). 65+ tests, 76 validation checks. 8 testable experimental hypotheses ready for grant writing. See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md`. |
+| March 2026 | References requested | She asked for professional references. List: Stefan Schegmann (MSUBI), Sean Larson (MSUBI), A. Daniel Jones (PFAS), Cheryl Murphy (PFAS), Dr. Murillo (CMSE/MSDS). Emails and phone numbers pending. See `references.md`. |
 
 ### MSU Drug Discovery Connection (via Gonzales referral)
 
