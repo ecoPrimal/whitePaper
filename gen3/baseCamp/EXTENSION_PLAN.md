@@ -1,7 +1,70 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 19, 2026 (V130 + ludoSpring V23 + airSpring V0.10.0 deep debt evolution update)
+**Date:** March 21, 2026 (hotSpring Exp 071 sovereign PFIFO pipeline update + V130 + ludoSpring V23 + airSpring V0.10.0 deep debt evolution update)
 **Foundation:** baseCamp papers 01–22, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V130 (376+ experiments, Anderson hormesis framework), airSpring v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, MCP tools/list + tools/call wired in primal dispatch — 10 ecology tools discoverable by Squirrel AI, platform-agnostic IPC Transport enum (Unix + TCP, ecoBin compliant), ValidationHarness migration, 50+ inline tolerances centralized, 63 provenance baselines, zero clippy warnings pedantic+nursery, `#![forbid(unsafe_code)]`, zero C deps, `#[expect(reason)]` Rust 2024 complete), ludoSpring V23 (75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, all modules >= 90% coverage, cross-ecosystem deep debt: zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`)
+
+---
+
+## Sovereign GPU Command Submission: PFIFO Pipeline Cracking (hotSpring Exp 071, March 21, 2026)
+
+**Source:** hotSpring Exp 071, coralReef coral-driver diagnostic matrix
+**Connects to:** baseCamp #14 (Sovereign Compute Hardware), sovereign compute thesis
+
+### What Was Proven
+
+A 54-configuration diagnostic matrix systematically tests every combination of
+GPU channel initialization strategies on GV100 (Titan V) via VFIO — no kernel
+driver, no proprietary firmware at the command submission layer.
+
+**6 of 10 sovereign pipeline layers are now proven working:**
+
+| Layer | Component | Status |
+|-------|-----------|--------|
+| 0-1 | PCIe/VFIO + PFB/MMU (warm state) | ✅ |
+| 2-3 | PFIFO Engine + Scheduler | ✅ Re-initialized from cold |
+| 4-5 | Channel + PBDMA Context | ✅ 12 configs scheduler-accepted |
+| 6 | MMU Page Table Translation | ❌ Single remaining blocker |
+| 7-10 | GPFIFO→Commands→FECS→Shader | Blocked by Layer 6 |
+
+### Key Technical Discovery: PFIFO Re-Initialization
+
+After nouveau unbind, PFIFO is disabled and PBDMAs hold stale channel contexts.
+A 5-phase sequence reliably re-initializes in ~25ms:
+
+1. PMC-level PFIFO reset (bit 8 of register 0x200)
+2. PFIFO soft enable (0→1 transition at 0x2200)
+3. Preempt ALL active runlists via GV100_PREEMPT (0x2638)
+4. Wait for INTR_RL_COMPLETE (BIT30) acknowledgment
+5. Force-clear PBDMA operational and context-save registers
+
+This produces clean PBDMA states (`STATE=0x00000000`) ready for new channels.
+
+### Root Cause: MMU Translation Failure
+
+The PBDMA loads the GPFIFO base address (GPU VA 0x1000) from the channel context
+but returns `0xbad00200` (PBUS timeout) when attempting to fetch entries. The GPU's
+internal FBHUB MMU cannot translate the 5-level page table chain (PD3→PD2→PD1→PD0→PT0)
+to reach host system memory via the IOMMU.
+
+### Sovereign Compute Implications
+
+The diagnostic matrix proves the channel→scheduler→PBDMA pipeline works without
+any proprietary firmware or kernel driver at those layers. The remaining gap is
+purely a memory mapping issue — the GPU MMU needs correctly-formatted page tables
+that map GPU virtual addresses to IOMMU-visible host physical addresses.
+
+Once this works, GPFIFO command submission is sovereign: the host writes commands
+into DMA buffers and the GPU executes them without any driver involvement. This
+is the foundation for the full sovereign compute pipeline (FECS/GPCCS firmware
+load → shader dispatch).
+
+### Cross-Spring Relevance
+
+The PFIFO re-initialization sequence and register map are GV100-specific but the
+*pattern* — PMC domain reset, engine enable, scheduler preempt, PBDMA context
+clearing — applies to any NVIDIA Volta+ GPU and conceptually to AMD's equivalent
+(SDMA/IH for command submission). The diagnostic matrix approach generalizes to
+any GPU where the command submission path needs reverse engineering.
 
 ---
 
