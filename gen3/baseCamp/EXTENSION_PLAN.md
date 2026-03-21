@@ -68,6 +68,48 @@ any GPU where the command submission path needs reverse engineering.
 
 ---
 
+## DRM Dispatch Dual-Track: Bypassing Naga Poisoning (hotSpring Exp 072, March 21, 2026)
+
+**Source:** hotSpring Exp 072, coralReef coral-driver AMD/NVIDIA backends
+**Connects to:** baseCamp #14 (Sovereign Compute Hardware), Exp 055 (Naga Poisoning)
+
+### Strategic Context
+
+The sovereign VFIO path (Exp 071) has 6/10 layers but is blocked at MMU page table
+translation. In parallel, coralReef's coral-driver has **fully coded DRM dispatch
+paths** for both AMD (`AmdDevice` with PM4/CS) and NVIDIA (`NvDevice` with new UAPI
+VM_INIT/VM_BIND/EXEC). DRM dispatch lets the kernel handle MMU, firmware, and
+scheduling while we supply the shader binary.
+
+### Naga Bypass
+
+Exp 055 proved DF64 transcendentals produce zeros on ALL Vulkan backends due to a
+naga WGSL→SPIR-V codegen bug. DRM dispatch bypasses this entirely:
+
+- WGSL → coral-reef → native GPU ISA (SASS for NVIDIA, GCN/RDNA for AMD)
+- Native ISA → coral-driver DRM (`DRM_AMDGPU_CS` or `DRM_NOUVEAU_EXEC`) → GPU
+
+This is the fastest path to working DF64 compute — no naga, no SPIR-V, no Vulkan.
+
+### Hardware Status
+
+- **AMD MI50** (GCN5/GFX906): PM4 dispatch coded, needs GCN5 arch in coral-reef
+  (currently RDNA2-only). VOP3 f64 encoding is compatible. MI50 has 1/4 rate f64
+  (3.5 TFLOPS, 4× faster than RDNA2).
+- **NVIDIA Titan V** (Volta/SM70): new UAPI coded, blocked by missing PMU firmware
+  for `CHANNEL_ALLOC`.
+- **NVIDIA K80** (Kepler/SM35): incoming, no PMU needed, validates both DRM and
+  sovereign paths. Bridge hardware for the stack.
+
+### Implications for Sovereign Compute Thesis
+
+DRM and sovereign are complementary, not competing:
+- DRM provides working reference for MMU page tables and command format
+- Sovereign provides vendor independence and deeper hardware understanding
+- K80 bridges both (unlocked firmware → sovereign works; legacy nouveau → DRM works)
+
+---
+
 ## FHE on GPU: Modular Arithmetic Without Native u64 (S87)
 
 **Source:** ToadStool S87 deep debt evolution (March 2, 2026)  

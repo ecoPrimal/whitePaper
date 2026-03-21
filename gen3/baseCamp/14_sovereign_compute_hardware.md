@@ -660,6 +660,27 @@ The trio's next evolution priority is **vendor-agnostic abstraction**: moving fr
 vendor-specific code paths to a unified `VendorProfile` trait that merges RegisterMap
 (hardware introspection) with VendorLifecycle (swap orchestration).
 
+### Dual-Track Dispatch (March 21, 2026 — Exp 072)
+
+Sovereign VFIO and DRM dispatch are now pursued in parallel:
+
+- **Sovereign** (6/10 layers, MMU page table blocker): direct hardware control,
+  vendor-agnostic, blocked at `0xbad00200` PBUS timeout on GV100
+- **DRM** (code complete, needs hardware validation): kernel-mediated dispatch
+  via `amdgpu` (AMD) or `nouveau` (NVIDIA)
+
+coral-driver has fully coded DRM paths for both vendors:
+- `AmdDevice`: PM4 command submission, GEM buffers, fence sync — ready to test on MI50
+- `NvDevice`: new UAPI (VM_INIT → VM_BIND → EXEC + syncobj) — blocked on Titan V
+  by missing PMU firmware, but K80 (Kepler, incoming) needs no PMU
+
+The DRM path bypasses the Naga WGSL→SPIR-V codegen bug (Exp 055) that produces
+zero forces for DF64 transcendentals. Route: WGSL → coral-reef → native ISA →
+coral-driver DRM → GPU. This is the fastest path to working DF64 compute dispatch.
+
+coral-reef needs GCN5 arch support (MI50 is GFX906, not RDNA2). The MI50's
+1/4 rate f64 (3.5 TFLOPS) makes it the best available f64 hardware for validation.
+
 ---
 
 *Sovereign compute hardware: 3 precision tiers, 4 device types (NVIDIA GPU, AMD GPU,
@@ -668,4 +689,6 @@ $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
 No proprietary drivers. No cloud dependencies. coral-glowplug daemon survives
 reboot, manages GPU lifecycle from boot to clean shutdown. AMD Vega 20: one
 round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
-Vendor-agnostic, seccomp-sandboxed, capability-restricted. Built in a basement in Lansing.*
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. 72 experiments, dual-track
+dispatch (DRM + sovereign VFIO), K80 incoming for unlocked validation.
+Built in a basement in Lansing.*
