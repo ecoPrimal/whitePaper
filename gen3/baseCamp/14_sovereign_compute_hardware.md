@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 21, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **AMD GCN5 DRM preswap validation (biomeGate, MI50, Mar 2026):** WGSL → coral-reef → coral-driver PM4 → MI50. **Phases A/B/C PASS** (f64 write, f64 arith, multi-workgroup). **12 bugs found/fixed** (VOP3 opcode, wave64, GLOBAL segment, SGPR, ACQUIRE_MEM, s_waitcnt, flat_offset GFX9, OpF2F encoding, f64 literal VGPR pair, S_WAITCNT, L1+L2 invalidation). **GLOBAL_LOAD blocker:** all variants hang (GLC, FLAT, SADDR, GTT/VRAM, cache invalidation) — blocks multi-buffer, LJ force, HBM2 bandwidth. Root cause: missing PM4 register config (ref Mesa radeonsi). Naga DF64 bypass validated for store-only shaders. **Sovereign GPU command submission (biomeGate, Titan V, Mar 21):** 54-configuration PFIFO diagnostic matrix — 12 winning configs, 0 faults, scheduler-accepted channels. PFIFO re-initialization solved (PMC reset + preempt + PBDMA clear). **6/10 sovereign pipeline layers proven working.** Root cause identified: PBDMA 0xbad00200 (PBUS timeout) fetching GPFIFO through GPU MMU — page table translation is the single remaining blocker. **Prior breakthroughs:** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). **AMD D3cold fully characterized (Mar 20):** Vega 20 SMU 1-round-trip/boot hardware limit, 4 strategies tested, PmResetAndBind deployed. **BrainChip Akida NPU integrated (Mar 20):** unlimited round-trips, SimpleBind, proves GlowPlug handles any PCIe device. **Triangle architecture:** coralReef↔toadStool↔barraCuda trio operates as vendor-agnostic compute triangle. **Zero-sudo coralctl:** `coralreef` group socket permissions. **Vendor-agnostic hardening (Mar 18, 2026):** coral-ember standalone crate, RegisterMap trait (NVIDIA GV100 + AMD GFX906), AMD MI50 personality/swap path, privilege hardening (capabilities + seccomp + namespaces), coralctl deploy-udev, typed EmberError. VendorLifecycle trait: 6 implementations (NVIDIA, AMD Vega 20, AMD RDNA, Intel Xe, BrainChip, Generic). 157 coralReef tests pass.
+**Date:** March 22, 2026
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **AMD GCN5 DRM preswap validation (biomeGate, MI50, Mar 2026):** WGSL → coral-reef → coral-driver PM4 → MI50. **6/6 phases PASS** — f64 write, f64 arith, multi-workgroup, multi-buffer, HBM2 bandwidth, **f64 Lennard-Jones force (Newton's 3rd law verified)**. **18 bugs found/fixed** across full GCN5 bring-up (VOP3 opcode, wave64, GLOBAL segment, SGPR, ACQUIRE_MEM, s_waitcnt, flat_offset GFX9, OpF2F encoding, f64 literal VGPR pair, VOP1 opcode table, f64 materialization, OpI2F f64 dest, is_f64_expr type resolution, VOP3 fneg/fabs modifiers, integer negation IAdd3, L1+L2 invalidation). Naga DF64 bypass validated end-to-end on real physics (LJ force). **RTX 5060 Blackwell DRM cracked (biomeGate, Mar 22):** NvUvmComputeDevice operational on SM120/GB206. Two Blackwell-specific bugs fixed (single-mmap context, per-buffer fd). 4/4 HW tests pass. ISA compilation pending (SM120 arch enum). **iommufd/cdev VFIO backend (biomeGate, Mar 22):** Kernel-agnostic VFIO on Linux 6.2+ — resolves persistent EBUSY on kernel 6.17. Dual-path: iommufd/cdev first, legacy container/group fallback. Backend-agnostic Ember→GlowPlug IPC. 38 files changed across coral-driver/ember/glowplug. 607 tests pass. Hardware validated on Titan V. **Sovereign GPU command submission (biomeGate, Titan V, Mar 21):** 54-configuration PFIFO diagnostic matrix — 12 winning configs, 0 faults, scheduler-accepted channels. PFIFO re-initialization solved (PMC reset + preempt + PBDMA clear). **6/10 sovereign pipeline layers proven working.** Root cause identified: PBDMA 0xbad00200 (PBUS timeout) fetching GPFIFO through GPU MMU — page table translation is the single remaining blocker. **Prior breakthroughs:** coral-glowplug production-grade boot-persistent PCIe broker daemon (systemd, VFIO-first boot, graceful shutdown, DRM render node fencing — Exp 069); D3hot→D0 VRAM recovery (24/26 tests); SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass on clean falcon, Exp 068). GV100 falcon boot chain fully mapped (SEC2→ACR→FECS/GPCCS). **AMD D3cold fully characterized (Mar 20):** Vega 20 SMU 1-round-trip/boot hardware limit, 4 strategies tested, PmResetAndBind deployed. **BrainChip Akida NPU integrated (Mar 20):** unlimited round-trips, SimpleBind, proves GlowPlug handles any PCIe device. **Triangle architecture:** coralReef↔toadStool↔barraCuda trio operates as vendor-agnostic compute triangle. **Zero-sudo coralctl:** `coralreef` group socket permissions. **Vendor-agnostic hardening (Mar 18, 2026):** coral-ember standalone crate, RegisterMap trait (NVIDIA GV100 + AMD GFX906), AMD MI50 personality/swap path, privilege hardening (capabilities + seccomp + namespaces), coralctl deploy-udev, typed EmberError. VendorLifecycle trait: 6 implementations (NVIDIA, AMD Vega 20, AMD RDNA, Intel Xe, BrainChip, Generic). 607 coralReef tests pass.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -166,20 +166,28 @@ The AMD RX 6950 XT runs the full sovereign pipeline today:
 | Parity harness (unified API) | 1 | Pass |
 | **Total passing on RX 6950 XT** | **24** | **All pass** |
 
-The AMD backend's remaining gap is literal materialization in VOP2/VOP3
-encoding — constants need to be `V_MOV`'d into VGPRs before use. This blocks
-the 7 spring f64 shaders on RDNA2 (they compile cleanly on SM70).
+**GCN5 DRM preswap (biomeGate, MI50, March 2026):** The GCN5/Vega backend
+was implemented and validated end-to-end on the MI50 — WGSL → coral-reef →
+GCN5 ISA → PM4 command submission → MI50 GPU execution → readback verified.
+**6/6 phases PASS** (f64 write, f64 arithmetic, multi-workgroup, multi-buffer,
+HBM2 bandwidth, f64 Lennard-Jones force with Newton's 3rd law verified).
+18 compiler bugs found and fixed during the bring-up. 85 coral-reef tests pass.
+The AMD RDNA2 backend's remaining gap is literal materialization in VOP2/VOP3
+encoding — constants need to be `V_MOV`'d into VGPRs before use.
 
-### NVIDIA — Compilation Verified, Dispatch Pending
+### NVIDIA — Blackwell DRM Cracked, Titan V VFIO iommufd Validated
 
-SM70 through SM89 compilation works for all shader patterns. The RTX 3090
-(SM86) on Strandgate is visible and queryable (3 probe tests pass), but
-dispatch requires either the proprietary `nvidia` UVM path or `nouveau`
-compute — and `nouveau` is not loaded on Strandgate.
+SM70 through SM89 compilation works for all shader patterns. **RTX 5060 (Blackwell
+SM120, GB206):** `NvUvmComputeDevice` fully operational — open/alloc/free/bind all
+pass. Two Blackwell-specific bugs fixed: single-mmap context (combined USERD+GPFIFO
+allocation) and per-buffer fd (fresh nvidiactl fd per allocation). 4/4 HW tests pass.
+ISA compilation pending (`NvArch::Sm120` enum). **Titan V (GV100):** iommufd/cdev
+backend resolves persistent EBUSY on kernel 6.17. Full Ember→GlowPlug pipeline
+validated with iommufd. PMU firmware blocks compute dispatch (FECS halt).
 
-The sovereign NVIDIA path runs through **Titan V** at Eastgate/biomeGate,
-where NVK/nouveau is validated. The NVIF subchannel setup code
-(`create_gv100_compute_channel`) is written and awaiting hardware testing.
+The sovereign NVIDIA path runs through **Titan V** at Eastgate/biomeGate.
+K80 (Kepler, no firmware signing) is the next validation target for full
+10-layer sovereign pipeline.
 
 ## 4. Market-Available Hardware — Mapped to Precision Tiers
 
@@ -687,8 +695,11 @@ coral-reef needs GCN5 arch support (MI50 is GFX906, not RDNA2). The MI50's
 BrainChip NPU, Intel GPU stubs), zero-sudo operation, triangle architecture.
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
 No proprietary drivers. No cloud dependencies. coral-glowplug daemon survives
-reboot, manages GPU lifecycle from boot to clean shutdown. AMD Vega 20: one
+reboot, manages GPU lifecycle from boot to clean shutdown. AMD GCN5 DRM: 6/6
+preswap phases PASS (f64 LJ force, Newton's 3rd law). RTX 5060 Blackwell DRM:
+pipeline cracked (SM120, 4/4 HW tests). iommufd/cdev: kernel-agnostic VFIO on
+6.2+ (resolves EBUSY on 6.17, 607 tests, HW validated). AMD Vega 20: one
 round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
-Vendor-agnostic, seccomp-sandboxed, capability-restricted. 72 experiments, dual-track
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. 73 experiments, dual-track
 dispatch (DRM + sovereign VFIO), K80 incoming for unlocked validation.
 Built in a basement in Lansing.*
