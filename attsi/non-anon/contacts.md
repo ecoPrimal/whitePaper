@@ -31,9 +31,9 @@
 - airSpring status: 326 checks, R²=0.967 across 918 station-days real data
 - Relationship: New lab job 2026
 
-**Andrea J. Gonzales** — Assistant Professor, Pharmacology & Toxicology, MSU (prev. Zoetis 18yr)
-- https://phmtox.msu.edu/
-- Domain: Comparative pharmacology, JAK inhibitors (Apoquel), anti-cytokine mAbs (Cytopoint), atopic dermatitis, One Health
+**Andrea J. Gonzales** — Professor and Director, MSU Drug Discovery Program, Pharmacology & Toxicology (prev. VP Zoetis, ~28yr pharma)
+- https://phmtox.msu.edu/ | https://drugdiscovery.msu.edu/
+- Domain: Drug discovery, comparative pharmacology, JAK inhibitors (Apoquel), anti-cytokine mAbs (Cytopoint), atopic dermatitis, One Health, oncology, inflammation
 - Papers reproduced: 6 publications (G1-G6) — IL-31 pruritus model, oclacitinib JAK1 selectivity, lokivetmab PD, cell-type targets
 - airSpring status: Paper 12 foundation — Exp 066-069 (94/94 checks), CytokineBrain, tissue diversity, barrier model, cross-species
 - wetSpring status: **All 6 papers fully reproduced + three-tier validated** — Exp273-279 (157/157 immuno-Anderson) + Exp280-286 (202/202 Gonzales reproductions) = **359/359 checks**
@@ -137,11 +137,13 @@
 
 ## MSU Drug Discovery Program (via Gonzales referral, March 2026)
 
-**Erika Lisabeth** — Director, Assay Development and Drug Repurposing Core (ADDRC), Pharmacology & Toxicology, MSU
+**Erika Lisabeth** — Assistant Professor (Fixed-Term), Director ADDRC, Pharmacology & Toxicology, MSU
 - https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
+- Role: Campus-wide service core director — facilitates HTS for faculty, students, external biotechs. Not tenure-track PI.
 - Domain: HTS assay development, drug repurposing, chemical probes, EphA3 RTK (cancer), NF-κB
-- Equipment: plate readers, high-content microscopes, liquid-handling robots, GREENScreen informatics, 8,000+ compound library
-- PhD: Chemistry/Biochemistry, UCSD; Postdoc: Sanford Burnham Prebys
+- Equipment: plate readers, high-content microscopes, SPR, ITC, liquid-handling robots, GREENScreen informatics, 8,000+ compound library
+- Education: BS Chemistry (MSU), PhD Chemistry/Biochemistry (UCSD), Postdoc cancer biology (Sanford Burnham Prebys)
+- Worked with Neubig since 2014; ADDRC director since ~2021
 - Spring relevance: **nS-605 Fajgenbaum MATRIX** — ADDRC is the institutional HTS platform for the Anderson-augmented drug repurposing scores. Pipeline: MATRIX scores → ADDRC screening → Gonzales iPSC validation. **Track 9 (V39)**: Low-affinity binding, toxicology, hormesis — the specificity/binding conversation with Lisabeth became healthSpring's newest science domain.
 - Relationship: Referred by Gonzales (March 2026 interview). **Met in person** — Gonzales introduced directly. Had the specificity/binding conversation that inspired Track 9.
 - Papers to look for: Lisabeth et al. Brucella host-cellular pathways (2024, small molecule screen), EphA3 kinase mutations (postdoc)

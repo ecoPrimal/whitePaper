@@ -1,4 +1,4 @@
-# ecoPrimals — Sovereign Scientific Computing Platform: Capability & Parity Assessment
+# ecoPrimals — Open-Source Scientific Computing Platform: Capability & Parity Assessment
 
 **From:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 **Date:** March 17, 2026
@@ -392,3 +392,9 @@ git clone git@github.com:syntheticChemistry/wetSpring.git
 | Date | Change |
 |------|--------|
 | 2026-03-17 | Initial capability & parity assessment (V127 wetSpring, V35 healthSpring) |
+| 2026-03-19 | Added collaboration framing and updated contact info |
+
+---
+
+*Contact: Kevin Mok — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU*
+*See `COLLABORATION_BRIEF.md` for how to plug your lab's data into this pipeline at no cost.*

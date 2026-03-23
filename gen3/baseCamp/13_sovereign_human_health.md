@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V39)
+**Spring**: healthSpring (V40)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 19, 2026
+**Date**: March 22, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
-**Status**: **V39** — 809 tests, 83 experiments, 85 JSON-RPC capabilities, 53 Python baselines. V39: 3 new science domains (toxicology, simulation, discovery::affinity_landscape), cross-spring hormesis framework, 65+ new unit tests, 5 new IPC capabilities, 4 new experiments (exp097–099, exp111). Low-affinity binding, Anderson toxicity IPR, biphasic hormesis, multi-scale causal chain. 8 testable experimental hypotheses for grant proposals. V38: all 79 experiments standardized to ValidationHarness, ~120+ inline tolerances → named constants, typed IPC dispatch, provenance DOI citations, clippy::nursery across all experiments. `mul_add()` FMA sweep (8 sites, IEEE 754 accuracy), centralized `extract_rpc_result()` (6 sites), 18 proptest IPC fuzz tests, structured provenance registry (53 records), MCP tool definitions (23 tools for Squirrel AI), `deny.toml` 14-crate C-dep ban list, leverage guide. V36: All 6 GPU ops rewired (Tier A + B). V35: IPC resilience, sovereign dispatch. V32: Structured tracing, health probes. V31: `OrExit<T>`, `IpcError`, `#![forbid(unsafe_code)]`. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 1000 LOC. AGPL-3.0-or-later across all files.
+**Status**: **V40** — 848 tests, 83 experiments, 85 JSON-RPC capabilities, 53 Python baselines. barraCuda v0.3.7. V40: Cross-ecosystem absorption sprint — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved (toxicology/ refactor). 17 magic numbers → named constants. provenance.rs smart-refactored (850→201+164 lines). 39 new tests (handler dispatch, MCP, WFDB, NLME solver). Zero `#[allow]`. V39: 3 new science domains (toxicology, simulation, discovery::affinity_landscape), cross-spring hormesis framework, 5 new IPC capabilities. V38: all 83 experiments standardized to ValidationHarness, typed IPC dispatch, provenance DOI citations. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 750 LOC. AGPL-3.0-or-later across all files.
 
 ---
 

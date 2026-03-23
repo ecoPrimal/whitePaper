@@ -2,21 +2,24 @@
 # Gonzales Lab — Computational Onboarding Package
 
 **Author:** Kevin Mok (mokkevin@msu.edu)
-**Position:** RA III, Molecular Biology — Gonzales Comparative Pharmacology Lab
+**Position:** Research Assistant III — Gonzales Lab, Dept. of Pharmacology & Toxicology
 **Date:** March 19, 2026
+**For:** Dr. Andrea Gonzales (Professor, Director of MSU Drug Discovery Program)
 **Purpose:** What I bring to the lab on Day 1, and what we can build together.
 
 ---
 
 ## Executive Summary
 
-I bring a sovereign computational pipeline — validated against 782 of Dr.
+I bring a validated computational pipeline — tested against 782 of Dr.
 Gonzales's published data points — that replaces $210K/year of commercial
-pharmacometric software with free, open-source Rust code running on a $500
-GPU. The pipeline has 809 tests, 83 experiments, and 8 grant-ready
-hypotheses that use existing ADDRC infrastructure. I also bring biomeGate,
-a multi-GPU workstation (2× Titan V + 2× MI50 + RTX 5060, 128 GB RAM) that
-can serve as lab HPC for pilot experiments and hardware demonstrations.
+pharmacometric software (NONMEM, Monolix, WinNonlin) with free, open-source
+code. The pipeline has 809 automated tests, 83 validated experiments, and
+8 grant-ready hypotheses designed around existing ADDRC infrastructure.
+
+I also bring biomeGate, a multi-GPU workstation (96 GB total GPU memory,
+native 64-bit precision) that can serve as a lab compute resource for
+pilot experiments and live demonstrations.
 
 **The computational work is ready before the bench work starts.**
 
@@ -37,7 +40,7 @@ three separate code repositories. Total: **782/782 validation checks pass.**
 | G4 (Lokivetmab PK, 2021) | Dose-duration regression (R²=1.0), exponential decay | 19/19 |
 | G5 (Oclacitinib FAD, 2024) | JAK1 selectivity cross-disease | included |
 | G6 (IL-31 cell targets, 2014) | Three-compartment tissue model (immune + skin + neural) | 19/19 |
-| **Cross-spring total** | Anderson framework, GPU validation, metalForge | **782/782** |
+| **Total across repositories** | Anderson framework, GPU validation | **782/782** |
 
 ### What I Replace on the Software Side
 
@@ -50,11 +53,33 @@ three separate code repositories. Total: **782/782 validation checks pass.**
 | CRO population PK | $50K–200K/program | Population PK Monte Carlo (100K patients) | Validated |
 | **Total per pipeline** | **$75K–$210K** | **~$0.01** (GPU electricity) | **Now** |
 
-### What I Do at the Bench (RA III Molecular Biology)
+### What I Do at the Bench
 
-iPSC culture, drug screening assays, molecular biology protocols, plate
-reader operation, data collection. The computational work doesn't replace
-bench work — it complements it. I compute predictions; the bench tests them.
+The bench is the job. The computation makes the bench more productive.
+
+| Bench Capability | Experience | Relevance to Position |
+|-----------------|-----------|----------------------|
+| BSL2 cell culture, aseptic technique | 5 years MSUBI (bacteria, fungi, mycobacteria, GMOs) | Ready for iPSC culture and eukaryotic cell lines |
+| Plate-based screening and phenotypic assays | MSUBI enzyme kinetics, HPLC, mass spec, viable cell counts | Drug screening assays, immunoassays |
+| Molecular biology | DNA/RNA extraction, PCR, selective media, microscopy | Molecular mechanisms of atopic disease |
+| Fermentation and bioprocess | Flask-to-10L bioreactors, BSL2, media prep | Culture maintenance, growth optimization |
+| High-throughput sequencing and bioinformatics | Sandia National Labs (algae toxin effects, microbial interactions) | Data analysis, mechanism identification |
+| Environmental chemistry | MSU PFAS Research Lab (EPA SOPs, biomolecular methods) | Rigorous protocol compliance |
+| Statistical analysis and ML | MS Data Science (4.0 GPA), Python, R, SQL | Data interpretation, presentation, computational analysis |
+
+**What I want to learn from this lab:** Eukaryotic cell culture (iPSC-derived
+skin models, mammalian systems), neuro-immune interaction assays, transgenic
+mouse models. My bench experience is prokaryotic and fungal — the discipline
+transfers, the biological system is new and is what I'm here to learn.
+
+**Why the computation matters at the bench:** When computation is near-free,
+the scarce resource is the person who can design the right experiment, run
+it correctly, and interpret the result. The computation tells us which 20
+compounds out of 8,000 to test first. The bench scientist runs those 20
+assays, measures the actual cytokine response, and determines whether the
+prediction held. That cycle — predict, test, refine — is faster and cheaper
+than screening blind. But it requires someone at the bench who understands
+both the biology and the data.
 
 ---
 
@@ -87,8 +112,8 @@ healthSpring MATRIX scoring (8,000 compounds, ~1 second on GPU)
    Marginal cost per compound.
 
 4. **Automated data science** — Z' calculation, SSMD, dose-response fitting,
-   IC50 determination, cross-compound comparison. All sovereign, all
-   reproducible, all free.
+   IC50 determination, cross-compound comparison. Fully automated,
+   reproducible, free.
 
 ### Data We'd Need From ADDRC
 
@@ -109,10 +134,10 @@ Everything runs locally. No cloud. No data leaves the lab.
 
 | # | Hypothesis | Mechanism | Budget | PI Lead |
 |---|------------|-----------|:------:|---------|
-| H1 | "Inactive" compounds show cancer selectivity via coincidence detection | NCI R21 | $275K/2yr | Lisabeth |
-| H3 | Hormetic dose-response detectable at sub-IC50 | NIGMS R21 | $275K/2yr | Lisabeth |
+| H1 | "Inactive" compounds show cancer selectivity via coincidence detection | NCI R21 | $275K/2yr | Gonzales (Lisabeth co-I) |
+| H3 | Hormetic dose-response detectable at sub-IC50 | NIGMS R21 | $275K/2yr | Gonzales (Lisabeth co-I) |
 | H6 | Cross-species PK translation without commercial software | NIGMS supp / FDA | $150K/2yr | Gonzales |
-| H8 | Hidden immunomodulators in HTS "inactive" compounds | NIAID R21 | $275K/2yr | Lisabeth |
+| H8 | Hidden immunomodulators in HTS "inactive" compounds | NIAID R21 | $275K/2yr | Gonzales (Lisabeth co-I) |
 
 ### Needs Pilot Data First (Medium-Term)
 
@@ -138,6 +163,29 @@ All proposals use **existing ADDRC infrastructure** — the computational
 triage is free, and wet-lab validation uses existing equipment.
 
 See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md` for full details on each.
+
+### The Pre-Grant Pipeline
+
+Every hypothesis can be explored computationally **before any grant
+money is requested**. Open data + free software + biomeGate = zero-cost
+preliminary results. The traditional pipeline (propose → fund → experiment →
+analyze) becomes: **compute → predict → propose with data → fund → validate**.
+
+Grant reviewers see preliminary results, not promises. Time to first insight
+drops from years to weeks. Cost to university: zero.
+
+See `onboarding/PRE_GRANT_PIPELINE.md` for the full rationale.
+
+### Cross-Species Causal Engine
+
+Why does cat skin ≠ dog skin ≠ human skin? Anderson localization predicts
+species-specific drug responses from measurable tissue geometry: epidermal
+thickness, follicle density, cell-type diversity. This is the causal
+engine that makes Gonzales's comparative pharmacology generalizable — not
+empirical scaling, but physics-based prediction.
+
+See `onboarding/CROSS_SPECIES_CAUSAL_MODEL.md` for the full model and
+testable predictions.
 
 ---
 
@@ -168,6 +216,16 @@ These are immediately usable — no institutional access, no IRB, no MTA.
 | MIMIC-III (PhysioNet) | ICU patient records + biosignals | ECG, HRV, biosignal validation | physionet.org |
 | MIT-BIH (PhysioNet) | Arrhythmia database | Beat classification templates | physionet.org |
 
+### Tissue Geometry & Cross-Species Biology
+
+| Source | What | How We Use It | URL |
+|--------|------|---------------|-----|
+| Human Protein Atlas | Tissue-specific protein expression + histology | Receptor density maps per tissue per species | proteinatlas.org |
+| Cell×Gene (CZI) | Single-cell RNA-seq atlases, multi-species | Cell-type diversity → Anderson W per species per tissue | cellxgene.cziscience.com |
+| Tabula Sapiens / Muris | Human + mouse single-cell reference atlases | Cross-species cell composition comparison → d_eff | tabula-sapiens-portal.ds.czbiohub.org |
+| GTEx | Gene expression across 54 human tissue types | Cell-type diversity (Pielou W) per tissue | gtexportal.org |
+| Published histomorphometry | Epidermal thickness, follicle density per species | Anderson d_eff per species — the causal bridge | Literature review |
+
 ### How Internal Data Layers On Top
 
 ```
@@ -195,30 +253,23 @@ the same models — just better parameters from real measurements.
 ## 5. Cost Savings on ICER
 
 MSU's ICER (Institute for Cyber-Enabled Research) provides V100/A100 GPU
-access. ecoPrimals runs on ICER with zero environment setup.
+access. Our pipeline runs on ICER with zero environment setup.
 
 ### How It Works
 
-```bash
-# Build once on lab machine (5 minutes)
-cargo build --release --target x86_64-unknown-linux-gnu
+The pipeline compiles into a single executable with zero external
+dependencies — no Python environments, no CUDA toolkit, no module
+loads on ICER. Build once on any Linux machine, copy to ICER, run.
+Setup time: under 10 minutes. No IT tickets, no environment conflicts.
 
-# Copy to ICER (1 minute)
-scp target/release/healthspring_primal user@hpcc.msu.edu:~/
+### Comparison: Commercial vs ICER + Our Pipeline
 
-# Run on A100 GPU node (no module loads, no conda, no CUDA setup)
-sbatch --gres=gpu:1 ./healthspring_primal validate_all
-# exit 0 = 809 tests pass
-```
-
-### Comparison: Commercial vs ICER + ecoPrimals
-
-| Task | Commercial | ICER + Python | ICER + ecoPrimals |
+| Task | Commercial | ICER + Python | ICER + Our Pipeline |
 |------|:----------:|:-------------:|:-----------------:|
-| Population PK (100K patients) | $50K–200K (CRO) | $5–20 (ICER GPU-hr) | **~$0.001** (consumer) or **~$0.001** (ICER A100, faster) |
-| 16S pipeline (1,000 samples) | $5K–15K (QIIME2 + analyst) | $2–5 (ICER CPU) | **~$0.10** (consumer GPU) |
-| Drug repurposing MATRIX (8K compounds) | $48.3M (Every Cure ARPA-H) | Not available | **< 1 second** on any GPU |
-| NONMEM + Monolix + WinNonlin | $6,500/yr license | $0 (R/Python) | **$0** (sovereign Rust) |
+| Population PK (100K patients) | $50K–200K (CRO) | $5–20 (ICER GPU-hr) | **< $0.01** (biomeGate or ICER) |
+| 16S pipeline (1,000 samples) | $5K–15K (QIIME2 + analyst) | $2–5 (ICER CPU) | **~$0.10** (GPU) |
+| Compound scoring (8K compounds) | Commercial + analyst (weeks) | Not available | **< 1 second** on any GPU |
+| PK software (NONMEM + Monolix + WinNonlin) | $6,500/yr license | $0 (R/Python) | **$0** (open source) |
 
 ### What ICER Accelerates
 
@@ -229,8 +280,8 @@ sbatch --gres=gpu:1 ./healthspring_primal validate_all
 | Lattice QCD 32⁴ production | ~8 hr | ~1 hr | 8× |
 | Michigan Crop Water Atlas | ~1 hr | ~8 min | 8× |
 
-ICER gives us scale. The consumer GPU gives us zero-queue iteration.
-Both run the same binary, produce the same results.
+ICER gives us scale for production runs. biomeGate gives us zero-queue
+iteration for daily work. Both run the same code, produce the same results.
 
 ---
 
@@ -243,7 +294,7 @@ A multi-GPU workstation I built and own. Portable to campus.
 | Component | Spec |
 |-----------|------|
 | **CPU** | AMD Threadripper 3970X (32 cores / 64 threads) |
-| **RAM** | 128 GB DDR4 ECC |
+| **RAM** | 256 GB DDR4 ECC |
 | **Primary GPU** | NVIDIA RTX 5060 (8 GB, consumer shader) |
 | **Work GPUs** | 2× NVIDIA Titan V (12 GB HBM2 each, native f64) |
 | **Work GPUs** | 2× AMD MI50 (32 GB HBM2 each, native f64) |
@@ -254,13 +305,13 @@ A multi-GPU workstation I built and own. Portable to campus.
 
 ### Why Titan V and MI50 Matter
 
-The Titan V has **native f64 at full rate** — no CUDA throttle, 6.9
-TFLOPS of 64-bit precision. This is data-center-class f64 compute in a
-consumer GPU form factor. The MI50 (AMD) provides the same native f64
-(6.7 TFLOPS) on a different vendor's silicon.
+The Titan V provides full-speed 64-bit floating point — 6.9 TFLOPS,
+matching data-center GPUs but at consumer prices. The MI50 (AMD) provides
+comparable 64-bit performance (6.7 TFLOPS) on different hardware.
 
 Together they prove **cross-vendor reproducibility**: the same computation
-on NVIDIA and AMD produces the same result to machine epsilon.
+on NVIDIA and AMD hardware produces identical results. This matters for
+grant reviewers who ask "can anyone reproduce this?"
 
 ### What biomeGate Enables in the Lab
 
@@ -279,23 +330,24 @@ on NVIDIA and AMD produces the same result to machine epsilon.
    Same computation, same result on NVIDIA (Titan V) and AMD (MI50).
    Reviewers love reproducibility evidence.
 
-5. **Sovereign data** — ADDRC compound data never leaves the lab. biomeGate
-   sits in the lab, under lab control. No cloud, no ICER data policy.
+5. **Data stays local** — ADDRC compound data never leaves the lab.
+   biomeGate sits in the lab, under lab control. No cloud uploads, no
+   third-party data processing.
 
-6. **NPU edge prototype** — the AKD1000 neuromorphic processor runs
+6. **Neuromorphic edge prototype** — the AKD1000 processor runs
    biosignal classifiers at 1.4 µJ per inference. Demo: real-time ECG
-   R-peak detection on coin-cell power. Relevant for wearable clinical
-   monitoring grants.
+   beat classification on coin-cell power. Relevant for wearable
+   monitoring grants (NIBIB, FDA).
 
 ### biomeGate on Campus — Logistics
 
 - **Physical:** One desktop-sized workstation. Standard power (two 120V
-  outlets). Standard Ethernet (lab jack or departmental WiFi for NUCLEUS).
+  outlets). Standard Ethernet (lab jack or departmental WiFi).
 - **Setup:** 30 minutes (plug in, run `cargo test --workspace`).
-- **Access:** My machine, lab use. NUCLEUS bonding can extend to Gonzales
-  lab workstations (covalent bond) and ADDRC machines (ionic bond).
-- **ICER integration:** biomeGate as a NUCLEUS node. Heavy jobs dispatch
-  to ICER A100s; results return to biomeGate. Best of both worlds.
+- **Access:** My machine, lab use. Can network with Gonzales lab
+  workstations and ADDRC machines for distributed computation.
+- **ICER integration:** Heavy jobs dispatch to ICER A100s; results
+  return to biomeGate. Best of both worlds.
 
 ---
 
@@ -342,8 +394,10 @@ existing validated models.
 | Document | Location | When |
 |----------|----------|------|
 | Computational brief (her data modeled) | `contact/gonzales/computational_brief.md` | Sent |
-| Spring validation brief (782/782) | `contact/gonzales/spring_validation_brief.md` | If she asks |
+| Validation brief (782/782 checks) | `contact/gonzales/spring_validation_brief.md` | If she asks |
 | Cost comparison ($210K → $0.01) | `baseCamp/gonzales/cost_access_methods.md` | Meeting |
+| Pre-grant pipeline (zero-cost science) | `onboarding/PRE_GRANT_PIPELINE.md` | Day 1 discussion |
+| Cross-species causal model | `onboarding/CROSS_SPECIES_CAUSAL_MODEL.md` | Day 1 discussion |
 | This onboarding package | This file | Day 1 |
 
 ### For Lisabeth (ADDRC)
@@ -353,6 +407,7 @@ existing validated models.
 | ADDRC computational brief | `contact/lisabeth/computational_brief.md` | Next meeting |
 | Binding landscape analysis | `contact/lisabeth/binding_landscape_brief.md` | Next meeting |
 | Drug Discovery Pipeline | `publicRelease/DRUG_DISCOVERY_PIPELINE.md` | If she asks |
+| Cross-species causal model | `onboarding/CROSS_SPECIES_CAUSAL_MODEL.md` | ADDRC + tissue geometry |
 
 ### For Drug Discovery Program (Neubig, Ellsworth)
 
@@ -361,6 +416,7 @@ existing validated models.
 | Drug Discovery Pipeline | `publicRelease/DRUG_DISCOVERY_PIPELINE.md` | Group meeting |
 | Grant Technical Appendix | `publicRelease/GRANT_TECHNICAL_APPENDIX.md` | Grant writing |
 | MSU Asset Acceleration | `publicRelease/MSU_ASSET_ACCELERATION.md` | Department talk |
+| Pre-grant pipeline rationale | `onboarding/PRE_GRANT_PIPELINE.md` | Department talk |
 
 ### For Grant Applications
 
@@ -369,6 +425,30 @@ existing validated models.
 | Experimental Hypotheses (8 proposals) | `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md` | Grant writing |
 | Grant Technical Appendix | `publicRelease/GRANT_TECHNICAL_APPENDIX.md` | Technical section |
 | Hardware Cost Analysis | `sporePrint/technical/HARDWARE_COST_ANALYSIS.md` | Budget justification |
+| Cross-species causal model | `onboarding/CROSS_SPECIES_CAUSAL_MODEL.md` | R01 preliminary data |
+| Pre-grant pipeline | `onboarding/PRE_GRANT_PIPELINE.md` | Broader impacts / innovation |
+
+### For Other MSU Labs and Collaborators
+
+This package is also designed as a collaboration resource. When the Drug
+Discovery Program reaches out to other departments — Vet Med, Chemistry,
+BMB, MGI (the three incoming Global Impact faculty hires) — these
+documents explain what the computational pipeline does for their data:
+
+| MSU Team | What We Offer | Document to Share |
+|----------|--------------|-------------------|
+| Vet Med (cross-species AD) | Cross-species causal model from tissue geometry | `CROSS_SPECIES_CAUSAL_MODEL.md` |
+| Chemistry (med chem, compound design) | Computational triage of compound libraries | `PRE_GRANT_PIPELINE.md` |
+| BMB (protein structure, receptor biology) | Anderson-augmented target scoring | `DRUG_DISCOVERY_PIPELINE.md` |
+| MGI (microbiome, immunology) | Gut Anderson W, colonization resistance models | `DATA_SOURCES_AND_INTEGRATION.md` |
+| ICER (HPC infrastructure) | Zero-dependency binaries, GPU validation | `COST_AND_COMPUTE_BRIEF.md` |
+| Any PI with dose-response data | Binding landscape reanalysis for free | `PRE_GRANT_PIPELINE.md` |
+
+The computation is free. The data is public. What's valuable is the
+expertise to connect them — to design the right experiment, run it at the
+bench, and interpret the result in the context of the causal model. Every
+collaboration we build produces data that feeds back into the pipeline,
+making the next prediction better and the next experiment more targeted.
 
 ---
 
@@ -388,13 +468,23 @@ existing validated models.
 
 ## The Bottom Line
 
-I walk in with:
-- 809 tests, 83 experiments, 782 Gonzales-specific checks — all passing
-- $0 replacement for $210K/year of commercial software
-- biomeGate: 96 GB GPU VRAM, native f64, cross-vendor validation
-- 8 grant proposals totaling $5.775M in addressable funding
-- Public data pipelines ready to run on Day 1
-- A computational framework that turns ADDRC's 8,000 compounds from
-  inactive rejects into grant-fundable science
+I walk in as a bench scientist with 5+ years of BSL2 lab experience,
+ready to learn eukaryotic cell culture, iPSC models, and neuro-immune
+assays. I want to work with transgenic mice, dissect tissue, and run
+the experiments that test real biological questions.
 
-The bench work is the job. The computation is the differentiator.
+I also walk in with:
+- A validated computational pipeline (809 tests, 782 Gonzales-specific checks)
+- $0 replacement for $210K/year of commercial software
+- biomeGate (96 GB GPU VRAM) as a lab compute resource
+- 8 grant-ready hypotheses totaling $5.775M in addressable funding
+- Public data pipelines that generate preliminary data while the lab spins up
+
+The computation is near-free. The expertise is valuable. A bench scientist
+who can design computationally-informed experiments, run them, and interpret
+the results across species is more productive than either capability alone.
+
+Every pilot experiment, every piece of preliminary data, every collaboration
+with another MSU team exists to generate the funding and the scientific
+questions that keep me at the bench, working with the biological systems
+that matter.

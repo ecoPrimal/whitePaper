@@ -1,12 +1,22 @@
-# Erika Lisabeth, PhD — ADDRC Director, MSU Pharmacology & Toxicology
+# Erika Lisabeth, PhD — Director, ADDRC, MSU Pharmacology & Toxicology
 
 **URL:** https://drugdiscovery.msu.edu/about-us/people/erika-lisabeth-ph-d.aspx
+**Position:** Assistant Professor (Fixed-Term), Director of ADDRC
+**Role context:** ADDRC is a campus-wide service core — Lisabeth helps faculty,
+students, postdocs, and external biotechs get assays working at high-throughput
+scale. She runs the facility and facilitates others' research; she is not primarily
+a tenure-track PI with an independent R01-funded lab.
 **Domain:** HTS assay development, drug repurposing, chemical probes, EphA3 RTK, NF-κB
-**Department:** Pharmacology & Toxicology, MSU (same as Gonzales)
-**Facility:** Assay Development and Drug Repurposing Core (ADDRC)
-**Equipment:** Plate readers, high-content microscopes, liquid-handling robots,
-GREENScreen informatics, 8,000+ compound library
-**PhD:** Chemistry/Biochemistry, UC San Diego; Postdoc: Sanford Burnham Prebys
+**Department:** Pharmacology & Toxicology, MSU (same department as Gonzales)
+**Facility:** Assay Development and Drug Repurposing Core (ADDRC) — operates 24/7,
+open to all MSU researchers and external biotechs
+**Equipment:** Plate readers, high-content microscopes, SPR, ITC, liquid-handling
+robots, GREENScreen informatics, 8,000+ compound library
+**Education:** BS Chemistry (MSU), PhD Chemistry/Biochemistry (UC San Diego),
+Postdoc cancer biology (Sanford Burnham Prebys Medical Discovery Institute)
+**Worked with Neubig** since returning to MSU in 2014; became ADDRC director ~2021
+**Self-description:** "Jack of All Trades" — broad expertise, service orientation,
+values "getting the most bang for the buck in terms of data"
 
 ---
 
@@ -104,12 +114,16 @@ existing infrastructure.
 
 ## Grant Alignment
 
+Lisabeth's role in grants is as **co-Investigator / core facility lead**, not PI.
+ADDRC provides the screening infrastructure; Gonzales or another tenure-track
+faculty member would be PI.
+
 | Mechanism | Title (short) | Lisabeth Role |
 |-----------|---------------|---------------|
-| NCI R21 | Low-affinity cancer selectivity | ADDRC data + screen design |
-| NIGMS R21 | Hormetic dose-response | Extended dose-response protocol |
-| NIAID R21 | Hidden immunomodulators | Compound selection from existing library |
-| NIAMS R01 | Anderson-augmented MATRIX | ADDRC 8K library screening |
+| NCI R21 | Low-affinity cancer selectivity | Co-I: ADDRC data + screen design |
+| NIGMS R21 | Hormetic dose-response | Co-I: extended dose-response protocol |
+| NIAID R21 | Hidden immunomodulators | Co-I: compound selection from existing library |
+| NIAMS R01 | Anderson-augmented MATRIX | Co-I: ADDRC 8K library screening |
 
 See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md` for full details.
 

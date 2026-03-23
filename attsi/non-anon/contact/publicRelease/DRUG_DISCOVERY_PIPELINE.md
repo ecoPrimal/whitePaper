@@ -321,7 +321,30 @@ third-party analytics platforms. The pipeline is the lab's own.
 
 ---
 
-*Source science: Gonzales AJ et al. (2013–2024), Fajgenbaum DC et al. (2019),  
-Anderson PW (1958), Fleck TJ & Gonzales AJ et al. (2021)  
-Computational validation: healthSpring V35, neuralSpring S162, wetSpring V127,  
+## 9. Collaboration Model
+
+The pipeline is designed for collaboration, not isolation:
+
+- **Data in:** Any lab with dose-response, compound screening, or tissue
+  expression data can feed it into the pipeline. We analyze it for free.
+- **Predictions out:** The pipeline returns ranked candidate lists, tissue
+  geometry predictions, and testable hypotheses. The collaborator tests
+  them at the bench.
+- **Feedback loop:** Experimental results refine the model. Each
+  collaboration makes the predictions better for everyone.
+- **Grant leverage:** Co-PI relationships formed through data sharing
+  strengthen R01/R21 proposals. Computational preliminary data (which costs
+  nothing) becomes the basis for experimental aims (which cost money).
+
+The computation is the cheap part. The bench expertise, the animal models,
+the iPSC lines, the screening infrastructure — those are the valuable
+assets. The pipeline makes them more productive by telling you where to look.
+
+---
+
+*Source science: Gonzales AJ et al. (2013–2024), Fajgenbaum DC et al. (2019),
+Anderson PW (1958), Fleck TJ & Gonzales AJ et al. (2021)
+Computational validation: healthSpring V35, neuralSpring S162, wetSpring V127,
 groundSpring V114. Total: 329/329 checks PASS.*
+
+*Contact: Kevin Mok — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU*

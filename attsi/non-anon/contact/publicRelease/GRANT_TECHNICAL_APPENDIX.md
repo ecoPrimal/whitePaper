@@ -319,6 +319,25 @@ No API keys, no cloud accounts, no proprietary software.
 
 ---
 
-*All spring repositories: github.com/syntheticChemistry/*  
-*Infrastructure: github.com/ecoPrimals/*  
+## Personnel
+
+**Kevin Mok** — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU
+
+- BS Microbiology (MSU 2018), MS Data Science (MSU 2025, 4.0 GPA)
+- 5+ years BSL2 lab experience: cell culture, fermentation, enzyme kinetics,
+  mass spectrometry, HPLC, microbial assays (MSU Bioeconomy Institute)
+- High-throughput sequencing and bioinformatics (Sandia National Laboratories)
+- Environmental chemistry, EPA SOPs (MSU PFAS Research Lab)
+- U.S. Army veteran (intelligence analysis, systems management)
+- Sole developer: all 20,695+ tests, all 175+ papers reproduced
+
+The computational validation requires no recurring cost and runs on
+existing hardware. The grants fund bench work — wet-lab experiments,
+animal models, reagents, and the FTE to run them. The computation
+generates the hypotheses; the bench tests them.
+
+---
+
+*All spring repositories: github.com/syntheticChemistry/*
+*Infrastructure: github.com/ecoPrimals/*
 *Full science catalog: see `CAPABILITY_PARITY_BRIEF.md` for domain-by-domain comparison vs proprietary tools*

@@ -195,3 +195,16 @@ the expected vs actual values were.
 
 The entire ecosystem was built on ~$15,000 of consumer hardware. No HPC required
 for development or validation. ICER access expands scale, not capability.
+
+---
+
+## Want Us to Analyze Your Data?
+
+If you're a student or core facility with data you'd like analyzed —
+dose-response curves, 16S sequencing, PK/PD data, compound screening
+results — we can run it through the pipeline at no cost.
+
+You don't need to install anything. Send the data, we send back results.
+See `COLLABORATION_BRIEF.md` for details, or email mokkevin@msu.edu.
+
+*Kevin Mok — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU*

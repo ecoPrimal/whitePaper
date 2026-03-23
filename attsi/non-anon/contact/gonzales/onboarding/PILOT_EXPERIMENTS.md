@@ -99,6 +99,52 @@ clinical monitoring at coin-cell power.
 
 **Grant seed:** Biosignal / wearable monitoring grant (NIBIB, FDA)
 
+### P05b: Cross-Species Skin Geometry → Anderson d_eff
+
+**What:** Compute effective dimension (d_eff) for each species from
+published tissue morphometry. Test whether geometry alone predicts
+the comparative pharmacology Gonzales has spent a career measuring.
+
+**Data:** Published dermatology literature (epidermal thickness,
+follicle density, dermal cell counts for dog, cat, human, horse, mouse)
+
+**Analysis:**
+1. Extract skin geometry parameters from published histomorphometry
+2. Compute d_eff per species: follicle density → dimensional promotion,
+   epidermal thickness → 2D barrier strength, cell diversity → Anderson W
+3. Rank species by predicted AD severity (d_eff)
+4. Compare to clinical severity rankings (dog > human > cat)
+5. Compute species-specific IC50 ratios from d_eff ratios
+6. Compare predicted IC50 ratios to Gonzales G2 data
+
+**Output:** Species ranking from geometry alone matches clinical
+observation. IC50 ratios explained by tissue architecture, not
+curve-fitting. The causal bridge for comparative pharmacology.
+
+**Grant seed:** H2 (NIGMS R01) — geometry explains species differences
+
+### P05c: Single-Cell Atlas Cross-Species Cell Diversity
+
+**What:** Use published single-cell atlases to compute Anderson disorder
+parameter W across species and tissues. Skin vs gut vs lung — same physics,
+different geometry, different disease.
+
+**Data:** Tabula Sapiens (human), Tabula Muris (mouse),
+Cell×Gene (multi-species skin atlases)
+
+**Analysis:**
+1. Extract cell-type proportions for skin tissue per species
+2. Compute Pielou evenness → Anderson W per species
+3. Repeat for gut and lung epithelium
+4. Compare W across species × tissue combinations
+5. Predict: high W + high d_eff → more severe disease
+
+**Output:** Cross-species × cross-tissue Anderson parameter map.
+Computational evidence for why the same cytokine pathway produces
+different diseases in different tissues and species.
+
+**Grant seed:** H2 (NIGMS R01), H4 (NIAMS R01) — cross-species mechanism
+
 ---
 
 ## Tier 2: Week 2–4 — Build Preliminary Results (Public Data)
@@ -111,7 +157,7 @@ samples from the Human Microbiome Project. Establish what "normal" looks like.
 **Data:** HMP Phase II 16S data (free from hmpdacc.org)
 
 **Analysis:**
-1. Run wetSpring 16S pipeline on HMP samples
+1. Run 16S diversity pipeline on HMP samples
 2. Compute Shannon diversity, Pielou evenness, Anderson W per sample
 3. Establish distribution of healthy W values
 4. Map W to colonization resistance score (healthSpring exp012)
@@ -248,6 +294,8 @@ NCI R21.
 Week 1:   P01 (reproduce G1-G6 live)
           P02 (PubChem binding landscape)
           P05 (NPU arrhythmia demo)
+          P05b (cross-species skin d_eff from literature)
+          P05c (single-cell atlas W computation)
 
 Week 2-4: P03 (ChEMBL cross-reactivity)
           P04 (DrugBank cross-species PK)

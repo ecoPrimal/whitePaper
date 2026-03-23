@@ -60,6 +60,22 @@ as access develops.
 | **UniProt** | Protein sequences + functional annotations | IL-31RA, IL-4Rα, OSMR receptor mapping | Free: `uniprot.org` |
 | **AlphaFold DB** | Predicted structures for 200M+ proteins | Target modeling where crystal structures missing | Free: `alphafold.ebi.ac.uk` |
 
+### Tissue Geometry / Histology (Cross-Species Causal Model)
+
+| Source | What You Get | Our Use | Access |
+|--------|-------------|---------|--------|
+| **Published histomorphometry** | Epidermal thickness, follicle density, dermal cell counts per species | Anderson d_eff computation per species — the causal geometry | Literature (dermatology textbooks, review papers) |
+| **GTEx (Genotype-Tissue Expression)** | Gene expression across 54 human tissue types | Cell-type diversity (Pielou W) per tissue → Anderson disorder parameter | Free: `gtexportal.org` |
+| **Human Protein Atlas** | Tissue-specific protein expression, histology images | Receptor density maps across tissues and species | Free: `proteinatlas.org` |
+| **Cell×Gene (CZI)** | Single-cell RNA-seq atlases across species | Cell-type composition of skin/gut/lung per species → Pielou → W | Free: `cellxgene.cziscience.com` |
+| **Tabula Muris / Tabula Sapiens** | Mouse and human single-cell atlases | Cross-species cell composition comparison → d_eff calibration | Free: `tabula-muris-senis.ds.czbiohub.org` |
+| **Published veterinary dermatology** | Canine, feline, equine skin architecture measurements | Species-specific d_eff parameters for cross-species causal model | Literature review |
+
+**What we compute on Day 1:**
+- d_eff (effective dimension) per species from published skin morphometry
+- Cross-species cell-type diversity W from single-cell atlases
+- Predicted species-specific drug responses from geometry alone
+
 ---
 
 ## Phase 2: Internal Data (Month 1–3, Pending Access)
@@ -118,14 +134,14 @@ iPSC experimental readout (Excel/CSV)
 Internal data doesn't just feed healthSpring. It enriches the entire ecosystem:
 
 ```
-ADDRC dose-response → healthSpring affinity landscape
-    → wetSpring colonization resistance models
-    → airSpring pesticide hormesis predictions
-    → groundSpring uncertainty budgets
+ADDRC dose-response → affinity landscape analysis
+    → colonization resistance models (microbiome)
+    → pesticide hormesis predictions (environmental)
+    → measurement uncertainty budgets (metrology)
 
-Gonzales iPSC → healthSpring tissue validation
-    → wetSpring Anderson immunological framework refinement
-    → neuralSpring ESN regime classifier training
+Gonzales iPSC → tissue model validation
+    → immunological framework refinement (microbiome)
+    → time-series regime classifier training (biosignal)
 ```
 
 Every spring benefits from better parameters. The public data builds the
@@ -138,8 +154,8 @@ framework; the internal data makes it precise.
 All data stays local:
 - Public data: downloaded once, stored on biomeGate or lab workstation
 - Internal data: never leaves lab hardware
-- ICER: binary runs on ICER GPU, data stays on biomeGate (NUCLEUS dispatch)
+- ICER: binary runs on ICER GPU, data stays on biomeGate
 - No cloud uploads, no third-party analytics, no data governance issues
-- Every computation produces a signed provenance record (BearDog Ed25519)
+- Every computation produces a cryptographically signed provenance record
 
 The lab owns its data. The computation serves the lab, not the other way around.

@@ -149,7 +149,7 @@ Joint R21 (NCI or NIGMS) based on Phase 1-2 results:
 | Toxicity tested per organ | Anderson IPR predicts distribution |
 | Monotonic dose-response assumed | Biphasic (hormetic) models included |
 | New screens required | Reanalyze existing data first |
-| $210K commercial software stack | $0 sovereign Rust (AGPL-3.0, public) |
+| $210K commercial software stack | $0 open-source Rust (AGPL-3.0, public) |
 
 ## The Data We'd Need to Start
 

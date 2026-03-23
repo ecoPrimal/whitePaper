@@ -8,7 +8,7 @@ reviewers, or anyone evaluating the ecoPrimals ecosystem.
 published papers, and named faculty. They do not contain private correspondence,
 interview strategy, or internal planning.
 
-**Last Updated:** March 17, 2026
+**Last Updated:** March 19, 2026
 
 ---
 
@@ -23,6 +23,7 @@ interview strategy, or internal planning.
 | `FOR_STUDENTS_AND_CORE_FACILITIES.md` | Graduate students, lab techs, core facility staff | 5-minute setup guide. Full 16S pipeline walkthrough. Common lab data formats. Student project ideas. |
 | `FOR_HARDWARE_BUILDERS_AND_HOBBYISTS.md` | Gamers, hardware hobbyists, r/homelab, distributed compute | The f64 Vulkan discovery. What your GPU actually does. Build topology. Games@Home distributed compute. |
 | `FOR_COMPLIANCE_AND_INSTITUTIONAL_REVIEW.md` | Legal counsel, IRB, QA auditors, grant compliance, regulatory | FDA 21 CFR Part 11, ISO 17025/15189, HIPAA, GDPR, IRB readiness, licensing. |
+| `COLLABORATION_BRIEF.md` | Any MSU lab or PI | One-pager: free computation, what we analyze, what you get back, how to start. Designed for cold outreach to new collaborators. |
 
 ### Technical and Strategic Documents
 

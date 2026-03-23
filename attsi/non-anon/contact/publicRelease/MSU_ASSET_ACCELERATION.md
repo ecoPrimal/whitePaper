@@ -246,6 +246,26 @@ No CUDA, no conda, no spack, no module file conflicts.
 
 ---
 
-*Contact for collaboration and access: see `contacts.md` in this directory.*  
-*Spring repositories: github.com/syntheticChemistry/*  
+## Why This Works for Collaborators
+
+The pipeline imposes no burden on collaborating labs:
+
+- **No software to install.** Collaborators send data, we run the analysis.
+- **No cost to the collaborator.** The computation runs on existing hardware
+  (biomeGate + ICER). No licenses, no cloud bills, no FTE allocated.
+- **Data stays local.** Raw data never leaves the collaborator's control
+  unless they choose to share it. We can work with summary statistics.
+- **Results are verifiable.** Every output comes with a provenance record
+  and a validation binary. Skeptical? Clone the repo and re-run.
+
+The computation is near-free. The bottleneck is expertise — knowing which
+biological question to ask, which dataset to analyze, which bench experiment
+to run next. That's where the value is, and that's what collaboration
+provides.
+
+---
+
+*Contact: Kevin Mok — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU*
+*BS Microbiology (MSU 2018), MS Data Science (MSU 2025)*
+*Spring repositories: github.com/syntheticChemistry/*
 *Infrastructure repositories: github.com/ecoPrimals/*

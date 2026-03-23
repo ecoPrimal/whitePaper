@@ -379,7 +379,7 @@ complete pipeline from computational prediction to experimental validation.
 - iPSC-derived skin models across species (canine, feline, human)
 - Plate-based screening infrastructure
 - Drug discovery pipeline and regulatory expertise
-- 18 years of Zoetis data and institutional knowledge
+- ~28 years of pharma experience and institutional knowledge
 
 **MSU Drug Discovery — ADDRC (Erika Lisabeth, Director):**
 - High-throughput screening facility in the same department (Pharm & Tox)

@@ -1,7 +1,7 @@
 # Interview Talking Points — Gonzales Lab, March 2026
 
-**Meeting**: Andrea Gonzales + Erika Lisabeth (ADDRC)
-**Role**: Research Associate III, Molecular Biology
+**Meeting**: Andrea Gonzales (Professor, Director Drug Discovery Program) + Erika Lisabeth (ADDRC Director)
+**Role**: Research Assistant III — 1-year off-dated position. Th2 cytokines, neuro-immune, One Health.
 **Purpose**: Lab position interview. Show bench + computational value. Don't overwhelm.
 
 ---
@@ -84,7 +84,11 @@ validated. What it needs is the data that comes from being in the lab.
 
 ---
 
-## For Lisabeth (ADDRC) — The Drug Repurposing Connection
+## For Lisabeth (ADDRC Director, Fixed-Term) — The Drug Repurposing Connection
+
+Note: Lisabeth runs a campus-wide service core. Her value is in facilitating
+others' research at high-throughput scale. Frame computational tools as making
+ADDRC more capable for all users, not as her leading grants independently.
 
 ### What I've Built
 

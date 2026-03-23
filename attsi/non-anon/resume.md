@@ -69,14 +69,24 @@ Recorded experimental data and analyzed sequences using the Ribosomal Database P
 Reported findings to the principal investigator and presented at the University Undergraduate Research and Arts Forum (UURAF).
 
 Projects
+ecoPrimals — Open-Source Scientific Computing Ecosystem
+GitHub: github.com/syntheticChemistry — all AGPL-3.0-or-later
+Sole developer of a validated computational platform spanning seven scientific domains (drug discovery, microbiome, agriculture, plasma physics, environmental science, machine learning, game science).
+175+ published papers reproduced. 20,000+ automated validation checks. Pure Rust, zero C dependencies, GPU-accelerated via WebGPU/Vulkan.
+Validated replacements for NONMEM, Monolix, WinNonlin, Galaxy/QIIME2, and commercial HTS informatics — at zero licensing cost.
+Anderson localization applied to immunological signaling: novel spatial drug scoring framework validated against 6 Gonzales AJ et al. publications (782/782 checks).
+Cross-species causal modeling, low-affinity binding analysis, hormesis modeling, and multi-scale causal chain simulation.
+Hardware: multi-GPU workstation (96 GB VRAM, 256 GB RAM, AMD Threadripper).
+
 App for Heart Disease Analysis
 Streamlit App: datasciencebiolab.streamlit.app
 GitHub Repo: https://github.com/ecoPrimal/CMSE
 
 Skills
-Programming Languages: Python, R, SQL, Visual Basic
-Laboratory Techniques: Aseptic techniques, fermentation processes, microbial assays, chemical assays
-Data Analysis Tools: Excel, SharePoint, HPLC, Mass Spectrometry, Bioinformatics tools
+Programming Languages: Python, R, SQL, Rust, Visual Basic, WGSL (GPU shaders)
+Laboratory Techniques: Aseptic techniques, fermentation processes, microbial assays, chemical assays, BSL2
+Data Analysis Tools: Excel, SharePoint, HPLC, Mass Spectrometry, Bioinformatics tools, GPU compute
+Computational: Machine learning, statistical modeling, bioinformatics, pharmacometrics, Anderson localization
 Soft Skills: Leadership, teamwork, communication, problem-solving, training and mentorship
 
 

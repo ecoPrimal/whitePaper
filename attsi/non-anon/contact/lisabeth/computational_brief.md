@@ -167,15 +167,16 @@ Total: 809 tests, 83 experiments, 53 Python baselines, zero warnings.
 
 ---
 
-## Grant Opportunities (Joint)
+## Grant Opportunities (Joint — Gonzales as PI, ADDRC as Core)
 
-| Mechanism | Focus | Budget |
-|-----------|-------|--------|
-| NCI R21 | Low-affinity cancer selectivity from existing HTS | $275K/2yr |
-| NIGMS R21 | Hormetic dose-response prediction from HTS data | $275K/2yr |
-| NIAID R21 | Hidden immunomodulators in "inactive" compounds | $275K/2yr |
-| NIAMS R01 | Anderson-augmented drug repurposing (with Gonzales) | $1.25M/5yr |
+| Mechanism | Focus | Budget | ADDRC Role |
+|-----------|-------|--------|------------|
+| NCI R21 | Low-affinity cancer selectivity from existing HTS | $275K/2yr | Data + screen design |
+| NIGMS R21 | Hormetic dose-response prediction from HTS data | $275K/2yr | Extended dose-response |
+| NIAID R21 | Hidden immunomodulators in "inactive" compounds | $275K/2yr | Compound selection |
+| NIAMS R01 | Anderson-augmented drug repurposing | $1.25M/5yr | 8K library screening |
 
 All proposals use existing ADDRC infrastructure — the computational
 triage is free, and the wet-lab validation uses existing equipment and
-compound libraries.
+compound libraries. Gonzales (or another tenure-track faculty) would
+serve as PI; ADDRC provides the core facility and co-I support.

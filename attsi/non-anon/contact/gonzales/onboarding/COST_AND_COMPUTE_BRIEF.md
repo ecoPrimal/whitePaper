@@ -70,7 +70,7 @@ Same experiments, ~8× faster due to native f64 at full rate.
 
 ### Versus Commercial CRO
 
-| Analysis | CRO Cost | ecoPrimals Cost | Savings |
+| Analysis | CRO Cost | Our Pipeline Cost | Savings |
 |----------|:--------:|:---------------:|:-------:|
 | Population PK (one drug program) | $50,000–200,000 | $0.003 | **$199,999.997** |
 | Dose-response panel (100 compounds) | $5,000–15,000 | $0.0001 | **$14,999.9999** |
@@ -94,7 +94,7 @@ Same experiments, ~8× faster due to native f64 at full rate.
 | Component | Spec |
 |-----------|------|
 | CPU | AMD Threadripper 3970X (32c/64t, 3.7–4.5 GHz) |
-| RAM | 128 GB DDR4 ECC |
+| RAM | 256 GB DDR4 ECC |
 | NPU | BrainChip AKD1000 (neuromorphic edge inference) |
 | Storage | 2 TB NVMe |
 | Network | 10 GbE |
@@ -112,7 +112,7 @@ consumer and previous-generation professional parts.
 
 The Titan V is the only consumer NVIDIA GPU with **unthrottled native f64**.
 CUDA does not artificially limit it. WebGPU/Vulkan accesses the full 6.9
-TFLOPS. These cards cost $500–800 used. Two of them in biomeGate deliver
+TFLOPS. These cards cost $100–300 used. Two of them in biomeGate deliver
 more f64 compute than the A100s on ICER — without the queue, without the
 allocation, without the data governance.
 
@@ -128,17 +128,16 @@ biomeGate (lab)                          ICER (campus HPC)
 Developer iteration (instant)    ─→      Production scale (queued)
 Parameter sweeps (50 in an hour)         10,000-sample batch jobs
 Hardware demos for collaborators         Multi-day lattice QCD production
-Data stays local                         Binary runs, data stays on biomeGate
-                                         (NUCLEUS dispatch: compute crosses, data doesn't)
+Data stays local                         Binary runs on ICER, data stays on biomeGate
 ```
 
-### NUCLEUS Bonding Model
+### Networking Model
 
-| Bond Type | What It Connects | Example |
-|-----------|-----------------|---------|
-| **Covalent** | biomeGate ↔ lab workstations | Gonzales lab machines join biomeGate pool |
-| **Ionic** | biomeGate ↔ ADDRC workstation | Shared compute, scoped data access |
-| **Metallic** | biomeGate ↔ ICER A100 nodes | ICER GPU-hours for heavy batch jobs |
+| Tier | What It Connects | Example |
+|------|-----------------|---------|
+| **Lab-internal** | biomeGate ↔ lab workstations | Gonzales lab machines share compute with biomeGate |
+| **Collaborator** | biomeGate ↔ ADDRC workstation | Shared compute, scoped data access |
+| **Institutional** | biomeGate ↔ ICER A100 nodes | ICER GPU-hours for heavy batch jobs |
 
 ### What This Looks Like in Practice
 
@@ -209,7 +208,7 @@ For grant applications that include biomeGate or ICER:
 > **Computational Infrastructure:** The PI brings a validated multi-GPU
 > workstation (biomeGate: AMD Threadripper 3970X, 2× NVIDIA Titan V, 2×
 > AMD MI50, 128 GB RAM) capable of 29.2 TFLOPS f64 aggregate compute.
-> All computational pipelines are implemented in sovereign Rust (AGPL-3.0)
+> All computational pipelines are implemented in open-source Rust (AGPL-3.0)
 > with zero commercial software dependencies, eliminating $59K–$209K/year
 > in pharmacometric software licensing. The pipeline has been validated
 > against 782 published data points from the Gonzales cytokine pharmacology
