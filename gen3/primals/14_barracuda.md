@@ -90,7 +90,7 @@ Springs (hotSpring, wetSpring, ...) ──validate──▶ barraCuda
 - **ToadStool** orchestrates dispatch to hardware; barraCuda discovers ToadStool via capability routing
 - **hotSpring** is the largest consumer — lattice QCD, HFB nuclear, spectral, MD, Anderson localization, ESN
 - **neuralSpring** uses bio ML, Hill kinetics, HMM, chi-squared, batch IPR
-- **wetSpring** uses ODE, MD forces, stress virial, Verlet, fused_map_reduce
+- **wetSpring** uses ODE, MD forces, stress virial, Verlet, fused_map_reduce — rewired to standalone barraCuda **v0.3.7** (crate migration from v0.3.5); device and tolerance paths align with **`DeviceCapabilities`** / `barracuda.device.*` and normalized IPC methods
 - **airSpring** uses Richards PDE, ET0, seasonal pipeline, hydrology
 - **groundSpring** uses sensor noise, Anderson Lyapunov, Welford, tolerance architecture
 - **healthSpring** uses microbiome, tridiagonal QL

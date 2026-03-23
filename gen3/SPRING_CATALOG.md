@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: March 1, 2026
+**Last Updated**: March 23, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -101,8 +101,8 @@ The springs are organized into two tiers:
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: V127 — 47 CPU + 47 GPU bio modules, 1 runtime dependency (flate2)
-**Checks**: 5,707+ validation checks across 376 experiments. 1,443+ Rust tests (0 failures), 214 named tolerances, 354 binaries (306 validate + 23 benchmark + 25 other). 63/63 papers reproduced, 46 at full CPU+GPU+metalForge. barraCuda v0.3.5 (150+ primitives consumed). IPC resilience (`RetryPolicy` + `CircuitBreaker`), 4-format capability parsing, batch Anderson spectral module, stable numerics (`log_sum_exp`, Kahan summation). 24 capabilities across 16 domains. JSON-RPC 2.0 server with batch requests and notifications. Zero local WGSL, zero unsafe, zero TODO/FIXME, zero mocks in production. Leverage guide: `wateringHole/WETSPRING_LEVERAGE_GUIDE.md`.
+**Grade**: V132 — 47 CPU + 47 GPU bio modules, 1 runtime dependency (flate2)
+**Checks**: 5,707+ validation checks across 379 experiments. **1,776** Rust tests (workspace; 0 failures), 214 named tolerances, 354 binaries (306 validate + 23 benchmark + 25 other). 63/63 papers reproduced, 46 at full CPU+GPU+metalForge. barraCuda **v0.3.7** (150+ primitives consumed; migration from v0.3.5). IPC resilience (`RetryPolicy` + `CircuitBreaker`), 4-format capability parsing, batch Anderson spectral module, stable numerics (`log_sum_exp`, Kahan summation). **V132:** workspace lints, `DeviceCapabilities`, `ValidationSink`, `PROVENANCE_REGISTRY`, IPC normalization, ecosystem wiring (sweetGrass braids, `StreamItem`, `performance_surface`). 24 capabilities across 16 domains. JSON-RPC 2.0 server with batch requests and notifications. Zero local WGSL, zero unsafe, zero TODO/FIXME, zero mocks in production. Leverage guide: `wateringHole/WETSPRING_LEVERAGE_GUIDE.md`.
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — cytokine signaling, AD, dose-response), Erika Lisabeth (ADDRC Director, MSU — HTS, drug repurposing, EphA3), Richard Neubig (Drug Discovery Director, MSU — GPCR, Rho/MRTF/SRF skin fibrosis)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -123,6 +123,7 @@ The springs are organized into two tiers:
 | V59 | Science extensions + three-tier controls | 1,094+ | NCBI sovereign, cold seep, dynamic W(t), NPU sentinel, Exp190-192 |
 | V66-V67 | Deep audit + experiment buildout + evolution | 733+ | 50/50 three-tier, BandwidthTier, ComputeDispatch, 10 Python baselines, Exp216-220 |
 | V86 | Cross-Spring Evolution & Deep Debt (March 1, 2026) | Exp260-262 | Cross-spring validation 23/23 across 5 Springs; ESN bridge to ToadStool esn_v2 (BioEsn + multi-head); 4 module refactors, 11 new tests (1,247 total); 75 files changed, -4,753 net lines (deep debt elimination) |
+| V132 | barraCuda v0.3.7 migration + ecosystem wiring (March 2026) | **1,776** tests | Workspace lints; `DeviceCapabilities`; `ValidationSink`; `PROVENANCE_REGISTRY`; IPC normalization; sweetGrass braids + `StreamItem` + `performance_surface` |
 
 **Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth), real NCBI sovereign pipeline (EFetch/SRA → FASTA → diversity → Anderson), cold seep metagenome classification, dynamic Anderson W(t) perturbation models.
 
