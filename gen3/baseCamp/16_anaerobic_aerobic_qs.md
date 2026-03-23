@@ -206,7 +206,7 @@ Full 6-tier validation chain (Exp341-346, 136 additional checks):
 - Anderson W mapping: `W = W_max * (1 - evenness)`, `W_digester > W_soil` confirmed
 - P(QS) comparison via `norm_cdf` operational for aerobic vs anaerobic
 
-**neuralSpring S142 — Paper 027 (Wang/Liao 2020):**
+**neuralSpring S170 — Paper 027 (Wang/Liao 2020):**
 
 | Component | Checks | Key Result |
 |-----------|:------:|------------|

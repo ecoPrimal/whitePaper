@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 22, 2026 (standalone barraCuda v0.3.5, airSpring v0.10.0, wetSpring V130, hotSpring v0.6.32 (74 experiments, **ember swap pipeline proven + hardened** (VRAM write-readback, BDF allowlist, preflight device checks, display GPU safety guard), **GCN5 6/6 PASS**, **RTX 5060 Blackwell DRM cracked**, 2× Titan V + RTX 5060, 848 hotSpring + 86 ember + 178 glowplug tests), neuralSpring S147, groundSpring V119, **healthSpring V40**, toadStool S158+, coralReef ce66de4 (ember hardened, iommufd/cdev, MMU fault diagnostics, 264 coral tests), ludoSpring V28)
+**Date:** March 22, 2026 (standalone barraCuda v0.3.7, airSpring v0.10.0, wetSpring V130, hotSpring v0.6.32 (74 experiments, **ember swap pipeline proven + hardened** (VRAM write-readback, BDF allowlist, preflight device checks, display GPU safety guard), **GCN5 6/6 PASS**, **RTX 5060 Blackwell DRM cracked**, 2× Titan V + RTX 5060, 848 hotSpring + 86 ember + 178 glowplug tests), neuralSpring S170, groundSpring V119, **healthSpring V40**, toadStool S158+, coralReef ce66de4 (ember hardened, iommufd/cdev, MMU fault diagnostics, 264 coral tests), ludoSpring V28)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
@@ -195,7 +195,7 @@ Every experiment can be reproduced with the corresponding Spring's binaries:
 cd wetSpring/barracuda && cargo run --release --features gpu --bin <binary_name>
 
 # neuralSpring experiments (ML, spectral, surrogates)
-cd neuralSpring && cargo run --release --bin <binary_name>
+cd neuralSpring && cargo run --release --bin neuralspring
 
 # hotSpring experiments (MD, nuclear EOS, lattice QCD)
 cd hotSpring && cargo run --release --features gpu --bin <binary_name>
@@ -203,13 +203,13 @@ cd hotSpring && cargo run --release --features gpu --bin <binary_name>
 
 No proprietary data. No restricted access. No institutional dependencies.
 
-## Cross-Spring Provenance (standalone barraCuda v0.3.5 at `03986ce`)
+## Cross-Spring Provenance (standalone barraCuda v0.3.7 at `03986ce`)
 
 **Validated March 11, 2026** — all springs rewired to standalone `barraCuda`:
 
 ```
 ┌─ hotSpring v0.6.32 ─ spectral (Anderson, Lanczos, level statistics), 4-layer brain, precision brain, coralReef sovereign compile 46/46, Kokkos parity (12.4× gap, DF64 exp blocker), **Ember hardened** (Exp 074: VRAM write-readback, BDF allowlist, preflight checks, display GPU guard, 264 coral tests, coralReef ce66de4)
-├─ neuralSpring S166 ─ 27/27 papers + 5 compositions + playGround (Squirrel MCP, Model Lab, compute triangle). Edition 2024, health probes, ipc_resilience, 28 proptest + IPC fuzz tests, mul_add FMA (14 sites), ECOSYSTEM_LEVERAGE_GUIDE.md. 1155+75+73 tests, 267 binaries, 67 modules, 225 named tolerances, zero eprintln workspace-wide, zero hardcoded paths, V117 handoff
+├─ neuralSpring S170 ─ 27/27 papers + 5 compositions + playGround (Squirrel MCP, Model Lab, compute triangle). Edition 2024, health probes, ipc_resilience, 28 proptest + IPC fuzz tests, mul_add FMA (14 sites), ECOSYSTEM_LEVERAGE_GUIDE.md. 1,195 lib / 1,217 total tests, 67 modules, 225 named tolerances, zero eprintln workspace-wide, zero hardcoded paths, V117 handoff
 ├─ wetSpring V125 ──── 376 experiments, 5,707+ checks, 1,719+ tests, structured IpcError enum (28 sites), dual-format extract_capabilities(), generic socket_env_var()/discover_primal(), 214 named tolerances, all #[expect(reason)]
 ├─ groundSpring V119 ── 40 modules, 990+ tests, ≥92% library coverage, deep audit + cross-ecosystem absorption (publish = false, MSRV 1.85, provenance registry, cast parity with airSpring, IPC isolation), 110 delegations (67 CPU + 43 GPU), zero clippy (pedantic+nursery), zero unsafe, zero TODO/FIXME
 ├─ airSpring v0.8.0 ── biomeOS composition: Provenance Trio integration (rhizoCrypt + loamSpine + sweetGrass via capability.call, graceful degradation), NestGateProvider three-tier routing, Cross-Spring Time Series v1, GPU compute provenance, 41 capabilities, 4 deploy graphs, 847 lib + 41 integration tests, 0 clippy warnings
