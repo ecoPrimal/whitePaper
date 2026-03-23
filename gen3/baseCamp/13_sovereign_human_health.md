@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V40)
+**Spring**: healthSpring (V41)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 22, 2026
+**Date**: March 23, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
-**Status**: **V40** — 848 tests, 83 experiments, 85 JSON-RPC capabilities, 53 Python baselines. barraCuda v0.3.7. V40: Cross-ecosystem absorption sprint — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved (toxicology/ refactor). 17 magic numbers → named constants. provenance.rs smart-refactored (850→201+164 lines). 39 new tests (handler dispatch, MCP, WFDB, NLME solver). Zero `#[allow]`. V39: 3 new science domains (toxicology, simulation, discovery::affinity_landscape), cross-spring hormesis framework, 5 new IPC capabilities. V38: all 83 experiments standardized to ValidationHarness, typed IPC dispatch, provenance DOI citations. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`, all files under 750 LOC. AGPL-3.0-or-later across all files.
+**Status**: **V41** — 855 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 53 Python baselines. barraCuda v0.3.7. V41: Deep debt resolution — workspace-level `[lints]` consolidation (forbid unsafe, deny pedantic+nursery+unwrap+expect, warn missing_docs), library `println!` → `tracing`, hardcoded primal names → env-driven capability-based discovery, ODE codegen (`BatchedOdeRK4`) wired to GPU dispatch, proptest numerical properties, CI validates all experiment binaries. V40: Cross-ecosystem absorption — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved. 17 magic numbers → named constants. provenance.rs smart-refactored. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`. AGPL-3.0-or-later.
 
 ---
 
@@ -203,7 +203,7 @@ Computation as preprocessor: exploring the affinity landscape that standard HTS 
 | Metric | Value |
 |--------|-------|
 | Experiments | 83 |
-| **Total tests** | **809** |
+| **Total tests** | **855** |
 | ValidationHarness (experiments) | 83/83 |
 | Proptest IPC fuzz tests | 18 |
 | Python baselines (provenance registry) | 53 |
@@ -477,7 +477,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-809 tests, 83 experiments, 85 JSON-RPC capabilities (incl. `mcp.tools.list`), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. `mul_add()` FMA sweep, centralized `extract_rpc_result()`, 18 proptest IPC fuzz tests, `deny.toml` 14-crate C-dep ban, leverage guide. See `HEALTHSPRING_V39_TOXICOLOGY_SIMULATION_HORMESIS_HANDOFF_MAR19_2026.md`.
+855 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. V41: workspace `[lints]`, `tracing`, env-driven discovery, ODE codegen, proptest numerical properties. V40: cross-ecosystem absorption, module conflict resolved. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. See `HEALTHSPRING_V41_DEEP_DEBT_RESOLUTION_HANDOFF_MAR23_2026.md`.
 
 ---
 
