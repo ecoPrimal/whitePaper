@@ -1,6 +1,6 @@
 # baseCamp: Independent Explorations Alongside the Constrained Evolution Thesis
 
-**Date:** March 23, 2026 (standalone barraCuda v0.3.7, airSpring v0.10.0, wetSpring V132, hotSpring v0.6.32 (74 experiments, **ember swap pipeline proven + hardened** (VRAM write-readback, BDF allowlist, preflight device checks, display GPU safety guard), **GCN5 6/6 PASS**, **RTX 5060 Blackwell DRM cracked**, 2× Titan V + RTX 5060, 848 hotSpring + 86 ember + 178 glowplug tests), neuralSpring S170, groundSpring V120, **healthSpring V41**, toadStool S158+, coralReef ce66de4 (ember hardened, iommufd/cdev, MMU fault diagnostics, 264 coral tests), ludoSpring V28)
+**Date:** March 23, 2026 (standalone barraCuda v0.3.7, airSpring v0.10.0, wetSpring V132, hotSpring v0.6.32 (74 experiments, **ember swap pipeline proven + hardened** (VRAM write-readback, BDF allowlist, preflight device checks, display GPU safety guard), **GCN5 6/6 PASS**, **RTX 5060 Blackwell DRM cracked**, 2× Titan V + RTX 5060, 848 hotSpring + 86 ember + 178 glowplug tests), **neuralSpring S171** (1356 tests, 227 named tolerances, 34 proptests, PipelineError typed errors, 0 clippy/fmt/doc warnings), groundSpring V120, **healthSpring V41**, toadStool S158+, coralReef ce66de4 (ember hardened, iommufd/cdev, MMU fault diagnostics, 264 coral tests), ludoSpring V28)
 **Author:** Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
 
 ---
