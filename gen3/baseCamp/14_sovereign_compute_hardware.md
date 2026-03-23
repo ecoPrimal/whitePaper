@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 22, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Ember swap pipeline proven (biomeGate, Mar 22):** D-state resilient sysfs (process-isolated watchdog), IOMMU group peer release, EmberClient retry, DRM isolation auto-generation. nouveau ↔ vfio round-trip on Titan V. **Fleet: 2× Titan V + RTX 5060** (MI50 swapped for second Titan). **AMD GCN5 DRM preswap validation (biomeGate, MI50, Mar 2026):** WGSL → coral-reef → coral-driver PM4 → MI50. **6/6 phases PASS** — f64 write, f64 arith, multi-workgroup, multi-buffer, HBM2 bandwidth, **f64 Lennard-Jones force (Newton's 3rd law verified)**. **18 bugs found/fixed** across full GCN5 bring-up. Naga DF64 bypass validated end-to-end on real physics (LJ force). **RTX 5060 Blackwell DRM cracked (biomeGate, Mar 22):** NvUvmComputeDevice operational on SM120/GB206. 4/4 HW tests pass. **iommufd/cdev VFIO backend (biomeGate, Mar 22):** Kernel-agnostic VFIO on Linux 6.2+ — resolves persistent EBUSY on kernel 6.17. Dual-path: iommufd/cdev first, legacy container/group fallback. 607 tests pass. **Sovereign GPU command submission (biomeGate, Titan V, Mar 21):** 54-configuration PFIFO diagnostic matrix — 6/10 sovereign pipeline layers proven working. PBDMA 0xbad00200 (PBUS timeout) fetching GPFIFO through GPU MMU — page table translation is the single remaining blocker. **Prior breakthroughs:** D3hot→D0 VRAM recovery; SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass, Exp 068). GV100 falcon boot chain fully mapped. **AMD D3cold fully characterized:** Vega 20 SMU 1-round-trip/boot hardware limit. **BrainChip Akida NPU integrated:** unlimited round-trips, proves GlowPlug handles any PCIe device. **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. **Zero-sudo coralctl.** VendorLifecycle trait: 6 implementations. 74 experiments.
+**Date:** March 23, 2026
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 24 AMD E2E GPU tests passing, 7 SM70 spring shaders compiled, 1,453 total tests. Market survey complete. **Ember swap pipeline proven (biomeGate, Mar 22):** D-state resilient sysfs (process-isolated watchdog), IOMMU group peer release, EmberClient retry, DRM isolation auto-generation. nouveau ↔ vfio round-trip on Titan V. **Fleet: 2× Titan V + RTX 5060** (MI50 swapped for second Titan). **AMD GCN5 DRM preswap validation (biomeGate, MI50, Mar 2026):** WGSL → coral-reef → coral-driver PM4 → MI50. **6/6 phases PASS** — f64 write, f64 arith, multi-workgroup, multi-buffer, HBM2 bandwidth, **f64 Lennard-Jones force (Newton's 3rd law verified)**. **18 bugs found/fixed** across full GCN5 bring-up. Naga DF64 bypass validated end-to-end on real physics (LJ force). **RTX 5060 Blackwell DRM cracked (biomeGate, Mar 22):** NvUvmComputeDevice operational on SM120/GB206. 4/4 HW tests pass. **iommufd/cdev VFIO backend (biomeGate, Mar 22):** Kernel-agnostic VFIO on Linux 6.2+ — resolves persistent EBUSY on kernel 6.17. Dual-path: iommufd/cdev first, legacy container/group fallback. 607 tests pass. **MMU Layer 6 breakthrough (Exp 076, Mar 23):** Volta FBHUB fault buffer config resolves 0xbad00200 PBUS timeout — sovereign pipeline advanced to **7/10 layers**. **Pre-PMU hardening (Exp 077, Mar 23):** BOOT0 auto-detect (eliminates SM mismatch GPU corruption), PfifoInitConfig unification, arch-aware diagnostic matrix, PFIFO liveness probe, PCIe FLR via coralctl. **Prior breakthroughs:** D3hot→D0 VRAM recovery; SEC2 EMEM writable; **FECS firmware executes from host-loaded IMEM** (LS security bypass, Exp 068). GV100 falcon boot chain fully mapped. **AMD D3cold fully characterized:** Vega 20 SMU 1-round-trip/boot hardware limit. **BrainChip Akida NPU integrated:** unlimited round-trips, proves GlowPlug handles any PCIe device. **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. **Zero-sudo coralctl.** VendorLifecycle trait: 6 implementations. **Deep debt burndown (Exp 075, Mar 22):** 13 P0/P1/P2 items resolved — TOCTOU BusyGuard, buffer handle validation, BDF-specific dispatch, async nvidia-smi, try_read_u32/try_write_u32, OracleError, optional deps, sm_70 PTX. **Cross-vendor CUDA dispatch** via daemon RPC (zero pkexec). **RTX 5060 dual-use** (display + CUDA compute — page table oracle). **pkexec-free pipeline** validated end-to-end. 77 experiments.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -691,6 +691,65 @@ coral-reef needs GCN5 arch support (MI50 is GFX906, not RDNA2). The MI50's
 
 ---
 
+## Update: Deep Debt Burndown + Cross-Vendor Dispatch (March 22, 2026, Exp 075)
+
+### Engineering Hardening for PMU Cracking
+
+Before proceeding with Layer 6 MMU page table cracking, 13 deep-debt items were
+resolved across `coral-glowplug`, `coral-driver`, and `hotspring-barracuda`:
+
+**Concurrency safety:** TOCTOU race in `DeviceSlot` fixed with `BusyGuard` RAII pattern —
+`Arc<AtomicBool>` prevents `swap`/`reclaim`/`resurrect` while oracle capture or compute
+dispatch is in progress. Critical for dual-Titan parallel experiments.
+
+**Error handling:** `Bar0Rw::try_read_u32`/`try_write_u32` return `Result` instead of
+sentinel values — essential for PMU debugging where every register value is diagnostic
+data. `DriverError::OracleError` provides clean error propagation from the oracle module.
+`CudaComputeDevice::dispatch_named` returns `DriverError::BufferNotFound` instead of
+silently skipping invalid handles. `from_bdf_hint` returns `OpenFailed` instead of
+falling back to device 0.
+
+**RPC robustness:** `nvidia-smi` calls moved out of device mutex into async handlers.
+`coralctl health` correctly parses `alive`/`device_count`/`healthy_count` fields.
+Per-connection `BufReader` starts at 64KB (was 4MB).
+
+**Build configuration:** `cudarc` and `base64` gated behind `cuda-validation` feature.
+`saxpy.ptx` retargeted to sm_70 (Volta+) for universal compatibility.
+
+### Cross-Vendor CUDA Dispatch
+
+CUDA-capable GPUs are now accessible interchangeably through the glowplug daemon's
+`device.dispatch` RPC. A single PTX kernel (sm_70 target) runs on Volta, Turing,
+Ampere, Ada, and Blackwell via JIT compilation. The dispatch path:
+
+```
+User binary (unprivileged) → Unix socket → coral-glowplug → coral-driver CUDA → GPU
+```
+
+This eliminates `pkexec` from the compute pipeline entirely. The systemd services
+hold capabilities; user tools communicate via socket RPC.
+
+### RTX 5060 Dual-Use: Display + Compute Oracle
+
+The RTX 5060 runs CUDA compute concurrently with display output — no driver swap,
+no DRM disruption. This transforms the display GPU into a **page table oracle** for
+PMU cracking: launch a CUDA allocation → nvidia driver writes PDE/PTE entries →
+capture BAR0 state via `try_read_u32` → compare with sovereign PTE encoding on
+the Titans → identify divergences.
+
+### PMU Cracking Attack Matrix
+
+| Vector | Hardware | Enabler |
+|--------|----------|---------|
+| 5060 Oracle Capture | RTX 5060 | `try_read_u32`, dual-use |
+| PTE Diff Analysis | 5060 vs Titan V | `OracleError`, `PageTableDump` |
+| Dual Titan A/B | Titan V #1 + #2 | `BusyGuard` (concurrent captures) |
+| BAR2-Resident Tables | Titan V | `try_write_u32` |
+| MMU Fault Buffer | Titan V | `try_read_u32` |
+| Tesla P80 (pending) | Tesla P80 | BDF-specific dispatch |
+
+---
+
 *Sovereign compute hardware: 3 precision tiers, 4 device types (NVIDIA GPU, AMD GPU,
 BrainChip NPU, Intel GPU stubs), zero-sudo operation, triangle architecture.
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
@@ -700,6 +759,10 @@ preswap phases PASS (f64 LJ force, Newton's 3rd law). RTX 5060 Blackwell DRM:
 pipeline cracked (SM120, 4/4 HW tests). iommufd/cdev: kernel-agnostic VFIO on
 6.2+ (resolves EBUSY on 6.17, 607 tests, HW validated). AMD Vega 20: one
 round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
-Vendor-agnostic, seccomp-sandboxed, capability-restricted. 73 experiments, dual-track
-dispatch (DRM + sovereign VFIO), K80 incoming for unlocked validation.
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. 77 experiments, dual-track
+dispatch (DRM + sovereign VFIO), cross-vendor CUDA dispatch, pkexec-free pipeline,
+RTX 5060 dual-use oracle, PMU cracking tooling hardened. Sovereign VFIO: 7/10 layers
+(MMU Layer 6 resolved via FBHUB fault buffer config, Exp 076). BOOT0 auto-detect
+eliminates SM mismatch GPU corruption. PfifoInitConfig unifies init paths. PCIe FLR
+via coralctl reset. Pre-PMU hardening complete — ready for Layer 7 (GR/FECS context).
 Built in a basement in Lansing.*
