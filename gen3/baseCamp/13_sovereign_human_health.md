@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V41)
+**Spring**: healthSpring (V42)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 23, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
-**Status**: **V41** — 855 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 53 Python baselines. barraCuda v0.3.7. V41: Deep debt resolution — workspace-level `[lints]` consolidation (forbid unsafe, deny pedantic+nursery+unwrap+expect, warn missing_docs), library `println!` → `tracing`, hardcoded primal names → env-driven capability-based discovery, ODE codegen (`BatchedOdeRK4`) wired to GPU dispatch, proptest numerical properties, CI validates all experiment binaries. V40: Cross-ecosystem absorption — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved. 17 magic numbers → named constants. provenance.rs smart-refactored. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`. AGPL-3.0-or-later.
+**Status**: **V42** — 863 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 53 Python baselines. 6 GPU ops via barraCuda v0.3.7; 9 science tracks complete. Zero clippy, zero unsafe, zero missing_docs. ValidationSink trait, `normalize_method()` IPC, OnceLock GPU probe; all 6 WGSL shaders absorbed by barraCuda. V41: Deep debt resolution — workspace-level `[lints]` consolidation (forbid unsafe, deny pedantic+nursery+unwrap+expect, warn missing_docs), library `println!` → `tracing`, hardcoded primal names → env-driven capability-based discovery, ODE codegen (`BatchedOdeRK4`) wired to GPU dispatch, proptest numerical properties, CI validates all experiment binaries. V40: Cross-ecosystem absorption — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved. 17 magic numbers → named constants. provenance.rs smart-refactored. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`. AGPL-3.0-or-later.
 
 ---
 
@@ -203,7 +203,7 @@ Computation as preprocessor: exploring the affinity landscape that standard HTS 
 | Metric | Value |
 |--------|-------|
 | Experiments | 83 |
-| **Total tests** | **855** |
+| **Total tests** | **863** |
 | ValidationHarness (experiments) | 83/83 |
 | Proptest IPC fuzz tests | 18 |
 | Python baselines (provenance registry) | 53 |
@@ -217,8 +217,8 @@ Computation as preprocessor: exploring the affinity landscape that standard HTS 
 | GPU fused pipeline checks | 11/11 (Exp054) |
 | Mixed dispatch checks | 22/22 (Exp061) |
 | PCIe transfer checks | 26/26 (Exp062) |
-| WGSL compute shaders | 6 (all rewired to upstream barraCuda) |
-| JSON-RPC capabilities | 85 (incl. `mcp.tools.list`) |
+| WGSL compute shaders | 6 (all absorbed by barraCuda) |
+| JSON-RPC capabilities | 59 (46 science + 13 infra) |
 | MCP tool schemas | 23 (for Squirrel AI coordination) |
 | FMA `mul_add()` sites | 23 (8 new in V37) |
 | Patient archetypes | 5 (Exp063) |
@@ -454,7 +454,7 @@ V22 transforms healthSpring from experiment binaries into a biomeOS BYOB niche:
 
 | Component | File | Purpose |
 |-----------|------|---------|
-| Primal binary | `ecoPrimal/src/bin/healthspring_primal/` | 79 capabilities via JSON-RPC 2.0 over Unix socket |
+| Primal binary | `ecoPrimal/src/bin/healthspring_primal/` | 59 capabilities via JSON-RPC 2.0 over Unix socket |
 | IPC dispatch | `ecoPrimal/src/ipc/dispatch/` | Method → science function routing for 6 domains |
 | Niche manifest | `graphs/healthspring_niche.toml` | Declares the niche: primals + workflow graphs |
 | Patient assessment | `graphs/healthspring_patient_assessment.toml` | ConditionalDag: 4 parallel science tracks → composite |
@@ -477,7 +477,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-855 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops rewired, zero clippy, zero unsafe, zero `#[allow()]`. V41: workspace `[lints]`, `tracing`, env-driven discovery, ODE codegen, proptest numerical properties. V40: cross-ecosystem absorption, module conflict resolved. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. See `HEALTHSPRING_V41_DEEP_DEBT_RESOLUTION_HANDOFF_MAR23_2026.md`.
+863 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops (barraCuda v0.3.7), zero clippy, zero unsafe, zero missing_docs, zero `#[allow()]`. V42: ValidationSink, `normalize_method()` IPC, OnceLock GPU probe, WGSL shaders absorbed. V41: workspace `[lints]`, `tracing`, env-driven discovery, ODE codegen, proptest numerical properties. V40: cross-ecosystem absorption, module conflict resolved. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. See `HEALTHSPRING_V41_DEEP_DEBT_RESOLUTION_HANDOFF_MAR23_2026.md`.
 
 ---
 
