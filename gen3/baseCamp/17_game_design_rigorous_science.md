@@ -1,7 +1,7 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: V28 — 75 experiments, 1692 checks, 450+ tests, 19 proptest, 6 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero hardcoded primal names (capability-based discovery via `discover_primals()`), zero TODO/FIXME/HACK. All 71 validation experiments use `ValidationHarness` + `BaselineProvenance`. 14 GPU tolerance constants centralized. Workspace lint centralization (16 crates). `#[expect(reason)]` curated dictionary. IPC integration tests hardened. Configurable output paths. `#![forbid(unsafe_code)]`
-**Date**: March 18, 2026
+**Status**: V29 — 82 experiments, 402 barracuda + 19 forge tests, 42 Python parity. Zero `#[allow()]`, zero `unsafe`, zero hardcoded primal names (capability-based discovery). All validation experiments use `ValidationHarness` + `BaselineProvenance`. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda (upstream feature-gating fixed). `metalForge/forge` refactored (4 domain modules, 19 tests). 80.2% line coverage (80% floor enforced). Baselines regenerated with `content_sha256`. `#![forbid(unsafe_code)]`
+**Date**: March 23, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
