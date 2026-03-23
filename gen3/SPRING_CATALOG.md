@@ -69,12 +69,12 @@ The springs are organized into two tiers:
 
 **Domain**: Evapotranspiration (8 methods), soil moisture sensing, IoT irrigation scheduling, Richards PDE, coupled hydrology, yield response, ecological diversity, immunological Anderson coupling
 **Grade**: Full Python→Rust→GPU→metalForge→NUCLEUS pipeline complete
-**Checks**: 1,237/1,237 Python + 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28) + 381/381 validation + 146/146 evolution + 78 experiments
+**Checks**: 1,237/1,237 Python **;** 938 lib + 316 integration/doc + 62 forge = 1,316 Rust tests (1,254 barracuda crate; 27 GPU fail: upstream wgpu 28) + 146/146 evolution + 87 experiments — **91** binaries, **58** tolerances, **41** capabilities; barraCuda **0.3.7** (wgpu 28), **`default-features = false`** (gpu + domain-pde only)
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0-or-later
 
-**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 19.8× geometric mean Rust speedup over Python (24 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops + fused Welford (hotSpring S58) + fused Pearson (neuralSpring S69). Cross-spring shader provenance: hotSpring (precision/DF64), wetSpring (bio/diversity), neuralSpring (ML/stats), groundSpring (MC/uncertainty). NUCLEUS primal with 30 science capabilities.
+**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 19.8× geometric mean Rust speedup over Python (24 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops + fused Welford (hotSpring S58) + fused Pearson (neuralSpring S69). Cross-spring shader provenance: hotSpring (precision/DF64), wetSpring (bio/diversity), neuralSpring (ML/stats), groundSpring (MC/uncertainty). NUCLEUS primal with **41** science capabilities.
 
 **Phase inventory**:
 
@@ -82,11 +82,11 @@ The springs are organized into two tiers:
 |-------|------|--------|------------|
 | 0 (Python control) | 57 papers: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, 8 ET₀, SCS-CN, Green-Ampt, VG, Anderson | 1,237/1,237 | Paper examples matched exactly |
 | 0+ (Real data) | 100 Michigan stations, 15,300 station-days | R²=0.97 | Open-Meteo ERA5 validates open data approach |
-| 1 (Rust) | 86 binaries, 827 lib + 62 forge tests | 827+62 | 19 eco modules + 25 GPU orchestrators (barraCuda 0.3.3, wgpu 28) |
+| 1 (Rust) | 91 binaries, 938 lib + 316 integration/doc + 62 forge tests | 1,316 | 19 eco modules + 25 GPU orchestrators (barraCuda 0.3.7, wgpu 28, default-features=false gpu+domain-pde) |
 | 2 (Cross-validation) | Python↔Rust value comparison | 75/75 | All values match within 1e-5 |
-| 3 (GPU live) | Titan V + RTX 4070 dispatch | 78/78 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
+| 3 (GPU live) | Titan V + RTX 4070 dispatch | 87/87 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
 | 3.4 (Local GPU) | 6 f64-canonical ops via compile_shader_universal | 6 ops | SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle |
-| 3.5+ (NPU/metalForge/NUCLEUS) | AKD1000, 27 workloads, 30 capabilities | 95+66+35 | Full cross-substrate pipeline |
+| 3.5+ (NPU/metalForge/NUCLEUS) | AKD1000, 27 workloads, 41 capabilities | 95+66+35 | Full cross-substrate pipeline |
 
 **Papers reproduced**: 57 papers including Allen et al. (1998) FAO-56, Dong et al. (2020/2024), Kumari et al. (2025), coupled SCS-CN + Green-Ampt, Van Genuchten inverse, 8 ET₀ intercomparison.
 
@@ -94,7 +94,7 @@ The springs are organized into two tiers:
 
 **BarraCuda contributions**: 3 upstream bug fixes (TS-001/003/004), Richards PDE absorbed (S40), stats metrics absorbed (S64), 6 f64-canonical local ops pending absorption.
 
-**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target), NUCLEUS (30 ecology capabilities), metalForge (27 workloads), bingoCube/nautilus (evolutionary reservoir).
+**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target), NUCLEUS (41 ecology capabilities), metalForge (27 workloads), bingoCube/nautilus (evolutionary reservoir).
 
 ---
 
