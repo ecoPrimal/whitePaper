@@ -1,11 +1,11 @@
 # Paper 13: Sovereign Human Health Computing — Per-Person Translation of PK/PD, Microbiome, Biosignal, and Endocrine Pipelines
 
-**Spring**: healthSpring (V42)
+**Spring**: healthSpring (V43)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
 **Date**: March 24, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
-**Status**: **V42** — 877 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 54 Python baselines with verified check counts + DOI baseline sources. 6 GPU ops via barraCuda v0.3.7 (CI-gated pin). 9 science tracks complete. Comprehensive audit: metalForge smart-refactored (4 modules), GPU dispatch extracted (named helpers), 3 bitwise determinism tests, WFDB round-trip integration, biomeOS graph/niche IPC client, `rustfmt.toml` pinned to edition 2024. Zero clippy (pedantic+nursery), zero unsafe, zero `#[allow]`, zero `#[expect]` in production library code.
+**Status**: **V43** — 888 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 54 Python baselines with verified check counts + DOI baseline sources. Cross-spring absorption, self-knowledge compliance, simulation/validation smart-refactored, cast module expanded (14 named conversions), extended 7-primal discovery. 6 GPU ops via barraCuda v0.3.7 (CI-gated pin). 9 science tracks complete. Comprehensive audit: metalForge smart-refactored (4 modules), GPU dispatch extracted (named helpers), 3 bitwise determinism tests, WFDB round-trip integration, biomeOS graph/niche IPC client, `rustfmt.toml` pinned to edition 2024. Zero clippy (pedantic+nursery), zero unsafe, zero `#[allow]`, zero `#[expect]` in production library code.
 
 ---
 
@@ -203,7 +203,7 @@ Computation as preprocessor: exploring the affinity landscape that standard HTS 
 | Metric | Value |
 |--------|-------|
 | Experiments | 83 |
-| **Total tests** | **863** |
+| **Total tests** | **888** |
 | ValidationHarness (experiments) | 83/83 |
 | Proptest IPC fuzz tests | 18 |
 | Python baselines (provenance registry) | 53 |
@@ -226,7 +226,7 @@ Computation as preprocessor: exploring the affinity landscape that standard HTS 
 | `#[allow()]` in production | 0 (all `#[expect()]` with `reason`) |
 | Clippy warnings | 0 (pedantic + nursery) |
 | cargo-deny | Enforced in CI (14-crate C-dep ban list) |
-| Max file size | 731 lines (under 1000-line limit) |
+| Max file size | 732 lines (under 1000-line limit) |
 
 ---
 
@@ -477,7 +477,7 @@ V32 absorbs proven patterns from all ecoPrimals components:
 | `OrExit<T>` trait | wetSpring V123 | Panic-free error handling for validation/utility binaries |
 | Enriched `capability.list` | biomeOS Pathway Learner | `operation_dependencies` + `cost_estimates` for execution graph planning |
 
-863 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 23 MCP tool schemas, 53 provenance records, 6/6 GPU ops (barraCuda v0.3.7), zero clippy, zero unsafe, zero missing_docs, zero `#[allow()]`. V42: ValidationSink, `normalize_method()` IPC, OnceLock GPU probe, WGSL shaders absorbed. V41: workspace `[lints]`, `tracing`, env-driven discovery, ODE codegen, proptest numerical properties. V40: cross-ecosystem absorption, module conflict resolved. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis, 8 grant-ready hypotheses. See `HEALTHSPRING_V41_DEEP_DEBT_RESOLUTION_HANDOFF_MAR23_2026.md`.
+888 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 23 MCP tool schemas, 54 provenance records, 6/6 GPU ops (barraCuda v0.3.7), zero clippy, zero unsafe, zero missing_docs, zero `#[allow()]`. V43: cross-spring absorption, self-knowledge compliance, simulation/validation smart-refactored, cast module (14 named conversions), 7-primal discovery. V42: comprehensive audit, metalForge refactor, GPU dispatch extraction, WFDB integration, WGSL absorption. V41: workspace `[lints]`, `tracing`, env-driven discovery, ODE codegen, proptest numerical properties. V40: cross-ecosystem absorption. V39: toxicology, simulation, affinity_landscape, cross-spring hormesis, 8 grant-ready hypotheses.
 
 ---
 
