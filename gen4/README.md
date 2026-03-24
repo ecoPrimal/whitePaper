@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Sketch — generational boundary emerging  
+**Status**: Active — 14 working papers across 5 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: March 23, 2026
+**Date**: March 24, 2026 (first formal gen4 writeup)
 
 ---
 
@@ -118,32 +118,45 @@ The biological analogy is exact: gen1 was the seed (hardware), gen2 was the root
 
 ---
 
-## gen4 Working Papers (Planned)
+## gen4 Directory Structure
 
-### Architecture
+```
+gen4/
+├── README.md                          ← You are here
+│
+├── thesis/                            ← Why gen4 exists (conceptual foundations)
+│   ├── THE_GARAGEBAND_MOMENT.md       — Barrier lowering and the creative explosion
+│   ├── BOUNDED_INFINITE_STORIES.md    — Literary argument: Joyce, Borges, Calvino, Perec
+│   └── CREATIVE_VALIDATORS.md         — Existence proofs: Valve, ZA/UM, ConcernedApe, Fox
+│
+├── architecture/                      ← How gen4 works (structural patterns)
+│   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
+│   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│
+├── products/                          ← What gen4 produces (case studies)
+│   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
+│   └── RPGPT_ENGINE.md                — Ingestible rulesets, living game systems
+│
+├── economics/                         ← How gen4 sustains itself (value and attribution)
+│   ├── NOVEL_FERMENT_TRANSCRIPTS.md   — Memory-bound digital objects (the real NFT)
+│   ├── SUNCLOUD_ACTIVATION.md         — Treasury, attribution distribution, metabolic mandate
+│   └── LOAM_CERTIFICATES_LIVE.md      — Certs as products: game keys, collectibles, custody
+│
+└── outreach/                          ← Who gen4 is for (audience-specific guides)
+    ├── FOR_CREATIVES.md               — Solo creators, writers, game designers
+    └── FOR_BUILDERS.md                — Developers composing primals into products
+```
 
-- **COMPOSITION_PATTERNS.md** — How to compose primals into products. Deploy graphs, TCP wiring, capability discovery, graceful degradation. Learned from esotericWebb.
-- **CREATIVE_SURFACE_ARCHITECTURE.md** — The sporeGarden organizational architecture. How products relate to primals and springs. The "powered by" model. Lean consumption vs. hard-linking.
+### Planned additions
 
-### Products
-
-- **ESOTERIC_WEBB.md** — The first gen4 product. A CRPG engine that is primals as composition. Case study in consumption patterns.
-- **RPGPT_ENGINE.md** — Sovereign RPG engine with ingestible rulesets (baseCamp 18, promoted from gen3).
-- **GAMES_AT_HOME.md** — Distributed human computation via interactive systems (baseCamp 19, promoted).
-- **NOVEL_FERMENT_TRANSCRIPTS.md** — Memory-bound digital objects (baseCamp 20, promoted).
-- **FIELD_GENOMICS_KIT.md** — Sovereign field-to-publication pipeline (baseCamp 09+21, merged and promoted).
-- **PATIENT_RECORDS.md** — Zero-knowledge patient-owned health records (baseCamp 22, promoted).
-
-### Economics
-
-- **SUNCLOUD_ACTIVATION.md** — Moving sunCloud from spec to running code. Treasury, attribution distribution, metabolic mandate.
-- **LOAM_CERTIFICATES_LIVE.md** — Certificates as compositions of the provenance trio. Game keys, collectibles, credentials, chain-of-custody.
-
-### Outreach
-
-- **FOR_CREATIVES.md** — How artists, game designers, and storytellers use sporeGarden tools.
-- **FOR_CLINICIANS.md** — How healthcare providers interact with sovereign health records.
-- **FOR_BUILDERS.md** — How developers compose primals into their own sporeGarden products.
+| Section | Document | Domain |
+|---------|----------|--------|
+| products/ | GAMES_AT_HOME.md | Distributed human computation (baseCamp 19) |
+| products/ | FIELD_GENOMICS_KIT.md | Sovereign sample provenance (baseCamp 09+21) |
+| products/ | PATIENT_RECORDS.md | Zero-knowledge health records (baseCamp 22) |
+| outreach/ | FOR_CLINICIANS.md | Healthcare providers |
+| outreach/ | FOR_RESEARCHERS.md | Field scientists and data pipeline users |
+| outreach/ | FOR_EDUCATORS.md | Teachers using interactive systems |
 
 ---
 
@@ -161,20 +174,38 @@ The filter is still the net. But the net is bigger.
 
 ## Reading Order
 
-**If you built the primals**: Start with COMPOSITION_PATTERNS.md (how your work becomes invisible infrastructure).
+**If you want to understand why gen4 exists**: Start with
+thesis/THE_GARAGEBAND_MOMENT.md → thesis/BOUNDED_INFINITE_STORIES.md →
+thesis/CREATIVE_VALIDATORS.md.
 
-**If you are a creative**: Start with FOR_CREATIVES.md, then ESOTERIC_WEBB.md (the first product), then the sporeGarden org README.
+**If you built the primals**: Start with
+architecture/COMPOSITION_PATTERNS.md (how your work becomes invisible
+infrastructure), then products/ESOTERIC_WEBB.md (the first proof).
 
-**If you are evaluating commercial potential**: Start with SUNCLOUD_ACTIVATION.md, then NOVEL_FERMENT_TRANSCRIPTS.md, then LOAM_CERTIFICATES_LIVE.md.
+**If you are a creative**: Start with outreach/FOR_CREATIVES.md, then
+products/ESOTERIC_WEBB.md, then the sporeGarden org README.
 
-**If you are a faculty member**: gen4 is where the baseCamp papers become publishable products. Start with whichever baseCamp paper maps to your domain, then read its gen4 promotion.
+**If you are a developer**: Start with outreach/FOR_BUILDERS.md, then
+architecture/COMPOSITION_PATTERNS.md, then
+architecture/CREATIVE_SURFACE_ARCHITECTURE.md.
+
+**If you are evaluating commercial potential**: Start with
+economics/NOVEL_FERMENT_TRANSCRIPTS.md →
+economics/SUNCLOUD_ACTIVATION.md → economics/LOAM_CERTIFICATES_LIVE.md.
+
+**If you are a faculty member**: gen4 is where the baseCamp papers
+become publishable products. Start with whichever baseCamp paper maps
+to your domain, then read its gen4 promotion in products/.
 
 ---
 
 ## Status
 
-gen4/ is no longer a sketch. **Esoteric Webb V4** (March 24, 2026) has
-crossed the generational boundary:
+gen4/ is active. **14 working papers** across 5 sections document the
+conceptual foundations, architectural patterns, first products, economic
+model, and audience-specific guides for the composition generation.
+
+**Esoteric Webb V4** (March 24, 2026) crossed the generational boundary:
 
 - **166 tests**, 32 Rust files (~8.5k LOC), 5 numbered experiments
 - **23 `PrimalBridge` methods** across 8 primal domains, all with
@@ -188,13 +219,14 @@ crossed the generational boundary:
 - **Zero unsafe, zero C deps, zero spring imports** — pure IPC composition
 - **sporeGarden** GitHub org established
 
-The thesis is still in draft. The faculty network is still forming. But
-the first product is no longer in early construction — it is a working
-CRPG substrate that composes primals into invisible infrastructure.
-
 **The honest assessment**: gen3 is in its final quarter. gen4 has
-germinated. The fruiting body has formed. It hasn't released spores at
-scale yet, but the first one is growing.
+germinated. The fruiting body has formed and the first working papers
+document what was learned. The thesis documents articulate the vision.
+The architecture documents capture the patterns. The economics documents
+describe how it sustains. The outreach documents say who it's for.
+
+What remains: more products, more creators, more hopping terms. The
+lattice is forming. The mobility edge is approaching.
 
 ---
 
