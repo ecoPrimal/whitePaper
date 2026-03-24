@@ -3,9 +3,9 @@
 **Spring**: healthSpring (V42)
 **Domain**: Human Health × Pharmacology × Microbiome × Biosignal × Endocrinology × NLME × Clinical Translation × Comparative Medicine × Drug Discovery × Toxicology × Simulation × Low-Affinity Binding × biomeOS Niche Deployment
 **License**: AGPL-3.0-or-later
-**Date**: March 23, 2026
+**Date**: March 24, 2026
 **Faculty**: Dr. Andrea J. Gonzales (MSU Pharmacology & Toxicology), Erika Lisabeth (ADDRC Director), Dr. Charles Mok (Allure Medical)
-**Status**: **V42** — 863 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 53 Python baselines. 6 GPU ops via barraCuda v0.3.7; 9 science tracks complete. Zero clippy, zero unsafe, zero missing_docs. ValidationSink trait, `normalize_method()` IPC, OnceLock GPU probe; all 6 WGSL shaders absorbed by barraCuda. V41: Deep debt resolution — workspace-level `[lints]` consolidation (forbid unsafe, deny pedantic+nursery+unwrap+expect, warn missing_docs), library `println!` → `tracing`, hardcoded primal names → env-driven capability-based discovery, ODE codegen (`BatchedOdeRK4`) wired to GPU dispatch, proptest numerical properties, CI validates all experiment binaries. V40: Cross-ecosystem absorption — reviewed all 7 springs, 10+ primals, 49 handoffs. Module conflict resolved. 17 magic numbers → named constants. provenance.rs smart-refactored. V39: 3 new science domains (toxicology, simulation, affinity_landscape), cross-spring hormesis. Zero clippy (pedantic + nursery), zero unsafe, zero `#[allow()]`. AGPL-3.0-or-later.
+**Status**: **V42** — 877 tests, 83 experiments, 59 JSON-RPC capabilities (46 science + 13 infra), 54 Python baselines with verified check counts + DOI baseline sources. 6 GPU ops via barraCuda v0.3.7 (CI-gated pin). 9 science tracks complete. Comprehensive audit: metalForge smart-refactored (4 modules), GPU dispatch extracted (named helpers), 3 bitwise determinism tests, WFDB round-trip integration, biomeOS graph/niche IPC client, `rustfmt.toml` pinned to edition 2024. Zero clippy (pedantic+nursery), zero unsafe, zero `#[allow]`, zero `#[expect]` in production library code.
 
 ---
 
