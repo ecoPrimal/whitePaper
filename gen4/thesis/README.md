@@ -6,15 +6,21 @@
 
 ## Reading Order
 
-1. **THE_GARAGEBAND_MOMENT.md** — The barrier-lowering pattern, the
-   digital music parallel, and why gen4 is the creative explosion phase.
-   Start here.
+1. **THE_SOVEREIGN_PUBLICATION.md** — Why a home HPC with a provenance
+   chain is more valuable than a journal paper. The concrete how: DAG
+   recording → BearDog signing → loamSpine dehydration → BTC/ETH
+   anchoring. The concrete why: proof vs. claim, priority, cost,
+   speed, attribution. **Start here if you want to understand what
+   gen4 actually does.**
 
-2. **BOUNDED_INFINITE_STORIES.md** — The literary argument: finite
+2. **THE_GARAGEBAND_MOMENT.md** — The barrier-lowering pattern, the
+   digital music parallel, and why gen4 is the creative explosion phase.
+
+3. **BOUNDED_INFINITE_STORIES.md** — The literary argument: finite
    topology + combinatorial state = infinite unique experiences. Joyce,
    Borges, Calvino, Perec, Nabokov as structural precedents.
 
-3. **CREATIVE_VALIDATORS.md** — The gen4 "faculty": people and studios
+4. **CREATIVE_VALIDATORS.md** — The gen4 "faculty": people and studios
    who proved the thesis before we named it. Valve, ZA/UM, ConcernedApe,
    Toby Fox, Garfield, the literary lineage.
 

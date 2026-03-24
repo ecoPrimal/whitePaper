@@ -1,6 +1,6 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 14 working papers across 5 sections  
+**Status**: Active — 16 working papers across 5 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
 **Date**: March 24, 2026 (first formal gen4 writeup)
 
@@ -125,11 +125,13 @@ gen4/
 ├── README.md                          ← You are here
 │
 ├── thesis/                            ← Why gen4 exists (conceptual foundations)
+│   ├── THE_SOVEREIGN_PUBLICATION.md   — Home HPC + provenance trio + BTC/ETH > journal papers
 │   ├── THE_GARAGEBAND_MOMENT.md       — Barrier lowering and the creative explosion
 │   ├── BOUNDED_INFINITE_STORIES.md    — Literary argument: Joyce, Borges, Calvino, Perec
 │   └── CREATIVE_VALIDATORS.md         — Existence proofs: Valve, ZA/UM, ConcernedApe, Fox
 │
 ├── architecture/                      ← How gen4 works (structural patterns)
+│   ├── ANCHORING_PIPELINE.md          — Concrete mechanism: DAG → signing → BTC/ETH anchor
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
 │
@@ -174,7 +176,12 @@ The filter is still the net. But the net is bigger.
 
 ## Reading Order
 
-**If you want to understand why gen4 exists**: Start with
+**If you want to understand what gen4 actually does**: Start with
+thesis/THE_SOVEREIGN_PUBLICATION.md (the concrete pipeline: home HPC →
+provenance chain → BTC/ETH anchor → sovereign publication) then
+architecture/ANCHORING_PIPELINE.md (the technical implementation).
+
+**If you want to understand why gen4 exists**: Continue with
 thesis/THE_GARAGEBAND_MOMENT.md → thesis/BOUNDED_INFINITE_STORIES.md →
 thesis/CREATIVE_VALIDATORS.md.
 
@@ -186,22 +193,24 @@ infrastructure), then products/ESOTERIC_WEBB.md (the first proof).
 products/ESOTERIC_WEBB.md, then the sporeGarden org README.
 
 **If you are a developer**: Start with outreach/FOR_BUILDERS.md, then
-architecture/COMPOSITION_PATTERNS.md, then
-architecture/CREATIVE_SURFACE_ARCHITECTURE.md.
+architecture/ANCHORING_PIPELINE.md, then
+architecture/COMPOSITION_PATTERNS.md.
 
 **If you are evaluating commercial potential**: Start with
 economics/NOVEL_FERMENT_TRANSCRIPTS.md →
 economics/SUNCLOUD_ACTIVATION.md → economics/LOAM_CERTIFICATES_LIVE.md.
 
-**If you are a faculty member**: gen4 is where the baseCamp papers
-become publishable products. Start with whichever baseCamp paper maps
-to your domain, then read its gen4 promotion in products/.
+**If you are a faculty member**: Start with
+thesis/THE_SOVEREIGN_PUBLICATION.md — this is the paper that explains
+why anchored reproductions of your work are more valuable than journal
+citations. Then find your domain's spring and run the reproduction
+yourself.
 
 ---
 
 ## Status
 
-gen4/ is active. **14 working papers** across 5 sections document the
+gen4/ is active. **16 working papers** across 5 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, and audience-specific guides for the composition generation.
 

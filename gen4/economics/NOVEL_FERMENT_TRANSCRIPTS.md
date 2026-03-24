@@ -239,23 +239,81 @@ that fermentation produces novel objects.
 
 ---
 
+## NFTs Beyond Games: Scientific Publication
+
+The same infrastructure that tracks a sword's history tracks a
+scientific computation's history. The same DAG that records player
+actions records experimental steps. The same merkle root that
+anchors a playthrough anchors a paper reproduction.
+
+### The Scientific NFT
+
+```
+Certificate: Scientific Reproduction
+  ├── reproduced: Stanton & Murillo 2016, Table II
+  ├── spring: hotSpring v0.6.23, experiment exp014
+  ├── checks: 45/45 PASS
+  ├── dag_merkle_root: sha256:4a7b...2e9f (247 vertices)
+  ├── hardware: Threadripper + RTX 4090/3090, 256GB RAM
+  ├── code: hotspring@a3f7c2e, Rust 1.87.0
+  ├── signer: ed25519:a7f3...c2e1 (kevin.mok)
+  ├── attribution:
+  │   ├── kevin.mok: reproducer (0.40)
+  │   ├── murillo: original_author (0.25)
+  │   ├── stanton: original_author (0.25)
+  │   ├── hotspring: tool (0.05)
+  │   └── barracuda: compute (0.05)
+  ├── btc_anchor: txid a1b2...e5f6, block 892,547
+  └── eth_anchor: txid 0x7a8b...d0e1, block 21,847,392
+```
+
+This is a Novel Ferment Transcript. The "fermentation" is the
+computation itself — raw parameters transformed through GPU kernels,
+statistical analysis, and validation checks into a verified result.
+The history is the science. The memory is the proof.
+
+See thesis/THE_SOVEREIGN_PUBLICATION.md for the full argument: why
+this is more valuable than a journal paper, how it solves the
+reproducibility crisis, and the concrete economics ($3 anchoring fee
+vs. $5,000 journal APC).
+
+### The Cross-Domain Universality
+
+The same provenance architecture serves every domain — validated in
+ludoSpring exp065 (74/74 checks, >80% structural similarity):
+
+| Domain | What ferments | What the NFT records |
+|--------|--------------|---------------------|
+| Games | A sword, a character, a playthrough | Player actions, NPC interactions, choices |
+| Science | A computation, a reproduction | Parameters, kernels, results, validation |
+| Genomics | A sample, a pipeline run | Collection → transport → process → analyze |
+| Medicine | A patient record, a treatment | Access events, consent grants, outcomes |
+| Art | A creative work | Creation process, remix history, exhibition |
+
+The code is the same. The DAG is the same. The signing is the same.
+The anchoring is the same. Only the vocabulary changes.
+
+---
+
 ## Implementation Status
 
 | Component | Status | Where |
 |-----------|--------|-------|
-| rhizoCrypt DAG in game loop | Wired (V4) | esotericWebb bridge.rs |
-| loamSpine dehydration | Bridge ready | esotericWebb bridge.rs |
-| sweetGrass attribution | Bridge ready | esotericWebb bridge.rs |
-| BearDog signing | Bridge ready | esotericWebb bridge.rs |
-| sunCloud activation | Conceptual | gen3/economics/ |
-| Lending protocol | Conceptual | wateringHole/ |
+| rhizoCrypt DAG recording | Validated (esotericWebb V4, exp061) | 317 checks across 6 experiments |
+| BearDog Ed25519 signing | Validated (exp064, 39/39) | Tamper detection at exact vertex |
+| loamSpine dehydration | Validated (exp061, 17/17) | Certificate lifecycle complete |
+| sweetGrass attribution | Validated (exp066, 41/41) | Conservation verified, decay models |
+| Cross-domain fraud detection | Validated (exp065, 74/74) | Same detector across gaming/science/medical |
+| BTC OP_RETURN anchoring | Designed | 2-3 weeks implementation (see architecture/ANCHORING_PIPELINE.md) |
+| ETH calldata anchoring | Designed | Same timeline |
+| sunCloud value distribution | Designed | gen3/economics/ |
+| Lending protocol | Designed | wateringHole/ |
 
-The infrastructure for creating NFTs is wired. The infrastructure for
-making them economically active (sunCloud) is designed but not yet
-implemented.
+The provenance infrastructure is validated with 317 checks. The
+anchoring implementation is plumbing, not research.
 
 ---
 
-*The sword remembers. The story remembers. The creator and the player
-both get credit. The value is in the memory, not the receipt. This is
-what digital objects should have been.*
+*The sword remembers. The computation remembers. The paper remembers.
+The value is in the memory, not the receipt. This is what digital
+objects — and scientific publications — should have been.*

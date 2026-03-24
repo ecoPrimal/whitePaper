@@ -6,12 +6,18 @@
 
 ## Reading Order
 
-1. **COMPOSITION_PATTERNS.md** — The patterns discovered building
-   esotericWebb V4: PrimalBridge, deploy graphs, graceful degradation,
-   tiered narration, the zero-import principle. Start here if you are a
-   developer.
+1. **ANCHORING_PIPELINE.md** — The concrete mechanism: how a computation
+   on a home HPC becomes a BTC/ETH-anchored proof. DAG recording,
+   Ed25519 signing, dehydration, OP_RETURN anchoring, verification CLI.
+   **Start here if you want to understand what the provenance trio
+   actually does end-to-end.**
 
-2. **CREATIVE_SURFACE_ARCHITECTURE.md** — The sporeGarden organizational
+2. **COMPOSITION_PATTERNS.md** — The patterns discovered building
+   esotericWebb V4: PrimalBridge, deploy graphs, graceful degradation,
+   tiered narration, the zero-import principle. Start here if you are
+   building a gen4 product.
+
+3. **CREATIVE_SURFACE_ARCHITECTURE.md** — The sporeGarden organizational
    model, the four-layer product architecture, lean consumption vs. hard
    linking, federation, the content pipeline. Start here if you are
    designing a new gen4 product.
