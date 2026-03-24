@@ -481,6 +481,37 @@ program depends on.
 
 | 23 | ~~Crate rename~~ **(DONE)**. ~~IPC module~~ **(DONE)**. ~~Real discover_primal()~~ **(DONE)**. ~~CheckOutcome + check_skip~~ **(DONE)**. ~~Tolerance provenance~~ **(DONE)**. ~~Zero clippy warnings~~ **(DONE)**. ~~genomeBin pinned~~ **(DONE)**. ~~IPC resilience stack~~ **(DONE v0.2.0)**. ~~4-format capability parsing~~ **(DONE v0.2.0)**. ~~health.liveness/readiness~~ **(DONE v0.2.0)**. ~~proptest IPC fuzzing~~ **(DONE v0.2.0, expanded v0.3.0 — 15)**. ~~132 unit tests~~ **(DONE v0.2.0)**. ~~Niche self-knowledge~~ **(DONE v0.2.0)**. ~~Deploy graph validation~~ **(DONE v0.2.0)**. ~~Integration tests~~ **(DONE v0.2.0)**. ~~195 tests~~ **(DONE v0.3.0)**. ~~MCP tools~~ **(DONE v0.3.0 — 8 typed)**. ~~5-tier discovery~~ **(DONE v0.3.0)**. ~~Structured provenance~~ **(DONE v0.3.0)**. ~~Capability registry TOML~~ **(DONE v0.3.0)**. ~~deny.toml~~ **(DONE v0.3.0)**. ~~Capability-first architecture~~ **(DONE v0.3.0)**. ~~Topological waves~~ **(DONE v0.3.0)**. ~~by_capability on all graph nodes~~ **(DONE v0.3.0)**. ~~graph.waves + graph.capabilities RPC~~ **(DONE v0.3.0)**. ~~check_capability_health()~~ **(DONE v0.3.0)**. ~~IpcErrorPhase~~ **(DONE v0.3.0)**. ~~discover_remote_tools()~~ **(DONE v0.3.0)**. ~~236 tests~~ **(DONE v0.3.0)**. ~~Live Tower Atomic IPC~~ **(DONE v0.4.0 — 24/24 gates STABLE)**. ~~Squirrel AI composition~~ **(DONE v0.4.0 — Tower + Squirrel + Anthropic Claude)**. ~~264 tests~~ **(DONE v0.4.0)**. ~~40 experiments~~ **(DONE v0.4.0)**. ~~passthrough_env~~ **(DONE v0.4.0)**. ~~PrimalProcess::from_parts()~~ **(DONE v0.4.0)**. ~~Nest Atomic (Tower + NestGate)~~ **(DONE v0.6.0 — 8/8 gates, storage round-trip, model cache, ZFS fallback)**. ~~Node Atomic (Tower + ToadStool compute)~~ **(DONE v0.6.0 — 5/5 gates, dual-protocol, 4 workload types)**. ~~Full NUCLEUS deploy~~ **(DONE v0.6.0 — 58/58 gates, Tower+Nest+Node compose)**. ~~282 tests~~ **(DONE v0.6.0)**. ~~47 experiments~~ **(DONE v0.6.0)**. ~~Graph-driven overlay composition~~ **(DONE v0.7.0 — tier-independent primals via deploy graphs, merge_graphs())**. ~~Squirrel cross-primal discovery~~ **(DONE v0.7.0 — env_sockets wiring, capability.discover, tool.list)**. ~~3/5 graph execution patterns live~~ **(DONE v0.7.0 — Sequential, Parallel, ConditionalDag)**. ~~Provenance readiness~~ **(DONE v0.7.0 — launch profiles + deploy graph)**. ~~253+ tests~~ **(DONE v0.7.0)**. ~~49 experiments~~ **(DONE v0.7.0)**. ~~87/87 gates~~ **(DONE v0.7.0)**. ~~Pipeline + Continuous patterns~~ **(awaiting provenance trio)**. ~~Provenance trio Neural API~~ **(DONE Phase 11 — ipc::provenance, zero compile coupling)**. ~~Multi-node bonding~~ **(DONE Phase 12 — 5 BondTypes, TrustModel, BondingPolicy, 4 multi-node graphs)**. ~~STUN sovereignty-first~~ **(DONE Phase 12 — stun_tiers.rs, 4-tier escalation)**. ~~280+ tests~~ **(DONE Phase 12)**. ~~51 experiments~~ **(DONE Phase 12)**. ~~22 deploy graphs~~ **(DONE Phase 12)**. ~~Ecosystem absorption~~ **(DONE Phase 12.1 — deny.toml convergence, cast lints, ValidationSink enrichment, exit_code_skip_aware, proptest_ipc 7 cross-cutting fuzz, primal_names 23 mappings, provenance circuit breaker — absorbed from all 7 sibling springs, 303 tests)**. RootPulse end-to-end (awaiting live trio). coralForge Pipeline graph. Live multi-node validation. Bonding live coordination. Anchoring + Economics (BTC/ETH attestation). BYOB primal DAG execution. | **primalSpring** (51 experiments, 9 tracks, v0.7.0 Phase 12 + 12.1 MULTI-NODE BONDING + ECOSYSTEM ABSORPTION 87/87, 303 tests) x **biomeOS** (primary test subject) x **all NUCLEUS primals** x **nestgate** (storage + federation) x **toadstool** (compute + idle) x **Squirrel** (cross-primal AI) x **Provenance Trio** (Neural API wired) x **Songbird** (mesh + STUN) x **BearDog** (lineage trust) x **neuralSpring + wetSpring + hotSpring** (coralForge + cross-spring) |
 
+## gen4 Cross-Pollination: Esoteric Webb
+
+**esotericWebb V4** (March 24, 2026) is the first gen4 consumer — a CRPG
+substrate that composes deployed primals into a playable game system. It
+directly exercises the infrastructure that baseCamp papers 17–22 describe:
+
+- **Paper 17 (Game Science)**: ludoSpring's 13 HCI models are wired live
+  into Webb's `GameSession::act()`. Flow evaluation, engagement, and DDA
+  run per-action when the game science primal is connected.
+- **Paper 18 (RPGPT)**: Webb's `GameDirector` + `NarrativeGraph` + provenance
+  trio implement the RPGPT engine architecture. NPC personality certs,
+  AI-constrained narration (Squirrel), DAG-traced sessions (rhizoCrypt).
+- **Paper 19 (Games@Home)**: Webb's bounded-space-infinite-exploration thesis
+  validates that game tree complexity is a design metric — authored topology
+  × combinatorial state space.
+- **Paper 20 (Novel Ferment Transcripts)**: Webb's provenance lifecycle
+  (`dag.session.create` → `dag.event.append` → `dag.session.complete`) is
+  exactly the NFT lifecycle: every playthrough is a Novel Ferment Transcript.
+- **Paper 21 (Sample Provenance)**: Same `PrimalBridge` → rhizoCrypt DAG
+  operations that track game actions can track biological sample custody.
+  Cross-domain fraud unification proven at >80% structural similarity.
+- **Paper 22 (Medical Provenance)**: Consent-as-certificate pattern maps
+  to Webb's NPC personality certs (scoped knowledge, trust gates, lies).
+
+Webb's architecture: 166 tests, 32 Rust files (~8.5k LOC), 23 bridge methods
+across 8 primal domains, all with graceful degradation. Zero unsafe, zero C
+deps, zero spring imports. JSON-RPC IPC over TCP/UDS. Deploy graphs for
+primal spawning (topological wave ordering). sporeGarden org on GitHub.
+
+This is the gen3→gen4 boundary: the primals disappear into the product.
+
 ## Future Contributions
 
 ### Immediate (S80+)
