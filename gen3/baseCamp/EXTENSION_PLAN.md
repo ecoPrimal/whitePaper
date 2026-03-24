@@ -1,7 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 22, 2026 (hotSpring Exp 075 deep debt burndown + cross-vendor dispatch + V130 + ludoSpring V23 + airSpring V0.10.0 deep debt evolution update)
-**Foundation:** baseCamp papers 01–22, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V130 (376+ experiments, Anderson hormesis framework), airSpring v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, MCP tools/list + tools/call wired in primal dispatch — 10 ecology tools discoverable by Squirrel AI, platform-agnostic IPC Transport enum (Unix + TCP, ecoBin compliant), ValidationHarness migration, 50+ inline tolerances centralized, 63 provenance baselines, zero clippy warnings pedantic+nursery, `#![forbid(unsafe_code)]`, zero C deps, `#[expect(reason)]` Rust 2024 complete), ludoSpring V23 (75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, all modules >= 90% coverage, cross-ecosystem deep debt: zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`)
+**Date:** March 23, 2026 (hotSpring Exp 071 sovereign PFIFO pipeline update + wetSpring V134 + ludoSpring V30 + airSpring V0.10.0 deep evolution execution + Songbird v0.2.1-wave64 cross-ecosystem naming convergence)
+**Foundation:** baseCamp papers 01–22, barraCuda v0.3.7 standalone (wgpu 28, DeviceCapabilities API), wetSpring V134 (379 experiments, **1,530** unit + **27** doc tests, 91.20% coverage, zero duplicate math, Anderson hormesis framework carried forward from V130), **V132:** `ValidationSink`, `PROVENANCE_REGISTRY`, IPC normalization, workspace `lints.workspace`, ecosystem wiring (sweetGrass braids, `StreamItem`, `performance_surface`), **V133:** `validate_all` meta-runner, `GpuContext`/`TensorSession`, `check_relative`/`check_abs_or_rel`, `performance_surface` complete, `ipc/message.rs` + `dispatch_strategy.rs`, feature-gate cleanup, airSpring v0.10.0 (938 lib + 316 integration/doc + 62 forge = 1,316 Rust tests; 91 binaries, 87 experiments, barraCuda default-features=false gpu+domain-pde, `GpuDriverProfile`→`DeviceCapabilities` migration, rpc.rs smart refactor to rpc/ module, `#[allow]`→`#[expect]` round 2 (66 files), 7 proptest scientific invariants, `f64_i8` NPU cast helper, MCP tools/list + tools/call wired in primal dispatch — 10 ecology tools discoverable by Squirrel AI, platform-agnostic IPC Transport enum (Unix + TCP, ecoBin compliant), 63 provenance baselines, zero clippy warnings pedantic+nursery, `#![forbid(unsafe_code)]`, zero C deps), ludoSpring V30 (82 experiments, 675+19 tests, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler split, CI, deploy graph, scyBorg triple license, zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`), Songbird v0.2.1-wave64 (10,020 tests, 30/30 crates pedantic+nursery clean, 14 JSON-RPC methods with `normalize_method()` ecosystem naming tolerance, capability-based 5-tier discovery, zero production unwrap/panic/unreachable, CONTEXT.md, workspace lint unification)
 
 ---
 
@@ -120,65 +120,6 @@ DRM and sovereign are complementary, not competing:
 - DRM GCN5 E2E success feeds back to sovereign: PM4 format, wave64 dispatch,
   memory model, and instruction encoding now validated against real hardware
 - K80 bridges both (unlocked firmware → sovereign works; legacy nouveau → DRM works)
-
----
-
-## Deep Debt Burndown + Cross-Vendor Dispatch + PMU Cracking Readiness (hotSpring Exp 075, March 22, 2026)
-
-**Source:** hotSpring Exp 075, coralReef crates (coral-driver, coral-glowplug), hotspring-barracuda
-**Connects to:** baseCamp #14 (Sovereign Compute Hardware), Exp 071 (PFIFO diagnostic matrix)
-
-### What Was Resolved
-
-13 deep-debt items across P0/P1/P2 priorities, systematically hardening the tooling
-before Layer 6 MMU cracking:
-
-**Concurrency:** TOCTOU race in `DeviceSlot` fixed with `BusyGuard` (RAII `Arc<AtomicBool>`).
-Long-running `spawn_blocking` tasks (oracle capture, compute dispatch) acquire the guard;
-mutating RPCs (`swap`, `reclaim`, `resurrect`) refuse while busy. Enables safe concurrent
-experiments on dual Titan V cards.
-
-**Error handling:** `Bar0Rw::try_read_u32`/`try_write_u32` return `Result` instead of
-sentinel values — critical for PMU debugging where `0xDEAD_BEEF` could be a real register
-value. `DriverError::OracleError` provides clean propagation from the oracle module.
-`CudaComputeDevice` validates buffer handles and BDF selection without silent fallback.
-
-**RPC robustness:** `nvidia-smi` calls moved to `spawn_blocking` outside the device mutex.
-`coralctl health` parses daemon responses correctly. Per-connection `BufReader` at 64KB.
-
-### Cross-Vendor Dispatch
-
-CUDA-capable GPUs are now accessible interchangeably through the glowplug daemon's
-`device.dispatch` RPC. A single PTX kernel (sm_70 target, JIT to higher SM at runtime)
-runs on any CUDA device in the fleet. The entire pipeline — enumerate, swap, capture,
-dispatch, health — operates via Unix socket RPC with zero `pkexec`.
-
-### RTX 5060 as Page Table Oracle
-
-The RTX 5060 runs CUDA compute concurrently with display output (no driver swap,
-no DRM disruption). This transforms the display GPU into a live reference for
-page table encoding: launch a CUDA allocation, capture BAR0 state via `try_read_u32`,
-compare PDE/PTE bit patterns with our sovereign encoding on the Titans.
-
-### Layer 6 Status
-
-Still blocked. The PBDMA loads GPFIFO base address (GPU VA 0x1000) but returns
-`0xbad00200` (PBUS timeout) on fetch — the FBHUB MMU cannot translate the 5-level
-page table chain. The deep-debt burndown provides the tooling for the next attack:
-
-1. 5060 oracle capture → reference PTE bit patterns from working nvidia driver
-2. PTE diff analysis → compare 5060 encoding with sovereign V2 format
-3. Dual Titan A/B → parallel encoding strategies with BusyGuard isolation
-4. BAR2-resident page tables → VRAM-based page table chain
-5. MMU fault buffer decoding → specific failure reason codes
-6. Tesla P80 → third Volta data point when it arrives
-
-### Sovereign Compute Implications
-
-The pkexec-free pipeline validates the security model: privileged operations confined
-to systemd services with minimal capability sets, user tools authenticated via Unix
-socket peer credentials. This is the operational model for sovereign compute on
-consumer hardware — no SUID, no polkit, no cloud IAM.
 
 ---
 
@@ -369,7 +310,7 @@ The bottleneck is always data acquisition, not compute.
 
 ## ludoSpring Extensions (V18, March 15, 2026)
 
-**Source:** ludoSpring V23 — 75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, Papers 17-22 in baseCamp
+**Source:** ludoSpring V30 — 82 experiments, 675+19 tests, 91.27% coverage, Papers 17-22 in baseCamp
 **Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
@@ -661,7 +602,7 @@ This validates the core thesis from Paper 18 (RPGPT): anti-cheat IS chain-of-cus
 | wetSpring pipeline adoption | wetSpring | High | Adapt exp062 SampleType/ProcessingStep to field genomics |
 | healthSpring clinical adoption | healthSpring | High | Adapt exp063 RecordType to PK/PD/microbiome/biosignal/TRT tracks |
 | BearDog ZK circuit | BearDog | Medium | Full zero-knowledge proofs for exp063 access control |
-| Cross-institution provenance | songbird + biomeOS | Medium | Multi-lab / multi-provider consent chains |
+| Cross-institution provenance | songbird + biomeOS | Medium | Multi-lab / multi-provider consent chains. Songbird v0.2.1-wave64: 14 JSON-RPC methods, `normalize_method()` for naming tolerance, capability-based crypto discovery |
 | FHIR/HL7 interop | healthSpring + loamSpine | Medium | Map consent certificates to FHIR resources |
 | ISO 17025 compliance matrix | wetSpring + loamSpine | Medium | Formal requirement → trio operation mapping |
 | Patient portal | petalTongue | Low | Consent status + access history visualization |
