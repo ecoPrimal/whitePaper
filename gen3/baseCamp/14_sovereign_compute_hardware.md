@@ -750,6 +750,80 @@ the Titans → identify divergences.
 
 ---
 
+---
+
+## Update: SCTL Myth Busted + FalconCapabilityProbe + Sovereign Layers 7-10 (March 25, 2026, Exp 082-092)
+
+### Myth Busted: SCTL Does NOT Block PIO
+
+The IMEMC register on GM200+ falcons uses **BIT(24)** (`0x0100_0000`) for write
+auto-increment, not BIT(6) (`0x40`). All previous manual PIO tests used the
+wrong control word format, creating a false impression that SCTL=0x3000 blocks
+PIO. **PIO to IMEM/DMEM/EMEM works regardless of security mode.** This
+invalidated multiple experiment decisions: FLR attempts, SBR for SCTL clearing,
+warm handoff to preserve firmware. The actual remaining blocker is DMA configuration
+(FBIF mode, FBHUB MMU), not security mode.
+
+### Runtime Bit Solver: FalconCapabilityProbe
+
+`FalconCapabilityProbe` in `falcon_capability.rs` dynamically discovers register
+layouts on actual hardware instead of hardcoding assumptions. The IMEMC bit position
+varies by falcon version — BIT(24) for GM200+, different on earlier generations.
+The probe discovers the correct layout at runtime, making PIO portable across any
+NVIDIA GPU generation. Pattern: probe hardware → build `FalconCapabilities` struct
+→ use `FalconPio` safe API. Same capability-discovery pattern as `WgslOptimizer`
+and `GpuDriverProfile` in the shader stack.
+
+### Sovereign Pipeline: 9/10 Layers Solved
+
+| Layer | Status | Key Discovery |
+|-------|--------|---------------|
+| L1-L5 | SOLVED | VFIO binding, BAR0/BAR2, PMC, PFIFO, MMU fault buffers |
+| L6 | SOLVED (Exp 076) | FBHUB requires non-replayable fault buffers before any MMU walk |
+| L7 | SOLVED (Exp 085) | 7 bugs found in falcon binding (B1-B7); `falcon_bind_context()` encapsulates full 8-step nouveau sequence; bind_stat=5 on both Titans |
+| L8 | SOLVED (Exp 087) | 7 WPR construction bugs (W1-W7); ACR bootstraps FECS+GPCCS |
+| L9 | SOLVED (Exp 088) | Post-ACR STARTCPU sequence; both falcons transition to RUNNING |
+| L10 | ROOT CAUSE FOUND (Exp 091) | BOOTVEC=0 → GPCCS faults at IMEM[0]; ACR loads BL to IMEM[0x3400] |
+| L11 | BLOCKED by L10 | GR context init + shader dispatch |
+
+Reverse engineering sources: nouveau (primary Rosetta Stone), nvidia-open
+kernel modules, Mesa NVK, envytools, NVIDIA closed-source header harvesting.
+Cross-driver register profiling (Exp 086) confirmed: WPR is an interface
+problem, not a key+lock hardware gate. Post-nouveau state is optimal starting
+point for sovereign boot.
+
+### Adaptive Experiment Loop + First Personality Sweep (Exp 092)
+
+Full adaptive experiment loop wired: `SwapObservation` + `ResetObservation`
+→ JSONL journal → `AdaptiveLifecycle` (settle times + reset selection from
+history). `DriverObserver` trait with personality-specific observers (nouveau,
+vfio, nvidia, nvidia-open). Ring/mailbox state persisted across swaps via
+ember `ring_meta`. `coralctl experiment sweep` CLI for automated personality
+characterization. First sweep on both Titan Vs: nouveau 21.9s / nvidia-open
+26.8s bind. Sub-1% cross-card variance. HBM2 alive on both cards post-sweep.
+
+### Deep Code Quality Evolution
+
+Systematic evolution of `coral-driver`:
+- **60+ hardcoded hex offsets** → named register constants in `registers.rs`
+- **4 unsafe blocks eliminated** via safe `DmaBuffer::volatile_write_u32/u64/read_u32`
+- **`NonNull<u8>`** replaces raw `*mut u8` in DMA buffers (type-level non-null invariant)
+- **Shared helpers** extracted: `poll_falcon_boot`, `dmem_nonzero_summary`, `dmem_detail`
+- 511 lib tests pass, zero new unsafe, zero `unwrap()` in production code
+
+### Compute Trio Evolution (coralReef + toadStool + barraCuda)
+
+The trio converges on **capability-based discovery at every layer**:
+- **Hardware layer** (coralReef): `FalconCapabilityProbe` discovers falcon PIO layouts
+- **Shader layer** (toadStool): `GpuDriverProfile` discovers ILP scheduling parameters
+- **Math layer** (barraCuda): adapter enumeration discovers GPU memory/capability
+
+Each primal discovers capabilities at runtime rather than hardcoding vendor specifics.
+The `VendorLifecycle` + `RegisterMap` trait pair provides the vendor-agnostic
+abstraction. All cross-spring dispatch now routes through `ComputeDispatch<B: GpuBackend>`.
+
+---
+
 *Sovereign compute hardware: 3 precision tiers, 4 device types (NVIDIA GPU, AMD GPU,
 BrainChip NPU, Intel GPU stubs), zero-sudo operation, triangle architecture.
 $750 buys a precision-routed QCD rig with native f64 + df64 + NPU steering.
@@ -759,10 +833,13 @@ preswap phases PASS (f64 LJ force, Newton's 3rd law). RTX 5060 Blackwell DRM:
 pipeline cracked (SM120, 4/4 HW tests). iommufd/cdev: kernel-agnostic VFIO on
 6.2+ (resolves EBUSY on 6.17, 607 tests, HW validated). AMD Vega 20: one
 round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
-Vendor-agnostic, seccomp-sandboxed, capability-restricted. 77 experiments, dual-track
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. 92 experiments, dual-track
 dispatch (DRM + sovereign VFIO), cross-vendor CUDA dispatch, pkexec-free pipeline,
-RTX 5060 dual-use oracle, PMU cracking tooling hardened. Sovereign VFIO: 7/10 layers
-(MMU Layer 6 resolved via FBHUB fault buffer config, Exp 076). BOOT0 auto-detect
-eliminates SM mismatch GPU corruption. PfifoInitConfig unifies init paths. PCIe FLR
-via coralctl reset. Pre-PMU hardening complete — ready for Layer 7 (GR/FECS context).
+RTX 5060 dual-use oracle. **Sovereign VFIO: 9/10 layers SOLVED** — Falcon binding
+(B1-B7, Exp 085), WPR construction (W1-W7, Exp 087), FECS+GPCCS boot (Exp 088),
+SCTL myth busted (Exp 091). IMEMC BIT(24) discovery + FalconCapabilityProbe runtime
+bit solver ensures portability. Layer 10 root cause found (BOOTVEC). Adaptive
+experiment loop with personality sweep, JSONL journal, observer traits. 4,065 tests
+pass workspace-wide. Deep code debt burned: 60+ hardcoded offsets → constants,
+4 unsafe blocks eliminated, NonNull DMA, safe volatile wrappers.
 Built in a basement in Lansing.*
