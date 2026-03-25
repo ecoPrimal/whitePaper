@@ -183,10 +183,13 @@ predicts specific kinds of practitioners:
 scientist, a clinician, a craftsperson, an artist. they have
 deep expertise in their field. K-NOME gives them a methodology
 for transmitting that expertise through conversation into
-working software. the conversation constraint means they don't
-need to learn a programming language. they need to learn to
-communicate their expertise clearly — which, if they've ever
-mentored a student, they already know how to do.
+working software. the human who built ecoPrimals does not know
+Rust — he chose it deliberately because the unfamiliarity forced
+him to stay in conversation. the conversation constraint means
+domain experts don't need to learn a programming language. they
+need to learn to communicate their expertise clearly — which, if
+they've ever mentored a student, they already know how to do.
+the human is the pattern matcher. the AI is the weaver.
 
 **the self-taught developer who never had a lab.** someone who
 learned to code but has no domain expertise to apply it to.

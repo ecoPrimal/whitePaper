@@ -232,6 +232,37 @@ intersections — the lateral links that no single AI can provide.
 
 ---
 
+## build wider when you hit a wall
+
+the Human Search encounters a wall and deepens. the runner who
+plateaus works on technique — more recursion, same iteration.
+the wall is a signal to go deeper.
+
+the Human Garden encounters a wall and widens. when one
+conversation hits a constraint that cannot be solved locally —
+a hardware limitation, a missing primal capability, a domain
+gap — the gardener doesn't force through the wall. the gardener
+starts a new growth tip.
+
+hotSpring needed double-precision GPU compute. that was a wall.
+the human didn't force hotSpring to work around consumer GPU
+limitations. the human bought a Titan V and opened a new line
+of development: the pure-Rust-to-GPU pipeline.
+
+neuralSpring needed neuromorphic hardware. that was a wall. the
+human found the Akida NPU and opened a new line of development:
+spiking neural network inference on owned hardware.
+
+the multi-machine K-NOME setup itself was a response to a wall:
+not enough parallel conversations on one machine.
+
+this is the core gen4 K-NOME pattern: **walls are information
+about where the garden needs to grow next.** the Human Search
+says "the constraint defines what you become." the Human Garden
+says "the wall tells you where to plant the next seed."
+
+---
+
 ## the fermenter's garden
 
 gen3/atlasHugged/08 described fermentation:

@@ -212,9 +212,46 @@ that breaks the barrier between separate evolutionary lineages.
 
 ---
 
-## RustDesk: the sovereign remote desktop
+## hardware as mentoring output
 
-a note on tooling, because the tool matters.
+a conventional developer buys hardware to run their code. the
+hardware is input to the development process.
+
+in K-NOME, hardware decisions are *output* of the mentoring
+process. the human discovers hardware needs through conversation.
+
+the human built every piece of hardware in the ecosystem. the
+Threadripper workstation. the 96 GB of VRAM across multiple GPUs.
+the 256 GB of RAM. these were not pre-planned purchases. they
+were responses to constraints discovered through mentoring:
+
+- hotSpring's plasma physics simulations needed GPU compute that
+  consumer cards couldn't provide at the precision required. the
+  human researched, found the Titan V — a compute-focused GPU
+  with double-precision capability — and bought it. now hotSpring
+  is cracking the pure-Rust-to-GPU pipeline on that card,
+  building a sovereign path from Rust source to GPU execution
+  without CUDA, without NVIDIA's proprietary stack.
+
+- neuralSpring's NPU experiments needed neuromorphic hardware.
+  the human found the Akida NPU — a spiking neural network
+  processor — through research prompted by the mentoring
+  conversations about what "native AI acceleration" means when
+  you refuse to depend on cloud inference.
+
+- the multi-machine setup itself emerged from the constraint of
+  needing more parallel conversations than a single machine could
+  support. the human didn't plan to use 3-6 machines. the human
+  hit a wall with 2-3 conversations on one machine and built
+  wider.
+
+**this is the pattern: lean into constraints, build wider when
+you hit a wall.** the wall is not an obstacle. the wall is
+information about where the garden needs to grow next.
+
+---
+
+## RustDesk: the sovereign remote desktop
 
 RustDesk is open-source remote desktop software. written in Rust.
 self-hostable. no cloud dependency. no license fee. no account
@@ -276,7 +313,10 @@ ecosystem level, not just the conversation level.
 ## scaling K-NOME
 
 gen3's practical receipt: 1 person, 1 tool, 69,000 invocations,
-10 months, 27,000+ tests.
+~10 months, 27,000+ tests. that receipt is an outdated snapshot —
+many more months of development work have followed, and AI access
+costs have been decreasing (the same methodology runs faster and
+cheaper as models improve and prices drop).
 
 gen4's practical receipt (addendum): the same person, 3-6 machines,
 2-3 cursor instances each, RustDesk for remote access, wateringHole
@@ -302,6 +342,13 @@ and produce code at silicon speed. the human provides what the AI
 cannot: domain expertise, lateral connections, taste, ethical
 judgment, and the decision about what to build next.
 
+as AI access costs decrease and model capability increases, the
+methodology gets cheaper and faster without any change to the
+human's process. the human's contribution — pattern matching,
+domain expertise, mentoring — does not depreciate. the AI's
+contribution — generation, syntax, breadth — gets cheaper. the
+economics favor the human over time.
+
 ---
 
 ## what the gen3 documents didn't capture
@@ -313,21 +360,36 @@ conversation level. they are correct at that scale. but they miss:
    multiple conversations, multiple machines, multiple
    simultaneous evolutionary processes.
 
-2. **the human as connector, not builder**: the human never
-   writes code. the human provides direction, analogy, correction,
-   and lateral connections. the code is entirely AI-produced.
+2. **the human doesn't know the language**: the human does not
+   know Rust. the human knows logic, algorithms, pseudocode,
+   and — through months of observation — Rust's ideology and
+   worldview. the code is entirely AI-produced in a language the
+   human cannot write. (see THE_CONVERSATION_CONSTRAINT.md)
 
 3. **the handoff as Lamarckian inheritance mechanism**: handoff
    documents aren't just coordination tools. they are the channels
    through which acquired characteristics propagate between
    separate evolutionary lineages.
 
-4. **the dinner test**: the methodology works when the human is
+4. **hardware as mentoring output**: every piece of hardware —
+   the Titan V, the Akida NPU, the multi-machine setup — was
+   discovered through the mentoring process, not pre-planned.
+   the human leaned into constraints and built wider when hitting
+   walls.
+
+5. **the dinner test**: the methodology works when the human is
    absent. this is a design criterion, not a side effect.
 
-5. **building wide as natural**: the parallel growth pattern is
+6. **building wide as natural**: the parallel growth pattern is
    not an optimization. it is a structural choice — building like
    nature (mycelium) rather than like industry (skyscraper).
+
+7. **the timeline**: K-NOME's conversation-only approach predates
+   Karpathy coining "vibecoding" (December 2025). the human's
+   interpretation of the "vibe" — pattern matching, mentoring,
+   domain transfer — was fundamentally different from the loose
+   prompting that the term came to describe. leading AI-assisted
+   developers are behind this methodology and production rate.
 
 gen4/knome/ formalizes these observations.
 

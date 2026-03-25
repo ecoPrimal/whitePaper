@@ -86,11 +86,20 @@ gen4/knome/ builds on:
 any person with deep domain expertise can, using K-NOME at garden
 scale, tend a parallel ecosystem of AI conversations that produces
 validated computational tools faster than traditional development
-teams — without writing a line of code.
+teams — without writing a line of code, without knowing the
+implementation language.
 
 the ecoPrimals project is the evidence. 14 primals, 8 springs,
-27,000+ tests, 100+ papers reproduced, one developer, ten months,
-zero lines of code written by human hands.
+27,000+ tests, 100+ papers reproduced, one developer who does not
+know Rust, months of development, zero lines of code written by
+human hands. the human is the pattern matcher. the AI is the
+weaver. the compiler is the constraint. the conversation is the
+only interface.
+
+the methodology predates the term "vibecoding" (Karpathy, December
+2025). the interpretation of "vibe" — domain-grounded pattern
+matching, mentoring, cross-domain transfer learning — was
+fundamentally different from loose prompting.
 
 the methodology is shared. the pen is yours.
 
