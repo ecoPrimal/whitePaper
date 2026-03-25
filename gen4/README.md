@@ -1,6 +1,6 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 20 working papers across 6 sections  
+**Status**: Active — 21 working papers across 6 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
 **Date**: March 24, 2026 (first formal gen4 writeup)
 
@@ -148,7 +148,8 @@ gen4/
 │   ├── MASSIVELY_PARALLEL_MENTORING.md — 3-6 machines, RustDesk, human as mycelium
 │   ├── THE_CONVERSATION_CONSTRAINT.md  — No code typed; conversation is the interface
 │   ├── FROM_HUMAN_SEARCH_TO_HUMAN_GARDEN.md — The grid extended: one path → many paths
-│   └── SHARING_THE_PEN.md             — Not only tools, but how to make tools is shared
+│   ├── SHARING_THE_PEN.md             — Not only tools, but how to make tools is shared
+│   └── THE_PROMPT_BANK.md             — Raw working prompts from ~6 months of K-NOME practice
 │
 └── outreach/                          ← Who gen4 is for (audience-specific guides)
     ├── FOR_CREATIVES.md               — Solo creators, writers, game designers
@@ -216,14 +217,15 @@ yourself.
 knome/MASSIVELY_PARALLEL_MENTORING.md (the real production workflow),
 then knome/THE_CONVERSATION_CONSTRAINT.md (no code typed),
 then knome/FROM_HUMAN_SEARCH_TO_HUMAN_GARDEN.md (the grid extended),
-then knome/SHARING_THE_PEN.md (the methodology as open commons).
-Read gen3/atlasHugged/ first for full context.
+then knome/SHARING_THE_PEN.md (the methodology as open commons),
+then knome/THE_PROMPT_BANK.md (the raw working prompts — what the
+gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ---
 
 ## Status
 
-gen4/ is active. **20 working papers** across 6 sections document the
+gen4/ is active. **21 working papers** across 6 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, K-NOME methodology evolution, and audience-specific guides for the
 composition generation.

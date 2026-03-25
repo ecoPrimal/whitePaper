@@ -48,6 +48,11 @@ Start here, in order:
    The ninth room: the one that teaches you how to prepare rooms.
    K-NOME practitioners, the loaves revisited.
 
+5. **[THE_PROMPT_BANK.md](./THE_PROMPT_BANK.md)**
+   — The actual working prompts used across ~6 months of ecoPrimals
+   development. Lightly cleaned, organized by theme. The gardener's
+   shorthand — terse, directional, repeated with variation.
+
 ---
 
 ## Relationship to gen3

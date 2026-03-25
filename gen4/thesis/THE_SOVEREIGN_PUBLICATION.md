@@ -1,55 +1,55 @@
-# the sovereign publication
+# The Sovereign Publication
 
-**why a home hpc with a provenance chain is more valuable than a journal paper, and how it actually works**
+**Why a home HPC with a provenance chain is more valuable than a journal paper, and how it actually works**
 
-**date**: march 24, 2026
-**status**: infrastructure validated — 317 checks across 6 provenance experiments, 27,000+ checks across the ecosystem
-**lineage**: gen3/baseCamp/20-22 → wateringHole/NOVEL_FERMENT_TRANSCRIPT_GUIDANCE → attsi
+**Date**: March 24, 2026
+**Status**: Infrastructure validated — 317 checks across 6 provenance experiments, 27,000+ checks across the ecosystem
+**Lineage**: gen3/baseCamp/20-22 → wateringHole/NOVEL_FERMENT_TRANSCRIPT_GUIDANCE → attsi
 
 ---
 
-## the problem with scientific publication
+## The Problem with Scientific Publication
 
-the current pipeline for publishing a scientific result:
+The current pipeline for publishing a scientific result:
 
-1. scientist does research (months to years)
-2. scientist writes a paper describing what they did (weeks to months)
-3. scientist submits to a journal ($0–$5,000 article processing charge)
-4. peer review (3 months to 3 years, often adversarial, often
+1. Scientist does research (months to years)
+2. Scientist writes a paper describing what they did (weeks to months)
+3. Scientist submits to a journal ($0–$5,000 article processing charge)
+4. Peer review (3 months to 3 years, often adversarial, often
    incompetent, always slow)
-5. revision cycle (months — address reviewer 2's irrelevant complaints)
-6. accepted, published (behind a $30/article paywall, or $2,000–$5,000
+5. Revision cycle (months — address reviewer 2's irrelevant complaints)
+6. Accepted, published (behind a $30/article paywall, or $2,000–$5,000
    open access fee)
-7. total: 6 months to 3 years from discovery to public record
+7. Total: 6 months to 3 years from discovery to public record
 
-the result is a pdf. a pdf that says "we did X and got Y." the reader
-trusts the authors. the reader trusts the journal. the reader trusts
-the peer reviewers. trust, trust, trust.
+The result is a pdf. A pdf that says "we did X and got Y." The reader
+trusts the authors. The reader trusts the journal. The reader trusts
+the peer reviewers. Trust, trust, trust.
 
-what the pdf does not contain:
+What the pdf does not contain:
 
-- the code (maybe a github link, maybe not, probably bitrotted)
-- the data (maybe a supplement, maybe "available upon request," maybe
+- The code (maybe a github link, maybe not, probably bitrotted)
+- The data (maybe a supplement, maybe "available upon request," maybe
   gone when the postdoc leaves)
-- the computational environment (which CUDA version? which numpy? which
+- The computational environment (which CUDA version? which numpy? which
   random seed?)
-- the intermediate steps (which parameters were tried and failed?)
-- cryptographic proof that any of this happened when they say it did
-- attribution beyond the author list (who actually wrote the code? who
+- The intermediate steps (which parameters were tried and failed?)
+- Cryptographic proof that any of this happened when they say it did
+- Attribution beyond the author list (who actually wrote the code? who
   actually ran the experiments? who actually cleaned the data?)
 
-the replication crisis is not a mystery. it is the predictable
+The replication crisis is not a mystery. It is the predictable
 consequence of a publication system that accepts claims instead of
 proofs.
 
 ---
 
-## what actually exists right now
+## What Actually Exists Right Now
 
-a threadripper workstation in east lansing, michigan. 96 GB VRAM
-(multi-GPU), 256 GB RAM, AMD threadripper. cost: ~$11,000. runs 24/7.
+A threadripper workstation in East Lansing, Michigan. 96 GB VRAM
+(multi-GPU), 256 GB RAM, AMD threadripper. Cost: ~$11,000. Runs 24/7.
 
-on this machine:
+On this machine:
 
 - **hotSpring**: 195/195 checks reproducing murillo group plasma physics
   (yukawa OCP, TTM, stanton & murillo 2016, diaw et al. 2024)
@@ -67,28 +67,28 @@ on this machine:
 - **primalSpring**: 303 tests validating primal federation, bonding,
   discovery
 
-total: 27,000+ automated checks. 175+ published papers reproduced.
-pure rust, zero C dependencies, GPU-accelerated via WebGPU/Vulkan.
-every check is a validation against a published result. every check
-either passes or fails. there is no "looks about right."
+Total: 27,000+ automated checks. 175+ published papers reproduced.
+Pure Rust, zero C dependencies, GPU-accelerated via WebGPU/Vulkan.
+Every check is a validation against a published result. Every check
+either passes or fails. There is no "looks about right."
 
-the provenance trio (rhizoCrypt, loamSpine, sweetGrass) is wired.
+The provenance trio (rhizoCrypt, loamSpine, sweetGrass) is wired.
 bearDog Ed25519 signing is validated (exp064, 39/39 checks — signing
 on every trio operation, tamper detection at exact DAG position).
-the radiating attribution calculator is validated (exp066, 41/41
+The radiating attribution calculator is validated (exp066, 41/41
 checks — proportional credit computation, decay models, role
 weighting, conservation: shares sum to 1.0).
 
-this is not a design document. this is a status report.
+This is not a design document. This is a status report.
 
 ---
 
-## the pipeline: how it actually works
+## The Pipeline: How It Actually Works
 
-### step 1: reproduce the science
+### Step 1: Reproduce the Science
 
-kevin runs hotSpring experiment 014 — reproducing stanton & murillo
-2016, table II: transport coefficients for yukawa one-component plasma.
+Kevin runs hotSpring experiment 014 — reproducing Stanton & Murillo
+2016, Table II: transport coefficients for Yukawa one-component plasma.
 
 ```
 $ cargo run -p hotspring-exp014 -- validate
@@ -102,13 +102,13 @@ $ cargo run -p hotspring-exp014 -- validate
 Result: 45/45 PASS
 ```
 
-every check is: compute the quantity on the threadripper, compare to
+Every check is: compute the quantity on the threadripper, compare to
 the published value in the paper, verify within the stated tolerance.
-this is not approximate. the tolerance is the published uncertainty.
+This is not approximate. The tolerance is the published uncertainty.
 
-### step 2: every computation is a DAG vertex
+### Step 2: Every Computation Is a DAG Vertex
 
-while the experiment runs, rhizoCrypt records every step as a vertex
+While the experiment runs, rhizoCrypt records every step as a vertex
 in a content-addressed DAG:
 
 ```
@@ -147,22 +147,22 @@ DAG session: hotspring-exp014-run-20260324-143022
   └── ... (45 validation vertices, one per check)
 ```
 
-every vertex is content-addressed (hash of its data + hash of parent
-vertices). the DAG is append-only. you cannot insert, delete, or
+Every vertex is content-addressed (hash of its data + hash of parent
+vertices). The DAG is append-only. You cannot insert, delete, or
 modify a vertex without breaking the hash chain.
 
-### step 3: bearDog signs every vertex
+### Step 3: bearDog Signs Every Vertex
 
-bearDog Ed25519 signs each vertex as it's created. the signature
+bearDog Ed25519 signs each vertex as it's created. The signature
 binds:
 
-- the vertex content hash
-- the signer's identity (kevin's ed25519 public key)
-- the timestamp
-- the parent vertex hashes
+- The vertex content hash
+- The signer's identity (Kevin's Ed25519 public key)
+- The timestamp
+- The parent vertex hashes
 
-this is the same cryptographic strength as SSH keys and tor hidden
-services. validated in ludoSpring exp064 (39/39 checks): tamper
+This is the same cryptographic strength as SSH keys and Tor hidden
+services. Validated in ludoSpring exp064 (39/39 checks): tamper
 detection catches modification at the exact vertex position.
 
 ```
@@ -174,9 +174,9 @@ vertex 5 signature:
   signature: ed25519:7e2a...9d3f
 ```
 
-### step 4: dehydrate to loamSpine
+### Step 4: Dehydrate to loamSpine
 
-when the experiment completes (all 45 checks pass), the rhizoCrypt
+When the experiment completes (all 45 checks pass), the rhizoCrypt
 DAG dehydrates to a loamSpine certificate:
 
 ```
@@ -195,11 +195,11 @@ Loam Certificate: Scientific Reproduction
   └── certificate_hash: sha256:8c3d...1f4e
 ```
 
-the certificate is the complete provenance record. the merkle root
-links back to every vertex in the DAG. anyone with the DAG data can
+The certificate is the complete provenance record. The merkle root
+links back to every vertex in the DAG. Anyone with the DAG data can
 verify it against the root.
 
-### step 5: sweetGrass records attribution
+### Step 5: sweetGrass Records Attribution
 
 ```
 Attribution Braid: hotspring-exp014-20260324
@@ -211,18 +211,18 @@ Attribution Braid: hotspring-exp014-20260324
   └── total: 1.00 (conservation verified — exp066, 41/41)
 ```
 
-the attribution is not an author list. it is a weighted, role-typed,
-machine-readable record. the radiating attribution calculator
+The attribution is not an author list. It is a weighted, role-typed,
+machine-readable record. The radiating attribution calculator
 (exp066) computes these weights based on contribution type, with
-configurable decay models. the shares always sum to 1.0.
+configurable decay models. The shares always sum to 1.0.
 
-### step 6: anchor to public chains
+### Step 6: Anchor to Public Chains
 
-this is the step that makes it sovereign publication. the loamSpine
-certificate's merkle root — a 32-byte hash — is written to bitcoin
-and ethereum:
+This is the step that makes it sovereign publication. The loamSpine
+certificate's merkle root — a 32-byte hash — is written to Bitcoin
+and Ethereum:
 
-#### bitcoin (OP_RETURN)
+#### Bitcoin (OP_RETURN)
 
 ```
 Bitcoin transaction:
@@ -235,18 +235,18 @@ Bitcoin transaction:
   permanence: as long as bitcoin exists
 ```
 
-OP_RETURN is a standard bitcoin script opcode that stores up to 80
-bytes of arbitrary data in a transaction. it is prunable (nodes don't
+OP_RETURN is a standard Bitcoin script opcode that stores up to 80
+bytes of arbitrary data in a transaction. It is prunable (nodes don't
 need to keep it in the UTXO set) but it is part of the blockchain
-forever. this is the most battle-tested append-only data store in
+forever. This is the most battle-tested append-only data store in
 human history — 15+ years, never successfully tampered with.
 
-the 32-byte hash proves: at this bitcoin block height (this specific
-moment in time), this specific loamSpine state existed. the hash is
-not the data — it is the commitment. anyone with the data can verify
-the commitment. no one can forge the timestamp.
+The 32-byte hash proves: at this Bitcoin block height (this specific
+moment in time), this specific loamSpine state existed. The hash is
+not the data — it is the commitment. Anyone with the data can verify
+the commitment. No one can forge the timestamp.
 
-#### ethereum (calldata or L2)
+#### Ethereum (Calldata or L2)
 
 ```
 Ethereum transaction:
@@ -258,24 +258,24 @@ Ethereum transaction:
   permanence: as long as ethereum exists
 ```
 
-ethereum anchoring is faster and can carry more metadata. L2s
+Ethereum anchoring is faster and can carry more metadata. L2s
 (Arbitrum, Base, Optimism) reduce cost to fractions of a cent while
 inheriting L1 security guarantees.
 
-#### why both?
+#### Why Both?
 
-redundancy. bitcoin is the most secure chain (hashrate dominance,
-15-year track record). ethereum is the most programmable (smart
-contracts could enable automated verification). anchoring to both
+Redundancy. Bitcoin is the most secure chain (hashrate dominance,
+15-year track record). Ethereum is the most programmable (smart
+contracts could enable automated verification). Anchoring to both
 means the proof survives the failure of either chain.
 
-the cost for dual anchoring: ~$3-5 total. the cost for publishing
+The cost for dual anchoring: ~$3-5 total. The cost for publishing
 the same result in a journal: $2,000-5,000 (open access APC) +
 6-36 months of waiting.
 
 ---
 
-## the comparison: sovereign publication vs. journal publication
+## The Comparison: Sovereign Publication vs. Journal Publication
 
 | | journal paper | sovereign publication |
 |---|---|---|
@@ -299,267 +299,267 @@ the same result in a journal: $2,000-5,000 (open access APC) +
 
 ---
 
-## why it is more valuable
+## Why It Is More Valuable
 
-### 1. it is proof, not claim
+### 1. It Is Proof, Not Claim
 
-a journal paper says "we computed the diffusion coefficient and got
-D = 0.849 ± 0.003." the reader trusts the authors.
+A journal paper says "we computed the diffusion coefficient and got
+D = 0.849 ± 0.003." The reader trusts the authors.
 
-a sovereign publication contains the DAG: input parameters →
+A sovereign publication contains the DAG: input parameters →
 barraCuda GPU kernel → equilibration → production run → statistical
-analysis → result. every step is signed. every step is verifiable.
-the reader doesn't trust the authors. the reader verifies the math.
+analysis → result. Every step is signed. Every step is verifiable.
+The reader doesn't trust the authors. The reader verifies the math.
 
-when murillo reads a hotSpring reproduction of his own paper, he
-doesn't need to trust kevin. he clones hotSpring, runs exp014, and
-checks his result against the same bitcoin-anchored merkle root.
-if his result matches, the reproduction is verified. the trust is in
+When Murillo reads a hotSpring reproduction of his own paper, he
+doesn't need to trust Kevin. He clones hotSpring, runs exp014, and
+checks his result against the same Bitcoin-anchored merkle root.
+If his result matches, the reproduction is verified. The trust is in
 the math, not the person.
 
-### 2. it solves the priority problem
+### 2. It Solves the Priority Problem
 
-academic priority disputes are ugly and common. who discovered it
-first? the paper with the earlier submission date? the preprint with
-the earlier arxiv timestamp? the conference talk that wasn't recorded?
+Academic priority disputes are ugly and common. Who discovered it
+first? The paper with the earlier submission date? The preprint with
+the earlier arXiv timestamp? The conference talk that wasn't recorded?
 
-a bitcoin anchor is a timestamp that cannot be forged. block 892,547
-happened at a specific moment. if your merkle root is in that block,
-your result existed at that moment. no dispute possible. the
+A Bitcoin anchor is a timestamp that cannot be forged. Block 892,547
+happened at a specific moment. If your merkle root is in that block,
+your result existed at that moment. No dispute possible. The
 blockchain is the priority register.
 
-this matters enormously for:
-- patent claims (provisional filing backed by anchored provenance)
-- grant applications (demonstrable prior work with immutable timestamps)
-- tenure cases (publication record with cryptographic provenance)
-- industry partnerships (IP timeline established beyond dispute)
+This matters enormously for:
+- Patent claims (provisional filing backed by anchored provenance)
+- Grant applications (demonstrable prior work with immutable timestamps)
+- Tenure cases (publication record with cryptographic provenance)
+- Industry partnerships (IP timeline established beyond dispute)
 
-### 3. it solves the reproducibility crisis
+### 3. It Solves the Reproducibility Crisis
 
-the replication crisis exists because papers don't contain enough
-information to reproduce. the methods section says "we used DADA2
-with default parameters." which DADA2 version? which R version? which
-random seed? which quality filtering threshold? the paper doesn't say.
-the postdoc who ran it left. the data is on a hard drive somewhere.
+The replication crisis exists because papers don't contain enough
+information to reproduce. The methods section says "we used DADA2
+with default parameters." Which DADA2 version? Which R version? Which
+random seed? Which quality filtering threshold? The paper doesn't say.
+The postdoc who ran it left. The data is on a hard drive somewhere.
 
-a sovereign publication contains everything. the DAG has every
-parameter, every code version, every intermediate output. clone the
-spring. run the experiment. compare your merkle root to the anchored
-root. if they match, you've independently reproduced the result.
+A sovereign publication contains everything. The DAG has every
+parameter, every code version, every intermediate output. Clone the
+spring. Run the experiment. Compare your merkle root to the anchored
+root. If they match, you've independently reproduced the result.
 
-this is not theoretical. hotSpring's 195 checks reproduce murillo
+This is not theoretical. hotSpring's 195 checks reproduce Murillo
 group results to within published tolerances. wetSpring's 782+ checks
-reproduce DADA2 pipelines, gonzales immunology, anderson evolution.
-the reproduction is the publication.
+reproduce DADA2 pipelines, Gonzales immunology, Anderson evolution.
+The reproduction is the publication.
 
-### 4. it is cheaper by orders of magnitude
+### 4. It Is Cheaper by Orders of Magnitude
 
-publishing a paper in nature communications: ~$5,500 APC.
-publishing a paper in PLOS ONE: ~$1,800 APC.
-publishing a preprint on arxiv: $0 (but no peer review, no prestige).
+Publishing a paper in Nature Communications: ~$5,500 APC.
+Publishing a paper in PLOS ONE: ~$1,800 APC.
+Publishing a preprint on arXiv: $0 (but no peer review, no prestige).
 
-anchoring a sovereign publication to bitcoin: ~$1-3.
-anchoring to bitcoin + ethereum L2: ~$3-5.
-total infrastructure cost: $11,000 one-time (the cluster) + ~$50/month
+Anchoring a sovereign publication to Bitcoin: ~$1-3.
+Anchoring to Bitcoin + Ethereum L2: ~$3-5.
+Total infrastructure cost: $11,000 one-time (the cluster) + ~$50/month
 electricity.
 
-the cluster reproduces papers continuously. each reproduction is a
-sovereign publication for ~$3. the amortized cost per publication
+The cluster reproduces papers continuously. Each reproduction is a
+sovereign publication for ~$3. The amortized cost per publication
 approaches the electricity cost of running the computation.
 
-a lab that publishes 10 papers a year spends $20,000-$55,000 on APCs.
-the same lab could anchor 10 sovereign publications for $30-50 and
+A lab that publishes 10 papers a year spends $20,000-$55,000 on APCs.
+The same lab could anchor 10 sovereign publications for $30-50 and
 buy a threadripper with the savings.
 
-### 5. it is faster by orders of magnitude
+### 5. It Is Faster by Orders of Magnitude
 
-journal publication: 6-36 months from submission to print.
-sovereign publication: the time to run the computation + the time for
-a bitcoin block (~10 minutes).
+Journal publication: 6-36 months from submission to print.
+Sovereign publication: the time to run the computation + the time for
+a Bitcoin block (~10 minutes).
 
-hotSpring exp014 takes ~30 minutes to run. add 10 minutes for a
-bitcoin confirmation. the stanton & murillo 2016 reproduction is
-publicly timestamped 40 minutes after it starts. not 40 minutes after
+hotSpring exp014 takes ~30 minutes to run. Add 10 minutes for a
+Bitcoin confirmation. The Stanton & Murillo 2016 reproduction is
+publicly timestamped 40 minutes after it starts. Not 40 minutes after
 submission — 40 minutes after the computation.
 
-### 6. it dissolves the gatekeeper
+### 6. It Dissolves the Gatekeeper
 
-journals are gatekeepers. they decide what gets published. they decide
-who reviews it. they charge for access. they charge for submission.
-they own the formatting. they own the copyright (often).
+Journals are gatekeepers. They decide what gets published. They decide
+who reviews it. They charge for access. They charge for submission.
+They own the formatting. They own the copyright (often).
 
-a sovereign publication has no gatekeeper. the computation runs. the
-DAG records it. bearDog signs it. the merkle root anchors to bitcoin.
-anyone in the world can verify it. the only gate is: does the science
-reproduce? if yes, the publication exists. if no, the checks fail and
+A sovereign publication has no gatekeeper. The computation runs. The
+DAG records it. bearDog signs it. The merkle root anchors to Bitcoin.
+Anyone in the world can verify it. The only gate is: does the science
+reproduce? If yes, the publication exists. If no, the checks fail and
 there is nothing to anchor.
 
-the filter is the net. the science that passes is the science that
-publishes. the science that fails is the science that doesn't. no
-reviewer 2. no editor's desk rejection. no 18-month backlog.
+The filter is the net. The science that passes is the science that
+publishes. The science that fails is the science that doesn't. No
+reviewer 2. No editor's desk rejection. No 18-month backlog.
 
-### 7. the attribution is real
+### 7. The Attribution Is Real
 
-a journal paper has an author list. first author did the most work
-(maybe). last author is the PI (definitely). middle authors are a
-political negotiation. who actually wrote the code? who actually ran
-the simulations? who actually cleaned the data? the author list
+A journal paper has an author list. First author did the most work
+(maybe). Last author is the PI (definitely). Middle authors are a
+political negotiation. Who actually wrote the code? Who actually ran
+the simulations? Who actually cleaned the data? The author list
 doesn't say.
 
-a sweetGrass attribution braid says exactly who did what:
+A sweetGrass attribution braid says exactly who did what:
 - kevin.mok: reproducer (wrote the spring, ran the computation)
 - murillo: original author (published the theory)
 - stanton: original author (published the theory)
 - hotspring: tool (the code that ran)
 - barracuda: compute (the GPU kernels)
 
-the attribution is granular, role-typed, weighted, and machine-
-readable. when sunCloud activates, value flows along these braids.
-the person who wrote the code gets credit for writing the code. the
+The attribution is granular, role-typed, weighted, and machine-
+readable. When sunCloud activates, value flows along these braids.
+The person who wrote the code gets credit for writing the code. The
 person who published the theory gets credit for publishing the theory.
-not "et al." — names, roles, weights.
+Not "et al." — names, roles, weights.
 
 ---
 
-## how this looks to murillo
+## How This Looks to Murillo
 
-professor michael murillo, computational mathematics, MSU. he
-published stanton & murillo 2016. he taught kevin in CMSE 890.
+Professor Michael Murillo, computational mathematics, MSU. He
+published Stanton & Murillo 2016. He taught Kevin in CMSE 890.
 
-one day he receives a message: "here is a sovereign publication
-reproducing your table II transport coefficients. 45/45 checks pass.
-here is the bitcoin transaction containing the merkle root. here is
-the loamSpine certificate. here is the DAG you can verify yourself.
-here is the sweetGrass braid attributing you as original author."
+One day he receives a message: "Here is a sovereign publication
+reproducing your Table II transport coefficients. 45/45 checks pass.
+Here is the Bitcoin transaction containing the merkle root. Here is
+the loamSpine certificate. Here is the DAG you can verify yourself.
+Here is the sweetGrass braid attributing you as original author."
 
-murillo can:
-1. clone hotSpring (`git clone`)
-2. run exp014 on his own machine (`cargo run -p hotspring-exp014 -- validate`)
-3. verify his result matches the anchored merkle root
-4. confirm the bitcoin transaction exists at the stated block height
-5. confirm the sweetGrass braid attributes him correctly
+Murillo can:
+1. Clone hotSpring (`git clone`)
+2. Run exp014 on his own machine (`cargo run -p hotspring-exp014 -- validate`)
+3. Verify his result matches the anchored merkle root
+4. Confirm the Bitcoin transaction exists at the stated block height
+5. Confirm the sweetGrass braid attributes him correctly
 
-he doesn't need to trust kevin. he doesn't need to trust a journal.
-he doesn't need to wait for peer review. the math either checks out
-or it doesn't. the anchor either exists or it doesn't. the
+He doesn't need to trust Kevin. He doesn't need to trust a journal.
+He doesn't need to wait for peer review. The math either checks out
+or it doesn't. The anchor either exists or it doesn't. The
 attribution either names him or it doesn't.
 
-this is what "the filter is the net" means in practice. the science
-filters itself. the infrastructure makes the filtering visible. the
+This is what "the filter is the net" means in practice. The science
+filters itself. The infrastructure makes the filtering visible. The
 public chain makes it permanent.
 
 ---
 
-## how this looks to kachkovskiy
+## How This Looks to Kachkovskiy
 
-assistant professor ilya kachkovskiy, mathematics, MSU. anderson
-localization specialist. co-authored with jean bourgain (fields
+Assistant Professor Ilya Kachkovskiy, mathematics, MSU. Anderson
+localization specialist. Co-authored with Jean Bourgain (Fields
 medalist). 417+ validated checks across 4 springs reproducing his
 area of expertise.
 
-the anchor contains reproductions of:
-- anderson 1958 (the original localization paper)
-- aubry-andré 1980 (quasiperiodic localization)
-- jitomirskaya 1999 (almost mathieu operator)
-- kachkovskiy & safarov 2016 (his own paper)
-- bourgain & kachkovskiy 2018 (his own paper)
+The anchor contains reproductions of:
+- Anderson 1958 (the original localization paper)
+- Aubry-André 1980 (quasiperiodic localization)
+- Jitomirskaya 1999 (almost Mathieu operator)
+- Kachkovskiy & Safarov 2016 (his own paper)
+- Bourgain & Kachkovskiy 2018 (his own paper)
 
-each reproduction is a sovereign publication. each is merkle-rooted
-and bitcoin-anchored. each attributes the original authors. each can
+Each reproduction is a sovereign publication. Each is merkle-rooted
+and Bitcoin-anchored. Each attributes the original authors. Each can
 be independently verified by running the spring.
 
-kachkovskiy doesn't need to read a paper about anderson localization
-applied to immunological signaling. he can run the code. the code
-reproduces his own results. the anchor proves it happened. the
-attribution names him. the science speaks for itself.
+Kachkovskiy doesn't need to read a paper about Anderson localization
+applied to immunological signaling. He can run the code. The code
+reproduces his own results. The anchor proves it happened. The
+attribution names him. The science speaks for itself.
 
-this is a hopping term that no journal can provide: not "we cite
-kachkovskiy 2016" but "we reproduce kachkovskiy 2016 to within
-published tolerances and the proof is on bitcoin."
+This is a hopping term that no journal can provide: not "we cite
+Kachkovskiy 2016" but "we reproduce Kachkovskiy 2016 to within
+published tolerances and the proof is on Bitcoin."
 
 ---
 
-## how this looks to gonzales
+## How This Looks to Gonzales
 
-professor andrea gonzales, drug discovery, MSU. 6 publications
-reproduced in wetSpring with 359/359 checks. interviewed kevin for
+Professor Andrea Gonzales, drug discovery, MSU. 6 publications
+reproduced in wetSpring with 359/359 checks. Interviewed Kevin for
 a lab position.
 
-the sovereign publications contain:
+The sovereign publications contain:
 - IL-31 pruritus model (her paper)
-- oclacitinib JAK1 selectivity (her paper)
-- lokivetmab pharmacodynamics (her paper)
-- cell-type target analysis (her paper)
-- cross-species causal model (novel, built on her data)
-- anderson-augmented drug repurposing scores (novel, built on her
-  framework + kachkovskiy's math)
+- Oclacitinib JAK1 selectivity (her paper)
+- Lokivetmab pharmacodynamics (her paper)
+- Cell-type target analysis (her paper)
+- Cross-species causal model (novel, built on her data)
+- Anderson-augmented drug repurposing scores (novel, built on her
+  framework + Kachkovskiy's math)
 
-the novel work — the cross-species causal model and the anderson-
+The novel work — the cross-species causal model and the Anderson-
 augmented scoring — are sovereign publications that could not exist
-in the journal system. they combine validated reproductions of
-gonzales's immunology with validated reproductions of kachkovskiy's
-spectral theory. no journal has a category for "cross-domain
-computational reproduction with novel synthesis." the sovereign
-publication system doesn't need a category. the DAG records what
-happened. the anchor proves it. the attribution credits everyone.
+in the journal system. They combine validated reproductions of
+Gonzales's immunology with validated reproductions of Kachkovskiy's
+spectral theory. No journal has a category for "cross-domain
+computational reproduction with novel synthesis." The sovereign
+publication system doesn't need a category. The DAG records what
+happened. The anchor proves it. The attribution credits everyone.
 
-the lisabeth conversation (binding landscape, specificity) becomes
-healthSpring track 9. the ADDRC HTS pipeline connects. the gonzales
-iPSC validation connects. none of this fits in a single paper. all of
+The Lisabeth conversation (binding landscape, specificity) becomes
+healthSpring track 9. The ADDRC HTS pipeline connects. The Gonzales
+iPSC validation connects. None of this fits in a single paper. All of
 it fits in a provenance chain.
 
 ---
 
-## the economic argument
+## The Economic Argument
 
-### for the individual researcher
+### For the Individual Researcher
 
-- save $2,000-5,500 per paper in APCs
-- publish in minutes instead of months
-- establish priority with bitcoin timestamps
-- build a provenance-backed CV (loamSpine credential)
-- attribution follows you, not the journal
+- Save $2,000-5,500 per paper in APCs
+- Publish in minutes instead of months
+- Establish priority with Bitcoin timestamps
+- Build a provenance-backed CV (loamSpine credential)
+- Attribution follows you, not the journal
 
-### for the lab
+### For the Lab
 
 - $11,000 for a cluster that publishes unlimited sovereign papers
 - vs. $20,000-55,000/year in journal APCs for 10 papers
-- the cluster also runs the actual science (it's the HPC, not just
+- The cluster also runs the actual science (it's the HPC, not just
   the publication system)
-- every student, postdoc, and technician gets granular attribution
-- the lab's entire computational history is provenance-traced
+- Every student, postdoc, and technician gets granular attribution
+- The lab's entire computational history is provenance-traced
 
-### for the field
+### For the Field
 
-- reproducibility becomes verifiable, not aspirational
-- priority disputes become cryptographically impossible
-- attribution becomes granular and fair
-- publication speed increases by 100-1000x
-- access becomes universal (public chain, not paywall)
-- fraud becomes detectable (DAG tamper detection, not trust)
+- Reproducibility becomes verifiable, not aspirational
+- Priority disputes become cryptographically impossible
+- Attribution becomes granular and fair
+- Publication speed increases by 100-1000x
+- Access becomes universal (public chain, not paywall)
+- Fraud becomes detectable (DAG tamper detection, not trust)
 
-### for the wider world
+### For the Wider World
 
-- anyone with a computer can verify any result
-- the public chains (bitcoin, ethereum) are the publication ledger
-- the loamSpine certificates are the publication record
-- the sweetGrass braids are the citation graph
-- the rhizoCrypt DAGs are the laboratory notebooks
+- Anyone with a computer can verify any result
+- The public chains (Bitcoin, Ethereum) are the publication ledger
+- The loamSpine certificates are the publication record
+- The sweetGrass braids are the citation graph
+- The rhizoCrypt DAGs are the laboratory notebooks
 
-the journal system is a 350-year-old technology (philosophical
-transactions, 1665). it was designed for a world where the fastest
-communication was physical mail. it has been incrementally patched
+The journal system is a 350-year-old technology (Philosophical
+Transactions, 1665). It was designed for a world where the fastest
+communication was physical mail. It has been incrementally patched
 (digital submission, open access, preprints) but the fundamental
 architecture — author submits claim, gatekeeper evaluates claim,
 reader trusts claim — has not changed.
 
-the sovereign publication replaces claim with proof, gatekeeper with
-math, and trust with verification. the public chain is the timestamp.
-the provenance trio is the record. the computation is the publication.
+The sovereign publication replaces claim with proof, gatekeeper with
+math, and trust with verification. The public chain is the timestamp.
+The provenance trio is the record. The computation is the publication.
 
 ---
 
-## what remains to build
+## What Remains to Build
 
 | component | status | what's needed |
 |-----------|--------|---------------|
@@ -572,14 +572,14 @@ the provenance trio is the record. the computation is the publication.
 | verification CLI | designed | `ecoPrimals verify <certificate> <btc_txid>` |
 | cross-spring aggregation | designed | aggregate multiple spring results into single anchor |
 
-the hard part is done. the provenance trio works. the signing works.
-the attribution works. the remaining work is: submit a 32-byte hash
-to a bitcoin transaction. this is not a research problem. this is a
-weekend of rust code interfacing with a bitcoin node.
+The hard part is done. The provenance trio works. The signing works.
+The attribution works. The remaining work is: submit a 32-byte hash
+to a Bitcoin transaction. This is not a research problem. This is a
+weekend of Rust code interfacing with a Bitcoin node.
 
 ---
 
-*a journal paper is a letter about what happened. a sovereign
+*A journal paper is a letter about what happened. A sovereign
 publication is the thing that happened, signed, timestamped, and
-anchored where no one can alter it. the question is not whether this
-is better. the question is why we still use letters.*
+anchored where no one can alter it. The question is not whether this
+is better. The question is why we still use letters.*
