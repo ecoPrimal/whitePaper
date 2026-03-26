@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 25, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065 tests passing. Market survey complete. **10/11 sovereign layers solved.** Layer 10 fix applied (Exp 091): BOOTVEC=0x3400+ITFEN+INTR_ENABLE. **Adaptive experiment loop live (Exp 092):** journal, observers, ring_meta persistence, `coralctl experiment sweep`. First sweep on both Titan Vs: nouveau 21.9s / nvidia-open 26.8s, sub-1% cross-card variance. 12 journal entries, HBM2 alive. Trace analysis: GR init 100% firmware-driven (zero FECS/GPCCS MMIO). **Fleet: 2× Titan V + RTX 5060**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5060 Blackwell DRM cracked** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 92 experiments.
+**Date:** March 26, 2026
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065 tests passing. Market survey complete. **10/11 sovereign layers — L7 BREAKTHROUGH (Exp 095).** SEC2 enters Heavy Secure mode (SCTL=0x3002) via system memory DMA. FBHUB PRI-dead after VFIO takeover — VRAM DMA corrupts data, sysmem DMA bypasses FBHUB. Path B dead (Exp 094: LS auth blocks PIO). W1 header + BOOTVEC wired from firmware metadata (Exp 093). blob_size=0 patch applied — next pkexec run expected to bootstrap FECS/GPCCS. **Fleet: 2× Titan V + RTX 5060**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5060 Blackwell DRM cracked** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 95 experiments.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -780,11 +780,11 @@ and `GpuDriverProfile` in the shader stack.
 |-------|--------|---------------|
 | L1-L5 | SOLVED | VFIO binding, BAR0/BAR2, PMC, PFIFO, MMU fault buffers |
 | L6 | SOLVED (Exp 076) | FBHUB requires non-replayable fault buffers before any MMU walk |
-| L7 | SOLVED (Exp 085) | 7 bugs found in falcon binding (B1-B7); `falcon_bind_context()` encapsulates full 8-step nouveau sequence; bind_stat=5 on both Titans |
+| L7 | **BREAKTHROUGH** (Exp 095) | SEC2 HS mode via sysmem DMA. FBHUB PRI-dead corrupts VRAM DMA; sysmem bypasses FBHUB. Falcon binding B1-B7 (Exp 085) |
 | L8 | SOLVED (Exp 087) | 7 WPR construction bugs (W1-W7); ACR bootstraps FECS+GPCCS |
 | L9 | SOLVED (Exp 088) | Post-ACR STARTCPU sequence; both falcons transition to RUNNING |
-| L10 | ROOT CAUSE FOUND (Exp 091) | BOOTVEC=0 → GPCCS faults at IMEM[0]; ACR loads BL to IMEM[0x3400] |
-| L11 | BLOCKED by L10 | GR context init + shader dispatch |
+| L10 | **CLOSE** (Exp 095) | Sysmem ACR enters HS; blob_size=0 should avoid trap; FECS/GPCCS bootstrap expected |
+| L11 | BLOCKED by L10 | GR context init + shader dispatch; FECS methods already implemented |
 
 Reverse engineering sources: nouveau (primary Rosetta Stone), nvidia-open
 kernel modules, Mesa NVK, envytools, NVIDIA closed-source header harvesting.
