@@ -16,15 +16,20 @@ A 54-configuration diagnostic matrix systematically tests every combination of
 GPU channel initialization strategies on GV100 (Titan V) via VFIO — no kernel
 driver, no proprietary firmware at the command submission layer.
 
-**6 of 10 sovereign pipeline layers are now proven working:**
+**10.5 of 11 sovereign pipeline layers are now proven working (Exp 104, March 25):**
 
 | Layer | Component | Status |
 |-------|-----------|--------|
 | 0-1 | PCIe/VFIO + PFB/MMU (warm state) | ✅ |
 | 2-3 | PFIFO Engine + Scheduler | ✅ Re-initialized from cold |
 | 4-5 | Channel + PBDMA Context | ✅ 12 configs scheduler-accepted |
-| 6 | MMU Page Table Translation | ❌ Single remaining blocker |
-| 7-10 | GPFIFO→Commands→FECS→Shader | Blocked by Layer 6 |
+| 6 | MMU Page Table Translation | ✅ FBHUB fault buffer config (Exp 076) |
+| 7 | SEC2 Falcon Binding + DMA | ✅ B1-B7 fixed (Exp 085), bind_stat=5 |
+| 8 | WPR/ACR Payload | ✅ W1-W7 fixed (Exp 087), ACR bootstraps |
+| 9 | FECS Boot + GR Register Init | ✅ BOOTVEC + ITFEN + INTR_ENABLE (Exp 091) |
+| 9.5 | ACR DMA + Page Table Format | ✅ **PDE FIX** (Exp 104) — firmware alive, 31 PCs |
+| 10 | HS Authentication | 🔶 Firmware runs in LS, HS transition pending |
+| 11 | GR Context Init + Shader Dispatch | 🔓 Unblocked when L10 done |
 
 ### Key Technical Discovery: PFIFO Re-Initialization
 

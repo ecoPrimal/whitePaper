@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 26, 2026
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065 tests passing. Market survey complete. **10/11 sovereign layers — L7 BREAKTHROUGH (Exp 095).** SEC2 enters Heavy Secure mode (SCTL=0x3002) via system memory DMA. FBHUB PRI-dead after VFIO takeover — VRAM DMA corrupts data, sysmem DMA bypasses FBHUB. Path B dead (Exp 094: LS auth blocks PIO). W1 header + BOOTVEC wired from firmware metadata (Exp 093). blob_size=0 patch applied — next pkexec run expected to bootstrap FECS/GPCCS. **Fleet: 2× Titan V + RTX 5060**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5060 Blackwell DRM cracked** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 95 experiments.
+**Date:** March 25, 2026 (updated)
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. Market survey complete. **10.5/11 sovereign layers — PDE BREAKTHROUGH (Exp 104).** ACR firmware alive and running on GV100: 31 trace PCs, EMEM queues initialized, DMEM intact, CPU at idle loop. HS authentication is the final gate. Root cause of DMA trap found: PDE slot position in GV100 MMU v2 (upper 8 bytes of 16-byte entry). Exp 099-103 eliminated all other hypotheses (FLR, IOMMU, FBIF, memory controller, data loading). **Fleet: 2× Titan V + RTX 5060**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5060 Blackwell DRM cracked** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. Silicon science (Exp 096). 104 experiments.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
