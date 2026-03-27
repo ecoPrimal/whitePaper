@@ -78,6 +78,31 @@ The name connects the coral reef — a living computational structure assembled 
 
 ---
 
+## gen4 Context — coralForge as Science Pipeline Proof
+
+coralForge proves the gen4 pattern works for science: validated infrastructure
+(gen3 springs validating structure prediction primitives) composed into a
+pipeline someone uses without knowing about primals (gen4). The entire path
+from sequencer to structure prediction runs on sovereign hardware, orchestrated
+by biomeOS graphs.
+
+coralForge's gen4 product surface is **helixVision** — a sovereign genomics
+discovery platform (sporeGarden, planned). helixVision composes coralForge's
+structure prediction with wetSpring's 16S/WGS pipelines and other primals into
+a deployable tool for field biologists and environmental scientists. coralForge
+remains the gen3 science name; helixVision is the gen4 product that makes this
+science accessible to people who don't know what an evoformer is.
+
+In the biomeOS OS trajectory (`gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`),
+helixVision represents the science application layer — running as an OS
+application that composes toadStool (GPU dispatch), barraCuda (math),
+coralReef (shader compilation), and wetSpring (sequencing) through the
+PrimalBridge.
+
+See `gen4/` for the full gen4 documentation (23 working papers).
+
+---
+
 ## Connection to the Thesis
 
 coralForge connects to the constrained evolution thesis at three levels:

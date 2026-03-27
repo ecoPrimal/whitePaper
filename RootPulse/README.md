@@ -107,6 +107,34 @@ different vocabulary.
 
 ---
 
+## gen4 Context — RootPulse as Conceptual Bridge
+
+RootPulse is the conceptual engine behind the gen3→gen4 transition. It proves
+that complex systems emerge from primal coordination — the same 6 primals
+with different TOML graphs produce version control, game session tracking,
+sample provenance, and medical records. This emergence proof is what makes
+gen4 possible: if temporal coordination emerges, so can game engines, science
+pipelines, and eventually a sovereign operating system.
+
+### gen4 Products That Use RootPulse Patterns
+
+| Product | RootPulse Pattern | What Emerges |
+|---------|-------------------|-------------|
+| esotericWebb | Session DAG + provenance lifecycle | Game session tracking with attribution |
+| helixVision | Sample → analysis → publication provenance | Field-to-publication chain-of-custody for genomic samples |
+| RPGPT Engine | Continuous + transactional | Campaign history with anti-cheat as chain-of-custody |
+
+### RootPulse → biomeOS OS Trajectory
+
+The temporal coordination that RootPulse provides is what an OS filesystem
+needs: version history, provenance, branching, federation. In the biomeOS OS
+trajectory (`gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`), RootPulse patterns
+become the filesystem layer — files don't just exist, they have provenance.
+
+See `gen4/` for the full gen4 documentation (22 working papers).
+
+---
+
 ## Implementation Status (March 15, 2026)
 
 | Component | Status |

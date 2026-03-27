@@ -232,7 +232,7 @@ real-time anomaly detection with minimal computational overhead.
 neuralSpring also contributes spectral analysis primitives (`eigh_f64`, IPR,
 level spacing ratio) for characterizing community structure shifts — the same
 primitives validated against Kachkovskiy Papers 022-023 (150+ tolerances,
-46 upstream rewires). S170 total: 1,195 lib / 1,217 total tests, 220/220
+46 upstream rewires). S135 total: 966 lib tests, 232 binaries, 220/220
 validate_all, 3,034+ checks across 25 papers + 5 WDM surrogates.
 
 Training: 12-24 months of baseline community sampling (monthly 16S)

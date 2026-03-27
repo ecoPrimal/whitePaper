@@ -216,7 +216,7 @@ network weight matrices that gen3 Sub-01 uses on microbial communities:
   same architecture can classify Anderson regimes (extended/localized/marginal)
   from community time-series features, directly applicable to QS regime
   monitoring (Sub-thesis 04, 06)
-- **Current status**: neuralSpring S170 — 1,195 lib / 1,217 total tests,
+- **Current status**: neuralSpring S135 — 966 lib tests, 232 binaries,
   220/220 validate_all, 3,034+ total checks, 5 WDM surrogates complete (nW-01..05),
   150+ named tolerances, 46 upstream rewires, `spectral_entropy` delegated to
   `barracuda::stats::shannon_from_frequencies`

@@ -2,7 +2,7 @@
 
 **Status**: Working paper
 **Lineage**: Science validation companion to `PRIMAL_CATALOG.md`
-**Last Updated**: March 23, 2026
+**Last Updated**: March 1, 2026
 **License**: AGPL-3.0 — All springs are aggressively open science
 
 ---
@@ -69,12 +69,12 @@ The springs are organized into two tiers:
 
 **Domain**: Evapotranspiration (8 methods), soil moisture sensing, IoT irrigation scheduling, Richards PDE, coupled hydrology, yield response, ecological diversity, immunological Anderson coupling
 **Grade**: Full Python→Rust→GPU→metalForge→NUCLEUS pipeline complete
-**Checks**: 1,237/1,237 Python **;** 938 lib + 316 integration/doc + 62 forge = 1,316 Rust tests (1,254 barracuda crate; 27 GPU fail: upstream wgpu 28) + 146/146 evolution + 87 experiments — **91** binaries, **58** tolerances, **41** capabilities; barraCuda **0.3.7** (wgpu 28), **`default-features = false`** (gpu + domain-pde only)
+**Checks**: 1,237/1,237 Python + 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28) + 381/381 validation + 146/146 evolution + 78 experiments
 **Faculty**: Younsuk Dong (BAE, MSU — new lab 2026)
 **Repository**: git@github.com:syntheticChemistry/airSpring.git
 **License**: AGPL-3.0-or-later
 
-**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 19.8× geometric mean Rust speedup over Python (24 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops + fused Welford (hotSpring S58) + fused Pearson (neuralSpring S69). Cross-spring shader provenance: hotSpring (precision/DF64), wetSpring (bio/diversity), neuralSpring (ML/stats), groundSpring (MC/uncertainty). NUCLEUS primal with **41** science capabilities.
+**What it validates**: airSpring proves BarraCuda can replace the Python/Excel toolchain for precision agriculture at every stage — from paper reproduction through GPU-accelerated sovereign computation on consumer hardware. 57 papers reproduced with full provenance. FAO-56 ET₀ computed in Rust matches Python to 1e-5 tolerance across 75 cross-validated values. Real data from 100 Michigan stations (15,300 station-days) achieves R²=0.97. 19.8× geometric mean Rust speedup over Python (24 algorithms), 13,000× atlas-scale. 25 Tier A GPU modules + 6 f64-canonical local GPU ops + fused Welford (hotSpring S58) + fused Pearson (neuralSpring S69). Cross-spring shader provenance: hotSpring (precision/DF64), wetSpring (bio/diversity), neuralSpring (ML/stats), groundSpring (MC/uncertainty). NUCLEUS primal with 30 science capabilities.
 
 **Phase inventory**:
 
@@ -82,11 +82,11 @@ The springs are organized into two tiers:
 |-------|------|--------|------------|
 | 0 (Python control) | 57 papers: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, 8 ET₀, SCS-CN, Green-Ampt, VG, Anderson | 1,237/1,237 | Paper examples matched exactly |
 | 0+ (Real data) | 100 Michigan stations, 15,300 station-days | R²=0.97 | Open-Meteo ERA5 validates open data approach |
-| 1 (Rust) | 91 binaries, 938 lib + 316 integration/doc + 62 forge tests | 1,316 | 19 eco modules + 25 GPU orchestrators (barraCuda 0.3.7, wgpu 28, default-features=false gpu+domain-pde) |
+| 1 (Rust) | 86 binaries, 827 lib + 62 forge tests | 827+62 | 19 eco modules + 25 GPU orchestrators (barraCuda 0.3.3, wgpu 28) |
 | 2 (Cross-validation) | Python↔Rust value comparison | 75/75 | All values match within 1e-5 |
-| 3 (GPU live) | Titan V + RTX 4070 dispatch | 87/87 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
+| 3 (GPU live) | Titan V + RTX 4070 dispatch | 78/78 + 46/46 | 0.04% seasonal parity, pure GPU end-to-end |
 | 3.4 (Local GPU) | 6 f64-canonical ops via compile_shader_universal | 6 ops | SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle |
-| 3.5+ (NPU/metalForge/NUCLEUS) | AKD1000, 27 workloads, 41 capabilities | 95+66+35 | Full cross-substrate pipeline |
+| 3.5+ (NPU/metalForge/NUCLEUS) | AKD1000, 27 workloads, 30 capabilities | 95+66+35 | Full cross-substrate pipeline |
 
 **Papers reproduced**: 57 papers including Allen et al. (1998) FAO-56, Dong et al. (2020/2024), Kumari et al. (2025), coupled SCS-CN + Green-Ampt, Van Genuchten inverse, 8 ET₀ intercomparison.
 
@@ -94,15 +94,15 @@ The springs are organized into two tiers:
 
 **BarraCuda contributions**: 3 upstream bug fixes (TS-001/003/004), Richards PDE absorbed (S40), stats metrics absorbed (S64), 6 f64-canonical local ops pending absorption.
 
-**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target), NUCLEUS (41 ecology capabilities), metalForge (27 workloads), bingoCube/nautilus (evolutionary reservoir).
+**Participates in**: ToadStool validation (Rust science crate), Penny Irrigation (real-world application target), NUCLEUS (30 ecology capabilities), metalForge (27 workloads), bingoCube/nautilus (evolutionary reservoir).
 
 ---
 
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: V132 — 47 CPU + 47 GPU bio modules, 1 runtime dependency (flate2)
-**Checks**: 5,707+ validation checks across 379 experiments. **1,776** Rust tests (workspace; 0 failures), 214 named tolerances, 354 binaries (306 validate + 23 benchmark + 25 other). 63/63 papers reproduced, 46 at full CPU+GPU+metalForge. barraCuda **v0.3.7** (150+ primitives consumed; migration from v0.3.5). IPC resilience (`RetryPolicy` + `CircuitBreaker`), 4-format capability parsing, batch Anderson spectral module, stable numerics (`log_sum_exp`, Kahan summation). **V132:** workspace lints, `DeviceCapabilities`, `ValidationSink`, `PROVENANCE_REGISTRY`, IPC normalization, ecosystem wiring (sweetGrass braids, `StreamItem`, `performance_surface`). 24 capabilities across 16 domains. JSON-RPC 2.0 server with batch requests and notifications. Zero local WGSL, zero unsafe, zero TODO/FIXME, zero mocks in production. Leverage guide: `wateringHole/WETSPRING_LEVERAGE_GUIDE.md`.
+**Grade**: V127 — 47 CPU + 47 GPU bio modules, 1 runtime dependency (flate2)
+**Checks**: 5,707+ validation checks across 376 experiments. 1,443+ Rust tests (0 failures), 214 named tolerances, 354 binaries (306 validate + 23 benchmark + 25 other). 63/63 papers reproduced, 46 at full CPU+GPU+metalForge. barraCuda v0.3.5 (150+ primitives consumed). IPC resilience (`RetryPolicy` + `CircuitBreaker`), 4-format capability parsing, batch Anderson spectral module, stable numerics (`log_sum_exp`, Kahan summation). 24 capabilities across 16 domains. JSON-RPC 2.0 server with batch requests and notifications. Zero local WGSL, zero unsafe, zero TODO/FIXME, zero mocks in production. Leverage guide: `wateringHole/WETSPRING_LEVERAGE_GUIDE.md`.
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — cytokine signaling, AD, dose-response), Erika Lisabeth (ADDRC Director, MSU — HTS, drug repurposing, EphA3), Richard Neubig (Drug Discovery Director, MSU — GPCR, Rho/MRTF/SRF skin fibrosis)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -123,7 +123,6 @@ The springs are organized into two tiers:
 | V59 | Science extensions + three-tier controls | 1,094+ | NCBI sovereign, cold seep, dynamic W(t), NPU sentinel, Exp190-192 |
 | V66-V67 | Deep audit + experiment buildout + evolution | 733+ | 50/50 three-tier, BandwidthTier, ComputeDispatch, 10 Python baselines, Exp216-220 |
 | V86 | Cross-Spring Evolution & Deep Debt (March 1, 2026) | Exp260-262 | Cross-spring validation 23/23 across 5 Springs; ESN bridge to ToadStool esn_v2 (BioEsn + multi-head); 4 module refactors, 11 new tests (1,247 total); 75 files changed, -4,753 net lines (deep debt elimination) |
-| V132 | barraCuda v0.3.7 migration + ecosystem wiring (March 2026) | **1,776** tests | Workspace lints; `DeviceCapabilities`; `ValidationSink`; `PROVENANCE_REGISTRY`; IPC normalization; sweetGrass braids + `StreamItem` + `performance_surface` |
 
 **Pipelines validated**: Complete 16S (Galaxy/QIIME2 → Rust → GPU), LC-MS features (asari → Rust), PFAS screening (FindPFAS → Rust), public data benchmark (4 BioProjects, 22 samples, all match paper ground truth), real NCBI sovereign pipeline (EFetch/SRA → FASTA → diversity → Anderson), cold seep metagenome classification, dynamic Anderson W(t) perturbation models.
 

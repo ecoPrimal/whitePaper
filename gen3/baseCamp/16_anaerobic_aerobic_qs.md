@@ -3,7 +3,7 @@
 **Status**: Stage 1 in progress — computational foundation complete (V108). **neuralSpring Paper 027 benchmark COMPLETE (S142)**: ESN methane yield predictor, 36/36 CPU + 23/23 bC/gT PASS
 **Date**: March 10, 2026
 **Faculty Anchor**: Wei Liao (ADREC, MSU BAE)
-**Springs**: wetSpring (QS framework), healthSpring (anaerobic gut), airSpring v0.8.9 (soil O₂ zones, Richards PDE refactored eco/richards 640 LOC, PRIMAL_NAME/PRIMAL_DOMAIN, composition guidance), neuralSpring (ML), groundSpring (spectral)
+**Springs**: wetSpring (QS framework), healthSpring (anaerobic gut), airSpring (soil O₂ zones), neuralSpring (ML), groundSpring (spectral)
 **Bench Source**: MSUBI bioreactor experience (5 years), ADREC interview (2024)
 
 ---
@@ -163,7 +163,7 @@ microbiology. The QS-disorder framework provides the physics.
 |--------|-------------|--------|
 | wetSpring | Anderson-QS framework, 16S pipeline, diversity analytics, Bray-Curtis GPU | **Ready** |
 | healthSpring | Anderson gut lattice model (Exp032), anaerobic gut as test case | **Ready** |
-| airSpring v0.8.9 | Soil aerobic/anaerobic zonation, Paper 06 pore network model, Richards PDE (eco/richards refactored, 640 LOC), cast module, mul_add FMA, composition guidance | **Ready** |
+| airSpring | Soil aerobic/anaerobic zonation, Paper 06 pore network model | **Ready** |
 | neuralSpring | ESN/LSTM for digester time series, regime classification. **Paper 027 (Wang/Liao 2020) COMPLETE**: `digestion_prediction.rs`, ESN methane yield predictor, bC/gT validated | **Ready + Benchmark Complete** |
 | groundSpring | Spectral theory for oxygen-dependent W, uncertainty budgets | **Ready** |
 | barraCuda | GPU diversity, GPU Anderson, GPU Bray-Curtis | **Ready** |
@@ -206,7 +206,7 @@ Full 6-tier validation chain (Exp341-346, 136 additional checks):
 - Anderson W mapping: `W = W_max * (1 - evenness)`, `W_digester > W_soil` confirmed
 - P(QS) comparison via `norm_cdf` operational for aerobic vs anaerobic
 
-**neuralSpring S170 — Paper 027 (Wang/Liao 2020):**
+**neuralSpring S142 — Paper 027 (Wang/Liao 2020):**
 
 | Component | Checks | Key Result |
 |-----------|:------:|------------|

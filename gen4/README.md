@@ -19,6 +19,70 @@ Each generation answered a different question. Each question could only be asked
 
 ---
 
+## The Emergent Systems — Conceptual Bridge from gen3 to gen4
+
+gen4 didn't appear from nothing. Three emergent systems proved during gen3
+that primal coordination produces complex behaviors — and that proof is
+what makes gen4 possible.
+
+### RootPulse — Temporal Coordination Proves Emergence
+
+RootPulse is the concept behind the gen3→gen4 transition. It proves that
+version control, game session tracking, sample provenance, and medical
+records all emerge from the same 6 primals coordinated by different TOML
+graphs. No monolithic system was built — the complex behavior emerged
+from simple primal composition.
+
+This is the critical insight: if version control can emerge from primal
+coordination, so can a game engine, a bio-omics pipeline, a health
+dashboard, and eventually an operating system. RootPulse is the proof
+that gen4 products are possible.
+
+**Papers**: `RootPulse/` (8 documents — introduction, philosophy,
+architecture, DAG vs linear, primal composition, coordination patterns,
+semantic attribution, API reference)
+
+### Neural API — The Orchestration Substrate
+
+The Neural API is what makes emergence mechanically possible. It executes
+capability graphs without domain knowledge — `rootpulse_commit.toml` and
+`game_engine_tick.toml` are both "graphs of capability calls." This
+domain-agnostic execution is what allows gen4 products to exist: the
+product defines *what* capabilities it needs as a graph, and the Neural
+API handles *how* to route, schedule, and learn from execution.
+
+Five coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline,
+Continuous) cover every gen4 product pattern — from transactional commits
+to 60 Hz game ticks to streaming bio-omics pipelines.
+
+**Papers**: `neuralAPI/` (11 documents — conceptual foundation, technical
+deep dives, implementation guides, RootPulse case study, roadmap)
+
+### coralForge — Science Pipelines Prove the Pattern
+
+coralForge runs AlphaFold2/3 in pure Rust on sovereign hardware —
+sequencer to structure prediction to publication, all orchestrated by
+biomeOS graphs, all on your hardware. This proves the gen4 pattern
+works for science: validated infrastructure (gen3) composed into a
+pipeline someone uses without knowing about primals (gen4).
+
+**Papers**: `coralForge/` (20 documents — design, implementation,
+validation, evolution, benchmarks, security, community guidance)
+
+### The Trajectory: biomeOS as Sovereign OS
+
+These emergent systems converge on a trajectory: biomeOS evolves from
+orchestrator to operating system. It already provides scheduling
+(graph executor), IPC (JSON-RPC), discovery (Neural API + Songbird),
+device management (toadStool + coralReef), and security (BearDog
+identity). A standalone OS is the natural endpoint — a companion to
+technology like SteamOS/Proton, but for sovereign science, gaming,
+hardware management, and creative work.
+
+**Paper**: `gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`
+
+---
+
 ## Why gen4 Is Emerging Now
 
 gen3 proved the infrastructure computes correct science. gen4 asks a different question: **can people who didn't build the primals compose them into tools they care about?**
@@ -51,7 +115,20 @@ esotericWebb's `PrimalLauncher` reads TOML deploy graphs, topologically sorts de
 
 14,201 tests, 87% coverage, 91+ JSON-RPC methods, Edition 2024. The security layer that gen3 described is now production-grade infrastructure that gen4 consumers inherit for free.
 
-### 7. baseCamp Papers 17–23: The Creative Surface
+### 7. Second gen4 Pattern: helixVision (Genomics)
+
+esotericWebb proved the pattern for creative domains. **helixVision** (working
+name) applies the same pattern to science: compose wetSpring genomics pipelines
+and coralForge structure prediction into a deployable sovereign genomics tool.
+Same PrimalBridge, same deploy graphs, same graceful degradation — different
+domain, different audience (field biologists, wastewater engineers, environmental
+scientists instead of game designers).
+
+This matters because it proves the sporeGarden pattern is **universal**, not
+gaming-specific. The same primals that power a CRPG engine also power a field
+genomics kit. The composition layer is domain-agnostic.
+
+### 8. baseCamp Papers 17–23: The Creative Surface
 
 | Paper | Domain | What It Really Is |
 |-------|--------|-------------------|
@@ -132,11 +209,13 @@ gen4/
 │
 ├── architecture/                      ← How gen4 works (structural patterns)
 │   ├── ANCHORING_PIPELINE.md          — Concrete mechanism: DAG → signing → BTC/ETH anchor
+│   ├── BIOMEOS_OS_TRAJECTORY.md       — biomeOS from orchestrator to sovereign OS (SteamOS analogy)
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
+│   ├── HELIX_VISION.md                — Sovereign genomics: sample → understanding pipeline
 │   └── RPGPT_ENGINE.md                — Ingestible rulesets, living game systems
 │
 ├── economics/                         ← How gen4 sustains itself (value and attribution)
@@ -161,7 +240,7 @@ gen4/
 | Section | Document | Domain |
 |---------|----------|--------|
 | products/ | GAMES_AT_HOME.md | Distributed human computation (baseCamp 19) |
-| products/ | FIELD_GENOMICS_KIT.md | Sovereign sample provenance (baseCamp 09+21) |
+| ~~products/~~ | ~~FIELD_GENOMICS_KIT.md~~ | Absorbed into HELIX_VISION.md (baseCamp 09+21+04+10) |
 | products/ | PATIENT_RECORDS.md | Zero-knowledge health records (baseCamp 22) |
 | outreach/ | FOR_CLINICIANS.md | Healthcare providers |
 | outreach/ | FOR_RESEARCHERS.md | Field scientists and data pipeline users |
@@ -194,7 +273,12 @@ thesis/CREATIVE_VALIDATORS.md.
 
 **If you built the primals**: Start with
 architecture/COMPOSITION_PATTERNS.md (how your work becomes invisible
-infrastructure), then products/ESOTERIC_WEBB.md (the first proof).
+infrastructure), then products/ESOTERIC_WEBB.md (the first proof), then
+architecture/BIOMEOS_OS_TRAJECTORY.md (where it all leads).
+
+**If you are a field scientist**: Start with
+products/HELIX_VISION.md (sovereign genomics pipeline), then
+architecture/COMPOSITION_PATTERNS.md (the gen4 patterns it uses).
 
 **If you are a creative**: Start with outreach/FOR_CREATIVES.md, then
 products/ESOTERIC_WEBB.md, then the sporeGarden org README.
@@ -225,7 +309,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **21 working papers** across 6 sections document the
+gen4/ is active. **23 working papers** across 6 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, K-NOME methodology evolution, and audience-specific guides for the
 composition generation.

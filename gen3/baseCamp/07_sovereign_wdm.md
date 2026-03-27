@@ -1,14 +1,14 @@
 # Sub-Thesis 07: Sovereign Warm Dense Matter Simulation on Consumer GPU
 
 **Date:** March 14, 2026 (updated)
-**Status:** **Validated + Live Kokkos Parity + Precision Stability + Precision Brain + VFIO PBDMA Context Load + AMD GCN5 DRM Preswap** — hotSpring v0.6.32, **848 lib tests**, 115 binaries, 85 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. **AMD GCN5 DRM preswap validation (March 2026):** WGSL → coral-reef → coral-driver PM4 → MI50. Phases A/B/C PASS (f64 write, f64 arith, multi-workgroup). 12 coral-reef bugs found/fixed. **GLOBAL_LOAD blocker:** all variants (GLC, FLAT, SADDR, GTT/VRAM, cache invalidation) hang — blocks multi-buffer, LJ force, HBM2 bandwidth. Root cause: missing PM4 register config (ref Mesa radeonsi). Naga DF64 bypass validated end-to-end for store-only shaders. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). **Live Kokkos benchmark** (Exp 053): 9/9 Yukawa cases, **12.4× gap** (barraCuda 212 steps/s vs Kokkos-CUDA 2,630 steps/s at N=2000) — gap dominated by native f64 fallback (1:32 on Ampere), DF64 safe-path fix expected to close to ~2×. DF64 transcendental poisoning bug discovered and fixed. **VFIO PBDMA context load** (Exp 058): 3 critical Volta register discoveries (preempt 0x002638, ACK 0x002A00, SIGNATURE validation), PBDMA2 loads RAMFC with zero errors; USERD DMA read remaining. coralReef P10 Iter 62+. Dual Titan V mmiotrace planned. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
+**Status:** **Validated + Live Kokkos Parity + Precision Stability + Precision Brain + VFIO PBDMA Context Load** — hotSpring v0.6.31, **848 lib tests**, 115 binaries, 85 WGSL shaders. All plasma MD, lattice QCD, and nuclear HFB reproduction complete. GPU promotion: Papers 43 (gradient flow, 38.5× speedup) and 44 (BGK dielectric, 12/12 physics checks). **Full multi-tier precision stability analysis** (Exp 046): 9 cancellation families audited across f32/DF64/f64/CKKS FHE. Stable BCS v² and plasma W(z) algorithms enable DF64 throughput (16× on consumer GPUs) without precision loss. **Precision brain** (Exp 049): self-routing hardware calibration, NVVM device poisoning discovered and gated, dual-GPU cooperative patterns (Split BCS 2.2×, Split HMC, Redundant, PCIe 1.2 GB/s). **Live Kokkos benchmark** (Exp 053): 9/9 Yukawa cases, **12.4× gap** (barraCuda 212 steps/s vs Kokkos-CUDA 2,630 steps/s at N=2000) — gap dominated by native f64 fallback (1:32 on Ampere), DF64 safe-path fix expected to close to ~2×. DF64 transcendental poisoning bug discovered and fixed. **VFIO PBDMA context load** (Exp 058): 3 critical Volta register discoveries (preempt 0x002638, ACK 0x002A00, SIGNATURE validation), PBDMA2 loads RAMFC with zero errors; USERD DMA read remaining. coralReef P10 Iter 52+. Dual Titan V mmiotrace planned. Zero clippy warnings (lib+bins), zero unsafe, all AGPL-3.0-only. 60/60 Sarkas observable checks (N=10k, 80k steps, $0.044). Deconfinement phase transition at β_c=5.69 on RTX 3090 (32⁴, 13.6h, $0.58). DF64 core streaming delivers 9.9× native f64 throughput. Verlet neighbor list achieves 992 steps/s (κ=3). Transport coefficients D*, η*, λ* via GPU Green-Kubo.
 **Domain:** Plasma physics, computational science, distributed computing
 **Novelty:** No prior work demonstrates full WDM transport coefficient
 reproduction on consumer GPU via vendor-agnostic shaders; no prior work
 frames distributed consumer GPU networks as alternatives to institutional
 HPC for plasma physics
 **Cross-Spring:** hotSpring (MD + transport + lattice QCD) × neuralSpring
-(surrogate learning + LSTM) × groundSpring V116 (uncertainty propagation — typed error evolution, ValidationSink trait, Format C/D capability parsing, OnceLock GPU probe cache, RAWR extraction, 102 barracuda delegations)
+(surrogate learning + LSTM) × groundSpring V113 (uncertainty propagation — GemmF64 transpose (Tikhonov KᵀK/KᵀG), RetryPolicy + CircuitBreaker, 4-format capability parsing, exit_code constants, 102 barracuda delegations)
 
 ---
 
@@ -308,9 +308,9 @@ df64-validated protein folding primitives directly to WDM science:
   Evoformer block pipeline validated end-to-end. Phase B GPU gaps all closed:
   ODE batch integration, FST variance decomposition, introgression HMM chain
 
-### 6.2 groundSpring V116 Integration
+### 6.2 groundSpring V113 Integration
 
-groundSpring V116 (40 modules, 960+ tests, typed error evolution (DispatchError, EsnError, ResilienceError), ValidationSink trait, Format C/D capability parsing, OnceLock GPU probe cache, RAWR extraction. 102 barracuda delegations,
+groundSpring V113 (GemmF64 transpose (Tikhonov KᵀK/KᵀG), RetryPolicy + CircuitBreaker, 4-format capability parsing, exit_code constants. V112: OrExit<T>, parse_benchmark(), socket_env_var(), provenance trio. 102 barracuda delegations,
 29/29 validation binaries, 140 metalForge checks)
 provides the inverse problem and uncertainty machinery for WDM science.
 

@@ -79,6 +79,42 @@ folding run are both "graphs of capability calls with timing constraints."
 
 ---
 
+## gen4 Context — Neural API as the Kernel Substrate
+
+The Neural API's domain-agnostic graph execution is what enables gen4 products
+to exist. A game engine, a science pipeline, and a health dashboard are all
+"graphs of capability calls" — the Neural API doesn't distinguish them. This
+makes the Neural API the kernel substrate for a sovereign operating system.
+
+### gen4 Products Built on Neural API
+
+| Product | Coordination Pattern | Graph |
+|---------|---------------------|-------|
+| esotericWebb | Deploy graphs + session pipeline | `webb_*.toml` (6 atomic tiers) |
+| helixVision | Pipeline + sequential | Genomics deploy graphs (Sequence/Provenance/Field/Full tiers) |
+| RPGPT Engine | Continuous + transactional | `game_engine_tick.toml` |
+| Cross-spring ecology | Sequential | `cross_spring_ecology.toml` |
+
+### Neural API → biomeOS OS Trajectory
+
+The five coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline,
+Continuous) cover every OS scheduling need. The capability routing (290+
+translations) is a service bus. The PathwayLearner is adaptive scheduling.
+In the biomeOS OS trajectory (`gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`),
+the Neural API becomes the kernel — the scheduler, IPC bus, and service
+discovery layer.
+
+### gen4 Validation: primalSpring as Composition Health
+
+esotericWebb's deploy graphs declare `primalspring_primal` as a post-deploy
+validator with 6 `composition.webb_*_health` capabilities. This means
+primalSpring validates not just that primals talk (gen3) but that products
+can build real pipelines from them (gen4). See `wateringHole/GEN4_BRIDGE.md`.
+
+See `gen4/` for the full gen4 documentation (22 working papers).
+
+---
+
 ## Quick Start
 
 **For biomeOS developers**: [06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md) then [03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)

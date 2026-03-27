@@ -1,23 +1,19 @@
 # Andrea J. Gonzales, PhD — Contact & Work Log
 
-**Position:** Professor and Director, MSU Drug Discovery Program, Dept. of Pharmacology & Toxicology (Nov 2025–present)
-**Previous:** Zoetis (~28 years, final role: VP Global Companion Animal Therapeutics); earlier: Pfizer, Parke-Davis, Upjohn
-**Lab:** Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU
-**Department:** https://phmtox.msu.edu/ | https://drugdiscovery.msu.edu/
-**Domain:** Drug discovery, comparative pharmacology, JAK inhibitors, anti-cytokine mAbs, atopic dermatitis, One Health, oncology, inflammation
-**Hiring:** Global Impact Initiative position — coordinating recruitment of 3 junior faculty (Chemistry, BMB, MGI)
+**Position:** Assistant Professor, Pharmacology & Toxicology, MSU (2025–present)
+**Previous:** Zoetis (18 years — Senior Research Fellow, Veterinary Medicine R&D)
+**Lab:** Gonzales Comparative Pharmacology Lab, MSU
+**Department:** https://phmtox.msu.edu/
+**Domain:** Comparative pharmacology, JAK inhibitors, anti-cytokine mAbs, atopic dermatitis, One Health drug development
 
 ---
 
-## Position
+## Interview
 
 **Date:** March 2026
-**Role:** Research Assistant III — 1-year off-dated position (extension contingent on funding)
+**Role:** Research Associate III (Molecular Biology)
 **Lab:** Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU
-**Focus:** Th2 cytokines in atopic dermatitis across companion animals and humans;
-neuro-immune interactions; molecular mechanisms of atopic disease; novel therapeutic
-target identification. One Health concept. Part of MSU Drug Discovery Program growth.
-**Posting:** Dept. of Pharmacology & Toxicology via MSU Careers
+**Focus:** iPSC-derived skin models, drug screening, molecular biology assays
 
 ---
 
@@ -54,40 +50,25 @@ provides the biological data that maps onto the Anderson framework.
 - **ToadStool streaming (Exp285, 37/37):** batched GPU pipeline, 50K-element batch parity
 - **metalForge cross-substrate (Exp286, 36/36):** full CPU↔GPU + NUCLEUS atomics
 
-### What she brings (the valuable assets):
+### What she has that complements our computational work:
 
 - Empirical cytokine data (IL-31 pruritus scores, dose-response curves)
 - iPSC-derived skin models across species (canine, feline, human)
 - Plate-based screening infrastructure
-- Drug discovery pipeline and regulatory expertise (~28 years pharma)
-- Program-building vision: 3 Global Impact hires, sustainable funding, patents, ROI
-- Wet-lab capacity to physically validate any computational prediction
+- Drug discovery pipeline and regulatory expertise
+- 18 years of Zoetis data and institutional knowledge
+- Wet-lab capacity to physically validate Anderson predictions
 
-### What I bring (bench + computation):
+### What we bring:
 
-**Bench:** 5+ years BSL2 (MSUBI — bacteria, fungi, mycobacteria, anaerobes,
-GMOs, fermentation, enzyme kinetics, HPLC, mass spec), Sandia National Labs
-(HTS, bioinformatics), PFAS Research Lab (EPA SOPs, environmental chemistry).
-Ready for iPSC culture, drug screening assays, transgenic mouse work.
-
-**Computation (near-free):**
-- Anderson localization spatial modeling (novel for immunology)
+- Anderson localization spatial modeling (no one else has this for immunology)
 - Fajgenbaum drug repurposing bridge (MATRIX geometry scoring)
-- GPU-accelerated pipelines (96 GB VRAM, vendor-agnostic)
-- Cross-domain validation (286 experiments, 7,579+ checks, 1,088 tests)
-- Public repos she can verify: all AGPL-3.0 on GitHub
-
-**The integration:** The computation is a zero-cost force multiplier
-for the bench. It tells us which 20 out of 8,000 compounds to screen,
-which tissue geometry to test, which cross-species comparison to make.
-The bench tests those predictions. The result: faster discovery, less
-waste, stronger grant applications with computational preliminary data.
-
-**As a collaboration resource for other MSU teams:** Any PI with
-dose-response data, compound libraries, or tissue models can plug in.
-The computation runs their data for free. What we get back: experimental
-validation, new parameters, co-investigator relationships. The Drug
-Discovery Program grows by making other labs more productive.
+- GPU/NPU-accelerated diversity + regime classification
+- Automated bioinformatics pipelines (NCBI, metagenomics)
+- Cross-spring validation infrastructure (286 experiments, 7,579+ checks, 1,088 tests)
+- Full three-tier portability chain: CPU → GPU → streaming → metalForge
+- Published data already reproduced computationally — her lab data can refine parameters
+- **Public repos she can verify:** all spring experiments are AGPL-3.0 on GitHub
 
 ### Potential collaboration areas:
 
@@ -128,22 +109,14 @@ Discovery Program grows by making other labs more productive.
 
 | Year | Role | Organization |
 |------|------|-------------|
-| ~1991–1998 | Postdoctoral Fellow / Research Associate | Upjohn Company, Parke-Davis Pharmaceuticals |
-| 1999–2013 | Associate Research Fellow | Pfizer Animal Health / Pfizer Inc. |
-| 2013–2016 | Director | Zoetis |
-| 2016–2022 | Senior Research Director | Zoetis |
-| 2022–2025 | VP, Global Companion Animal Therapeutics | Zoetis (Kalamazoo, MI) |
-| Nov 2025–present | Professor and Director, Drug Discovery Program | Michigan State University |
+| ~2007–2025 | Senior Research Fellow → Principal Scientist (Vet Med R&D) | Zoetis (Kalamazoo, MI) |
+| 2025–present | Assistant Professor, Pharmacology & Toxicology | Michigan State University |
 
-**Education:** PhD Toxicology, University of North Carolina at Chapel Hill; BS Biology (with Distinction), University of Michigan. Native of Portage, MI.
-
-Key contributions across career:
-- Contributed to human therapeutics for lung cancer, breast cancer, HIV-1 (Pfizer/Upjohn/Parke-Davis)
+Key contributions at Zoetis:
 - Co-developed oclacitinib (Apoquel) — first JAK inhibitor for veterinary use
 - Co-developed lokivetmab (Cytopoint) — first anti-cytokine mAb for veterinary use
 - Established IL-31 pruritus model in beagles (standardized experimental platform)
 - Published canine→human translation data supporting human drug development
-- Now building MSU Drug Discovery with 3 incoming Global Impact Initiative faculty hires
 
 ---
 
@@ -186,7 +159,6 @@ All spring repos are public under AGPL-3.0. These are what the `computational_br
 | `computational_brief.md` | **Sendable** — technical brief summarizing our computational modeling of her published data. Covers dose-response, PK decay, pruritus model, 3D tissue lattice, Fajgenbaum MATRIX, and public repo links. | **Attach to thank-you email** |
 | `spring_validation_brief.md` | **Sendable** — detailed validation evidence: what was reproduced from G1–G6, what was extended (Anderson framework, CytokineBrain, Fajgenbaum MATRIX), four-tier validation chain across wetSpring + neuralSpring + airSpring. Shows the 782/782 check breakdown. | Second conversation (if she engages) |
 | `../hotspring_evolution_brief.md` | **Sendable** — general-audience brief showing the full pipeline evolution (CERN → Python → Rust CPU → BarraCUDA GPU → Brain architecture). Demonstrates scale, speed, and infrastructure maturity. Not Gonzales-specific — can be sent to anyone. | If she asks about infrastructure |
-| `references.md` | Professional references for RA III position. Schegmann + Larson (MSUBI bench), Jones + Murphy (PFAS current), Murillo (computation/MSDS). **Emails and phone numbers pending.** | When she needs them |
 
 ---
 
@@ -216,12 +188,9 @@ dose-response × MATRIX end-to-end chain.
 
 | Date | Type | Notes |
 |------|------|-------|
-| March 2026 | Job interview | Research Assistant III, Gonzales Lab, MSU Pharmacology & Toxicology. 1-year off-dated position (extension contingent on funding). Focus: Th2 cytokines in AD, neuro-immune interactions, One Health, novel therapeutic targets. |
-| March 2026 | Interview outcome | **Went great.** She appreciates the data science / analytics dimension. Introduced me to Erika Lisabeth (Director, ADDRC) in MSU Drug Discovery. This connects our Fajgenbaum MATRIX scoring directly to institutional HTS infrastructure. |
-| March 2026 | Sent data draft | Sent `computational_brief.md` before the interview. She has now seen the computational modeling of her published data. |
-| March 2026 | Lisabeth introduction | Gonzales introduced me to Lisabeth in person. Had the specificity/binding conversation that became Track 9 (low-affinity binding, hormesis). See `contact/lisabeth/` for details. |
-| March 2026 | Post-interview | Track 9 built: exp097 (affinity landscape), exp098 (toxicity), exp099 (hormesis), exp111 (causal terrarium). 65+ tests, 76 validation checks. 8 testable experimental hypotheses ready for grant writing. See `healthSpring/work/EXPERIMENTAL_HYPOTHESES.md`. |
-| March 2026 | References requested | She asked for professional references. List: Stefan Schegmann (MSUBI), Sean Larson (MSUBI), A. Daniel Jones (PFAS), Cheryl Murphy (PFAS), Dr. Murillo (CMSE/MSDS). Emails and phone numbers pending. See `references.md`. |
+| March 2026 | Job interview | RA III Molecular Biology, Gonzales Lab, MSU Pharmacology & Toxicology. Focus: iPSC-derived skin models, drug screening, molecular biology assays. |
+| March 2026 | Interview outcome | **Went great.** She appreciates the data science / analytics dimension. Wants me to meet Erika Lisabeth (Director, ADDRC — Assay Development and Drug Repurposing Core) in MSU Drug Discovery. This connects our Fajgenbaum MATRIX scoring directly to institutional HTS infrastructure. |
+| March 2026 | Email (draft) | Post-interview thank-you. First exposure to computational work — attaching `computational_brief.md`. She has not seen any ecoPrimals/spring/Anderson work yet. Tone: her science first, computation as differentiator alongside bench contribution. |
 
 ### MSU Drug Discovery Connection (via Gonzales referral)
 

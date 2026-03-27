@@ -1,15 +1,9 @@
 # Email: Post-Interview Follow-Up (March 2026)
 
-**Context:** Interview for Research Assistant III in the Gonzales Lab,
-Dept. of Pharmacology & Toxicology, MSU. 1-year off-dated position (extension
-contingent on funding). Focus: Th2 cytokines in AD across companion animals
-and humans, neuro-immune interactions, novel therapeutic targets, One Health.
-She has NOT seen the computational work yet. This is the first time she'll see it.
-
-**Gonzales context:** Professor and Director of MSU Drug Discovery Program
-(appointed Nov 2025 via Global Impact Initiative). ~30 years pharma:
-VP at Zoetis; Pfizer, Parke-Davis, Upjohn. PhD Toxicology (UNC Chapel Hill).
-Priorities: cross-species, One Health, sustainable funding, patents, ROI.
+**Context:** Interview for RA III (Molecular Biology) in the Gonzales Lab,
+Dept. of Pharmacology & Toxicology, MSU. Position focuses on iPSC-derived
+skin models, drug screening, molecular biology assays. She has NOT seen any
+of the computational work yet. This is the first time she'll see it.
 
 **Interview outcome:** Went great. She appreciates the data science /
 analytics dimension. Wants me to meet Erika Lisabeth (Director, ADDRC) in
@@ -48,7 +42,8 @@ kind of work I want to be part of.
 
 After the interview, I wanted to share something I've been working on
 that's directly relevant to your research. Over the past few months I've
-built a computational framework that models the cytokine signaling data
+built a computational framework, and I have recently extened it to work 
+that models the cytokine signaling data
 from your published work — the oclacitinib dose-response curves (G2),
 the lokivetmab pharmacokinetics (G4), the IL-31 pruritus model (G3), and
 the three-compartment target cell identification from McCandless (G6).

@@ -180,12 +180,12 @@ These primals form the NUCLEUS deployment architecture. Each is production-ready
 
 **Domain**: AI model coordination and sovereign inference  
 **Grade**: A++ (98/100)  
-**Version**: 0.1.0-alpha.22  
-**Tests**: 6,720 passing / 0 failures across 22 crates  
-**Coverage**: 86.0% line coverage (cargo-llvm-cov)  
-**Safety**: `#![forbid(unsafe_code)]` on ALL lib.rs, main.rs, and bin/*.rs files workspace-wide; `#![deny(clippy::unwrap_used, clippy::expect_used)]` in production; `#[expect(reason)]` over `#[allow]` everywhere
+**Version**: 0.1.0-alpha.7  
+**Tests**: 4,819 passing / 0 failed / 140 ignored across 22 crates  
+**Coverage**: 69% line coverage (cargo-llvm-cov)  
+**Safety**: `#![forbid(unsafe_code)]` on all 22 crates; `#![deny(clippy::unwrap_used, clippy::expect_used)]` in production
 
-**What it does**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows — all without compile-time coupling to any AI vendor. Built as 22 workspace crates on Edition 2024 (Rust 1.94+). Pure Rust: zero C dependencies in default build (ecoBin v3.0 compliant — `sysinfo` removed). Typed errors via thiserror (no Box<dyn Error> in library code). Structured logging via tracing. Zero-copy patterns: Arc<str>, bytes::Bytes, Arc<dyn Trait> on hot paths. Clippy pedantic+nursery+cargo zero warnings under `-D warnings`. All source files under 1,000 lines (19 smart-refactored). Human dignity evaluation on AI operations. 24 JSON-RPC methods with semantic `domain.verb` naming. tarpc 0.37 dual-protocol with automatic negotiation.
+**What it does**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor. Built as 22 workspace crates on Edition 2024 (Rust 1.85+). Pure Rust: zero C dependencies in default build (ecoBin compliant). Typed errors via thiserror (no Box<dyn Error> in library code). Structured logging via tracing. Zero-copy patterns: Arc<str>, bytes::Bytes, Arc<dyn Trait> on hot paths.
 
 **Primitive catalog**:
 

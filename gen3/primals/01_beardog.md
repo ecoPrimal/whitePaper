@@ -6,22 +6,17 @@
 |-------|-------|
 | Phase | 1 (Foundation) |
 | Domain | Cryptography, identity, trust |
-| Rust lines | 600,000+ |
-| Tests | 14,201 (0 failures, fully concurrent) |
-| Coverage | 87.0%+ line (llvm-cov) |
+| Rust lines | 577,341 |
+| Tests | 11,872 |
 | Crates | 30 (`crates/*`) |
 | JSON-RPC methods | 91+ |
-| Edition | 2024 (MSRV 1.93.0) |
-| AGPL-3.0 | Yes (100% SPDX headers) |
-| Clippy | 0 warnings (pedantic + nursery + cast + unwrap/expect warn) |
-| Unsafe | `forbid(unsafe_code)` workspace-wide |
-| C deps | Zero (100% Pure Rust, ecoBin compliant) |
+| AGPL-3.0 | Yes |
 
 ## What It Is
 
 BearDog is the cryptographic spine of ecoPrimals. Every operation that requires signing, encrypting, hashing, key derivation, or identity verification is delegated to BearDog via JSON-RPC. No other primal implements its own crypto. This is the **Tower Atomic pattern**: a single, auditable cryptographic surface for the entire ecosystem.
 
-Pure Rust. RustCrypto libraries. Zero C dependencies. Zero OpenSSL. `forbid(unsafe_code)` workspace-wide. Edition 2024, MSRV 1.93.0. `unwrap_used`/`expect_used` warn at workspace level — justified invariants use `#[expect(reason)]`.
+Pure Rust. RustCrypto libraries. Zero C dependencies. Zero OpenSSL. Zero unsafe in production paths.
 
 ## Why It Exists
 

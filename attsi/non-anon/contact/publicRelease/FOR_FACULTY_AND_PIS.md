@@ -27,7 +27,7 @@ You can clone the repo and verify on your own hardware.
 | Monolix | ~$1,500/yr | healthSpring SAEM estimation | Validated on synthetic (Exp075) |
 | WinNonlin (Phoenix) | ~$3,000/yr | healthSpring NCA (λz, AUC∞, MRT, CL, Vss) | Full parity (Exp075) |
 | CRO population PK | $50K–200K/program | GPU Monte Carlo (100K patients, RTX 4070) | Validated (Exp005) |
-| Galaxy server (local) | $50K+ setup | wetSpring 16S pipeline (pure Rust, no Python) | Full parity, 306 binaries |
+| Galaxy server (local) | $50K+ setup | wetSpring 16S pipeline (sovereign Rust) | Full parity, 306 binaries |
 | QIIME2 + conda | Free + sysadmin time | wetSpring (no Python, no conda, no Docker) | Full parity |
 | MassHunter/Chromeleon | ~$10K+/yr | wetSpring Track 2 (mzML/EIC/peaks/PFAS) | Full parity on analysis (no instrument control) |
 
@@ -115,7 +115,7 @@ ICER's A100s.
 
 ```
 Patient data → healthSpring PK/PD pipeline
-    → NONMEM-equivalent FOCE estimation (open-source, no Fortran)
+    → NONMEM-equivalent FOCE estimation (sovereign, no Fortran)
     → NCA (λz, AUC∞, MRT, CL, Vss — WinNonlin replacement)
     → NLME diagnostics (CWRES, VPC, GOF)
     → petalTongue visualization → clinical dashboard
@@ -180,25 +180,8 @@ Total across all springs: **70+ papers reproduced, 27,000+ tests, 15,334+ valida
 
 ---
 
-## Why Collaboration Is Free
-
-The computation costs nothing. The data is public. What costs money is
-bench time, reagents, and FTE — the things you're already paying for.
-
-If your lab has dose-response data, compound libraries, sequencing data,
-or tissue models, the pipeline can analyze it at no cost and return
-predictions you can test with your existing experimental infrastructure.
-What we get back: experimental validation, model refinement, and
-co-investigator relationships for joint grants.
-
-**You don't need to learn Rust. You don't need to install anything.
-You send data, we send predictions, you test them at the bench.**
-
----
-
 ## Contact
 
-Kevin Mok — Gonzales Lab, Dept. of Pharmacology & Toxicology, MSU
-BS Microbiology (MSU 2018), MS Data Science (MSU 2025, 4.0 GPA)
-5+ years BSL2 bench experience (MSUBI), Sandia National Laboratories fellow
-github.com/syntheticChemistry — all AGPL-3.0-or-later
+Kevin Mok — github.com/syntheticChemistry
+BS Microbiology (MSU 2018), MS Data Science (MSU 2025)
+Built on ~$15,000 of consumer hardware in a basement. Zero cloud bills. Zero licenses.

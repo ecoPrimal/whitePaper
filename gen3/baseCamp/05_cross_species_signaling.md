@@ -261,7 +261,7 @@ Connects to Exp146 (luxR phylogeny overlay from Paper P3).
 
 ## 7. neuralSpring Connections
 
-neuralSpring's ML primitives (S170: 1,195 lib / 1,217 total tests,
+neuralSpring's ML primitives (S135: 966 lib tests, 232 binaries,
 3,034+ checks, 5 WDM surrogates complete) apply directly to cross-species
 signaling analysis:
 
