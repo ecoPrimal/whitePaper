@@ -1,7 +1,7 @@
 # Sub-Thesis 24: All-Silicon Science — Repurposing Every GPU Hardware Unit for Computational Physics
 
 **Date:** March 26, 2026
-**Status:** First non-shader-core experiment complete (TMU, Exp 096). 4 of 9 units tested.
+**Status:** First non-shader-core experiment complete (TMU, Exp 096). 4-phase silicon pipeline (budget, saturation, QCD kernel, composition) validated (Exp 097-100). Hardware personalities mapped: RTX 3090 as TMU compositor, RX 6950 XT as cache/precision champion (AMD DF64 38% faster). Dual-GPU cross-validation planned.
 **Domain:** GPU hardware architecture × computational physics × all-silicon pipeline
 **Novelty:** No prior work systematically maps computational physics operations to
 all 9 GPU silicon unit types with empirical throughput measurements and tolerance

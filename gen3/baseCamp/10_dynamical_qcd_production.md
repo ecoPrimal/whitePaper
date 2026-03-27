@@ -1,7 +1,7 @@
 # baseCamp 10: First Dynamical QCD Production on Consumer GPU
 
 **Date:** March 9, 2026 (initial); March 27, 2026 (Nf=2+1 RHMC + self-tuning)
-**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 44/44 overnight checks pass** (v0.6.24). Dynamical N_f=4 ext 3/3 complete. coralReef sovereign compilation: 44/46 shaders, full `GpuBackend` impl. **Evolution (Exp 099-103):** GPU RHMC production — Nf=2 at 4⁴/8⁴, Nf=2+1 at 4⁴ (2-sector: light + strange). Gradient flow at 16⁴ volume. Self-tuning RHMC calibrator eliminates all hand-tuned magic numbers (spectral probe, acceptance-driven step, consistency-driven poles). See `25_self_tuning_simulation.md`.
+**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 44/44 overnight checks pass** (v0.6.24). Dynamical N_f=4 ext 3/3 complete. coralReef sovereign compilation: 44/46 shaders, full `GpuBackend` impl. **Evolution (Exp 099-103):** GPU RHMC production complete — Nf=2 at 4⁴/8⁴, Nf=2+1 at 4⁴ (Exp 101). Gradient flow at volume: five LSCFRK integrators, CK4 six-orders stability (Exp 102). RHMC + gradient flow on dynamical configs via `production_rhmc_flow` (Exp 103). 16⁴ quenched flow and 16⁴ Nf=2+1 RHMC+flow running overnight. Self-tuning RHMC calibrator eliminates all hand-tuned parameters (Exp 103; spectral probe, acceptance-driven step, consistency-driven poles). **biomeGate sovereign experiments 110-123** in parallel (K80 zero-security sovereign, WPR2 root cause). See `25_self_tuning_simulation.md`.
 **Spring:** hotSpring (v0.6.32+)
 **Hardware:** RTX 3090 (GPU) + BrainChip AKD1000 (NPU) + Titan V (DRM testing)
 **License:** AGPL-3.0-only
@@ -494,3 +494,11 @@ tests pass. See `hotSpring/experiments/041_DEEP_DEBT_RESOLUTION_AUDIT.md`.
   confinement transitions." Nucl. Phys. B 210, 423 (1982).
 - F. Wegner. "Disordered system with n orbitals per site: n = ∞ limit."
   Phys. Rev. B 19, 783 (1979).
+
+---
+
+## March 27, 2026 Update: RHMC + Gradient Flow at Volume
+
+Scaling has moved from small-volume RHMC validation to **16⁴** workloads where both pure gauge gradient flow and full **Nf=2+1 RHMC with coupled flow** exercise the same science ladder at realistic site counts. Overnight runs pair quenched flow at 16⁴ with dynamical RHMC+flow at the same volume so wall-clock and thermal behavior can be compared under production-like load. That closes the gap between “integrators and calibrators work in principle” (4⁴/8⁴, Exp 101–103) and “they hold when the Dirac operator and flow operators dominate runtime.”
+
+The **science ladder** status is: **Exp 101** established GPU RHMC production for Nf=2 and Nf=2+1 at small volumes; **Exp 102** locked in gradient-flow machinery at volume (LSCFRK family, CK4 stability); **Exp 103** wires RHMC and flow together on dynamical configurations via the `production_rhmc_flow` binary and the self-tuning calibrator, removing hand-tuned step and pole choices. **16⁴** is the current rung—large enough to stress solvers and flow schedules, still tractable for overnight iteration before committing to 32⁴-scale campaigns. Parallel **biomeGate sovereign experiments 110–123** continue on the side (including K80 zero-security sovereign work and WPR2 root-cause analysis), so infrastructure hardening proceeds in parallel with physics scaling rather than blocking it.
