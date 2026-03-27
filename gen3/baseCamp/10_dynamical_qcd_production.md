@@ -1,8 +1,8 @@
 # baseCamp 10: First Dynamical QCD Production on Consumer GPU
 
-**Date:** March 9, 2026
-**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 44/44 overnight checks pass** (v0.6.24). Dynamical N_f=4 ext 3/3 complete. coralReef sovereign compilation: 44/46 shaders, full `GpuBackend` impl.
-**Spring:** hotSpring (v0.6.24)
+**Date:** March 9, 2026 (initial); March 27, 2026 (Nf=2+1 RHMC + self-tuning)
+**Status:** Complete (all 17 β points finished, 1,071 trajectories). **Chuna Papers 43-45: 44/44 overnight checks pass** (v0.6.24). Dynamical N_f=4 ext 3/3 complete. coralReef sovereign compilation: 44/46 shaders, full `GpuBackend` impl. **Evolution (Exp 099-103):** GPU RHMC production — Nf=2 at 4⁴/8⁴, Nf=2+1 at 4⁴ (2-sector: light + strange). Gradient flow at 16⁴ volume. Self-tuning RHMC calibrator eliminates all hand-tuned magic numbers (spectral probe, acceptance-driven step, consistency-driven poles). See `25_self_tuning_simulation.md`.
+**Spring:** hotSpring (v0.6.32+)
 **Hardware:** RTX 3090 (GPU) + BrainChip AKD1000 (NPU) + Titan V (DRM testing)
 **License:** AGPL-3.0-only
 
