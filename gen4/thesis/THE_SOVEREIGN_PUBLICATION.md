@@ -64,8 +64,8 @@ On this machine:
 - **airSpring**: 326+ checks reproducing ET₀ models, soil calibration
 - **ludoSpring**: 317+ checks validating provenance trio lifecycle,
   NFT economics, fraud detection
-- **primalSpring**: 303 tests validating primal federation, bonding,
-  discovery
+- **primalSpring**: 378 tests (72.5% coverage) validating primal federation, bonding,
+  discovery, composition health, and coordination patterns
 
 Total: 27,000+ automated checks. 175+ published papers reproduced.
 Pure Rust, zero C dependencies, GPU-accelerated via WebGPU/Vulkan.

@@ -109,7 +109,7 @@ esotericWebb's `PrimalLauncher` reads TOML deploy graphs, topologically sorts de
 
 ### 5. primalSpring v0.7.0: Federation Is Real
 
-51 experiments, 9 tracks, 303 tests. **Multi-node bonding and federation validated.** Ecosystem absorption from all 7 sibling springs. 22 deploy graphs. The bonding model (covalent/ionic/metallic) described in gen3's ECOSYSTEM_ARCHITECTURE.md now runs.
+53 experiments, 10 tracks, 378 tests, 72.5% library coverage. **Multi-node bonding and federation validated.** Deep debt audit complete: zero TODOs, zero unsafe, zero C deps, all hardcoded primal names evolved to centralized constants. Ecosystem absorption from all 7 sibling springs. 22 deploy graphs. The bonding model (covalent/ionic/metallic) described in gen3's ECOSYSTEM_ARCHITECTURE.md now runs.
 
 ### 6. BearDog v0.9.0: The Immune System Is Mature
 
