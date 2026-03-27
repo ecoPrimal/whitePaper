@@ -16,7 +16,7 @@ A 54-configuration diagnostic matrix systematically tests every combination of
 GPU channel initialization strategies on GV100 (Titan V) via VFIO — no kernel
 driver, no proprietary firmware at the command submission layer.
 
-**10.5 of 11 sovereign pipeline layers are now proven working (Exp 104, March 25):**
+**11 sovereign pipeline layers — L10 root cause definitive (Exp 122, March 25). K80 validates full stack without security (Exp 123-K):**
 
 | Layer | Component | Status |
 |-------|-----------|--------|
@@ -24,12 +24,12 @@ driver, no proprietary firmware at the command submission layer.
 | 2-3 | PFIFO Engine + Scheduler | ✅ Re-initialized from cold |
 | 4-5 | Channel + PBDMA Context | ✅ 12 configs scheduler-accepted |
 | 6 | MMU Page Table Translation | ✅ FBHUB fault buffer config (Exp 076) |
-| 7 | SEC2 Falcon Binding + DMA | ✅ B1-B7 fixed (Exp 085), bind_stat=5 |
+| 7 | SEC2 Falcon Binding + DMA | ✅ B1-B7 fixed (Exp 085), bind_stat=5. PDE sole determinant (Exp 110) |
 | 8 | WPR/ACR Payload | ✅ W1-W7 fixed (Exp 087), ACR bootstraps |
 | 9 | FECS Boot + GR Register Init | ✅ BOOTVEC + ITFEN + INTR_ENABLE (Exp 091) |
-| 9.5 | ACR DMA + Page Table Format | ✅ **PDE FIX** (Exp 104) — firmware alive, 31 PCs |
-| 10 | HS Authentication | 🔶 Firmware runs in LS, HS transition pending |
-| 11 | GR Context Init + Shader Dispatch | 🔓 Unblocked when L10 done |
+| 9.5 | ACR DMA + Page Table Format | ✅ **PDE FIX** (Exp 104), **HS achieved** (Exp 112, SCTL=0x3002) |
+| 10 | HS Authentication | 🔴 **ROOT CAUSE DEFINITIVE** (Exp 122): WPR2 HW-locked, FWSEC inaccessible, PMU-dependent. Bypassed on Kepler (K80) |
+| 11 | GR Context Init + Shader Dispatch | 🔓 **K80 (Kepler)**: no security barriers. PIO FECS/GPCCS boot. Exp 123-K designed, hardware arriving 2026-03-26 |
 
 ### Key Technical Discovery: PFIFO Re-Initialization
 
