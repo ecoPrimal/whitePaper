@@ -502,3 +502,43 @@ tests pass. See `hotSpring/experiments/041_DEEP_DEBT_RESOLUTION_AUDIT.md`.
 Scaling has moved from small-volume RHMC validation to **16⁴** workloads where both pure gauge gradient flow and full **Nf=2+1 RHMC with coupled flow** exercise the same science ladder at realistic site counts. Overnight runs pair quenched flow at 16⁴ with dynamical RHMC+flow at the same volume so wall-clock and thermal behavior can be compared under production-like load. That closes the gap between “integrators and calibrators work in principle” (4⁴/8⁴, Exp 101–103) and “they hold when the Dirac operator and flow operators dominate runtime.”
 
 The **science ladder** status is: **Exp 101** established GPU RHMC production for Nf=2 and Nf=2+1 at small volumes; **Exp 102** locked in gradient-flow machinery at volume (LSCFRK family, CK4 stability); **Exp 103** wires RHMC and flow together on dynamical configurations via the `production_rhmc_flow` binary and the self-tuning calibrator, removing hand-tuned step and pole choices. **16⁴** is the current rung—large enough to stress solvers and flow schedules, still tractable for overnight iteration before committing to 32⁴-scale campaigns. Parallel **biomeGate sovereign experiments 110–123** continue on the side (including K80 zero-security sovereign work and WPR2 root-cause analysis), so infrastructure hardening proceeds in parallel with physics scaling rather than blocking it.
+
+---
+
+## March 28, 2026 Update: True Multi-Shift CG + Fermion Force Validated
+
+The GPU RHMC pipeline has undergone critical algorithmic and correctness fixes:
+
+### Fermion Force Sign Convention
+The staggered fermion force had a sign and magnitude error (+η/2 vs correct −η) that
+caused ΔH ≈ 1500 and 0% acceptance. This was traced through 5-step isolation:
+quenched baseline → CG A/B test → timestep invariance → Hamiltonian determinism →
+gauge force convention comparison. The fix applies to all RHMC fermion flavors.
+
+### True Multi-Shift CG (Shared Krylov)
+Replaces sequential per-shift CG solves with a single shared Krylov subspace:
+- **Cost reduction**: N_shifts × I → I D†D applications per trajectory
+- **Performance**: 37% wall-time speedup (26.5s → 16.5s per trajectory at 8⁴ Nf=2)
+- **Throughput**: 8.5 GFLOP/s sustained (RTX 3090)
+- **8 new WGSL shaders** validated in production
+
+### Compiler Optimizer Interaction
+`std::hint::black_box(rz_new)` is now required wherever GPU staging buffer readbacks
+feed convergence loops in release builds. Without this barrier, Rust's optimizer
+eliminates the convergence check, causing infinite CG loops. This pattern should be
+adopted across all springs using wgpu GPU-resident convergence.
+
+### Cross-Primal Impact
+- **barraCuda**: True multi-shift CG is general-purpose — any rational approximation benefits
+- **coralReef**: 8 new shaders for sovereign compilation pipeline
+- **All springs**: Force sign convention (∂S/∂U with P += dt·F) is now documented as project standard
+- **All springs**: `black_box` pattern for GPU convergence loops is a mandatory coding pattern
+
+### Updated Science Ladder
+Quenched SU(3) ✅ → Gradient Flow ✅ → LSCFRK Integrators ✅ → Nf=4 Infra ✅ →
+Chuna 44/44 ✅ → Nf=2 ✅ → Nf=2+1 ✅ → Self-tuning ✅ → **True Multi-Shift CG ✅** →
+**Fermion Force Validated ✅** → 16⁴ dynamical flow (running)
+
+See `hotSpring/whitePaper/baseCamp/true_multishift_cg_validated.md` for the full briefing.
+See `ecoPrimals/wateringHole/handoffs/HOTSPRING_TRUE_MULTISHIFT_CG_FERMION_FORCE_HANDOFF_MAR28_2026.md`.
+

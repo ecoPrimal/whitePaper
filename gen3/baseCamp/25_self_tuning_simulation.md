@@ -194,3 +194,23 @@ pure prediction (which can hallucinate outside training distribution).
 - **baseCamp paper 11:** Nautilus shell (evolutionary reservoir → ESN training for NPU bridge)
 - **baseCamp paper 07:** Sovereign WDM (consumer GPU validation foundation)
 - **Thesis connection:** Constrained evolution (Ch. 3) — physics constraints as fitness landscape
+
+---
+
+## March 28, 2026 Update: True Multi-Shift CG Validates Self-Tuning Pipeline
+
+The self-tuning RHMC calibrator's output parameters are now validated through production
+runs using the true multi-shift CG solver with the corrected fermion force:
+
+- **Fermion force sign**: Changed from +η/2 to −η (matching gauge force convention ∂S/∂U)
+- **ΔH**: O(1) across all tested trajectories — confirms calibrator-chosen dt and n_md are correct
+- **37% speedup**: True multi-shift CG + diagnostic removal = 16.5s per trajectory at 8⁴ Nf=2
+- **Compiler fix**: `std::hint::black_box` for GPU convergence loops (release-mode safety)
+
+The calibrator's spectral probe (λ_max from power iteration, λ_min from m²) correctly
+bounds the rational approximation range. The acceptance-driven step adaptation produces
+dt/n_md combinations that yield ΔH = O(1) with the corrected force — validating the
+entire self-tuning chain: spectral discovery → approximation → integration → acceptance.
+
+See `hotSpring/whitePaper/baseCamp/true_multishift_cg_validated.md` for the full debugging
+methodology and production results.
