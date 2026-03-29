@@ -443,7 +443,7 @@ Paper 23 (Primal Coordination)
 | **healthSpring** | **13**, **16** | **Hill, PBPK 5-tissue, population PK Monte Carlo, Michaelis-Menten nonlinear PK, Anderson gut lattice, FMT engraftment, antibiotic perturbation, SCFA production, gut-brain serotonin, Pan-Tompkins QRS, HRV/PPG SpO2/EDA stress/arrhythmia classification, WFDB, testosterone PK, TRT outcomes, testosterone-gut axis, NLME (FOCE+SAEM — sovereign NONMEM/Monolix), NCA (sovereign WinNonlin), 6 WGSL compute shaders, GPU dispatch + metalForge routing + toadStool streaming (51 tests), petalTongue pipeline (28 nodes, 121 channels, 14 scenarios), gut as anaerobic QS system. V44: `primal_names` centralized, `gpu/mod.rs` smart-refactored (696→413), provenance registry accessors, tolerance migration (8 experiments), 928 tests** |
 | **ludoSpring** | **17, 18, 19, 20, 21, 22** | **Fitts's law, Hick's law, Steering law, GOMS, Flow theory, DDA, Four Keys to Fun, Engagement metrics, Perlin noise, WFC, L-systems, BSP trees, Tufte data-ink. 75 experiments, 1692 checks, 394+12+6 tests, ≥90% coverage. Playable prototypes (Doom terminal, roguelike), game telemetry protocol (NDJSON), 3 external game adapters (Veloren, Fish Folk, A/B Street), external control groups. GPU dispatch (Tier A WGSL) + metalForge capability routing + NUCLEUS atomics + petalTongue live dashboards. Lysogeny catalog (6 proprietary mechanics). Cross-spring provenance (>80% similarity). RPGPT + 9 dialogue plane experiments, Games@Home, Novel Ferment Transcript. V22 ecosystem absorption: toadStool direct dispatch, dual-format discovery, Python tolerance mirror, Write→Absorb→Lean documented, session decomposition, typed transition verification, pluggable validation, `#![forbid(unsafe_code)]`** |
 
-| **primalSpring** | **23** | **Coordination and composition validation: 59 experiments, 11 tracks (Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, coralForge Redefinition, Cross-Spring Coordination, Showcase-Mined Patterns, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, gen4 Deployment Evolution). biomeOS is primary test subject and substrate. 385 tests, 72.5% library coverage. Phase 17: GEN4 DEPLOYMENT EVOLUTION (87/87 gates) — biomeOS substrate validated as neural-api orchestrator, native NeuralBridge (zero compile coupling), cross-gate Pixel routing via ADB, Squirrel AI bridge (abstract socket), spring deploy sweep (7 sibling springs), gen4 prototype graphs (sovereign, science, agentic, interactive). Builder `.run()` on all 59 experiments, 100% provenance, zero `.unwrap()`/`#[allow()]`. 35 deploy graphs (18 single-node + 4 multi-node + 7 spring validation + 2 cross-spring + 4 gen4), all nodes `by_capability`. 17 RPC endpoints, 37 capabilities. MCP tools (8 typed for Squirrel AI), 5-tier discovery + biomeOS Neural API, deny.toml hardened, zero clippy warnings (all-targets), zero unsafe (workspace forbid), zero C deps, zero missing docs. v0.7.0 Phase 17.** |
+| **primalSpring** | **23** | **Coordination and composition validation: 63 experiments, 13 tracks (Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, coralForge Redefinition, Cross-Spring Coordination, Showcase-Mined Patterns, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, gen4 Deployment Evolution, Deployment Matrix, Substrate Stress). biomeOS is primary test subject and substrate. 385 tests, 72.5% library coverage. Phase 20: DEPLOYMENT MATRIX + SUBSTRATE VALIDATION (87/87 gates) — 43-cell deployment matrix (arch × topology × preset × transport), 15 benchScale topologies, chaos engineering, agentic trio (biomeOS+Squirrel+petalTongue), storytelling stack (esotericWebb+ludoSpring+Squirrel AI DM), 59 deploy graphs (18 single-node + 5 multi-node + 7 spring validation + 2 cross-spring + 10 gen4 + 5 bonding + 2 chaos + 10 science), all nodes `by_capability`. 17 RPC endpoints, 37 capabilities. MCP tools (8 typed for Squirrel AI), 5-tier discovery + biomeOS Neural API, deny.toml hardened, zero clippy warnings (all-targets), zero unsafe (workspace forbid), zero C deps, zero missing docs. v0.8.0 Phase 20.** |
 
 groundSpring V123 now contributes to ALL 10 active baseCamp papers (01-09, 12) —
 reflecting the expansion from 5 experiments (sensor noise only) to 35 experiments
@@ -536,6 +536,22 @@ Phase 17 validated the biomeOS substrate model end-to-end:
 7. **6 new experiments** (exp075–080), 13 new deploy graphs (35 total), 385 tests
 
 **Known gaps**: Squirrel abstract socket vs biomeOS filesystem routing; no aarch64 biomeOS binary for Pixel substrate.
+
+### primalSpring Deployment Matrix + Substrate Validation (Phase 20) — DONE
+
+Phase 20 built a comprehensive deployment validation substrate:
+
+1. **43-cell deployment matrix** — arch × topology × preset × transport combinations
+2. **15 benchScale topologies** — niche/constrained, bonding models, federation, showcase, agentic, storytelling
+3. **23 new graph compositions** — bonding models (5), chaos (2), science (10), gen4 (6)
+4. **4 new experiments** (exp081–084) — deployment matrix sweep, chaos substrate, federation edge cases, provenance adversarial
+5. **Chaos engineering** — `scripts/chaos-inject.sh` for partition, kill, disk-fill, slow DNS, clock drift
+6. **Agentic trio spec** — biomeOS (nervous system) + Squirrel (brain) + petalTongue (senses) evolution guidance
+7. **Storytelling spec** — ludoSpring + esotericWebb AI DM with Squirrel narration and petalTongue scene rendering
+8. **Primal + spring team handoffs** — per-primal evolution debt table, patterns for springs to model
+9. **59 deploy graphs** (up from 35), **63 experiments** (up from 59)
+
+**Key findings**: biomeOS TCP-only `--port` blocks mobile cells; Squirrel abstract socket blocks agentic routing; ludoSpring missing 6 IPC methods esotericWebb needs; petalTongue needs dialogue-tree scene type for storytelling.
 
 ## Future Contributions
 
