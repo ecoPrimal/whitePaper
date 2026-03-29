@@ -2,7 +2,8 @@
 # Sub-Thesis 24: Esoteric Webb — Primal Composition as Creative Infrastructure
 
 **Date:** March 29, 2026
-**Status:** V5.1, 335 tests, 90.84% coverage, 37 Rust files (~12.5k LOC)
+**Status:** V6, 342 tests, ~91% coverage, 41 Rust files (~13.5k LOC), no spring dependencies
+**Identity:** sporeGarden composition for deployment — composes primals directly via biomeOS graph deployments
 **Foundation:** ecoPrimals gen4 composition layer; primalSpring IPC patterns; wateringHole standards
 
 ## Abstract
@@ -98,8 +99,9 @@ Springs (science)  →  produce  →  primals (genomeBin/ecoBin)
                     Webb discovers via 5-tier capability probe
                            (env vars → metadata → filesystem → Songbird)
                                          ↓
-                    PrimalBridge composes 8 domains with 23 methods
+                    PrimalBridge composes 7 domains with 19 methods
                            (retry + circuit breaker per domain)
+                    Local science (flow, engagement, DDA) — no IPC needed
                                          ↓
                     6-phase enrichment per player action:
                       narrate → dialogue → flow → scene → DAG → close
@@ -111,15 +113,37 @@ Springs (science)  →  produce  →  primals (genomeBin/ecoBin)
 
 | Metric | Value |
 |--------|-------|
-| Tests | 335 (316 unit + 18 E2E + 1 validation) |
-| Coverage | 90.84% lines |
-| Rust files | 37 |
-| LOC | ~12,500 |
-| Bridge methods | 23 (all domains, all degrading) |
-| Primal domains | 8 (ai, game, viz, dag, lineage, compute, storage, provenance) |
+| Tests | 342 (323 unit + 18 E2E + 1 validation) |
+| Coverage | ~91% lines |
+| Rust files | 41 |
+| LOC | ~13,500 |
+| Bridge methods | 19 (all domains, all degrading) |
+| Primal domains | 7 (ai, viz, dag, lineage, compute, storage, provenance) |
+| Local science | flow, engagement, DDA (absorbed from spring patterns) |
 | Unsafe code | `#![forbid(unsafe_code)]` |
 | C dependencies | 0 |
 | Quality gates | 6/6 (fmt, clippy, test, doc, deny, coverage) |
+
+### 6. Compositions Absorb and Evolve — They Don't Depend
+
+V6 proved that a consumer can absorb patterns from springs (game science
+algorithms) as local implementations, then compose the rest directly from
+primals. The gap between what primal compositions can do today and what a
+self-composed creative engine needs is itself the evolution signal. sporeGarden
+projects are **compositions for deployment**: they deploy primal compositions
+via biomeOS graph deployments and discover gaps through use-case exercise —
+they do not depend on spring source code at runtime.
+
+This establishes a clear ecosystem layering:
+- **Primals**: independent binaries with IPC capabilities
+- **Springs**: science workspaces that produce and evolve primals
+- **Compositions** (gardens): deploy primals, compose them, discover gaps
+- **biomeOS**: routes capabilities, orchestrates graphs, bridges naming
+
+When a composition's use case doesn't work, it's a spring validation gap.
+When a spring validation gap is found, it discovers primal debt. The
+compositions are the final stage — focused on the use case, not the
+validation.
 
 ## Implications for Ecosystem Evolution
 
