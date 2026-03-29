@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 # Sub-Thesis 24: Esoteric Webb — Primal Composition as Creative Infrastructure
 
-**Date:** March 25, 2026
-**Status:** V5, 329 tests, 90.84% coverage, 35 Rust files (~12.5k LOC)
+**Date:** March 29, 2026
+**Status:** V5.1, 335 tests, 90.84% coverage, 37 Rust files (~12.5k LOC)
 **Foundation:** ecoPrimals gen4 composition layer; primalSpring IPC patterns; wateringHole standards
 
 ## Abstract
@@ -63,6 +63,13 @@ related logic. Identifying *semantic boundaries* (data types, pipeline logic,
 core state management) produces modules that are independently comprehensible
 while sharing state via `pub(crate)` visibility.
 
+V5.1 extended this pattern: `content/mod.rs` (967 LOC) extracted data model
+types to `content/types.rs`; `bridge.rs` (943 LOC) converted to a directory
+module with `bridge/mod.rs` (core) and `bridge/domains.rs` (domain
+delegations). The bridge split is particularly instructive — child modules in
+Rust can access parent private methods, so domain delegations call generic
+helpers without visibility changes.
+
 ### 4. Coverage Gates Drive Targeted Testing
 
 Setting `--fail-under-lines 90` as a CI gate forced identification of
@@ -104,9 +111,9 @@ Springs (science)  →  produce  →  primals (genomeBin/ecoBin)
 
 | Metric | Value |
 |--------|-------|
-| Tests | 329 (316 unit + 12 E2E + 1 validation) |
+| Tests | 335 (316 unit + 18 E2E + 1 validation) |
 | Coverage | 90.84% lines |
-| Rust files | 35 |
+| Rust files | 37 |
 | LOC | ~12,500 |
 | Bridge methods | 23 (all domains, all degrading) |
 | Primal domains | 8 (ai, game, viz, dag, lineage, compute, storage, provenance) |
@@ -125,3 +132,10 @@ Springs (science)  →  produce  →  primals (genomeBin/ecoBin)
 4. **Creative surfaces validate infrastructure** — Webb found and logged 15+
    evolution gaps that fed back to 6 primal teams, proving that consumers
    are the best auditors of producer capabilities.
+5. **`#[expect]` over `#[allow]`** — lint suppressions with mandatory reasons
+   and automatic dead-suppression detection. During V5.1 migration, several
+   `#[allow]` were found dead (lints already resolved by prior refactoring).
+6. **Directory modules for growing impl blocks** — Rust child modules can
+   access parent private methods, enabling `bridge/domains.rs` to call generic
+   call helpers without widening visibility. New primal domains add lines only
+   to `domains.rs`, never growing core infrastructure.
