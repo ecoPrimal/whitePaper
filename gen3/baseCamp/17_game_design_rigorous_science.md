@@ -1,10 +1,12 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: Validated — 75 experiments, 1692 checks, 394 tests + 12 proptest + 6 IPC integration, 3 playable prototypes, 3 external control groups, 4 cross-spring, 3 RPGPT + 9 dialogue plane, 4 Games@Home, 1 trio, 1 extraction shooter, 1 composable viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance, 24 IPC capabilities (10 local, 14 external), cross-ecosystem deep debt V23 (zero `#[allow()]` — `#[expect(reason)]` curated dictionary, zero-panic validation — 14 experiments, `extract_rpc_result()` centralized, `deny.toml wildcards=deny`, XDG socket paths, named unit constants, toadStool direct dispatch, dual-format discovery, Python tolerance mirror, `#![forbid(unsafe_code)]`)
-**Date**: March 16, 2026
+**Status**: V31 — 82 experiments, 27 IPC capabilities, 675 barracuda + 19 forge tests, 42 Python parity, 19 proptest. Zero `#[allow()]` (3 `#[expect(reason)]`), zero `unsafe`, zero hardcoded primal names (capability-based discovery). All 86 workspace members inherit `[lints] workspace = true`. All validation experiments use `ValidationHarness` + `BaselineProvenance`. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda. 91.27% line coverage (85% floor enforced). 13 MCP tool descriptors (8 science + 5 delegation). `game.gpu.*` toadStool delegation with CPU fallback. Fog-of-war Bresenham LOS. esotericWebb `LudoSpringClient` response shape alignment. Baselines regenerated with `content_sha256`. `#![forbid(unsafe_code)]`
+**Date**: March 23, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
+
+**Gen4 consumer note**: **esotericWebb** is the first gen4 product to consume ludoSpring’s game-science IPC surface at scale — the same JSON-RPC capability plane (session quality, flow, engagement, provenance-adjacent hooks) that papers 18–22 build on is what gen4 routes through for playable CRPG composition, without importing ludoSpring as a crate.
 
 ---
 
@@ -71,7 +73,7 @@ the metrics framework is content-agnostic.
 | BSP trees | Fuchs, Kedem, Naylor (1980) | `procedural::bsp` | 017 |
 | Tufte data-ink | Tufte (1983, 1990) | `metrics::tufte_gaming` | 003, 016, 022 |
 
-### 22 Tracks, 75 Experiments, 1692 Checks
+### 22 Tracks, 82 Experiments, 1692 Checks
 
 | Track | Description | Experiments | Checks |
 |-------|-------------|-------------|--------|
@@ -145,7 +147,7 @@ Four experiments bridge ludoSpring game science with the broader ecosystem:
 
 | Spring/Primal | Contribution | Status |
 |---------------|-------------|--------|
-| ludoSpring | 13 HCI models, 75 experiments, 1692 checks, 24 IPC capabilities (10 local, 14 external) | **Validated** (V23) |
+| ludoSpring | 13 HCI models, 82 experiments, 1692 checks, 27 IPC capabilities | **Validated** (V31) |
 | barraCuda | Math primitives (sigmoid, dot, lcg_step, state_to_f64) | **Consumed** |
 | toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders + `compute.dispatch.*` direct dispatch | **Deep integration** (V23) |
 | metalForge | Cross-substrate routing (CPU/GPU/NPU) | **Architecture validated** (exp032-033) |
