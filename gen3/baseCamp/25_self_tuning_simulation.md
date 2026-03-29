@@ -214,3 +214,28 @@ entire self-tuning chain: spectral discovery → approximation → integration �
 
 See `hotSpring/whitePaper/baseCamp/true_multishift_cg_validated.md` for the full debugging
 methodology and production results.
+
+---
+
+## March 29, 2026 Update: Silicon-Aware Self-Tuning
+
+The self-tuning calibrator's observation data now includes silicon routing metadata
+via the 11D NPU input vector (`npu_canonical_input_v2`). The 5 new dimensions are:
+
+| Dimension | Field | Meaning |
+|-----------|-------|---------|
+| 7 | `tmu_prng` | Was TMU used for PRNG? (0.0 or 1.0) |
+| 8 | `subgroup_reduce` | Was subgroup reduce active? (0.0 or 1.0) |
+| 9 | `rop_force_accum` | Was ROP atomic path used? (0.0 or 1.0) |
+| 10 | `fp64_strategy_id` | Fp64Strategy as f64 (0=Sovereign, 1=Native, 2=Hybrid, 3=Concurrent) |
+| 11 | `has_native_f64` | Does hardware support native f64? (0.0 or 1.0) |
+
+This extends the self-tuning pattern from "physics-only" to "physics + hardware":
+the NPU can now correlate routing decisions with trajectory quality and adapt
+both physics parameters (dt, n_md) AND routing preferences per-GPU.
+
+The capacity analysis (Phase 7) also informs the calibrator's volume selection:
+knowing that RTX 3090 fits L=46⁴ dynamical and RX 6950 XT fits L=40⁴ prevents
+OOM failures during automated scaling.
+
+See `HOTSPRING_V0632_SILICON_SATURATION_PRIMAL_EVOLUTION_HANDOFF_MAR29_2026.md`.

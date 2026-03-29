@@ -505,6 +505,38 @@ The **science ladder** status is: **Exp 101** established GPU RHMC production fo
 
 ---
 
+## March 29, 2026 Update: Silicon Saturation Profiling Complete
+
+The GPU RHMC pipeline now leverages three additional silicon unit types beyond
+shader cores, completing the 7-phase silicon saturation profiling on strandgate
+(RTX 3090 + RX 6950 XT):
+
+### Silicon Routing in Production RHMC
+
+| Unit | Phase | Application | Shader |
+|------|-------|-------------|--------|
+| TMU (Tier 0) | PRNG | Box-Muller momentum generation via textureLoad | `su3_random_momenta_tmu_f64.wgsl` |
+| Subgroup (Tier 4) | CG reduction | `subgroupAdd()` for dot products | `sum_reduce_subgroup_f64.wgsl` |
+| ROP (Tier 3) | Force accum | i32 fixed-point `atomicAdd`, parallel poles | `su3_fermion_force_accumulate_rop_f64.wgsl` |
+
+### NPU Evolution
+
+`TrajectoryObservation` now includes `SiliconRoutingTags` — which silicon tiers
+were active for each trajectory. NPU canonical input expanded from 6D to 11D
+via `npu_canonical_input_v2`. The ESN can now learn optimal routing decisions
+from observed performance across different hardware configurations.
+
+### Memory Capacity
+
+| Card | Max dynamical L⁴ | Memory | Max quenched L⁴ |
+|------|-------------------|--------|------------------|
+| RTX 3090 | 46⁴ (4.5M sites) | 23.6 GB | 56⁴ |
+| RX 6950 XT | 40⁴ (2.6M sites) | 13.5 GB | 42⁴ |
+
+See `HOTSPRING_V0632_SILICON_SATURATION_PRIMAL_EVOLUTION_HANDOFF_MAR29_2026.md`.
+
+---
+
 ## March 28, 2026 Update: True Multi-Shift CG + Fermion Force Validated
 
 The GPU RHMC pipeline has undergone critical algorithmic and correctness fixes:

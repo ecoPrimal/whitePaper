@@ -1,7 +1,7 @@
 # Sub-Thesis 24: All-Silicon Science — Repurposing Every GPU Hardware Unit for Computational Physics
 
-**Date:** March 26, 2026
-**Status:** First non-shader-core experiment complete (TMU, Exp 096). 4-phase silicon pipeline (budget, saturation, QCD kernel, composition) validated (Exp 097-100). Hardware personalities mapped: RTX 3090 as TMU compositor, RX 6950 XT as cache/precision champion (AMD DF64 38% faster). Dual-GPU cross-validation planned.
+**Date:** March 29, 2026
+**Status:** Silicon saturation profiling **complete**. 4-phase characterization + 7-phase saturation. TMU PRNG, subgroup reduce (`subgroupAdd()`), ROP atomics (i32 fixed-point `atomicAdd`) all **LIVE** in production RHMC. NPU observation extended to 11D. Capacity: RTX 3090 L=46⁴ dynamical (23.6 GB), RX 6950 XT L=40⁴ (13.5 GB). strandgate validated (RTX 3090 + RX 6950 XT). 870 lib tests, 139 binaries, 99 WGSL shaders.
 **Domain:** GPU hardware architecture × computational physics × all-silicon pipeline
 **Novelty:** No prior work systematically maps computational physics operations to
 all 9 GPU silicon unit types with empirical throughput measurements and tolerance
@@ -113,6 +113,25 @@ the hardware level: the "organism" (scientific computation) doesn't redesign
 the "environment" (GPU silicon) but finds unexpected fitness in the existing
 landscape.
 
+## Answered Questions (March 29, 2026)
+
+1. **Can TMU accelerate PRNG in production physics?** YES — Box-Muller via
+   `textureLoad` offloads log/cos/sin to TMU hardware. Wired into production
+   RHMC via `GpuHmcStreamingPipelines::new_with_tmu`.
+
+2. **Can ROP atomics accelerate force accumulation?** YES — Fixed-point i32
+   `atomicAdd` (scale 2^20, ~6 digits) enables parallel pole dispatch with
+   zero inter-pole barriers. AMD 6x faster atomics vs NVIDIA (93.6 vs 15.6 Gatom/s).
+
+3. **Can subgroup operations accelerate CG reductions?** YES — `subgroupAdd()`
+   eliminates shared-memory barriers for intra-subgroup reduction. Feature-gated:
+   automatic fallback when `wgpu::Features::SUBGROUP` unavailable.
+
+4. **What is the maximum physics a consumer card can do?** RTX 3090: L=46⁴
+   dynamical RHMC (4.5M sites, 23.6 GB). RX 6950 XT: L=40⁴ (2.6M sites, 13.5 GB).
+   Both fit 32⁴ (5.5 GB). Bottleneck: `wgpu::Limits::max_buffer_size` (4 GB per-allocation)
+   and total VRAM.
+
 ## Open Questions
 
 1. Does TMU linear filtering (`textureSampleLevel`) close the accuracy gap
@@ -125,11 +144,18 @@ landscape.
    handles the refinement — mixed-precision CG across silicon units?
 5. What is the overhead of mixed command streams (compute + draw + RT)
    versus sequential dispatch?
+6. How much does TMU PRNG improve wall-clock time at large lattice sizes
+   where PRNG is a larger fraction of total cost?
+7. Does the i32 fixed-point precision (2^20 scale, ~6 digits) introduce
+   measurable systematic error in observables at 32⁴+ volumes?
 
 ## References
 
 - hotSpring Exp 096: `experiments/096_SILICON_SCIENCE_TMU_QCD_MAPPING.md`
+- hotSpring Silicon Saturation: `whitePaper/baseCamp/silicon_science.md`, `silicon_characterization_at_scale.md`
+- wateringHole handoff: `HOTSPRING_V0632_SILICON_SATURATION_PRIMAL_EVOLUTION_HANDOFF_MAR29_2026.md`
 - wateringHole: `GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md`
 - toadStool: `specs/ALL_SILICON_PIPELINE.md`
 - Sub-thesis 14: `14_sovereign_compute_hardware.md`
+- Sub-thesis 25: `25_self_tuning_simulation.md`
 - Dekker, T. J. (1971). "A floating-point technique for extending the available precision"
