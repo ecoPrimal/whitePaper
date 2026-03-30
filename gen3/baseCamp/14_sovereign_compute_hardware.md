@@ -843,3 +843,36 @@ experiment loop with personality sweep, JSONL journal, observer traits. 4,065 te
 pass workspace-wide. Deep code debt burned: 60+ hardcoded offsets → constants,
 4 unsafe blocks eliminated, NonNull DMA, safe volatile wrappers.
 Built in a basement in Lansing.*
+
+---
+
+## March 30 Update: Validation Matrix and Livepatch Strategy
+
+The Titan V sovereign stack is now tracked as a **four-path validation matrix**. Each path answers a different question: VFIO lifecycle and handoff, proprietary DRM mediation, open DRM, or Mesa NVK/wgpu. Together they define what is proven today versus what remains gated on firmware, driver validation, or livepatch control.
+
+### Titan V — four dispatch paths
+
+| Path | Role | Status |
+|------|------|--------|
+| **VFIO warm handoff** | Livepatch **4-NOP** slot with **dynamic enable/disable** so the GPU can move between VFIO and a native personality without full reboot choreography; pairs with warm-handoff scripts and permission hardening. | Active validation track — orchestrates lifecycle when DRM paths are unavailable or risky. |
+| **nvidia-drm + UVM** | Kernel-mediated VM/bind/exec path in coralReef/coral-driver (proprietary stack). | **Code-complete in coralReef; pending on-hardware validation** on the Gate fleet. |
+| **nouveau DRM** | Fully open DRM path for compute. | **Blocked on Titan V: missing PMU firmware** — same class of gating called out elsewhere in this document for FECS/GPCCS bring-up. |
+| **NVK / wgpu** | Mesa NVK + wgpu stack for portable compute. | **Proven** — including **four-tier QCD** workloads on sovereign-friendly paths where NVK is the display/compute API. |
+
+This matrix is the hardware-facing complement to orchestration and math-layer fixes: routing only works if at least one path per machine is green; the matrix makes that explicit per card.
+
+### Upstream integration (March 2026)
+
+- **toadStool S168** — `shader.dispatch` wiring tightens the **orchestration layer**: compute requests flow through typed dispatch with clearer handoff to coralReef and device brokers.
+- **barraCuda Sprint 23** — **f64 precision pipeline** fixes (transcendentals, Dekker/Knuth paths, and NVVM-adjacent hazards) so physics binaries do not fight the driver on Volta-class hardware.
+- **coral-ember / coral-glowplug** — **`reset_method` fix** (avoid blocking PCI reset on VFIO fd teardown where documented), **JSONL journal tracking** for swap observations, and **dynamic livepatch control** so 4-NOP and related patches can be toggled without redeploying the whole daemon graph.
+
+### References (hotSpring)
+
+For experiment-level captures, cross-GPU comparisons, DRM tracing, and warm-handoff procedure notes, see **hotSpring** experiments **122–126** (including VM capture / cross-analysis, warm-handoff livepatch, and proprietary DRM tracing matrix material as recorded in that spring).
+
+The consolidated **sovereign validation matrix** (dispatch paths × hardware × gate status) lives at:
+
+`hotSpring/specs/SOVEREIGN_VALIDATION_MATRIX.md`
+
+Use that file as the checklist when a gate moves from “code-complete” to “hardware-validated” or when a path is downgraded (for example nouveau blocked on PMU until firmware exists).
