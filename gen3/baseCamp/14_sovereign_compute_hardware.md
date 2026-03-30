@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 30, 2026 (updated — NVIDIA GPFIFO + AMD scratch memory operational)
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. **NVIDIA GPFIFO PIPELINE OPERATIONAL on RTX 3090** — channel init sequence reverse-engineered via ioctl interception of CUDA driver (BIND + TSG schedule + Volta WST + VRAM USERD + context share). **AMD scratch/local memory OPERATIONAL on RX 6950 XT** — three-layer fix: compiler SEG=SCRATCH, driver PM4 wiring, FLAT_SCRATCH shader prolog (Exp 124). 7/8 HW parity tests pass, 1672 unit tests pass. **AMD sovereign compiler:** 24/24 QCD shaders → native GFX10.3 ISA. L10 ROOT CAUSE DEFINITIVE (Exp 122). K80 (GK210, Kepler) direct PIO boot path ready. **Fleet: 2× Titan V + RTX 5070 (GB206) + K80 + RTX 3090 + RX 6950 XT**. DRM dual-track: AMD PM4 + NVIDIA UVM/GPFIFO. 1672+ tests. coralReef sovereign compiler eliminates naga/wgpu/Vulkan for both vendors.
+**Date:** March 30, 2026 (updated — NVIDIA GPFIFO + AMD scratch memory operational + warm handoff daemon wiring)
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. **NVIDIA GPFIFO PIPELINE OPERATIONAL on RTX 3090.** **AMD scratch/local memory OPERATIONAL on RX 6950 XT** — 7/8 HW parity tests pass, 1672 unit tests pass. **AMD sovereign compiler:** 24/24 QCD shaders → native GFX10.3 ISA. L10 ROOT CAUSE DEFINITIVE (Exp 122). FECS firmware survives warm handoff via livepatch (Exp 125-127). GPU lifecycle wired into ember/glowplug daemon RPC layer. Puzzle box matrix (Exp 128) — parallel K80+Titan V solution tracks. **Fleet: 2× Titan V + RTX 5070 (GB206) + K80 + RTX 3090 + RX 6950 XT**. DRM dual-track: AMD PM4 + NVIDIA UVM/GPFIFO. 128 experiments across 2 GPU architectures. coralReef sovereign compiler eliminates naga/wgpu/Vulkan for both vendors.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -867,9 +867,24 @@ This matrix is the hardware-facing complement to orchestration and math-layer fi
 - **barraCuda Sprint 23** — **f64 precision pipeline** fixes (transcendentals, Dekker/Knuth paths, and NVVM-adjacent hazards) so physics binaries do not fight the driver on Volta-class hardware.
 - **coral-ember / coral-glowplug** — **`reset_method` fix** (avoid blocking PCI reset on VFIO fd teardown where documented), **JSONL journal tracking** for swap observations, and **dynamic livepatch control** so 4-NOP and related patches can be toggled without redeploying the whole daemon graph.
 
+### Warm FECS Dispatch + Puzzle Box Matrix (Exp 127-128, March 30)
+
+Exp 127 validated that FECS firmware **survives** the nouveau→vfio-pci swap via livepatch (CPUCTL: `0xbadf1201` → `0x00000010`, SCTL: `0x00003000` HS+, 23 engines powered). But FECS enters idle HALT and cannot be woken from HS+ mode. The problem shifted from **preservation** to **resumption**.
+
+Exp 128 implements a puzzle box matrix with parallel solution tracks:
+- **K80 (Kepler):** Full nvidia-470 recipe replay + PIO FECS boot + GPFIFO channel dispatch — validates infrastructure with zero security barriers
+- **Titan V (Volta):** Keepalive (hold DRM fd), nvidia proprietary warm handoff (learn RM's FECS init), timing attack (50ms BAR0 polls), STOP_CTXSW freeze
+- **Cross-cutting:** FECS method enumeration, CPUCTL bit labeling fix (bit 4 = halted, bit 5 = stopped)
+
+### GPU Lifecycle Wired Into Daemon RPC Layer (March 30)
+
+All livepatch management and GPU register access moved from shell scripts and `coralctl` into `ember`/`glowplug` as first-class JSON-RPC operations: `ember.livepatch.*` (status/enable/disable), `ember.fecs.state` (structured FECS snapshot), `ember.mmio.read` (mmap-based BAR0 access), `device.warm_handoff` (full orchestrated warm handoff). This provides a programmable interface for other primals and projects to interact with the GPU lifecycle.
+
+Code quality: FECS register offsets shared as `coral-driver::nv::bar0::FECS_*` constants, hex parsing consolidated into `coral-driver::parse_hex_u32`, `Bar0Access` DRY'd via shared `mmap_file`, livepatch handlers idempotent with `was_noop` feedback. 808 tests across the three crates.
+
 ### References (hotSpring)
 
-For experiment-level captures, cross-GPU comparisons, DRM tracing, and warm-handoff procedure notes, see **hotSpring** experiments **122–126** (including VM capture / cross-analysis, warm-handoff livepatch, and proprietary DRM tracing matrix material as recorded in that spring).
+For experiment-level captures, cross-GPU comparisons, DRM tracing, and warm-handoff procedure notes, see **hotSpring** experiments **122–128** (VM capture / cross-analysis, livepatch breakthrough, DRM tracing matrix, warm FECS dispatch attack, puzzle box matrix).
 
 The consolidated **sovereign validation matrix** (dispatch paths × hardware × gate status) lives at:
 
