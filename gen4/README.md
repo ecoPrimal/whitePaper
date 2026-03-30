@@ -12,9 +12,9 @@ Each generation answered a different question. Each question could only be asked
 
 | Gen | Question | Answer | Timeline | Artifact |
 |-----|----------|--------|----------|----------|
-| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | ~2024–mid 2025 | AI Swarm whitepaper, NestGate, Squirrel |
-| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, Philosophy of Forgetting, BYOAI | mid 2025–early 2026 | Sovereignty whitepaper, biomeOS manifesto, theological + philosophical foundations |
-| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals, PhD thesis, faculty network | Feb–Mar 2026 (~60 days) | Constrained evolution methodology, SPRING/PRIMAL catalogs, atlasHugged, baseCamp, thesis |
+| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | Feb 2025 | AI Swarm whitepaper, NestGate, Squirrel |
+| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, Philosophy of Forgetting, BYOAI | Jun 2025 | Sovereignty whitepaper, biomeOS manifesto, theological + philosophical foundations |
+| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals, PhD thesis, faculty network | Feb 2026 | Constrained evolution methodology, SPRING/PRIMAL catalogs, atlasHugged, baseCamp, thesis |
 | **gen4** | Who uses it? | Creatives, scientists, sovereign builders — via primal compositions, not primal internals | Mar 2026– | This document |
 
 ---

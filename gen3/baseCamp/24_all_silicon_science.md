@@ -1,7 +1,7 @@
 # Sub-Thesis 24: All-Silicon Science — Repurposing Every GPU Hardware Unit for Computational Physics
 
-**Date:** March 29, 2026
-**Status:** Silicon saturation profiling **complete**. 4-phase characterization + 7-phase saturation. TMU PRNG, subgroup reduce (`subgroupAdd()`), ROP atomics (i32 fixed-point `atomicAdd`) all **LIVE** in production RHMC. NPU observation extended to 11D. Capacity: RTX 3090 L=46⁴ dynamical (23.6 GB), RX 6950 XT L=40⁴ (13.5 GB). strandgate validated (RTX 3090 + RX 6950 XT). 870 lib tests, 139 binaries, 99 WGSL shaders.
+**Date:** March 30, 2026 (updated — sovereign pipeline operational)
+**Status:** Silicon saturation profiling **complete**. **Sovereign GPU pipeline operational** — coralReef NVIDIA GPFIFO working on RTX 3090, AMD 24/24 QCD shaders compiling to native ISA. TMU PRNG, subgroup reduce, ROP atomics **LIVE** in production RHMC. The sovereign compiler path (coralReef) eliminates wgpu/Vulkan/naga for both vendors, enabling direct access to every silicon unit without driver abstraction overhead. Capacity: RTX 3090 L=46⁴ dynamical (23.6 GB), RX 6950 XT L=40⁴ (13.5 GB). 870 lib tests, 139 binaries, 99 WGSL shaders + 350 coral-driver tests.
 **Domain:** GPU hardware architecture × computational physics × all-silicon pipeline
 **Novelty:** No prior work systematically maps computational physics operations to
 all 9 GPU silicon unit types with empirical throughput measurements and tolerance

@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** March 25, 2026 (updated)
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. Market survey complete. **L10 ROOT CAUSE DEFINITIVE (Exp 122).** WPR2 hardware-locked, FWSEC inaccessible, FBPA offline — explains all WPR copy stalls (Exp 114-121). HS mode achieved (Exp 112, SCTL=0x3002) but PMU-dependent (Exp 113). Dual-phase boot validated. **K80 (GK210, Kepler) arriving 2026-03-26** — zero firmware security, validates full pipeline. Kepler PIO loader + identity module built. **Fleet: 2× Titan V + RTX 5070 (GB206, Blackwell) + K80 (incoming)**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5070 Blackwell DRM** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 123 experiments across 2 GPU architectures.
+**Date:** March 30, 2026 (updated — NVIDIA GPFIFO pipeline operational)
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. **NVIDIA GPFIFO PIPELINE OPERATIONAL on RTX 3090** — channel init sequence reverse-engineered via ioctl interception of CUDA driver (BIND + TSG schedule + Volta WST + VRAM USERD + context share). **AMD sovereign compiler:** 24/24 QCD shaders → native GFX10.3 ISA, 38/39 dispatch tests pass. L10 ROOT CAUSE DEFINITIVE (Exp 122). K80 (GK210, Kepler) direct PIO boot path ready. **Fleet: 2× Titan V + RTX 5070 (GB206) + K80 + RTX 3090 + RX 6950 XT**. DRM dual-track: AMD PM4 + NVIDIA UVM/GPFIFO. 350+ coral-driver tests. coralReef sovereign compiler eliminates naga/wgpu/Vulkan for both vendors.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
