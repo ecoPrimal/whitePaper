@@ -1,7 +1,7 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: V35.3 — 88 experiments (83 science + 5 primal composition gap discovery), 27 IPC capabilities, 734 workspace tests. Track 26 primal composition: **34/50 (68%)** after V35.2 local debt resolution; expected **38–46/51 (75–90%)** with biomeOS v2.80. V35.3: ecosystem evolution review — biomeOS v2.80 resolves 3/4 remaining gaps (barraCuda domain in bootstrap, `graph.save` schema, bundled bootstrap). Cross-primal overstep audit completed; `PRIMAL_RESPONSIBILITY_MATRIX.md` published to wateringHole. Deploy graphs at `graphs/composition/*.toml`. Handoff: `LUDOSPRING_V35_PRIMAL_COMPOSITION_GAP_DISCOVERY_HANDOFF_MAR30_2026.md` (V35.3 addendum appended). V34: Dependency path fixes. V32: Full audit + deep debt.
-**Date**: March 30, 2026
+**Status**: V37.1 — 98 experiments (83 science + 15 composition), 27 IPC capabilities, 734 workspace tests. **Live plasmidBin validation: 95/141 (67.4%)** — 5 experiments fully PASS against deployed primals. Track 26–28: primal composition gap discovery → science-via-composition → NUCLEUS game engine composition. 10 primal evolution gaps documented per-team. Projected 92.2% with rhizoCrypt UDS + loamSpine fix + barraCuda formula alignment. Handoff: `LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md`.
+**Date**: March 31, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
@@ -213,49 +213,65 @@ documented gaps with specific primal owners and evolution targets.
 | V35 (initial) | 47 | 5/47 (11%) | First live run — most failures were local experiment errors |
 | V35.1 (revalidation) | 50 | 21/50 (42%) | barraCuda IPC confirmed, coralReef transport clarified |
 | V35.2 (local debt) | 50 | **34/50 (68%)** | Fixed graph.save key, capability domains, exp dry-run logic |
-| V35.3 (expected) | 51 | **38–46/51 (75–90%)** | biomeOS v2.80 resolves 3/4 remaining gaps |
+| V36 (science-via-composition) | 91 | 34+/51 | 5 new experiments: HCI math via barraCuda IPC composition |
+| V37 (NUCLEUS game engine) | 141 | — | 5 more: session lifecycle, content ownership, dialogue, population, NUCLEUS |
+| **V37.1 (plasmidBin live)** | **141** | **95/141 (67.4%)** | **First live run against deployed primals. 5 experiments fully PASS** |
 
-### V35 Initial Live Results (Mar 30, 2026)
+### V37.1 Live Results (Mar 31, 2026)
 
-Primals running from plasmidBin: beardog, songbird, biomeOS Neural API,
-coralReef, toadStool. UDS at `/run/user/$UID/biomeos/`.
+11 primals deployed from `infra/plasmidBin/` (barraCuda from source build — not yet in plasmidBin).
+All sockets at `/run/user/$UID/biomeos/`.
 
-| Experiment | Target | V35 | V35.2 | V35.3 (expected) |
-|-----------|--------|-----|-------|-------------------|
-| exp084 | barraCuda math over IPC | 0/12 | **12/15** | 12–15/15 |
-| exp085 | Shader compile→dispatch | 2/8 | **7/8** | 7–8/8 |
-| exp086 | Tensor composition | 0/10 | **10/10** | 10/10 |
-| exp087 | Neural API graph orchestration | 1/7 | 3/7 | **5–8/8** |
-| exp088 | 60Hz continuous game loop | 2/10 | 2/10 | **4–8/10** |
+| Experiment | Target | V37.1 live | Status |
+|-----------|--------|------------|--------|
+| exp084 | barraCuda math over IPC | 12/15 | Neural API routing gap |
+| exp085 | Shader compile→dispatch | 7/8 | toadStool↔coralReef discovery gap |
+| exp086 | Tensor composition | **10/10** | **PASS** |
+| exp087 | Neural API graph orchestration | 3/8 | Capability registration gap |
+| exp088 | 60Hz continuous game loop | 2/10 | Capability registration gap |
+| exp089 | Psychomotor (Fitts/Hick/Steering) | 4/8 | barraCuda formula mismatch |
+| exp090 | GameFlow tensor (Flow/DDA/Engagement) | **13/13** | **PASS** |
+| exp091 | PCG/Noise (Perlin/WFC) | 7/8 | barraCuda perlin3d lattice bug |
+| exp092 | Composite pipeline (GOMS/Four Keys) | **8/8** | **PASS** |
+| exp093 | Continuous 60Hz session | **6/6** | **PASS** (0.18ms max tick) |
+| exp094 | Session lifecycle (Nest Atomic) | 3/8 | rhizoCrypt: no UDS |
+| exp095 | Content ownership (Trio) | 0/8 | rhizoCrypt no UDS + loamSpine panic |
+| exp096 | NPC dialogue (NUCLEUS) | 5/10 | rhizoCrypt/Squirrel/petalTongue |
+| exp097 | Population dynamics (tensor) | **10/10** | **PASS** |
+| exp098 | NUCLEUS game session (full stack) | 5/6 | rhizoCrypt: no UDS |
 
 ### Key Findings for the Thesis
 
-1. **Transport is fast enough**: Sub-millisecond `capability.call` on UDS
-   confirms primal composition can meet 60Hz (16ms) budgets
-2. **Registration is the bottleneck**: Primals run but don't announce
-   themselves to the Neural API — composition requires explicit wiring.
-   *V35.3: biomeOS v2.80 adds `register_barracuda` node with 30 method translations*
-3. **biomeOS needs nucleus graphs internally**: Bootstrap graphs should be
-   compiled into the binary; runtime composition graphs deployed via API.
-   *V35.3: RESOLVED — biomeOS v2.80 uses `include_str!()` to bundle*
-4. **coralReef transport divergence**: HTTP-wrapped JSON-RPC on UDS breaks
-   the ecosystem convention of raw newline-delimited framing.
-   *V35.1: RESOLVED — coralReef Iter 70 uses raw newline-delimited on UDS*
-5. **Cross-primal overstep is systemic**: V35.3 audit reveals nestGate, toadStool,
-   bearDog, songBird all retain functionality outside their core domains.
-   `PRIMAL_RESPONSIBILITY_MATRIX.md` published to wateringHole for governance.
+1. **Transport is fast enough**: 0.18ms max per-tick latency on UDS (93× under 16ms budget).
+   Primal composition meets 60Hz with massive headroom.
+2. **barraCuda math is correct for most domains**: Flow (sigmoid), engagement (weighted_mean),
+   stats (mean, std_dev), tensor (create/reduce/matmul), noise (perlin2d), population dynamics
+   (replicator, Markov, Wright-Fisher) all match Python baselines exactly.
+3. **Three formula-level gaps remain in barraCuda**: Fitts (Shannon vs Welford), Hick
+   (log2(n) vs log2(n+1)), perlin3d (lattice invariant broken). These are math specification
+   disagreements, not infrastructure failures.
+4. **Registration is still the primary bottleneck**: Running primals do not auto-register
+   capabilities with the Neural API. Only 5 ecosystem-level capabilities visible.
+5. **Provenance Trio transport gap**: rhizoCrypt and loamSpine lack Unix domain socket support,
+   blocking all provenance chain experiments. sweetGrass and NestGate work over UDS.
+6. **BearDog IPC contract**: Expects base64 data (not raw strings) and `{"message": ...}` for
+   signing (not `{"data": ...}`). Once discovered, works perfectly.
+7. **NestGate requires family_id**: All `storage.*` methods need `family_id` parameter.
+   Works correctly once provided.
 
-### Evolution Pressure (updated V35.3)
+### Evolution Pressure (V37.1 — per-primal targets)
 
-- ~~barraCuda team: build + publish binary, wire math as JSON-RPC~~ **DONE** (Sprint 23+, 30 methods on IPC)
-- ~~biomeOS team: auto-discover running primals, bundle nucleus graphs~~ **MOSTLY DONE** (v2.80: bundled bootstrap, improved discovery — needs live revalidation)
-- ~~coralReef team: add raw JSON-RPC mode for UDS~~ **DONE** (Iter 70)
-- biomeOS team: auto-discovery effectiveness (`is_known_primal()` may not match all socket names)
-- toadStool + coralReef: sovereign dispatch readback (hardware gap)
-- biomeOS: `graph.execute` end-to-end routing (capability.call per node)
-- biomeOS: <16ms per capability.call hop for 60Hz composition throughput
-- All primals: shed overstep per PRIMAL_RESPONSIBILITY_MATRIX guidance
-- primalSpring: absorb ludoSpring's composition experiment patterns, update `ludospring_validate.toml` to V35.3
+- ~~barraCuda: build + publish binary, wire math as JSON-RPC~~ **DONE** (Sprint 23+)
+- ~~coralReef: raw JSON-RPC mode for UDS~~ **DONE** (Iter 70)
+- ~~biomeOS: bundle bootstrap graph~~ **DONE** (v2.80, `include_str!()`)
+- **rhizoCrypt: Add `--unix` flag** (CRITICAL — blocks 4 experiments, +9 checks)
+- **loamSpine: Fix infant_discovery.rs:233 runtime nesting** (CRITICAL — blocks 1 experiment, +6 checks)
+- **barraCuda: Align Fitts/Hick formulas** (HIGH — Shannon variant default, +4 checks)
+- **barraCuda: Publish ecoBin to plasmidBin** (HIGH — deployment gap)
+- **biomeOS: Auto-register primal capabilities** (HIGH — +14 checks)
+- **barraCuda: Fix perlin3d lattice invariant** (MEDIUM — +1 check)
+- **toadStool: Discover coralReef via socket scan** (MEDIUM — +1 check)
+- primalSpring: Absorb ludoSpring composition graphs and experiment patterns
 
 ---
 
