@@ -89,7 +89,7 @@ baseCamp papers use that validated infrastructure to explore new science.
 
 **For a plasma physicist**: 07 (sovereign WDM on consumer GPU) → 10 (dynamical QCD production) → 15 (precision brain, heterogeneous GPU) → 01 (Anderson framework) → the hotSpring paper queue (Tier 0–4)
 
-**For a GPU systems researcher**: 15 (precision brain, NVVM poisoning) → 14 (sovereign compute hardware) → 07 (sovereign WDM) → 10 (dynamical QCD) → 11 (nautilus shell, evolutionary reservoir)
+**For a GPU systems researcher**: 15 (precision brain, NVVM poisoning) → 14 (`14_sovereign_compute_hardware.md` — **Mar 30, 2026:** Titan V validation matrix + livepatch strategy + deep debt evolution (Python→Rust, nvidia-smi→nvml, virsh→virt, RegisterMap/LockedAlloc RAII); hotSpring Exp 122–131; `hotSpring/specs/SOVEREIGN_VALIDATION_MATRIX.md`) → 24 (all-silicon science) → 07 (sovereign WDM) → 10 (dynamical QCD) → 25 (self-tuning — adaptive algorithms on GPU) → 11 (nautilus shell, evolutionary reservoir)
 
 **For a PhD committee**: 01 (demonstrates novel contribution) → 06 (applied to 60-year dataset) → 07 (WDM + distributed compute) → 02 (connects to LTEE proposal) → 03-05 (breadth) → 08 (NPU edge deployment)
 
