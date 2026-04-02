@@ -86,7 +86,7 @@ paths** for both AMD (`AmdDevice` with PM4/CS) and NVIDIA (`NvDevice` with new U
 VM_INIT/VM_BIND/EXEC). DRM dispatch lets the kernel handle MMU, firmware, and
 scheduling while we supply the shader binary.
 
-### Naga Bypass
+### Naga Bypass → Sovereign Frontend (coral-parse)
 
 Exp 055 proved DF64 transcendentals produce zeros on ALL Vulkan backends due to a
 naga WGSL→SPIR-V codegen bug. DRM dispatch bypasses this entirely:
@@ -94,7 +94,12 @@ naga WGSL→SPIR-V codegen bug. DRM dispatch bypasses this entirely:
 - WGSL → coral-reef → native GPU ISA (SASS for NVIDIA, GCN/RDNA for AMD)
 - Native ISA → coral-driver DRM (`DRM_AMDGPU_CS` or `DRM_NOUVEAU_EXEC`) → GPU
 
-This is the fastest path to working DF64 compute — no naga, no SPIR-V, no Vulkan.
+**Update (March 30, 2026 — Iter 71):** `coral-parse` now replaces naga entirely as
+the default frontend. Pure-Rust WGSL/SPIR-V/GLSL parsers eliminate the naga
+dependency from the default build (28 transitive deps removed). naga remains
+available as an optional Cargo feature for diff-testing. The full sovereign
+pipeline is now: WGSL → coral-parse → CoralIR → native ISA → coral-driver → GPU.
+No naga, no SPIR-V intermediate, no Vulkan. 1264 tests pass with zero naga.
 
 ### Hardware Status (Updated March 21, 2026)
 
