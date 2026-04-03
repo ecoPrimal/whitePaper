@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 22 working papers across 6 sections  
+**Status**: Active — 24 working papers across 6 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: March 24, 2026 (first formal gen4 writeup)
+**Date**: March 24, 2026 (first formal gen4 writeup; updated April 3 — first deployment artifact)
 
 ---
 
@@ -148,6 +148,42 @@ These are not reproduction studies. They are **new systems built on validated in
 
 gen3 said "here is what I built." gen4 says "here is what **you** can build with it."
 
+### 9. First guideStone Deployment Artifact (April 2026)
+
+The conceptual became concrete. `hotSpring-guideStone-v0.7.0` is the
+first artifact that left the development environment as a self-contained,
+self-verifying, self-benchmarking object. USB drive, OCI container, or
+tarball — the artifact carries binaries for 2 architectures (x86_64 +
+aarch64), detects GPU hardware at runtime, validates 59/59 physics checks
+against published papers, and benchmarks the machine it lands on.
+
+Validated across 5 substrates: Ubuntu CPU, Ubuntu + NVIDIA 3090, Ubuntu +
+AMD 6950 XT, Alpine (musl), aarch64 (qemu-user). 40/40 cross-substrate
+observables bit-identical. Windows launcher (WSL2/Docker) and macOS
+container fallback included.
+
+This is the gen3→gen4 handoff made physical: **the science travels.** Not
+as a paper, not as a source tree, but as a binary artifact that proves
+itself on contact with any machine. The Deployable Artifact Standard
+(`architecture/DEPLOYABLE_ARTIFACT_STANDARD.md`) formalizes the patterns
+extracted from this first instantiation.
+
+### 10. Chuna Onboarding: First External Collaborator
+
+TC Chuna (Murillo Group / LANL) is the first external physicist to receive
+a guideStone artifact. The onboarding package (`attsi/non-anon/contact/
+chuna/onboarding/PHYSICS_ONBOARDING_PACKAGE.md`) bridges his Python/MILC
+workflow into hotSpring's pure Rust engine. Three of his published papers
+are reproduced and validated: gradient flow (arXiv:2101.05320), BGK
+dielectric (Phys. Rev. E 111, 035206), kinetic-fluid coupling (J. Comput.
+Phys. 2024).
+
+This is the first test of the gen4 thesis: can someone who did not build
+the primals use the output? The deployment artifact is the delivery
+mechanism. The onboarding package is the conversation guide. guideStone
+is the trust layer. Together they answer: yes, the science can travel
+from sovereign hardware to institutional consumption.
+
 ### 9. The New Organization: sporeGarden
 
 **sporeGarden** is the GitHub org for creative-facing tools that compose primals into products. esotericWebb is its first project. The three-org relationship:
@@ -212,6 +248,7 @@ gen4/
 │   ├── BIOMEOS_OS_TRAJECTORY.md       — biomeOS from orchestrator to sovereign OS (SteamOS analogy)
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│   ├── DEPLOYABLE_ARTIFACT_STANDARD.md — Self-leveling benchmark: guideStone as portable science
 │   └── GUIDESTONE.md                  — Verification class: how computation becomes proof
 │
 ├── products/                          ← What gen4 produces (case studies)
@@ -282,8 +319,9 @@ all leads).
 **If you are a field scientist**: Start with
 products/HELIX_VISION.md (sovereign genomics pipeline), then
 architecture/GUIDESTONE.md (what makes the pipeline's output
-trustworthy), then architecture/COMPOSITION_PATTERNS.md (the gen4
-patterns it uses).
+trustworthy), then architecture/DEPLOYABLE_ARTIFACT_STANDARD.md (how
+the artifact travels to your machine), then
+architecture/COMPOSITION_PATTERNS.md (the gen4 patterns it uses).
 
 **If you are a creative**: Start with outreach/FOR_CREATIVES.md, then
 products/ESOTERIC_WEBB.md, then the sporeGarden org README.
@@ -315,10 +353,15 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **24 working papers** across 6 sections document the
+gen4/ is active. **25 working papers** across 6 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, K-NOME methodology evolution, and audience-specific guides for the
 composition generation.
+
+**hotSpring-guideStone-v0.7.0** (April 3, 2026) shipped the first
+Deployable Artifact — guideStone as self-leveling benchmark, validated
+across 5 substrates and 2 architectures. See
+`architecture/DEPLOYABLE_ARTIFACT_STANDARD.md`.
 
 **Esoteric Webb V4** (March 24, 2026) crossed the generational boundary:
 

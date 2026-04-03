@@ -1,11 +1,14 @@
 # Physics Onboarding Package — TC Chuna / Murillo Group
 
 **Author**: Kevin Mok
-**Date**: April 2026
+**Date**: April 2026 (updated: April 3 — guideStone deployment artifact)
 **Recipient**: Thomas (TC) Chuna, PhD candidate, Murillo Group / LANL
 **Purpose**: Bridge Chuna's Python/MILC workflow into the hotSpring
 Collaborator Engine, enabling him to prototype lattice QCD experiments
 on consumer hardware without waiting for HPC SSH.
+
+**Delivery**: guideStone deployment artifact (USB drive or tarball).
+No Rust toolchain required. No installation. One command validates.
 
 ---
 
@@ -86,24 +89,36 @@ Murillo Group plasma DB is already public.
 
 ## 3. Compute — ICER vs Lab vs Laptop
 
-The same code runs everywhere. The difference is speed and scale.
+The same binary runs everywhere. No compilation. No `cargo`. No toolchain.
+The guideStone deployment artifact ships pre-built static binaries for
+x86_64 and aarch64 Linux. The difference between platforms is speed and
+scale, not correctness.
 
-| Platform | Hardware | Time for 59 checks | What it proves |
-|----------|----------|:-------------------:|---------------|
-| TC's laptop | Any x86_64 CPU | ~5 hours | All physics is correct |
-| ICER A100 | A100 80GB | ~20 min (estimated) | GPU scales correctly |
-| biomeGate | TR 3970X + RTX 3090 | ~3 hours | Cross-vendor GPU parity |
-| LANL HPC | Future target | TBD | Production-scale ensembles |
+| Platform | Hardware | How To Run | Time (59 checks) | What it proves |
+|----------|----------|-----------|:-----------------:|---------------|
+| TC's laptop | Any x86_64 CPU | `./hotspring validate` | ~3 min | All physics correct |
+| ICER login node | x86_64, no GPU | `srun ./hotspring validate` | ~3 min | Works on HPC |
+| ICER A100 node | A100 80GB | `./hotspring validate` (auto-detects GPU) | ~30 sec (est.) | GPU scales correctly |
+| biomeGate | TR 3970X + 3090 | `./hotspring validate` | ~42 sec | Cross-vendor GPU parity |
+| LANL HPC | Future target | `./hotspring validate` | TBD | Production-scale ensembles |
 
-**CPU-only path**: All validation passes without a GPU. Set
-`HOTSPRING_NO_GPU=1` to skip GPU discovery entirely. This is the path
-TC uses on an HPC login node — the math validates on CPU, the GPU
-just makes it fast.
+**No installation required**: The artifact is a directory of static
+binaries. Copy to any directory, `cd` into it, run. TC's SSH-only
+workflow is exactly right: `scp` the tarball, `tar xf`, `./hotspring validate`.
 
-**LANL transition**: When TC moves to LANL, the same `cargo build`
-produces binaries for any Vulkan-capable HPC node. No CUDA dependency,
-no MILC compilation, no vendor SDK. If the node has an f64 GPU,
+**CPU-only path**: All validation passes without a GPU. The binary
+detects hardware at runtime. On a login node with no GPU, it runs
+CPU-only automatically.
+
+**LANL transition**: When TC moves to LANL, the same pre-built binary
+runs on any x86_64 or aarch64 Linux node. No CUDA dependency, no MILC
+compilation, no vendor SDK. If the node has a Vulkan-capable GPU,
 hotSpring uses it automatically.
+
+**Self-benchmarking**: `./hotspring benchmark` characterizes the hardware:
+CPU throughput, GPU capability, precision (f32/f64), memory bandwidth.
+TC knows exactly what his machine can do for this physics before generating
+a single configuration.
 
 ---
 
@@ -128,12 +143,13 @@ data requiring coordination.
 
 ### Week 1: Validation and Familiarization
 
-- **Day 1**: `git clone` + `cargo test` on TC's laptop or ICER login node
-- **Day 2**: Run `validation/run` (59 checks, CPU-only, ~5 hours)
-- **Day 3**: Load results with `hotspring_reader.py`, inspect JSON output
-- **Day 4**: Run `chuna_generate --beta=6.0 --dims=8,8,8,8 --n-configs=10`
-- **Day 5**: Measure with `chuna_measure`, analyze with `chuna_analyze --format=tsv`
-- **Outcome**: TC has validated that our code reproduces his numbers
+- **Day 1**: Receive USB or tarball. `tar xf hotspring-guidestone-v0.7.0.tar.gz` (or plug in USB). `cd validation/`. `./hotspring validate` — 59/59 pass in ~3 min.
+- **Day 1 (continued)**: `./hotspring benchmark` — characterize laptop/workstation hardware
+- **Day 2**: Inspect JSON results (`results/latest.json`), compare plaquette values, flow energies, and convergence orders against his MILC/Python reference runs
+- **Day 3**: Load results with `hotspring_reader.py`, plot in familiar NumPy/matplotlib workflow
+- **Day 4**: Run `./hotspring generate --beta=6.0 --lattice=8x8x8x16 --n-configs=10` (asymmetric Ns^3 x Nt for finite-T)
+- **Day 5**: Measure with `./hotspring measure`, analyze with `./hotspring analyze --format=tsv`
+- **Outcome**: TC has validated that our code reproduces his numbers — zero installation friction
 - **Grant seed**: "Independent Rust implementation validates published LSCFRK results"
 
 ### Weeks 2-4: Cross-Validation with MILC
@@ -185,11 +201,18 @@ data requiring coordination.
 
 ## Bottom Line
 
-TC gets a workbench that runs his physics at home. No HPC queue, no
-vendor SDK, no MILC compilation. The same binary runs on his laptop
-(CPU), his office GPU (if any), ICER (A100), and eventually LANL.
+TC gets a USB drive (or tarball) that runs his physics at home. No
+HPC queue, no vendor SDK, no MILC compilation, no Rust toolchain, no
+`cargo`. One command: `./hotspring validate`. 59/59 checks pass. The
+same binary runs on his laptop (CPU), ICER (A100), and eventually LANL.
 Python bridge means his existing analysis workflow works unchanged.
 
-The onboarding is: **validate our numbers against yours (Week 1),
-cross-check with MILC (Weeks 2-4), then prototype new integrators
-(Month 2+)**. Each phase produces grant-ready results.
+The artifact also benchmarks his hardware, so he knows what his machine
+can do before generating a single configuration. It carries its own
+integrity (CHECKSUMS), its own documentation (README, GUIDESTONE.md),
+and tracks every machine it visits (liveSpore.json).
+
+The onboarding is: **plug in, validate, benchmark (Day 1), cross-check
+against MILC (Weeks 2-4), then prototype new integrators (Month 2+)**.
+Each phase produces grant-ready results. The deployment artifact is the
+conversation starter — the physics speaks for itself.

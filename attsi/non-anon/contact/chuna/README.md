@@ -64,11 +64,14 @@ queue, no vendor lock-in.
 | `email_draft_chuna.md` | Draft email for first contact (Murillo CC'd) |
 | `reply_mar09_2026.md` | Reply to TC's 4 questions |
 | `reply_mar12_2026.md` | Scheduling reply |
-| **`onboarding/PHYSICS_ONBOARDING_PACKAGE.md`** | **Physics onboarding package** (pilot experiments, compute, data, asks) |
+| **`onboarding/PHYSICS_ONBOARDING_PACKAGE.md`** | **Physics onboarding package** (pilot experiments, deployment artifact, compute, data, asks) |
 | **hotSpring/`CHUNA_REVIEW.md`** | **External-facing data sheet** (what Chuna sees in the repo) |
+| **hotSpring/`validation/`** | **Deployment artifact** — `./hotspring validate`, pre-built binaries, GUIDESTONE.md, README |
 | **hotSpring/`validation/GUIDESTONE.md`** | **guideStone certification** (5 properties + cross-substrate + NUCLEUS) |
 | **hotSpring/`control/hotspring_reader/`** | **Python reader** for NumPy integration |
 | **hotSpring/`whitePaper/baseCamp/chuna_*.md`** | **Per-paper detailed artifacts** (math, data, reproduction) |
+| **gen4/architecture/GUIDESTONE.md** | **guideStone concept** (verification class, first deployment artifact) |
+| **gen4/architecture/DEPLOYABLE_ARTIFACT_STANDARD.md** | **Deployment standard** (self-leveling benchmark, cross-platform) |
 
 ## Timeline
 
@@ -94,14 +97,26 @@ queue, no vendor lock-in.
   - Added CG convergence history (`--cg-history`) for solver comparison
   - guideStone v0.7.0 certified with cross-substrate parity
   - Physics onboarding package created (`onboarding/PHYSICS_ONBOARDING_PACKAGE.md`)
-- **Next**: TC validates Week 1 pilot (cargo test + Python reader on his data).
-  Cross-validation with MILC configs (Weeks 2-4). Custom integrator prototyping (Month 2+).
+- **April 3, 2026**: guideStone Universal Substrate Deployment:
+  - First deployable artifact built: USB drive / tarball, no toolchain required
+  - Validated across 5 substrates (x86_64 + aarch64), 40/40 cross-substrate parity
+  - OCI container image for Windows/macOS/non-Linux execution
+  - `./hotspring validate` — one command, 59/59 checks, ~3 min on CPU
+  - `./hotspring benchmark` — self-leveling hardware characterization
+  - `liveSpore.json` tracks every machine the artifact visits
+  - TC's SSH-only workflow: `scp` tarball → `tar xf` → `./hotspring validate`
+  - See: `gen4/architecture/DEPLOYABLE_ARTIFACT_STANDARD.md`
+- **Next**: TC receives deployment artifact (USB or tarball). Week 1 pilot:
+  validate + benchmark on his machine. Cross-validation with MILC configs
+  (Weeks 2-4). Custom integrator prototyping (Month 2+).
 
 ## Phase Status
 
 **Phase 1: Reproduce** — COMPLETE (59/59 checks, 3 papers, 3 substrates)
 **Phase 2: Pivot** — COMPLETE (April 1 meeting; outcomes captured above)
-**Phase 3: Engine** — IN PROGRESS (8 binaries, Python bridge, TSV export, guideStone v0.7.0)
+**Phase 3: Engine** — COMPLETE (8 binaries, Python bridge, TSV export, guideStone v0.7.0)
+**Phase 4: Deployment Artifact** — COMPLETE (universal substrate, 5 substrates, OCI container, cross-OS launchers)
+**Phase 5: Delivery** — READY (artifact packaged for TC; pending handoff)
 
 ## Tone
 
@@ -123,10 +138,13 @@ the lattice QCD and dielectric work needs someone who knows the physics.
 - No hands-on hardware experience (last electronics lab course: 2014)
 - Does not use his laptop for calculations
 - Self-describes as "from the 1980's" re: hardware knowledge
-- **Implication**: The artifact we give him must be pure `cargo test` on
-  an HPC login node or his laptop. No GPU required for validation. The
-  CPU interpreter path (NagaExecutor / coralReef interpreter) is the
-  bridge — he validates the math, the GPU is just acceleration.
+- **Implication (resolved)**: The guideStone deployment artifact is exactly
+  what he needs. `scp` a tarball, `tar xf`, `./hotspring validate`. No
+  Rust toolchain, no `cargo`, no GPU driver installation. The static musl
+  binary runs on any x86_64 Linux — his HPC login node, his laptop, LANL.
+  CPU-only path validates all 59 checks in ~3 minutes. GPU is automatic
+  when present.
 - He's a mathematician/physicist who will evaluate the **results**, not
-  the infrastructure. Show numbers, convergence, conservation, and let
-  him compare against his ICER/MILC production runs.
+  the infrastructure. The deployment artifact delivers results, not code.
+  JSON output, TSV export, Python reader — his familiar tools consume our
+  output unchanged.

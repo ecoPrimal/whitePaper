@@ -2,8 +2,8 @@
 
 **The Verification Class: How Computation Becomes Proof**
 
-**Date**: March 31, 2026
-**Status**: Ecosystem Standard — first gen4 architecture concept
+**Date**: March 31, 2026 (updated: April 3, 2026 — first deployment artifact)
+**Status**: Ecosystem Standard — first gen4 architecture concept, first deployment artifact shipped
 **Lineage**: gen3/about/SOVEREIGN_SCIENCE → gen3/atlasHugged/08_DISCOVERY_IS_LOCAL → gen4
 
 ---
@@ -379,6 +379,144 @@ output is true regardless of who runs the binary, where they run it, or
 what institution they belong to.
 
 Reality owns itself. guideStone is how computation proves that.
+
+---
+
+---
+
+## The First Deployment Artifact (April 2026)
+
+Everything above was conceptual when written on March 31. Five days later,
+the first guideStone deployment artifact — `hotSpring-guideStone-v0.7.0` —
+was built, deployed to USB, validated across 5 substrates and 2
+architectures, containerized, and shipped with cross-OS launchers. This
+section documents what the five properties look like when they hit reality.
+
+### What Was Built
+
+A self-contained directory (`validation/`) with:
+
+- Dual-architecture binaries: `bin/x86_64/{static,gpu}/` + `bin/aarch64/static/`
+- Unified entry point: `./hotspring validate` (shell wrapper dispatching to Rust binaries)
+- OCI container image: `container/hotspring-guidestone.tar` (Docker/Podman)
+- Windows launcher: `hotspring.bat` (WSL2 → Docker fallback)
+- Integrity manifest: `CHECKSUMS` (SHA-256)
+- Self-knowledge: `liveSpore.json` (tracks every machine the artifact visits)
+- Reference data: `expected/validate_chuna_reference.json`
+- Plain-text documentation: `README`, `GUIDESTONE.md`
+
+Total artifact: ~80 MB (dual binary + container), ~40 MB (static only).
+
+### How the Five Properties Manifested
+
+**Property 1 (Deterministic)** was tested on 5 substrates:
+
+| Substrate | Arch | GPU | Checks | Result |
+|-----------|------|-----|--------|--------|
+| Ubuntu 22.04 | x86_64 | None | 59/59 | PASS |
+| Ubuntu 22.04 | x86_64 | NVIDIA RTX 3090 | 59/59 | PASS |
+| Ubuntu 22.04 | x86_64 | AMD RX 6950 XT | 59/59 | PASS |
+| Alpine 3.19 | x86_64 | None | 59/59 | PASS |
+| Ubuntu 22.04 | aarch64 (qemu-user) | None | 59/59 | PASS |
+
+Cross-substrate observable comparison: **40/40 bit-identical**. The physics
+does not depend on the instruction set, the C library, the GPU vendor, or
+the operating system. The computation touches the same mathematical
+substrate regardless of hardware — the concrete realization of Property 1.
+
+**Property 2 (Reference-Traceable)** carried through to JSON output. Every
+check in the validation suite includes `paper`, `measured`, `threshold`,
+`tolerance_justification`, and `comparison` fields. Chuna can `diff` the
+output against his MILC runs.
+
+**Property 3 (Self-Verifying)** caught real problems during development.
+When `validate_chuna_overnight.rs` was modified for GPU streaming HMC, the
+CHECKSUMS verification failed immediately on the next USB run. The
+integrity pipeline is genuine, not decorative.
+
+**Property 4 (Environment-Agnostic)** was the hardest. Three failures:
+
+1. **FAT32 permissions**: USB formatted as FAT32 silently ignores `chmod +x`.
+   Fixed by: ext4 for Linux, exFAT + tmpdir fallback for universal.
+2. **Static musl + Vulkan**: `dlopen("libvulkan.so.1")` fails in static-pie
+   musl binaries. Fixed by: dual-binary strategy (static CPU + glibc GPU).
+3. **macOS/Windows**: No native Linux execution. Fixed by: OCI container
+   image + platform-specific launchers.
+
+Each failure taught something about what "environment-agnostic" actually
+means. The theoretical definition ("runs anywhere") collapsed into an
+engineering reality ("runs anywhere with the right substrate detection and
+fallback strategy"). The artifact is environment-agnostic not because it
+avoids complexity, but because it detects and adapts.
+
+**Property 5 (Tolerance-Documented)** survived cross-architecture testing.
+The same tolerances derived for x86_64 held on aarch64 — confirming they
+are mathematical properties of the computation, not artifacts of the
+platform. This is the strongest test: if a tolerance only holds on one
+architecture, it is not mathematically derived.
+
+### What Was Learned
+
+**The artifact is the proof.** Not the paper, not the test suite, not the
+CI badge. The USB drive itself — plug it in, `./hotspring validate`, 59/59
+pass. The artifact carries its own validation, its own reference data, its
+own integrity, and its own documentation. It does not need a network, a
+package manager, or a conversation about dependencies.
+
+**Cross-architecture parity is the strongest determinism test.** x86_64
+and aarch64 have different floating-point rounding behavior, different SIMD
+paths, different instruction scheduling. If the same tolerances hold on
+both architectures, they are properties of the mathematics, not the
+silicon.
+
+**The dual-binary strategy is fundamental.** Static musl binaries (CPU-only,
+zero deps, any Linux since 2014) and dynamic glibc binaries (GPU via Vulkan
+dlopen) are complementary, not competing. The entry point detects which to
+use. This should be a standard pattern for any ecoBin that touches GPU
+hardware.
+
+**Container images are the universal substrate fallback.** When native
+execution is not possible (macOS, Windows without WSL2, NFS noexec), an
+OCI container with the full artifact provides identical behavior. The
+container is not a development tool — it is a deployment substrate.
+
+**Self-knowledge is operationally useful.** `liveSpore.json` tracks every
+machine the USB visits: hostname, date, GPU/CPU mode, checks passed,
+duration. When the drive comes back from a collaborator, you can see
+exactly what happened on their hardware.
+
+### guideStone as Hardware Benchmark
+
+An unexpected property emerged: the guideStone artifact doubles as a
+hardware benchmark. When plugged into unknown hardware, `./hotspring
+benchmark` profiles GPU throughput, precision capabilities, and physics
+performance. The artifact does not just validate physics — it
+characterizes the machine.
+
+This makes the guideStone a **self-leveling** tool. It tells the user:
+"your hardware can do this" alongside "the physics is correct." The
+benchmark and the validation are the same computation seen from two
+perspectives — one measures the substrate, the other measures the output.
+
+### Implications for gen4
+
+The first deployment artifact proves that guideStone is not a theoretical
+classification. It is a concrete engineering practice with specific
+patterns:
+
+1. **Unified entry point** (`./hotspring`) with subcommands
+2. **Arch-first binary layout** (`bin/<arch>/{static,gpu}/`)
+3. **Shared library** (`_lib.sh`) for detection and dispatch
+4. **Dual binary** (static CPU + glibc GPU) for hardware coverage
+5. **Container fallback** for non-Linux substrates
+6. **Cross-OS launchers** (.bat for Windows, auto-dispatch for macOS)
+7. **Integrity manifest** (CHECKSUMS validated before execution)
+8. **Self-knowledge** (liveSpore.json for operational tracking)
+
+These patterns are reusable. esotericWebb, helixVision, or any gen4
+product that produces verifiable output can follow the same structure.
+The guideStone is not domain-specific. The deployment artifact is the
+pattern; the physics/genomics/gaming content is the payload.
 
 ---
 

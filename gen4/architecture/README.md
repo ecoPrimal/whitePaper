@@ -26,10 +26,19 @@
    proof. Defines the quality grade that certifies an ecoBin produces
    reproducible, self-proving output. The five properties: deterministic,
    reference-traceable, self-verifying, environment-agnostic, tolerance-
-   documented. Start here if you need to understand what makes gen4
-   output trustworthy when the primals are invisible.
+   documented. Includes "The First Deployment Artifact" section documenting
+   the v0.7.0 experience. Start here if you need to understand what makes
+   gen4 output trustworthy when the primals are invisible.
 
-5. **BIOMEOS_OS_TRAJECTORY.md** — The long-term vision: biomeOS evolving
+5. **DEPLOYABLE_ARTIFACT_STANDARD.md** — How a guideStone-certified
+   artifact becomes portable science. The eight-layer anatomy (entry
+   point, binary layout, container fallback, integrity, self-knowledge,
+   documentation, reference data, cross-OS launchers). Self-leveling
+   benchmark: hardware characterization as a side effect of validation.
+   The Chuna onboarding pattern. **Start here if you are shipping a
+   guideStone artifact to a collaborator or institution.**
+
+6. **BIOMEOS_OS_TRAJECTORY.md** — The long-term vision: biomeOS evolving
    from orchestrator to standalone sovereign operating system. The SteamOS
    analogy, layer architecture, deployment models, honest timeline. Start
    here if you want to understand where gen4 leads.
@@ -49,8 +58,9 @@ describe how to **consume** that infrastructure invisibly.
 | SPRING_CATALOG | Product catalog in CREATIVE_SURFACE_ARCHITECTURE |
 | NUCLEUS_ATOMICS | Deploy graph wave ordering |
 | EXTERNAL_VALIDATION_ARTIFACT | GUIDESTONE (generalized verification class) |
+| liveSpore / ColdSpore | DEPLOYABLE_ARTIFACT_STANDARD (portable science) |
 | biomeOS manifesto | BIOMEOS_OS_TRAJECTORY (where the orchestrator is going) |
 
 ---
 
-*gen3 describes the parts. gen4 describes the assembly. guideStone certifies the output.*
+*gen3 describes the parts. gen4 describes the assembly. guideStone certifies the output. The Deployable Artifact carries it all.*
