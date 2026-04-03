@@ -458,3 +458,30 @@ rather than an institutional privilege.
 
 The shaders are the mathematics. The GPU is the substrate. The heat is
 the byproduct. The science is the point.
+
+---
+
+## 10. April 3, 2026 Update: guideStone Universal Substrate Deployment
+
+The hotSpring artifact that validates the WDM and lattice QCD physics
+described in this paper is now a guideStone-certified universal deployment
+artifact (v0.7.0). The validation suite runs on any OS, any architecture,
+any filesystem — fulfilling the sovereign accessibility thesis at the
+infrastructure level.
+
+Key milestones:
+- **5-substrate validation**: CPU-only, NVIDIA GPU, AMD GPU, Alpine musl,
+  aarch64 (via qemu-user). All substrates produce bit-identical physics.
+- **Cross-architecture parity**: x86_64 and aarch64 static musl binaries
+  validated with 40/40 observable comparisons matching exactly.
+- **OCI container**: Docker/Podman image enables deployment on macOS and
+  Windows without native Linux.
+- **Unified entry point**: `./hotspring validate` replaces 5+ legacy scripts.
+
+This means a collaborator receiving the artifact on USB, via scp, or as a
+Docker image can independently verify every physics result in this paper
+without installing any dependencies. The sovereignty thesis extends from
+"the math is correct on our GPU" to "the math is correct on any GPU, any
+CPU, any architecture, any OS."
+
+See `HOTSPRING_V070_UNIVERSAL_SUBSTRATE_DEPLOYMENT_HANDOFF_APR03_2026.md`.

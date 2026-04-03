@@ -1,6 +1,6 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 21 working papers across 6 sections  
+**Status**: Active — 22 working papers across 6 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
 **Date**: March 24, 2026 (first formal gen4 writeup)
 
@@ -211,7 +211,8 @@ gen4/
 │   ├── ANCHORING_PIPELINE.md          — Concrete mechanism: DAG → signing → BTC/ETH anchor
 │   ├── BIOMEOS_OS_TRAJECTORY.md       — biomeOS from orchestrator to sovereign OS (SteamOS analogy)
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
-│   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│   └── GUIDESTONE.md                  — Verification class: how computation becomes proof
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -273,12 +274,16 @@ thesis/CREATIVE_VALIDATORS.md.
 
 **If you built the primals**: Start with
 architecture/COMPOSITION_PATTERNS.md (how your work becomes invisible
-infrastructure), then products/ESOTERIC_WEBB.md (the first proof), then
-architecture/BIOMEOS_OS_TRAJECTORY.md (where it all leads).
+infrastructure), then architecture/GUIDESTONE.md (how output quality
+transfers through the composition layer), then products/ESOTERIC_WEBB.md
+(the first proof), then architecture/BIOMEOS_OS_TRAJECTORY.md (where it
+all leads).
 
 **If you are a field scientist**: Start with
 products/HELIX_VISION.md (sovereign genomics pipeline), then
-architecture/COMPOSITION_PATTERNS.md (the gen4 patterns it uses).
+architecture/GUIDESTONE.md (what makes the pipeline's output
+trustworthy), then architecture/COMPOSITION_PATTERNS.md (the gen4
+patterns it uses).
 
 **If you are a creative**: Start with outreach/FOR_CREATIVES.md, then
 products/ESOTERIC_WEBB.md, then the sporeGarden org README.
@@ -288,7 +293,8 @@ architecture/ANCHORING_PIPELINE.md, then
 architecture/COMPOSITION_PATTERNS.md.
 
 **If you are evaluating commercial potential**: Start with
-economics/NOVEL_FERMENT_TRANSCRIPTS.md →
+architecture/GUIDESTONE.md (the quality standard that makes output
+trustworthy), then economics/NOVEL_FERMENT_TRANSCRIPTS.md →
 economics/SUNCLOUD_ACTIVATION.md → economics/LOAM_CERTIFICATES_LIVE.md.
 
 **If you are a faculty member**: Start with
@@ -309,7 +315,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **23 working papers** across 6 sections document the
+gen4/ is active. **24 working papers** across 6 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, K-NOME methodology evolution, and audience-specific guides for the
 composition generation.

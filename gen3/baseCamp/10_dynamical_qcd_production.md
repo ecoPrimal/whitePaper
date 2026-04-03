@@ -574,3 +574,52 @@ Chuna 44/44 ✅ → Nf=2 ✅ → Nf=2+1 ✅ → Self-tuning ✅ → **True Multi
 See `hotSpring/whitePaper/baseCamp/true_multishift_cg_validated.md` for the full briefing.
 See `ecoPrimals/wateringHole/handoffs/HOTSPRING_TRUE_MULTISHIFT_CG_FERMION_FORCE_HANDOFF_MAR28_2026.md`.
 
+---
+
+## April 3, 2026 Update: guideStone Universal Substrate Deployment
+
+The hotSpring guideStone artifact (v0.7.0) is now certified for universal
+deployment. The validation pipeline that produced these dynamical QCD results
+has been packaged into a self-contained, cross-platform artifact validated
+across 5 substrates and 2 architectures.
+
+### guideStone Certification
+
+| Property | Value |
+|----------|-------|
+| Checks | 59/59 per substrate |
+| Substrates validated | 5 (CPU Ubuntu, NVIDIA GPU, AMD GPU, Alpine musl, aarch64 qemu-user) |
+| Cross-substrate parity | 40/40 observable comparisons bit-identical |
+| Architectures | x86_64 (static + GPU), aarch64 (static CPU-only) |
+| Container image | `hotspring-guidestone.tar` (Docker/Podman) |
+| Windows support | `hotspring.bat` → WSL2 or Docker Desktop |
+| macOS support | `./hotspring` auto-dispatches to Docker/Podman |
+| Filesystem support | ext4 (native), exFAT (tmpdir fallback), NTFS (WSL2) |
+
+### Deployment Significance
+
+A physicist can now receive the guideStone artifact on a USB drive, plug it
+into any x86_64 or aarch64 Linux machine, and run `./hotspring validate` to
+verify the entire lattice QCD validation suite — including the dynamical
+fermion infrastructure (HMC, CG solver, gradient flow) that produced the
+results in this paper. The same artifact runs on Windows via WSL2/Docker
+and on macOS via Docker.
+
+Cross-architecture parity proves the physics is substrate-independent:
+identical observables on x86_64 and aarch64 confirm that the WGSL shader
+math and the CPU-side Rust implementations produce identical results
+regardless of instruction set architecture.
+
+### benchScale Validation
+
+The 5-substrate benchScale validation (`validate-hotspring-multi.sh
+--with-aarch64`) confirmed:
+
+- CPU-only Ubuntu: 59/59 ✅
+- NVIDIA GPU (RTX 3090): 59/59 ✅
+- AMD GPU (RX 6950 XT): 59/59 ✅
+- Alpine musl (minimal Linux): 59/59 ✅
+- aarch64 via qemu-user emulation: 59/59 ✅
+
+See `infra/wateringHole/handoffs/HOTSPRING_V070_UNIVERSAL_SUBSTRATE_DEPLOYMENT_HANDOFF_APR03_2026.md`.
+

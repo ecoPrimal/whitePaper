@@ -59,10 +59,15 @@ queue, no vendor lock-in.
 
 | File | Purpose |
 |------|---------|
-| `README.md` | This file — outreach plan |
-| `review_package.md` | Internal reference (full technical detail) |
+| `README.md` | This file — contact hub + status |
+| `review_package.md` | Internal reference (full technical detail, March 8) |
 | `email_draft_chuna.md` | Draft email for first contact (Murillo CC'd) |
+| `reply_mar09_2026.md` | Reply to TC's 4 questions |
+| `reply_mar12_2026.md` | Scheduling reply |
+| **`onboarding/PHYSICS_ONBOARDING_PACKAGE.md`** | **Physics onboarding package** (pilot experiments, compute, data, asks) |
 | **hotSpring/`CHUNA_REVIEW.md`** | **External-facing data sheet** (what Chuna sees in the repo) |
+| **hotSpring/`validation/GUIDESTONE.md`** | **guideStone certification** (5 properties + cross-substrate + NUCLEUS) |
+| **hotSpring/`control/hotspring_reader/`** | **Python reader** for NumPy integration |
 | **hotSpring/`whitePaper/baseCamp/chuna_*.md`** | **Per-paper detailed artifacts** (math, data, reproduction) |
 
 ## Timeline
@@ -74,7 +79,29 @@ queue, no vendor lock-in.
 - **March 9**: Our reply sent — concise answers, wet lab background, AGPL-3.0 open, flexible schedule. (`reply_mar09_2026.md`)
 - **March 11**: Chuna replied — wants to set up a meeting. **He's in Germany** (5hr ahead of ET). Prefers 9am-12pm ET mornings. Apologized for delay.
 - **March 12**: Reply drafted (`reply_mar12_2026.md`) — available every day but Tuesday, mornings work, AGPL-3.0 noted.
-- **Next**: He picks day/time → confirm → prep CHUNA_REVIEW.md + convergence data for meeting
+- **March 30**: Exchange resumed. TC describes himself as terminal/SSH-only, no hardware experience, "from the 1980's" — all compute done on HPC cluster. Kevin shared RTX 3090 + RX 6950 XT cross-vendor validation work.
+- **March 30**: **Meeting confirmed: Wednesday April 1, 0800 EST** (1400 CEST for TC in Germany).
+- **April 1**: **Meeting held.** TC validated our gradient flow results. Key outcomes:
+  - He is the **optimization expert** — wants a flow workbench, not a paper demo
+  - Bazavov always needs more **MILC data** — formalize measurement output
+  - TC heading to **LANL** — needs ILDG/LIME interop for HPC data exchange
+  - The artifact should serve **his work**, not validate ours
+  - Phase 2 pivot complete; Phase 3 Engine build underway
+- **April 2026**: Post-meeting evolution:
+  - Built Chuna Engine (8 binaries via `chuna-engine` wrapper)
+  - Added Python reader (`control/hotspring_reader/`) for his NumPy workflow
+  - Added TSV export (`--format=tsv`) for paper-ready tables
+  - Added CG convergence history (`--cg-history`) for solver comparison
+  - guideStone v0.7.0 certified with cross-substrate parity
+  - Physics onboarding package created (`onboarding/PHYSICS_ONBOARDING_PACKAGE.md`)
+- **Next**: TC validates Week 1 pilot (cargo test + Python reader on his data).
+  Cross-validation with MILC configs (Weeks 2-4). Custom integrator prototyping (Month 2+).
+
+## Phase Status
+
+**Phase 1: Reproduce** — COMPLETE (59/59 checks, 3 papers, 3 substrates)
+**Phase 2: Pivot** — COMPLETE (April 1 meeting; outcomes captured above)
+**Phase 3: Engine** — IN PROGRESS (8 binaries, Python bridge, TSV export, guideStone v0.7.0)
 
 ## Tone
 
@@ -89,3 +116,17 @@ do this at home) follow naturally once he validates the results.
 Murillo is CC'd and has context from the earlier reproduction work (Sarkas,
 TTM, transport on Eastgate). He referred us to Chuna specifically because
 the lattice QCD and dielectric work needs someone who knows the physics.
+
+## TC's Background (from March 30 exchange)
+
+- Terminal/SSH only — exclusively codes in terminal, SSHs to HPC/cluster
+- No hands-on hardware experience (last electronics lab course: 2014)
+- Does not use his laptop for calculations
+- Self-describes as "from the 1980's" re: hardware knowledge
+- **Implication**: The artifact we give him must be pure `cargo test` on
+  an HPC login node or his laptop. No GPU required for validation. The
+  CPU interpreter path (NagaExecutor / coralReef interpreter) is the
+  bridge — he validates the math, the GPU is just acceleration.
+- He's a mathematician/physicist who will evaluate the **results**, not
+  the infrastructure. Show numbers, convergence, conservation, and let
+  him compare against his ICER/MILC production runs.
