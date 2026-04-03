@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 24 working papers across 6 sections  
+**Status**: Active — 22 working papers across 6 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: March 24, 2026 (first formal gen4 writeup; updated April 3 — first deployment artifact)
+**Date**: April 3, 2026 (updated: deploy graph composition from ludoSpring V18)
 
 ---
 
@@ -12,9 +12,9 @@ Each generation answered a different question. Each question could only be asked
 
 | Gen | Question | Answer | Timeline | Artifact |
 |-----|----------|--------|----------|----------|
-| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | Feb 2025 | AI Swarm whitepaper, NestGate, Squirrel |
-| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, Philosophy of Forgetting, BYOAI | Jun 2025 | Sovereignty whitepaper, biomeOS manifesto, theological + philosophical foundations |
-| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals, PhD thesis, faculty network | Feb 2026 | Constrained evolution methodology, SPRING/PRIMAL catalogs, atlasHugged, baseCamp, thesis |
+| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | ~2024–mid 2025 | AI Swarm whitepaper, NestGate, Squirrel |
+| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, Philosophy of Forgetting, BYOAI | mid 2025–early 2026 | Sovereignty whitepaper, biomeOS manifesto, theological + philosophical foundations |
+| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals, PhD thesis, faculty network | Feb–Mar 2026 (~60 days) | Constrained evolution methodology, SPRING/PRIMAL catalogs, atlasHugged, baseCamp, thesis |
 | **gen4** | Who uses it? | Creatives, scientists, sovereign builders — via primal compositions, not primal internals | Mar 2026– | This document |
 
 ---
@@ -247,9 +247,8 @@ gen4/
 │   ├── ANCHORING_PIPELINE.md          — Concrete mechanism: DAG → signing → BTC/ETH anchor
 │   ├── BIOMEOS_OS_TRAJECTORY.md       — biomeOS from orchestrator to sovereign OS (SteamOS analogy)
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
-│   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
-│   ├── DEPLOYABLE_ARTIFACT_STANDARD.md — Self-leveling benchmark: guideStone as portable science
-│   └── GUIDESTONE.md                  — Verification class: how computation becomes proof
+│   ├── DEPLOY_GRAPH_COMPOSITION.md    — BYOB schema, session-as-primal, proto sketch taxonomy
+│   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -353,7 +352,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **25 working papers** across 6 sections document the
+gen4/ is active. **22 working papers** across 6 sections document the
 conceptual foundations, architectural patterns, first products, economic
 model, K-NOME methodology evolution, and audience-specific guides for the
 composition generation.
