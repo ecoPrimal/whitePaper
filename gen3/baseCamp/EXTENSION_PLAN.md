@@ -806,3 +806,27 @@ three additional gaps that were immediately resolved:
    optional aligns both TOML loading paths (serde `DeploymentGraph` and manual
    `neural_graph::Graph`). This is the correct default — graph identity is
    determined by `id`, not by name.
+
+### GAP-MATRIX Second Wave (v2.94, same day)
+
+primalSpring's continued validation exposed three additional refinement gaps:
+
+1. **Error code transparency** (GAP-07b): The forwarding proxy swallowed primal
+   JSON-RPC error codes (e.g. -32601 "Method not found") into a generic -32603
+   "Internal error." Fix: `forward_request()` now uses `try_call()` and preserves
+   `IpcError::JsonRpcError` as a downcastable type; `dispatch()` extracts the
+   original code. This validates Paper 26's composition integrity thesis — error
+   semantics must cross composition boundaries faithfully, not be absorbed.
+
+2. **Self-discovery isolation** (GAP-08): Neural API registered itself as a
+   capability provider during lazy socket rescans, polluting routing tables.
+   Fix: `NeuralRouter` now tracks its own socket path and excludes it from
+   rescan. This mirrors a biological boundary — the orchestrator observes but
+   does not register as a participant.
+
+3. **Parser unification** (GAP-02b): `graph.list` returned empty because it
+   used only the `neural_graph::Graph` parser. The `DeploymentGraph` parser
+   (fixed in v2.93) handles additional formats, so `graph.list` now falls back
+   to it. This demonstrates that schema evolution requires parser composition,
+   not parser replacement — both paths contribute valid readings of the same
+   ecosystem artifact.
