@@ -746,7 +746,7 @@ The capability-first discovery architecture described in Paper 26 — where
 compositions route by capability rather than primal identity — is now fully
 operational end-to-end:
 
-1. **4-format capability parser** aligned across biomeOS and primalSpring.
+1. **5-format capability parser** aligned across biomeOS and primalSpring.
    BearDog's 9 capability groups (Format A string array) are now correctly
    discovered and routed. All springs can invoke any primal capability through
    `capability.call` without knowing which primal provides it.
@@ -782,3 +782,27 @@ JSON-RPC client that sends `identity.get` + `capabilities.list` over Unix
 sockets. This closes the observability gap — compositions can now verify at
 runtime that a primal is not just reachable but advertising the expected
 capabilities.
+
+### GAP-MATRIX Live Validation (v2.93, same day)
+
+primalSpring's first systematic live validation matrix against Eastgate exposed
+three additional gaps that were immediately resolved:
+
+1. **URI round-trip integrity** (GAP-07, Critical): `TransportEndpoint::parse()`
+   now handles `unix://` URIs. The `display_string()` → `parse()` round-trip
+   was broken — `unix:///path` was misrouted to TCP parsing. This blocked all
+   `capability.call` forwarding even when discovery succeeded. Fix validates
+   that composition chains requiring proxy forwarding now work end-to-end.
+
+2. **5-format wire tolerance** (GAP-01b): BearDog's native capability format
+   (`provided_capabilities: [{type: "security", methods: [...]}]`) was the 5th
+   format encountered in the ecosystem. Parser now handles A (flat strings),
+   B (objects), C (method_info), D (semantic_mappings), and E (provided_capabilities).
+   This confirms Paper 26's observation that wire format diversity is a natural
+   consequence of independent primal evolution.
+
+3. **Schema tolerance** (GAP-02): `DeploymentGraph` required `name` + `version`
+   fields; the actual `tower_atomic_bootstrap.toml` omits both. Making these
+   optional aligns both TOML loading paths (serde `DeploymentGraph` and manual
+   `neural_graph::Graph`). This is the correct default — graph identity is
+   determined by `id`, not by name.
