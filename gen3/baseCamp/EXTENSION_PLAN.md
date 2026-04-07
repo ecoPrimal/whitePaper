@@ -732,3 +732,53 @@ Pattern: `wind_speed_at_2m()` evolved from `assert!` to `Result<f64, InvalidInpu
 | #06 (No-Till) | `airspring_dual_kc` MCP tool for cover crop coefficient queries |
 | #09 (Richards) | `airspring_richards` MCP tool + kahan_sum for PDE accumulation precision |
 | #14 (Climate Scenarios) | `airspring_spi_drought` MCP tool for drought analysis |
+
+---
+
+## biomeOS v2.92: Capability Composition Architecture Validated (April 7, 2026)
+
+**Source:** biomeOS deep debt evolution + primalSpring GAP-MATRIX audit
+**Connects to:** baseCamp #26 (Primal Composition as Scientific Methodology)
+
+### What Was Proven
+
+The capability-first discovery architecture described in Paper 26 — where
+compositions route by capability rather than primal identity — is now fully
+operational end-to-end:
+
+1. **4-format capability parser** aligned across biomeOS and primalSpring.
+   BearDog's 9 capability groups (Format A string array) are now correctly
+   discovered and routed. All springs can invoke any primal capability through
+   `capability.call` without knowing which primal provides it.
+
+2. **Dynamic ecosystem detection** replaces hardcoded primal lists. The nucleus
+   scans socket directories at runtime, discovering any primal following the
+   `{name}-{family_id}.sock` convention. New primals join the ecosystem without
+   orchestrator code changes.
+
+3. **Taxonomy-only resolution** for socket paths. Hardcoded fallbacks
+   (`"security" → beardog`, `"registry" → songbird`) removed in favor of
+   `CapabilityTaxonomy::resolve_to_primal()`. The `BIOMEOS_STRICT_DISCOVERY=1`
+   environment variable disables even taxonomy fallbacks, requiring pure
+   Songbird-based runtime discovery.
+
+### Relevance to baseCamp Thesis
+
+Paper 26 §1.1 identified three composition constraints: no shared crates,
+capability-only routing, and primal self-knowledge. The v2.92 changes validate
+constraint satisfaction in production:
+
+- **Constraint 1 (no shared crates)**: biomeOS-graph replicates the capability
+  parser inline rather than adding a cross-crate dependency on biomeOS-core.
+- **Constraint 2 (capability-only routing)**: All socket resolution now uses
+  taxonomy lookup; no primal name appears in the routing path.
+- **Constraint 3 (primal self-knowledge)**: `detect_ecosystem()` learns what's
+  running by scanning sockets, not by consulting a hardcoded list.
+
+### Technical Detail: The Health Probe Evolution
+
+`probe_endpoint()` evolved from a stub returning fabricated data to a real
+JSON-RPC client that sends `identity.get` + `capabilities.list` over Unix
+sockets. This closes the observability gap — compositions can now verify at
+runtime that a primal is not just reachable but advertising the expected
+capabilities.
