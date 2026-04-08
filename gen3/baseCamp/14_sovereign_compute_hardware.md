@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
 **Date:** April 7, 2026 (updated — Multi-Ember Fleet Architecture + Ember Survivability Hardening complete)
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. Market survey complete. **Multi-Ember Fleet Architecture COMPLETE (Iter 78):** Per-device ember isolation (one process per GPU), hot-standby pool with `ember.adopt_device` RPC for instant takeover, fault-informed resurrection (HotAdopt / WarmThenRespawn / FullRecovery / ColdRespawn), fleet discovery file for external client routing, systemd template units. **Ember Survivability Hardening COMPLETE (Iter 77):** Three-phase hardening — fork-isolated MMIO everywhere, zero-I/O recovery paths, `abort()` not `exit()`, FdVault checkpoint/restore, GPU warm cycle (nouveau bind/unbind) in glowplug resurrection, `ember.warm_cycle` RPC for live warm cycling. 8 consecutive fault runs — zero lockups. Cold VRAM (`0xbad0ac0X`) detected and reported gracefully. All GPU access routes through MMIO gateway RPCs. SEC2 ACR boot runs full pipeline without system lockup. SEC2 executes BL code but HS mode not yet achieved. VBIOS DEVINIT contradicted (Exp 142-143). K80 cold boot pipeline wired into `coralctl`. **Fleet: Titan V (GV100) + 2× K80 (GK210) + RTX 5070 (GB206, Blackwell)**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5070 Blackwell DRM** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 151+ experiments across 2 GPU architectures.
+**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. Market survey complete. **Firmware Boundary Pivot COMPLETE (Exp 163):** NOP dispatch proven via pure Rust DRM ioctls on Titan V (GV100). PMU mailbox protocol mapped. `PmuInterface` struct created. Firmware-agnostic interfacing pattern established (scales Kepler→Volta→Turing→GSP). **Multi-Ember Fleet Architecture COMPLETE (Iter 78):** Per-device ember isolation (one process per GPU), hot-standby pool with `ember.adopt_device` RPC for instant takeover, fault-informed resurrection (HotAdopt / WarmThenRespawn / FullRecovery / ColdRespawn), fleet discovery file for external client routing, systemd template units. **Ember Survivability Hardening COMPLETE (Iter 77):** Three-phase hardening — fork-isolated MMIO everywhere, zero-I/O recovery paths, `abort()` not `exit()`, FdVault checkpoint/restore, GPU warm cycle (nouveau bind/unbind) in glowplug resurrection, `ember.warm_cycle` RPC for live warm cycling. 8 consecutive fault runs — zero lockups. Cold VRAM (`0xbad0ac0X`) detected and reported gracefully. All GPU access routes through MMIO gateway RPCs. SEC2 ACR boot runs full pipeline without system lockup. SEC2 executes BL code but HS mode not yet achieved. VBIOS DEVINIT contradicted (Exp 142-143). K80 cold boot pipeline wired into `coralctl`. **Fleet: Titan V (GV100) + 2× K80 (GK210) + RTX 5070 (GB206, Blackwell)**. **AMD GCN5 DRM: 6/6 PASS**. **RTX 5070 Blackwell DRM** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 151+ experiments across 2 GPU architectures.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -882,12 +882,32 @@ All livepatch management and GPU register access moved from shell scripts and `c
 
 Code quality: FECS register offsets shared as `coral-driver::nv::bar0::FECS_*` constants, hex parsing consolidated into `coral-driver::parse_hex_u32`, `Bar0Access` DRY'd via shared `mmap_file`, livepatch handlers idempotent with `was_noop` feedback. 808 tests across the three crates.
 
+### April 7 Update: Firmware Boundary Pivot (Exp 159-163)
+
+**Architectural pivot**: Falcon firmware (PMU, SEC2, FECS, GPCCS) is the GPU's internal operating system — to be **interfaced with**, not replaced. This is the same pattern toadStool uses for platform BIOS/UEFI: probe, interface, inject — never recreate.
+
+**Key results:**
+
+1. **NOP dispatch via nouveau DRM: PROVEN** (both C and pure Rust). Pipeline: `VM_INIT → CHANNEL_ALLOC(VOLTA_COMPUTE_A) → SYNCOBJ → GEM_NEW → VM_BIND → mmap → EXEC → SYNCOBJ_WAIT`. New UAPI (kernel 6.6+) operational on kernel 6.17 + GV100. Zero C, zero libc.
+
+2. **PMU mailbox protocol mapped**: GV100 uses register-based mailbox (MBOX0/MBOX1 + IRQSSET), not queue-based RPC (Turing+). `PmuInterface` struct created in `coral-driver`.
+
+3. **HBM2 training preserved through driver swaps**: nouveau warm-cycle + `reset_method` clear avoids FLR.
+
+4. **Cross-generation scaling**: Learning the Volta firmware interface (PMU mailbox) is the foundation for Turing/Ampere (GSP RPC) and beyond. The interface abstraction scales; only the transport changes.
+
+**Updated nouveau DRM path:**
+
+| Path | Status |
+|------|--------|
+| **nouveau DRM (Titan V)** | **PROVEN** — NOP dispatch via pure Rust DRM ioctls. Full end-to-end. |
+
 ### References (hotSpring)
 
-For experiment-level captures, cross-GPU comparisons, DRM tracing, and warm-handoff procedure notes, see **hotSpring** experiments **122–128** (VM capture / cross-analysis, livepatch breakthrough, DRM tracing matrix, warm FECS dispatch attack, puzzle box matrix).
+For experiment-level captures, cross-GPU comparisons, DRM tracing, and warm-handoff procedure notes, see **hotSpring** experiments **122–128** (VM capture / cross-analysis, livepatch breakthrough, DRM tracing matrix, warm FECS dispatch attack, puzzle box matrix) and **159–163** (firmware boundary pivot, NOP dispatch, PMU mailbox protocol).
 
 The consolidated **sovereign validation matrix** (dispatch paths × hardware × gate status) lives at:
 
 `hotSpring/specs/SOVEREIGN_VALIDATION_MATRIX.md`
 
-Use that file as the checklist when a gate moves from “code-complete” to “hardware-validated” or when a path is downgraded (for example nouveau blocked on PMU until firmware exists).
+Use that file as the checklist when a gate moves from “code-complete” to “hardware-validated” or when a path is downgraded.
