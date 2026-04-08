@@ -830,3 +830,43 @@ primalSpring's continued validation exposed three additional refinement gaps:
    to it. This demonstrates that schema evolution requires parser composition,
    not parser replacement — both paths contribute valid readings of the same
    ecosystem artifact.
+
+### Deep Debt Overstep Cleanup (v2.95, Apr 8)
+
+Comprehensive evolution pass validating several baseCamp principles at the
+infrastructure level:
+
+1. **Safety evolution**: `std::mem::forget` eliminated from the codebase; all
+   binary crate roots now enforce `#[forbid(unsafe_code)]`. This confirms
+   Paper 24's thesis that all-silicon scientific infrastructure can be built
+   without unsafe escape hatches — safe Rust is sufficient for systems-level
+   orchestration including IPC, graph execution, and deployment.
+
+2. **Agnostic naming**: Hardcoded primal name literals replaced with SSOT
+   constants (`primal_names::BEARDOG`, `primal_names::NESTGATE`). This
+   extends Paper 26's capability-based composition principle to bootstrap
+   paths — even fallback resolution uses the taxonomy, not identity.
+
+3. **Mock isolation**: Test support code gated behind feature flags, ensuring
+   production builds contain zero test-only artifacts. This mirrors the
+   biological distinction between laboratory strains and wild-type organisms
+   (Paper 9, Field Genomics).
+
+4. **Entropy stubs evolved**: `get_disk_serial()`, `get_cpu_hash()`, and MAC
+   address fallbacks now read real hardware data via `/sys/block` and
+   `/sys/class/net`. Stable hash-based fallbacks replace zero-value stubs for
+   non-Linux. This connects to Paper 21 (Sovereign Sample Provenance) —
+   hardware identity must be derived from real measurements, not placeholders.
+
+5. **Smart refactors**: Three 800+ LOC files decomposed into cohesive modules
+   (server_lifecycle → 4 modules, pathway_learner → 2 modules, atomic_client
+   → 3 modules). This demonstrates that modular decomposition in software
+   follows the same principles as biological compartmentalization (Paper 12,
+   Immunological Anderson) — boundaries emerge from functional responsibility,
+   not arbitrary size limits.
+
+6. **Dependency deduplication**: Eliminated `xattr`/`rustix` 1.x duplicate by
+   disabling tar's xattr feature; removed direct `getrandom` 0.2 dependency.
+   The remaining duplicates (getrandom, thiserror, rand) are all transitive
+   from upstream crates — confirming that dependency governance in an ecosystem
+   mirrors ecological carrying capacity (Paper 3, BioAg Microbiome).
