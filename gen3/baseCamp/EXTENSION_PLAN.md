@@ -735,138 +735,49 @@ Pattern: `wind_speed_at_2m()` evolved from `assert!` to `Result<f64, InvalidInpu
 
 ---
 
-## biomeOS v2.92: Capability Composition Architecture Validated (April 7, 2026)
+## SovereignInit Pipeline: nouveau Replaced (hotSpring Exp 164-165, April 8, 2026)
 
-**Source:** biomeOS deep debt evolution + primalSpring GAP-MATRIX audit
-**Connects to:** baseCamp #26 (Primal Composition as Scientific Methodology)
+**Source:** hotSpring Exp 164-165, coralReef coral-driver `sovereign_init.rs`
+**Connects to:** baseCamp #14 (Sovereign Compute Hardware), PFIFO section above, DRM dual-track section
 
 ### What Was Proven
 
-The capability-first discovery architecture described in Paper 26 — where
-compositions route by capability rather than primal identity — is now fully
-operational end-to-end:
+Full compute dispatch (f32, f64, multi-workgroup, Lennard-Jones forces) via DRM on Titan V (Exp 164, 5/5 E2E phases pass). Then: **every nouveau initialization subsystem replaced with pure Rust** (Exp 165).
 
-1. **5-format capability parser** aligned across biomeOS and primalSpring.
-   BearDog's 9 capability groups (Format A string array) are now correctly
-   discovered and routed. All springs can invoke any primal capability through
-   `capability.call` without knowing which primal provides it.
+### SovereignInit 8-Stage Pipeline
 
-2. **Dynamic ecosystem detection** replaces hardcoded primal lists. The nucleus
-   scans socket directories at runtime, discovering any primal following the
-   `{name}-{family_id}.sock` convention. New primals join the ecosystem without
-   orchestrator code changes.
+`NvVfioComputeDevice::open_sovereign(bdf)` orchestrates:
 
-3. **Taxonomy-only resolution** for socket paths. Hardcoded fallbacks
-   (`"security" → beardog`, `"registry" → songbird`) removed in favor of
-   `CapabilityTaxonomy::resolve_to_primal()`. The `BIOMEOS_STRICT_DISCOVERY=1`
-   environment variable disables even taxonomy fallbacks, requiring pure
-   Songbird-based runtime discovery.
+| Stage | Replaces | What |
+|-------|----------|------|
+| 0 | `nouveau_devinit` | HBM2/VRAM training via VBIOS DEVINIT interpreter. Auto cold/warm detection. |
+| 1 | `mc_init()` | PMC engine gating. |
+| 2 | `gr_init()` topology | GPC/TPC/SM/FBP/PBDMA fuse-read enumeration. |
+| 3 | `fb_init()` | PFB/FBPA memory controller configuration. |
+| 4 | `secboot + acr` | `FalconBootSolver` — 15 strategies for SEC2→ACR→FECS/GPCCS chain. |
+| 5 | `gr_init()` registers | Standalone `apply_gr_bar0_init()` + FECS method probe. |
+| 6 | `fifo_init()` | PBDMA/runlist enumeration, engine→runlist binding. |
+| 7 | `gr_init_ctx()` | Optional. FECS exception config, context alloc, golden save. |
 
-### Relevance to baseCamp Thesis
+### Firmware-as-Ingredient Architecture
 
-Paper 26 §1.1 identified three composition constraints: no shared crates,
-capability-only routing, and primal self-knowledge. The v2.92 changes validate
-constraint satisfaction in production:
+GPU falcon firmware (PMU, SEC2, FECS, GPCCS) is treated as **ingredients** — proprietary binary blobs loaded and sequenced by Rust, executed by hardware. The Rust driver manages all orchestration; hardware executes its own code. This is the GPU equivalent of how toadStool interfaces with motherboard BIOS/UEFI.
 
-- **Constraint 1 (no shared crates)**: biomeOS-graph replicates the capability
-  parser inline rather than adding a cross-crate dependency on biomeOS-core.
-- **Constraint 2 (capability-only routing)**: All socket resolution now uses
-  taxonomy lookup; no primal name appears in the routing path.
-- **Constraint 3 (primal self-knowledge)**: `detect_ecosystem()` learns what's
-  running by scanning sockets, not by consulting a hardcoded list.
+`Hbm2Controller` typestate pipeline (`Configured → Training → Trained`) with `TrainingBackend` enum: VbiosInterpreter (current), DifferentialReplay (future), FalconUpload (future). Ember RPC `ember.gpu.train_hbm2` wraps training in fork-isolation for crash safety.
 
-### Technical Detail: The Health Probe Evolution
+### Cross-Spring Impact
 
-`probe_endpoint()` evolved from a stub returning fabricated data to a real
-JSON-RPC client that sends `identity.get` + `capabilities.list` over Unix
-sockets. This closes the observability gap — compositions can now verify at
-runtime that a primal is not just reachable but advertising the expected
-capabilities.
+- **coralReef**: Primary absorption target. GR init functions extracted to standalone module-level fns (shared by DRM + VFIO paths). `FalconBootSolver` ready for fleet deployment.
+- **toadStool**: Firmware probe pattern aligns (`FirmwareInventory::probe()` ↔ `FalconProbe::discover()`). HBM2 training is GPU equivalent of BIOS POST.
+- **barraCuda**: `open_sovereign()` returns compute-ready device for direct dispatch. SM auto-detection from topology discovery.
+- **All springs**: 165+ experiments in fossil record. Sovereign compute on NVIDIA proven end-to-end. AMD DRM already proven (6/6 pass). Cross-vendor pipeline is next.
 
-### GAP-MATRIX Live Validation (v2.93, same day)
+### Remaining Blockers
 
-primalSpring's first systematic live validation matrix against Eastgate exposed
-three additional gaps that were immediately resolved:
+1. Cold-boot Titan V hardware validation (pipeline implemented, needs real run)
+2. HBM2 PHY calibration data for VBIOS interpreter
+3. GSP RPC client for Turing+ (pattern known, transport differs)
 
-1. **URI round-trip integrity** (GAP-07, Critical): `TransportEndpoint::parse()`
-   now handles `unix://` URIs. The `display_string()` → `parse()` round-trip
-   was broken — `unix:///path` was misrouted to TCP parsing. This blocked all
-   `capability.call` forwarding even when discovery succeeded. Fix validates
-   that composition chains requiring proxy forwarding now work end-to-end.
+### Handoff Reference
 
-2. **5-format wire tolerance** (GAP-01b): BearDog's native capability format
-   (`provided_capabilities: [{type: "security", methods: [...]}]`) was the 5th
-   format encountered in the ecosystem. Parser now handles A (flat strings),
-   B (objects), C (method_info), D (semantic_mappings), and E (provided_capabilities).
-   This confirms Paper 26's observation that wire format diversity is a natural
-   consequence of independent primal evolution.
-
-3. **Schema tolerance** (GAP-02): `DeploymentGraph` required `name` + `version`
-   fields; the actual `tower_atomic_bootstrap.toml` omits both. Making these
-   optional aligns both TOML loading paths (serde `DeploymentGraph` and manual
-   `neural_graph::Graph`). This is the correct default — graph identity is
-   determined by `id`, not by name.
-
-### GAP-MATRIX Second Wave (v2.94, same day)
-
-primalSpring's continued validation exposed three additional refinement gaps:
-
-1. **Error code transparency** (GAP-07b): The forwarding proxy swallowed primal
-   JSON-RPC error codes (e.g. -32601 "Method not found") into a generic -32603
-   "Internal error." Fix: `forward_request()` now uses `try_call()` and preserves
-   `IpcError::JsonRpcError` as a downcastable type; `dispatch()` extracts the
-   original code. This validates Paper 26's composition integrity thesis — error
-   semantics must cross composition boundaries faithfully, not be absorbed.
-
-2. **Self-discovery isolation** (GAP-08): Neural API registered itself as a
-   capability provider during lazy socket rescans, polluting routing tables.
-   Fix: `NeuralRouter` now tracks its own socket path and excludes it from
-   rescan. This mirrors a biological boundary — the orchestrator observes but
-   does not register as a participant.
-
-3. **Parser unification** (GAP-02b): `graph.list` returned empty because it
-   used only the `neural_graph::Graph` parser. The `DeploymentGraph` parser
-   (fixed in v2.93) handles additional formats, so `graph.list` now falls back
-   to it. This demonstrates that schema evolution requires parser composition,
-   not parser replacement — both paths contribute valid readings of the same
-   ecosystem artifact.
-
-### Deep Debt Overstep Cleanup (v2.95, Apr 8)
-
-Comprehensive evolution pass validating several baseCamp principles at the
-infrastructure level:
-
-1. **Safety evolution**: `std::mem::forget` eliminated from the codebase; all
-   binary crate roots now enforce `#[forbid(unsafe_code)]`. This confirms
-   Paper 24's thesis that all-silicon scientific infrastructure can be built
-   without unsafe escape hatches — safe Rust is sufficient for systems-level
-   orchestration including IPC, graph execution, and deployment.
-
-2. **Agnostic naming**: Hardcoded primal name literals replaced with SSOT
-   constants (`primal_names::BEARDOG`, `primal_names::NESTGATE`). This
-   extends Paper 26's capability-based composition principle to bootstrap
-   paths — even fallback resolution uses the taxonomy, not identity.
-
-3. **Mock isolation**: Test support code gated behind feature flags, ensuring
-   production builds contain zero test-only artifacts. This mirrors the
-   biological distinction between laboratory strains and wild-type organisms
-   (Paper 9, Field Genomics).
-
-4. **Entropy stubs evolved**: `get_disk_serial()`, `get_cpu_hash()`, and MAC
-   address fallbacks now read real hardware data via `/sys/block` and
-   `/sys/class/net`. Stable hash-based fallbacks replace zero-value stubs for
-   non-Linux. This connects to Paper 21 (Sovereign Sample Provenance) —
-   hardware identity must be derived from real measurements, not placeholders.
-
-5. **Smart refactors**: Three 800+ LOC files decomposed into cohesive modules
-   (server_lifecycle → 4 modules, pathway_learner → 2 modules, atomic_client
-   → 3 modules). This demonstrates that modular decomposition in software
-   follows the same principles as biological compartmentalization (Paper 12,
-   Immunological Anderson) — boundaries emerge from functional responsibility,
-   not arbitrary size limits.
-
-6. **Dependency deduplication**: Eliminated `xattr`/`rustix` 1.x duplicate by
-   disabling tar's xattr feature; removed direct `getrandom` 0.2 dependency.
-   The remaining duplicates (getrandom, thiserror, rand) are all transitive
-   from upstream crates — confirming that dependency governance in an ecosystem
-   mirrors ecological carrying capacity (Paper 3, BioAg Microbiome).
+Full handoff: `ecoPrimals/infra/wateringHole/handoffs/HOTSPRING_SOVEREIGN_INIT_PIPELINE_HANDOFF_APR08_2026.md`
