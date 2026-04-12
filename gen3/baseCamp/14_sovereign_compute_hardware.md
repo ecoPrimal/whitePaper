@@ -934,3 +934,51 @@ GPU falcon firmware (PMU, SEC2, FECS, GPCCS) treated as binary blob ingredients:
 2. Production QCD dispatch (24 shaders) via `open_sovereign()`
 3. Cross-vendor: MI50 (AMD) + Titan V (NVIDIA) in same session
 4. GSP RPC client for Turing+ cards
+
+---
+
+## Current State (April 12, 2026): Staged Sovereign Init — Ember Sacrificial Architecture
+
+### Zero-MMIO Startup + Per-Stage Fork Isolation
+
+The SovereignInit pipeline now runs through ember's staged fork-isolation architecture. Three changes hardened the system against PCIe bus hangs:
+
+1. **Zero-MMIO startup**: Ember acquires VFIO file descriptors at startup with zero BAR0 I/O. `post_swap_quiesce` removed entirely. All MMIO deferred to explicit RPC calls. Eliminates the "startup lockup" class of failures.
+
+2. **Per-stage fork isolation**: Each SovereignInit stage runs in its own fork-isolated child process with a short timeout (3-15s). If a stage causes a PCIe bus hang, ember kills that child and reports which stage failed. The monolithic 60s timeout is replaced by 9 individually-timed stages.
+
+3. **PRI ring reset stage**: After PMC engine ungating, stale PRI ring faults cause falcon registers to read `0xbad00100`. A new `reset_pri_ring()` stage drains all PRI faults and verifies falcon register accessibility before proceeding to the falcon boot stage.
+
+### Hardware Validation (April 12)
+
+Staged init on Titan V (GV100) after nouveau warm cycle:
+
+| Stage | Timeout | Result | Detail |
+|-------|---------|--------|--------|
+| probe | 3s | OK | PMC_ENABLE=0x40000020, warm=true |
+| hbm2 | 10s | OK | DEVINIT done, HBM2 trained by nouveau |
+| pmc | 5s | OK | 5 register writes, engines ungated |
+| topology | 5s | OK | 1 GPC, 16 SM, 12 FBP, 4 PBDMA |
+| pfb | 5s | OK | Memory controller configured |
+| pri_ring_reset | 5s | OK | PRI faults cleared, falcon regs accessible |
+| falcons | 15s | TIMEOUT | SEC2 trap (exci=0x041f0000), FBP=0 |
+
+**System stayed alive throughout.** Falcon timeout sacrificed only the child process.
+
+### Remaining Gap: Memory Controller Sleep
+
+After nouveau unbind, the GPU memory controller goes back to sleep (FBP=0 in topology). Falcon firmware upload requires VRAM access via PRAMIN, which fails without an active memory controller. Two paths forward:
+
+1. Capture hot state before nouveau unbinds (FBP=12 while nouveau active)
+2. Wake memory controller in PFB stage via VBIOS DEVINIT interpreter
+
+### Architectural Pattern: Ember as Firmware Intermediary
+
+All GPU interaction — including probing, sovereign init, and MMIO — routes through ember. Direct VFIO access from user processes is explicitly warned against in examples. The pattern:
+
+```
+caller -> coralctl -> ember RPC -> fork_isolated child -> BAR0 I/O
+                                   (sacrificial, short timeout)
+```
+
+If the child hangs (PCIe bus hang from uninitialized hardware), ember kills it and remains alive. The caller receives a structured error with the failing stage name. This pattern scales to any GPU generation — the timeout and stage list change, but the safety architecture is constant.
