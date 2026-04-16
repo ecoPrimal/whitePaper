@@ -104,6 +104,8 @@ biomeOS's Neural API adds a semantic layer: `capability.call("crypto.sign", ...)
 | **LoamSpine** | signing | federate | | | | |
 | **rhizoCrypt** | signing | | | blob store | | |
 | **skunkBat** | lineage | metadata | resource | usage | | alerts |
+
+**Note on skunkBat**: The row above shows what skunkBat *consumes* from other primals. skunkBat also *provides* anomaly monitoring back: `baseline.observe`/`baseline.anomaly` can profile telemetry from any primal (compilation times from coralReef, dispatch rates from ToadStool, commit rates from LoamSpine, inference volumes from Squirrel, DAG vertex rates from rhizoCrypt, storage access patterns from NestGate). It provides anomaly assessments to sweetGrass as braid metadata and to petalTongue as dashboard data.
 | **sourDough** | identity | discover | | | | |
 
 ---

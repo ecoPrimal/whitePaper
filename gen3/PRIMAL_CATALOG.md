@@ -376,27 +376,35 @@ These primals represent capabilities that emerge after NUCLEUS is deployed. They
 
 ### 2.5 skunkBat - Defense Primal
 
-**Domain**: Defensive network security  
+**Domain**: Defensive network security, composable anomaly detection  
 **Grade**: Production Ready  
-**Coverage**: 87.37% (core modules: 90-100%)
+**Coverage**: 82.0% line (153 tests, 14 ignored/gated; core modules 90-100%)
 
-**What it does**: skunkBat protects sovereign computing environments through threat detection and graduated response. It is strictly defensive - reconnaissance, not surveillance. It learns the network's normal baseline and detects deviations. It never inspects content, only metadata. User authority is preserved: the owner approves all major defensive actions.
+**What it does**: skunkBat protects sovereign computing environments through threat detection and graduated response. It is strictly defensive — reconnaissance, not surveillance. It learns the network's normal baseline and detects deviations. It never inspects content, only metadata. User authority is preserved: the owner approves all major defensive actions.
+
+Beyond security, skunkBat's primitives are composable: statistical baseline profiling works for any time-series (shader compilation times, GPU utilization, commit rates, inference volumes), graduated response is a general state machine, and health sensing provides cross-platform system metrics. These primitives compose with every other primal.
 
 **Primitive catalog**:
 
-| Category | Primitives |
-|----------|-----------|
-| Threat Detection | Genetic (unknown lineage), Topology (layer-hopping), Behavioral (statistical anomalies), Intrusion (attack signatures), Resource (DoS, exhaustion) |
-| Defense Actions | Monitor + Alert (low), Quarantine (isolate), Block (deny, operator decision) |
-| Baseline | Statistical profiling of normal network patterns |
-| Reconnaissance | Network intelligence (metadata-only, no content inspection possible) |
-| Integration | Trait-based: BearDog (lineage verification), ToadStool (capability discovery), Songbird (federated intelligence), NestGate (protected platform) |
+| Domain | Primitives | General Use |
+|--------|-----------|-------------|
+| `baseline.*` | observe, query, anomaly, reset | Time-series anomaly detection for any metric |
+| `metadata.*` | classify, fingerprint | Connection/telemetry pattern analysis |
+| `response.*` | evaluate, escalate, deescalate, status | Progressive state machine for any workflow |
+| `lineage.*` | challenge, verify (delegates to BearDog) | Trust boundary arbitration |
+| `health.*` | system, network, resource, check | Cross-platform system sensing |
+| Threat Detection | Genetic, Topology, Behavioral, Intrusion, Resource | Five threat types composed from primitives above |
+| Integration | BearDog (lineage), Songbird (federation), ToadStool (compute), NestGate (storage), coralReef (compilation), LoamSpine (ledger), rhizoCrypt (DAG), sweetGrass (braids), Squirrel (inference), biomeOS (alerts) | Anomaly monitoring for every primal |
+
+**Thymic selection model** (design phase): Inspired by adaptive immunity. Instead of maintaining a threat signature database, skunkBat learns "self" via BearDog's genetic lineage and flags everything that is not self. Pseudorandom detector probes undergo positive selection (can read BearDog lineage) and negative selection (do not attack verified family). Zero-day detection becomes the default case.
 
 **Architectural guarantee**: Cannot access packet contents or user data by design, not by policy.
 
-**Showcase**: 10 working examples (all production code, zero mocks): basic usage, all 5 threat types, defense actions, baseline learning, local federation, defensive vs surveillance distinction, and 4 ecosystem integration demos (BearDog, ToadStool, Songbird, NestGate). 4-level interactive demonstration suite.
+**Showcase**: 12 working examples, 4-tier interactive demonstration suite (22 scenarios). All production code, zero mocks. BTSP Phase 2 complete on TCP and UDS with first-byte peek for biomeOS composition bypass.
 
-**Post-NUCLEUS role**: Security layer that complements the Dark Forest protocol. While Dark Forest handles identity and discovery privacy, skunkBat handles active threat detection and response within the sovereign computing environment.
+**Cross-primal compositions**: Compiler sensing (+ coralReef), compute guardian (+ ToadStool), defended inference (+ Squirrel + BearDog), ledger sentinel (+ LoamSpine), DAG anomaly monitor (+ rhizoCrypt), exfiltration detection (+ NestGate), federation health (+ Songbird), provenance-backed anomaly chain (+ Provenance Trio).
+
+**Post-NUCLEUS role**: Security layer that complements the Dark Forest protocol. While Dark Forest handles identity and discovery privacy, skunkBat handles active threat detection and response within the sovereign computing environment. Its composable primitives extend beyond security into general-purpose anomaly detection for the entire ecosystem.
 
 ---
 
