@@ -42,21 +42,41 @@ related compiler work via coralReef.
 
 ## Towers
 
-### northGate — Flagship AI/LLM Compute
+### northGate — Personal Gaming + Remote Compute
 
 | Component | Specification |
 |-----------|---------------|
-| **CPU** | Intel i9-14900K |
+| **CPU** | AMD Ryzen 9 9950X3D |
 | **Display GPU** | — (RTX 5090 serves both roles) |
 | **Work GPU** | NVIDIA RTX 5090 |
-| **RAM** | 192 GB DDR5 |
-| **Storage** | ~8 TB NVMe (Samsung 990 series; bought in 2025 when prices were low) |
+| **RAM** | 96 GB DDR5 (2×48 GB, speed-optimized) |
+| **Storage** | 1 TB NVMe (OS/drivers) + 4 TB NVMe (games) |
 | **Network** | 10G NIC (copper) |
-| **Role** | Primary AI/LLM compute, main hub |
+| **Role** | Personal gaming primary, remote compute secondary |
 
-Heavy Node Atomic. Where Squirrel routes large inference jobs and toadStool runs
-GPU-intensive barraCuda workloads. The RTX 5090 is the most capable single GPU
-in the mesh.
+Evolved from flagship AI/LLM node. The i9-14900K and half the DDR5 moved to
+ironGate; northGate received a 9950X3D for gaming. Storage reduced from ~8 TB
+to 5 TB. Demonstrates the "friend/family remote compute without disrupting
+normal use" pattern — NUCLEUS primals run in the background while the owner
+games. The RTX 5090 remains the most capable single GPU in the mesh.
+
+### ironGate — Agentic Development + Composition Validation
+
+| Component | Specification |
+|-----------|---------------|
+| **CPU** | Intel i9-14900K (RMA replacement — 3rd unit, IPC burnout on original) |
+| **Display GPU** | NVIDIA RTX 5070 |
+| **RAM** | 96 GB DDR5 (2×48 GB, speed-optimized) |
+| **Storage** | 3.6 TB NVMe |
+| **OS** | Pop!_OS 22.04 |
+| **Role** | Agentic development, composition validation, clean deploys |
+
+Node Atomic. Split from northGate — inherited the i9-14900K (after two RMAs for
+IPC burnout) and half the DDR5. First gate bootstrapped entirely from zero via
+`bootstrap.sh --fresh`. Agentic-native: Cursor-driven development from day one.
+Second SM120 (Blackwell) device in the mesh alongside northGate's RTX 5090.
+Owns primalSpring (composition + deploy quality, shared with eastGate for BTSP),
+ludoSpring, and groundSpring.
 
 ### southGate — Gaming + Heavy Compute
 
@@ -315,21 +335,21 @@ federation traffic.
 
 | Resource | Total |
 |----------|-------|
-| **Towers** | 10 |
+| **Towers** | 11 |
 | **Small form factor** | 4 (1× NucBox + 3× Intel NUC) |
-| **CPU Cores** | 130+ (across all gates) |
-| **GPU VRAM (display-class GPUs)** | ~60 GB (RTX 5090 32 GB + RTX 5060 8 GB + RTX 4070 12 GB + RTX 4060 8 GB) |
+| **CPU Cores** | 154+ (across all gates) |
+| **GPU VRAM (display-class GPUs)** | ~72 GB (RTX 5090 32 GB + RTX 5070 12 GB + RTX 5060 8 GB + RTX 4070 12 GB + RTX 4060 8 GB) |
 | **GPU VRAM (work pool inventory)** | 128 GB (2× RTX 3090 48 GB + 2× Titan V 24 GB + 2× MI50 32 GB + 1× Tesla K80 24 GB) |
-| **GPU VRAM (installed per gate, excl. float)** | ~168 GB (5090/4060/4070 + strandGate 3090+6950 + biomeGate 5060+Titan V+K80 + 2070S + three RTX 3070-class) |
+| **GPU VRAM (installed per gate, excl. float)** | ~180 GB (5090/5070/4060/4070 + strandGate 3090+6950 + biomeGate 5060+Titan V+K80 + 2070S + three RTX 3070-class) |
 | **GPU VRAM (float pool not installed)** | ~68 GB (1× RTX 3090 + 1× Titan V + 2× MI50) |
-| **GPU VRAM (total, unique cards)** | ~236 GB |
+| **GPU VRAM (total, unique cards)** | ~248 GB |
 | **HBM2** | 56 GB (2× Titan V + 2× MI50) |
-| **System RAM** | ~1.2 TB (across all gates) |
-| **Storage** | ~125 TB total (~49 TB NVMe across gates + ~76 TB HDD ZFS on westGate only) |
+| **System RAM** | ~1.0 TB (across all gates; northGate reduced from 192 to 96 GB in ironGate split) |
+| **Storage** | ~122 TB total (~46 TB NVMe across gates + ~76 TB HDD ZFS on westGate only) |
 | **GPU Vendors** | NVIDIA + AMD (barraCuda universal compute validated on both) |
 | **GPU Architectures** | Kepler (K80) + Pascal → Turing → Ampere → Ada → Blackwell (NVIDIA) + Volta (HBM2) + Vega 20 (HBM2) + RDNA 2 (AMD) |
 | **coralReef HBM2 Targets** | `sm_70` (Volta), `gfx906` (Vega 20) |
-| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through Threadripper 3970X through Dual EPYC 7452) |
+| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through 9950X3D through Threadripper 3970X through Dual EPYC 7452) |
 | **Memory Types** | DDR3, DDR4, DDR4 ECC, DDR5 |
 | **NPU** | 3× BrainChip Akida AKD1000 |
 | **HSM** | 4× SoloKey FIDO2 + Android StrongBox |
@@ -358,4 +378,4 @@ hardware demanded it.
 
 ---
 
-**10 towers, 4 HBM2 cards, 3 NPUs, 1 Tesla K80. Sovereign compute on consumer hardware.**
+**11 towers, 4 HBM2 cards, 3 NPUs, 1 Tesla K80. Sovereign compute on consumer hardware.**
