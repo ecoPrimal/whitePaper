@@ -1,6 +1,13 @@
-# The Hardware Atheist's Case for NVIDIA
+# HISTORIC — The Hardware Atheist's Case for NVIDIA
 
-> *Supersedes: AN_INVITATION_TO_NVIDIA.md (deprecated — wrong framing)*
+> **Status**: Historic (March 2026). Superseded by `AN_INVITATION_TO_NVIDIA_V3.md`.
+> The two-layer architecture argument and "hardware atheist" framing remain correct
+> and are carried forward. Numbers are stale (806 shaders → 1,145; 27K tests → 83K).
+> Most significantly: coralReef now has sovereign dispatch live on SM120 (Blackwell),
+> with SM70 (Volta) and SM37 (Kepler) in progress — the position has shifted from
+> "please don't obstruct" to "here's what we've already built on your hardware."
+>
+> *Archived May 2026. Supersedes: AN_INVITATION_TO_NVIDIA.md (deprecated — wrong framing)*
 
 ---
 

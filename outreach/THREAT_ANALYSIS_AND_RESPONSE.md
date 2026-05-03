@@ -1,5 +1,12 @@
 # Threat Analysis: The Inevitability of a Market Correction
 
+> **Status**: Evergreen strategic document. Core thesis (market correction, not
+> competitor; anti-fragile architecture; asymmetric positioning) remains valid.
+> Numbers and specifics predate the current stack scale (4.5M Rust LOC, 88K WGSL
+> lines, sovereign GPU dispatch) and should be read in that context.
+>
+> *Last reviewed May 2026.*
+
 ---
 
 ## Executive Summary: A Paradigm Shift, Not a Competitor

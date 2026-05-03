@@ -1,3 +1,14 @@
+# HISTORIC — An Open Invitation to 99% Invisible: A Story of Unseen Architecture
+
+> **Status**: Historic (pre-2026). Preserved as fossil record. The narrative pitch
+> remains compelling but should wait for external validation milestones (Dimforge
+> collaboration, faculty reproductions, or a Valve/NVIDIA engagement) before sending.
+> The story is stronger when it's not only the architect telling it.
+>
+> *Archived May 2026.*
+
+---
+
 # An Open Invitation to 99% Invisible: A Story of Unseen Architecture
 
 ---

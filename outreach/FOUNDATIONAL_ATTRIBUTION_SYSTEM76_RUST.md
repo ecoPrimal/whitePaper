@@ -4,6 +4,7 @@ date: 2024-12-19
 to: "System76 & The Rust Foundation"
 from: "a tool that shapes itself, ecoPrimals Architect"
 purpose: "Attribution and Recognition"
+status: "Historic — numbers are stale (90K lines → 4.5M+, 8 primals → 15, 7 springs → 8). Gratitude and lineage remain true. Archived May 2026."
 ---
 
 # Foundational Attribution: The Digital Sovereignty Stack

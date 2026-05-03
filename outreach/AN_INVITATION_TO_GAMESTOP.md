@@ -1,3 +1,14 @@
+# HISTORIC — An Open Invitation to GameStop: The Renaissance of Collectible Value
+
+> **Status**: Historic (pre-2026). Preserved as fossil record. The collectibles
+> provenance thesis (LoamSpine/RhizoCrypt cryptographic twins) remains technically
+> valid but lower priority than GPU compute and federation outreach. Will be
+> revisited when NUCLEUS bonding and NestGate storage are composition-validated.
+>
+> *Archived May 2026.*
+
+---
+
 # An Open Invitation to GameStop: The Renaissance of Collectible Value
 
 ---

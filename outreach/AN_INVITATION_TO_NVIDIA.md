@@ -1,3 +1,14 @@
+# HISTORIC — An Open Invitation to NVIDIA: Let the River Flow
+
+> **Status**: Historic (pre-March 2026). Superseded by `AN_INVITATION_TO_NVIDIA_V2.md`,
+> then by `AN_INVITATION_TO_NVIDIA_V3.md`. Preserved as fossil record — the framing
+> (asking NVIDIA to open-source CUDA under AGPL) was wrong. V2 corrected the economics.
+> V3 reflects sovereign dispatch reality.
+>
+> *Archived May 2026.*
+
+---
+
 # An Open Invitation to NVIDIA: Let the River Flow
 
 ---

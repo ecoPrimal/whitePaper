@@ -1,3 +1,14 @@
+# HISTORIC — An Open Invitation to Valve: The Future of True Digital Ownership
+
+> **Status**: Historic (pre-2026). Superseded by `AN_INVITATION_TO_VALVE_V2.md`.
+> Preserved as fossil record — the framing led with product promises and consumer
+> features rather than engineering proof. V2 leads with technology, introduces the
+> NUCLEUS federation proposition, and reflects the current state of the stack.
+>
+> *Archived May 2026.*
+
+---
+
 # An Open Invitation to Valve: The Future of True Digital Ownership
 
 ---
