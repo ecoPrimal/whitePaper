@@ -262,3 +262,7 @@ Total: **189 checks, 0 failures**.
 - **Cross-institution consent**: songbird discovery for multi-provider consent chains
 - **Patient portal**: petalTongue visualization of consent status and access history
 - **Clinical trial consent**: Specialized consent certificates for research participation
+
+---
+
+**Operational note (May 2026):** The provenance trio underlying the consent and access model described here is now operationally validated. projectNUCLEUS exercised `dag.session.create`, `dag.event.append`, `entry.append` (DataAnchor, SessionCommit), and `braid.create` end-to-end with real bioinformatics data. The same loamSpine ledger and sweetGrass attribution chain that would track patient consent is tracking pipeline provenance — validating the cross-domain architecture. See Paper 26 addendum.

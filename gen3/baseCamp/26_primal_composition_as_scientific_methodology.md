@@ -314,3 +314,24 @@ The science that got us here is gen3. The deployment surface it enables is gen4.
 *gen3 asked "does it work?" for single primals. Paper 26 asks "does it work?"
 for primal compositions. The answer is yes — with 11 experiments, 9 deploy
 graphs, and a methodology any spring can replicate.*
+
+---
+
+## Addendum: Operational Validation (May 2026)
+
+The composition methodology described above was operationally validated through
+projectNUCLEUS on ironGate hardware. A Nest Atomic + ToadStool composition
+(9 primals) ran the full ABG bioinformatics pipeline — 235+ checks across
+10 workloads processing real NCBI data (PRJNA488170, 11.9M reads) — with every
+artifact and step wrapped in provenance:
+
+- **BLAKE3 content hashes** for all NCBI FASTQs and workload outputs (NestGate)
+- **rhizoCrypt DAG session** tracking 24 events (data registration + workload execution + results)
+- **loamSpine permanent ledger** commit (SessionCommit with Merkle root of the DAG)
+- **sweetGrass attribution braid** with ed25519 witness signature (W3C PROV-O JSON-LD)
+
+This closes the full validation arc: published science → Python ground truth →
+Rust parity → primal composition dispatch → provenance-verified reproducibility.
+The provenance pipeline uses direct JSON-RPC over TCP/HTTP to the trio (not
+Neural API routing), validating the "no shared crates" independence principle —
+the wrapper script composes primals purely through their documented RPC interfaces.

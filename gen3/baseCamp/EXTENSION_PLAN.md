@@ -534,12 +534,27 @@ RPGPT scaffolds evolution goals that benefit all domains:
 - **Composable IPC**: JSON-RPC wire types for live trio deployment
 - **Deployment graph**: `provenance_node_atomic.toml` (Tower + Trio)
 
+### Operational Status (May 2026 — projectNUCLEUS Provenance Pipeline)
+
+The provenance trio is now **live and exercised end-to-end** via projectNUCLEUS `provenance_pipeline.sh`. The following JSON-RPC methods were validated over direct TCP/HTTP (not Neural API routing):
+
+| Primal | Method | Status |
+|--------|--------|--------|
+| rhizoCrypt | `dag.session.create`, `dag.event.append` (`DataCreate`, `ExperimentStart`, `Result`), `dag.merkle.root` | **Operational** — 24 events, Merkle root produced |
+| loamSpine | `spine.create`, `entry.append` (`DataAnchor`, `SessionCommit`) | **Operational** — permanent ledger with BLAKE3 byte arrays |
+| sweetGrass | `braid.create` | **Operational** — ed25519-witnessed W3C PROV-O JSON-LD braid |
+| NestGate | `storage.store`, `storage.list` | **Operational** — 14 content-addressed artifacts stored |
+
+Pattern: shell script wraps `toadstool execute` with pre/post RPC calls to the trio. Real NCBI data (PRJNA488170, 11.9M reads) processed through 10 workloads with full provenance chain.
+
 ### What Needs Building
 
 | Component | Team | Priority | Status |
 |-----------|------|----------|--------|
-| BearDog signing on every operation | BearDog | High | **Model validated (exp064)** — wire format proven, needs live IPC swap |
+| BearDog signing on every operation | BearDog | High | **Model validated (exp064)** — wire format proven. sweetGrass auto-signs braids via Tower. Explicit `crypto.sign` call from wrapper not yet exercised |
 | Radiating attribution calculator | sweetGrass + sunCloud | High | **Model validated (exp066)** — decay, role weighting, conservation proven |
+| Native `--archive` in toadStool | toadStool | High | Currently external wrapper; should be native TOML `[provenance]` section |
+| Hex string acceptance in loamSpine | loamSpine | Medium | `data_hash`/`merkle_root` require `[u8; 32]` byte arrays, not hex strings |
 | Public chain anchor entry type | loamSpine | Medium | Pending |
 | Owner inventory query | loamSpine | Medium | Pending |
 | Cross-session derivation links | rhizoCrypt | Medium | Pending |

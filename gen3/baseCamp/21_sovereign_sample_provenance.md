@@ -239,3 +239,7 @@ Total: **193 checks, 0 failures**.
 - **Public anchor**: Optional blockchain anchoring for regulatory proof
 - **Cross-institution provenance**: songbird discovery for multi-lab chains
 - **ISO 17025 compliance matrix**: Formal mapping of all requirements to provenance trio operations
+
+---
+
+**Operational note (May 2026):** The provenance trio is now live. The projectNUCLEUS provenance pipeline validates the BLAKE3 content addressing and DAG session model described here with real NCBI bioinformatics data (PRJNA488170). The same `dag.event.append` and `entry.append` calls that would track field samples are tracking pipeline execution steps, producing Merkle roots committed to loamSpine and witnessed by sweetGrass braids. See Paper 26 addendum and `sporeGarden/projectNUCLEUS/validation/`.

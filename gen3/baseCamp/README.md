@@ -5,6 +5,8 @@
 
 **wetSpring V137:** Full provenance + tolerance centralization + IPC modularization — `//! Provenance:` headers on all 355 validation/benchmark binaries (first spring with 100% binary provenance), 8 new named tolerance constants (242 total, zero inline literals), `ipc/connection.rs` extraction (protocol pipeline separated from server lifecycle), GPU buffer renames. 1,902 tests, 355 binaries, 242 named tolerances, 91.20% coverage. V136: thiserror, named casts (~60), upstream contract pinning, determinism tests, CI pin, hardcoding audit, CONTRIBUTING + SECURITY. V135: doc reconciliation. V134: drug NMF delegation, validation harness refactored, primal discovery extended.
 
+**Provenance Pipeline Elevation (May 2026):** The provenance trio is now **operationally validated** end-to-end. projectNUCLEUS deployed Nest Atomic + ToadStool (9 primals) on ironGate and ran the full ABG pipeline (235+ checks, 10 workloads, real NCBI data from PRJNA488170) with every artifact and pipeline step content-addressed via BLAKE3, tracked in rhizoCrypt DAG sessions (24 events), committed to loamSpine permanent ledger (SessionCommit with Merkle root), and witnessed via sweetGrass ed25519 attribution braid. This is the first live validation of the python → rust → primal composition → provenance chain described in Papers 20-22 and 26. Direct JSON-RPC over UDS/TCP (not Neural API routing) was used. See `EXTENSION_PLAN.md` provenance section and `sporeGarden/projectNUCLEUS/validation/` for full results.
+
 ---
 
 ## What This Is

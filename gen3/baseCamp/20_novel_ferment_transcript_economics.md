@@ -361,3 +361,7 @@ Each carries its attribution chain. Each can optionally anchor to global
 persistence. And when value flows, it radiates back through every contributor.
 
 This was the goal from the beginning. It evolved, just like the primals.
+
+---
+
+**Operational note (May 2026):** The provenance trio described here is now operationally validated. projectNUCLEUS ran the full ABG pipeline with BLAKE3 content-addressed artifacts stored in NestGate, rhizoCrypt DAG sessions tracking 24 events, loamSpine permanent ledger commits, and sweetGrass ed25519-witnessed braids — all over direct JSON-RPC. The same architecture that tracks game items and biological samples now provably tracks bioinformatics pipeline execution. See `sporeGarden/projectNUCLEUS/validation/` and Paper 26 addendum.
