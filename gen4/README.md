@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 22 working papers across 6 sections  
+**Status**: Active — 25 working papers across 7 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: April 3, 2026 (updated: deploy graph composition from ludoSpring V18)
+**Date**: May 6, 2026 (updated: foundation live + sediment layer model + living geology)
 
 ---
 
@@ -128,7 +128,38 @@ This matters because it proves the sporeGarden pattern is **universal**, not
 gaming-specific. The same primals that power a CRPG engine also power a field
 genomics kit. The composition layer is domain-agnostic.
 
-### 8. baseCamp Papers 17–23: The Creative Surface
+### 8. The Unified Foundation (May 2026)
+
+gen4/products/ proves primals work for consumers. **gen4/foundations/**
+maps the complete validated scientific lineage — 28 baseCamp papers,
+8 springs, 12+ faculty and community contacts — as **one foundation
+with many expressions**.
+
+The insight: the science is not separate. Anderson localization threads
+through microbiology, immunology, soil science, and plasma physics. The
+provenance trio validates game sessions, biological samples, and medical
+records with the same machinery. barraCuda powers lattice QCD, protein
+structure prediction, and drug screening. The foundation is one
+interconnected graph. Products (helixVision, blueFish, esotericWebb)
+are different **focuses** on this graph — each pulling specific threads
+for specific audiences. projectNUCLEUS handles the primal deployment
+layer; foundations handle the science lineage.
+
+The first expression document targets the ABG whole-cell modeling
+lineage (Karr 2012 → Thornburg 2026) — 7 papers, 14 years, 5 research
+groups — rebuilt through NUCLEUS with full structural provenance.
+
+The foundation is now operational. `sporeGarden/foundation` (live Git
+repository) contains machine-readable data source manifests, validation
+targets, and provenance-wrapped pipelines. Real NCBI/UniProt/KEGG data
+has been fetched and BLAKE3-anchored. The geological sediment cycle is
+active.
+
+See `foundations/THE_UNIFIED_LINEAGE.md` for the master map,
+`foundations/ABG_WHOLE_CELL_REBUILD.md` for the first expression, and
+`foundations/LIVING_GEOLOGY.md` for the sediment accumulation model.
+
+### 9. baseCamp Papers 17–23: The Creative Surface
 
 | Paper | Domain | What It Really Is |
 |-------|--------|-------------------|
@@ -255,6 +286,11 @@ gen4/
 │   ├── HELIX_VISION.md                — Sovereign genomics: sample → understanding pipeline
 │   └── RPGPT_ENGINE.md                — Ingestible rulesets, living game systems
 │
+├── foundations/                        ← The unified lineage (one foundation, many expressions)
+│   ├── THE_UNIFIED_LINEAGE.md         — Master map: 28 papers + 8 springs + 12+ contacts = 1 foundation
+│   ├── ABG_WHOLE_CELL_REBUILD.md      — Expression: whole-cell modeling thread (Karr 2012 → Thornburg 2026)
+│   └── LIVING_GEOLOGY.md             — The sediment accumulation model: from bibliography to bedrock
+│
 ├── economics/                         ← How gen4 sustains itself (value and attribution)
 │   ├── NOVEL_FERMENT_TRANSCRIPTS.md   — Memory-bound digital objects (the real NFT)
 │   ├── SUNCLOUD_ACTIVATION.md         — Treasury, attribution distribution, metabolic mandate
@@ -338,7 +374,15 @@ economics/SUNCLOUD_ACTIVATION.md → economics/LOAM_CERTIFICATES_LIVE.md.
 thesis/THE_SOVEREIGN_PUBLICATION.md — this is the paper that explains
 why anchored reproductions of your work are more valuable than journal
 citations. Then find your domain's spring and run the reproduction
-yourself.
+yourself. See foundations/ABG_WHOLE_CELL_REBUILD.md for a concrete
+example: the complete whole-cell modeling lineage (2012–2026) rebuilt
+through NUCLEUS with full provenance.
+
+**If you want to see NUCLEUS applied to real external science**: Start
+with foundations/THE_UNIFIED_LINEAGE.md — the master map of one
+foundation with 10 domain threads. Then read
+foundations/ABG_WHOLE_CELL_REBUILD.md for the first expression: a
+14-year, 7-paper lineage rebuilt with full structural provenance.
 
 **If you want to understand how this was built**: Start with
 knome/MASSIVELY_PARALLEL_MENTORING.md (the real production workflow),
@@ -352,10 +396,10 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **22 working papers** across 6 sections document the
-conceptual foundations, architectural patterns, first products, economic
-model, K-NOME methodology evolution, and audience-specific guides for the
-composition generation.
+gen4/ is active. **25 working papers** across 7 sections document the
+conceptual foundations, architectural patterns, first products, science
+lineage reproductions, economic model, K-NOME methodology evolution,
+and audience-specific guides for the composition generation.
 
 **hotSpring-guideStone-v0.7.0** (April 3, 2026) shipped the first
 Deployable Artifact — guideStone as self-leveling benchmark, validated
