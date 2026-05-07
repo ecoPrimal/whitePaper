@@ -6,32 +6,42 @@
 
 ## Reading Order
 
-1. **NOVEL_FERMENT_TRANSCRIPTS.md** — The core economic primitive:
-   digital objects whose value derives from accumulated history, not
-   artificial scarcity. Start here to understand what gen4 values.
+1. **THE_FLYWHEEL.md** — Start here. How the ecosystem sustains itself
+   before products generate revenue. The seed-stage economics: monetary
+   support, hardware donations, sweat equity, Loam Certificates for
+   contributions, the bidirectional hardware vision, and the path from
+   flywheel to sunCloud. This is the bridge between gen0's original
+   flywheel concept and gen4's product-stage economics.
 
-2. **LOAM_CERTIFICATES_LIVE.md** — Certificates as products: game keys,
+2. **NOVEL_FERMENT_TRANSCRIPTS.md** — The core economic primitive:
+   digital objects whose value derives from accumulated history, not
+   artificial scarcity. What gen4 values.
+
+3. **LOAM_CERTIFICATES_LIVE.md** — Certificates as products: game keys,
    collectibles, credentials, chain-of-custody. How permanent
    provenance becomes something end users hold and trade.
 
-3. **SUNCLOUD_ACTIVATION.md** — The economic coordination layer:
+4. **SUNCLOUD_ACTIVATION.md** — The economic coordination layer:
    treasury, attribution distribution, metabolic mandate. How value
-   flows through the ecosystem without platform extraction.
+   flows through the ecosystem without platform extraction. This is
+   the flywheel's mature state.
 
 ---
 
 ## The Economic Argument
 
-gen3's economic papers (sunCloud spec, latent value analysis) described
-the theory. gen4 connects the theory to infrastructure:
+gen0 named the flywheel. gen2 described the self-reinforcing loop.
+gen3 proved sovereignty economics (OWN_NOTHING, metalMatrix). gen4
+connects theory to running infrastructure:
 
-| gen3 design | gen4 activation |
-|-------------|-----------------|
-| sunCloud spec | SUNCLOUD_ACTIVATION.md |
-| Novel Ferment Transcript concept | NOVEL_FERMENT_TRANSCRIPTS.md (infrastructure wired) |
-| Loam Certificate concept | LOAM_CERTIFICATES_LIVE.md (product-facing certs) |
-| Attribution braids | sweetGrass wired in esotericWebb V4 |
-| Metabolic mandate | Designed, awaiting implementation |
+| Lineage | gen4 activation |
+|---------|-----------------|
+| gen0 flywheel concept | THE_FLYWHEEL.md (seed-stage economics, live) |
+| gen3 sunCloud spec | SUNCLOUD_ACTIVATION.md (product-stage, designed) |
+| gen3 NFT concept | NOVEL_FERMENT_TRANSCRIPTS.md (infrastructure wired) |
+| gen3 Loam Certificate concept | LOAM_CERTIFICATES_LIVE.md (product-facing certs) |
+| gen2 attribution braids | sweetGrass wired in esotericWebb V4 |
+| gen3 metabolic mandate | Designed, first expression via flywheel |
 
 ---
 

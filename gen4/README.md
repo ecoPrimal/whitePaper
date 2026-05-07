@@ -292,6 +292,7 @@ gen4/
 │   └── LIVING_GEOLOGY.md             — The sediment accumulation model: from bibliography to bedrock
 │
 ├── economics/                         ← How gen4 sustains itself (value and attribution)
+│   ├── THE_FLYWHEEL.md               — Seed-stage economics: how the ecosystem sustains before revenue
 │   ├── NOVEL_FERMENT_TRANSCRIPTS.md   — Memory-bound digital objects (the real NFT)
 │   ├── SUNCLOUD_ACTIVATION.md         — Treasury, attribution distribution, metabolic mandate
 │   └── LOAM_CERTIFICATES_LIVE.md      — Certs as products: game keys, collectibles, custody
@@ -366,9 +367,15 @@ architecture/ANCHORING_PIPELINE.md, then
 architecture/COMPOSITION_PATTERNS.md.
 
 **If you are evaluating commercial potential**: Start with
-architecture/GUIDESTONE.md (the quality standard that makes output
-trustworthy), then economics/NOVEL_FERMENT_TRANSCRIPTS.md →
-economics/SUNCLOUD_ACTIVATION.md → economics/LOAM_CERTIFICATES_LIVE.md.
+economics/THE_FLYWHEEL.md (seed-stage sustainability), then
+architecture/GUIDESTONE.md (quality standard), then
+economics/NOVEL_FERMENT_TRANSCRIPTS.md → economics/SUNCLOUD_ACTIVATION.md
+→ economics/LOAM_CERTIFICATES_LIVE.md.
+
+**If you want to support the ecosystem**: Start with
+economics/THE_FLYWHEEL.md — it explains what contributions enable, how
+they're attributed, and the path from seed-stage support to self-sustaining
+economics.
 
 **If you are a faculty member**: Start with
 thesis/THE_SOVEREIGN_PUBLICATION.md — this is the paper that explains
