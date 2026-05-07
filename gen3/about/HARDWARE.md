@@ -60,7 +60,7 @@ to 5 TB. Demonstrates the "friend/family remote compute without disrupting
 normal use" pattern — NUCLEUS primals run in the background while the owner
 games. The RTX 5090 remains the most capable single GPU in the mesh.
 
-### ironGate — Agentic Development + Composition Validation
+### ironGate — Agentic Development + Composition Validation (Currently dedicated ABG gate)
 
 | Component | Specification |
 |-----------|---------------|

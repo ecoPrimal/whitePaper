@@ -1,3 +1,8 @@
+<!-- PII: Raw Discord capture. Contains real names, institutions, research
+     profiles, and external links voluntarily posted by ABG members in a
+     public admissions channel. Internal reference only — do not redistribute.
+     See ABG_ANALYSIS.md for structured summary. -->
+
 This is the start of the #admissions channel. 
 rosīe — Yesterday at 2:31 AM
 ABG is a minimally-selective research group. a prospective member who demonstrates any one of the following is allowed in:

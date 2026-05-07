@@ -7,6 +7,13 @@
 **Admissions model**: Minimally-selective — any one of: research experience,
 strong technical ability, strong conceptual knowledge, or relevant degree
 
+**PII note**: Member profiles below are derived from public Discord
+admissions posts. This document aggregates and analyzes that information
+for internal planning only. Do not share this file or use it to contact
+members outside of normal Discord interaction. Members are identified by
+Discord handles, not real names, except where they volunteered their name
+publicly in the channel.
+
 ---
 
 ## Community Profile
@@ -160,5 +167,307 @@ Biobank creation          ──► NestGate CAS + loamSpine provenance
 
 ---
 
-*Analysis based on #admissions channel thread captured May 2-3, 2026.
-Community is <48 hours old — profiles will evolve as projects emerge.*
+## #general Channel Analysis (May 2-3, 2026)
+
+Source: `ABG_thread2.md`
+
+The `#general` channel captures the community's first substantive
+discussion — project ideas, compute needs, publication logistics,
+and organizational structure. The conversation is disjointed (multiple
+people talking past each other, tangential threads), but surfaces
+concrete problems that ecoPrimals has already addressed.
+
+### Key Issues Raised
+
+| Issue | Who Raised It | ecoPrimals Status |
+|-------|--------------|-------------------|
+| **Compute for sequencing** — "anything that deal with sequencing data may requires a relatively strong computers (usually cluster computer)" "is the resource available though" | bake3011 | **Solved** — metalMatrix cluster (154 cores, 1 TB RAM, 248 GB VRAM). toadStool dispatch validated with real NCBI data. ironGate alone processed 11.9M reads through Nest Atomic. |
+| **Google Colab as compute answer** — "you could probably get by with a google collab subscription" | rosie | **Inverted** — sovereign compute sharing pattern. The cluster is free to friends, no subscription. Colab is the dependency we eliminate. |
+| **Public dataset reanalysis** — "we could use public datasets from other papers and mix them together" | Jeremy | **Already doing this** — PRJNA488170, PRJNA382322, SRA Toolkit integration. The provenance pipeline wraps NCBI data with BLAKE3 content hashing and full chain-of-custody. |
+| **Publication path unclear** — bioRxiv vs journal, cost, authorship rules | bake3011, Vividshades, rosie | **Relevant** — scyBorg triple license (AGPL + ORC + CC-BY-SA) provides structural publication protection. The provenance chain (sweetGrass braids) gives attribution evidence. |
+| **Scooping anxiety** — "I just recognized earlier today that there was a preprint on the same topic" | bake3011 (in #admissions) | **Structurally addressed** — AGPL forces derivative disclosure. loamSpine timestamps are cryptographic proof of priority. sweetGrass braids create attribution chains. But the real answer is: publish faster, which compute helps with. |
+| **Authorship confusion** — "Do we need a PI to be corresponding author?" "how will authorship/contributor go?" | bake3011, iaacornus | **Relevant** — sweetGrass radiating attribution (Paper 20) solves this structurally: every contributor gets permanent, machine-verifiable credit proportional to contribution. But ABG isn't there yet — they're still figuring out social norms. |
+| **scRNA-seq across tumor types** — "compare datasets across different papers from different types of tumor" | Jeremy | **Adjacent** — neuralSpring / wetSpring validation targets. The cross-dataset integration is exactly what the "python → standard tools → Rust → primal compositions" pipeline enables. |
+| **Huntington's disease biomarker via RNA-seq** — linear model between HD score and expression | bake3011 | **Adjacent** — healthSpring PK/PD track handles biomarker progression modeling (Hill equation, NLME). The Anderson framework could provide spatial/spectral analysis of expression landscape changes. |
+| **Channel organization** — "Would it be possible to create possible topic chats" | Voltaire | Organizational growing pains — 30+ members, no structure yet. |
+
+### LinearParadox Connection
+
+LinearParadox (from `#admissions`: 5 years drug lab, scRNA-seq, ATAC-seq,
+bulk RNA-seq, papers and posters) is dealing with the same issues the
+ecoPrimals stack has already addressed — but doesn't know it. Specifically:
+
+- **scRNA-seq and ATAC-seq** at scale require compute that LinearParadox has
+  (in a lab) but most ABG members don't. The compute sharing pattern bridges
+  this gap.
+- **Drug lab work** for 5 years means reproducibility and chain-of-custody
+  are daily operational concerns — exactly what the provenance trio provides.
+- **"Didn't understand what I was saying"** — this is a sporePrint signal.
+  If a 5-year practitioner in the exact domain can't parse the value
+  proposition, the communication needs work. The tools solve their problems;
+  the words don't reach them yet.
+
+This is the core insight: the `#general` discussion is a group of people
+independently rediscovering problems that ecoPrimals has already solved
+(compute access, data provenance, reproducibility, scooping protection,
+attribution). They're solving them socially (Discord norms, Google Colab,
+manual authorship rules) rather than structurally (cryptographic
+provenance, content-addressed storage, copyleft licensing).
+
+The introduction strategy (Phase 3 in `ABG_OUTREACH_STRATEGY.md`) should
+meet them where they are — offer compute first, then let the structural
+solutions emerge naturally as the social solutions hit their limits.
+
+### Proposal Deadline and Timing
+
+rosie set a one-week deadline (AoE from May 2) for project proposals.
+Proposals don't need to be "well thought out or ornate, but need to be
+technical." Top proposals move to a plan stage with "a full step-by-step
+project plan (methodology prospectus)" including contributor roles and
+open contributions.
+
+This timeline matters for Phase 2-3 of the outreach strategy: Tamison
+should join before the proposal deadline passes, so compute and pipeline
+contributions can be offered to active proposals. The proposal deadline
+is approximately **May 9, 2026**.
+
+### Active Project Directions (from thread)
+
+1. **scRNA-seq meta-analysis across tumor types** (Jeremy) — integrating
+   public sc/snRNA-seq datasets with bulk survival validation. Cancer
+   informatics journal target.
+2. **Huntington's biomarker progression via RNA-seq** (bake3011) — linear
+   model between HD score and expression, extending Mastrokolias et al. 2015.
+3. **Signaling pathway discovery** (Vividshades) — immunology PhD, looking
+   for collaborators on pathway discovery with scRNA data.
+
+All three have strong ecoPrimals overlap and would benefit from compute
+and validated pipelines.
+
+---
+
+## #project-proposals Channel — NUCLEUS Capability Audit (May 2-5, 2026)
+
+Source: `ABG_thread3.md`
+
+The question is not "how can we help their proposals." The question is:
+**can NUCLEUS express every workflow they're proposing?** If yes, NUCLEUS
+is validated as the compute substrate for real science. If not, the gap
+is a NUCLEUS evolution target.
+
+### The Social-to-Structural Mapping
+
+Every ephemeral social solution ABG uses has a permanent structural
+equivalent in NUCLEUS:
+
+| Social Solve (ephemeral) | Structural Solve (permanent) |
+|--------------------------|------------------------------|
+| Google Colab subscription | toadStool dispatch on sovereign hardware |
+| Google Docs for plans/methods | loamSpine certificates for methodology |
+| Discord `#project-proposals` | biomeOS deploy graphs (TOML DAGs) |
+| Manual authorship agreement | sweetGrass radiating attribution braids |
+| "Make figures" as final step | petalTongue: the computation IS the figure |
+| bioRxiv preprint for priority | loamSpine timestamp + sweetGrass ed25519 witness |
+| Channel per project | Composition per project (NUCLEUS deploy graph) |
+| rosie reviewing proposals | primalSpring validating compositions |
+
+The social solutions work — Discord is real coordination, Google Docs are
+real collaboration. But they don't persist, aren't verifiable, aren't
+composable, and don't scale. The structural equivalents do all four.
+
+### petalTongue: The Work Is the Presentation
+
+ABG methodology lists end with "make clean figures and release code" as
+a final step. This is backwards. If every computation runs through NUCLEUS
+and renders live through petalTongue:
+
+- The scRNA-seq UMAP renders as it clusters, not after
+- The DEG volcano plot updates as each dataset processes
+- The MD simulation trajectory is visible as it runs
+- The provenance chain is visible alongside the data
+
+**The work itself IS the presentation.** No separate figure-making step.
+petalTongue renders computation as it happens. Figures in a paper are
+screenshots of the live computation view. "Released code" is the deploy
+graph TOML that anyone re-runs on their own NUCLEUS.
+
+### Proposal-by-Proposal Audit
+
+#### 1. Mark — MD Simulation of PfAAT1 (Chloroquine Resistance)
+
+**Workflow**: Structure modeling (AlphaFold/I-TASSER) -> MD simulation
+(GROMACS/OpenMM) -> Docking -> Eigenmode analysis -> Population genetics
+
+**NUCLEUS expressibility**:
+- toadStool: dispatches GROMACS/OpenMM as native workloads (TOML specs)
+- barraCuda: GPU eigenmode decomposition of MD trajectories
+- helixVision: math primitives for structure refinement (validated 1e-10)
+- NestGate: content-addressed trajectory frame storage (BLAKE3)
+- rhizoCrypt: simulation DAG (setup -> equilibration -> production -> analysis)
+- sweetGrass: attributes the computational work
+
+**Anderson connection**: Mutations = disorder. Drug transport through the
+channel = signal propagation. Localization transition = resistance
+threshold. This is Paper 12 applied to a membrane transporter instead of
+cytokine propagation through skin tissue. The disorder parameter W maps
+to mutation load; W_c predicts which mutation combinations confer full
+resistance. The population allele frequency data Mark mentioned maps
+naturally — high-frequency resistance mutations are the ones that push W
+past the critical value.
+
+**petalTongue vision**: Live trajectory visualization. Mutation sites
+highlighted on the 3D structure as the simulation runs. Eigenmode
+spectrum rendered alongside. Population allele frequencies overlaid on
+the structural model. The figure in the paper IS this view.
+
+**NUCLEUS gaps exposed**: GROMACS/OpenMM as toadStool workload type (new).
+MD trajectory formats (XTC, TRR) in NestGate (new). 3D molecular
+visualization in petalTongue (new).
+
+#### 2. Jeremy — HS-Crohn's Shared Transcriptomic Programs
+
+**Workflow**: Download GEO datasets -> DESeq2 per dataset -> FDR ->
+Intersect replicated DEGs -> GO/KEGG/GSEA -> Immune deconvolution ->
+Validate in independent datasets
+
+**NUCLEUS expressibility**:
+- toadStool: dispatches DESeq2/R as native workload (same pattern as Python)
+- NestGate: stores expression matrices and DEG results
+- rhizoCrypt: tracks analysis DAG (per-dataset -> intersection -> enrichment)
+- Paper 12 Anderson framework adds physics layer to IL-17/TNF immune analysis
+- Fajgenbaum MATRIX scoring (nS-605) directly applicable to shared drug targets
+
+**petalTongue vision**: Side-by-side volcano plots for HS and Crohn's,
+shared DEGs highlighted in real time as intersection runs. Pathway
+enrichment rendered as computation completes. The "clean figures" ARE
+the live analysis view.
+
+**NUCLEUS gaps exposed**: R runtime in toadStool (same pattern as Python).
+
+#### 3. Jeremy — Ependymoma scRNA-seq Meta-Analysis
+
+**Workflow**: Download GEO scRNA-seq -> Filter/normalize -> Batch
+correction -> Cell type annotation -> Program/signature scoring -> Bulk
+validation
+
+**NUCLEUS expressibility**:
+- toadStool: dispatches Scanpy/Seurat workloads
+- Compute: EPYC 64c/256 GB handles scRNA-seq without Colab
+- NestGate: stores h5ad/Seurat objects (content-addressed)
+- rhizoCrypt: tracks the integration DAG
+
+**petalTongue vision**: UMAP embedding rendered live as batch correction
+converges. Cell type annotations appear as the classifier runs. Program
+scores overlaid in real time. No "make UMAP figure" step — the UMAP IS
+the live view.
+
+**NUCLEUS gaps exposed**: Large h5ad binary blobs in NestGate (blob
+storage gap from handoff). Scanpy/Seurat as toadStool workloads.
+
+#### 4. Mark — PTP Expression in Metastatic Cancers
+
+**Workflow**: Identify cancer datasets -> Screen PTP family expression ->
+Compare primary vs metastatic -> Prioritize candidates
+
+**NUCLEUS expressibility**: Standard transcriptomics pipeline through
+toadStool. TNMplot-equivalent screening as a toadStool workload.
+
+**petalTongue vision**: PTP family heatmap across cancer types, rendered
+as each dataset processes. Click a PTP to drill into its expression
+profile. The screening tool IS the visualization.
+
+**NUCLEUS gaps exposed**: Minimal — standard pipeline.
+
+#### 5. bake3011 — TMS/Huntington's Biomarker Prediction
+
+**Workflow**: Download RNA-seq + TMS data from GEO -> Normalize ->
+Univariate regression per gene -> FDR -> Multivariable model -> LASSO ->
+Pathway enrichment
+
+**NUCLEUS expressibility**: Standard regression pipeline. healthSpring
+PK/PD track has Hill/NLME. LASSO is barraCuda-expressible
+(L1-regularized optimization).
+
+**petalTongue vision**: Gene-by-gene regression scatter plots rendered as
+each gene tests. Manhattan-style association plot builds in real time.
+Top genes highlighted as they pass FDR threshold. The ranked gene list
+IS the live computation view.
+
+**NUCLEUS gaps exposed**: Minimal — standard pipeline.
+
+#### 6. bake3011 — AlphaFold Large Protein Structures (>2k aa)
+
+**Workflow**: Select target proteins >2k aa -> Domain splitting ->
+AlphaFold inference -> Validate -> Assemble
+
+**NUCLEUS expressibility**: helixVision math primitives. GPU compute for
+inference. Alistaire's domain-splitting approach is a natural toadStool
+workflow pattern (split -> predict -> assemble).
+
+**petalTongue vision**: 3D structure renders as AF inference progresses.
+pLDDT confidence coloring live. Domain boundaries highlighted.
+
+**NUCLEUS gaps exposed**: AlphaFold inference as toadStool workload. 3D
+protein visualization in petalTongue.
+
+### NUCLEUS Gaps Exposed by ABG Proposals
+
+| Gap | Exposed By | Priority |
+|-----|-----------|----------|
+| MD simulation workloads (GROMACS/OpenMM) | Mark's PfAAT1 | High — novel Anderson contribution |
+| 3D molecular visualization in petalTongue | Mark's PfAAT1, bake3011's AF | High — "work is presentation" |
+| Live data visualization in petalTongue | ALL proposals | High — core petalTongue thesis |
+| R runtime as toadStool workload | Jeremy's HS-Crohn's | Medium — same pattern as Python |
+| Large binary blob storage in NestGate | Jeremy's ependymoma (h5ad) | Medium — handoff already noted |
+| AlphaFold inference as toadStool workload | bake3011's AF | Medium |
+
+### Key Observation
+
+Every single ABG proposal is expressible as a NUCLEUS composition. The
+workflows are standard bioinformatics — download data, process, analyze,
+visualize. NUCLEUS already has the compute layer (toadStool), the storage
+layer (NestGate), the provenance layer (trio), and the trust layer
+(Tower). The gaps are at the edges: specific tool integrations
+(GROMACS, R, AlphaFold) and the visualization surface (petalTongue).
+
+The most distinctive contribution is not compute — anyone can rent a GPU.
+It's the Anderson framework for Mark's MD proposal (mutations as
+disorder, transport as signal propagation) and petalTongue as the
+surface where computation becomes visible and connectable. The work
+itself becomes the presentation, the paper, and the reproducibility
+artifact — all at once.
+
+---
+
+## gen4 Unified Foundation: ABG as Thread 1 (May 2026)
+
+The whole-cell computational modeling lineage that Dennis and Mark are
+interested in is **Thread 1** of the gen4 unified foundation — one
+expression of the complete validated scientific lineage (28 baseCamp
+papers, 8 springs, 12+ contacts) mapped in
+`gen4/foundations/THE_UNIFIED_LINEAGE.md`.
+
+The ABG rebuild (Karr 2012 → Thornburg 2026) is the first detailed
+expression document. It directly validates every NUCLEUS gap exposed by
+ABG proposals: GROMACS/OpenMM workloads (Paper F), 3D molecular
+visualization (Papers E/F/G), live data rendering (all papers), large
+simulation state storage (Papers E/G), and multi-scale composition
+(Paper G). The rebuild also demonstrates the parameter provenance chain
+that ABG members need for reproducible science.
+
+The unified foundation connects ABG's interests to the broader
+ecosystem: Mark's MD proposal maps to Thread 2 (plasma physics — same
+barraCuda GPU kernels that power hotSpring). Jeremy's transcriptomics
+maps to Thread 4 (environmental genomics — same wetSpring pipelines).
+The foundation is one interconnected graph; ABG proposals are nodes
+within it.
+
+See `gen4/foundations/ABG_WHOLE_CELL_REBUILD.md` for the Thread 1
+expression and `gen4/foundations/THE_UNIFIED_LINEAGE.md` for the
+complete lineage map.
+
+---
+
+*Analysis based on #admissions, #general, and #project-proposals channel
+threads captured May 2-5, 2026. Updated May 6, 2026 with unified
+foundation cross-reference.*

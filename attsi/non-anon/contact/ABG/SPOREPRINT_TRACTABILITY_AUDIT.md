@@ -12,8 +12,8 @@ members and track what needs rewriting.
 
 If an ABG member — a grad student in bioinformatics who uses Python,
 QIIME2, and Snakemake — visits primals.eco and can understand what
-a tool does and how to use it without Kevin explaining it in voice,
-the page passes. If Kevin has to translate, the page fails.
+a tool does and how to use it without Tamison explaining it in voice,
+the page passes. If Tamison has to translate, the page fails.
 
 ---
 
@@ -100,9 +100,9 @@ useful. helixVision is not a product to buy. It's what happens when you
 compose barraCuda + coralReef + toadStool + NestGate + loamSpine and
 point them at genomic data.
 
-This distinction matters enormously for ABG engagement. If Kevin says
+This distinction matters enormously for ABG engagement. If Tamison says
 "I have a product called helixVision," the ABG grad student hears
-"you're selling me something." If Kevin says "I built a protein
+"you're selling me something." If Tamison says "I built a protein
 structure prediction pipeline in Rust that runs on your gaming GPU,"
 the grad student hears "free tool that helps me."
 
@@ -114,7 +114,7 @@ the chemical reaction metaphor. Or just don't use the word at all.
 
 ## Tracking Log (Update After Each ABG Interaction)
 
-| Date | Concept Discussed | Understood from Site? | Kevin Had to Explain? | What Phrasing Worked? | sporePrint Page Needing Work |
+| Date | Concept Discussed | Understood from Site? | Tamison Had to Explain? | What Phrasing Worked? | sporePrint Page Needing Work |
 |------|------------------|----------------------|----------------------|----------------------|------------------------------|
 | — | — | — | — | — | — |
 
@@ -129,9 +129,11 @@ Based on this pre-engagement audit, the sporePrint pages most likely
 to need rewriting for external tractability:
 
 1. **scyBorg explanation** — ~~Needs a plain-language page~~ **DONE** (May 2026):
-   Knowledge Commons page now leads with "AGPL-3.0 + ORC + CC-BY-SA 4.0"
-   before introducing "scyBorg" parenthetically. Glossary has plain
-   definition. "What this means in practice" paragraph added.
+   Dedicated page at `/methodology/scyborg-licensing/` explains the
+   orthogonal triple (AGPL code + ORC mechanics + CC-BY-SA docs) with
+   plain language and non-obvious examples. Knowledge Commons page leads
+   with license names before "scyBorg" shorthand. Glossary has plain
+   definition. Footer shows all three licenses. Site is deployed.
 2. **helixVision page** — ~~Remove "product" framing~~ **DONE** (May 2026):
    Title changed to "Self-Hosted Structure Prediction." Products section
    now leads with chemical-reaction-product disambiguation.
