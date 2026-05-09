@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 25 working papers across 7 sections  
+**Status**: Active — 27 working papers across 7 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: May 6, 2026 (updated: foundation live + sediment layer model + living geology)
+**Date**: May 9, 2026 (updated: stadial/interstadial pattern + geological constraint)
 
 ---
 
@@ -279,7 +279,8 @@ gen4/
 │   ├── BIOMEOS_OS_TRAJECTORY.md       — biomeOS from orchestrator to sovereign OS (SteamOS analogy)
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   ├── DEPLOY_GRAPH_COMPOSITION.md    — BYOB schema, session-as-primal, proto sketch taxonomy
-│   └── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
+│   └── STADIAL_INTERSTADIAL_PATTERN.md — The stadial/interstadial cycle as constraint-driven optimization
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -301,6 +302,7 @@ gen4/
 │   ├── MASSIVELY_PARALLEL_MENTORING.md — 3-6 machines, RustDesk, human as mycelium
 │   ├── THE_CONVERSATION_CONSTRAINT.md  — No code typed; conversation is the interface
 │   ├── FROM_HUMAN_SEARCH_TO_HUMAN_GARDEN.md — The grid extended: one path → many paths
+│   ├── THE_GEOLOGICAL_CONSTRAINT.md    — K-NOME at ecosystem scale through stadial/interstadial cycles
 │   ├── SHARING_THE_PEN.md             — Not only tools, but how to make tools is shared
 │   └── THE_PROMPT_BANK.md             — Raw working prompts from ~6 months of K-NOME practice
 │
@@ -350,7 +352,8 @@ architecture/COMPOSITION_PATTERNS.md (how your work becomes invisible
 infrastructure), then architecture/GUIDESTONE.md (how output quality
 transfers through the composition layer), then products/ESOTERIC_WEBB.md
 (the first proof), then architecture/BIOMEOS_OS_TRAJECTORY.md (where it
-all leads).
+all leads), then architecture/STADIAL_INTERSTADIAL_PATTERN.md (the
+ecosystem evolution framework that got you here).
 
 **If you are a field scientist**: Start with
 products/HELIX_VISION.md (sovereign genomics pipeline), then
@@ -395,6 +398,8 @@ foundations/ABG_WHOLE_CELL_REBUILD.md for the first expression: a
 knome/MASSIVELY_PARALLEL_MENTORING.md (the real production workflow),
 then knome/THE_CONVERSATION_CONSTRAINT.md (no code typed),
 then knome/FROM_HUMAN_SEARCH_TO_HUMAN_GARDEN.md (the grid extended),
+then knome/THE_GEOLOGICAL_CONSTRAINT.md (K-NOME at ecosystem scale —
+stadial gates, primordial extinctions, Lamarckian inheritance),
 then knome/SHARING_THE_PEN.md (the methodology as open commons),
 then knome/THE_PROMPT_BANK.md (the raw working prompts — what the
 gardener actually types). Read gen3/atlasHugged/ first for full context.
@@ -403,7 +408,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **25 working papers** across 7 sections document the
+gen4/ is active. **27 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.
