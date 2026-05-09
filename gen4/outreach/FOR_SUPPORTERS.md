@@ -2,7 +2,7 @@
 
 **How to Contribute to the Ecosystem and What Your Contribution Enables**
 
-**Date**: May 7, 2026
+**Date**: May 7, 2026 (updated May 8, 2026)
 **Audience**: Anyone who sees value in sovereign open science and wants
 to help sustain it
 
@@ -10,11 +10,13 @@ to help sustain it
 
 ## The Short Version
 
-The ecoPrimals ecosystem runs on consumer hardware — 11 nodes, ~$15K
-in equipment. It serves a bioinformatics research community (ABG) with
-free compute, validated pipelines, and full provenance infrastructure.
-The monthly metabolic cost to keep it alive is ~$485 (electricity,
-internet, depreciation).
+The ecoPrimals ecosystem runs on consumer hardware — 10 towers + 4
+SFF nodes, ~$15K in equipment, ~130 CPU cores, ~188 GB GPU VRAM,
+~1.2 TB system RAM, ~125 TB storage. It serves a bioinformatics
+research community (ABG) with free compute, validated pipelines, full
+provenance infrastructure, and a 175-PASS security posture (darkforest
+v2.0). The monthly metabolic cost to keep it alive is ~$485
+(electricity, internet, depreciation).
 
 Contributions of money, hardware, or time keep the ecosystem running
 and growing. Every contribution is permanently attributed via sweetGrass
@@ -122,7 +124,7 @@ The ecosystem's metabolic costs:
 
 | Cost | Monthly |
 |------|---------|
-| Electricity (11 nodes) | ~$150 |
+| Electricity (14 nodes) | ~$150 |
 | Internet | ~$80 |
 | Domain / DNS | ~$5 |
 | Hardware depreciation | ~$250 |

@@ -2,7 +2,7 @@
 
 **How Scientists Use Sovereign Compute for Real Science**
 
-**Date**: May 7, 2026
+**Date**: May 7, 2026 (updated May 8, 2026)
 **Audience**: Bioinformaticians, field scientists, computational researchers,
 lab PIs, grad students, research communities (ABG and beyond)
 
@@ -66,9 +66,22 @@ dedicated to your workload.
 
 ### 3. You Work in JupyterHub
 
-Standard Jupyter environment. Python, R, Rust, whatever your
-pipeline needs. Shared workspace visible to all group members.
-Individual credentials.
+Standard Jupyter environment with structured workspace scaffolding:
+
+- **`commons/`** — shared scratch space for group collaboration
+- **`pilot/`** — structured experiments with lifecycle (propose → run → review)
+- **`projects/`** — formal research projects with their own directories
+- **`data/`** — shared datasets, BLAKE3-hashed at ingest
+- **`showcase/`** — published dashboards visible to reviewers (Voila)
+- **`validation/`** — darkforest security results, provenance integrity checks
+- **`~/notebooks/scratch/`** — per-user private scratch (chmod 700)
+
+Per-user Python environments with offline package installation via a
+local wheelhouse. No internet required for package installs. Welcome
+notebook orients new users to the workspace layout.
+
+Individual credentials. Shared workspace visible to group members.
+Per-tier mechanism-level enforcement (see below).
 
 ### 4. Provenance Forms Underneath
 
@@ -149,16 +162,35 @@ accumulation model.
 
 ---
 
+## Security Validation
+
+The system is continuously validated by **darkforest** (v2.0), a pure Rust
+security binary (939 KB) that runs 181 checks:
+
+- **Pen tests** — 3 threat actors (external attacker, authorized user,
+  restricted observer) probing all 13 services
+- **Protocol fuzzing** — malformed inputs for every JSON-RPC and BTSP endpoint
+- **Crypto strength** — cookie entropy, shadow hashing, token tamper resistance,
+  cipher negotiation, file permissions
+
+Latest run: **175 PASS, 0 FAIL, 6 DARK_FOREST** (informational findings).
+Results available as structured JSON in `validation/darkforest-latest.json`.
+
+---
+
 ## Current Availability
 
 | Resource | Status |
 |----------|--------|
 | JupyterHub | Live at lab.primals.eco |
-| Dedicated ABG node (ironGate) | i9-14900K, RTX 5070, 96 GB DDR5 |
+| Dedicated ABG node (ironGate) | i9-14900K, RTX 4070, 96 GB DDR5 |
 | Heavy compute (strandGate) | 64-core EPYC, 256 GB ECC, RTX 3090 |
+| Flagship compute (northGate) | i9-14900K, RTX 5090, 192 GB DDR5 |
 | Cold storage | 76 TB ZFS |
 | GPU float pool | 2× RTX 3090, 2× Titan V, 2× MI50 |
 | Foundation pipeline | Operational (fetch + validate + provenance) |
+| Workspace scaffolding | Full ABG layout with pilot lifecycle |
+| darkforest validation | 175 PASS, 0 FAIL, 6 DARK_FOREST |
 
 Hardware is reconfigurable per project. Don't be shy on requests.
 

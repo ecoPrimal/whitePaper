@@ -2,7 +2,7 @@
 
 **How Developers Compose Primals Into Their Own sporeGarden Products**
 
-**Date**: March 24, 2026
+**Date**: March 24, 2026 (updated May 8, 2026)
 **Audience**: Rust developers, indie game devs, tool builders, infrastructure engineers
 
 ---
@@ -196,11 +196,16 @@ available model (local GPU, remote sovereign, fallback). Your product
 calls `ai.chat` and gets text back. Where the model runs is Squirrel's
 problem.
 
-### Security (BearDog)
+### Security (BearDog + darkforest)
 
 14,201 tests, 91+ JSON-RPC methods, production-grade cryptography.
 Your product calls `security.sign` and gets a signed payload. Key
 management, identity, verification — BearDog handles it.
+
+The ecosystem includes **darkforest** (pure Rust, 939 KB), a security
+validator that pen-tests, fuzzes, and crypto-audits the full stack:
+181 checks, 175 PASS, 0 FAIL. Your product inherits a validated
+security posture.
 
 ### Game Science (ludoSpring)
 
