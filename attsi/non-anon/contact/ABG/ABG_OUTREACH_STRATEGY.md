@@ -387,6 +387,61 @@ any ABG proposal — not just whole-cell modeling.
 
 ---
 
+---
+
+## Dual Presentation Architecture (May 9, 2026)
+
+ABG work is now presented on two distinct surfaces with clear separation
+of identity:
+
+### ABG Presentation Surface
+
+| Surface | Content | Identity |
+|---------|---------|----------|
+| **lab.primals.eco** (observer) | Rendered notebooks — science, data, benchmarks | "ABG Compute Lab" |
+| **lab.primals.eco/hub** (gated) | Interactive compute — JupyterHub for members | ABG community workspace |
+| **Discord** | Community engagement, project proposals | Tamison (human-first) |
+
+The observer Welcome page now presents as "ABG Compute Lab" — community
+research front and center. Science notebooks (commons, pilot, wetspring
+validations) render as ABG work. No ecoPrimals jargon visible.
+
+### ecoPrimals Presentation Surface
+
+| Surface | Content | Identity |
+|---------|---------|----------|
+| **primals.eco** (sporePrint) | Architecture, methodology, springs, primals | ecoPrimals project |
+| **lab.primals.eco** (infrastructure section) | darkforest reports, security dashboards | ecoPrimals validation |
+
+Infrastructure notebooks (validation-dashboard, darkforest-viewer,
+security-posture-summary) render as ecoPrimals artifacts — the platform
+validating itself.
+
+### Gate Portability
+
+The compute surface is now gate-portable. If the active gate changes
+(hardware upgrade, relocation, failure), the observer layer survives:
+
+- **Always-on**: Static HTML exports from pappusCast Heavy tier serve as
+  fallback. sporePrint on GitHub Pages is perpetually available.
+- **Gate-portable**: `deploy/gate_switch.sh <target>` transfers compute
+  services to any gate with SSH access and cloudflared.
+- **Gate-anonymous**: Observer surface never reveals which gate hosts the
+  compute. All gate names, absolute paths, and internal topology have been
+  scrubbed from public-facing content.
+
+### Implication for Outreach
+
+The dual presentation means:
+- ABG members see their community lab. Not an infrastructure demo.
+- External observers see ABG science. Not ecosystem architecture.
+- Tamison can point people to `lab.primals.eco` and it reads as a
+  bioinformatics lab, not a software project.
+- The "Hosted on ecoPrimals" footer link exists for the curious, but the
+  framing centers the science.
+
+---
+
 *Strategy is a living document. Update after each significant ABG
 interaction with observed friction points and sporePrint refinement
 targets.*
