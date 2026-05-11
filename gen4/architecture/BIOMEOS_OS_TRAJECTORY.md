@@ -115,6 +115,18 @@ The sovereign GPU stack (coralReef's VFIO dispatch, DRM isolation,
 glow-plug device lifecycle) is the foundation for an OS that owns its
 hardware without proprietary drivers.
 
+**May 2026 status**: All 3 local GPUs (RTX 5060, Titan V, Tesla K80) are
+now sovereign via a pure Rust warm-catch pipeline (`coralctl warm-catch`).
+The warm-catch technique — binary-patching `nouveau.ko` at ELF level to NOP
+teardown, letting nouveau train memory and init FECS/GPCs, then swapping to
+`vfio-pci` — bypassed firmware barriers that blocked cold-boot sovereign init.
+Hardware dispatch infrastructure (`VfioChannel::create_warm`) is proven.
+The remaining gap is E2E wiring: shader compile → sovereign dispatch →
+readback for physics workloads. coral-ember and coral-glowplug implementations
+are ready for absorption into toadStool, following the Nest atomic pattern
+where hardware access (WHERE) belongs to toadStool and compilation (HOW)
+stays in coralReef, composed via `by_domain()` IPC.
+
 ### Layer 1: Security (BearDog + Songbird)
 
 Cryptographic identity, genetic lineage trust, BirdSong encrypted discovery,
