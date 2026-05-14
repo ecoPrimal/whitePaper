@@ -75,15 +75,27 @@ Reached out noting shared connection from Murillo's Applied ML class (CMSE 890, 
 ### May 10, 2026 — Joelle → Kevin (LinkedIn)
 Positive response. Currently writing dissertation, not much on her plate but lab mates might have needs. Interested in learning more. Suggested a Zoom call. Provided MSU email (jeaves@msu.edu) and asked for availability this week.
 
+### May 11, 2026 — Kevin → Joelle (Email)
+Sent follow-up to jeaves@msu.edu. Pitched the cluster: 11 nodes, 154 cores, 248 GB VRAM, 1 TB RAM, 122 TB storage. Linked lab.primals.eco and primals.eco. Framed as "looking for external workloads to prove parity — any domain." Proposed Zoom this week.
+
+### May 13, 2026 — Zoom Call (Kevin ↔ Joelle)
+**Very receptive.** Outcome:
+- Will talk to **grad students** in the lab about compute needs and forward them
+- Will also connect with **CMSE undergrads** working on projects who may benefit
+- Contacts will be sent to Kevin's **MSU email** (mokkevin@msu.edu)
+- Casual, positive tone — genuine interest in the compute offer
+
 ---
 
 ## Next Steps
 
-1. **Email jeaves@msu.edu** with availability for Zoom this week
-2. Keep it casual and exploratory — she's finishing up, her lab mates are the potential users
-3. Prepare a brief demo/overview of what ironGate can do for protein engineering workflows
-4. Identify which Woldring Lab members might benefit from compute resources
-5. Potential gateway to Woldring and/or Gilad as faculty contacts
+1. ✅ ~~Email jeaves@msu.edu with availability~~ (done May 11)
+2. ✅ ~~Zoom call~~ (done May 13 — very receptive)
+3. **Wait for inbound contacts** from grads and CMSE undergrads via mokkevin@msu.edu
+4. **Prepare onboarding** — ready to spin up reviewer/user accounts on lab.primals.eco for anyone she sends
+5. **Have a demo-ready workload** — something visual they can see immediately (16S dashboard, paper reproductions, benchmark comparison)
+6. **Follow up with Joelle in ~1 week** if no contacts come through — gentle check-in
+7. Potential gateway to Woldring and/or Gilad as faculty contacts once students are engaged
 
 ---
 

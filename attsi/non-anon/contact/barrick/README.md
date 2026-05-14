@@ -20,7 +20,16 @@
 
 ## Context
 
-Applied to Research Assistant II position in the Barrick and Lenski Labs (posting 1124446, closes May 12, 2026). Interview with Barrick scheduled **May 11, 2026** (initial Zoom). Position manages lab operations and LTEE, characterizes evolving populations, uses synthetic biology and computation.
+Applied to Research Assistant II position in the Barrick and Lenski Labs (posting 1124446, closed May 12, 2026).
+
+### Interview Timeline
+- **May 11, 2026** — Initial Zoom with Barrick ✅ (went well)
+- **May 13, 2026** — Invited to **in-person interview** to meet lab + Rich Lenski
+  - Options: **Fri 5/15**, **Mon 5/18**, or **Tue 5/19** (11:30 AM – 4:00 PM)
+  - Format: Lab tour → Lunch with PhD students/postdocs → One-on-one/small group meetings → Final meeting with Barrick
+  - This is the **guideStone USB opportunity** — bring the LTEE artifact
+
+Position manages lab operations and LTEE, characterizes evolving populations, uses synthetic biology and computation.
 
 ---
 
@@ -257,7 +266,10 @@ Beyond breseq's deterministic mutation calling:
 
 1. ✅ Interview prep document created (whitePaper/interview_prep_barrick_lenski_RA2.md)
 2. ✅ Contact file created
-3. 🔄 Interview: May 11, 2026 (Zoom)
-4. ⏳ If hired: Begin LTEE Paper 02 validation with real LTEE data
-5. ⏳ Propose Anderson-QS experiments using LTEE strains
-6. ⏳ Integrate breseq output into wetSpring analysis pipeline
+3. ✅ Initial Zoom interview with Barrick (May 11) — went well
+4. 🔄 **In-person interview** — schedule one of: Fri 5/15, Mon 5/18, Tue 5/19
+5. 🔄 **Build LTEE guideStone USB** for in-person interview (see gen4/architecture/GUIDESTONE_LTEE.md)
+6. ⏳ Meet Rich Lenski at in-person interview
+7. ⏳ If hired: Begin LTEE Paper 02 validation with real LTEE data
+8. ⏳ Propose Anderson-QS experiments using LTEE strains
+9. ⏳ Integrate breseq output into wetSpring analysis pipeline
