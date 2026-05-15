@@ -1,6 +1,6 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 27 working papers across 7 sections  
+**Status**: Active — 29 working papers across 7 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
 **Date**: May 9, 2026 (updated: stadial/interstadial pattern + geological constraint)
 
@@ -280,7 +280,9 @@ gen4/
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   ├── DEPLOY_GRAPH_COMPOSITION.md    — BYOB schema, session-as-primal, proto sketch taxonomy
 │   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
-│   └── STADIAL_INTERSTADIAL_PATTERN.md — The stadial/interstadial cycle as constraint-driven optimization
+│   ├── STADIAL_INTERSTADIAL_PATTERN.md — The stadial/interstadial cycle as constraint-driven optimization
+│   ├── NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md — From calibration to sovereign primals (glacial evolution)
+│   └── CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md — VPS as touchpoint, gate as source (inner membrane)
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -394,6 +396,14 @@ foundation with 10 domain threads. Then read
 foundations/ABG_WHOLE_CELL_REBUILD.md for the first expression: a
 14-year, 7-paper lineage rebuilt with full structural provenance.
 
+**If you want to understand the sovereignty evolution**: Start with
+architecture/NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md (the full posture —
+what's evolved, what's secure, what remains), then
+architecture/CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md (the inner membrane
+— VPS deployment, Tower composition, content-aware routing), then
+architecture/STADIAL_INTERSTADIAL_PATTERN.md (the glacial cycle that
+drives evolution).
+
 **If you want to understand how this was built**: Start with
 knome/MASSIVELY_PARALLEL_MENTORING.md (the real production workflow),
 then knome/THE_CONVERSATION_CONSTRAINT.md (no code typed),
@@ -408,7 +418,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **27 working papers** across 7 sections document the
+gen4/ is active. **29 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.

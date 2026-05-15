@@ -43,6 +43,21 @@
    analogy, layer architecture, deployment models, honest timeline. Start
    here if you want to understand where gen4 leads.
 
+7. **NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md** — The sovereignty evolution
+   from calibration instruments to sovereign primals. What's evolved
+   (Horizon 1 security, Horizon 2 parallels), what's validated as secure
+   (darkforest, Dark Forest gate, membrane audit), what remains (DNS,
+   content serving, CI/CD, package registries). The glacial metaphor:
+   interstadial pre-wires, stadial validates under load. **Start here if
+   you want to understand the current sovereignty posture.**
+
+8. **CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md** — The first primal
+   deployment on external substrate. VPS as touchpoint, gate as source.
+   Tower composition (BearDog + SkunkBat), three membrane channels,
+   content-aware routing, credential encryption. The operational model
+   for deploying NUCLEUS at scale. **Start here if you want to understand
+   the inner membrane.**
+
 ---
 
 ## Relationship to gen3 Architecture
