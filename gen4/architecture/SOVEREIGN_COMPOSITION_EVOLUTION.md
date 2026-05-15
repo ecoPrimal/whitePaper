@@ -82,6 +82,33 @@ comparisons, 7-day metrics).
 **Current state**: IN PROGRESS. Four sovereign parallels running. Two
 active. Four not started.
 
+### Layer 3+4: The Membrane Bridge (continuous telemetry)
+
+Layer 3 (external membrane / VPS) and Layer 4 (internal membrane / gate)
+are two faces of the same cell membrane. The critical design decision:
+**shadow data collection is permanent, not a pre-cutover phase**.
+
+The calibrate-shadow-cutover protocol defines the gate for replacing an
+external service. But even after cutover, telemetry continues because:
+
+- Regressions can emerge after primal updates (BearDog TLS p95 drifts)
+- External baselines shift (Cloudflare edge routing changes)
+- Cost patterns change (VPS bandwidth, gate CPU, relay load)
+- Composition interactions produce emergent latency profiles
+
+The implementation is a unified telemetry pipeline:
+- `deploy/membrane_telemetry.sh` probes both membranes every 15 minutes
+- `deploy/membrane_summary.sh` produces a rolling 7-day `membrane_7day.toml`
+- `routing_config.toml [telemetry]` formalizes `shadow_mode = "permanent"`
+- SkunkBat audit events correlate with telemetry probes for Layer 2 validation
+- The shadow run orchestrator reads unified baselines instead of per-channel files
+
+This makes the "shadow" phase a permanent health signal rather than a
+pre-cutover test. The organism keeps sensing its environment even after
+it no longer depends on external services — exactly as a biological cell
+continues monitoring its membrane even when all internal protein
+synthesis is operational.
+
 ### Layer 4: Sovereign Composition (convergence)
 
 The end state: all layers compose into a self-sustaining system. Not
@@ -94,10 +121,11 @@ The Tower atomic (BearDog + Songbird + SkunkBat) replaces Cloudflare
 NUCLEUS replaces the entire external stack.
 
 **Validation**: End-to-end integration test with zero external
-dependencies. The final darkforest audit.
+dependencies, plus continuous membrane telemetry that persists beyond
+cutover as a permanent health signal.
 
 **Current state**: EARLY. Tower on VPS without biomeOS. Full NUCLEUS on
-gate with external dependencies.
+gate with external dependencies. Continuous telemetry pipeline deployed.
 
 ---
 
@@ -200,6 +228,10 @@ This means:
   These are measurement tools, not security tools. They measure parity;
   darkforest validates security.
 
+- **Membrane telemetry**: `membrane_telemetry.sh` and `membrane_summary.sh`
+  collect and summarize shadow data. They're cron-driven probes that
+  output TOML — readable by future Rust tooling when the summary evolves.
+
 ### What Must Evolve to Rust
 
 | Current | Target | Priority | Reason |
@@ -256,3 +288,5 @@ Final:    Gate mesh (sovereign) + VPS mesh (owned) + biomeOS (orchestrated)
 | `STADIAL_INTERSTADIAL_PATTERN.md` | The evolution framework: glacial cycles drive convergence |
 | `TUNNEL_EVOLUTION.md` (projectNUCLEUS) | The step-by-step replacement roadmap |
 | `COMPLETE_DEPENDENCY_INVENTORY.md` (projectNUCLEUS) | The 40+ dependency map across 7 clusters |
+| `routing_config.toml [telemetry]` (projectNUCLEUS) | Permanent shadow mode configuration for SkunkBat correlation |
+| `membrane_7day.toml` (projectNUCLEUS) | Canonical membrane state snapshot — the L3+L4 health summary |
