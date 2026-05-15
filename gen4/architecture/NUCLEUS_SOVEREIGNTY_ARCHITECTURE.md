@@ -55,18 +55,27 @@ counterparts:
 
 #### BearDog TLS Shadow (H2-12) — LIVE
 - BearDog v0.9.0 on :8443 alongside Cloudflare :443
-- 2ms RPC latency vs 102ms Cloudflare baseline (51x faster)
+- **3ms RPC latency** vs 102ms Cloudflare baseline (34x faster)
+- Telemetry probe fixed: `/dev/tcp` + `read -t 1` (previous `nc` inflated to 3s)
 - rustls X.509 termination, SNI routing, cert auto-renewal
 - Per-IP sliding-window rate limiter
 - `btsp_tls_parity.sh` ready for formal 7-day comparison
 - **What it proves**: Sovereign TLS can massively outperform rented TLS
 
-#### Songbird NAT Relay (H2-14) — LIVE
+#### Channel 3 TLS Surface — LIVE (membrane.primals.eco)
+- DNS-only A record → 157.230.3.183 (grey-cloud, not proxied)
+- ACME cert auto-obtained (Let's Encrypt E8, valid to Aug 13 2026)
+- Caddy serves sporePrint content (19MB synced from gate) + health/status endpoints
+- **HTTP parity PASS**: VPS 68ms TTFB vs GitHub Pages 89ms (10 samples)
+- **TLS parity**: 130ms vs 96ms, 100% uptime — within 35% (expected VPS vs CDN)
+- **What it proves**: VPS can obtain certs and serve content at or above CDN parity
+
+#### Songbird NAT Relay (H2-14) — LIVE + HTTP PARITY PASS
 - cellMembrane fieldMouse on 157.230.3.183 (DigitalOcean nyc1)
 - Songbird TURN relay on :3478, 100% reachable (10/10 probes)
 - 5-tier ConnectionFallbackChain shipped (direct → STUN → TURN → cloudflared → offline)
-- `songbird_nat_parity.sh` ready for HTTP parity validation
-- **What it proves**: NAT traversal works on owned infrastructure
+- **HTTP parity PASS**: VPS content delivery 68ms vs GitHub Pages 89ms
+- **What it proves**: NAT traversal works on owned infrastructure, content at parity
 
 #### BTSP Dual-Auth (H2-01) — ACTIVE
 - BTSPAuthenticator plugin live on JupyterHub

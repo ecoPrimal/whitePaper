@@ -79,8 +79,11 @@ validated (Layer 2). Layer 3 is the ops.
 **Validation**: benchScale parity scenarios (shadow runs, baseline
 comparisons, 7-day metrics).
 
-**Current state**: IN PROGRESS. Four sovereign parallels running. Two
-active. Four not started.
+**Current state**: IN PROGRESS. Six sovereign parallels running. Three
+proven (TLS ACME cert live, HTTP parity PASS, BearDog RPC 3ms). Two
+active (BTSP dual-auth, Forgejo primary). Four not started (DNS,
+CI, registry, data). Content synced to VPS — VPS serves real sporePrint
+at `membrane.primals.eco` with Let's Encrypt E8 cert.
 
 ### Layer 3+4: The Membrane Bridge (continuous telemetry)
 
@@ -124,8 +127,11 @@ NUCLEUS replaces the entire external stack.
 dependencies, plus continuous membrane telemetry that persists beyond
 cutover as a permanent health signal.
 
-**Current state**: EARLY. Tower on VPS without biomeOS. Full NUCLEUS on
-gate with external dependencies. Continuous telemetry pipeline deployed.
+**Current state**: EARLY but advancing. Tower on VPS without biomeOS. Full
+NUCLEUS on gate with external dependencies. Continuous telemetry pipeline
+deployed. Key milestone: `membrane.primals.eco` proves the VPS can obtain
+ACME certs and serve content at parity with GitHub Pages CDN — the first
+end-to-end Channel 3 operation (DNS → TLS → content → response).
 
 ---
 
@@ -265,10 +271,15 @@ protein sources, borrowed membranes, and cloud-hosted DNA is a
 laboratory construct. We're building a living cell.
 
 ```
-Current:  Gate (sovereign) + Cloudflare (rented) + GitHub (rented)
+Was:      Gate (sovereign) + Cloudflare (rented) + GitHub (rented)
                 = laboratory construct
 
-Target:   Gate (sovereign) + VPS membrane (owned) + Forgejo (owned)
+Now:      Gate (sovereign) + VPS membrane (owned, TLS proven) + Forgejo (owned)
+                = cell with membrane forming
+                  [membrane.primals.eco TLS live, content at parity,
+                   BearDog 3ms vs Cloudflare 120ms, Forgejo 32 repos]
+
+Target:   Gate (sovereign) + VPS membrane (full TLS) + Forgejo (CI)
                 = living cell
 
 Final:    Gate mesh (sovereign) + VPS mesh (owned) + biomeOS (orchestrated)
