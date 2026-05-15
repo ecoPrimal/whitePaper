@@ -1,6 +1,6 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 29 working papers across 7 sections  
+**Status**: Active — 30 working papers across 7 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
 **Date**: May 9, 2026 (updated: stadial/interstadial pattern + geological constraint)
 
@@ -282,7 +282,8 @@ gen4/
 │   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
 │   ├── STADIAL_INTERSTADIAL_PATTERN.md — The stadial/interstadial cycle as constraint-driven optimization
 │   ├── NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md — From calibration to sovereign primals (glacial evolution)
-│   └── CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md — VPS as touchpoint, gate as source (inner membrane)
+│   ├── CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md — VPS as touchpoint, gate as source (inner membrane)
+│   └── SOVEREIGN_COMPOSITION_EVOLUTION.md — Primal goals vs sovereignty goals, Rust thread, final convergence
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -418,7 +419,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **29 working papers** across 7 sections document the
+gen4/ is active. **30 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.

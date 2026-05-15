@@ -58,6 +58,12 @@
    for deploying NUCLEUS at scale. **Start here if you want to understand
    the inner membrane.**
 
+9. **SOVEREIGN_COMPOSITION_EVOLUTION.md** — The evolution from shipped
+   primals to sovereign self-hosted safe primal compositions. Separates
+   primal goals (Layer 1) from sovereignty goals (Layer 3), maps the
+   overlaps, defines the Rust thread, and charts the final convergence.
+   **Start here if you want to understand the full sovereignty arc.**
+
 ---
 
 ## Relationship to gen3 Architecture
