@@ -3,7 +3,7 @@
 **Total Investment**: ~$15,000
 **Location**: Sovereign residential cluster
 **Network**: Local ethernet mesh with 10 Gigabit backbone (switch acquired, NICs installed, cables pending)
-**Last Updated**: April 3, 2026
+**Last Updated**: May 15, 2026
 
 ---
 
@@ -16,6 +16,16 @@ The hardware is heterogeneous by nature — DDR3 to DDR5, RTX 2070 to RTX 5090,
 32 GB to 256 GB RAM — and the architecture treats this heterogeneity as a
 feature. Each gate runs the NUCLEUS atomics that match its hardware, and biomeOS
 coordinates the mesh so workloads land on the right gate.
+
+As of May 2026, the hardware composes through a **gram-negative membrane model**:
+- **Intracellular** (this inventory): the covalent HPC mesh
+- **Inner membrane**: gate network boundary (UFW, iptables, hidepid)
+- **Periplasm**: routing + telemetry (routing_config.toml, membrane_telemetry.sh)
+- **Outer membrane**: VPS (157.230.3.183) running Tower composition
+- **Extracellular**: internet, DNS, CDN
+
+See `gen4/architecture/SOVEREIGN_HPC_EVOLUTION.md` for the full membrane model,
+bonding at each layer, and evolution path (10G → HBM2 fleet → multi-VPS mesh).
 
 ---
 
@@ -305,18 +315,48 @@ model.
 
 ---
 
+## Outer Membrane (VPS — cellMembrane)
+
+The sovereign cluster extends beyond the LAN via a VPS outer membrane,
+covalently bonded to the gate cluster via SSH. This is infrastructure, not
+a cloud dependency — owned, controlled, reproducible.
+
+| Resource | Value |
+|----------|-------|
+| **Provider** | DigitalOcean nyc1 |
+| **Cost** | $12/month (2 GB RAM, 1 vCPU, 50 GB SSD) |
+| **IP** | 157.230.3.183 |
+| **Services** | Songbird TURN, RustDesk hbbs/hbbr, BearDog, SkunkBat, Caddy TLS |
+| **TLS surface** | `membrane.primals.eco` (Let's Encrypt E8, auto-renewal) |
+| **Content cache** | 19 MB sporePrint (synced from gate NestGate) |
+| **Bonding** | Covalent to gate (SSH key), Ionic to external (BTSP tokens) |
+| **Sovereignty proof** | HTTP parity 68ms TTFB (vs GitHub Pages 89ms), BearDog 3ms RPC |
+| **Deployed** | May 14, 2026 (TLS surface May 15) |
+
+The VPS is a sacrificial outer membrane — it can be destroyed and reprovisioned
+from gate state without data loss. All persistent state lives intracellularly.
+
+---
+
 ## Networking
 
 | Component | Specification | Status |
 |-----------|---------------|--------|
-| 10G Switch | 10 Gigabit Ethernet | Acquired |
-| 10G NICs (copper) ×4 | northGate, southGate, eastGate, westGate | Installed |
-| 10G Cables (Cat6a / DAC) | — | Pending purchase |
+| 10G Switch | 10 Gigabit Ethernet | **Acquired** |
+| 10G NICs (copper) ×4 | northGate, southGate, eastGate, westGate | **Installed** |
+| 10G Cables (Cat6a / DAC) | ~$50-100 estimated | **Pending** — sole blocker for backbone activation |
+| 1G Mesh | biomeGate, strandGate, swiftGate, flockGate, kinGate, blueGate | Active |
+| NUC M6 P2P | USB-C ethernet to ironGate (10.99.0.0/30) | Active |
+| VPS ↔ Gate | SSH over internet (~15ms RTT NYC↔Michigan) | Active |
 
 The 10G backbone connects the four primary towers. Once cabled, the covalent
 mesh's inter-gate bandwidth jumps from 1 Gbps to 10 Gbps — relevant for
 nestGate blob replication, toadStool distributed compute, and songBird
 federation traffic.
+
+**Planned 10G configuration**: MTU 9000 (jumbo frames), dedicated VLAN for
+inter-gate covalent traffic, Songbird auto-discovery of 10G peers for larger
+payload allocation.
 
 ---
 
@@ -378,4 +418,15 @@ hardware demanded it.
 
 ---
 
-**11 towers, 4 HBM2 cards, 3 NPUs, 1 Tesla K80. Sovereign compute on consumer hardware.**
+**11 towers, 4 HBM2 cards, 3 NPUs, 1 Tesla K80, 1 VPS outer membrane.
+Sovereign compute on consumer hardware, wrapped in a gram-negative organism.**
+
+---
+
+## Changelog
+
+- **May 15, 2026**: Added VPS outer membrane section, updated networking table
+  with status and 10G config plan, added membrane model context + gen4
+  cross-reference, updated Last Updated date.
+- **April 3, 2026**: Initial gen3 inventory (11 towers, work card pool, 10G
+  backbone status, neuromorphic, mobile/security hardware).

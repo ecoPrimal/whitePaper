@@ -5,7 +5,7 @@ These cards are physically capable but vendor-orphaned — CUDA/ROCm support dro
 which craters resale price while the silicon remains viable for coralReef's
 sovereign compiler pipeline.
 
-**Last Updated**: March 16, 2026
+**Last Updated**: May 15, 2026
 
 ---
 
@@ -123,10 +123,15 @@ sovereign compiler pipeline.
 |-------|------|----------------|--------------|
 | ROCm drops Vega 20 (gfx906) maintenance | Q2 2024 | MI50, MI60 | Already crashed → $300–600 |
 | CUDA marks Volta "frozen" | CUDA 12.8 (2025) | Titan V, V100, GV100 | Declining, watch eBay |
-| NVIDIA R535 LTS driver EOL | June 2026 | All Volta cards | Expect price drop |
-| NVIDIA R570 production driver EOL | Feb 2026 | All Volta cards | Already past → prices softening |
-| ROCm drops CDNA 1 (gfx908) | TBD (~2026?) | MI100 | Not yet — watch ROCm release notes |
+| NVIDIA R570 production driver EOL | Feb 2026 | All Volta cards | **Past** → prices softening |
+| **NVIDIA R535 LTS driver EOL** | **June 2026** | All Volta cards | **IMMINENT** — expect significant drop. This is the final official Volta driver. |
+| ROCm drops CDNA 1 (gfx908) | TBD (~2026-2027?) | MI100 | Watch ROCm 6.x release notes — still listed in 6.3 |
 | CUDA drops Pascal/Volta entirely | TBD (~2027?) | P100, V100, Titan V | Will trigger another crash |
+
+**May 2026 status**: R535 EOL is ~3 weeks away. V100 16GB PCIe prices are
+already soft ($380-530). Post-June expect further 20-30% decline as institutional
+users dump Volta hardware that no longer receives security patches. MI100 ROCm
+support remains intact in 6.3 (May 2026) — the gfx908 drop has not happened yet.
 
 ---
 
@@ -168,3 +173,48 @@ Your MI50 blowers already validate this approach — same community, same patter
 
 Seven HBM2 cards, 120 GB aggregate, ~48 TFLOPS FP64, under $2k total.
 For reference, a single A100 80GB is $10k+ and delivers 19.5 TFLOPS FP64.
+
+---
+
+## Tier 3 — Long Horizon (Blackwell Pro / HBM3e)
+
+The mesh already contains two Blackwell (SM120) consumer devices:
+- northGate: RTX 5090 (32 GB GDDR7) — validates coralReef SM120 at consumer ratios
+- ironGate: RTX 5070 (12 GB GDDR7) — second SM120 target
+
+A Blackwell Pro (B200/B100) would represent a generational leap:
+
+| Spec | B100 | B200 |
+|------|------|------|
+| **HBM** | 192 GB HBM3e | 192 GB HBM3e |
+| **FP64** | ~30 TFLOPS | ~40 TFLOPS |
+| **BW** | ~8 TB/s | ~8 TB/s |
+| **TDP** | 700W | 1000W |
+| **New price** | ~$25,000 | ~$30,000+ |
+| **Secondary market** | Years away | Years away |
+| **Cooling** | Server chassis (liquid or forced-air) | Server chassis |
+| **coralReef target** | SM120 (already validated on consumer 5090/5070) | SM120 |
+
+**The honest assessment**: A single B200 would have less aggregate FP64 than the
+full Tier 1 HBM2 fleet (~48 TFLOPS) at 15x the cost. The advantage is memory
+bandwidth (8 TB/s vs ~1 TB/s) and contiguous VRAM (192 GB vs 32 GB max per card).
+
+**When to buy**: When a single workload exceeds 32 GB contiguous GPU memory AND
+requires >1 TB/s memory bandwidth. Until then, the embarrassingly-parallel HBM2
+fleet is the better sovereign investment. Monitor secondary market for B100
+datacenter pulls in 2028-2029 timeframe.
+
+**Relationship to sovereign compute trio**: coralReef already targets SM120.
+toadStool's dispatch model handles heterogeneous cards. Adding a Blackwell Pro
+requires only physical integration (PSU, cooling, PCIe/NVLink) — zero software
+architecture changes. The organism is ready for the organ; the organ is not yet
+affordable.
+
+---
+
+## Cross-References
+
+- `gen4/architecture/SOVEREIGN_HPC_EVOLUTION.md` — membrane model, evolution tiers
+- `gen4/architecture/SOVEREIGN_COMPUTE_TRIO_SKETCH.md` — dispatch model
+- `gen3/about/HARDWARE.md` — full inventory including non-HBM2 cards
+- `projectNUCLEUS/gates/` — machine-readable gate configs with GPU fields
