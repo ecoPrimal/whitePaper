@@ -26,6 +26,13 @@
    flows through the ecosystem without platform extraction. This is
    the flywheel's mature state.
 
+5. **`../architecture/SOVEREIGN_TRANSACTION_MEMBRANE.md`** — The unified
+   view: how all four documents above compose through the gram-negative
+   membrane model. Ties ferment tokens, certs, sunCloud economics,
+   BearDog genetics, Steam data federation, and Tier 2 key ceremonies
+   into one operational architecture. Read after the four economics docs
+   to see how they flow through infrastructure.
+
 ---
 
 ## The Economic Argument
@@ -57,6 +64,21 @@ value from their participants lose those participants. Systems that
 distribute value fairly retain and attract them. The metabolic mandate
 is the minimum viable extraction — just enough to keep the
 infrastructure alive, not enough to starve the creative surface.
+
+---
+
+---
+
+## Cross-References (May 2026)
+
+| Document | Location | Relationship |
+|----------|----------|--------------|
+| Sovereign Transaction Membrane | `gen4/architecture/SOVEREIGN_TRANSACTION_MEMBRANE.md` | Unified composition of all economics through membrane |
+| Tier 2 Ceremony Design | `projectNUCLEUS/specs/TIER2_CEREMONY_DESIGN.md` | Operational protocol for human entropy ceremonies |
+| Sovereign HPC Evolution | `gen4/architecture/SOVEREIGN_HPC_EVOLUTION.md` | Companion: how the organism computes |
+| GPU Heat Recovery | `gen4/architecture/GPU_HEAT_RECOVERY_OPERATIONS.md` | Physical metabolism: compute as heating |
+| Family HPC Model | `projectNUCLEUS/docs/FAMILY_HPC_MODEL.md` | Social model for shared compute |
+| Science Dispatch Map | `projectNUCLEUS/specs/SCIENCE_DISPATCH_MAP.md` | Where science workloads land |
 
 ---
 
