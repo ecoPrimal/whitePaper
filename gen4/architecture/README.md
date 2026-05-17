@@ -64,6 +64,44 @@
    overlaps, defines the Rust thread, and charts the final convergence.
    **Start here if you want to understand the full sovereignty arc.**
 
+### Sovereignty and Infrastructure Cluster
+
+10. **SOVEREIGN_HPC_EVOLUTION.md** — From basement cluster to gram-negative
+    organism. Three-layer membrane model, bonding at each layer, full
+    hardware inventory, 10G backbone plan, multi-VPS future architecture.
+
+11. **SOVEREIGN_COMPUTE_TRIO_SKETCH.md** — coralReef + toadStool + barraCuda
+    IPC split, degradation tiers, absorption path for compute sovereignty.
+
+12. **SOVEREIGN_TRANSACTION_MEMBRANE.md** — NFT fermentation, Tier 2
+    ceremony, NestGate/Steam federation, economics through the membrane.
+
+13. **GPU_HEAT_RECOVERY_OPERATIONS.md** — Science-as-heating, seasonal
+    dispatch bias, thermal zone telemetry integration with gate TOMLs.
+
+### Validation and Lifecycle Cluster
+
+14. **CONTRACT_TESTING_THESIS_SKETCH.md** — Wire format as contract,
+    transport parity across tiers, implications for validation pipelines.
+
+15. **GUIDESTONE_LTEE.md** — Concept for Barrick/Lenski LTEE-focused
+    verification artifact using hotSpring and wetSpring modules.
+
+16. **DEPLOY_GRAPH_COMPOSITION.md** — BYOB schema for session-as-primal,
+    deploy graph declaration, ecosystem flywheel for new products.
+
+17. **STADIAL_INTERSTADIAL_PATTERN.md** — Ecosystem convergence/divergence
+    cycles, fossil record, Tier 1/2 gate criteria, selection under constraints.
+
+### Operations and Resilience
+
+18. **INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md** — Cold-start
+    rebuild from bare metal to full composition. Outage simulation catalog
+    (VPS loss, WAN loss, gate power loss, LAN partition, Forgejo down,
+    full site power loss). Acceptance criteria for each scenario.
+    **Start here if you need to understand how to recreate or test
+    the infrastructure.**
+
 ---
 
 ## Relationship to gen3 Architecture

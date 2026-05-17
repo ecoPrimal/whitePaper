@@ -280,10 +280,19 @@ gen4/
 │   ├── COMPOSITION_PATTERNS.md        — PrimalBridge, deploy graphs, degradation, enrichment
 │   ├── DEPLOY_GRAPH_COMPOSITION.md    — BYOB schema, session-as-primal, proto sketch taxonomy
 │   ├── CREATIVE_SURFACE_ARCHITECTURE.md — sporeGarden org model, four-layer architecture
-│   ├── STADIAL_INTERSTADIAL_PATTERN.md — The stadial/interstadial cycle as constraint-driven optimization
-│   ├── NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md — From calibration to sovereign primals (glacial evolution)
+│   ├── STADIAL_INTERSTADIAL_PATTERN.md — Stadial/interstadial cycle as constraint-driven optimization
+│   ├── NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md — Calibration → sovereign primals (glacial evolution)
 │   ├── CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md — VPS as touchpoint, gate as source (inner membrane)
-│   └── SOVEREIGN_COMPOSITION_EVOLUTION.md — Primal goals vs sovereignty goals, Rust thread, final convergence
+│   ├── SOVEREIGN_COMPOSITION_EVOLUTION.md — Primal vs sovereignty goals, Rust thread, convergence
+│   ├── SOVEREIGN_HPC_EVOLUTION.md     — Gram-negative membrane model, hardware inventory, 10G plan
+│   ├── SOVEREIGN_COMPUTE_TRIO_SKETCH.md — coralReef + toadStool + barraCuda IPC split
+│   ├── SOVEREIGN_TRANSACTION_MEMBRANE.md — NFT fermentation, economics through membrane
+│   ├── GPU_HEAT_RECOVERY_OPERATIONS.md — Science-as-heating, thermal zone telemetry
+│   ├── CONTRACT_TESTING_THESIS_SKETCH.md — Wire format = contract, transport parity
+│   ├── GUIDESTONE.md                  — Verification class, five properties, quality grades
+│   ├── GUIDESTONE_LTEE.md             — LTEE verification artifact concept (Barrick/Lenski)
+│   ├── DEPLOYABLE_ARTIFACT_STANDARD.md — Portable science: eight-layer anatomy, self-leveling
+│   └── INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md — Cold-start rebuild, outage simulations
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
