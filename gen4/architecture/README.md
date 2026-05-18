@@ -102,6 +102,14 @@
     **Start here if you need to understand how to recreate or test
     the infrastructure.**
 
+### Hardware Sovereignty
+
+19. **SOVEREIGN_WARM_KEEPALIVE.md** — 183ms GPU initialization on sovereign
+    hardware. Falcon warm preservation eliminates ACR re-boot, systemd fd
+    store keeps GPUs warm across daemon restarts, cold early-exit skips
+    doomed training. The hardware management layer that makes GPU compute
+    invisible in gen4 products. **Start here if you want to understand
+    sovereign GPU latency and the warm/cold boundary.**
 ---
 
 ## Relationship to gen3 Architecture
