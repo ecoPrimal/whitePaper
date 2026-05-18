@@ -1,7 +1,7 @@
 # Sub-Thesis 14: Sovereign Compute Hardware — Precision Tiers, Market Economics, and the Science They Unlock
 
-**Date:** April 8, 2026 (updated — **Sovereign compute PROVEN on Titan V: 5/5 E2E phases pass. SovereignInit pipeline replaces nouveau.**)
-**Status:** Hardware profiled on Strandgate (dual EPYC, RX 6950 XT + RTX 3090). 4,065+ tests passing. Market survey complete. **SOVEREIGN COMPUTE DISPATCH PROVEN (Exp 164):** WGSL→SM70 SASS→DRM dispatch on Titan V — f32 write, f32 arithmetic, multi-workgroup (256 threads), f64 write, f64 Lennard-Jones (Newton's 3rd law verified, tol=1e-8). 7 bugs fixed (NVIF objects, subchannel assignment, NVC3C0 method offsets, QMD v02_02 bitfields, SPH header offset, local memory window width, test sign convention). **Multi-Ember Fleet Architecture COMPLETE (Iter 78).** **Ember Survivability Hardening COMPLETE (Iter 77).** **Fleet: Titan V (GV100) + 2× K80 (GK210) + RTX 5070 (GB206, Blackwell)**. **AMD GCN5 DRM: 6/6 PASS**. **NVIDIA SM70 DRM: 5/5 PASS**. **RTX 5070 Blackwell DRM** (SM120). **iommufd/cdev VFIO** (kernel 6.2+). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. 165+ experiments across 2 GPU architectures.
+**Date:** April 8, 2026 (updated May 18, 2026 — **183ms warm pipeline PROVEN, falcon preservation, fd store validated, dual Titan V fleet**)
+**Status:** **WARM KEEPALIVE PROVEN (Exp 208):** 183ms sovereign GPU init (`compute_ready: true`), 76× faster than cold. Falcon warm preservation eliminates 3.7s ACR re-boot. systemd FileDescriptorStore validated end-to-end. **Fleet: 2× Titan V (GV100) + RTX 5060 (Blackwell).** K80 retired (Exp 199 fire → second Titan V installed). **208 experiments.** Full sovereign init pipeline: WGSL→SM70 SASS→VFIO dispatch. `sovereign.init` + `sovereign.profile` + `sovereign.warm_status` RPCs live. Vendor-agnostic `BootPipeline` trait (KeplerInit + VoltaInit + VegaInit). **Triangle architecture:** coralReef↔toadStool↔barraCuda trio. Three-tier validation: Python → Rust → NUCLEUS IPC.
 **Domain:** Computational physics × hardware architecture × sovereign computing
 **Novelty:** No prior work maps a three-tier precision model (f32/df64/f64) onto
 heterogeneous consumer hardware arrays with per-tier cost/TFLOP analysis for
@@ -833,15 +833,12 @@ preswap phases PASS (f64 LJ force, Newton's 3rd law). RTX 5060 Blackwell DRM:
 pipeline cracked (SM120, 4/4 HW tests). iommufd/cdev: kernel-agnostic VFIO on
 6.2+ (resolves EBUSY on 6.17, 607 tests, HW validated). AMD Vega 20: one
 round-trip per boot (firmware limit). NVIDIA GV100: unlimited. Akida NPU: unlimited.
-Vendor-agnostic, seccomp-sandboxed, capability-restricted. 92 experiments, dual-track
-dispatch (DRM + sovereign VFIO), cross-vendor CUDA dispatch, pkexec-free pipeline,
-RTX 5060 dual-use oracle. **Sovereign VFIO: 9/10 layers SOLVED** — Falcon binding
-(B1-B7, Exp 085), WPR construction (W1-W7, Exp 087), FECS+GPCCS boot (Exp 088),
-SCTL myth busted (Exp 091). IMEMC BIT(24) discovery + FalconCapabilityProbe runtime
-bit solver ensures portability. Layer 10 root cause found (BOOTVEC). Adaptive
-experiment loop with personality sweep, JSONL journal, observer traits. 4,065 tests
-pass workspace-wide. Deep code debt burned: 60+ hardcoded offsets → constants,
-4 unsafe blocks eliminated, NonNull DMA, safe volatile wrappers.
+Vendor-agnostic, seccomp-sandboxed, capability-restricted. 208 experiments, dual-track
+dispatch (DRM + sovereign VFIO). **All 13 sovereign layers PROVEN** — 183ms warm
+pipeline, falcon preservation, fd store keepalive across daemon restarts.
+Fleet: 2× Titan V (GV100) + RTX 5060 (Blackwell). K80 retired (Exp 199 fire).
+Triangle architecture: coralReef (compile) ↔ toadStool (hardware) ↔ barraCuda (physics).
+Three-tier validation: Python → Rust → NUCLEUS IPC composition.
 Built in a basement in Lansing.*
 
 ---
@@ -982,3 +979,88 @@ caller -> coralctl -> ember RPC -> fork_isolated child -> BAR0 I/O
 ```
 
 If the child hangs (PCIe bus hang from uninitialized hardware), ember kills it and remains alive. The caller receives a structured error with the failing stage name. This pattern scales to any GPU generation — the timeout and stage list change, but the safety architecture is constant.
+
+---
+
+## May 2026: Warm Keepalive PROVEN — 183ms Sovereign GPU Init
+
+### Fleet Evolution
+
+K80 (GK210) caught fire during Exp 199 (PMC_ENABLE bulk write + uninitialised
+GDDR5 + aged VRM). Replaced by second Titan V, giving identical twin-card
+experimentation surface. Current fleet: **2× Titan V (GV100)** + **RTX 5060
+(GB206, Blackwell)**. RTX 5060 remains DRM dispatch path; both Titan Vs run
+full sovereign VFIO pipeline.
+
+### Hardware Line (Codified)
+
+Cold boot = power-on reset = boot ROM trains HBM2. This is the same wall
+NVIDIA's proprietary driver faces. Software cannot train HBM2 — only the
+boot ROM, triggered by board-level voltage regulator sequencing, can. This
+is an acceptable hardware constraint, not a software limitation.
+
+### Sovereign Boot State Abstraction (Exp 207)
+
+Unified warm/cold boot model: `SovereignBootState` enum (Warm/Cold) with
+`ColdBootReason`, `BootCapability` flags, `probe_boot_state()` as single
+authoritative detection function. `WarmKeepalive` facade in ember wraps
+VfioAnchor + clutch + systemd fd store. `sovereign.profile` RPC returns
+µs-precision per-stage timings and register snapshots.
+
+### Reboot-Efficient Sovereign Evolution (Exp 208)
+
+Three stacked optimizations validated end-to-end:
+
+| Optimization | Effect | Files |
+|-------------|--------|-------|
+| Cold early-exit | 14s → 200ms (cold GPUs skip doomed `memory_training`) | `sovereign_init.rs`, `sovereign_types.rs` |
+| Falcon warm preservation | 3.9s → 183ms (skip `pgraph_reset` + `falcon_boot` when FECS running) | `sovereign_init.rs`, `sovereign_strategy.rs` |
+| systemd fd store | GPUs stay warm across `systemctl restart` | `dispatch/mod.rs` |
+
+**Result:** 183ms warm pipeline with `compute_ready: true`. 76× faster than
+cold. Twin-card validated (183ms ± 5ms on both Titan Vs).
+
+### Falcon Warm Detection
+
+After ACR HS boot, FECS state: CPUCTL=0x10 (HRESET), PC=0xB0+ (firmware
+executing). After FLR (VFIO device re-open): CPUCTL=0x10, PC=0x03 (residual).
+Detection uses PC threshold >= 0x40 to distinguish genuine firmware from FLR
+artifacts. ACR entry points are 0x80+ (code section); FLR residuals are
+0x00–0x10 (boot ROM artifacts).
+
+The boot ROM leaves FECS running at PC=0xB0+ after POST. The early falcon
+probe detects this on the **first** `sovereign.init` after power cycle —
+no ACR boot needed.
+
+### Pipeline Evolution Summary
+
+| Era | Pipeline Time | Dominant Stage | Key |
+|-----|-------------|----------------|-----|
+| Exp 164 (Apr) | ~14s | memory_training | Full nouveau replacement |
+| Exp 207 (May) | 3.9s warm | falcon_boot (94.5%) | Twin-card profiling |
+| Exp 208 (May) | **183ms warm** | pri_recovery (46%) | Falcon preservation |
+
+### Updated Layer Status (May 18)
+
+| Layer | Status |
+|-------|--------|
+| 0-9 | ✅ All proven (PCIe/VFIO/PFB/PFIFO/Channel/PBDMA/MMU/SEC2/WPR/ACR) |
+| 10 (HS Auth) | ✅ Bypassed — ACR DMA boot working (Exp 206) |
+| 11 (Full Compute) | ✅ PROVEN — f32, f64, multi-workgroup, LJ forces |
+| 12 (SovereignInit) | ✅ PROVEN — 183ms warm pipeline, 208 experiments |
+| 13 (Warm Keepalive) | ✅ PROVEN — fd store, falcon preservation, daemon restarts |
+
+### Cross-Platform Testing Status
+
+| Architecture | Status |
+|-------------|--------|
+| **Volta (GV100)** | ✅ Fully validated — 183ms warm, dual Titan V |
+| **Blackwell (GB206)** | ✅ DRM dispatch (8/8 roundtrip, SM120) |
+| **Kepler (GK210)** | Historical — K80 validated (Exp 190), retired (Exp 199) |
+| **AMD Vega 20** | Stub — VegaInit, GRBM/SRBM detection, no falcon equivalent |
+
+### References
+
+- **Experiment write-up**: `hotSpring/experiments/208_REBOOT_EFFICIENT_SOVEREIGN_EVOLUTION.md`
+- **gen4 whitepaper**: `gen4/architecture/SOVEREIGN_WARM_KEEPALIVE.md`
+- **Upstream handoff**: `infra/wateringHole/handoffs/HOTSPRING_WARM_KEEPALIVE_PROVEN_MAY18_2026.md`
