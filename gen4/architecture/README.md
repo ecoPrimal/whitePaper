@@ -110,6 +110,16 @@
     doomed training. The hardware management layer that makes GPU compute
     invisible in gen4 products. **Start here if you want to understand
     sovereign GPU latency and the warm/cold boundary.**
+
+20. **SILICON_DEISM.md** — The abstraction elimination thesis. The
+    evolution ladder: vendor agnostic → vendor atheistic → silicon deistic.
+    There is only math, energy, and silicon — everything else is a
+    temporary scaffolding. Rust→binary eliminates the CPU abstraction stack.
+    WGSL→native ISA eliminates the GPU abstraction stack. VFIO eliminates
+    the vendor driver. The sovereignty tier model (Tier 0–3) maps the
+    remaining distance. **Start here if you want to understand the
+    philosophical target of sovereign compute.**
+
 ---
 
 ## Relationship to gen3 Architecture

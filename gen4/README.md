@@ -293,7 +293,8 @@ gen4/
 │   ├── GUIDESTONE_LTEE.md             — LTEE verification artifact concept (Barrick/Lenski)
 │   ├── DEPLOYABLE_ARTIFACT_STANDARD.md — Portable science: eight-layer anatomy, self-leveling
 │   ├── INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md — Cold-start rebuild, outage simulations
-│   └── SOVEREIGN_WARM_KEEPALIVE.md — 183ms GPU init: falcon warm preservation, fd store, warm pipeline
+│   ├── SOVEREIGN_WARM_KEEPALIVE.md — 183ms GPU init: falcon warm preservation, fd store, warm pipeline
+│   └── SILICON_DEISM.md           — The abstraction elimination thesis: math, energy, silicon
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -429,7 +430,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **31 working papers** across 7 sections document the
+gen4/ is active. **32 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.
