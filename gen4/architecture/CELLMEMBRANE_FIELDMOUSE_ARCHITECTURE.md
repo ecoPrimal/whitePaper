@@ -1,7 +1,7 @@
 # cellMembrane fieldMouse Architecture — The External Membrane
 
-**Date**: May 15, 2026
-**Status**: LIVE (Tower composition, 6 services, 2GB)
+**Date**: May 19, 2026 (updated from May 15 baseline)
+**Status**: LIVE (Tower composition + shadow services, 8 services, 2GB)
 **VPS**: 157.230.3.183 (DigitalOcean nyc1, Debian 12 x64)
 
 ---
@@ -238,10 +238,12 @@ cd sporeGarden/projectNUCLEUS/deploy && bash vps_resize.sh
 ```
 
 ### Monitoring
-- **systemd**: `systemctl status {songbird,hbbs,hbbr,beardog,skunkbat,caddy}-membrane`
-- **darkforest**: `bash validation/darkforest_membrane.sh`
-- **HTTP health**: `curl http://157.230.3.183/health`
-- **Resource**: `ssh root@157.230.3.183 free -h && df -h`
+- **systemd**: `systemctl status {songbird-relay,hbbs,hbbr,beardog,skunkbat,caddy}-membrane petaltongue-web beardog-tls-shadow`
+- **darkforest**: `bash validation/darkforest_membrane.sh` (17 PASS, 0 FAIL, May 19)
+- **telemetry**: `bash deploy/membrane_telemetry.sh` (15-min cadence → rolling 7-day baseline)
+- **shadow parity**: `bash infra/benchScale/scenarios/shadow_run_orchestrator.sh --parity-only`
+- **HTTP health**: `curl http://157.230.3.183/health` or `curl http://157.230.3.183:8080/`
+- **Resource**: 1.9 GB RAM (331 MB used), 9.7 GB disk (21% used) as of May 19
 
 ### Recovery
 If the VPS is destroyed:

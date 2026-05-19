@@ -1,8 +1,8 @@
 # gen4/ — Composition, Deployment, and the Creative Surface
 
-**Status**: Active — 31 working papers across 7 sections  
+**Status**: Active — 45 working papers across 7 sections  
 **Lineage**: gen1 → gen2 → gen3 → **gen4**  
-**Date**: May 9, 2026 (updated: stadial/interstadial pattern + geological constraint)
+**Date**: May 18, 2026 (updated: hypogeal deployment evolution — first live guideStone handoff)
 
 ---
 
@@ -430,7 +430,7 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **32 working papers** across 7 sections document the
+gen4/ is active. **45 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.
@@ -439,6 +439,13 @@ and audience-specific guides for the composition generation.
 Deployable Artifact — guideStone as self-leveling benchmark, validated
 across 5 substrates and 2 architectures. See
 `architecture/DEPLOYABLE_ARTIFACT_STANDARD.md`.
+
+**lithoSpore v0.1.0** (May 18, 2026) shipped the first **live handoff**
+to external scientists — 4 USB drives to the Barrick Lab (MSU, LTEE).
+73 science checks, 7 modules, exFAT cross-platform, 3-zone structure,
+pre-rendered HTML browse layer. Revealed the Layer 0-4 model, shim
+pattern for exFAT, and data courier use case. See
+`architecture/HYPOGEAL_DEPLOYMENT_EVOLUTION.md`.
 
 **Esoteric Webb V4** (March 24, 2026) crossed the generational boundary:
 

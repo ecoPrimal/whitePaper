@@ -1,8 +1,8 @@
 # NUCLEUS Sovereignty Architecture — From Calibration to Sovereign Primals
 
-**Date**: May 15, 2026
-**Status**: Active evolution
-**Lineage**: gen3 cell membrane (May 10) → gen4 sovereignty architecture (May 15)
+**Date**: May 19, 2026 (updated from May 15 baseline)
+**Status**: Active evolution — shadow parity operational
+**Lineage**: gen3 cell membrane (May 10) → gen4 sovereignty architecture (May 15) → shadow runs (May 19)
 
 ---
 
@@ -41,8 +41,9 @@ Every gap discovered during the Phase 2 pen tests has been resolved:
 | Session management | JH-4, H1-06 | BearDog `auth.issue_session`, cookie rotation |
 | ABG tier enforcement | H1-04, H1-05 | setfacl on systemctl, python3 |
 
-**Validation**: darkforest v0.2.1 — 175 PASS, 0 FAIL. 5-layer
-`security_validation.sh`. Dark Forest Glacial Gate PASS (33/33 checks).
+**Validation**: darkforest v0.2.1 — 267 PASS, 0 FAIL, 1 WARN, 11 INFO.
+5-layer `security_validation.sh`. Dark Forest Glacial Gate PASS (33/33 checks).
+Membrane audit (VPS): 17 PASS, 0 FAIL, 1 SKIP.
 
 This layer is the **foundation**. Everything above it assumes Horizon 1
 is complete. No sovereignty replacement begins until the local security
@@ -53,41 +54,49 @@ posture is validated.
 Four sovereign systems running in parallel with their external
 counterparts:
 
-#### BearDog TLS Shadow (H2-12) — LIVE
+#### S1: BearDog TLS Shadow (H2-12) — LIVE on ironGate + VPS
 - BearDog v0.9.0 on :8443 alongside Cloudflare :443
-- **3ms RPC latency** vs 102ms Cloudflare baseline (34x faster)
-- Telemetry probe fixed: `/dev/tcp` + `read -t 1` (previous `nc` inflated to 3s)
-- rustls X.509 termination, SNI routing, cert auto-renewal
-- Per-IP sliding-window rate limiter
-- `btsp_tls_parity.sh` ready for formal 7-day comparison
-- **What it proves**: Sovereign TLS can massively outperform rented TLS
+- **6-12ms RPC latency** (ironGate loopback) vs 163ms Cloudflare TTFB p95 (13-27× faster)
+- **10-14ms RPC** on VPS loopback, **71ms** from ironGate → VPS over network
+- rustls X.509 termination, per-IP sliding-window rate limiter
+- `beardog-acme` crate shipped (Wave 106): HTTP-01, cert storage, hot-reload
+- `btsp_tls_parity.sh` measuring JSON-RPC round-trip via `nc -q 0`
+- Deployed on VPS as `beardog-tls-shadow.service` (systemd, PrivateTmp, 64MB cap)
+- **What it proves**: Sovereign TLS massively outperforms rented TLS; VPS deployment works
 
 #### Channel 3 TLS Surface — LIVE (membrane.primals.eco)
 - DNS-only A record → 157.230.3.183 (grey-cloud, not proxied)
 - ACME cert auto-obtained (Let's Encrypt E8, valid to Aug 13 2026)
 - Caddy serves sporePrint content (19MB synced from gate) + health/status endpoints
-- **HTTP parity PASS**: VPS 68ms TTFB vs GitHub Pages 89ms (10 samples)
-- **TLS parity**: 130ms vs 96ms, 100% uptime — within 35% (expected VPS vs CDN)
-- **What it proves**: VPS can obtain certs and serve content at or above CDN parity
+- **Content parity PASS**: VPS 67ms TTFB vs GitHub Pages 111ms (40% faster, May 19)
+- **What it proves**: VPS can serve content faster than commercial CDN
 
-#### Songbird NAT Relay (H2-14) — LIVE + HTTP PARITY PASS
+#### S2: Songbird NAT Relay (H2-14) — LIVE on VPS
 - cellMembrane fieldMouse on 157.230.3.183 (DigitalOcean nyc1)
-- Songbird TURN relay on :3478, 100% reachable (10/10 probes)
-- 5-tier ConnectionFallbackChain shipped (direct → STUN → TURN → cloudflared → offline)
-- **HTTP parity PASS**: VPS content delivery 68ms vs GitHub Pages 89ms
-- **What it proves**: NAT traversal works on owned infrastructure, content at parity
+- Songbird TURN relay v0.2.1 on UDP :3478, **100% reachable** (15/15 probes over 3 days)
+- `songbird-relay.service` active since May 16 (3+ days continuous)
+- 5-tier ConnectionFallbackChain shipped (direct → STUN → lineage → TURN → emergency)
+- **What it proves**: NAT traversal works on owned infrastructure, relay is stable
 
-#### BTSP Dual-Auth (H2-01) — ACTIVE
-- BTSPAuthenticator plugin live on JupyterHub
-- PAM + ionic token dual-accept, auth events accumulating
-- PAM fallback ensures zero downtime during transition
-- **What it proves**: BTSP identity can replace PAM passwords
+#### S3: Content Hosting — LIVE on VPS
+- petalTongue web mode on :8080, deployed as `petaltongue-web.service`
+- NestGate 8 `content.*` methods on 4 transports (Session 60)
+- **TTFB parity**: 0.4ms local / 67ms VPS vs 111ms GitHub Pages — PASS
+- **Content hash parity**: pending (sporePrint not mirrored via `content.put` yet)
+- **What it proves**: Sovereign content delivery is faster; mirror is the remaining step
+
+#### S4: BTSP Dual-Auth (H2-01) — READY
+- Ed25519 ionic tokens with TTL/expiry (Wave 102)
+- BTSP Phase 3 AEAD (ChaCha20-Poly1305) on all 13 primals
+- FIDO2/CTAP2 IPC surface for hardware attestation (Wave 103)
+- JupyterHub dual-auth spec shipped (`JUPYTERHUB_DUAL_AUTH_INTEGRATION.md`, Wave 106)
+- **What remains**: Implement dual-auth middleware, session mapping, <50ms p95 target
 
 #### DNS-over-TLS (Step 4) — INTERMEDIATE
 - Gate resolves via DoT to Cloudflare (1.0.0.1) with Quad9 fallback
 - ISP resolver bypassed — no DNS metadata leak to AT&T
-- DoT baseline captured: 3-8ms latency, 10/10 success
-- Sovereign resolver (knot-dns) pending
+- DoT baseline captured: 3-8ms latency, 10/10 success, all 6 domains
+- Sovereign resolver (knot-dns) pending (H2-17→20)
 - **What it proves**: DNS encryption works; sovereignty needs own resolver
 
 ### Layer 3: Content Pipeline (H2-05/06) — READY

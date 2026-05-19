@@ -274,13 +274,14 @@ laboratory construct. We're building a living cell.
 Was:      Gate (sovereign) + Cloudflare (rented) + GitHub (rented)
                 = laboratory construct
 
-Now:      Gate (sovereign) + VPS membrane (owned, TLS proven) + Forgejo (owned)
+Now:      Gate (sovereign) + VPS membrane (owned, 8 services) + Forgejo (owned)
                 = cell with membrane forming
-                  [membrane.primals.eco TLS live, content at parity,
-                   BearDog 3ms vs Cloudflare 120ms, Forgejo 32 repos]
+                  [membrane.primals.eco TLS live, shadow parity operational,
+                   BearDog 6-12ms vs Cloudflare 163ms, petalTongue 67ms vs GH 111ms,
+                   Songbird TURN 100% reachable 3+ days, Forgejo 32 repos PRIMARY]
 
-Target:   Gate (sovereign) + VPS membrane (full TLS) + Forgejo (CI)
-                = living cell
+Target:   Gate (sovereign) + VPS membrane (full TLS + DNS) + Forgejo (CI)
+                = living cell (cutover: all 4 tracks parity for 7 consecutive days)
 
 Final:    Gate mesh (sovereign) + VPS mesh (owned) + biomeOS (orchestrated)
                 = organism
