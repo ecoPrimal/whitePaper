@@ -2,8 +2,8 @@
 
 **the concrete mechanism: from home hpc computation to public chain proof**
 
-**date**: march 24, 2026
-**status**: trio validated, anchoring implementation pending
+**date**: march 24, 2026 (updated may 20, 2026)
+**status**: trio validated, loamSpine anchor surface live (42 methods), chain submission pending
 **lineage**: wateringHole/NOVEL_FERMENT_TRANSCRIPT_GUIDANCE → bearDog → gen4
 
 ---
@@ -455,7 +455,129 @@ it scales to any number of results per anchor.
 
 ---
 
-## implementation plan
+---
+
+## crypto as infrastructure, not currency
+
+public blockchains are immutable append-only ledgers. we use them as
+notary services — the same way you use a post office to timestamp a
+letter. the gas cost is postage. that is the extent of our interaction
+with cryptocurrency.
+
+| what we use | what we don't use |
+|-------------|-------------------|
+| bitcoin as a public timestamp ledger | bitcoin as a currency |
+| ethereum as a programmable timestamp ledger | ethereum tokens, DeFi, NFT marketplaces |
+| L2 rollups as cheap, fast timestamp ledgers | L2 bridges for financial transactions |
+| gas fees as postage for public record | wallets, exchanges, token economics |
+
+currency is an abstraction of the blockchain's own economics. bitcoin
+miners accept BTC for including transactions. we pay that postage to
+write 32 bytes to their ledger. we don't hold positions, trade tokens,
+or participate in their economic systems beyond the gas transaction.
+
+### what IS possible (for others)
+
+the anchor surface is a bridge. someone who holds a loam certificate
+(a novel ferment transcript) COULD use L2 smart contracts to transfer
+digital assets cryptographically — the certificate's `state_hash` is
+already on-chain, a bridge contract could verify ownership via the
+Merkle inclusion proof. these are possible because the infrastructure
+is chain-compatible. they are not required because the ecosystem is
+sovereign.
+
+this mirrors the cellMembrane / projectNUCLEUS pattern: use available
+infrastructure (VPS, GitHub, public chains) as stepping stones while
+building toward full sovereignty.
+
+---
+
+## aggregation economics: community pooling
+
+the aggregation merkle tree is the key economic insight. because the
+on-chain cost is fixed per transaction (not per result), batching N
+results into one anchor divides the cost by N:
+
+| results batched | BTC cost per result | ETH L2 cost per result |
+|-----------------|--------------------|-----------------------|
+| 1 | $1.00 | $0.005 |
+| 10 | $0.10 | $0.0005 |
+| 100 | $0.01 | $0.00005 |
+| 1,000 | $0.001 | $0.000005 |
+
+a community of 100 researchers producing 10 results/month = 1,000
+results. one BTC aggregate anchor = ~$1.50. one ETH L2 aggregate
+anchor = ~$0.005. dual-chain (BTC + L2) = ~$1.51 total.
+
+per researcher: $0.015/month for dual-chain public record.
+per result: $0.0015 for bitcoin + $0.000005 for L2.
+
+for comparison: a single AWS S3 GET request costs $0.0004. publishing
+1,000 provenance-verified scientific results to bitcoin + ethereum L2
+costs less than 4 S3 GET requests. a community could publish on
+**every major chain** for less than cloud data egress for a single
+export of the underlying data.
+
+### the comparison table
+
+| method | cost per "publication" | speed | verification |
+|--------|----------------------|-------|-------------|
+| journal APC (Nature Comms) | $5,500 | 6-36 months | trust the journal |
+| journal APC (PLOS ONE) | $1,800 | 3-12 months | trust the journal |
+| arXiv preprint | $0 | days | no formal verification |
+| cloud provenance export | $0.09/GB egress | minutes | trust the cloud provider |
+| **sovereign publication (BTC)** | **$0.001** (aggregated) | **~40 min** | **cryptographic proof** |
+| **sovereign publication (L2)** | **$0.000005** (aggregated) | **~15 sec** | **cryptographic proof** |
+
+---
+
+## L2 strategy: fractions of a cent
+
+ethereum L2 rollups (Arbitrum, Base, Optimism) inherit L1 security
+while reducing cost by 100-1000x:
+
+- L2 posts calldata to L1 in batches
+- L2 confirmation is near-instant (~1 second)
+- L2 anchor cost: $0.001-$0.01 per transaction
+- with aggregation: $0.000005 per result
+
+this means high-frequency anchoring is practical on L2. a spring
+could anchor every experiment run (not just milestones) for
+effectively zero cost. bitcoin anchoring remains the "publish to
+permanent record" tier for major milestones.
+
+the rust ecosystem for L2: `alloy` crate (MIT/Apache-2.0, pure Rust,
+successor to `ethers-rs`, actively maintained). same transaction
+format as L1 — the only difference is the RPC endpoint.
+
+---
+
+## implementation status (may 2026)
+
+| component | status | where |
+|-----------|--------|-------|
+| rhizoCrypt DAG recording | validated (esotericWebb V4, ludoSpring exp061) | 317 checks |
+| BearDog Ed25519 signing | validated (exp064, 39/39) | tamper detection at exact vertex |
+| loamSpine dehydration | validated (exp061, 17/17) | certificate lifecycle complete |
+| sweetGrass attribution | validated (exp066, 41/41) | conservation verified, decay models |
+| **loamSpine `anchor.publish`** | **LIVE** | 42 JSON-RPC methods, tested |
+| **loamSpine `anchor.verify`** | **LIVE** | state hash verification |
+| **loamSpine `anchor.publish_batch`** | **LIVE** | aggregate Merkle tree + batch anchoring |
+| **`AnchorTarget::Rfc3161Tsa`** | **LIVE** | RFC 3161 TSA variant in enum |
+| **loamSpine `spine.list` / `entry.list`** | **LIVE** | cross-spring query for WS-2 |
+| BTC OP_RETURN submission | designed | chain-anchor primal pending |
+| ETH calldata submission | designed | chain-anchor primal pending |
+| verification CLI | designed | `ecoPrimals verify` command |
+| cross-spring aggregation | designed | aggregate multiple springs |
+
+see also:
+- loamSpine `specs/ANCHORING_ARCHITECTURE.md` — full aggregation architecture
+- loamSpine `specs/PUBLIC_TIMESTAMPING.md` — anchor target comparison
+- wateringHole `ANCHORING_STANDARD.md` — ecosystem-wide guidance
+
+---
+
+## implementation plan (remaining)
 
 | task | complexity | dependency |
 |------|-----------|------------|
@@ -464,18 +586,18 @@ it scales to any number of results per anchor.
 | BTC OP_RETURN builder | low | standard script |
 | BTC transaction signing | low | BearDog crypto primitives |
 | BTC broadcast (electrum client) | medium | network module |
-| ETH transaction construction | medium | `ethers` or `alloy` crate |
+| ETH/L2 transaction construction | medium | `alloy` crate |
 | ETH calldata builder | low | standard ABI |
 | ETH transaction signing | low | BearDog crypto primitives |
 | ETH broadcast (JSON-RPC to node) | low | existing IPC patterns |
-| Aggregation merkle tree | low | same pattern as rhizoCrypt |
-| Verification CLI | medium | combines all above |
-| Spring integration hooks | medium | wire into experiment harness |
+| verification CLI | medium | combines all above |
+| spring integration hooks | medium | wire into experiment harness |
 
 total estimated effort: 2-3 weeks of focused development. the crypto
 primitives exist in BearDog. the DAG structures exist in rhizoCrypt.
 the transaction formats are well-documented. the rust crates are
-mature.
+mature. the loamSpine anchor surface is live — what remains is the
+chain-anchor primal that submits to BTC/ETH.
 
 this is not a research project. this is plumbing.
 

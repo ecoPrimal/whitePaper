@@ -295,22 +295,33 @@ The anchoring is the same. Only the vocabulary changes.
 
 ---
 
-## Implementation Status
+## Implementation Status (updated May 2026)
 
 | Component | Status | Where |
 |-----------|--------|-------|
-| rhizoCrypt DAG recording | Validated (esotericWebb V4, exp061) | 317 checks across 6 experiments |
-| BearDog Ed25519 signing | Validated (exp064, 39/39) | Tamper detection at exact vertex |
-| loamSpine dehydration | Validated (exp061, 17/17) | Certificate lifecycle complete |
-| sweetGrass attribution | Validated (exp066, 41/41) | Conservation verified, decay models |
-| Cross-domain fraud detection | Validated (exp065, 74/74) | Same detector across gaming/science/medical |
-| BTC OP_RETURN anchoring | Designed | 2-3 weeks implementation (see architecture/ANCHORING_PIPELINE.md) |
-| ETH calldata anchoring | Designed | Same timeline |
+| rhizoCrypt DAG recording | **Validated** (esotericWebb V4, exp061) | 317 checks across 6 experiments |
+| BearDog Ed25519 signing | **Validated** (exp064, 39/39) | Tamper detection at exact vertex |
+| loamSpine dehydration | **Validated** (exp061, 17/17) | Certificate lifecycle complete |
+| sweetGrass attribution | **Validated** (exp066, 41/41) | Conservation verified, decay models |
+| Cross-domain fraud detection | **Validated** (exp065, 74/74) | Same detector across gaming/science/medical |
+| loamSpine `anchor.publish` | **LIVE** | JSON-RPC method, 42 methods total |
+| loamSpine `anchor.verify` | **LIVE** | State hash verification |
+| loamSpine `anchor.publish_batch` | **LIVE** | Aggregation Merkle tree + batch anchoring |
+| `AnchorTarget::Rfc3161Tsa` | **LIVE** | RFC 3161 TSA variant for legal timestamping |
+| Aggregation Merkle tree | **LIVE** | Blake3, batch any N results to one 32-byte root |
+| BTC OP_RETURN submission | Designed | chain-anchor primal pending |
+| ETH/L2 calldata submission | Designed | chain-anchor primal pending |
 | sunCloud value distribution | Designed | gen3/economics/ |
 | Lending protocol | Designed | wateringHole/ |
 
-The provenance infrastructure is validated with 317 checks. The
-anchoring implementation is plumbing, not research.
+The provenance infrastructure is validated with 317 checks. The anchor
+surface is live in loamSpine (42 JSON-RPC methods). What remains is the
+chain-anchor primal that submits 32-byte roots to BTC/ETH/L2.
+
+See also:
+- loamSpine `specs/ANCHORING_ARCHITECTURE.md` — aggregation pipeline and economics
+- loamSpine `specs/PUBLIC_TIMESTAMPING.md` — anchor target comparison
+- wateringHole `ANCHORING_STANDARD.md` — ecosystem-wide guidance
 
 ---
 
