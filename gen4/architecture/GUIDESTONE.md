@@ -434,13 +434,24 @@ When `validate_chuna_overnight.rs` was modified for GPU streaming HMC, the
 CHECKSUMS verification failed immediately on the next USB run. The
 integrity pipeline is genuine, not decorative.
 
-**Property 4 (Environment-Agnostic)** was the hardest. Three failures:
+**Property 4 (Environment-Agnostic)** was the hardest. Four failures:
 
-1. **FAT32 permissions**: USB formatted as FAT32 silently ignores `chmod +x`.
-   Fixed by: ext4 for Linux, exFAT + tmpdir fallback for universal.
-2. **Static musl + Vulkan**: `dlopen("libvulkan.so.1")` fails in static-pie
+1. **Filesystem format**: The first lithoSpore USB was GPT/ext4 — standard
+   for Linux, invisible to Windows. The target machine could not mount the
+   drive at all. Cross-compiled binaries on an unreadable filesystem are
+   dead weight. **The artifact must be readable before it can be runnable.**
+   Fixed by: **exFAT** as the universal filesystem format. exFAT is natively
+   supported by Windows (all versions), macOS (10.6.5+), and Linux (kernel
+   5.4+, 2019). No 4 GB file limit (unlike FAT32). No Unix permission bits
+   (unlike ext4), which means executables must be launched through a
+   platform-specific entry point that copies to a tmpdir and sets +x, or
+   run via container. This is the deepest environment-agnostic lesson:
+   **cross-compatible format, not just cross-compatible binaries.**
+2. **FAT32 permissions**: USB formatted as FAT32 silently ignores `chmod +x`.
+   Fixed by: exFAT + tmpdir copy-and-chmod fallback for Unix systems.
+3. **Static musl + Vulkan**: `dlopen("libvulkan.so.1")` fails in static-pie
    musl binaries. Fixed by: dual-binary strategy (static CPU + glibc GPU).
-3. **macOS/Windows**: No native Linux execution. Fixed by: OCI container
+4. **macOS/Windows**: No native Linux execution. Fixed by: OCI container
    image + platform-specific launchers.
 
 Each failure taught something about what "environment-agnostic" actually
@@ -448,6 +459,16 @@ means. The theoretical definition ("runs anywhere") collapsed into an
 engineering reality ("runs anywhere with the right substrate detection and
 fallback strategy"). The artifact is environment-agnostic not because it
 avoids complexity, but because it detects and adapts.
+
+The layered requirement is:
+```
+Layer 0 — Media format    exFAT (universally mountable)
+Layer 1 — Entry point     Platform-specific launcher (ltee.bat, ltee.sh, ./ltee)
+Layer 2 — Execution       tmpdir + chmod (Unix) or container (Windows/macOS)
+Layer 3 — Binary          Static musl (CPU) + glibc dynamic (GPU)
+Layer 4 — Output          JSON + HTML (universally readable, no runtime needed)
+```
+If any layer fails, the layers above it are inaccessible.
 
 **Property 5 (Tolerance-Documented)** survived cross-architecture testing.
 The same tolerances derived for x86_64 held on aarch64 — confirming they

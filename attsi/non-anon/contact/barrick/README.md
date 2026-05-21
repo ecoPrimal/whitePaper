@@ -25,11 +25,263 @@ Applied to Research Assistant II position in the Barrick and Lenski Labs (postin
 ### Interview Timeline
 - **May 11, 2026** — Initial Zoom with Barrick ✅ (went well)
 - **May 13, 2026** — Invited to **in-person interview** to meet lab + Rich Lenski
-  - Options: **Fri 5/15**, **Mon 5/18**, or **Tue 5/19** (11:30 AM – 4:00 PM)
-  - Format: Lab tour → Lunch with PhD students/postdocs → One-on-one/small group meetings → Final meeting with Barrick
-  - This is the **guideStone USB opportunity** — bring the LTEE artifact
+- **May 18, 2026 (Monday)** — **IN-PERSON INTERVIEW CONFIRMED**
+
+### Interview Schedule — Monday May 18
+
+| Time | Location | Meeting |
+|------|----------|---------|
+| 11:30–11:50 | BPS 6179 | Arrive. Meet Jeff. Lab tour and introductions. |
+| 12:00–1:30 | BPS 6176 | Lunch with **Anthony VanDieren** + **Kathleen Sotelo** (grad students) |
+| 1:30–2:00 | BPS 6177 | **Rich Lenski** |
+| 2:00–2:30 | BPS 6150 | **Tyler De Jong** (tentative) |
+| 2:30–3:00 | BPS 6150 | **Isaac Gifford** (postdoc) |
+| 3:00–3:30 | BPS 6199 or atrium | **Ira Zibbu** + **Pranesh Rao** (grad students) |
+| 3:30–4:00 | BPS 6179 | **Jeff Barrick** (closing) |
 
 Position manages lab operations and LTEE, characterizes evolving populations, uses synthetic biology and computation.
+
+---
+
+## Lab Member Deep Profiles
+
+Each person has a full research profile, wet/dry lab needs analysis, and force-multiplier mapping in their subdirectory:
+
+| Person | Role | Subdir | Interview Slot |
+|--------|------|--------|----------------|
+| Jeff Barrick | PI | [lab/jeff_barrick/](lab/jeff_barrick/) | 11:30 + 3:30 |
+| Rich Lenski | Founder Emeritus | [lab/rich_lenski/](lab/rich_lenski/) | 1:30–2:00 |
+| Anthony VanDieren | Grad Student | [lab/anthony_vandieren/](lab/anthony_vandieren/) | 12:00–1:30 (lunch) |
+| Kathleen Sotelo | Grad Student | [lab/kathleen_sotelo/](lab/kathleen_sotelo/) | 12:00–1:30 (lunch) |
+| Tyler De Jong | Grad Student | [lab/tyler_dejong/](lab/tyler_dejong/) | 2:00–2:30 (tentative) |
+| Isaac Gifford | Postdoc | [lab/isaac_gifford/](lab/isaac_gifford/) | 2:30–3:00 |
+| Ira Zibbu | Grad Student | [lab/ira_zibbu/](lab/ira_zibbu/) | 3:00–3:30 |
+| Pranesh Rao | Grad Student | [lab/pranesh_rao/](lab/pranesh_rao/) | 3:00–3:30 |
+
+---
+
+## Lab Members — Interview Day Profiles (Summary)
+
+### Anthony VanDieren — Grad Student (Microbiology, Apr 2023–)
+
+- **Degrees**: BS Entomology + BS Biological Science + BS Chemistry, University of Georgia
+- **Research**: Insects and their symbionts — how symbionts affect insect physiology. Works with **aphids**, engineering their vertically inherited symbionts (endosymbionts)
+- **Prior**: Analytical chemistry lab tech at Henkel; staff entomologist at Cranbrook Institute of Science (Michigan)
+- **Undergrad research**: Kissing bugs and gut symbionts (UGA)
+- **Personal**: Serious entomologist — finds, rears, preserves exotic insects and arachnids
+- **Connection to our work**: Symbiont engineering = Anderson-QS predictions for insect gut (Paper 05 cross-species signaling). Aphid endosymbionts are vertically inherited = extreme constraint on co-evolution. His Michigan connection (Cranbrook) is local common ground
+- **Lunch conversation**: Ask about aphid symbiont engineering challenges. Bench-to-computation bridge — does he have genomic data that needs pipeline work?
+
+### Kathleen Sotelo — Grad Student (Microbiology, Jan 2025–)
+
+- **Degree**: BS Biology (Microbiology & Infectious Diseases), UT Austin
+- **Research**: Genetically manipulating **honeybee gut symbionts** to secrete peptides that protect hosts from pathogens. Symbiont-mediated RNAi
+- **Prior**: Nancy Moran's lab at UT Austin — honeybee gut microbiome, characterizing novel Orbaceae species in Drosophila gut, lyophilizing bacterial strains. Then Research Engineering Scientist Associate I at UT Austin (2023–2025)
+- **Personal**: Reading, video games, dog
+- **Connection to our work**: Directly relevant to Paper B5 (Leonard 2024 — one-step genome engineering in bee gut symbionts). Anderson-QS predicts: bee gut is 3D biofilm → engineered symbionts maintain QS-active geometry → coordinated RNAi expression depends on spatial structure. healthSpring PK/PD modeling of colonization density → gene expression → host phenotype
+- **Lunch conversation**: How does colonization density affect RNAi knockdown efficiency? This is the QS/Anderson question in practice. She works on the exact system our Paper 05 predicts about
+
+### Rich Lenski — Hannah Distinguished Professor Emeritus
+
+- Already profiled extensively — founder of LTEE (1988), 80,000+ generations
+- **30 min window (1:30–2:00)** — this is the highlight
+- **Focus**: The Anderson-QS framework as a new lens on LTEE. Power-law fitness dynamics predicted from constrained evolution framework. The frozen fossil record as a computational goldmine. coralForge for structural evolution tracking
+- **Don't oversell**: He's been doing this for 38 years. Listen more than talk. Ask what questions he wishes the computational tools could answer
+
+### Tyler De Jong — Grad Student (MGI, Jan 2024–, tentative)
+
+- **Degree**: BS Biochemistry, UT Austin
+- **Research**: **Gene accordions** — adaptation systems where microbes rapidly diversify and evolve genes via recombination-driven expansions and contractions. Directed evolution of fluorescent proteins in naturally competent *Acinetobacter baylyi* ADP1
+- **Prior**: Clinical reference lab (COVID-19 tests), then research associate in Nancy Moran's lab (honeybee gut microbiome)
+- **Personal**: Walks in Austin greenbelts, cat person
+- **Connection to our work**: Gene accordions are structural mutations — expansions/contractions. Ira's seabreeze pipeline detects these computationally. neuralSpring ESN could classify accordion events from sequencing data. The directed evolution of fluorescent proteins is a beautiful constrained evolution case study — constrained to fluoresce, evolving under selection
+- **Conversation**: Ask about the accordion detection pipeline. How do they currently identify expansion/contraction events? Is there a computational bottleneck?
+
+### Dr. Isaac Gifford — Postdoc (Jan 2020–)
+
+- **Degrees**: BS Microbiology (UT Austin), PhD Microbiology (UC Davis)
+- **Research**: Mechanisms of **horizontal gene transfer** and genome evolution. Works with *Acinetobacter baylyi* ADP1 — naturally transformable bacterium. Grad work on *Frankia* nitrogen-fixing symbioses
+- **Publication**: Gifford et al. 2024, *PLOS Genetics* — "Evolution recovers the fitness of *A. baylyi* strains with large deletions through mutations in deletion-specific targets and global post-transcriptional regulators"
+- **Personal**: Game design, 21st century sequential art (comics)
+- **Connection to our work**: His PLOS Genetics paper is directly about how evolution compensates for genome deletions — convergent recovery pathways. This is constrained evolution in action: constrained by the deletion, evolving to compensate. groundSpring drift vs selection classification applies directly. The A. baylyi system is naturally transformable = horizontal gene transfer without conjugation = simpler system for studying recombination. Also: Frankia = nitrogen-fixing symbionts → connects to our agricultural microbiome work (Paper 03)
+- **Conversation**: His 2024 paper on fitness recovery from large deletions is a perfect test case for constrained evolution predictions. Ask about the computational analysis — did they use breseq? What would help for future experiments? Game design interest = potential esotericWebb conversation starter
+
+### Ira Zibbu — Grad Student (Cell & Molecular Biology, Jan 2025–)
+
+- **Degrees**: BS-MS Biology with Data Science minor, IISER Thiruvananthapuram (India)
+- **Research**: Large-scale **genome rearrangements** in LTEE — how they evolved and their effects on populations. Combines experimental evolution + NGS + molecular biology
+- **Publication**: Zibbu, Wilke & Barrick 2025 — **seabreeze**: a pipeline for analyzing structural variation between bacterial genome assemblies (*JOSS*). Python/Snakemake pipeline: inversions, deletions, translocations, duplications, IS predictions, synteny plots, replichore balance analysis
+- **GitHub**: github.com/ira-zibbu — active, bioinformatics focused
+- **Undergrad**: Insect ecology, chemotaxis DEs, synthetic biology, ML for protein-ligand predictions
+- **Personal**: Gym, biking, musical theater, philosophy of science, contemporary fiction, cooking. Believes in removing barriers to scientific participation
+- **Connection to our work**: **Strongest computational overlap in the lab.** seabreeze is a Python/Snakemake structural variation pipeline — our wetSpring is a Rust/GPU pipeline doing related work. Her data science background means she'll understand our validation methodology. Her ML for protein-ligand undergrad work connects to coralForge/neuralSpring. She's looking at LTEE genome rearrangements = the structural evolution layer that coralForge can add (protein fold changes from rearrangements). seabreeze is MIT-licensed, our work is AGPL — complementary
+- **Conversation**: Ask about seabreeze and the structural variation work. What's slow? What's next? Does she have visualization needs? Her philosophy-of-science interest means the guideStone concept (reproducible, self-proving artifacts) may resonate
+
+### Pranesh Rao — Grad Student (Cell & Molecular Biology, Feb 2024–)
+
+- **Degrees**: BE Biotechnology (Mumbai University), MS Biotechnology (Texas A&M)
+- **Research**: **Omics of microbial evolution dynamics** — LTEE E. coli populations using DNA barcoding + high-throughput sequencing. **Supplementing the breseq computational pipeline**
+- **Prior**: R&D in molecular diagnostics and carrier screening at Asuragen (Bio-techne), Austin TX
+- **Personal**: Soccer (football) enthusiast, hiking, biking, painting/sketching
+- **Connection to our work**: **The breseq person.** breseq is Barrick's own mutation-calling pipeline. Pranesh is actively supplementing it computationally. Our guideStone-LTEE Module 6 is literally breseq parity — a Rust pipeline producing concordant mutation calls. This is the most direct technical handshake in the interview. He also does DNA barcoding for LTEE = allele frequency trajectories = neuralSpring LSTM/ESN territory. His industry diagnostics background means he understands validated pipelines
+- **Conversation**: Ask what he's adding to breseq. Where are the computational bottlenecks? What would a faster, GPU-accelerated mutation caller mean for their throughput? This is the "I can help with what you're literally working on right now" conversation
+
+---
+
+## Active Research Projects — What They Do and How You'd Support Them
+
+### Project 1: LTEE Daily Operations and Frozen Fossil Record
+
+**What it is**: 12 populations of *E. coli* in glucose minimal medium, daily 1:100 serial transfer (1/100 dilution → ~6.64 generations/day). Currently at **82,500+ generations**. Every 500 generations, glycerol stocks are frozen — the "frozen fossil record." Transferred from UT Austin to MSU Sept 2025.
+
+**Who works on it**: Alexa Morton (lab manager, not on interview schedule), Pranesh Rao, Ira Zibbu. The RA II position (you) would take over or co-manage daily operations.
+
+**Day-to-day**:
+- Daily transfers of 12 populations (7 days a week, the experiment never stops)
+- Periodic plating on TA agar to check for contamination and population health
+- Archiving frozen stocks every 500 generations
+- Fitness assays: competition experiments between evolved and ancestral strains
+- Sequencing: both whole-genome (clones) and metagenomic (whole populations) at regular intervals
+
+**Recent event**: "Ara+3: The Red Scare" (Dec 2024) — at 80,500 generations, colonies appeared red and white on TA agar. Diagnostic PCR ruled out contamination; sequencing showed both variants share nearly all mutations. The red phenotype swept the population rapidly. This is exactly the kind of thing you'd detect and investigate as lab manager.
+
+**Computational needs**:
+- **breseq** for mutation calling on sequenced clones (Pranesh is supplementing this)
+- Allele frequency tracking from metagenomic sequencing (Good et al. 2017 methodology)
+- Fitness trajectory analysis (power-law fits, model comparison)
+- Population genomics: what's under selection, what's hitchhiking, what's drifting
+
+**How you'd help**: Run the daily experiment, manage the frozen archive, coordinate sequencing, and bridge to computational analysis. The RA II position description says "characterizes evolving populations" — that means sequencing, plating, fitness assays, and feeding data into the analysis pipeline.
+
+---
+
+### Project 2: breseq and Computational Genomics
+
+**What it is**: breseq is Barrick's own mutation-calling pipeline (C++ and R, GPL-2.0, published in Methods Mol Bio 2014). It identifies SNPs, indels, large deletions, and new junctions from Illumina data in haploid microbial genomes. It's the standard tool for LTEE genome analysis and is used by labs worldwide.
+
+**Who works on it**: Pranesh Rao (supplementing the pipeline), Barrick (original author)
+
+**Current state**: v0.39.0 (July 2024). Recent additions: improved IS prediction, experimental soft-clipping subcommand, promoter region fixes. Actively maintained, 37 releases.
+
+**Computational needs**:
+- Pranesh is adding features — likely barcoding integration, improved structural variant calling
+- Speed: breseq is serial C++. Parallelization or GPU acceleration would help throughput, especially as sequencing volume increases
+- Integration with seabreeze for structural variation (Ira's pipeline)
+- Population-level analysis: moving from single-clone to metagenomic variant calling
+
+**How you'd help**: Your guideStone-LTEE Module 6 is literally breseq parity — a Rust pipeline producing concordant mutation calls. You can benchmark against breseq, identify speed bottlenecks, and potentially offer a GPU-accelerated path for the same analysis. You don't replace breseq — you complement it with speed and validation.
+
+---
+
+### Project 3: seabreeze — Structural Variation in LTEE
+
+**What it is**: Ira Zibbu's Python/Snakemake pipeline (JOSS 2025) for analyzing large-scale structural variation between bacterial genome assemblies — inversions, deletions, translocations, duplications, IS element predictions, synteny plots, replichore balance.
+
+**Who works on it**: Ira Zibbu (primary), Barrick
+
+**Key finding**: Long-read sequencing (Oxford Nanopore) of LTEE populations at 75,000 generations revealed deletions in almost all populations, inversions and duplications in some. Ara+1 has the most extensive changes (successive inversions). Ara+4 has none. Most rearrangements mediated by IS elements.
+
+**Computational needs**:
+- Long-read assembly is computationally expensive — GPU acceleration for assembly or alignment helps
+- Connecting structural variation to fitness consequences (which rearrangements are adaptive?)
+- Protein structural consequences: do inversions/duplications change protein folding? (coralForge territory)
+- Visualization: synteny plots are 2D static — interactive visualization of genome rearrangements over evolutionary time would be powerful
+
+**How you'd help**: coralForge can predict structural consequences of rearrangements at the protein level. neuralSpring ESN/LSTM can model whether rearrangements correlate with fitness changes. Your wetSpring pipeline can process the long-read data. The visualization angle is open territory.
+
+---
+
+### Project 4: Honeybee Symbiont Engineering (Kathleen Sotelo, Zuberi Ashraf)
+
+**What it is**: Engineering *Snodgrassella alvi* (bee gut bacterium) to express dsRNA that triggers RNAi in the bee host. Used to knock down specific bee genes (functional genomics) and to protect bees from viruses and parasites (Varroa mites, DWV). One-step chromosomal integration via electroporation — no exogenous recombination machinery needed.
+
+**Key publications**: Leonard et al. 2020 *Science* (engineered symbionts activate bee immunity), Leonard et al. 2024 *mBio* (one-step genome engineering).
+
+**Current researchers**: Kathleen Sotelo (peptide secretion for pathogen protection), Zuberi Ashraf (*S. alvi* evolution), plus several others
+
+**Computational needs**:
+- Tracking engineered symbiont stability over generations (do the constructs persist?)
+- Understanding colonization dynamics — what determines whether the engineered strain establishes
+- Gene expression quantification from RNA-seq
+- PK/PD-style modeling: dose (colonization density) → response (RNAi knockdown level)
+
+**How you'd help**: Your Anderson-QS framework predicts whether QS-mediated coordination works in the bee gut geometry (3D biofilm = QS-active). healthSpring PK/PD modeling maps colonization → expression → host phenotype. Your wet lab experience with fermentation/bioprocess (5 years at MSUBI) is directly relevant to growing and maintaining bacterial cultures.
+
+---
+
+### Project 5: Aphid Endosymbiont Engineering (Anthony VanDieren)
+
+**What it is**: Engineering *Serratia symbiotica* strains that colonize the aphid gut. These can be pathogenic or beneficial. The lab showed that cultured strains can achieve maternal transmission — they possess a latent capacity to evolve into long-term symbionts. Exploring pest control applications via symbiont-mediated RNAi.
+
+**Computational needs**:
+- Tracking symbiont genome evolution across aphid generations (vertical inheritance = strong bottleneck)
+- Understanding the transition from free-living to obligate symbiont (genome streamlining, gene loss)
+- Comparative genomics: cultured vs. intracellular *S. symbiotica* strains
+
+**How you'd help**: Paper 05 (cross-species signaling) predicts Anderson-QS dynamics in symbiont-host systems. The vertical transmission bottleneck is an extreme case of constrained evolution — small N_e, strong drift, genome reduction. groundSpring drift vs. selection classification is directly applicable.
+
+---
+
+### Project 6: Naturally Transformable Bacteria — *A. baylyi* (Isaac Gifford, Tyler de Jong)
+
+**What it is**: *Acinetobacter baylyi* ADP1 is naturally competent — it takes up DNA from the environment without conjugation machinery. The lab uses this as a platform for studying horizontal gene transfer, genome streamlining, and synthetic biology.
+
+**Gifford's work**: Evolved 8 strains with 22–293 kb deletions for ~300 generations. Fitness recovered in nearly all cases through two mechanisms: (1) deletion-specific compensatory mutations in 9 genes + 2 sRNAs, and (2) global regulatory adjustments in *rnd*, *csrA*, *hfq* post-transcriptional regulators. Published PLOS Genetics 2024.
+
+**Tyler's work**: Gene accordions — tandem gene amplification and loss via recombination. Expanding and contracting at high rates. Creates genotypic/phenotypic heterogeneity in clonal populations. He's replicating this through directed evolution of fluorescent proteins in ADP1.
+
+**Lab also**: Built ADP1-ISx (transposon-free strain) by deleting all insertion sequences and prophages. This is a clean-genome platform for synthetic biology — reduces genetic instability that inactivates introduced genes.
+
+**Computational needs**:
+- Tracking copy number variation over time (gene accordion dynamics)
+- Distinguishing adaptive from neutral structural variants
+- Genome streamlining analysis: what genes are lost, when, and why
+- breseq for mutation calling, seabreeze for structural variation
+
+**How you'd help**: Gifford's fitness recovery from large deletions is a textbook constrained evolution test case. groundSpring (drift vs. selection, jackknife CI) classifies which recovery mutations are beneficial vs. compensatory vs. hitchhiking. neuralSpring ESN can detect regime shifts in copy number trajectories. The clean-genome platform work connects directly to BioBrick burden analysis.
+
+---
+
+### Project 7: Bartonella Parasites — Negev Desert (Isaac Gifford)
+
+**What it is**: Collaboration with the Hawlena Lab (Ben-Gurion University, Israel). *Bartonella* species circulate in gerbil populations vectored by fleas. Multiple species infect and co-infect multiple host species. The lab studies genome evolution within and across infection cycles — specifically contingency loci, gene accordions, and recombination during co-infections.
+
+**Key publication**: Rodríguez-Pastor et al. 2024, *PLoS Pathogens*
+
+**Computational needs**:
+- Tracking hypermutable contingency loci across infection cycles
+- Mixed-infection variant calling (multiple Bartonella species co-infecting same host)
+- Phylogenomics of Bartonella diversification
+
+**How you'd help**: This connects to Paper B8 (Barrick & Waters 2025 — phage contingency loci as bet-hedging). Anderson framework: contingency loci = intentional high-disorder positions in the genome. The same HMM identification pipeline applies.
+
+---
+
+### Project 8: Synthetic Biology Reliability (Dennis Mishler, not on interview)
+
+**What it is**: Engineered cells evolve and "break" — mutations inactivate introduced functions. The lab works on: (1) "negative design" software to alert researchers to unstable DNA designs, (2) "antimutator" host strains with lower mutation rates, (3) databases for tracking engineered DNA sequence variants.
+
+**Key publication**: Radde et al. 2024 *Nature Communications* — BioBrick burden (301 plasmids, 19.6% burdensome, 45% max growth reduction)
+
+**Computational needs**:
+- ML prediction of burden from sequence features (before building constructs)
+- Understanding the constructability limit — why 45%?
+- Tracking genetic stability of engineered constructs over time
+
+**How you'd help**: guideStone-LTEE Module 5 targets BioBrick burden analysis directly. neuralSpring ML for burden prediction from sequence features. The Anderson disorder theory for the constructability limit (gene expression resources scatter through the disordered plasmid landscape) is the novel theoretical contribution.
+
+---
+
+### The Tools Ecosystem
+
+| Tool | Language | Maintainer | What it does |
+|------|----------|------------|-------------|
+| **breseq** | C++/R | Barrick, Pranesh | Mutation calling from Illumina data in haploid microbes |
+| **seabreeze** | Python/Snakemake | Ira | Structural variation between genome assemblies |
+| **gdtools** | C++ | Barrick | Genome diff manipulation (part of breseq) |
+| Bee microbiome toolkit (BTK) | Wet lab | Kathleen, Zuberi | Genetic tools for engineering bee gut bacteria |
+
+The lab uses **HPCC (MSU iCER)** for heavy compute. Sequencing: Illumina (short-read) for routine work, Oxford Nanopore (long-read) for structural variation. Wet lab: standard molecular biology — PCR, cloning, transformation, plating, competition assays, gnotobiotic bees/aphids.
 
 ---
 

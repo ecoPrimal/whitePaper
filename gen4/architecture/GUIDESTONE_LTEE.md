@@ -138,6 +138,44 @@ This is the unique contribution. Not reproducing their work — extending it.
 
 ---
 
+## Media Format — Lesson from First Deploy (May 18, 2026)
+
+The first lithoSpore USB was GPT/ext4. Plugged into a Windows machine:
+partition type "Unknown," no drive letter assigned, no access. The
+cross-compiled binaries inside were unreachable.
+
+**Rule**: The USB filesystem must be **exFAT**.
+
+| Format | Windows | macOS | Linux | Max File | Permissions | Verdict |
+|--------|---------|-------|-------|----------|-------------|---------|
+| FAT32 | Yes | Yes | Yes | 4 GB | None | Too small for OCI images |
+| ext4 | No | No | Yes | 16 TB | Full Unix | Invisible to Windows/macOS |
+| NTFS | Yes | Read-only | Read-only | 16 TB | Windows ACL | Write problems on Unix |
+| **exFAT** | **Yes** | **Yes** | **Yes (≥5.4)** | **128 PB** | **None** | **Universal** |
+
+exFAT has no Unix permission bits. Binaries can't be executed directly
+from the mount. The entry point script must:
+1. Copy binaries to a tmpdir (`/tmp/ltee-guidestone/`)
+2. `chmod +x` the copies
+3. Execute from tmpdir
+4. On Windows: use `ltee.bat` → WSL2 or Docker fallback
+
+The output tier (pre-rendered HTML notebooks, JSON results, docs) is
+always readable — no execution needed to browse the artifact contents.
+This means even on a system that can't run the binaries, the science
+is still visible.
+
+**Layer model**:
+```
+Layer 0 — Media:     exFAT (every OS can mount)
+Layer 1 — Browse:    README, HTML notebooks, docs (every OS can read)
+Layer 2 — Launch:    Platform-specific entry point (ltee.sh / ltee.bat)
+Layer 3 — Execute:   tmpdir + chmod (Linux/macOS) or container (Windows)
+Layer 4 — Validate:  Rust binaries produce JSON + figures
+```
+
+---
+
 ## Artifact Structure
 
 ```
@@ -207,28 +245,32 @@ ltee-guidestone-v1.0/
 
 ## Entry Points
 
+### Linux / macOS
 ```bash
-# Full validation — all 7 modules, ~10 minutes
-./ltee validate
-
-# Single module
-./ltee validate --module fitness
-./ltee validate --module mutations
-./ltee validate --module alleles
-./ltee validate --module citrate
-./ltee validate --module biobricks
-./ltee validate --module breseq
-./ltee validate --module anderson
-
-# Benchmark (characterize the machine)
-./ltee benchmark
-
-# View pre-rendered notebooks (opens browser, no Python needed)
-./ltee notebooks
-
-# Run Python tier (requires Python 3.10+, pip install -r requirements.txt)
-./ltee python
+# The shell launcher handles tmpdir copy + chmod automatically
+bash ltee.sh validate          # Full validation — all 7 modules, ~10 min
+bash ltee.sh validate --module fitness
+bash ltee.sh notebooks         # Opens pre-rendered HTML in browser
+bash ltee.sh benchmark         # Characterize this machine
+bash ltee.sh python            # Requires Python 3.10+
 ```
+
+### Windows
+```cmd
+REM Batch launcher — tries WSL2 first, falls back to Docker
+ltee.bat validate
+ltee.bat notebooks             REM Opens HTML directly (no WSL needed)
+```
+
+### Direct (if mounted with exec permissions, e.g. ext4 on Linux)
+```bash
+./ltee validate
+```
+
+### Browse only (no execution, any OS)
+Open `python/rendered/` in a browser — pre-rendered HTML notebooks
+with all figures and results. Open `docs/FOR_BARRICK.md` in any text
+editor. The science is accessible even if execution isn't possible.
 
 ---
 
