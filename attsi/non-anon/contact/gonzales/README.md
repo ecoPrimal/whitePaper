@@ -13,10 +13,53 @@
 - **Applied**: Spring 2026 (posting closed ~April 15, 2026)
 - **First interview**: Completed (made second round)
 - **Second round status**: On hold as of May 13, 2026
+- **RA III position**: Filled — went to drug screening researcher (May 23, 2026)
+- **New lead**: Compound registration / data management / AI super user (May 23, 2026)
 
 ---
 
-## Latest Communication — May 13, 2026
+## Latest Communication — May 23, 2026
+
+Andrea emailed directly with update + new opportunity:
+
+1. **RA III position filled** — offered to a researcher with drug screening experience for sponsored research grant
+2. **Still hiring** — additional positions coming once new hires are running
+3. **New role floated**: "super user for compound registration and data management system" that will:
+   - House all drug discovery program data
+   - Allow AI-driven pattern assessment across compounds
+4. **Explicitly asked if Kevin is interested** in this role
+5. **Invited a meeting**: "Feel free to set up some time if you'd still like to keep discussions going"
+6. Tone: warm, proactive, offering something specific
+
+### What This Means
+
+- The RA III (bench screener) went to someone with direct screening experience — expected
+- She's now offering something that may be a **better fit** for Kevin's actual skillset
+- "Compound registration and data management system + AI tools" is exactly:
+  - Data infrastructure (ecoPrimals pattern)
+  - Scientific data management (structured compound/assay data)
+  - ML/AI pattern recognition (neuralSpring, barraCuda)
+  - Drug discovery pipeline integration (Fajgenbaum MATRIX, ADDRC screening)
+- She's inviting continued conversation — this is not a soft close, it's an active lead
+- The role is likely **3rd or 4th hire** in her sequence (after antibody engineer + screener)
+
+### Strategic Assessment
+
+**This role maps directly to what Kevin already builds.** The ecoPrimals ecosystem IS a compound registration and data management system with AI pattern assessment — just for a different domain. The translation:
+
+| ecoPrimals concept | Gonzales lab equivalent |
+|---|---|
+| NestGate (content-addressed storage) | Compound registry (structured chemical/assay data) |
+| rhizoCrypt (provenance DAG) | Audit trail for screening results |
+| sweetGrass (attribution) | Data lineage (which compound, which assay, which result) |
+| neuralSpring ML | AI pattern detection across compound library |
+| barraCuda stats | Dose-response, IC50, PK modeling |
+| healthSpring validation | Drug discovery pipeline validation |
+| lab.primals.eco | Data access surface for lab members |
+
+---
+
+## Previous Communication — May 13, 2026
 
 Andrea provided a detailed update:
 
@@ -27,14 +70,6 @@ Andrea provided a detailed update:
 3. **Total positions**: Plans to post for **4 positions** before end of 2026
 4. **Kevin's interest** (her own research) may be **3rd in hiring order** due to funding strategy
 5. Tone: appreciative, transparent, asking for patience
-
-### What This Means
-
-- Not a rejection — she's actively strategizing and was transparent about the process
-- The position Kevin wants most (her own research, AD/cytokine/Anderson-relevant work) exists but may be months out
-- She's building a lab from scratch and needs funding momentum (company partnerships first)
-- Staying warm and patient is the right move
-- The Barrick position is the more immediate opportunity
 
 ---
 
@@ -76,8 +111,9 @@ Rather than waiting passively, position as an active collaborator whose work is 
 ## Next Steps
 
 1. ✅ Send reply expressing patience + flexibility + computational contribution (email_reply_patience.md)
-2. **Monitor for inbound** — she may respond with a direction or ADDRC contact
-3. Keep Barrick interview as primary employment focus
-4. If Barrick offer comes, decide timing vs waiting for Gonzales position
-5. The LTEE guideStone and Anderson framework strengthen the case for both positions
-6. Paper 12 is the persistent connection — it exists whether or not she hires you
+2. ✅ Andrea replied May 23 — RA III filled, new data management/AI role floated
+3. **Reply to May 23 email** — express strong interest in the data management/AI role, set up meeting
+4. **Prepare for meeting**: demonstrate how existing infra maps to compound registration + AI pattern detection
+5. Keep Barrick position as parallel track — these are complementary, not competing
+6. Paper 12 + MATRIX drug repurposing + the PTP/kinase-phosphatase work from ABG all strengthen the case
+7. The ABG PTP cancer project (Mark) is isomorphic to Gonzales's work — kinase-phosphatase balance in disease. This is additional evidence of domain fluency
