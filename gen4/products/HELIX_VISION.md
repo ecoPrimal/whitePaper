@@ -40,8 +40,9 @@ Sample (soil, water, air, tissue)
       ├── Community profiling (Shannon, Simpson, Anderson QS framework)
       ├── Anomaly detection (ESN classifiers on AKD1000 NPU)
       ├── coralForge structure prediction (AlphaFold on proteins of interest)
+      ├── hotSpring MD validation (bonded FF + metadynamics → conformational trust)
       └── Provenance (trio: sample → analysis → results → publication)
-  → Visualization (petalTongue: community profiles, 3D structures)
+  → Visualization (petalTongue: community profiles, 3D structures, FEL surfaces)
   → All on sovereign hardware, no cloud, no vendor lock-in
 ```
 
@@ -49,7 +50,7 @@ Sample (soil, water, air, tissue)
 
 ## Springs Consumed (gen3 Science)
 
-helixVision composes validated science from two springs:
+helixVision composes validated science from three springs:
 
 ### wetSpring — Genomics and Environmental Monitoring
 
@@ -77,6 +78,29 @@ is sovereign — no QIIME2, no EPI2ME, no Python runtime.
 
 coralForge has 154 checks (62 Python + 55 Rust + 37 GPU) across
 the full structure prediction stack. All quality gates green.
+
+### hotSpring — Biomolecular MD Validation
+
+| Capability | Experiment | What It Provides |
+|-----------|------------|-----------------|
+| Nonbonded MD engine | Exp 001–219 | LJ, Coulomb, PPPM, thermostats, cell/Verlet lists — 500+ checks |
+| Bonded force fields | Exp 220 (Phase 1) | Harmonic bond/angle, dihedral torsion, improper — carbohydrate ring FF |
+| Topology reader | Exp 220 (Phase 2) | GROMOS 45a4 / GLYCAM06 parameter parsing |
+| Metadynamics bias | Exp 220 (Phase 3) | Cremer-Pople CVs, Gaussian hill deposition for conformational FEL |
+| GROMACS parity | Exp 220 (Phase 4) | Industry control validation — proves MD correctness before trust |
+
+hotSpring's MD engine validates that coralForge's predicted structures sit at
+conformational energy minima — structure prediction is necessary but not
+sufficient; MD validation proves the predicted geometry is physically stable.
+GROMACS 2026.0 (CUDA, PLUMED, Colvars) is the industry control/parity anchor.
+
+**The predict→validate→confirm→visualize loop:**
+```
+coralForge predicts structure (AlphaFold2/3)
+  → hotSpring validates via MD (bonded FF + metadynamics on sovereign GPU)
+  → GROMACS confirms hotSpring MD is correct (industry parity)
+  → petalTongue renders FEL + 3D structure
+```
 
 ---
 

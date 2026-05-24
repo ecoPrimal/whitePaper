@@ -1,4 +1,4 @@
-# Email: Follow-Up with Onboarding Materials (March 2026)
+# Email: Follow-Up with Onboarding Materials (March 2026) — SENT
 
 **Context:** This follows the in-person interview and the meeting with
 Lisabeth. Kevin already sent `computational_brief.md` before the
@@ -19,7 +19,7 @@ bench is the goal.
 
 ---
 
-## Email (DRAFT)
+## Email (SENT)
 
 **To:** Dr. Andrea Gonzales
 **CC:** Dr. Erika Lisabeth

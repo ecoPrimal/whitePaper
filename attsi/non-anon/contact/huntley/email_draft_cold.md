@@ -1,4 +1,4 @@
-# Cold Outreach — Geoffrey Huntley
+# Cold Outreach — Geoffrey Huntley — SENT
 
 **To:** Geoffrey Huntley (via https://ghuntley.com/contact/)
 **From:** Kevin Mok
@@ -6,7 +6,7 @@
 
 ---
 
-## Draft
+## Email (SENT)
 
 Geoffrey,
 

@@ -1,4 +1,4 @@
-# Email: Post-Coffee Follow-Up (March 4, 2026)
+# Email: Post-Coffee Follow-Up (March 4, 2026) — SENT
 
 **Context**: Second coffee meeting, Tuesday March 4. He asked two sharp questions:
 (1) How does hotSpring/BarraCuda handle Ewald summation for long-range interactions?
@@ -9,7 +9,7 @@ and dynamical QCD progress (Feb 28).
 
 ---
 
-## Email (DRAFT — send tonight or tomorrow morning)
+## Email (SENT)
 
 **Subject:** Re: Following up — Ewald and Kokkos
 

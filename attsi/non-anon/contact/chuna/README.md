@@ -106,6 +106,14 @@ queue, no vendor lock-in.
   - `liveSpore.json` tracks every machine the artifact visits
   - TC's SSH-only workflow: `scp` tarball → `tar xf` → `./hotspring validate`
   - See: `gen4/architecture/DEPLOYABLE_ARTIFACT_STANDARD.md`
+- **April 4, 2026**: Delivery email drafted (`email_guidestone_delivery_apr2026.md`):
+  - All delivery methods offered: scp tarball, download link, USB, OCI container
+  - Shared primals.eco/guidestone/ as public framing
+  - Laid out MILC data generator trajectory: ILDG-compatible gauge output,
+    measurement pipeline (plaquette, Polyakov loop, topological charge),
+    sovereign lattice QCD stack as sporeGarden product (replacing QUDA/MILC/Chroma)
+  - Bazavov contact to happen on TC's recommendation once MILC generator is self-leveled
+  - primals.eco linked — site has guideStone concept, paper catalog, full ecosystem docs
 - **Next**: TC receives deployment artifact (USB or tarball). Week 1 pilot:
   validate + benchmark on his machine. Cross-validation with MILC configs
   (Weeks 2-4). Custom integrator prototyping (Month 2+).

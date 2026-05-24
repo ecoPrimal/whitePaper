@@ -1,4 +1,4 @@
-# Email Draft: First Contact with Ilya Kachkovskiy
+# Email: First Contact with Ilya Kachkovskiy — SENT
 
 **Context**: Bought a NucBox M6 from him on Facebook Marketplace. Brief
 conversation about GPUs. He has an RTX 5080. He noticed equations on his

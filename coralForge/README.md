@@ -88,10 +88,14 @@ by biomeOS graphs.
 
 coralForge's gen4 product surface is **helixVision** — a sovereign genomics
 discovery platform (sporeGarden, planned). helixVision composes coralForge's
-structure prediction with wetSpring's 16S/WGS pipelines and other primals into
-a deployable tool for field biologists and environmental scientists. coralForge
-remains the gen3 science name; helixVision is the gen4 product that makes this
-science accessible to people who don't know what an evoformer is.
+structure prediction with wetSpring's 16S/WGS pipelines, hotSpring's
+biomolecular MD validation (Exp 220: bonded FF + metadynamics + GROMACS
+parity), and other primals into a deployable tool for field biologists and
+environmental scientists. coralForge remains the gen3 science name; helixVision
+is the gen4 product that makes this science accessible to people who don't know
+what an evoformer is. Structure prediction alone is necessary but not sufficient
+— hotSpring's MD validation proves predicted geometries are physically stable
+(predict→validate→confirm→visualize loop, documented in Exp 220).
 
 In the biomeOS OS trajectory (`gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`),
 helixVision represents the science application layer — running as an OS

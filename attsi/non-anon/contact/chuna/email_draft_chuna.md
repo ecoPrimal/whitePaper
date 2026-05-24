@@ -1,4 +1,4 @@
-# Email Draft: First Contact with TC Chuna
+# Email: First Contact with TC Chuna — SENT
 
 **Context**: Murillo referred us during coffee (March 4, 2026). He said
 Chuna is the person who would evaluate our work. Chuna authored/co-authored

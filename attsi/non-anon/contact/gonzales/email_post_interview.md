@@ -1,4 +1,4 @@
-# Email: Post-Interview Follow-Up (March 2026)
+# Email: Post-Interview Follow-Up (March 2026) — SENT
 
 **Context:** Interview for RA III (Molecular Biology) in the Gonzales Lab,
 Dept. of Pharmacology & Toxicology, MSU. Position focuses on iPSC-derived
@@ -27,7 +27,7 @@ the science, shows work without overselling.
 
 ---
 
-## Email (DRAFT)
+## Email (SENT)
 
 **Subject:** Thank you — and some computational modeling of your published work
 

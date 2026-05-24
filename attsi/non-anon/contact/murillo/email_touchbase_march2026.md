@@ -1,4 +1,4 @@
-# Email: Touch-Base Before Coffee (March 2026)
+# Email: Touch-Base Before Coffee (March 2026) — SENT
 
 **Context**: Coffee meeting Tuesday March 4. Repo link already shared. Previous emails covered Sarkas reproduction (131 checks) and neuromorphic benchmarks. Since then: 22 papers reproduced, lattice QCD production runs, DF64 discovery, live NPU. First email (Feb 27) sent with quenched QCD data sheet. **Update Feb 28**: dynamical production complete — 1,071 trajectories, 17 NPU-steered β points, crossover confirmed. Brain architecture built. Second data sheet ready to send Sunday/Monday.
 
@@ -27,7 +27,7 @@ mokkevin@msu.edu
 
 ---
 
-## Email 2 (DRAFT — send Sunday Mar 1 or Monday Mar 2)
+## Email 2 (SENT)
 
 **Subject:** Re: Quick check-in — dynamical results in
 

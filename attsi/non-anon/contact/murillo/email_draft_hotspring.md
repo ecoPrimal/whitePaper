@@ -1,4 +1,4 @@
-# Email Drafts: hotSpring Repo to Professor Murillo
+# Email: hotSpring Repo to Professor Murillo — SENT
 
 **Context**: Already had coffee, good rapport, he's returning from ignition conference. Previous emails were about neuromorphic/Akida. This is the pivot to plasma physics — sharing the hotSpring repo where we reproduced his group's work on consumer hardware. Let the repo do the talking.
 
