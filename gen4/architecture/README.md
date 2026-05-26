@@ -64,38 +64,48 @@
    overlaps, defines the Rust thread, and charts the final convergence.
    **Start here if you want to understand the full sovereignty arc.**
 
+### K-Derm Topology and Bonding
+
+10. **K_DERM_RECONCILIATION.md** — Bridges the gram-negative/gram-positive
+    framing in gen4 documents to the canonical K-Derm cell envelope model.
+    Resolves Franklin's Current (conflicting inner/outer labels), maps every
+    gen4 concept to K-Derm absolute layers (cytoplasm/plasma/periplasm/outer/
+    extracellular), connects NUCLEUS atomics to envelope placement, and aligns
+    sovereignty layers with K-Derm boundaries. **Start here if you want to
+    understand how gen4 membrane vocabulary maps to the K-Derm standard.**
+
 ### Sovereignty and Infrastructure Cluster
 
-10. **SOVEREIGN_HPC_EVOLUTION.md** — From basement cluster to gram-negative
+11. **SOVEREIGN_HPC_EVOLUTION.md** — From basement cluster to gram-negative
     organism. Three-layer membrane model, bonding at each layer, full
     hardware inventory, 10G backbone plan, multi-VPS future architecture.
 
-11. **SOVEREIGN_COMPUTE_TRIO_SKETCH.md** — coralReef + toadStool + barraCuda
+12. **SOVEREIGN_COMPUTE_TRIO_SKETCH.md** — coralReef + toadStool + barraCuda
     IPC split, degradation tiers, absorption path for compute sovereignty.
 
-12. **SOVEREIGN_TRANSACTION_MEMBRANE.md** — NFT fermentation, Tier 2
+13. **SOVEREIGN_TRANSACTION_MEMBRANE.md** — NFT fermentation, Tier 2
     ceremony, NestGate/Steam federation, economics through the membrane.
 
-13. **GPU_HEAT_RECOVERY_OPERATIONS.md** — Science-as-heating, seasonal
+14. **GPU_HEAT_RECOVERY_OPERATIONS.md** — Science-as-heating, seasonal
     dispatch bias, thermal zone telemetry integration with gate TOMLs.
 
 ### Validation and Lifecycle Cluster
 
-14. **CONTRACT_TESTING_THESIS_SKETCH.md** — Wire format as contract,
+15. **CONTRACT_TESTING_THESIS_SKETCH.md** — Wire format as contract,
     transport parity across tiers, implications for validation pipelines.
 
-15. **GUIDESTONE_LTEE.md** — Concept for Barrick/Lenski LTEE-focused
+16. **GUIDESTONE_LTEE.md** — Concept for Barrick/Lenski LTEE-focused
     verification artifact using hotSpring and wetSpring modules.
 
-16. **DEPLOY_GRAPH_COMPOSITION.md** — BYOB schema for session-as-primal,
+17. **DEPLOY_GRAPH_COMPOSITION.md** — BYOB schema for session-as-primal,
     deploy graph declaration, ecosystem flywheel for new products.
 
-17. **STADIAL_INTERSTADIAL_PATTERN.md** — Ecosystem convergence/divergence
+18. **STADIAL_INTERSTADIAL_PATTERN.md** — Ecosystem convergence/divergence
     cycles, fossil record, Tier 1/2 gate criteria, selection under constraints.
 
 ### Operations and Resilience
 
-18. **INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md** — Cold-start
+19. **INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md** — Cold-start
     rebuild from bare metal to full composition. Outage simulation catalog
     (VPS loss, WAN loss, gate power loss, LAN partition, Forgejo down,
     full site power loss). Acceptance criteria for each scenario.
@@ -104,14 +114,14 @@
 
 ### Hardware Sovereignty
 
-19. **SOVEREIGN_WARM_KEEPALIVE.md** — 183ms GPU initialization on sovereign
+20. **SOVEREIGN_WARM_KEEPALIVE.md** — 183ms GPU initialization on sovereign
     hardware. Falcon warm preservation eliminates ACR re-boot, systemd fd
     store keeps GPUs warm across daemon restarts, cold early-exit skips
     doomed training. The hardware management layer that makes GPU compute
     invisible in gen4 products. **Start here if you want to understand
     sovereign GPU latency and the warm/cold boundary.**
 
-20. **SILICON_DEISM.md** — The abstraction elimination thesis. The
+21. **SILICON_DEISM.md** — The abstraction elimination thesis. The
     evolution ladder: vendor agnostic → vendor atheistic → silicon deistic.
     There is only math, energy, and silicon — everything else is a
     temporary scaffolding. Rust→binary eliminates the CPU abstraction stack.
