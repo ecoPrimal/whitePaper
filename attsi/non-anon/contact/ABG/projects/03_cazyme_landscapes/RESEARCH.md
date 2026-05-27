@@ -209,6 +209,42 @@ Docking is cheap enough to run on any laptop. FEL calculations require HPC — t
 
 ---
 
+## Deliverables
+
+### pseudoSpore v1.6.1 — CompChem GuideStone (May 27, 2026)
+
+First formal ABG deliverable. Shipped to Discord as 5.7 MB tarball, 76 files.
+
+**What it delivers:**
+- 6 computational modules: free β-D-xylopyranose vs GH10 enzyme-bound (PDB 2D24). 1D theta + 2D Stoddart. Alanine dipeptide + chignolin OPES method controls.
+- PLUMED-NEST survey (Module 07): 8 targets, including Grothaus 2022 (plumID:22.028) and Grothaus 2025 (plumID:25.007)
+- Exploration roadmap (Module 08): 13 targets across 3 priority tiers
+- Full reproducibility: solvated .gro (2,657-atom free xylose, 92,745-atom enzyme), topologies, MDPs, PLUMED inputs with inline index translation
+- 71 automated checks PASS. Self-verifying: `./validate`
+- Pipeline-generated figures (Ramachandran, 1D FES, Stoddart diagram, enzyme-vs-free comparison)
+
+**Key results:**
+- Free xylose: ⁴C₁/boat/¹C₄ basins, barriers 38–53 kJ/mol
+- Enzyme-bound: all barriers lowered 1–5 kJ/mol, conformational selection visible in 2D
+- Consistent with Iglesias-Fernández 2015: ²S₀ → [²,⁵B]‡ → ⁵S₁ and ¹S₃ → [⁴H₃]‡ → ⁴C₁
+
+**Provenance evolution:**
+- Era 1 (v0.6.0–v1.6.0): Hand-authored metadata. v0.6.0 had atom index errors and lyxose contamination caught by Alistaire
+- Era 2 (v1.6.1): Pipeline-derived metadata, agentic deploy, every value extracted from authoritative data files
+- Era 3 (target v2.0+): NUCLEUS provenance trio signs via `biomeos nucleus ingest`
+
+**Pending domain questions for Alistaire:**
+1. Puckering convention: θ=0 → ⁴C₁ (north), θ=π → ¹C₄ (south). Cross-check against Iglesias-Fernández Fig 10?
+2. Force field: CHARMM36-jul2022 vs GROMOS 45A4 vs GLYCAM06 for epimer baselines?
+3. Convergence: 10 ns metadynamics sufficient for publication, or need 50–200 ns?
+
+**Next (from Module 08 roadmap):**
+- Tier 1 (~10 hr): Free lyxose/glucose/mannose/galactose + 2D24 −2/+1 subsites
+- Tier 2 (~8 hr): GH11 inverting (1XYN) + 1E0X covalent intermediate
+- Tier 3: AutoDock Vina ↔ FEL correlation (the core question)
+
+---
+
 ## FOUNDATION Thread Linkage
 
 - **Structural Biology / Computational Chemistry**: Core domain — enzyme mechanism prediction

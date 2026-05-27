@@ -97,7 +97,7 @@ OneMoreChemist flagged proteomics interest — phospho-site relative abundances 
 
 **Lead**: Alistaire
 **Timeline**: Ongoing, reviewing methods
-**Status**: Has preliminary AutoDock Vina results, validating against energy landscape methods
+**Status**: **pseudoSpore v1.6.1 delivered May 27** — 6 modules, 71 checks PASS, FEL side validated. Awaiting Alistaire review before AutoDock correlation phase.
 
 ### Summary
 
@@ -122,9 +122,23 @@ Validate whether molecular docking (AutoDock Vina) can substitute for resource-i
 
 ### Validation Targets
 
-- [ ] Reproduce Fig 10 from Davies et al. 2015 — conformational free energy landscape
-- [ ] Docking score vs energy landscape correlation for representative GH families
+- [x] Reproduce Iglesias-Fernández 2015 FEL — ⁴C₁/boat/¹C₄ basins, barriers 38–53 kJ/mol (free xylose) ← **v1.6.1 PASS**
+- [x] Enzyme-bound barrier lowering (1–5 kJ/mol) consistent with two-fold catalytic itinerary ← **v1.6.1 PASS**
+- [x] 2D Stoddart diagram: conformational selection visible in enzyme-bound landscape ← **v1.6.1 PASS**
+- [x] Method controls: alanine dipeptide Ramachandran + chignolin OPES folding ← **v1.6.1 PASS**
+- [x] PLUMED-NEST validation: 8 targets ingested (2 PASS, 6 profiled) ← **v1.6.1 PASS**
+- [ ] Docking score vs energy landscape correlation for representative GH families (Tier 3 — after FEL review)
 - [ ] Ring conformation generator validation against known pucker coordinates
+- [ ] Epimer baselines: lyxose/glucose/mannose/galactose (Tier 1 — next)
+- [ ] 2D24 −2/+1 subsite distortion propagation (Tier 1 — next)
+- [ ] GH11 inverting xylanase comparison (Tier 2)
+
+### Deliverables
+
+| Version | Date | Files | Checks | Status |
+|---------|------|-------|--------|--------|
+| v0.6.0 | May 24 | 41 | ~20 | Prototype. Atom index errors + lyxose contamination found by Alistaire |
+| v1.6.1 | May 27 | 76 | 71 PASS | Pipeline-derived. All v0.6.0 issues fixed + machine-verified. Self-verifying |
 
 ### Notes
 
