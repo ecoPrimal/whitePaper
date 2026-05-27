@@ -112,7 +112,7 @@ Rather than waiting passively, position as an active collaborator whose work is 
 
 1. ✅ Send reply expressing patience + flexibility + computational contribution (email_reply_patience.md)
 2. ✅ Andrea replied May 23 — RA III filled, new data management/AI role floated
-3. **Reply to May 23 email** — express strong interest in the data management/AI role, set up meeting
+3. ✅ **Reply to May 23 email** — v5 SENT (`email_reply_data_ai_role_v5.md`). Two-level AI (tool-building + lab Jarvis), ABG + PTP connection, lithoSpore concept, opportunity-not-outcome framing, AGPL licensing, around all summer.
 4. **Prepare for meeting**: demonstrate how existing infra maps to compound registration + AI pattern detection
 5. Keep Barrick position as parallel track — these are complementary, not competing
 6. Paper 12 + MATRIX drug repurposing + the PTP/kinase-phosphatase work from ABG all strengthen the case

@@ -94,7 +94,7 @@ Sent follow-up to jeaves@msu.edu. Pitched the cluster: 11 nodes, 154 cores, 248 
 3. **Wait for inbound contacts** from grads and CMSE undergrads via mokkevin@msu.edu
 4. **Prepare onboarding** — ready to spin up reviewer/user accounts on lab.primals.eco for anyone she sends
 5. **Have a demo-ready workload** — something visual they can see immediately (16S dashboard, paper reproductions, benchmark comparison)
-6. **Follow up with Joelle in ~1 week** if no contacts come through — gentle check-in
+6. **Dissertation revalidation offer** — drafted `email_revalidation_offer_may2026.md`. Offer to independently revalidate her dissertation work and confirm/document non-replicable gaps in the literature she built on. She's the rigor & reproducibility contact — she discovered only a fraction of papers in her domain are reproducible.
 7. Potential gateway to Woldring and/or Gilad as faculty contacts once students are engaged
 
 ---
