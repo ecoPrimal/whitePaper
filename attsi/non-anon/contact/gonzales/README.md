@@ -108,13 +108,74 @@ Rather than waiting passively, position as an active collaborator whose work is 
 
 ---
 
+## NF Data Mining Project — gen5 Proof Case
+
+Andrea floated a **neurofibromatosis (NF) patient data mining project** tied to a foundation (likely Children's Tumor Foundation). This is the first multi-product composition for an external PI — the gen5 proof case.
+
+### The Biological Connection
+
+NF1 = loss of neurofibromin = hyperactive RAS/MAPK. Andrea already studies JAK/STAT via oclacitinib (782/782 checks). NF1 tumors exhibit hyperactivated STAT3. This is the same signaling biology extended to a rare disease — not a domain shift.
+
+### Product Composition
+
+| Product | Role in NF Project |
+|---------|-------------------|
+| **helixVision** | Gene expression mining from NF Data Portal (Synapse) |
+| **healthSpring** | MATRIX drug repurposing scoring (MEK, JAK, mTOR inhibitors) |
+| **initioChem** | Conformational dynamics of MEK inhibitor binding |
+| **coralForge** | NF1 variant structural impact prediction |
+
+### Grant Alignment
+
+- **Children's Tumor Foundation NF Data Utilization Award (NDU)**: up to $125K total ($50K Y1 + $75K Y2), 10% indirect cap
+  - Year 1 (up to $50K): Bioinformatics analysis via Pluto.bio (computational preliminary data). CTF covers Pluto platform access.
+  - Year 2 (up to $75K): In vitro validation (iPSC, ADDRC screening)
+- Andrea = PI, Kevin = computational infrastructure
+
+### Data Sources
+
+- NF Data Portal / Synapse (gene expression, genomic variants, drug screening)
+- Pluto.bio NF datasets (~108M data points, 12 datasets)
+- PubChem / ChEMBL (compound activity for RAS/MAPK, JAK/STAT targets)
+- ADDRC 8K compound library (Lisabeth access)
+
+### Ecosystem Documentation
+
+- `gen5/products/NF_CASE_STUDY.md` — full product composition mapping
+- `gen5/collaborators/GONZALES_NF.md` — collaborator status tracking
+- `gen4/thesis/THE_GEN5_TRANSITION.md` — the architectural pattern this instantiates
+
+---
+
+## Meeting — Scheduled ~Tuesday, June 3, 2026
+
+Reply sent (`email_reply_meeting_may2026.md`): Tuesday proposed, flexible through Thursday.
+
+### Three Threads to Cover
+
+| Thread | Source | Key Message |
+|--------|--------|-------------|
+| Compound registration / AI super user | May 23 email, pseudoSpore | pseudoSpore pattern → dose-response/screening artifacts with built-in validation |
+| NF data mining | Meeting email | Pre-grant pipeline as operating model — public data, zero lab cost, validated preliminary data |
+| Core science (still valid) | computational_brief, 782/782 | Anderson framework, MATRIX scoring, PTP/JAK-STAT connection |
+
+### Questions for Andrea
+
+1. NF project: what dataset, what foundation, what timeline/deliverables?
+2. Compound registration system: what platform (or greenfield?), what data types first?
+3. Where does the data/AI role sit in the hiring sequence (3rd/4th)?
+4. Does Lisabeth/ADDRC connect to either thread?
+
+---
+
 ## Next Steps
 
 1. ✅ Send reply expressing patience + flexibility + computational contribution (email_reply_patience.md)
 2. ✅ Andrea replied May 23 — RA III filled, new data management/AI role floated
 3. ✅ **Reply to May 23 email** — v5 SENT (`email_reply_data_ai_role_v5.md`). Two-level AI (tool-building + lab Jarvis), ABG + PTP connection, lithoSpore concept, opportunity-not-outcome framing, AGPL licensing, around all summer.
-4. **pseudoSpore follow-up** — drafted (`email_spore_followup_may2026.md`). Attached pseudoSpore as AI workflow example + artifact pattern. Shows compound registration angle directly.
-5. **Prepare for meeting**: demonstrate how existing infra maps to compound registration + AI pattern detection
-5. Keep Barrick position as parallel track — these are complementary, not competing
-6. Paper 12 + MATRIX drug repurposing + the PTP/kinase-phosphatase work from ABG all strengthen the case
-7. The ABG PTP cancer project (Mark) is isomorphic to Gonzales's work — kinase-phosphatase balance in disease. This is additional evidence of domain fluency
+4. ✅ **pseudoSpore follow-up** — SENT (`email_spore_followup_may2026.md`). Attached pseudoSpore as AI workflow example + artifact pattern. Shows compound registration angle directly.
+5. ✅ **Meeting reply** — SENT (`email_reply_meeting_may2026.md`). Tuesday proposed, NF interest expressed, independent researcher framing.
+6. **Tuesday meeting**: demonstrate how existing infra maps to compound registration + AI pattern detection + NF data mining
+7. Keep Barrick position as parallel track — these are complementary, not competing
+8. Paper 12 + MATRIX drug repurposing + the PTP/kinase-phosphatase work from ABG all strengthen the case
+9. The ABG PTP cancer project (Mark) is isomorphic to Gonzales's work — kinase-phosphatase balance in disease. This is additional evidence of domain fluency
