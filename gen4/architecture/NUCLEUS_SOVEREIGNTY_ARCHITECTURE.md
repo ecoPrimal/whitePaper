@@ -1,8 +1,8 @@
 # NUCLEUS Sovereignty Architecture — From Calibration to Sovereign Primals
 
-**Date**: May 19, 2026 (updated from May 15 baseline)
-**Status**: Active evolution — shadow parity operational
-**Lineage**: gen3 cell membrane (May 10) → gen4 sovereignty architecture (May 15) → shadow runs (May 19)
+**Date**: May 28, 2026 (updated from May 19 baseline)
+**Status**: Active evolution — **NUCLEUS deployed to VPS**, spring overlay validated
+**Lineage**: gen3 cell membrane (May 10) → gen4 sovereignty (May 15) → shadow runs (May 19) → **NUCLEUS deploy (May 28)**
 
 ---
 
@@ -99,6 +99,28 @@ counterparts:
 - Sovereign resolver (knot-dns) pending (H2-17→20)
 - **What it proves**: DNS encryption works; sovereignty needs own resolver
 
+### Layer 2b: NUCLEUS Full Deploy (Wave 59) — VALIDATED
+
+Full 13-primal NUCLEUS runtime deployed to sovereign VPS (May 28, 2026):
+
+| Tier | Primals | Transport | Status |
+|------|---------|-----------|--------|
+| Tower | beardog, songbird, skunkbat | UDS + :3478 | LIVE (since May 16) |
+| Node (compute) | toadstool, barracuda, coralreef | UDS-only | **NEW — LIVE** |
+| Nest (provenance) | nestgate, rhizocrypt, loamspine, sweetgrass | UDS + TCP | LIVE (since May 22) |
+| Meta (orchestration) | biomeos, squirrel, petaltongue | UDS-only | **NEW — LIVE** |
+
+Key validation results:
+- All 13 primals respond to `health.liveness` JSON-RPC
+- Capability symlinks auto-created at runtime (btsp, crypto, ai, visualization)
+- Zero new firewall ports (all new services are UDS-only)
+- Spring overlay graph (hotSpring, 14 nodes) parsed and validated by biomeOS
+- Total VPS load: 0.00 with 17 services on $12/mo substrate
+
+**What it proves**: Full NUCLEUS can run on commodity VPS. The sovereignty
+infrastructure layer is complete. Spring emissions are gated only on
+biomeOS orchestration evolution (v0.2), not on infrastructure.
+
 ### Layer 3: Content Pipeline (H2-05/06) — READY
 
 NestGate Session 60 shipped `content.*` transport parity — 8 methods on
@@ -193,8 +215,9 @@ Actions) and GitHub-to-read-only mirror (Forgejo webhook push).
 | Package registry | crates.io / PyPI | NestGate + private registry | Low priority |
 | AI inference | Anthropic / OpenAI | Ollama + barraCuda WGSL | Partial |
 | Container registry | Docker Hub / ghcr.io | NestGate OCI store | Unblocked |
-| Cross-primal auth | Manual token distribution | biomeOS CompositionContext | Unblocked |
+| Cross-primal auth | Manual token distribution | biomeOS CompositionContext | **LIVE** (UDS discovery) |
 | Audit forwarding | Local ring buffer | skunkBat → rhizoCrypt DAG | Unblocked |
+| Spring emissions | Manual deploy | biomeOS graph.execute | **VALIDATED** (parse pass, execute v0.2) |
 
 ### Irreducible Externals (never sovereign)
 - Domain registrar (primals.eco)
@@ -213,7 +236,8 @@ The pattern is glacial. Each capability builds on the previous:
 Phase 1 (Covalent)     → 13 primals on one gate, provenance pipeline
 Phase 2 (Ionic)        → ABG access, tunnel, multi-gate, membrane
 Phase 3 (Self-Hosted)  → BTSP replaces TLS, Songbird replaces tunnel
-Phase 4 (Full NUCLEUS) → biomeOS as OS, zero external dependencies
+Phase 3.5 (NUCLEUS)    → 13 primals on VPS (UDS-only), spring overlay validated  ← CURRENT
+Phase 4 (Full NUCLEUS) → biomeOS graph orchestration, zero external dependencies
 ```
 
 Nothing is removed until it is replaced. Nothing is replaced until the
@@ -225,6 +249,12 @@ The current moment: we are in the **interstadial-to-stadial transition**.
 The interstadial pre-wired all sovereignty capabilities. The stadial
 will drive cutover through external validation — Cloudflare baselines,
 upstream peers, Barrick Lab, community frameworks.
+
+**Wave 59 milestone (May 28, 2026):** Full NUCLEUS (13 primals) deployed
+to sovereign VPS. biomeOS Neural API running. Spring overlay graph
+validation passed. All primals on UDS sockets. Zero external dependencies
+added. The orchestration layer exists — spring emissions are gated only
+on biomeOS `graph.execute` (v0.2, code evolution, not infrastructure).
 
 The glacial metaphor is precise: the ice sheet advances when external
 pressure (baselines, peers, real users) forces the system to evolve.

@@ -31,6 +31,7 @@ why this matters." attsi says "ecoPrimal has the receipts."
 | 1 | ecoPrimal | I Don't Know Rust | `ecoPrimal/01_I_DONT_KNOW_RUST.md` |
 | 2 | ecoPrimal | The Sovereign Lab | `ecoPrimal/02_THE_SOVEREIGN_LAB.md` |
 | 3 | ecoPrimal | 70 Papers, One Stack | `ecoPrimal/03_70_PAPERS_ONE_STACK.md` |
+| 4 | ecoPrimal | The Invisible Developer | `ecoPrimal/05_THE_INVISIBLE_DEVELOPER.md` |
 
 ecoPrimal publishes first. The builder establishes the evidence base.
 Without the proof, the critique has no weight.
@@ -103,6 +104,11 @@ ecoPrimal articles                    attsi articles
    "attsi carries the meaning  <--->     "ecoPrimal dug the wells.
     behind the math."                     I name the tollbooths. Neither
                                           is enough alone."
+
+05 The Invisible Developer
+   "The receipts. 51B tokens,
+    the methodology, the timeline.
+    attsi names why it matters."
 
                                       04c The Kingdom Builders
                                          "ecoPrimal carries the weight.

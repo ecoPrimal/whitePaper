@@ -18,6 +18,7 @@ they're ready. Cross-link but don't require reading order.
 | 1 | I Don't Know Rust | `01_I_DONT_KNOW_RUST.md` | Methodology — how a microbiologist built this through conversation |
 | 2 | The Sovereign Lab | `02_THE_SOVEREIGN_LAB.md` | Hardware, economics, sovereignty — the builder's story |
 | 3 | 70 Papers, One Stack | `03_70_PAPERS_ONE_STACK.md` | Science credibility — 8 domains, provenance, darkforest |
+| 5 | The Invisible Developer | `05_THE_INVISIBLE_DEVELOPER.md` | Evidence — 51B tokens, methodology primacy, timeline vs. Karpathy |
 | 4 | While They Were Writing Manifestos | `04_WHILE_THEY_WERE_WRITING_MANIFESTOS.md` | Palantir-orthogonal — disgust through structural contrast |
 | 4a | The Bread Thief and the Billionaire | `04a_THE_BREAD_THIEF_AND_THE_BILLIONAIRE.md` | Companion — frostbitten hands, opioid dynasties, preconditions |
 | 4b | The Tollbooth Economy | `04b_THE_TOLLBOOTH_ECONOMY.md` | Companion — "as a Service" as enclosure, wells vs. tollbooths |
