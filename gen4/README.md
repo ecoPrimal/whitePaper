@@ -294,7 +294,8 @@ gen4/
 │   ├── DEPLOYABLE_ARTIFACT_STANDARD.md — Portable science: eight-layer anatomy, self-leveling
 │   ├── INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md — Cold-start rebuild, outage simulations
 │   ├── SOVEREIGN_WARM_KEEPALIVE.md — 183ms GPU init: falcon warm preservation, fd store, warm pipeline
-│   └── SILICON_DEISM.md           — The abstraction elimination thesis: math, energy, silicon
+│   ├── SILICON_DEISM.md           — The abstraction elimination thesis: math, energy, silicon
+│   └── SOVEREIGNTY_EVOLUTION_NARRATIVE.md — PostPrimordial journey: golgiBody, WaterFall, DNS, gate routing
 │
 ├── products/                          ← What gen4 produces (case studies)
 │   ├── ESOTERIC_WEBB.md               — First gen4 product: CRPG as primal composition
@@ -409,6 +410,8 @@ foundations/ABG_WHOLE_CELL_REBUILD.md for the first expression: a
 14-year, 7-paper lineage rebuilt with full structural provenance.
 
 **If you want to understand the sovereignty evolution**: Start with
+architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md (the postPrimordial
+journey — golgiBody, WaterFall, DNS, gate-spring routing), then
 architecture/NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md (the full posture —
 what's evolved, what's secure, what remains), then
 architecture/CELLMEMBRANE_FIELDMOUSE_ARCHITECTURE.md (the inner membrane
@@ -430,10 +433,15 @@ gardener actually types). Read gen3/atlasHugged/ first for full context.
 
 ## Status
 
-gen4/ is active. **45 working papers** across 7 sections document the
+gen4/ is active. **46 working papers** across 7 sections document the
 conceptual foundations, architectural patterns, first products, science
 lineage reproductions, economic model, K-NOME methodology evolution,
 and audience-specific guides for the composition generation.
+
+**golgiBody Phase A** (May 28, 2026) established the periplasmic layer:
+VPS Forgejo (38 repos), WaterFall sync pattern, sovereign DNS (knot-dns),
+gate-spring ownership SSOT. See
+`architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md`.
 
 **hotSpring-guideStone-v0.7.0** (April 3, 2026) shipped the first
 Deployable Artifact — guideStone as self-leveling benchmark, validated

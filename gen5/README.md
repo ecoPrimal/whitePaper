@@ -67,7 +67,8 @@ gen5/
 │   ├── SCIENTIFIC_CHALLENGES.md       ← Synapse/DREAM challenges as gen5 evolution profile
 │   └── EXTERNAL_DEMAND_EVOLUTION.md   ← How collaborator demand drives ecosystem evolution
 ├── foundations/
-│   └── PUBLIC_DATA_SYSTEMS.md         ← Catalog of public data systems with provenance mapping
+│   ├── PUBLIC_DATA_SYSTEMS.md         ← Catalog of public data systems with provenance mapping
+│   └── EXTERNAL_SOVEREIGNTY_PATTERN.md ← How sovereignty enables external collaboration via WaterFall
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -108,6 +109,10 @@ gen5/
 1. `products/README.md` — the journey catalog
 2. Any specific `*_JOURNEY.md` for a product's theory-to-reality arc
 
+### For understanding sovereignty and external collaboration
+1. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
+2. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure
+
 ### For understanding the public data and challenge landscape
 1. `foundations/PUBLIC_DATA_SYSTEMS.md` — every data system mapped to provenance, springs, collaborators
 2. `thesis/SCIENTIFIC_CHALLENGES.md` — why Synapse/DREAM, not Kaggle/LeetCode
@@ -117,6 +122,14 @@ gen5/
 ---
 
 ## Status — May 2026
+
+### Sovereignty Infrastructure (Wave 60)
+
+The golgiBody Phase A deployment (VPS Forgejo, WaterFall sync, sovereign
+DNS) provides the infrastructure gen5 needs for external collaboration.
+Collaborators will sync through the same WaterFall pipeline as internal
+gates, with scoped gate profiles. See
+`foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md`.
 
 ### Products Across the Generational Arc
 
