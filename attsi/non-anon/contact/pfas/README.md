@@ -37,6 +37,7 @@
 - Kevin was laid off Oct 2025. This is reaching back to former colleagues.
 - wetSpring Track 2 has 40/40 checks reproducing PFAS detection papers
 - Project blueFish is the intended product: sovereign PFAS data pipeline replacing Chromeleon and vendor-locked analytical software
+- blueFish now seeded as a gen4 sporeGarden product (`gardens/blueFish/`, product doc: `whitePaper/gen4/products/BLUEFISH.md`)
 - Email drafted May 2026 (`email_spore_may2026.md`) — pseudoSpore attached as example
 - **New lab manager**: Dr. Aswin Kumar Ilango (started recently, replacing Jones as on-site lead)
 
@@ -67,10 +68,50 @@ Jones replied same day. Now **Professor Emeritus** (retired). Provided three tec
 - **The gap**: No open-source tool gives acceptable failure rates AND graphical evaluation of feature detection/measurement quality
 - **blueFish opportunity**: Fill exactly this gap — low failure rate + visual QC + sovereign + validated
 
+## Jones Second Reply — May 28, 2026
+
+Jones replied again after Kevin's follow-up. Key new intel:
+
+### MANA SODA Group (Metabolomics Cross-Validation)
+- URL: https://sites.google.com/metabolomicsna.org/soda/home
+- Provides common datasets + multiple processing software for comparison
+- Purpose: data quality review via cross-tool comparison
+- Jones: "most people don't want to go to that much effort"
+- **blueFish target**: Use MANA SODA datasets as benchmark validation suite
+
+### MRM (Multiple Reaction Monitoring) Architecture
+- Most PFAS analyses are **targeted MRM** (not untargeted)
+- Single sample → **~100 chromatograms** (2 per analyte + internal standards)
+- Each chromatogram: 1+ peaks integrated and reported
+- Current workflow: Ehab exports into "grand consolidated spreadsheet"
+- Setup: "quite tedious compared to untargeted analyses"
+- **blueFish target**: Template-driven MRM batch processing, automated peak integration
+
+### Consulting Status
+- Jones: "I would be glad to review"
+- Caveat: "limited access to data sets and proprietary software these days"
+- Best use: architecture review, QC compliance validation, domain sanity checks
+- Not a data source (retired, no lab access)
+
+---
+
 ## Strategy
 
-Jones is now emeritus and willing to engage. Ask for ongoing consulting/review. He knows where the bodies are buried (QC compliance, LOQ reporting, tool failure rates). His expertise validates blueFish design decisions.
+Jones is now emeritus and actively willing to consult/review. He knows where
+the bodies are buried (QC compliance, LOQ reporting, tool failure rates). His
+expertise validates blueFish design decisions. Two replies in 24h — engagement
+is genuine.
 
-Sima and Cheryl are the on-campus contacts. Dr. Aswin Kumar Ilango is the new lab manager — potential new contact.
+**Critical path for blueFish:**
+1. EPA 1633A → parse for exact ion abundance ratio tolerances
+2. NIST reference data → validation baseline for untargeted
+3. MANA SODA → cross-validation benchmark datasets
+4. MRM batch architecture → template-driven, 100 chromatograms/sample
+5. Visual QC → petalTongue integration for peak evaluation
+
+Sima and Cheryl are the on-campus contacts. Dr. Aswin Kumar Ilango is the new
+lab manager — potential data source contact.
+
+Full domain expertise extraction: `gardens/blueFish/domain/JONES_DOMAIN_EXPERTISE_MAY2026.md`
 
 Connection to Chuna: Jones is in California, Chuna is heading to LANL. Both are remote collaborators in different domains.

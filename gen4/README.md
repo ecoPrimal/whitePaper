@@ -140,10 +140,10 @@ through microbiology, immunology, soil science, and plasma physics. The
 provenance trio validates game sessions, biological samples, and medical
 records with the same machinery. barraCuda powers lattice QCD, protein
 structure prediction, and drug screening. The foundation is one
-interconnected graph. Products (helixVision, blueFish, esotericWebb)
-are different **focuses** on this graph — each pulling specific threads
-for specific audiences. projectNUCLEUS handles the primal deployment
-layer; foundations handle the science lineage.
+interconnected graph. Products (helixVision, blueFish, esotericWebb,
+initioChem) are different **focuses** on this graph — each pulling
+specific threads for specific audiences. projectNUCLEUS handles the
+primal deployment layer; foundations handle the science lineage.
 
 The first expression document targets the ABG whole-cell modeling
 lineage (Karr 2012 → Thornburg 2026) — 7 papers, 14 years, 5 research

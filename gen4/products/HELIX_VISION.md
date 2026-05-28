@@ -99,8 +99,13 @@ GROMACS 2026.0 (CUDA, PLUMED, Colvars) is the industry control/parity anchor.
 coralForge predicts structure (AlphaFold2/3)
   → hotSpring validates via MD (bonded FF + metadynamics on sovereign GPU)
   → GROMACS confirms hotSpring MD is correct (industry parity)
-  → petalTongue renders FEL + 3D structure
+  → initioChem visualizes FEL + 3D structure interactively (petalTongue Phase 4)
 ```
+
+**Note**: The visualization step is now formalized as initioChem — a sibling
+sporeGarden product (`gardens/initioChem/`) that makes hotSpring's validated
+FEL data interactive. helixVision and initioChem complement each other:
+helixVision discovers what proteins exist, initioChem explores how they move.
 
 ---
 

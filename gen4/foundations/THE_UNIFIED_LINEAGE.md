@@ -468,6 +468,22 @@ by Jones' 40/40 wetSpring Track 2 checks. Its format conversion is
 validated by every spring that ingests external data. The foundation makes
 blueFish's outputs trustworthy.
 
+### initioChem — Computational Chemistry Focus
+
+**Threads pulled**: 2 (Plasma/QCD — energy landscape methods via hotSpring),
+7 (Anderson framework — enzyme active site as bounded 3D micro-niche),
+3 (ABG Project 3 — Alistaire's CAZyme docking validation)
+
+**What it surfaces**: Interactive 3D molecular FEL explorer — rotate the
+Cremer-Pople sphere, navigate energy basins, compare free vs enzyme-bound
+conformations, launch new simulations, share pseudoSpores.
+
+**Foundation dependency**: hotSpring's 500+ checks (229 experiments) validate
+the MD engine. pseudoSpore v1.7.0 (190/190 checks, Derivation Anchoring)
+proves the science is correct. Paper 50 GPU shader (11-14× acceleration)
+enables real-time FES reconstruction. The foundation makes initioChem's
+energy landscapes trustworthy.
+
 ### esotericWebb — Creative Focus
 
 **Threads pulled**: 9 (gaming/creative / ludoSpring), 10 (provenance

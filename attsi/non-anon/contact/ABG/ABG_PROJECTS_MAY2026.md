@@ -97,7 +97,8 @@ OneMoreChemist flagged proteomics interest — phospho-site relative abundances 
 
 **Lead**: Alistaire
 **Timeline**: Ongoing, reviewing methods
-**Status**: **pseudoSpore v1.6.1 delivered May 27** — 6 modules, 71 checks PASS, FEL side validated. Awaiting Alistaire review before AutoDock correlation phase.
+**Status**: **pseudoSpore v1.7.0 delivered May 28** — 8 modules, 190 checks PASS, GuideStone-grade. Derivation Anchoring v1.0 (zero magic numbers). Automated artifact detection (cross-landscape, binding distance, KS test). Awaiting Alistaire review before AutoDock correlation phase.
+**Product**: **initioChem** (`gardens/initioChem/`, `git@github.com:sporeGarden/initioChem.git`) — interactive 3D FEL explorer being seeded as the user-facing tool for this work.
 
 ### Summary
 
@@ -139,6 +140,7 @@ Validate whether molecular docking (AutoDock Vina) can substitute for resource-i
 |---------|------|-------|--------|--------|
 | v0.6.0 | May 24 | 41 | ~20 | Prototype. Atom index errors + lyxose contamination found by Alistaire |
 | v1.6.1 | May 27 | 76 | 71 PASS | Pipeline-derived. All v0.6.0 issues fixed + machine-verified. Self-verifying |
+| v1.7.0 | May 28 | 190+ | 190 PASS | GuideStone-grade. 16 FEL landscapes. Derivation Anchoring. Automated artifact detection. Phase 0 self-consistency. Zero magic numbers. |
 
 ### Notes
 
