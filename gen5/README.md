@@ -1,8 +1,8 @@
 # gen5/ — External Science Production and the Spore Cycle
 
-**Status**: Active — skeleton established, first collaborator engaged
+**Status**: Active — skeleton established, first collaborator engaged, coordination patterns documented
 **Lineage**: gen1 → gen2 → gen3 → gen4 → **gen5**
-**Date**: May 28, 2026
+**Date**: May 31, 2026 (Wave 63+)
 
 ---
 
@@ -68,7 +68,8 @@ gen5/
 │   └── EXTERNAL_DEMAND_EVOLUTION.md   ← How collaborator demand drives ecosystem evolution
 ├── foundations/
 │   ├── PUBLIC_DATA_SYSTEMS.md         ← Catalog of public data systems with provenance mapping
-│   └── EXTERNAL_SOVEREIGNTY_PATTERN.md ← How sovereignty enables external collaboration via WaterFall
+│   ├── EXTERNAL_SOVEREIGNTY_PATTERN.md ← How sovereignty enables external collaboration via WaterFall
+│   └── CONTEXT_BRAID_PATTERN.md       ← Developer state as woven provenance — sweetGrass external analog
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -86,8 +87,14 @@ gen5/
 │   ├── MURILLO_STUDENTS.md            ← Student thesis spores (potential)
 │   ├── CHUNA_QCD.md                   ← Lattice QCD workbench (potential)
 │   └── EAVES_REVALIDATION.md          ← Dissertation reproducibility (potential)
-└── economics/
-    └── README.md                      ← How gen5 feeds the flywheel
+├── economics/
+│   └── README.md                      ← How gen5 feeds the flywheel
+└── atlas/
+    ├── 00_THE_MAP.md                  ← Memory Palace: full landscape overview, expedition start
+    ├── 01_THE_MOUNTAIN.md             ← Primal Mountain — 13 primals as mass
+    ├── 02_THE_RIVER.md                ← River Delta — 8 springs as energy
+    ├── 03_THE_GARDEN.md               ← sporeGarden — products as information
+    └── 04_THE_WATER.md                ← waterFall — the sync cycle that connects everything
 ```
 
 ---
@@ -111,7 +118,13 @@ gen5/
 
 ### For understanding sovereignty and external collaboration
 1. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
-2. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure
+2. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
+3. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure
+
+### For navigating the ecosystem landscape (Memory Palace)
+1. `atlas/00_THE_MAP.md` — the full landscape, Paper 23 bridge, expedition start
+2. `atlas/01_THE_MOUNTAIN.md` → `atlas/02_THE_RIVER.md` → `atlas/03_THE_GARDEN.md` — mountain to sea
+3. `atlas/04_THE_WATER.md` — the cycle that connects everything
 
 ### For understanding the public data and challenge landscape
 1. `foundations/PUBLIC_DATA_SYSTEMS.md` — every data system mapped to provenance, springs, collaborators
@@ -123,13 +136,16 @@ gen5/
 
 ## Status — May 2026
 
-### Sovereignty Infrastructure (Wave 60)
+### Sovereignty Infrastructure (Wave 63+)
 
-The golgiBody Phase A deployment (VPS Forgejo, WaterFall sync, sovereign
-DNS) provides the infrastructure gen5 needs for external collaboration.
+The K-Derm diderm envelope (3-node VPS: golgiBody/peptidoglycan/golgiBody-ext)
+provides the infrastructure gen5 needs for external collaboration.
 Collaborators will sync through the same WaterFall pipeline as internal
-gates, with scoped gate profiles. See
-`foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md`.
+gates, with scoped gate profiles. impulsePotential and context braids
+(Wave 63+) add structured coordination layers for cross-gate and
+cross-organization communication. See
+`foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` and
+`foundations/CONTEXT_BRAID_PATTERN.md`.
 
 ### Products Across the Generational Arc
 

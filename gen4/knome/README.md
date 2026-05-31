@@ -61,6 +61,13 @@ Start here, in order:
    development. Lightly cleaned, organized by theme. The gardener's
    shorthand — terse, directional, repeated with variation.
 
+7. **[K_NOME_COORDINATION_COMPLEMENT.md](./K_NOME_COORDINATION_COMPLEMENT.md)**
+   — The horizontal dimension: how K-NOME extends from human-AI
+   mentoring (vertical) to gate-mesh coordination (horizontal) via
+   impulsePotential and context braids. Maps the manual copy-paste
+   blurb pattern to structured, discoverable, version-controlled
+   coordination artifacts. Wave 63+.
+
 ---
 
 ## Relationship to gen3
@@ -158,3 +165,4 @@ THE_CONVERSATION_CONSTRAINT.md, "Reading the Vibe."
 
 *March 24, 2026 — first gen4 knome papers*
 *May 9, 2026 — THE_GEOLOGICAL_CONSTRAINT: K-NOME at ecosystem scale*
+*May 31, 2026 — K_NOME_COORDINATION_COMPLEMENT: gate-mesh coordination via impulsePotential + context braids*
