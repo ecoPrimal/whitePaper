@@ -2,7 +2,7 @@
 
 **Status**: Active — skeleton established, first collaborator engaged, coordination patterns documented
 **Lineage**: gen1 → gen2 → gen3 → gen4 → **gen5**
-**Date**: May 31, 2026 (Wave 63+)
+**Date**: May 31, 2026 (Wave 65)
 
 ---
 
@@ -69,7 +69,11 @@ gen5/
 ├── foundations/
 │   ├── PUBLIC_DATA_SYSTEMS.md         ← Catalog of public data systems with provenance mapping
 │   ├── EXTERNAL_SOVEREIGNTY_PATTERN.md ← How sovereignty enables external collaboration via WaterFall
-│   └── CONTEXT_BRAID_PATTERN.md       ← Developer state as woven provenance — sweetGrass external analog
+│   ├── CONTEXT_BRAID_PATTERN.md       ← Developer state as woven provenance — sweetGrass external analog
+│   ├── KDERM_DIDERM_ENVELOPE.md       ← Multi-membrane VPS topology (gen4 reconciliation → gen5 deployment)
+│   ├── TRANSPORT_EVOLUTION.md         ← Nanowire → quorum sensing transport progression
+│   ├── IMPULSE_POTENTIAL_COORDINATION.md ← Neural API triad integration (qS/wF/rP + provenance trio)
+│   └── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -117,9 +121,13 @@ gen5/
 2. Any specific `*_JOURNEY.md` for a product's theory-to-reality arc
 
 ### For understanding sovereignty and external collaboration
-1. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
-2. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
-3. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure
+1. `foundations/SOVEREIGNTY_SHADOW_EVOLUTION.md` — S1-S4 tracks, membrane-shadow Rust coverage
+2. `foundations/KDERM_DIDERM_ENVELOPE.md` — multi-membrane VPS topology
+3. `foundations/TRANSPORT_EVOLUTION.md` — nanowire → quorum sensing progression
+4. `foundations/IMPULSE_POTENTIAL_COORDINATION.md` — Neural API triad (qS/wF/rP + provenance trio)
+5. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
+6. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
+7. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
 
 ### For navigating the ecosystem landscape (Memory Palace)
 1. `atlas/00_THE_MAP.md` — the full landscape, Paper 23 bridge, expedition start
@@ -136,16 +144,18 @@ gen5/
 
 ## Status — May 2026
 
-### Sovereignty Infrastructure (Wave 63+)
+### Sovereignty Infrastructure (Wave 65)
 
 The K-Derm diderm envelope (3-node VPS: golgiBody/peptidoglycan/golgiBody-ext)
 provides the infrastructure gen5 needs for external collaboration.
 Collaborators will sync through the same WaterFall pipeline as internal
 gates, with scoped gate profiles. impulsePotential and context braids
 (Wave 63+) add structured coordination layers for cross-gate and
-cross-organization communication. See
-`foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` and
-`foundations/CONTEXT_BRAID_PATTERN.md`.
+cross-organization communication. `membrane-shadow` is now a 12-module
+Rust crate replacing all bash control scripts — `plasmid.fetch` and
+`temporal.cascade` are fully Rust. S1-S3 sovereignty shadows are live,
+DNS (ns1+ns2) is operational, and 5 gates are in the mesh. See the
+`foundations/` subdirectory for detailed coverage of each system.
 
 ### Products Across the Generational Arc
 
