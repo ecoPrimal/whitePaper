@@ -1,9 +1,9 @@
-# 🏗️ biomeOS Implementation Guide
+# biomeOS Implementation Guide
 
 **What biomeOS needs to implement for Neural API**
 
-**Date**: January 4, 2026  
-**Status**: Implementation Specification
+**Date**: January 4, 2026 (revised May 14, 2026 — v3.50+, Phase 1-2 COMPLETE)
+**Status**: Implementation Specification — Phases 1-2 COMPLETE, Phase 3 PARTIAL
 
 ---
 
@@ -645,5 +645,52 @@ After biomeOS implements these components:
 
 ---
 
-🏗️ **biomeOS: From orchestrator to adaptive learning engine!**
+---
+
+## May 2026 Addendum: Current State (biomeOS v3.50)
+
+Much of the Phase 1 and Phase 2 work described above is now **COMPLETE**.
+The actual implementation differs from the January 2026 pseudocode in
+important ways:
+
+### What's implemented (v3.50)
+
+- **7,924 tests** — comprehensive coverage
+- **25 workspace crates** including `biomeos-graph`, `biomeos-atomic-deploy`,
+  `neural-api-client`, `neural-api-client-sync`
+- **320+ capability translations** across 27 domains
+- **GraphExecutor** in `biomeos-atomic-deploy` — Sequential, Parallel,
+  Continuous (ContinuousExecutor with TickClock, feedback edges, session lifecycle)
+- **MetricsCollector** — redb-backed (persistent) + in-memory
+- **NeuralRouter** — capability registry + tarpc escalation with JSON-RPC fallback
+- **Token forwarding** — `_bearer_token` propagation through all capability paths (v3.50)
+- **MethodGate** — JH-0/JH-2 resource envelope + `auth.check` compatibility
+- **`composition.reload`** — hot reload aligned with primalSpring `CompositionContext::reload()`
+- **55+ deploy/workflow graphs** in biomeOS `graphs/`
+
+### primalSpring integration (NeuralBridge)
+
+`ecoPrimal/src/ipc/neural_bridge.rs` provides the client bridge:
+
+- `NeuralBridge::discover()` — tiered socket discovery (env → XDG → /tmp)
+- `health_check()` — liveness probe with fallback chain
+- `capability_call(capability, operation, args)` — semantic routing
+- `graph_deploy(graph)` — execute a graph via the neural API
+- `graph_status(id)`, `graph_rollback(id)` — lifecycle management
+- `topology_rescan()` — force re-discovery of late-registering primals
+- `discover_capability(cap)`, `discover_domain(domain)` — query routing
+
+### What remains
+
+- **PathwayLearner** — code exists but not wired into execution path
+- **ConditionalDag** — parsed but executes as Sequential
+- **Pipeline streaming** — parsed but executes as Sequential
+- **Continuous via JSON-RPC** — only runs via `biomeos continuous` CLI
+- **Unified graph schema** — `[[nodes]]` vs `[[graph.nodes]]` split
+- **Signal dispatch** — NeuralRouter does not yet recognize atomic tier names
+  (`tower`, `node`, `nest`, `nucleus`) as signal triggers
+
+---
+
+*"biomeOS: From orchestrator to adaptive learning engine — Phase 1-2 DONE, Phase 3 wiring next."*
 

@@ -72,7 +72,8 @@ gen5/
 │   ├── CONTEXT_BRAID_PATTERN.md       ← Developer state as woven provenance — sweetGrass external analog
 │   ├── KDERM_DIDERM_ENVELOPE.md       ← Multi-membrane VPS topology (gen4 reconciliation → gen5 deployment)
 │   ├── TRANSPORT_EVOLUTION.md         ← Nanowire → quorum sensing transport progression
-│   ├── IMPULSE_POTENTIAL_COORDINATION.md ← Neural API triad integration (qS/wF/rP + provenance trio)
+│   ├── FUNCTIONAL_PATTERN_CONVERGENCE.md ← The Two Threes: coordination triad + provenance trio (canonical vocabulary)
+│   ├── IMPULSE_POTENTIAL_COORDINATION.md ← Triad integration (qS/wF/rP + SYNC impulses + divergence policy)
 │   └── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
@@ -124,7 +125,8 @@ gen5/
 1. `foundations/SOVEREIGNTY_SHADOW_EVOLUTION.md` — S1-S4 tracks, membrane-shadow Rust coverage
 2. `foundations/KDERM_DIDERM_ENVELOPE.md` — multi-membrane VPS topology
 3. `foundations/TRANSPORT_EVOLUTION.md` — nanowire → quorum sensing progression
-4. `foundations/IMPULSE_POTENTIAL_COORDINATION.md` — Neural API triad (qS/wF/rP + provenance trio)
+4. `foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md` — The Two Threes (canonical vocabulary)
+5. `foundations/IMPULSE_POTENTIAL_COORDINATION.md` — Triad integration (qS/wF/rP + SYNC impulses)
 5. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
 6. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
 7. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)

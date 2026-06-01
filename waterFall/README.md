@@ -2,17 +2,19 @@
 
 **Asynchronous multi-membrane reconciliation through temporal awareness**
 
-**Updated**: May 31, 2026
-**Wave**: 63+
+**Updated**: June 1, 2026
+**Wave**: 66+
+**Vocabulary**: `gen5/foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md`
 
 ---
 
 ## White Paper Series
 
 waterFall is not a primal. It is a coordination pattern — a set of TOML
-graphs that biomeOS executes over existing primals. Multi-repo alignment,
-freshness tracking, and cross-gate federation all use the same temporal
-primitives: fetch, measure, converge, propagate.
+composition graphs that biomeOS dispatches over existing primals. Multi-repo
+alignment, freshness tracking, divergence resolution, and cross-gate
+federation all use the same temporal primitives: fetch, measure, converge,
+propagate.
 
 waterFall completes the Neural API coordination triad:
 
@@ -37,13 +39,14 @@ waterFall completes the Neural API coordination triad:
 
 **Implementation**
 
-6. **[05_IMPLEMENTATION.md](./05_IMPLEMENTATION.md)** — From bash to Neural API
+6. **[05_IMPLEMENTATION.md](./05_IMPLEMENTATION.md)** — membrane temporal.cascade (Rust production)
 7. **[06_AIRGAP_FEDERATION.md](./06_AIRGAP_FEDERATION.md)** — Sneakernet, depot, USB patterns
 8. **[07_ROADMAP.md](./07_ROADMAP.md)** — Glacial gate path
 
 **Extensions (Wave 63+)**
 
 9. **[08_IMPULSE_POTENTIAL.md](./08_IMPULSE_POTENTIAL.md)** — The action potential layer: inter-gate coordination riding on waterFall
+10. **[09_AGENTIC_SYNC.md](./09_AGENTIC_SYNC.md)** — Provenance-aware divergence resolution (triad + trio composition)
 
 ---
 
@@ -98,7 +101,7 @@ See [02_ARCHITECTURE.md](./02_ARCHITECTURE.md) for the full decomposition.
 
 ## The Wave Model
 
-There is no single sync event. Waves pass through the ecosystem:
+There is no single sync moment. Waves pass through the ecosystem:
 
 ```
 Wave N    ironGate rP: team pushes evolution to GitHub
@@ -161,23 +164,26 @@ gates, and the Neural API orchestrates the primals that do the work.
 
 ---
 
-## Implementation Status (May 31, 2026)
+## Implementation Status (June 1, 2026)
 
 | Component | Status |
 |-----------|--------|
-| `cascade-pull.sh` manifest-driven | Production — gate profiles, `--source auto/temporal`, `--parallel N`, `--shallow`, `--clone-missing` |
-| `--source temporal` | **Production** — Rust implementation in membrane-shadow, bash fallback |
-| `ecosystem_manifest.toml` gate profiles | Production — 39 repos, 7 gate profiles (flockGate added Wave 63) |
+| `membrane temporal.cascade` | **Production** — Rust engine, manifest-driven, policy dispatch |
+| Temporal sync (fetch all, measure, pull leader, push followers) | **Production** |
+| Divergence policy engine (flag/merge-ff/merge-rebase/impulse-only) | **Production** — per-repo in manifest |
+| SYNC impulse posting (`post_sync_diverge`) | **Production** — auto-fires on divergence |
+| Remote exclusion (`exclude_remotes`) | **Production** — per-repo in manifest |
+| `ecosystem_manifest.toml` gate profiles | Production — 39 repos, 7 gate profiles |
 | `.gate` identity file | Production — replaces hostname heuristic |
-| impulsePotential | **Production** — `impulse.post/ack/archive`, `potential.sense/check` |
+| impulsePotential (FRAGO/STATUS/AAR/RELEASE/SYNC) | **Production** — `impulse.post/ack/archive`, `potential.sense/check` |
 | Context braids | **Production** — `context.weave/sense/clear` |
 | `cascade-pull.sh` → `potential.sense` | **Production** — auto-triggers after sync |
 | NeuralBridge (membrane-shadow) | **Implemented** — feature-gated try-primal-first routing |
 | bearDog impulse signing | **Implemented** — optional Ed25519 via UDS |
 | songbird impulse relay | **Implemented** — optional mesh.publish via UDS |
-| Graduated graphs | **Defined** — `impulse_post_signed.toml`, `context_weave_anchored.toml` |
+| Composition graphs (32 defined) | **Defined** — including `sync_diverge`, `sync_resolve`, `sync_resolve_crossgate` |
 | Freshness mesh (songbird) | Not started |
-| Cross-gate temporal coordination | Spec only (`CROSS_GATE_GRAPH_EXECUTOR.md`) |
+| Cross-gate temporal coordination | Spec + composition graphs defined |
 | Airgap/USB remote support | Conceptual — protocol-agnostic by design |
 
 ---

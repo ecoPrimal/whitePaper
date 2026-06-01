@@ -1,341 +1,262 @@
-# Implementation Path
+# Implementation — membrane temporal.cascade
 
-**From bash to Neural API**
+**From bash to Rust to agentic composition**
 
-**Date**: May 29, 2026
-**Status**: Whitepaper — Implementation Guide
+**Date**: June 1, 2026
+**Status**: Whitepaper — Wave 66 production reality
+**See also**: `FUNCTIONAL_PATTERN_CONVERGENCE.md` — canonical triad/trio vocabulary
 
 ---
 
-## Current State: cascade-pull.sh
+## Current State: Rust Production (Wave 66)
 
-The current implementation is a bash script at
-`infra/wateringHole/cascade-pull.sh`. It provides:
+The waterFall implementation has evolved from `cascade-pull.sh` (bash, spatial)
+to `membrane temporal.cascade` (Rust, temporal, policy-driven). The Rust
+implementation in `cellMembrane/crates/membrane-shadow/src/temporal.rs` is the
+production engine.
 
 | Feature | Status |
 |---------|--------|
 | Manifest-driven repo list | Production |
 | Gate profiles (`--gate eastGate`) | Production |
 | `.gate` identity file | Production |
-| `--source auto` (forgejo-first) | Production — **spatially aware, temporally naive** |
-| `--source forgejo` / `--source origin` | Production |
-| `--check` (parity check) | Production |
-| `--parallel N` (concurrent pulls) | Production |
+| Temporal sync (fetch all, measure, pull leader, push followers) | **Production** |
+| `--publish-freshness` | **Production** — writes `freshness.toml` |
+| Remote exclusion (`exclude_remotes` per repo) | **Production** — manifest-driven |
+| Divergence policy engine (flag/merge-ff/merge-rebase/impulse-only) | **Production** |
+| SYNC impulse posting on divergence | **Production** — `post_sync_diverge` |
+| `--parallel N` (concurrent repos) | Production |
 | `--clone-missing` | Production |
 | `--dry-run` | Production |
-| `--publish-freshness` | **Not implemented** |
-| `--source temporal` | **Not implemented** |
+| impulsePotential auto-trigger (`potential.sense` after sync) | Production |
+| NeuralBridge try-primal-first routing | Implemented (feature-gated) |
+| bearDog impulse signing | Implemented (optional Ed25519 via UDS) |
+| songbird impulse relay | Implemented (optional mesh.publish via UDS) |
+| Composition graph dispatch via biomeOS | Defined — `sync_diverge.toml`, `sync_resolve.toml` |
 
-### What `--source auto` Does Today
+---
+
+## The `membrane temporal` Command Surface
+
+### temporal.cascade — Full ecosystem sync
 
 ```bash
-if git remote get-url forgejo >/dev/null 2>&1; then
-    pull_source="forgejo"
-else
-    pull_source="origin"
-fi
-git pull "$pull_source" main --ff-only
+membrane temporal.cascade --gate eastGate --publish-freshness
 ```
 
-This is spatial: "use forgejo if configured, else origin." It does NOT:
-- Fetch all remotes to compare
-- Measure which remote is ahead
-- Push to followers after pulling
+The cascade engine:
 
----
+1. Loads the ecosystem manifest and resolves the gate profile (which repos
+   this gate manages)
+2. For each repo, reads `divergence_policy` and `exclude_remotes` from
+   the manifest
+3. Fetches all remotes (excluding those in `exclude_remotes`)
+4. Builds the temporal position matrix (ahead/behind per remote)
+5. Classifies: converge (one leader), diverge (multiple leaders), parity
+6. Applies the repo's `divergence_policy`:
+   - `flag`: report divergence, take no action
+   - `merge-ff`: fast-forward if one side is a strict ancestor
+   - `merge-rebase`: rebase on leader, fall back to flag on conflict
+   - `impulse-only`: fire SYNC impulse via `post_sync_diverge`, no merge
+   - `agentic`: future — delegate to `sync_resolve.toml` composition graph
+7. Pushes to followers (any remote behind local HEAD after resolution)
+8. If `diverge_impulse = true` in `[sync]` and divergence was detected,
+   fires a SYNC impulse to `infra/wateringHole/impulses/active/`
+9. Writes `freshness.toml` if `--publish-freshness` is set
+10. Auto-triggers `potential.sense` to show pending impulses
 
-## Phase 1: `--source temporal` in cascade-pull.sh
-
-**Effort**: Small — bash changes to existing script
-**Wave target**: 61
-
-### Algorithm
+### temporal.sync — Single repo sync
 
 ```bash
-temporal_pull_one_repo() {
-    local repo_path="$1"
-    cd "$ECOPRIMALS_ROOT/$repo_path"
-
-    # 1. Fetch all remotes
-    git fetch --all --quiet
-
-    # 2. Build temporal position matrix
-    local leader=""
-    local leader_behind=0
-    local diverged=false
-
-    for remote in $(git remote); do
-        ref="${remote}/main"
-        git rev-parse --verify "$ref" >/dev/null 2>&1 || continue
-
-        ahead=$(git rev-list --count "${ref}..HEAD")
-        behind=$(git rev-list --count "HEAD..${ref}")
-
-        if [[ $behind -gt $leader_behind ]]; then
-            leader="$remote"
-            leader_behind=$behind
-        fi
-
-        if [[ $ahead -gt 0 && $behind -gt 0 ]]; then
-            diverged=true
-        fi
-    done
-
-    # 3. Classify and act
-    if $diverged; then
-        echo "DIVERGE $repo_path"
-        return 1
-    elif [[ -n "$leader" && $leader_behind -gt 0 ]]; then
-        git pull "$leader" main --ff-only
-        # Push to followers
-        for remote in $(git remote); do
-            [[ "$remote" == "$leader" ]] && continue
-            behind=$(git rev-list --count "HEAD..${remote}/main" 2>/dev/null || echo 0)
-            if [[ $behind -lt 0 ]] || ! git rev-list --count "${remote}/main..HEAD" >/dev/null 2>&1; then
-                continue
-            fi
-            local remote_behind=$(git rev-list --count "${remote}/main..HEAD")
-            if [[ $remote_behind -gt 0 ]]; then
-                git push "$remote" main 2>/dev/null && echo "  pushed → $remote"
-            fi
-        done
-    else
-        echo "PARITY  $repo_path"
-    fi
-}
+membrane temporal.sync primals/bearDog
 ```
 
-### Output Format
+Same temporal logic as cascade, applied to a single repository.
 
-```
-=== WaterFall Temporal Sync ===
-Manifest: v2.0.0 wave 60 (38 repos)
-Gate:    eastGate
-Source:  temporal
-
-  primals/songBird      CONVERGE origin→local→forgejo (+4)
-  primals/toadStool      CONVERGE origin→local→forgejo (+3)
-  primals/bearDog        PARITY
-  primals/rhizoCrypt     CONVERGE origin→local→forgejo (+3)
-  gardens/helixVision    DIVERGE (origin +2 / forgejo +1)
-  ...
-
-=== Summary ===
-Parity:    30 / 38
-Converged:  7 / 38
-Diverged:   1 / 38
-```
-
-### New Flags
-
-```
---source temporal     Fetch all, measure, pull leader, push followers
---publish-freshness   Write temporal freshness.toml after sync
---divergence-report   Produce detailed divergence report for flagged repos
-```
-
----
-
-## Phase 2: Freshness Mesh
-
-**Effort**: Medium — songbird + `freshness.toml` evolution
-**Wave target**: 62–63
-**Depends on**: songbird `mesh.publish` upstream implementation
-
-### Freshness Publishing
-
-After a `--source temporal` sync, `cascade-pull.sh` writes an extended
-`freshness.toml` and optionally publishes it to the songbird mesh:
-
-```toml
-[wave]
-id = 61
-gate = "eastGate"
-measured = "2026-05-29T16:04:00Z"
-source = "temporal"
-
-[summary]
-total = 38
-parity = 30
-converged = 7
-diverged = 1
-
-[repos."primals/songBird"]
-local = "a58a676c"
-origin = "a58a676c"
-forgejo = "a58a676c"
-pattern = "parity"
-
-[repos."gardens/helixVision"]
-local = "b3c4d5e6"
-origin = "f7g8h9i0"
-forgejo = "j1k2l3m4"
-pattern = "diverge"
-origin_unique = 2
-forgejo_unique = 1
-```
-
-### Mesh Broadcast
-
-songbird's `mesh.publish` broadcasts the freshness snapshot to all
-connected gates. Receiving gates can use it as a hint to skip
-unnecessary fetches.
-
----
-
-## Phase 3: Neural API Signal Integration
-
-**Effort**: Large — requires upstream primal methods
-**Wave target**: 63–65
-**Depends on**: nestGate `content.sync` with temporal source, songbird
-`mesh.discover_remotes`, biomeOS cross-gate executor
-
-### ecosystem.pull Graph Evolution
-
-Current `ecosystem_pull.toml`:
-
-```toml
-[[nodes]]
-primal = "biomeOS"
-capability = "manifest.gate_profile"
-input = { gate = "${GATE_NAME}" }
-
-[[nodes]]
-primal = "songbird"
-capability = "mesh.discover_remotes"
-input = { repos = "${gate_repos}" }
-
-[[nodes]]
-primal = "nestGate"
-capability = "content.sync"
-input = { repos = "${gate_repos}", source = "auto" }
-coordination = "parallel"
-
-[[nodes]]
-primal = "songbird"
-capability = "mesh.publish"
-input = { type = "freshness", data = "${sync_result}" }
-```
-
-Temporal evolution:
-
-```toml
-[[nodes]]
-primal = "nestGate"
-capability = "content.sync"
-input = {
-    repos = "${gate_repos}",
-    source = "temporal",            # NEW: temporal source selection
-    push_followers = true,          # NEW: push to behind remotes
-    divergence_policy = "flag"      # NEW: flag, don't merge
-}
-coordination = "parallel"
-```
-
-The `content.sync` method on nestGate would need to implement the
-temporal position matrix internally, replacing the bash logic with
-native Rust.
-
-### signal.dispatch Replacement
-
-The end state: `cascade-pull.sh` becomes a thin wrapper around:
+### temporal.check — Read-only parity check
 
 ```bash
-biomeos signal dispatch ecosystem.pull \
-    --gate "$GATE_NAME" \
-    --source temporal
+membrane temporal.check
 ```
 
-biomeOS executes the ecosystem.pull graph, which calls nestGate's
-temporal sync, songbird's mesh publish, and reports results.
+Fetches all remotes, measures temporal positions, reports without modifying
+state. Pure qS SENSE — no side effects.
 
 ---
 
-## Phase 4: Cross-Gate Temporal Coordination
+## Manifest Configuration
 
-**Effort**: Large — requires cross-gate graph executor Phase B+
-**Wave target**: 65+
-**Depends on**: biomeOS `graph.execute` with `gate` hints
+The ecosystem manifest (`wateringHole/ecosystem_manifest.toml`) drives the
+cascade engine. Wave 66 added three agentic sync fields:
 
-### Fleet Freshness Dashboard
-
-With cross-gate execution, a coordinator gate can query freshness
-from all gates:
+### Sync-level configuration
 
 ```toml
-[[nodes]]
-primal = "songbird"
-capability = "mesh.discover_remotes"
-gate = "any"
-relay = "songbird_turn"
-
-[[nodes]]
-primal = "biomeOS"
-capability = "ecosystem.check"
-gate = "any"
-fan_out = true
+[sync]
+diverge_impulse = true     # fire SYNC impulses on detected divergence
 ```
 
-This produces a fleet-wide freshness view without requiring all gates
-to independently publish.
+### Per-repo configuration
 
-### Adaptive Sync Cadence
+```toml
+[repos.plasmidBin]
+divergence_policy = "merge-ff"    # safe fast-forward for binary artifacts
 
-Based on fleet freshness data, gates can adjust their wave period:
+[repos.sporePrint]
+divergence_policy = "impulse-only"  # content repo — human/agent reviews
 
-| Gate drift | Action |
-|-----------|--------|
-| 0 repos behind | Lengthen wave period (less work) |
-| 1–5 repos behind | Normal wave period |
-| 5+ repos behind | Shorten wave period (catch up faster) |
-| Divergences detected | Alert + manual wave trigger |
+[repos.rustChip]
+exclude_remotes = ["upstream"]      # ignore unrelated upstream history
+```
 
 ---
 
-## Migration Path
+## Evolution from Bash
 
-| Phase | Tool | Source | Gate awareness | Mesh |
-|-------|------|--------|:-------------:|:----:|
-| Current | `cascade-pull.sh` | `--source auto` (spatial) | `.gate` file | No |
-| Phase 1 | `cascade-pull.sh` | `--source temporal` | `.gate` file | No |
-| Phase 2 | `cascade-pull.sh` | temporal + freshness | `.gate` file | Publish only |
-| Phase 3 | `signal.dispatch` | temporal via nestGate | biomeOS profile | Full mesh |
-| Phase 4 | cross-gate graph | temporal + fleet-wide | cross-gate discovery | Fleet mesh |
+The implementation evolved through three phases:
 
-Each phase is independently valuable. Phase 1 alone solves the
-"stale Forgejo" problem we hit on May 29. Phases 2+ add progressive
-intelligence.
+### Phase 1: cascade-pull.sh (Wave 58–62)
+
+Bash script with `--source auto` (spatial — forgejo-first, origin-fallback).
+Reliable but temporally naive: pulled from the closest reachable remote
+regardless of which remote was actually ahead.
+
+**The May 29 incident**: 8 upstream primals shipped evolution to GitHub.
+`--source auto` pulled zero changes because Forgejo was reachable but stale.
+This proved that spatial sync was structurally unsound.
+
+### Phase 2: cascade-pull.sh --source temporal (Wave 62–64)
+
+Bash script extended with `--source temporal`: fetch all remotes, measure
+ahead/behind, pull from leader, push to followers. Solved the spatial
+problem. Still bash — no manifest-driven policy, no impulse integration.
+
+### Phase 3: membrane temporal.cascade (Wave 64–66)
+
+Full Rust implementation in `membrane-shadow`. The cascade engine:
+
+- Reads the ecosystem manifest for gate profiles, repo lists, policies
+- Implements the temporal position matrix in Rust
+- Adds `divergence_policy` per repo (flag/merge-ff/merge-rebase/impulse-only)
+- Adds `exclude_remotes` per repo (filter out noise remotes)
+- Fires SYNC impulses via `post_sync_diverge` on divergence detection
+- Integrates with NeuralBridge for primal-assisted operations
+- Auto-triggers `potential.sense` post-sync
+
+### Phase 4: biomeOS composition dispatch (future)
+
+The end state: `cascade-pull.sh` is replaced entirely by biomeOS
+composition dispatch:
+
+```
+biomeOS composition dispatch: ecosystem.pull
+  → manifest.gate_profile (biomeOS)
+  → mesh.discover_remotes (songbird)
+  → content.sync with temporal policy (nestGate/membrane)
+  → mesh.publish freshness (songbird)
+```
+
+The `sync_diverge.toml` and `sync_resolve.toml` composition graphs in
+`primalSpring/graphs/signals/` define the biomeOS-native equivalents.
+Phase A (graph definition in primalSpring) is complete. Phase B (biomeOS
+dispatch) awaits upstream NeuralRouter evolution.
+
+---
+
+## SYNC Impulse Flow
+
+When `temporal.cascade` detects divergence on a repo with
+`diverge_impulse = true`:
+
+```
+membrane temporal.cascade
+    │
+    │ fetches all remotes, builds temporal matrix
+    │ detects: forgejo +2, origin +3, local at common ancestor
+    │
+    ├─ policy = "merge-ff"?
+    │   └── attempts fast-forward → succeeds or falls through to flag
+    │
+    ├─ policy = "impulse-only" or resolution failed?
+    │   └── post_sync_diverge:
+    │       ├── classifies diverge type (fork/drift/conflict)
+    │       ├── creates SyncImpulseFile (TOML) with payload
+    │       ├── git add + commit to wateringHole/impulses/active/
+    │       └── git push (rides waterFall to all gates)
+    │
+    └─ other gates on next cascade-pull:
+        ├── waterFall syncs impulses/active/ directory
+        └── potential.sense detects pending SYNC impulse
+            └── human or agent reviews and resolves
+```
+
+---
+
+## Architecture
+
+```
+membrane CLI (main.rs)
+    └── dispatch.rs → temporal domain
+        └── temporal.rs
+            ├── cascade()       — full ecosystem sync with policy engine
+            ├── sync()          — single repo sync
+            ├── check()         — read-only parity check
+            ├── check_with_excludes() — filters exclude_remotes
+            ├── sync_with_policy()    — applies divergence_policy
+            └── try_policy_resolve()  — merge-ff / merge-rebase logic
+                    │
+                    └── impulse.rs::post_sync_diverge()
+                        ├── classify_diverge_type()
+                        ├── suggest_action()
+                        └── SyncImpulseFile creation + git push
+```
+
+### Key modules
+
+| Module | Responsibility |
+|--------|---------------|
+| `temporal.rs` | Cascade engine, temporal matrix, policy dispatch |
+| `impulse.rs` | Impulse lifecycle + SYNC impulse posting |
+| `manifest.rs` | Manifest reader — `divergence_policy`, `exclude_remotes`, `diverge_impulse` |
+| `git_ops.rs` | Shared git add/commit/push operations |
+| `bridge.rs` | NeuralBridge — try-primal-first routing to biomeOS |
+| `config.rs` | `membrane.toml` + environment configuration |
 
 ---
 
 ## Testing Strategy
 
-### Unit Tests (primalSpring)
+### Validation via primalSpring
 
-- `s_waterfall_temporal_position` — validate temporal matrix computation
-- `s_waterfall_pattern_classification` — converge/diverge/parity logic
-- `s_waterfall_freshness_schema` — freshness.toml validation
+- `s_atomic_signals` — validates all 32 composition graphs structurally
+  (including `sync_diverge`, `sync_resolve`, `sync_resolve_crossgate`)
+- `s_meta_tier_signals` — validates tool schemas and composition tier coverage
+- `s_routing_consistency` — validates `temporal` domain routes to `membrane` primal
 
-### Integration Tests (benchScale)
+### Integration tests (cellMembrane)
 
-- `test-waterfall-temporal.sh` — Docker lab with 3 gates, 2 remotes,
-  push to one remote, verify temporal sync discovers and converges
+- `membrane temporal.check` against live multi-remote repos
+- `membrane temporal.cascade --gate eastGate` on production ecosystem
+- SYNC impulse round-trip: fire on eastGate, sense on flockGate
 
-### Ecosystem Tests (live)
+### Ecosystem validation
 
-- Run `--source temporal` on eastGate after known GitHub pushes
-- Verify Forgejo receives propagation
-- Run `--check` on southGate to confirm convergence
+- 39 repos across 7 gate profiles managed by `temporal.cascade`
+- Daily cascade runs on eastGate with `--publish-freshness`
+- SYNC impulses observed flowing through wateringHole
 
 ---
 
 ## Next Reading
 
+- **[09_AGENTIC_SYNC.md](./09_AGENTIC_SYNC.md)** — Full agentic sync paper
 - **[06_AIRGAP_FEDERATION.md](./06_AIRGAP_FEDERATION.md)** — Depot and USB patterns
-- **[07_ROADMAP.md](./07_ROADMAP.md)** — Full glacial gate path
-- **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Sync levels and topology
+- **[07_ROADMAP.md](./07_ROADMAP.md)** — Glacial gate path
+- **[03_TRIAD_COORDINATION.md](./03_TRIAD_COORDINATION.md)** — Triad mechanics
 
 ---
 
 *"The best implementation is the one that makes the common case trivial
-and the uncommon case visible."*
+and the uncommon case visible. Convergence is trivial — it happens on every
+cascade. Divergence is visible — it fires an impulse and records its own
+provenance."*

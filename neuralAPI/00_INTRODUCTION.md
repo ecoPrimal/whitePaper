@@ -1,9 +1,9 @@
-# 🧠 Introduction to Neural API Architecture
+# Introduction to Neural API Architecture
 
 **What is Neural API and why does it matter?**
 
-**Date**: January 4, 2026  
-**Status**: Whitepaper - Conceptual Design
+**Date**: January 4, 2026 (revised May 14, 2026 — Phase 32 atomic model)
+**Status**: Whitepaper - Conceptual Design + Implementation Underway
 
 ---
 
@@ -69,27 +69,33 @@ Day 1000: Request → Self-Optimized → Discover New Patterns
 ### **Layer 1: Primals (Capabilities)**
 
 ```
-┌──────────────────────────────────────────────┐
-│        Primals - Individual Capabilities      │
-│                                              │
-│  BearDog   Songbird   ToadStool   rhizoCrypt│
-│  LoamSpine NestGate   SweetGrass  Squirrel  │
-│                                              │
-│  • Self-contained services                   │
-│  • Provide specific capabilities             │
-│  • Report usage metrics ← NEW!               │
-└──────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│              Primals — 13 Autonomous Capabilities          │
+│                                                           │
+│  Tower:     BearDog    Songbird   skunkBat                │
+│  Compute:   ToadStool  barraCuda  coralReef               │
+│  Storage:   NestGate   rhizoCrypt LoamSpine  SweetGrass   │
+│  Meta:      biomeOS    Squirrel   petalTongue             │
+│                                                           │
+│  • 427 registered capability methods                      │
+│  • 13/13 BTSP AEAD authenticated                          │
+│  • All at zero debt (Waves 1-14 complete)                 │
+│  • Dark Forest Glacial Gate compliant                     │
+│  • Report usage metrics ← learning signal                 │
+└───────────────────────────────────────────────────────────┘
 ```
 
 **Primals:**
 - Do ONE thing well (single responsibility)
 - Know only themselves (self-knowledge only)
 - Report metrics to biomeOS (optional, for learning)
+- Compose into atomic tiers: Tower (3), Node (6), Nest (7), NUCLEUS (10+3 meta)
 
-**Examples:**
-- BearDog provides: Security, Encryption, Trust
-- Songbird provides: Discovery, Federation
-- ToadStool provides: Compute, Orchestration
+**Atomic tiers (Phase 32):**
+- **Tower** (bearDog + songbird + skunkBat): Trust boundary — crypto + discovery + defense
+- **Node** (Tower + compute trio): Compute substrate — dispatch + execute + compile
+- **Nest** (Tower + provenance trio + nestGate): Storage + provenance
+- **NUCLEUS** (Node + Nest): Full atom — 10 unique primals + 3 meta-tier
 
 ---
 
@@ -147,10 +153,11 @@ Day 1000: Request → Self-Optimized → Discover New Patterns
 // User calls high-level API
 rootpulse.commit("Feature complete").await?;
 
-// Behind the scenes: 4 primals coordinated
-// NestGate → BearDog → SweetGrass → LoamSpine
-// biomeOS learns: "These 4 always used together"
-// Next time: Optimized (some run in parallel)
+// Behind the scenes: Nest atomic signal decomposes into 6 primal calls:
+// BearDog.sign → NestGate.store → rhizoCrypt.dehydrate →
+// LoamSpine.commit → SweetGrass.braid → skunkBat.audit
+// biomeOS learns: "sweetGrass and NestGate can parallelize"
+// Next time: Optimized graph (30% faster)
 ```
 
 ---
@@ -399,22 +406,45 @@ $ rootpulse commit "Polish"
 
 ---
 
-## 🚀 What's Next?
+## May 2026 Addendum: Composition Collapse
 
-### **Read the Series:**
-1. **[01_PHILOSOPHY.md](./01_PHILOSOPHY.md)** - Why this approach?
-2. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** - Technical design
-3. **[03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)** - How graphs work
-4. **[04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md)** - Learning mechanism
+The original vision described learning and optimization as the primary
+goals. Two additional goals have emerged from ecosystem evolution:
 
-### **Implementation Guides:**
-5. **[06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md)** - What biomeOS needs
-6. **[07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md)** - What primals provide
-7. **[10_ROADMAP.md](./10_ROADMAP.md)** - Implementation timeline
+### Goal: Atomic Signal Collapse
+
+The 427-method surface across 13 primals produces a combinatorial
+explosion for springs. Atomic signals (see `02_ARCHITECTURE.md`)
+collapse this into ~20 tier-level operations. A spring calls
+`signal("nest", "store", payload)` instead of 6 individual primal
+calls. biomeOS decomposes the signal into the correct graph.
+
+### Goal: Barrick Lab Pipeline Convergence
+
+lithoSpore now has access to the full Barrick Lab software stack
+(breseq, pLannotate, OSTIR, EFM Calculator, CryptKeeper). Each tool
+has Python/R pipelines that produce known-correct output. The Neural
+API provides the graph execution layer for Rust reproductions: fetch
+data → compute → store with provenance → visualize via petalTongue.
+This is a `nest.store` + `node.compute` signal composition.
 
 ---
 
-🧠 **Neural API: Orchestration that learns, adapts, and evolves**
+## What's Next?
 
-*"The best systems are not designed—they emerge from the right kind of simplicity, repeated and refined."*
+### **Read the Series:**
+1. **[01_PHILOSOPHY.md](./01_PHILOSOPHY.md)** — Why this approach?
+2. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Atomic decomposition layer (Tower/Node/Nest/NUCLEUS)
+3. **[03_GRAPH_EXECUTION.md](./03_GRAPH_EXECUTION.md)** — How graphs work
+4. **[04_BIDIRECTIONAL_LEARNING.md](./04_BIDIRECTIONAL_LEARNING.md)** — Learning mechanism
+5. **[05_PATHWAY_OPTIMIZATION.md](./05_PATHWAY_OPTIMIZATION.md)** — Pattern discovery and signal collapse metrics
+
+### **Implementation Guides:**
+6. **[06_BIOMEOS_IMPLEMENTATION.md](./06_BIOMEOS_IMPLEMENTATION.md)** — What biomeOS needs
+7. **[07_PRIMAL_REQUIREMENTS.md](./07_PRIMAL_REQUIREMENTS.md)** — 13/13 primals: Dark Forest compliant
+8. **[10_ROADMAP.md](./10_ROADMAP.md)** — Atomic signal activation path
+
+---
+
+*"The best systems are not designed — they emerge from the right kind of simplicity, repeated and refined."*
 

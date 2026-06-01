@@ -1,8 +1,8 @@
-# 🌱 Philosophy of Neural API - Emergence Over Engineering
+# Philosophy of Neural API — Emergence Over Engineering
 
 **Why adaptive orchestration aligns with natural systems**
 
-**Date**: January 4, 2026  
+**Date**: January 4, 2026 (revised May 14, 2026 — atomic signal collapse)
 **Status**: Whitepaper - Philosophical Foundation
 
 ---
@@ -457,16 +457,49 @@ impl Primal {
 
 ---
 
-## 🔗 Next Reading
+## May 2026 Addendum: The Composition Collapse as Emergence
 
-1. **[00_INTRODUCTION.md](./00_INTRODUCTION.md)** - High-level overview
-2. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** - Technical design
-3. **[10_ROADMAP.md](./10_ROADMAP.md)** - How we build it
+The ecosystem has evolved to 13 primals, 427 methods, 8 springs. The
+original philosophy — simple components, rich coordination, feedback
+loops — now faces a concrete test: **can the Neural API collapse the
+combinatorial surface into tractable atomic signals?**
+
+This is emergence in its purest form. No one designed "tower.publish"
+as a primitive. It emerged from observing that every spring that needs
+to announce something always calls bearDog.sign → songbird.announce →
+skunkBat.audit in that order. The pattern was there in the execution
+traces. The Neural API's job is to discover it, name it, and optimize it.
+
+### The Atom Analogy (Phase 32)
+
+The ecosystem already uses atomic language: Tower (electron), Node
+(proton), Nest (neutron), NUCLEUS (atom). The physics analogy is deeper
+than naming. In nature:
+
+- An electron doesn't know it's part of an atom
+- A proton doesn't coordinate with neutrons consciously
+- The atom's behavior emerges from the forces between particles
+
+In ecoPrimals:
+
+- bearDog doesn't know it's part of a Tower
+- toadStool doesn't coordinate with coralReef consciously
+- The Tower's behavior (authenticated discovery, signed announcement)
+  emerges from biomeOS orchestrating the forces (capability calls)
+  between primals
+
+**This is Principle 4 (Emergence Over Engineering) applied to composition itself.** We don't design Tower behavior. We define the particles, enable coordination via graphs, and let the Tower's capabilities emerge.
 
 ---
 
-🌱 **Neural API: Intelligence that emerges, not engineered**
+## Next Reading
 
-*"The whole is greater than the sum of its parts."* — Aristotle  
+1. **[00_INTRODUCTION.md](./00_INTRODUCTION.md)** — High-level overview
+2. **[02_ARCHITECTURE.md](./02_ARCHITECTURE.md)** — Atomic decomposition layer
+3. **[10_ROADMAP.md](./10_ROADMAP.md)** — Activation path
+
+---
+
+*"The whole is greater than the sum of its parts."* — Aristotle
 *"And the parts don't even know there's a whole."* — Neural API
 

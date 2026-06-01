@@ -2,8 +2,9 @@
 
 **How quorumSignal, rootPulse, and waterFall work together**
 
-**Date**: May 29, 2026
+**Date**: June 1, 2026 (updated Wave 66)
 **Status**: Whitepaper — Coordination Design
+**Vocabulary**: `gen5/foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md`
 
 ---
 
@@ -157,11 +158,13 @@ This temporal decoupling is what enables:
 
 ---
 
-## Signal Graph Composition
+## Composition Graphs per Domain
 
-Each domain has signal graphs that biomeOS executes:
+Each triad domain has biomeOS composition graphs (see
+`FUNCTIONAL_PATTERN_CONVERGENCE.md` for the canonical vocabulary — these are
+composition graphs dispatched by biomeOS, not generic "signals"):
 
-### quorumSignal Graphs (sense)
+### quorumSignal Compositions (SENSE)
 
 ```
 ecosystem.check
@@ -170,7 +173,7 @@ ecosystem.check
 └── songbird:  mesh.publish (drift report)
 ```
 
-### rootPulse Graphs (action)
+### rootPulse Compositions (ACTION)
 
 ```
 rootpulse.commit
@@ -181,7 +184,7 @@ rootpulse.commit
 └── sweetGrass: braid.create (attribution)
 ```
 
-### waterFall Graphs (sync)
+### waterFall Compositions (SYNC)
 
 ```
 ecosystem.pull
@@ -196,6 +199,38 @@ ecosystem.push
 ├── songbird:  mesh.mirror (GitHub trailing mirror)
 └── songbird:  mesh.publish (freshness update)
 ```
+
+### Agentic Sync Compositions (wF + rP + trio) — Wave 66+
+
+Agentic sync is the fullest triad composition — it uses all three triad
+domains and all three provenance trio members in a single operation:
+
+```
+sync_diverge (qS SENSE)
+├── biomeOS:   manifest.gate_profile
+├── membrane:  temporal.check (fetch + classify)
+├── membrane:  impulse.post SYNC (fire if diverged)
+└── songbird:  mesh.publish (drift + impulse)
+
+sync_resolve (wF SYNC + rP ACTION + provenance trio)
+├── membrane:   impulse.read (load SYNC impulse)
+├── rhizoCrypt: dag.snapshot (pre-state)
+├── membrane:   temporal.sync (merge per policy)
+├── loamSpine:  spine.commit (certify resolution)
+├── bearDog:    crypto.sign (sign certificate)
+├── sweetGrass: braid.create (attribute resolution)
+├── membrane:   impulse.ack (close SYNC impulse)
+└── membrane:   temporal.cascade (propagate)
+
+sync_resolve_crossgate (extends sync_resolve)
+├── sweetGrass: context.sense (gate working state)
+├── songbird:   mesh.discover (peer enumeration)
+├── rhizoCrypt: dag.diff (cross-gate comparison)
+├── *(sync_resolve nodes)*
+└── songbird:   mesh.federate (push across mesh)
+```
+
+See `09_AGENTIC_SYNC.md` for the full paper on agentic sync design.
 
 All graphs use capability-based routing. No primal names in the graphs.
 biomeOS resolves capabilities to primals at runtime.

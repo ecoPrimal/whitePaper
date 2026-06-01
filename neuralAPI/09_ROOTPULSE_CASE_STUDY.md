@@ -2,7 +2,7 @@
 
 **Provenance trio end-to-end with real execution traces**
 
-**Date**: March 13, 2026
+**Date**: March 13, 2026 (revised May 14, 2026 — Barrick Lab convergence)
 **Status**: Whitepaper - Case Study
 
 ---
@@ -135,4 +135,58 @@ This document fills the slot described in README.md as "09_ROOTPULSE_CASE_STUDY.
 
 ---
 
-*"The provenance trio is not three services. It is one temporal collapse—ephemeral to permanent—orchestrated by graphs that learn."*
+---
+
+## May 2026 Addendum: Barrick Lab Convergence
+
+### Updated Trio State
+
+| Primal | Version | Tests | Key Evolution |
+|--------|---------|------:|--------------|
+| rhizoCrypt | v0.13.0+ | 1,637+ | `dag.session.get` enriched with agents/genesis/frontier |
+| LoamSpine | v0.8.0+ | 1,442+ | Immutable record with witness-bearing commits |
+| sweetGrass | v0.7.3+ | 1,522 | JH-0 gate + port 9850 canonical |
+
+All three at zero debt. BTSP AEAD 3/3. MethodGate 3/3.
+
+### Barrick Lab Tool Convergence
+
+The Barrick Lab software list (https://barricklab.org/twiki/bin/view/Lab/SoftwareList)
+has been handed to lithoSpore. These tools map directly onto the RootPulse
+provenance pattern:
+
+| Barrick Tool | Pipeline | lithoSpore Module | Provenance Flow |
+|-------------|----------|-------------------|----------------|
+| **breseq** | C++/Python → mutation calls | Module 6 (ltee-breseq) | breseq output → `nest.store` → Merkle proof |
+| **pLannotate** | Python → plasmid annotation | New candidate | Annotation → `nest.store` → attribution braid |
+| **OSTIR** | Python → translation rates | Module 5 (biobricks) | Rate data → `nest.store` → reproducibility record |
+| **EFM Calculator** | Python/Django → failure modes | Module 3 (clonal) | Hypermutable sites → `nest.store` → validation target |
+| **CryptKeeper** | Python → burden prediction | New candidate | Burden data → `nest.store` → comparison baseline |
+
+Each tool produces scientific data that flows through the same provenance
+trio commit pattern: compute → dehydrate → sign → store → commit → attribute.
+The Python/R pipelines are Tier 1 baselines; Rust lithoSpore modules are
+Tier 2 reproductions validated against them.
+
+**petalTongue visualization target**: Barrick tools have published figures
+(mutation frequency plots, fitness trajectories, phylogenetic trees).
+These become concrete render targets for petalTongue's grammar of graphics,
+served from NestGate content, with provenance braids from sweetGrass.
+
+### Atomic Signal for Barrick Pipelines
+
+The full Barrick pipeline maps to a signal composition:
+
+```
+node.compute (Rust reproduction)
+  → nest.store (provenance commit via trio)
+    → petalTongue.visualize (figure generation)
+```
+
+This is `node.compute` + `nest.commit` — two atomic signals composing
+the entire scientific reproduction pipeline. The 427-method surface
+collapses to 2 signals for any Barrick reproduction.
+
+---
+
+*"The provenance trio is not three services. It is one temporal collapse — ephemeral to permanent — orchestrated by graphs that learn."*

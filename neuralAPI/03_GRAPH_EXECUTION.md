@@ -2,8 +2,8 @@
 
 **TOML-defined graphs, coordination patterns, and execution engines**
 
-**Date**: March 13, 2026  
-**Status**: Whitepaper - Implementation Specification
+**Date**: March 13, 2026 (revised May 14, 2026 — 123 deploy graphs, Phase 32)
+**Status**: Implementation Specification (Sequential/Parallel/Continuous IMPLEMENTED)
 
 ---
 
@@ -183,6 +183,44 @@ Primals are agnostic to who invokes them; they expose JSON-RPC methods, and biom
 | Continuous execution | biomeos-graph | ContinuousExecutor: TickClock, SessionState, feedback, budget |
 | Capability routing | biomeos-atomic-deploy + config | capability_registry.toml → primal method |
 | Wire protocol | All | JSON-RPC 2.0 |
+
+---
+
+---
+
+## May 2026 Addendum: Ecosystem Graph State
+
+The ecosystem now has **123 deploy graphs** across 8 springs (78 in
+primalSpring alone). Graph types in active use:
+
+| Type | Count | Examples |
+|------|------:|---------|
+| Root deploy graphs | 13 | tower_atomic, node_atomic, nest_atomic, full_nucleus |
+| Profile graphs | 9 | tower.toml, node.toml, nest.toml, nucleus.toml |
+| Fragment graphs | 6 | meta_tier.toml, compute_trio.toml |
+| Spring validation | 9 | per-spring deploy validation |
+| Multi-node bonding | 5 | cross-node federation patterns |
+| Cell graphs | 12 | per-spring cellular deployment |
+| Chaos/stress | 2+2 | failure injection, substrate stress |
+| Downstream | 3 | esotericWebb, lithoSpore |
+
+### Atomic signal graphs (proposed)
+
+A new graph category for atomic signals:
+
+| Signal Graph | Tier | Nodes | Coordination |
+|-------------|:----:|------:|:------------:|
+| `tower_publish.toml` | Tower | 3 | Sequential |
+| `tower_authenticate.toml` | Tower | 2 | Sequential |
+| `tower_discover.toml` | Tower | 3 | Sequential |
+| `tower_health.toml` | Tower | 3 | Parallel |
+| `node_compute.toml` | Node | 4 | Sequential |
+| `nest_store.toml` | Nest | 5 | Sequential (optimizable to partial parallel) |
+| `nest_commit.toml` | Nest | 6 | Sequential (RootPulse flow) |
+| `nucleus_deploy.toml` | NUCLEUS | 1 (meta) | Delegates to tier graphs |
+
+These would live in `graphs/signals/` alongside existing `graphs/profiles/`
+and `graphs/fragments/`.
 
 ---
 

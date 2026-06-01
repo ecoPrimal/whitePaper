@@ -101,6 +101,19 @@
 17. **STADIAL_INTERSTADIAL_PATTERN.md** — Ecosystem convergence/divergence
     cycles, fossil record, Tier 1/2 gate criteria, selection under constraints.
 
+### Mass-Energy-Information
+
+21. **SPORE_WATERFALL_MASS_ENERGY.md** — The operational realization of
+    Paper 23's three-way equivalence. Spores as mass (data at rest),
+    waterFall as energy (data in transit/propagation), braids as
+    information (structural proof). Maps lithoSpore LTEE and compoChem
+    pseudoSpore as mass instances, waterFall temporal sync as energy
+    propagation, ferment transcripts as the c² conversion factor.
+    Connects the Neural API triad (rootPulse/waterFall/quorumSignal)
+    to the mass-energy-information triangle. **Start here if you want
+    to understand why the spore taxonomy and waterFall sync are two
+    sides of the same coin.**
+
 ### Operations and Resilience
 
 18. **INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md** — Cold-start

@@ -1,8 +1,8 @@
-# 🦴 Primal Requirements for Neural API
+# Primal Requirements for Neural API
 
-**What primals need to provide to enable adaptive orchestration**
+**What 13 primals need to provide for adaptive orchestration + Dark Forest compliance**
 
-**Date**: January 4, 2026  
+**Date**: January 4, 2026 (revised May 14, 2026 — 13/13 primals at zero debt)
 **Status**: Implementation Specification
 
 ---
@@ -550,7 +550,54 @@ impl BearDog {
 
 ---
 
-🦴 **Primals: Stay simple, enable intelligence!**
+---
+
+## May 2026 Addendum: 13/13 Primals at Zero Debt
+
+All 13 primals now meet the baseline requirements. The January 2026
+document listed 6 primals — the ecosystem has grown to 13:
+
+| Primal | Tests | BTSP | MethodGate | Dark Forest | Structured Logging |
+|--------|------:|:----:|:----------:|:-----------:|:-----------------:|
+| bearDog | 14,784+ | FULL | JH-0 | Pillar 1 enforcer | YES (tracing) |
+| songbird | 7,178+ | FULL | JH-0 | Pillar 3 sole surface | YES |
+| skunkBat | 363+ | FULL | JH-0 | Pillar 5 audit | YES |
+| toadStool | 22,900+ | FULL | JH-0 | Node compute | YES |
+| barraCuda | 4,422+ | FULL | JH-0 | Node math | YES |
+| coralReef | 4,506+ | FULL | JH-0 | Node compile | YES |
+| nestGate | 8,915+ | FULL | JH-0 | Nest storage | YES |
+| rhizoCrypt | 1,637+ | FULL | JH-0 | Nest DAG | YES |
+| loamSpine | 1,442+ | FULL | JH-0 | Nest ledger | YES |
+| sweetGrass | 1,522 | FULL | JH-0 | Nest attribution | YES |
+| biomeOS | 7,919+ | FULL | JH-0 | Meta orchestrator | YES |
+| squirrel | 7,178 | FULL | JH-0 | Meta AI | YES |
+| petalTongue | varies | FULL | JH-0 | Meta UI | YES |
+
+### Dark Forest Compliance (new requirement)
+
+The Dark Forest Glacial Gate adds 5 security invariants that all primals
+must respect:
+
+1. **Zero metadata leakage** — stripped binaries, no DNS identity leaks
+2. **Zero port exposure** — UDS-only default, Tier 5 TCP opt-in
+3. **Songbird as sole network surface** — no direct TCP listeners
+4. **BTSP crypto integrity** — ChaCha20-Poly1305 AEAD, no cleartext
+5. **Enclave computing** — content-addressed opaque storage
+
+All 13 primals comply structurally (validated by `s_dark_forest_gate`
+scenario in primalSpring). Springs adopting Dark Forest CI checks will
+validate at the composition level.
+
+### What's left for Neural API enhancements
+
+- **Metrics socket** — no primal currently reports via `BIOMEOS_METRICS_SOCKET`
+- **Dependency hints** — no primal currently declares operation dependencies
+- **Cost estimates** — no primal currently provides benchmark data
+
+These remain optional enhancements. The learning signal from structured
+`tracing` logs is sufficient for Phase 3 PathwayLearner wiring.
+
+---
 
 *"The best primals do one thing well and let biomeOS discover the rest."*
 

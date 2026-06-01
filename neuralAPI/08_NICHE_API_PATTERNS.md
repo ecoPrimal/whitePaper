@@ -2,8 +2,8 @@
 
 **From transactional coordination to real-time orchestration**
 
-**Date**: March 10, 2026
-**Status**: Whitepaper - Architectural Design
+**Date**: March 10, 2026 (revised May 14, 2026 — all 8 springs current)
+**Status**: Whitepaper - Architectural Design (Continuous IMPLEMENTED)
 
 ---
 
@@ -494,6 +494,49 @@ coordination pattern.
 The next document in the series, 09_ROOTPULSE_CASE_STUDY.md, describes the
 first transactional niche. This document describes the first continuous niche.
 Together they cover the full niche spectrum.
+
+---
+
+---
+
+## May 2026 Addendum: Spring Niche Readiness (All 8 Springs)
+
+The March 2026 table listed 7 springs. With Phase 32 evolution and
+Dark Forest standards, the updated readiness:
+
+| Spring | Version | Tests | niche.rs | Deploy Graphs | Capability Registry | Dark Forest | Atomic Tier |
+|--------|---------|------:|:--------:|:-------------:|:-------------------:|:-----------:|:-----------:|
+| hotSpring | V168+ | 1,042 | YES | 5 graphs | 427 cross-sync | PENDING | Node |
+| neuralSpring | V160 | 1,453 | YES | 4 graphs | 34 caps, sync | PENDING | Node |
+| wetSpring | V168 | 1,962 | YES | 7 graphs | 427 cross-sync | PENDING | Nest |
+| airSpring | v0.10.0 | 1,389 | YES | 7 graphs | 46 caps, sync | PENDING | Node |
+| groundSpring | V142 | 1,123 | YES | 6 graphs | 16 MCP tools | PENDING | Node |
+| healthSpring | V64n | 1,018 | YES | 7 graphs | 118 methods | PENDING | NUCLEUS (dual-tower) |
+| ludoSpring | V71 | 862 | YES | 12 graphs | 28 game.* | PENDING | NUCLEUS (pure composition) |
+| primalSpring | v0.9.25 | 651+ | N/A | 78 graphs | 427 canonical | DONE | Coordination |
+
+**All 8 springs** now have deploy graphs and capability registry sync.
+healthSpring's dual-tower enclave pattern is the most demanding niche —
+it composes Tower + Nest + compute in an enclave model that maps to
+Dark Forest Pillar 5 (enclave computing).
+
+### Continuous Niche Status
+
+The ContinuousExecutor is implemented in biomeOS. The game engine
+graph (`game_engine_tick.toml`) runs at 60 Hz via `biomeos continuous`
+CLI. The gap is JSON-RPC exposure — `graph.start_continuous`,
+`graph.pause`, `graph.resume`, `graph.stop` are not yet wired as
+Neural API methods. This blocks programmatic continuous niche management
+from springs and products.
+
+### Niche → Atomic Signal Mapping
+
+Each spring's niche maps naturally to an atomic tier:
+
+- **Compute-heavy** (hotSpring, neuralSpring, groundSpring, airSpring): Node tier — `node.compute` signals
+- **Data-heavy** (wetSpring): Nest tier — `nest.store` / `nest.retrieve` signals
+- **Composition-heavy** (healthSpring, ludoSpring): NUCLEUS — full `nucleus.deploy` signals
+- **Coordination** (primalSpring): Meta — validates all tiers
 
 ---
 
