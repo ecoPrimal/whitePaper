@@ -130,27 +130,37 @@ that must hold across the mesh:
 | BTSP on relay traffic | **PARTIAL** | Phase 2 validates non-empty `_btsp_session`. Full crypto deferred. |
 | Virtual relay default | **PASS** | Phase 2 active: ipc.resolve returns virtual by default |
 
-### Phase 3: Security Trust (Wave 75 — IN PROGRESS)
+### Phase 3: Security Trust (Wave 75 — IMPLEMENTED)
 
 | Check | Target | Status |
 |-------|--------|--------|
-| bearDog BTSP cross-gate token validation | Gate A issues token, Gate B verifies | **TODO** |
-| auth.verify_ionic scopes across gates | Scopes field propagates through mesh | **TODO** — bearDog w131 scopes fix deployed |
-| SecurityVerifier Enforced mode cross-gate | primalSpring rejects missing scopes from remote gate | **TODO** |
-| BTSP session integrity through relay | Relay cannot forge or modify BTSP tokens | **TODO** — Phase 2 validates non-empty only |
+| bearDog BTSP cross-gate token validation | Gate A issues token, Gate B verifies | **IMPLEMENTED** — `security:local_token_issue` + `security:cross_gate_verify` |
+| auth.verify_ionic scopes across gates | Scopes field propagates through mesh | **IMPLEMENTED** — `security:scopes_propagate` check |
+| SecurityVerifier Enforced mode cross-gate | primalSpring rejects missing scopes from remote gate | **IMPLEMENTED** — `parse_verify_ionic_response` rejects empty scopes |
+| Forged token rejection | Remote gate rejects forged/expired tokens | **IMPLEMENTED** — `security:reject_forged` check |
+| BTSP session integrity through relay | Relay cannot forge or modify BTSP tokens | **PARTIAL** — Phase 2 validates non-empty only |
 | Family seed cross-enrollment | westGate enrollment protocol validates | **TODO** — FRAGO active |
 
-### Phase 4: Content Trust (Wave 75+ — DESIGNED)
+### Phase 4: Content Trust (Wave 75 — IMPLEMENTED)
 
 | Check | Target | Status |
 |-------|--------|--------|
-| NestGate content.put → content.get integrity | BLAKE3 hash matches across put/get cycle | **TODO** — NestGate s85 ready |
-| content.replicate.pull integrity | Remote content maintains hash through federation | **TODO** |
+| NestGate content.put → content.get integrity | BLAKE3 hash matches across put/get cycle | **IMPLEMENTED** — `content:local_put_get` + `content:hash_integrity` |
+| content.replicate.pull integrity | Remote content maintains hash through federation | **IMPLEMENTED** — `content:cross_gate_replicate` via mesh dispatch |
 | cas-manifest verification | sporePrint BLAKE3 manifest validates post-replication | **TODO** — sporePrint cas-manifest ready |
 | ZFS-backed CAS integrity | Content on ZFS pool matches original hash | **TODO** — NestGate ZFS backend ready |
 | Cross-gate content discovery | route.register makes content findable via mesh | **TODO** — NestGate route.register built |
 
-### Phase 5: Sovereignty Trust (Ongoing)
+### Phase 5: Dark Forest Invariants (Wave 75 — IMPLEMENTED)
+
+| Check | Target | Status |
+|-------|--------|--------|
+| Federation port isolation | Only :7700 accepts cross-gate traffic | **IMPLEMENTED** — `darkforest:federation_port_only` + `darkforest:no_extra_ports` |
+| UDS-only local IPC | No TCP for local primal communication | **IMPLEMENTED** — `darkforest:no_tcp_local` |
+| Reversibility (data independence) | Gate can leave mesh without data loss | **IMPLEMENTED** — `darkforest:reversibility_local_store` |
+| UDS runtime dir exists | /run/user/1000/biomeos present | **IMPLEMENTED** — `darkforest:uds_runtime_exists` |
+
+### Phase 6: Sovereignty Trust (Ongoing)
 
 | Check | Target | Status |
 |-------|--------|--------|

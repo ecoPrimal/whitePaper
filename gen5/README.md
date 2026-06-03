@@ -74,7 +74,9 @@ gen5/
 │   ├── TRANSPORT_EVOLUTION.md         ← Nanowire → quorum sensing transport progression
 │   ├── FUNCTIONAL_PATTERN_CONVERGENCE.md ← The Two Threes: coordination triad + provenance trio (canonical vocabulary)
 │   ├── IMPULSE_POTENTIAL_COORDINATION.md ← Triad integration (qS/wF/rP + SYNC impulses + divergence policy)
-│   └── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
+│   ├── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
+│   ├── COVALENT_MESH_TRUST_VALIDATION.md ← Multi-gate trust model, Dark Forest invariants, 5-phase cross-validation
+│   └── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -127,7 +129,9 @@ gen5/
 3. `foundations/TRANSPORT_EVOLUTION.md` — nanowire → quorum sensing progression
 4. `foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md` — The Two Threes (canonical vocabulary)
 5. `foundations/IMPULSE_POTENTIAL_COORDINATION.md` — Triad integration (qS/wF/rP + SYNC impulses)
-5. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
+6. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
+7. `foundations/OVERWATCH_DISTRIBUTED_COORDINATION.md` — how sovereign infra enables floating coordination
+8. `foundations/COVALENT_MESH_TRUST_VALIDATION.md` — multi-gate trust model and Dark Forest invariants
 6. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
 7. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
 
