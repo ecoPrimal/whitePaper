@@ -1,7 +1,7 @@
 # gen5/products/ — The sporeGarden Journey Catalog
 
-**Status**: Active — 5 products tracked from theory to reality
-**Date**: May 28, 2026
+**Status**: Active — 6 products tracked from theory to reality
+**Date**: June 6, 2026
 
 ---
 
@@ -33,6 +33,7 @@ baseCamp paper (gen3 theory)
 | **initioChem** | baseCamp + hotSpring Exp 220 (CAZyme FEL) | Seeded v0.1.0, 190/190 | ABG pseudoSpore v1.7.0 delivered | ABG (Alistaire) | `INITIOCHEM_JOURNEY.md` |
 | **blueFish** | wetSpring Track 2 (Jones Lab PFAS) | Seeded, 40/40 | Jones emeritus consulting | Jones | `BLUEFISH_JOURNEY.md` |
 | **helixVision** | baseCamp 03, 04, 09, 10, 21 | Conceptual, science validated | NF = first multi-product composition | Gonzales | `HELIX_VISION_JOURNEY.md` |
+| **tideGlass** | GPS platform (Bin Chen Lab, Cell 2026) | — (gen5 native) | First `protoKarya` project, Phase 0 | Gonzales → Bin Chen | `TIDEGLASS_JOURNEY.md` |
 
 ---
 
@@ -93,6 +94,7 @@ Every product participates in the same cycle, but each enters at a different poi
 | initioChem | pseudoSpore (CAZyme FEL) | hotSpring | Conformational FEL landscapes |
 | blueFish | PFAS detection reports | wetSpring | EPA 1633A QC, LOQ consistency |
 | helixVision | NF pseudoSpore (planned) | wetSpring, healthSpring | NF gene expression, drug repurposing |
+| tideGlass | NUCLEUS lithoSpore (planned) | healthSpring, wetSpring, hotSpring | Transcriptomic reversal, LINCS parity, MCTS chemistry |
 
 ---
 
@@ -120,7 +122,20 @@ Each product gets a dedicated journey document tracking its full arc from baseCa
 | `INITIOCHEM_JOURNEY.md` | Planned |
 | `LITHOSPORE_JOURNEY.md` | Planned |
 | `NF_CASE_STUDY.md` | Active — first multi-product composition |
+| `TIDEGLASS_JOURNEY.md` | Planned — first gen5-native product (protoKarya) |
 
 ---
 
-*Five products. Five different soils. The same pattern: validated science becomes sovereign tools, sovereign tools serve external science, external science feeds the validation that made the tools possible. The spore cycle is not a metaphor. It is the operating model.*
+### tideGlass — The Gen5-Native Crossing (June 2026, in progress)
+
+**GPS platform** (Bin Chen Lab, Cell 2026) was assigned by Andrea Gonzales for sovereign rebuild. Unlike every other product, tideGlass has no gen3 baseCamp origin and no gen4 predecessor. It was born in gen5 — external collaborator assigns codebase, we rebuild from scratch, validate against the paper chain, and produce a lithoSpore.
+
+**What it names**: `tideGlass` — the cross-spring biological current parser. The motion (gene expression flow, protein dynamics, community shifts) is the reality. The glass is the instrument that parses it. GPS rebuild is the first lens ground into the glass.
+
+**Key arc**: Gonzales meeting (June 5) → GPS assigned → `protoKarya` org → `tideGlass` named → Phase 0 archaeology → reproduce → validate → rebuild sovereign → NUCLEUS lithoSpore → Bin Chen review
+
+**What it proves (in progress)**: gen5 products don't need to grow through gen3/gen4. External codebases can be directly ingested, revalidated, and elevated. The ecosystem can adopt 10 years of someone else's science and make it sovereign. This is how protoKarya scales.
+
+---
+
+*Six products. Six different soils. The same pattern: validated science becomes sovereign tools, sovereign tools serve external science, external science feeds the validation that made the tools possible. tideGlass adds a new entry point: the ecosystem can adopt external codebases as validation targets, not just grow them internally. The spore cycle is not a metaphor. It is the operating model.*

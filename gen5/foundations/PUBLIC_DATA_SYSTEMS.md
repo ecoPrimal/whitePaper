@@ -262,11 +262,16 @@ Secondary/Derived source (claim)
 
 | System | Data Types | Scale | Format | URL | Spring(s) | Collaborator(s) | Ingestion | Trust |
 |--------|-----------|-------|--------|-----|-----------|-----------------|-----------|-------|
+| **LINCS L1000** | Drug perturbation gene expression signatures | 1.3M profiles, ~50 GB | GCTx/CSV | clue.io | healthSpring, wetSpring | Gonzales (GPS) | Planned — GPS rebuild Phase 1 | T1 — NIH instrument data |
+| **OCTAD** | Open Cancer TherApeutic Discovery platform | Cancer drug-disease pairs | Web/API | octad.org | healthSpring | Gonzales (GPS lineage) | Survey | T2 — computational |
+| **ZINC** | Purchasable compound library (screening) | 750M+ compounds | SMILES/SDF | zinc.docking.org | healthSpring | Gonzales (GPS MolSearch) | Planned — GPS Phase 3 | T1 — computed from vendor catalogs |
 | **repoDB** | Drug-disease associations matrix | 1,571 drugs × 1,209 diseases | CSV | — | wetSpring | — | Active (Exp160, NMF) | T2 — curated from literature |
 | **ROBOKOP KG** | Biomedical knowledge graph | Large-scale | TransE embeddings | robokop.renci.org | wetSpring | — | Planned (Exp161) | T2 — computational |
 | **MONDO / Disease Ontology** | Disease classification | Standard | OWL/JSON | mondo.monarchinitiative.org | healthSpring | Gonzales | Planned | T1 — community standard |
 | **OMIM / Orphanet** | Rare disease ontologies | Curated | Web/API | omim.org / orpha.net | healthSpring | Gonzales (NF) | Planned | T2 — curated |
 | **Reactome** | Biological pathway database | 2,700+ pathways | REST API | reactome.org | healthSpring | Gonzales | Planned | T2 — curated |
+| **Every Cure MATRIX** | Drug repurposing knowledge graph (3K drugs × 22K diseases) | 75M drug-disease pairs | Neo4j + Kedro pipeline | github.com/everycure-org/matrix | healthSpring | — | Survey (open source) | T2 — computational |
+| **Connectivity Map** | Drug perturbation ↔ disease signatures | Overlaps LINCS | GCTx | clue.io/cmap | healthSpring | Gonzales (GPS lineage) | Planned | T2 — derived from LINCS |
 
 ### Agriculture & Soil (Codebase-Verified)
 
@@ -442,7 +447,7 @@ gen3/gen4 fetched public data to reproduce published results. gen5 fetches publi
 | Cancer Genomics (ABG) | 6 | 1 | 4 | 1 |
 | Malaria Genomics (ABG) | 3 | 1 | 2 | 0 |
 | Salmon Genomics (ABG) | 3 | 0 | 3 | 0 |
-| Drug Repurposing & Knowledge Graphs | 5 | 1 | 4 | 0 |
+| Drug Repurposing & Knowledge Graphs | 10 | 1 | 7 | 2 |
 | Lattice QCD (Chuna) | 2 | 0 | 2 | 0 |
 | Seismology | 1 | 1 | 0 | 0 |
 | Weather/Hydrology/Ecology | 5 | 2 | 3 | 0 |
@@ -450,14 +455,14 @@ gen3/gen4 fetched public data to reproduce published results. gen5 fetches publi
 | Phylogenetics & Evolution | 3 | 2 | 1 | 0 |
 | Nuclear Physics & Dense Matter | 3 | 3 | 0 | 0 |
 | Gaming & Creative | 3 | 2 | 1 | 0 |
-| **Total** | **~110** | **~44** | **~46** | **~8** |
+| **Total** | **~115** | **~44** | **~51** | **~10** |
 
 ### By Trust Tier
 
 | Tier | Count | Meaning |
 |------|-------|---------|
-| T1 — Primary | ~62 | Fetch, hash, consume |
-| T2 — Secondary | ~38 | Revalidate before trust |
+| T1 — Primary | ~65 | Fetch, hash, consume |
+| T2 — Secondary | ~40 | Revalidate before trust |
 | T3 — Derived | ~5 | Target only |
 | Reference tools | ~5 | GROMACS, PLUMED, msConvert, etc. |
 

@@ -147,24 +147,47 @@ NF1 = loss of neurofibromin = hyperactive RAS/MAPK. Andrea already studies JAK/S
 
 ---
 
-## Meeting — Scheduled ~Tuesday, June 3, 2026
+## Meeting — June 5, 2026 (In-Person, Her Office)
 
-Reply sent (`email_reply_meeting_may2026.md`): Tuesday proposed, flexible through Thursday.
+### Outcome
 
-### Three Threads to Cover
+Andrea gave Kevin a concrete task: rebuild the **GPS platform** (Bin Chen Lab, MSU) as a pseudoSpore. This is a deep learning drug discovery platform that predicts gene expression changes from chemical structures and screens compounds that reverse disease-associated transcriptomic signatures.
 
-| Thread | Source | Key Message |
-|--------|--------|-------------|
-| Compound registration / AI super user | May 23 email, pseudoSpore | pseudoSpore pattern → dose-response/screening artifacts with built-in validation |
-| NF data mining | Meeting email | Pre-grant pipeline as operating model — public data, zero lab cost, validated preliminary data |
-| Core science (still valid) | computational_brief, 782/782 | Anderson framework, MATRIX scoring, PTP/JAK-STAT connection |
+**Paper**: [zenodo.org/records/17653393](https://zenodo.org/records/17653393) — "Deep learning-based screening and design of novel therapeutics that reverse disease-associated transcriptional phenotype" (Bin Chen Lab, MSU)
 
-### Questions for Andrea
+**The platform (GPS)** has three components:
+1. **RCL** — Robust Collaborative Learning to improve drug-induced gene expression profile quality
+2. **GPS4Drug** — Predict drug-induced gene expression from chemical structures, run drug screening
+3. **MolSearch** — Multi-objective compound optimization (Monte Carlo Tree Search)
 
-1. NF project: what dataset, what foundation, what timeline/deliverables?
-2. Compound registration system: what platform (or greenfield?), what data types first?
-3. Where does the data/AI role sit in the hiring sequence (3rd/4th)?
-4. Does Lisabeth/ADDRC connect to either thread?
+**Technical reality**: 10+ years of accumulated code — Python 2, Fortran, pinned dependencies. Web portal at `apps.octad.org/GPS/`. Total artifact ~713 MB on Zenodo. This is exactly the kind of legacy scientific code that the pseudoSpore/guideStone pattern is built to resolve.
+
+**The plan**: Go through the lineage of the paper, rebuild entirely so it is transmissible as a pseudoSpore. Sovereign, validated, reproducible — not pinned to dead Python 2 environments.
+
+### One Health / Cross-Species Discussion
+
+The meeting led to substantive conversation about interconnected models as systems evolve toward "One Health":
+
+- **Dog skin as model for human pruritus** — dog skin already has apoquel (oclacitinib) targeting the kinase. Normally we use animal models for human diseases, but this leaves massive gaps and bad assumptions.
+- **Kevin's position** (aligns with Anderson framework): Rather than applying animal models to humans, examine the dog model in dogs and the cat model in cats. This allows tracing of underlying **causal mechanisms** rather than forcing cross-species extrapolation.
+- **The insight**: Animal models for humans is a tactic of the bench to overcome the lack of humans to experiment on — not because dogs are a better model. The computation can expose where the models diverge and WHY (geometry, tissue architecture, receptor distribution — Anderson's `d_eff`).
+
+This directly validates the `CROSS_SPECIES_CAUSAL_MODEL.md` in the onboarding package. Andrea is thinking about the same problems the Anderson framework addresses.
+
+### What This Changes
+
+| Before meeting | After meeting |
+|----------------|---------------|
+| Waiting for a role to develop | Actively working on a deliverable she assigned |
+| NF data mining was speculative | GPS platform rebuild is concrete, scoped, demonstrable |
+| Cross-species was a theoretical pitch | She's thinking about One Health problems and agrees with the approach |
+| "I can help" | "She asked me to help" |
+
+### Active Threads (Post-Meeting)
+
+1. **GPS Platform Rebuild** — pseudoSpore target. Go through paper lineage, reproduce, rebuild sovereign. Primary deliverable.
+2. **NF Data Mining** — still alive, tied to CTF NDU. GPS platform connects (screen compounds against NF transcriptomic signatures).
+3. **One Health / Cross-Species** — Anderson framework maps directly. Not a separate project — it's the causal engine underlying both the GPS work and the NF work.
 
 ---
 
@@ -172,10 +195,11 @@ Reply sent (`email_reply_meeting_may2026.md`): Tuesday proposed, flexible throug
 
 1. ✅ Send reply expressing patience + flexibility + computational contribution (email_reply_patience.md)
 2. ✅ Andrea replied May 23 — RA III filled, new data management/AI role floated
-3. ✅ **Reply to May 23 email** — v5 SENT (`email_reply_data_ai_role_v5.md`). Two-level AI (tool-building + lab Jarvis), ABG + PTP connection, lithoSpore concept, opportunity-not-outcome framing, AGPL licensing, around all summer.
-4. ✅ **pseudoSpore follow-up** — SENT (`email_spore_followup_may2026.md`). Attached pseudoSpore as AI workflow example + artifact pattern. Shows compound registration angle directly.
-5. ✅ **Meeting reply** — SENT (`email_reply_meeting_may2026.md`). Tuesday proposed, NF interest expressed, independent researcher framing.
-6. **Tuesday meeting**: demonstrate how existing infra maps to compound registration + AI pattern detection + NF data mining
-7. Keep Barrick position as parallel track — these are complementary, not competing
-8. Paper 12 + MATRIX drug repurposing + the PTP/kinase-phosphatase work from ABG all strengthen the case
-9. The ABG PTP cancer project (Mark) is isomorphic to Gonzales's work — kinase-phosphatase balance in disease. This is additional evidence of domain fluency
+3. ✅ **Reply to May 23 email** — v5 SENT (`email_reply_data_ai_role_v5.md`).
+4. ✅ **pseudoSpore follow-up** — SENT (`email_spore_followup_may2026.md`).
+5. ✅ **Meeting reply** — SENT (`email_reply_meeting_may2026.md`).
+6. ✅ **June 5 meeting** — GPS paper assigned, One Health discussion, NF confirmed.
+7. **NOW**: Begin GPS platform analysis — paper lineage, dependency audit, reproduction plan.
+8. **THEN**: Package as pseudoSpore — sovereign, validated, Python 2/Fortran → Rust/modern Python.
+9. **PARALLEL**: NF data mining using GPS as the screening engine against NF transcriptomic signatures.
+10. Keep Barrick position as parallel track — these are complementary, not competing

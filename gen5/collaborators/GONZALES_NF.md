@@ -1,12 +1,12 @@
 # Andrea Gonzales — NF Data Mining & Drug Discovery Collaboration
 
-**Status**: Engaged — meeting ~Tuesday June 3, product composition mapped, CTF NDU aligned
+**Status**: Engaged — GPS platform assigned (June 5), product composition mapped, CTF NDU aligned
 **Collaborator**: Andrea J. Gonzales, PhD, Assistant Professor, Pharmacology & Toxicology, MSU
 **Products**: helixVision + healthSpring + initioChem + coralForge (multi-product composition)
 **Springs Fed**: wetSpring, healthSpring, neuralSpring, hotSpring
-**Domain**: Neurofibromatosis data mining, drug discovery, compound registration
+**Domain**: Drug discovery transcriptomics (GPS platform), neurofibromatosis data mining, One Health cross-species
 **Funding**: CTF NF Data Utilization Award (NDU) — up to $125K total ($50K Y1 + $75K Y2)
-**Date**: May 28, 2026
+**Date**: June 6, 2026 (updated post-meeting)
 
 ---
 
@@ -23,11 +23,34 @@
 | May 2026 | pseudoSpore follow-up sent (artifact demo) | engaged |
 | May 2026 | Andrea mentions NF data mining project | engaged |
 | May 2026 | Meeting reply sent (Tuesday proposed) | engaged |
-| ~June 3 | Meeting scheduled | engaged |
+| **June 5, 2026** | **In-person meeting: GPS platform assigned, One Health discussion** | **engaged → producing** |
 
 ---
 
 ## Two Active Threads
+
+### Thread 0: GPS Platform Rebuild — `tideGlass` (Primary Deliverable)
+
+Andrea assigned Kevin the **GPS platform** (Bin Chen Lab, MSU) for rebuild as a pseudoSpore. This is the first concrete deliverable — not speculative, not waiting for a hire.
+
+**Platform name**: `tideGlass` (cross-spring biological current parser)
+**Org**: `protoKarya` (first project, first lens)
+**Introduction**: Gonzales → Bin Chen (offered, pending)
+
+**Source**: [zenodo.org/records/17653393](https://zenodo.org/records/17653393) — "Deep learning-based screening and design of novel therapeutics that reverse disease-associated transcriptional phenotype" — Cell (2026)
+
+**What GPS does**: Predicts drug-induced gene expression changes from chemical structures (SMILES → expression profile), then screens for compounds that *reverse* disease transcriptomic signatures. Three modules:
+- **RCL**: Robust Collaborative Learning — cleans noisy drug-induced profiles
+- **GPS4Drug**: Structure → expression prediction + virtual screening
+- **MolSearch**: Multi-objective lead optimization via MCTS
+
+**Technical state**: Python 2, Fortran, pinned dependencies, 713 MB on Zenodo, web portal at `apps.octad.org/GPS/`. 10+ years of accumulated legacy code.
+
+**pseudoSpore target**: Full lineage trace → reproduce every figure → rebuild sovereign → package with automated validation checks. Same pattern as hotSpring compChem GuideStone.
+
+**Data dependencies (all public)**: LINCS L1000 (1.3M drug perturbation profiles), GEO disease signatures, ChEMBL/PubChem compounds.
+
+**Connection to NF**: Screen compound libraries against NF transcriptomic signatures from the NF Data Portal. The GPS reversal scoring + Anderson tissue geometry + healthSpring MATRIX = three complementary angles on the same drug repurposing question.
 
 ### Thread 1: NF Data Mining Project
 
@@ -136,6 +159,17 @@ This is the gen5 evolution profile: challenge participation and collaborator sci
 ---
 
 ## The gen5 Pattern
+
+### One Health / Cross-Species (Meeting June 5)
+
+Andrea and Kevin discussed the interconnected models problem as systems evolve toward "One Health":
+
+- Dog skin is used as a model for human pruritus because apoquel already targets the kinase in dogs
+- Animal models for humans is a tactic of the bench to overcome the lack of human subjects — not because dogs are a better model
+- Better approach: examine the dog model in dogs, cat model in cats — trace **underlying causal mechanisms**
+- This is the Anderson framework stated in pharmacology language: tissue geometry (d_eff) determines signal propagation, not species identity
+
+**GPS + Anderson synthesis**: GPS tells you WHAT compound reverses the disease signature. Anderson tells you WHERE the drug signal will propagate in a given tissue geometry. Together they bypass species-extrapolation entirely — you predict species-specific drug responses from causal mechanisms.
 
 Gonzales is the canonical gen5 collaborator: a faculty PI with a specific biological question, foundation funding, and institutional access that the ecosystem doesn't have. The cycle:
 
