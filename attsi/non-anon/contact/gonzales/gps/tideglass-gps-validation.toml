@@ -1,0 +1,164 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Thread 3: Immunology / Drug Discovery — tideGlass GPS Validation
+#
+# Validates the tideGlass lithoSpore guidestone against GPS Cell 2026.
+# Runs all 7 modules in dependency order:
+#   module1 (RGES correlation) → module2 (RCL) → module3 (GPS4Drug) →
+#   module4 (reversal screening) → module5 (MCTS) → module6 (OCTAD parity) →
+#   module7 (NF extension)
+#
+# This workload covers the full Tier 1 (Python notebooks) validation pass.
+# Tier 2 (Rust parity) and Tier 3 (Primal/GPU) are separate workloads
+# that depend on this one passing first.
+
+[metadata]
+name = "tideglass-gps-validation"
+description = "tideGlass GPS Cell 2026 full validation — 7 modules, papers as validation targets"
+version = "0.1.0"
+thread = "03"
+thread_name = "Immunology / Drug Discovery"
+spring = "healthSpring"
+garden = "lithoSpore"
+org = "protoKarya"
+platform = "tideGlass"
+guidestone = "tideglass-guidestone"
+scope_file = "scope.toml"
+
+[execution]
+type = "native"
+command = "${TIDEGLASS_ROOT:-${GARDENS_ROOT:-${ECOPRIMALS_ROOT}/gardens}/tideGlass}/target/release/tideglass-validate"
+args = ["--scope", "scope.toml", "--tier", "1", "--all-modules"]
+working_dir = "${TIDEGLASS_ROOT:-${GARDENS_ROOT:-${ECOPRIMALS_ROOT}/gardens}/tideGlass}"
+
+[resources]
+max_memory_bytes = 34359738368
+max_cpu_percent = 90.0
+gpu_required = false
+gpu_preferred = true
+estimated_duration_minutes = 180
+
+[data]
+required_datasets = [
+    "lincs_l1000_level5_vcap_t1",
+    "gps4drug_heldout_test",
+    "chembl_jak_panel",
+    "zinc_hcc_screened_subset",
+    "octad_hcc_baseline",
+    "nf_disease_signatures",
+]
+data_root = "${TIDEGLASS_DATA:-${BIOMEGATE_DATA}/tideglass}"
+total_size_gb = 28.5
+streaming_required = true
+
+[modules]
+order = [
+    "rges_correlation",
+    "rcl_noise_cleaning",
+    "expression_prediction",
+    "reversal_screening",
+    "mcts_optimization",
+    "octad_parity",
+    "nf_extension",
+]
+
+[modules.rges_correlation]
+binary = "tideglass-rges"
+tier1_notebook = "notebooks/module1_rges/rges_correlation.py"
+paper = "Chen 2017 (Nat Commun 8:16022)"
+claim = "RGES correlates with IC50 (r=0.52, P=2.3e-3 in MCF7)"
+tolerance_r_squared = 0.90
+depends_on = []
+
+[modules.rcl_noise_cleaning]
+binary = "tideglass-rcl"
+tier1_notebook = "notebooks/module2_rcl/rcl_vcap_cleaning.py"
+paper = "Xing 2026 (Cell)"
+claim = "RCL improves VCAP_t1 profile signal-to-noise vs raw LINCS"
+tolerance_snr_improvement = 1.5
+depends_on = []
+
+[modules.expression_prediction]
+binary = "tideglass-gps4drug"
+tier1_notebook = "notebooks/module3_prediction/gps4drug_heldout.py"
+paper = "Xing 2026 (Cell)"
+claim = "GPS4Drug predicts expression from structure (R² on held-out test set)"
+tolerance_r_squared = 0.85
+depends_on = ["rcl_noise_cleaning"]
+
+[modules.reversal_screening]
+binary = "tideglass-screen"
+tier1_notebook = "notebooks/module4_screening/zinc_reversal_screen.py"
+paper = "Xing 2026 (Cell)"
+claim = "ZINC screening recovers known HCC actives (enrichment AUC)"
+tolerance_auc = 0.70
+depends_on = ["expression_prediction"]
+
+[modules.mcts_optimization]
+binary = "tideglass-molsearch"
+tier1_notebook = "notebooks/module5_mcts/molsearch_hcc_lead.py"
+paper = "Xing 2026 (Cell)"
+claim = "MCTS optimizes HCC lead: IC50 4uM to 0.5uM, selectivity maintained"
+tolerance_ic50_improvement_fold = 4.0
+depends_on = ["expression_prediction"]
+
+[modules.octad_parity]
+binary = "tideglass-octad"
+tier1_notebook = "notebooks/module6_octad/octad_parity.py"
+paper = "Zeng 2021 (Nat Protocols 16:728-753)"
+claim = "GPS screening exceeds OCTAD repurposing for HCC targets"
+tolerance_enrichment_delta = 0.0
+depends_on = ["reversal_screening"]
+
+[modules.nf_extension]
+binary = "tideglass-nf"
+tier1_notebook = "notebooks/module7_nf/nf_reversal_screen.py"
+paper = "Novel (first NF application)"
+claim = "GPS reversal scoring identifies candidates for NF1-driven tumors"
+tolerance_enrichment_auc = 0.60
+depends_on = ["reversal_screening"]
+
+[security]
+isolation_level = "Standard"
+trusted_directories = [
+    "${TIDEGLASS_ROOT}",
+    "${TIDEGLASS_DATA}",
+    "${ECOPRIMALS_ROOT}",
+    "${GARDENS_ROOT}",
+]
+network_required = false
+network_reason = "All data pre-fetched via DATA_MANIFEST.md; no runtime network"
+
+[skip]
+when = "binary_missing"
+binary = "${TIDEGLASS_ROOT:-${GARDENS_ROOT:-${ECOPRIMALS_ROOT}/gardens}/tideGlass}/target/release/tideglass-validate"
+reason = "tideGlass binary requires: cargo build --release in tideGlass repo (protoKarya/tideGlass)"
+
+[provenance]
+chain = "rhizoCrypt"
+attestation = "sweetGrass"
+spine = "loamSpine"
+requires_trio = true
+method_stability = "all_stable"
+methods_consumed = [
+    "session.create",
+    "event.append",
+    "session.complete",
+    "entry.append",
+    "braid.create",
+]
+emit_pseudospore = true
+pseudospore_format = "v1"
+
+[validation_targets]
+file = "data/targets/thread03_tideglass_targets.toml"
+paper_count = 6
+claim_count = 7
+total_modules = 7
+
+[lineage]
+parent_threads = ["03", "07", "10"]
+upstream_springs = ["healthSpring", "wetSpring", "neuralSpring", "hotSpring"]
+upstream_gardens = ["lithoSpore", "projectNUCLEUS"]
+upstream_primals = ["barraCuda", "toadStool", "rhizoCrypt", "loamSpine", "sweetGrass", "nestGate"]
+zenodo_record = "17653393"
+zenodo_md5 = "f6c33dc6ccb994866ee13ed98f78a37d"
