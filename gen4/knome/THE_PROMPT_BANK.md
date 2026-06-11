@@ -493,3 +493,33 @@ and here is what matters now."
 
 *These prompts built 14 primals, 8 springs, 27,000+ tests, and an
 ecosystem. They are not complex. They are consistent.*
+
+---
+
+## Wave 109 Evolution Note (June 2026)
+
+The prompt bank above is the **gen3→gen4 methodology fossil record** — preserved
+exactly as used. The living operational context has since evolved into a
+three-tier architecture:
+
+**Tier 1** (you are here): `whitePaper/gen4/knome/` — K-NOME methodology,
+the geological constraint, the prompt vocabulary. Historical and durable.
+
+**Tier 2**: `wateringHole/ECOSYSTEM_ARCHITECTURE_CONTEXT.md` — universal
+operational patterns (cascade, build pipeline, primal composition, wave system,
+AI interaction patterns). Portable to any NUCLEUS deployment.
+
+**Tier 3**: `wateringHole/DEPLOYMENT_INSTANCE.toml` — this fleet's VPS nodes,
+IPs, SSH aliases, endpoints, active FRAGOs. Instance-specific, forkable.
+
+The comprehensive audit prompt (Section 1 above) has a current-wave descendant:
+`wateringHole/handoffs/PRIMALSPRING_OVERWATCH_SPRING_AUDIT_BLURB_WAVE109.md`
+which adds guideStone P1-P5 properties, HEALTH-01, gate profiles, and the
+standard startup envelope as audit dimensions.
+
+The communication model (handoffs / FRAGOs / blurbs) is formalized in:
+`wateringHole/ECOSYSTEM_COMMUNICATION_STANDARD.md`
+
+**Reading order for a fresh instance**: `DEPLOYMENT_INSTANCE.toml` (where am I?) →
+`ECOSYSTEM_ARCHITECTURE_CONTEXT.md` (how does it work?) → this file (why was it
+built this way?) → `gen5/README.md` (where is it going?)
