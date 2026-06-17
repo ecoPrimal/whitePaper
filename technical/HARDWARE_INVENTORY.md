@@ -23,8 +23,8 @@ Each physical device maps to a position in the K-Derm cell envelope model
  ║                      cellMembrane/crates/.../firewall.rs         ║
  ╚═══════════════════════════════════════════════════════════════════╝
        │
- Cytoplasm              CRS310 (L2) → Omada (L2+) → TL-SG605S (L2)
-                        eastGate, northGate, Eeros
+ Cytoplasm              Hub 1: CRS310 (L2) — sporeGate, eastGate, northGate
+                        Hub 2: Omada (L2+) — fieldGate, towers, Eero, TL-SG605S
                         All NUCLEUS processes, UDS IPC
 ```
 
@@ -118,10 +118,11 @@ these rules programmatically from the membrane composition.
 | **FCC ID** | 2AEM4-61704 |
 | **Serial** | ND3S-O15V-4SFF-XZPH |
 | **Power** | 5.0V 3.0A |
-| **Connection** | CRS310 ether2 (2.5G) |
-| **LAN IP** | 192.168.1.115 |
-| **Mode** | Bridge to ATT subnet (192.168.1.x) |
-| **Extends to** | House 2 (Samantha Ave) via satellite |
+| **Connection** | Omada SX3008F (house2 zone) |
+| **NAT subnet** | 10.0.7.x (Eero's own NAT) |
+| **Mode** | NAT router for human WiFi at house2 |
+| **Extends to** | House 2 (Samantha Ave) coverage via satellite |
+| **Role** | Human WiFi only — no compute gates. Collapsing to bridge mode (future). |
 
 ---
 
@@ -138,13 +139,17 @@ these rules programmatically from the membrane composition.
 | **Role** | Overwatch, primalSpring, compute (Galaxy :8080) |
 | **OS** | Pop!_OS |
 
-### northGate (gaming/remote)
+### northGate (gaming/idle compute)
 
 | Field | Value |
 |-------|-------|
-| **LAN IP** | TBD (reachable via RustDesk) |
-| **Connection** | via MikroTik or Omada |
-| **Role** | Gaming/remote node, NUCLEUS pending |
+| **OS** | Windows |
+| **GPU** | NVIDIA RTX 5090 |
+| **LAN IP** | TBD (on CRS310 backbone zone) |
+| **Connection** | CRS310 (backbone, hub 1) |
+| **RustDesk** | Reachable (public relay, needs sovereign push) |
+| **SSH** | Windows OpenSSH (needs: Settings → Optional Features → OpenSSH Server) |
+| **Role** | Gaming primary. Idle compute (GPU workloads via NUCLEUS). Future: toadStool/barraCuda GPU dispatch. |
 
 ### fieldGate (canary NUC — OFFLINE)
 
@@ -175,18 +180,21 @@ AT&T Fiber ──► BGW320-500 (192.168.1.254)
               sporeGate enp1s0 (192.168.1.233)
               sporeGate eno1 (192.168.4.1) ──2.5G──► CRS310 ether8
                                                        │
-                              ┌─────────────────────────┼──────────────────┐
-                              │                         │                  │
-                        ether2 (2.5G)            sfp+1 (10G)         sfp+2 (10G)
-                        Eero 6 base              Omada SX3008F       eastGate
-                        (bridge 192.168.1.x)     (L2+ switch)        (compute)
-                                                       │
-                                                  ┌────┼────┐
-                                                  │    │    │
-                                                APs  IoT  TL-SG605S-M2
-                                                          (2.5G expansion)
+              ┌────────────────┬───────────────────────┼──────────────────┐
+              │                │                       │                  │
+        etherX (2.5G)    etherX (2.5G)          sfp+1 (10G)        sfp+2 (10G)
+        northGate        (spare)                Omada SX3008F      eastGate
+        (Win/5090)                              (L2+ → house2)     (compute)
+                                                      │
+                                                 ┌────┼────┼────────┐
+                                                 │    │    │        │
+                                               fieldGate towers  TL-SG605S  Eero 6
+                                               (offline)         (2.5G)     (WiFi/NAT)
 
-WiFi coverage: Eero 6 base → satellite (House 2, wireless backhaul)
+Hub 1 (backbone/CRS310): sporeGate, eastGate, northGate
+Hub 2 (house2/Omada):    fieldGate, towers, TL-SG605S, Eero 6 (human WiFi)
+WAN:                     flockGate (offsite, public relay)
+WiFi coverage:           Eero 6 on Omada → satellite (House 2 humans, NAT 10.0.7.x)
 ```
 
 ---
