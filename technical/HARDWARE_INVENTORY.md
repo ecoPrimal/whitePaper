@@ -147,9 +147,38 @@ these rules programmatically from the membrane composition.
 | **GPU** | NVIDIA RTX 5090 |
 | **LAN IP** | TBD (on CRS310 backbone zone) |
 | **Connection** | CRS310 (backbone, hub 1) |
-| **RustDesk** | Reachable (public relay, needs sovereign push) |
+| **RustDesk** | ✅ Sovereign relay |
 | **SSH** | Windows OpenSSH (needs: Settings → Optional Features → OpenSSH Server) |
 | **Role** | Gaming primary. Idle compute (GPU workloads via NUCLEUS). Future: toadStool/barraCuda GPU dispatch. |
+
+### ironGate
+
+| Field | Value |
+|-------|-------|
+| **RustDesk** | ✅ Sovereign relay |
+| **Connection** | TBD |
+| **Role** | projectNUCLEUS/ABG compute. Reassigned from cellMembrane ownership. |
+
+### strandGate (on Omada/house2)
+
+| Field | Value |
+|-------|-------|
+| **RustDesk** | Public relay (needs sovereign push) |
+| **Connection** | Omada SX3008F (house2 zone, via TL-SG605S) |
+
+### southGate (on Omada/house2)
+
+| Field | Value |
+|-------|-------|
+| **RustDesk** | Public relay (needs sovereign push) |
+| **Connection** | Omada SX3008F (house2 zone, via TL-SG605S) |
+
+### swiftGate (on Eero WiFi)
+
+| Field | Value |
+|-------|-------|
+| **RustDesk** | Public relay (needs sovereign push) |
+| **Connection** | Eero 6 WiFi (house2 zone, bridged) |
 
 ### fieldGate (canary NUC — OFFLINE)
 
