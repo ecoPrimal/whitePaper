@@ -1,6 +1,6 @@
 # Hardware Inventory — ecoPrimals Physical Topology
 
-**Last updated**: Jun 17 2026 | **Wave**: 115
+**Last updated**: Jun 18 2026 | **Wave**: 116
 **Location**: 4422 Southgate Ave / 641 Samantha Ave, Lansing MI
 
 ---
@@ -24,7 +24,7 @@ Each physical device maps to a position in the K-Derm cell envelope model
  ╚═══════════════════════════════════════════════════════════════════╝
        │
  Cytoplasm              Hub 1: CRS310 (L2) — sporeGate, eastGate, northGate
-                        Hub 2: Omada (L2+) — fieldGate, towers, Eero, TL-SG605S
+                        Hub 2: Omada (L2+) — fieldGate, towers, Flint 2 (AP), TL-SG605S
                         All NUCLEUS processes, UDS IPC
 ```
 
@@ -109,7 +109,23 @@ these rules programmatically from the membrane composition.
 
 ---
 
-## WiFi Mesh
+## WiFi AP — Hub 2
+
+### GL.iNet Flint 2 (GL-MT6000) — INCOMING (replaces Eero this weekend)
+
+| Field | Value |
+|-------|-------|
+| **Device** | GL.iNet Flint 2 (GL-MT6000) |
+| **Chipset** | MediaTek MT7986A (Filogic 830) |
+| **WiFi** | Wi-Fi 6 (AX6000): 2.4GHz + 5GHz + 6GHz-ready |
+| **Ports** | 1x 2.5G WAN + 4x 1G LAN |
+| **Firmware** | OpenWrt (GL.iNet fork) |
+| **Target Mode** | AP bridge (no NAT, transparent to sporeGate DHCP) |
+| **Connection** | Omada SX3008F (house2 zone) |
+| **Role** | Human WiFi at hub 2 + swiftGate connectivity |
+| **Advantages** | SSH, nftables, WireGuard client, VLAN-tagged SSIDs, guest isolation |
+
+### Eero 6 (RETIRING — bridge mode collapsed Jun 18)
 
 | Field | Value |
 |-------|-------|
@@ -118,11 +134,8 @@ these rules programmatically from the membrane composition.
 | **FCC ID** | 2AEM4-61704 |
 | **Serial** | ND3S-O15V-4SFF-XZPH |
 | **Power** | 5.0V 3.0A |
-| **Connection** | Omada SX3008F (house2 zone) |
-| **NAT subnet** | 10.0.7.x (Eero's own NAT) |
-| **Mode** | NAT router for human WiFi at house2 |
-| **Extends to** | House 2 (Samantha Ave) coverage via satellite |
-| **Role** | Human WiFi only — no compute gates. Collapsing to bridge mode (future). |
+| **Status** | RETIRING — bridge mode unstable, replaced by Flint 2 |
+| **Failure** | Bridge mode collapsed overnight Jun 17→18. Not repairable without Eero cloud dependency. |
 
 ---
 
@@ -173,12 +186,12 @@ these rules programmatically from the membrane composition.
 | **RustDesk** | Public relay (needs sovereign push) |
 | **Connection** | Omada SX3008F (house2 zone, via TL-SG605S) |
 
-### swiftGate (on Eero WiFi)
+### swiftGate (hub 2 WiFi)
 
 | Field | Value |
 |-------|-------|
 | **RustDesk** | Public relay (needs sovereign push) |
-| **Connection** | Eero 6 WiFi (house2 zone, bridged) |
+| **Connection** | WiFi — was on Eero, will move to Flint 2 AP after swap |
 
 ### fieldGate (canary NUC — OFFLINE)
 
@@ -217,13 +230,13 @@ AT&T Fiber ──► BGW320-500 (192.168.1.254)
                                                       │
                                                  ┌────┼────┼────────┐
                                                  │    │    │        │
-                                               fieldGate towers  TL-SG605S  Eero 6
-                                               (offline)         (2.5G)     (WiFi/NAT)
+                                               fieldGate towers  TL-SG605S  Flint 2
+                                              (offline)         (2.5G)     (WiFi AP)
 
 Hub 1 (backbone/CRS310): sporeGate, eastGate, northGate
-Hub 2 (house2/Omada):    fieldGate, towers, TL-SG605S, Eero 6 (human WiFi)
+Hub 2 (house2/Omada):    fieldGate, towers, TL-SG605S, Flint 2 (WiFi AP, incoming)
 WAN:                     flockGate (offsite, public relay)
-WiFi coverage:           Eero 6 on Omada → satellite (House 2 humans, NAT 10.0.7.x)
+WiFi coverage:           Flint 2 on Omada → AP bridge (hub 2 humans + swiftGate)
 ```
 
 ---
