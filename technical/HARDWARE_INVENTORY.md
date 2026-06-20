@@ -92,7 +92,7 @@ these rules programmatically from the membrane composition.
 | **Device Key** | 1E73-A4FF-F547-8EC5-8000 |
 | **S/N** | Y24C041000089 |
 | **Connection** | sfp-sfpplus1 on CRS310 (10G trunk) |
-| **LAN IP** | 192.168.4.115 |
+| **LAN IP** | 192.168.4.111 (confirmed Jun 20 via sporeGate probe) |
 
 ---
 
@@ -247,7 +247,7 @@ WiFi coverage:           Flint 2 on Omada → AP bridge (hub 2 humans + swiftGat
 |--------|-----------|----------|----------|
 | ATT BGW320 | http://192.168.1.254 | — | Device Access Code: #283>#66<> |
 | CRS310 | 192.168.4.2 (SSH/HTTP/Winbox) | admin | (set during setup) |
-| Omada SX3008F | LAN IP (TBD, likely 192.168.4.115) | admin | admin |
+| Omada SX3008F | https://192.168.4.111 | admin | admin |
 | sporeGate | ssh sporeGate (192.168.4.3) | sporegate | SSH key |
 | golgi | ssh root@157.230.3.183 | root | SSH key |
 | pepti | ssh root@157.230.209.218 | root | SSH key |
