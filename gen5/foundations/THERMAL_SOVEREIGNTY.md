@@ -136,16 +136,110 @@ The ecosystem produces dollars (electricity → compute → IP) and gold bars (w
 
 A typical home water heater uses ~4,500 kWh/year. A 4-gate garage rack generates **2× that** in waste heat alone. The question is not whether there's enough energy — it's whether we capture it efficiently.
 
-### Heat Pump COP Advantage
+### Heat Pump COP — Where the Bath Equalizes
 
-Heat pumps move thermal energy at COP 3-5. Meaning: 1 kWh of electricity moves 3-5 kWh of heat energy from source to sink.
+A heat pump doesn't create heat — it **moves** it from source to sink using electricity as the mover. COP (Coefficient of Performance) is the ratio: how many kWh of heat delivered per kWh of electricity consumed.
 
-But we don't even need to *pump* against a gradient in the compute case — the exhaust air is already **hot** (40-60°C at the rack exhaust). This is a *source-side* advantage: the heat pump's source temperature is elevated, boosting COP significantly above ambient-source numbers.
+**COP > 1 means you're getting "free" energy** (moving ambient/exhaust heat that already exists).
+**COP = 1 means you've equalized** — no better than a resistance heater.
+**COP < 1 is impossible for a heat pump** (but system overhead/parasitic losses can make the *effective* COP < 1).
+
+#### The Carnot Limit (Physics Maximum)
 
 ```
-Typical air-source COP (cold ambient → hot water): 2.5-3.5
-Compute-exhaust-source COP (warm exhaust → hot water): 4.0-6.0+
+COP_carnot = T_hot / (T_hot - T_source)    [temperatures in Kelvin]
 ```
+
+Real heat pumps achieve 40-60% of Carnot. Our source is compute exhaust at ~50°C (323K).
+
+#### COP vs Target Temperature (Source: 50°C Compute Exhaust)
+
+| Target Sink | T_hot (K) | Carnot COP | Real COP (50% Carnot) | kWh heat per kWh elec | Verdict |
+|------------|-----------|-----------|----------------------|----------------------|---------|
+| Space heating (25°C) | 298 | — | — | — | Exhaust IS the heating (no pump needed) |
+| DHW preheat (45°C) | 318 | — | — | — | Exhaust IS hotter (direct exchange) |
+| **DHW (55°C)** | **328** | **65.6** | **~12** | **12 kWh heat / 1 kWh elec** | **Absurd efficiency — 5°C lift** |
+| DHW (60°C) | 333 | 33.3 | **~10** | **10:1** | Still excellent |
+| Hot tub (40°C) | 313 | — | — | — | Below source, no pump needed |
+| Sauna feed (70°C) | 343 | 17.2 | **~7** | **7:1** | Great |
+| Sauna (80°C) | 353 | 11.8 | **~5.5** | **5.5:1** | Good |
+| Sand battery (100°C) | 373 | 7.5 | **~3.5** | **3.5:1** | Solid |
+| Sand battery (150°C) | 423 | 4.2 | **~2.1** | **2.1:1** | Still worth it |
+| Sand battery (200°C) | 473 | 3.2 | **~1.6** | **1.6:1** | Marginal gain over resistance |
+| Sand battery (300°C) | 573 | 2.3 | **~1.2** | **1.2:1** | Barely beats resistance |
+| **EQUILIBRIUM (~370°C)** | **~643** | **2.0** | **~1.0** | **1:1** | **Bath equalized — resistance is simpler** |
+| Kiln (600°C) | 873 | 1.6 | ~0.8 effective | <1:1 | **Use resistance** |
+
+#### The Equalization Point
+
+**The bath equalizes at ~370°C target temperature** (with 50°C source). Above that, the heat pump offers no efficiency advantage over just dumping electricity into resistive coils in the sand.
+
+```
+ZONE MAP:
+
+   Source: 50°C (compute exhaust)
+   ─────────────────────────────────────────────────────────────────
+   
+   25°C         55°C        80°C       150°C      370°C      600°C+
+   ├─────────────┼───────────┼──────────┼──────────┼──────────┤
+   │   FREE      │  COP 10+  │  COP 5   │  COP 2   │  COP 1   │ RESISTANCE
+   │ (no pump    │ (absurd   │ (great)  │ (worth   │ (equals  │ (just use
+   │  needed,    │  gains,   │          │  it for  │  line,   │  coils)
+   │  exhaust    │  DHW is   │          │  storage)│  use     │
+   │  alone)     │  nearly   │          │          │  either) │
+   │             │  free)    │          │          │          │
+   └─────────────┴───────────┴──────────┴──────────┴──────────┘
+```
+
+#### What This Means Practically
+
+1. **DHW (55-60°C)**: COP 10-12. For every 1 kWh powering the heat pump, you get 10-12 kWh of hot water. Your compute exhaust does almost all the work — the pump just lifts it 5-10°C. **This is essentially free hot water.**
+
+2. **Sauna (70-80°C)**: COP 5-7. Still an incredible ratio. 1 kWh of electricity delivers 5-7 kWh of thermal energy to the sauna. **80% of your sauna heat comes from compute waste.**
+
+3. **Sand battery (100-150°C)**: COP 2-3.5. Every kWh of pump electricity stores 2-3.5 kWh. **The sweet spot for long-term storage.** Enough temperature for overnight DHW delivery, space heating, and kiln preheat.
+
+4. **Sand battery (200-370°C)**: COP 1.2-1.6. Marginal gain. **Use resistance heating above 200°C** — it's simpler, cheaper hardware, and you only lose 20-40% vs the pump. The sand itself doesn't care how the heat got there.
+
+5. **Above 370°C**: Resistance only. The heat pump adds nothing. For kiln/furnace, just run power through coils in the sand or directly in the kiln.
+
+#### The Hybrid Strategy
+
+The optimal system uses the heat pump WHERE it has leverage, and resistance WHERE it doesn't:
+
+```
+Compute exhaust (50°C)
+    │
+    ▼
+Heat Pump (targets 100-150°C sweet spot)
+    │
+    ├──→ Water buffer (55-60°C) ──→ DHW (COP 10-12, essentially free)
+    │
+    └──→ Sand battery (100-150°C, COP 2-3.5) ──→ stores thermal energy
+              │
+              ▼
+         Resistance boost (when needed)
+              │
+              ├──→ Sand to 200-400°C (for kiln preheat)
+              └──→ Sauna boost past 80°C (small top-off)
+```
+
+The heat pump does the heavy lifting up to 150°C (where it has 2-3.5× leverage). Resistance handles the last mile above that (where the pump's advantage vanishes). You get the best of both: efficiency where it matters, simplicity where it doesn't.
+
+#### The Ratio: Thermal Energy vs Electrical Input
+
+For our steady-state system (~515W compute exhaust, heat pump running):
+
+| Heat Pump Target | Pump Power Needed | Heat Delivered | Ratio (Heat:Elec) | Monthly Elec Cost (@$0.12) |
+|-----------------|-------------------|----------------|-------------------|----------------------------|
+| DHW (55°C) | ~43W | 515W thermal | **12:1** | $3.10 |
+| Sand (100°C) | ~147W | 515W thermal | **3.5:1** | $10.60 |
+| Sand (150°C) | ~245W | 515W thermal | **2.1:1** | $17.60 |
+| Sand (200°C) | ~322W | 515W thermal | **1.6:1** | $23.20 |
+
+**To capture ALL 515W of compute waste heat into a 100°C sand battery**: costs ~147W of additional electricity = **$10.60/month**. That stored heat is worth ~$40-60/month in displaced DHW + space heating. **Net gain: $30-50/month from a $10 electricity investment.**
+
+For DHW alone (55°C target): costs **$3.10/month** in pump electricity to deliver **$40-50/month worth of hot water**. That's a **13:1 return on energy invested.**
 
 ---
 
