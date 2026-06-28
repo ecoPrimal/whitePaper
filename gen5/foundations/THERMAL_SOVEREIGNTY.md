@@ -19,7 +19,108 @@ The biological metaphor: a cell doesn't distinguish between "ATP energy" and "he
 
 ## The Unified Energy Model
 
-### Energy Is One Thing
+### Energy Is One Thing — But Two Kinds
+
+There's one energy. But it has two *qualities*:
+
+**Ordered energy (electricity)** — flows on wires, does precise work, fully convertible. This is the FUEL. It enters the system from outside (grid, solar) or is generated internally (TEG, Stirling). It's like gasoline: concentrated, directional, you buy it, you burn it once, and it's gone (converted to heat). You can't "find" electricity lying around in your system — it must be generated or purchased.
+
+**Disordered energy (heat)** — fills volumes, flows through mass, moves by conduction/convection/radiation. This is the MEDIUM. It's what electricity becomes after it does work. It's everywhere, it's the natural end-state of all energy, it flows "downhill" (hot→cold) for free. You can't easily convert it back to electricity (5-25% efficiency). It's like water after the dam: spread out, low-grade, but still useful if you have channels for it.
+
+```
+ELECTRICITY                              HEAT
+(ordered, wired, fuel)                   (disordered, volumetric, medium)
+──────────────────────                   ─────────────────────────────────
+• Travels on wires                       • Fills space, moves through mass
+• 100% convertible to any form           • Only 5-25% convertible back to elec
+• Must be generated or bought            • Exists naturally (ambient is heat)
+• Instantaneous (speed of light)         • Slow (conduction, convection)
+• Doesn't "store" well (LFP: $500/kWh)  • Stores cheaply (sand: $10/kWh)
+• Precise (runs motors, chips, lights)   • Diffuse (warms volumes, grows plants)
+• Like gasoline: burn once               • Like water: flows, fills, soaks
+• The INPUT to the system                • The MEDIUM of the system
+• You pay for this                       • You get this for free (from the input)
+```
+
+**The relationship:**
+```
+Grid/Solar ──→ ELECTRICITY ──→ Compute ──→ HEAT ──→ (...useful sinks...)
+   (fuel)        (ordered)      (work)     (disordered)    (value)
+                    │                          │
+                    │   100% conversion →      │
+                    │   (trivial, irreversible)│
+                    │                          │
+                    │   ← 5-25% conversion     │
+                    │   (hard, expensive,      │
+                    │    requires engine)       │
+                    └──────────────────────────┘
+```
+
+Electricity is coal. Heat is the fire after you burn the coal. You can't un-burn coal easily (heat→electricity is hard). But the fire is still useful — you just need the right hearth for it.
+
+**In our system**: electricity enters from the grid (or solar). It does one job — run compute. Then it's done. It BECOMES heat. Everything after that point is thermal engineering — routing the heat to where it has value. The electricity chapter is short (buy it, spend it on compute). The heat chapter is long (capture, store, route, cascade, dissipate usefully).
+
+### So Where Is Electricity in the Physical System?
+
+```
+                         ELECTRICITY LAYER (wired, point-to-point)
+                         ═══════════════════════════════════════════
+     Grid ────────────── Main Panel ─────── Subpanels ──── Outlets
+     (200A service)         │                    │            │
+                            │                    │            ├── Compute racks
+     Solar (future) ───── Inverter ──── LFP ────┘            ├── Heat pump compressor
+                            │           Battery               ├── Water pump (loops)
+                            │           (time-shift           ├── Fans (exhaust ducting)
+                            │            electricity)         ├── Sensors (ESP32)
+                            │                                 └── LED grow lights (if needed)
+                            │
+                            └──── Net meter (grid export when excess)
+
+                         HEAT LAYER (volumetric, flows through mass)
+                         ═══════════════════════════════════════════
+                         Exists EVERYWHERE after electricity is spent.
+                         Not wired. Not point-to-point.
+                         Moves through: air, water, glycol, sand, copper, soil, concrete
+                         Stored in: sand battery, water tank, ground loop, thermal mass
+                         Routed by: pipes, ducts, pumps, dampers, insulation (lack of = flow)
+```
+
+Electricity is the **nervous system** — thin wires, precise signals, fast, expensive, directional.
+Heat is the **circulatory system** — thick pipes, bulk flow, slow, cheap, volumetric.
+
+Both carry energy. But they move differently, store differently, and cost differently. The system needs both: electricity to GENERATE the heat (via compute), and thermal infrastructure to DISTRIBUTE and USE the heat.
+
+### What Electricity Pays For (and What Heat Provides for Free)
+
+| Electricity pays for... | Heat provides for free... |
+|------------------------|--------------------------|
+| Running the CPUs/GPUs (compute work) | Warming the garage (just exhaust) |
+| Running the heat pump compressor (~50-150W) | Hot water at COP 10 (10× the pump's input) |
+| Running circulation pumps (~10-30W) | Moving thermal mass through pipes |
+| Running fans for exhaust ducting (~5-20W) | Natural convection (hot air rises) |
+| Running sensors/ESP32 (~2-5W) | Temperature gradients (physics does the measuring) |
+| **Total overhead: ~70-300W** | **Total delivered: 500-2500W thermal** |
+
+The ratio: you spend **70-300W of ordered energy** (electricity for pumps/fans/sensors) to capture and route **500-2500W of disordered energy** (heat from compute). That's a system-level COP of 3-8×. You're getting 3-8 watts of useful thermal output for every watt you spend on the thermal infrastructure.
+
+The compute electricity itself (~515W) isn't "spent" on thermal — it's spent on COMPUTE (information is the primary product). The heat is the free byproduct. The 70-300W overhead is the cost of CAPTURING that byproduct instead of venting it.
+
+### Adding Energy vs Routing Energy
+
+```
+ADDING ENERGY (costs money):        ROUTING ENERGY (costs almost nothing):
+  • Grid electricity ($0.12/kWh)       • Opening/closing a damper
+  • Solar install (capital cost)       • Turning a valve
+  • LFP battery (capital cost)         • Starting a pump (10-30W)
+  • Resistance boost (kWh for kWh)     • Insulation (one-time install)
+                                       • Gravity (water flows downhill)
+                                       • Convection (hot air rises)
+                                       • Conduction (heat moves through copper)
+```
+
+Your grid meter measures what you ADD. Everything after the meter is routing — and routing is nearly free. The whole thermal system's operating cost is the small electricity overhead for pumps and fans (~$5-20/month). The heat itself is a gift from compute that you were already paying for.
+
+### Energy Is One Thing (continued)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
