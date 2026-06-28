@@ -1,6 +1,6 @@
-# Thermal Sovereignty — Waste Heat as a Resource Stream
+# Energy Sovereignty — Unified Energy Accounting for a Sovereign Mesh
 
-**Date**: Jun 27, 2026
+**Date**: Jun 27, 2026 (expanded Jun 28)
 **Status**: Concept — architectural vision, hardware planning stage
 **Lineage**: gen4/economics/THE_FLYWHEEL §sunCloud → gen5/foundations/KDERM_DIDERM_ENVELOPE → topology/physical
 **Wave**: 128
@@ -9,9 +9,115 @@
 
 ## Thesis
 
-Every watt consumed by compute becomes heat. In a sovereign ecosystem, waste heat is not a problem to be cooled away — it is a resource stream to be captured, concentrated, and applied. The garage becomes a thermal plant: insulated for year-round compute, with heat pumps extracting energy from rack exhaust and delivering it where thermal energy has value.
+There is no "waste heat." There is no "electricity" vs "heat" vs "compute." There is only **energy in different forms**, flowing through the system at different conversion efficiencies. The ecosystem is an energy transformer: sunlight becomes electricity becomes computation becomes information + thermal energy becomes stored heat becomes hot water, warmth, craft.
 
-The biological metaphor: mitochondria don't vent ATP synthesis waste heat into the void. The cell captures it as metabolic warmth, maintaining homeostasis. Our compute mesh should do the same.
+Every conversion has a cost (2nd law of thermodynamics). But the insight is: **you don't need to convert back if you have enough sinks.** The system's job is to find the highest-value use for energy at each stage, and store it in the cheapest form until needed.
+
+The biological metaphor: a cell doesn't distinguish between "ATP energy" and "heat energy" and "chemical gradient energy" — it's all one coupled system. Mitochondria, proton gradients, conformational changes, metabolic heat — the cell uses every form where it has value. So do we.
+
+---
+
+## The Unified Energy Model
+
+### Energy Is One Thing
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    THE ENERGY GRAPH                              │
+│                                                                 │
+│  SOURCES              TRANSFORMS             SINKS              │
+│  ───────              ──────────             ─────              │
+│                                                                 │
+│  Sunlight ──→ PV ──→ Electricity ──→ Compute ──→ Information   │
+│                           │              │                      │
+│                           │              └──→ Heat (45-60°C)    │
+│                           │                      │              │
+│                           ├──→ Battery (LFP)     ├──→ DHW       │
+│                           │    (electrical        ├──→ Space     │
+│                           │     store)            ├──→ Sauna    │
+│                           │                      ├──→ Kiln      │
+│                           │                      └──→ Sand      │
+│                           │                          (thermal   │
+│  Grid ────────────────────┤                           store)    │
+│                           │                              │      │
+│                           │    ┌─────────────────────────┘      │
+│                           │    │                                │
+│                           │    ▼                                │
+│                           │  Thermoelectric / Stirling ──→ ε   │
+│                           │  (heat → electricity, η≈5-15%)     │
+│                           │                                     │
+│  Natural Gas ──→ Combustion ──→ Heat ──→ (same sinks)          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Conversion Efficiencies (The "Exchange Rates")
+
+Every energy conversion has a rate. These are the physics-dictated exchange rates in our system:
+
+| Conversion | Efficiency (η) | Notes |
+|-----------|----------------|-------|
+| Solar → Electricity (PV) | 18-22% | Modern panels, roof-mounted |
+| Electricity → Compute | ~100% | All electricity becomes heat eventually |
+| Electricity → Stored Electricity (LFP) | 90-95% | Round-trip, excellent |
+| Electricity → Heat (resistance) | 100% | Perfect but wasteful of high-grade energy |
+| Electricity → Heat (heat pump) | 300-600% (COP) | Moves existing heat, doesn't create it |
+| Compute → Heat | 100% | Thermodynamics: all compute becomes heat |
+| Heat → Stored Heat (sand) | 85-95% | Insulation losses over time |
+| Heat → Electricity (Stirling) | 5-15% | Low-grade source, small delta-T |
+| Heat → Electricity (TEG) | 3-8% | Thermoelectric generators, solid-state |
+| Heat → Electricity (ORC) | 10-20% | Organic Rankine Cycle, best for <200°C |
+| Stored Heat → Use (DHW/space) | 90-98% | Direct thermal application |
+
+### The Key Insight: Directionality Matters
+
+```
+Electricity → Heat:    100% efficient (trivial, always possible)
+Heat → Electricity:    5-20% efficient (hard, expensive, Carnot-limited)
+```
+
+This asymmetry means: **once energy is heat, it's cheapest to USE it as heat.** Converting back to electricity is possible (gives you the baseline accounting unit) but you lose 80-95% in the conversion. So the strategy is:
+
+1. **Use electricity for things that REQUIRE electricity** (compute, lighting, motors)
+2. **Let the waste heat serve thermal needs** (DHW, space, wellness)
+3. **Store excess electricity AS electricity** (LFP battery) when you need time-shift for compute
+4. **Store excess heat AS heat** (sand/water) when you need time-shift for thermal sinks
+5. **Only convert heat→electricity as last resort** (emergency power, proof of concept, accounting baseline)
+
+---
+
+## Energy Accounting in Unified Units
+
+Everything can be expressed in kWh for comparison, even if you'd never actually convert between forms in practice:
+
+| Energy Store | Capacity | Cost/kWh stored | Lifetime Cycles | Round-trip η |
+|-------------|----------|-----------------|-----------------|-------------|
+| LFP Battery (electrical) | 10 kWh | $400-600/kWh | 4,000-6,000 | 92% |
+| Sand Battery (thermal) | 25 kWh per 500kg | $8-20/kWh | ∞ | 90% (as heat) |
+| Water Tank (thermal) | 4.6 kWh per 100L @40°C rise | $10-30/kWh | ∞ | 85% |
+| Concrete Slab (thermal) | ~1 kWh per 1000kg @1°C | $1-5/kWh | ∞ | 70-80% |
+| Hydrogen (chemical) | 33 kWh/kg | $800-1500/kWh (system) | ∞ | 30-40% |
+
+**Sand is 20-50× cheaper per kWh than lithium for thermal storage.** The tradeoff: you can only get heat back out (not electricity without massive loss). But if your thermal sinks are large enough — and ours are (DHW, sauna, space heating, kiln) — that's fine.
+
+### The "Convert Back" Baseline
+
+If you DID want to convert sand battery heat back to electricity (to establish a unified accounting baseline):
+
+- 25 kWh thermal in sand × 10% ORC efficiency = **2.5 kWh electrical equivalent**
+- 25 kWh thermal in sand × 5% TEG efficiency = **1.25 kWh electrical equivalent**
+
+This gives you the "real" stored value in electricity-equivalent terms. But you'd never actually do this conversion unless you needed emergency power — the thermal use value is 5-10× higher than the electrical conversion value.
+
+### The Correct Mental Model
+
+Think of it like currency:
+- **Electricity** = US dollars (universally convertible, high-grade, expensive to store)
+- **High-temp heat (200-400°C)** = gold bars (cheap to store, hard to spend as dollars, high intrinsic value for specific uses)
+- **Low-temp heat (40-60°C)** = raw materials (nearly free, immediately useful if you have a use, worthless if you don't)
+- **Information (compute output)** = intellectual property (the actual product, what you're building for)
+
+The ecosystem produces dollars (electricity → compute → IP) and gold bars (waste heat → sand) simultaneously. Smart accounting means spending each currency where it has most value.
 
 ---
 
@@ -393,29 +499,81 @@ The system compounds over time:
 
 ## Biological Grounding (Extended)
 
-| Biology | Thermal Sovereignty |
+| Biology | Energy Sovereignty |
 |---------|-------------------|
 | Mitochondrial waste heat → cell homeostasis | Compute waste heat → garage heating |
 | Brown adipose tissue (thermogenesis) | Intentional heavy compute for heating |
 | Fat stores (seasonal energy reserve) | Sand battery (seasonal thermal reserve) |
+| Glycogen (fast-access energy) | LFP battery (fast-access electricity) |
 | Photosynthesis (solar → chemical energy) | Solar PV → electrical → compute → thermal |
 | Metabolic rate scales with temperature demand | Workload scheduling scales with thermal value |
 | Hibernation (reduce metabolic rate when warm) | Throttle compute when thermal sinks saturated |
 | ATP recycling (no energy truly lost) | Full cascade: nothing wasted, everything transformed |
+| Proton gradient (potential energy → work) | Temperature gradient (stored heat → useful output) |
+| Coupled reactions (exothermic drives endothermic) | Compute (exothermic) drives DHW/sauna/kiln (endothermic sinks) |
+
+---
+
+## The System Boundary
+
+The sovereign mesh isn't just a network of computers. It's an **energy system** with compute as one transformation stage. Drawing the boundary correctly:
+
+```
+INPUTS:                          OUTPUTS:
+  Sunlight ──────────┐    ┌──── Information (science, products, art)
+  Grid electricity ──┤    ├──── Hot water
+  Natural gas ───────┤    ├──── Warm space
+                     │    ├──── Wellness (sauna, hot tub)
+                     ▼    ├──── Craft (kiln, furnace)
+              ┌──────────┐├──── WiFi / network services
+              │ SOVEREIGN ││──── Collaboration infrastructure
+              │  ENERGY   ││
+              │  SYSTEM   │├──── Grid export (net metering)
+              └──────────┘└──── Emergency power (heat→elec, last resort)
+                     ▲
+                     │
+STORES:              │
+  LFP battery (electrical, fast, expensive/kWh)
+  Sand battery (thermal, slow, cheap/kWh)
+  Water tank (thermal, immediate, medium)
+  Concrete slab (thermal, passive, free)
+```
+
+When the inputs equal the outputs minus storage losses, the system is **energy sovereign**. That's the long-term target. Not off-grid for ideology — off-grid because the economics compound until grid dependence is irrational.
 
 ---
 
 ## Open Questions
 
-1. **Optimal heat pump sizing** — how many kW source capacity for a 1-2 kW steady compute load?
-2. **Sand battery geometry** — vertical cylinder vs horizontal box? Convection management?
-3. **High-temp heat pump availability** — residential units rarely go above 80°C output. Industrial units (200°C+) exist but cost more. Is resistive boost into sand more practical?
-4. **Code integration** — should `cellMembrane` expose thermal telemetry as a gate property?
-5. **Zoning** — any permit requirements for hydronic systems or garage-to-house plumbing?
-6. **Solar orientation** — which roofs face south? Shading analysis needed per house.
-7. **Electrical vs thermal storage ratio** — what fraction of excess solar should charge batteries vs heat sand?
-8. **Three-house coordination** — shared thermal infrastructure, or independent per-site?
+1. **Heat pump sizing** — how many kW source capacity for ~500W steady compute exhaust?
+2. **Sand battery geometry** — vertical cylinder vs horizontal box? Convection vs conduction transfer?
+3. **High-temp storage** — resistive coils into sand (cheap, simple) vs high-temp heat pump (efficient, expensive)?
+4. **Thermoelectric baseline** — is a small TEG array worth installing purely for accounting? (Converts 3-8% of sand heat to electricity for measurement/emergency)
+5. **Code integration** — `cellMembrane` thermal telemetry as gate property? Energy-aware scheduling?
+6. **Zoning/permits** — hydronic systems, garage-to-house plumbing, solar interconnection
+7. **Solar orientation** — south-facing roof area per house, shading analysis
+8. **Optimal storage ratio** — what fraction of excess solar → LFP vs → sand vs → grid export?
+9. **Three-house coordination** — shared thermal loop between houses, or independent per-site?
+10. **ORC/Stirling viability** — at what sand battery temp does heat→electricity conversion become worth the hardware cost?
 
 ---
 
-*Heat is not waste. Heat is the other half of the flywheel. Every joule of compute produces two outputs: information and warmth. The sun charges both the silicon and the sand. Capture everything.*
+## Summary: The One Rule
+
+**Energy flows downhill. Our job is to extract value at every step of the descent.**
+
+```
+High-grade:   Sunlight → Electricity → Compute → Information
+                                          ↓
+Mid-grade:                              Heat (60°C) → DHW, space heating
+                                          ↓
+Stored:                                 Sand (200-400°C) → time-shifted thermal
+                                          ↓
+Low-grade:                              Ambient → lost (minimize this)
+```
+
+Every joule enters the system as sunlight or grid electricity. Every joule exits as either information (the product), useful heat (the dividend), or ambient loss (the tax). Minimize the tax. Maximize the dividend. The product is why we're here.
+
+---
+
+*There is no waste. There is only energy you haven't found a use for yet.*
