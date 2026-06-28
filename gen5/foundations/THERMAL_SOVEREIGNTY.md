@@ -1016,6 +1016,353 @@ When the inputs equal the outputs minus storage losses, the system is **energy s
 
 ---
 
+## Site Layout — Where We're Building
+
+### Physical Topology (Thermal Overlay)
+
+```
+                    ┌─────────────────────────────────────────────┐
+                    │          HOUSE 1 (4422 Southgate Ave)        │
+                    │  Corner lot, 1920 build. ATT fiber drop.     │
+                    │                                             │
+                    │  Hub 1: CRS310 backbone                     │
+                    │  Gates: sporeGate (.3), eastGate (.5),      │
+                    │         northGate (Win/5090)                 │
+                    │  Flint H1: edge router (plasma membrane)    │
+                    │                                             │
+                    │  COMPUTE HEAT: sporeGate 77W + eastGate     │
+                    │  133W + northGate 148W = ~358W steady       │
+                    │  (up to 750W under load)                    │
+                    └──────────┬──────────────────────────────────┘
+                               │
+                    ┌──────────┴──────────┐
+                    │      GARAGE          │
+                    │  (between houses)    │
+                    │                      │
+                    │  TARGET: Thermal     │
+                    │  plant. Insulated.   │
+                    │  Racks, sand battery,│
+                    │  heat pump, buffer   │
+                    │  tank, prototypes.   │
+                    │                      │
+                    │  80m AOC fiber runs  │
+                    │  through here        │
+                    │  (CRS310 → Omada)    │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────┴──────────────────────────────────┐
+                    │          HOUSE 2 (641 Samantha Ave)          │
+                    │  Adjacent west. 1920 build.                  │
+                    │  ~20m physical distance from House 1.        │
+                    │                                             │
+                    │  Hub 2: Omada SX3008F + Flint H2 (WiFi AP) │
+                    │  Gates: ironGate (RTX 5070), strandGate,    │
+                    │         southGate, swiftGate (WiFi)          │
+                    │                                             │
+                    │  COMPUTE HEAT: ironGate 130W +              │
+                    │  strandGate/southGate ~50W ea = ~230W       │
+                    │  (up to 555W under GPU load)                │
+                    └─────────────────────────────────────────────┘
+
+Total steady-state: ~590W across both houses
+Total under load: ~1,300W
+Annual waste heat: 5,170 - 11,400 kWh (currently vented to room air)
+```
+
+### The Garage Advantage
+
+The garage sits between both houses. The 80m fiber trunk already runs through/near it. This makes it the natural thermal plant:
+- **Equidistant** from both heat sources and both houses' thermal sinks
+- **Not a living space** — temperature doesn't need to be 72°F
+- **High ceiling** — room for vertical thermal mass (sand battery)
+- **Concrete floor** — passive thermal mass already exists
+- **Vehicle bay** — can accommodate rack + tank + prototypes
+- **Ventilation** — garage doors = infinite summer venting
+
+---
+
+## DIY Prototyping — Where to Start
+
+### Philosophy: Science First, Cost Later
+
+```
+Phase 0: MEASURE (what do we have?)
+Phase 1: CAPTURE (grab waste energy that currently escapes)
+Phase 2: NEUTRAL (energy in ≈ useful energy out, losses understood)
+Phase 3: COST    (economics, payback, scaling decisions)
+```
+
+You're mechanically inclined. You already run copper, build computers, pull fiber. This is the same work — just thermal instead of digital. Same pipe-fitting, same insulation, same measurement loops.
+
+### Prototype 0: Instrumentation ($30-80)
+
+**Before building anything, measure what you have.** The system can't be managed without telemetry.
+
+| Item | Cost | Purpose |
+|------|------|---------|
+| DS18B20 waterproof temp sensors (10-pack) | $12 | Measure exhaust, ambient, inlet, outlet, floor |
+| ESP32 dev board | $8 | Read sensors, log to WiFi/MQTT |
+| USB power meter (Kill-a-Watt) | $25 | Measure actual gate power draw |
+| IR thermometer gun | $20 | Spot-check surfaces, exhaust temps |
+| Insulated thermocouple (K-type) | $15 | High-temp measurements (sand, heat exchange) |
+
+**What to measure first:**
+1. Actual exhaust temperature behind each gate (tape DS18B20 to rear exhaust)
+2. Actual power draw per gate (Kill-a-Watt at the wall)
+3. Garage ambient temp cycle over 1 week (winter and summer)
+4. Concrete floor temp (tape sensor to slab)
+
+This feeds metalForge telemetry and gives real baselines instead of spec-sheet estimates.
+
+### Prototype 1: Micro Sand Battery ($50-150)
+
+**Goal**: prove thermal storage works, measure charge/discharge rates, understand insulation needs.
+
+**Build:**
+```
+Materials:
+- 5-gallon steel bucket with lid ($15, hardware store)
+- Clean sand or pea gravel (50 lbs, $5)
+- Ceramic fiber blanket (1" thick, enough to wrap bucket, $25)
+- Nichrome wire heating element (12V, 100-150W, $10)
+- 2x DS18B20 probes (center + outer edge, $5)
+- 12V power supply (from spare computer PSU, $0)
+- Aluminum foil (reflective layer under insulation, $3)
+
+Assembly:
+1. Fill bucket with dry sand (dry it in sun or oven first — moisture kills storage)
+2. Embed nichrome coil in sand center (spiral, not touching walls)
+3. Insert temp probes: one at center, one 1" from wall
+4. Wrap bucket in aluminum foil (radiant barrier)
+5. Wrap in ceramic fiber blanket, tape/wire secure
+6. Lid with small hole for probe wires
+
+Operation:
+- Charge: apply 12V to nichrome. Sand heats to 100-200°C over hours.
+- Measure: log center + edge temp. Plot charge curve.
+- Discharge: disconnect power. Log cooling rate.
+- Calculate: kWh stored = mass × specific heat × delta-T
+  50 lbs (23 kg) × 830 J/(kg·°C) × 150°C rise = 2.87 MJ = 0.8 kWh
+```
+
+**What you learn:**
+- How fast sand heats (charge rate)
+- How fast it cools (insulation effectiveness, discharge rate)
+- Temperature gradient (center vs edge) — how uniformly heat distributes
+- Real vs theoretical capacity
+- Whether 1" ceramic blanket is enough or you need 2-3"
+
+This is your **"Hello, World"** for thermal storage. It costs less than a dinner out and teaches you the physics hands-on.
+
+### Prototype 2: Exhaust-to-Water Heat Exchange ($50-100)
+
+**Goal**: capture actual compute exhaust heat into water, measure real COP.
+
+**Build:**
+```
+Materials:
+- Automotive heater core ($25, junkyard or Amazon)
+  (these are compact copper/aluminum heat exchangers designed for 
+   hot air → water transfer — EXACTLY our use case)
+- 12V water pump (aquarium/fountain pump, $15)
+- Silicone tubing (3/8" ID, 10 ft, $10)
+- 5-gallon insulated bucket (or cooler, $10-20)
+- Cardboard/foam duct to channel rack exhaust over heater core ($5)
+
+Assembly:
+1. Position heater core behind compute rack (in exhaust stream)
+2. Duct exhaust air through the core (cardboard shroud, seal gaps)
+3. Connect pump + tubing: bucket → pump → heater core → bucket (loop)
+4. Fill loop with water
+5. Attach DS18B20 to: bucket water, heater core inlet air, outlet air
+
+Operation:
+- Run compute load (stress test GPU)
+- Log: water temp rising, air temp drop across core
+- Calculate: thermal power captured = flow_rate × specific_heat × delta_T
+  At 2 L/min, 5°C water rise = 2L/min × 4186 J/(L·°C) × 5°C / 60 = 698W captured
+- Compare to exhaust air temp drop: if air drops 15°C through core, that's real capture
+```
+
+**What you learn:**
+- Actual thermal capture rate from compute exhaust (not theoretical)
+- How hot you can get a bucket of water from compute alone
+- Whether automotive heater core is adequate or you need a bigger exchanger
+- Flow rate vs temperature trade-off
+
+**Expected result:** a 5-gallon bucket reaching 40-50°C in 2-4 hours from a single GPU at load. Not hot enough for a shower — but PROOF that compute → hot water works, and data to size the real system.
+
+### Prototype 3: Cold Side Experiment ($20-50)
+
+**Goal**: prove cross-threading. Use a cheap peltier (TEC) to demonstrate heat→electricity.
+
+**Build:**
+```
+Materials:
+- TEC1-12706 Peltier module ($5)
+  (Yes, Peltiers are garbage for power generation — 2-4% efficiency.
+   But for $5 they PROVE THE CONCEPT and teach the physics.)
+- Heat sink + fan (salvaged from old CPU cooler, $0)
+- Cup of ice (cold side)
+- Cup of hot water from Prototype 2 (hot side, ~50°C)
+- Multimeter ($0, you have one)
+- Small LED ($1)
+
+Assembly:
+1. Peltier module sandwiched between hot surface (cup of warm water, 
+   aluminum plate) and cold surface (cup of ice, aluminum plate)
+2. Multimeter across Peltier leads
+3. LED across leads if voltage sufficient
+
+Operation:
+- Place hot water (50°C) on one side, ice (0°C) on other
+- Delta-T = 50°C
+- Observe: voltage appears across Peltier (Seebeck effect)
+- Expected: ~1-2V open circuit, enough to dimly light an LED
+- Power: maybe 50-200 mW (terrible efficiency — but it's REAL electricity from a temperature gradient)
+```
+
+**What you learn:**
+- The gradient DOES produce electricity (proof of concept, not production)
+- How voltage scales with delta-T (double the delta, roughly double the voltage)
+- Why TEGs are better than Peltiers for generation (Peltiers are designed for pumping, not generating)
+- Intuition for "this is what a Stirling engine does, but better"
+
+### Prototype 4: Permaculture Cold Frame + Thermal Mass ($30-80)
+
+**Goal**: prove compute heat keeps plants alive through frost.
+
+**Build:**
+```
+Materials:
+- Clear polycarbonate sheet or old window sash (cold frame lid, $10-20)
+- Cinderblocks or scrap lumber (cold frame walls, $0-20)
+- 20 ft of 1/2" PEX tubing ($10)
+- Small 12V pump ($15)
+- 5-gallon bucket of warm water from Prototype 2
+
+Assembly:
+1. Build small cold frame (2' × 4') against south-facing garage wall
+2. Bury PEX tubing 6" deep in soil inside frame (serpentine)
+3. Connect PEX loop to warm-water bucket (pump circulates)
+4. Plant cold-hardy greens (lettuce, spinach, kale)
+
+Operation:
+- Circulate compute-warmed water through soil loop
+- Log: soil temp, air temp inside frame, ambient
+- Observe: how much warmer is the soil vs unheated control?
+- Target: maintain soil at 50-60°F when ambient drops to 25-30°F
+
+Expected result: 
+- Frost protection from compute heat alone (no additional energy)
+- Extended growing season by 4-8 weeks in fall, start 4-8 weeks early in spring
+- Proof that "lossy sink" (heat lost to soil/air) = food production
+```
+
+**This is permaculture**: closed-loop, waste = resource, stack functions. The cold frame is heated by compute, sheltered by the garage, and produces food. Three functions from one structure.
+
+### Prototype 5: Rack-to-Garage Thermal Loop ($100-200)
+
+**Goal**: connect compute exhaust capture to garage heating. Stop heating the house interior with compute waste.
+
+**Build:**
+```
+Materials:
+- Automotive heater core × 2 (one behind rack, one in garage, $50)
+- 12V pump (slightly larger, $20)
+- 25-50 ft silicone or PEX tubing ($25-40)
+- Antifreeze/glycol (if running through unheated spaces, $15)
+- Inline flow meter ($15, optional)
+- Expansion tank or reservoir (5 gal bucket, $10)
+
+Assembly:
+1. Heater core #1 behind compute rack (absorbs exhaust heat)
+2. Pipe to garage (through wall, or out window + along exterior)
+3. Heater core #2 in garage (radiates heat into space)
+4. Return pipe back to rack
+5. Pump + reservoir in loop
+
+Operation:
+- Compute runs, exhaust heats water, water flows to garage, 
+  garage heater core radiates, cooled water returns
+- Thermostat: cut pump when garage > 60°F (prevent overheating)
+
+Expected result:
+- Garage stays 10-20°F above ambient in winter (from compute alone)
+- House rooms with computers run COOLER (heat is exported, not trapped)
+- Measured thermal transfer rate → sizing data for full system
+```
+
+---
+
+## Prototyping Sequence (Start Here)
+
+| # | Project | Cost | Time | What It Proves |
+|---|---------|------|------|---------------|
+| 0 | **Instrument everything** | $30-80 | 1 day | Real baselines (not spec sheets) |
+| 1 | **Micro sand battery** | $50-150 | 1 weekend | Thermal storage works, insulation sizing |
+| 2 | **Exhaust-to-water exchange** | $50-100 | 1 day | Real capture rate, COP data |
+| 3 | **Peltier TEG demo** | $20-50 | 1 hour | Gradient → electricity (proof, not production) |
+| 4 | **Heated cold frame** | $30-80 | 1 weekend | Compute heat → food (permaculture loop closed) |
+| 5 | **Rack-to-garage thermal loop** | $100-200 | 1 weekend | Multi-room thermal routing works |
+| | **TOTAL (all prototypes)** | **$280-660** | **3-4 weekends** | **Full proof of concept for entire system** |
+
+After all 5 prototypes, you have:
+- Measured baselines for every gate
+- A working sand battery (small, but real)
+- Compute → hot water demonstrated
+- Gradient → electricity demonstrated  
+- Compute → food production demonstrated
+- Multi-room thermal routing demonstrated
+
+**None of this is "the real system."** It's all science — building intuition, measuring reality, proving physics. The real system scales from these learnings. But now you're designing from data, not from spec sheets.
+
+---
+
+## Permaculture Integration
+
+### Stacking Functions
+
+Every element serves multiple purposes. Every need is served by multiple elements.
+
+| Element | Functions (3+ per element, permaculture principle) |
+|---------|--------------------------------------------------|
+| Compute rack | (1) Information production (2) Heat source (3) Dehumidifier (hot exhaust dries air) |
+| Sand battery | (1) Thermal storage (2) Thermal mass (stabilizes garage temp) (3) Kiln preheat source (4) Emergency heating |
+| Cold frame | (1) Food production (2) Heat sink (absorbs excess) (3) Humidity source (transpiration) (4) Passive solar gain |
+| Garage insulation | (1) Thermal envelope (2) Sound dampening (quiet compute) (3) Moisture barrier (4) Fire separation |
+| Hydronic loop | (1) Heat transport (2) Freeze protection (glycol in pipes) (3) Cooling (reverse in summer) (4) Soil warming |
+| Concrete slab | (1) Floor (2) Thermal mass (3) Radiant heat surface (4) Moisture wicking (if sealed) |
+
+### Zones (Permaculture Zones Applied to Thermal)
+
+Permaculture zones are based on frequency of interaction:
+
+| Zone | Thermal Application | Interaction Frequency |
+|------|--------------------|-----------------------|
+| Zone 0 (house interior) | Comfortable temperature (20-22°C) | Constant (you live here) |
+| Zone 1 (garage/workshop) | Working temperature (15-25°C) | Daily (compute, projects) |
+| Zone 2 (cold frame/greenhouse) | Growing temperature (10-25°C) | Every 1-2 days (tend plants) |
+| Zone 3 (driveway/pathways) | Above-freezing (2-5°C surface) | Passive (no interaction, just works) |
+| Zone 4 (sand battery/ground loop) | Storage (100-300°C / seasonal) | Weekly (check, maintenance) |
+| Zone 5 (wild/unmanaged) | Ambient | Never (entropy wins here, and that's fine) |
+
+### The Permaculture Energy Cascade
+
+```
+High-quality energy (electricity) → used for high-quality work (compute)
+    ↓ degrades to
+Medium-quality energy (heat, 50-150°C) → used for medium-quality work (DHW, storage)
+    ↓ degrades to
+Low-quality energy (warmth, 20-40°C) → used for low-quality work (space heat, growing, de-icing)
+    ↓ degrades to
+Ambient → "lost" — but only after passing through every useful tier
+```
+
+This IS permaculture's energy principle: catch and store energy, use it at the highest appropriate level, let it cascade through every useful tier before it reaches ambient. The compute mesh is just the highest tier in the cascade.
+
+---
+
 ## Open Questions
 
 1. **Heat pump sizing** — how many kW source capacity for ~500W steady compute exhaust?
@@ -1024,9 +1371,9 @@ When the inputs equal the outputs minus storage losses, the system is **energy s
 4. **Thermoelectric baseline** — is a small TEG array worth installing purely for accounting? (Converts 3-8% of sand heat to electricity for measurement/emergency)
 5. **Code integration** — `cellMembrane` thermal telemetry as gate property? Energy-aware scheduling?
 6. **Zoning/permits** — hydronic systems, garage-to-house plumbing, solar interconnection
-7. **Solar orientation** — south-facing roof area per house, shading analysis
+7. **Solar orientation** — which roofs face south? Shading analysis needed per house.
 8. **Optimal storage ratio** — what fraction of excess solar → LFP vs → sand vs → grid export?
-9. **Three-house coordination** — shared thermal loop between houses, or independent per-site?
+9. **Three-house coordination** — shared thermal infrastructure, or independent per-site?
 10. **ORC/Stirling viability** — at what sand battery temp does heat→electricity conversion become worth the hardware cost?
 
 ---
