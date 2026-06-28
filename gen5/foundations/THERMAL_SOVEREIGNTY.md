@@ -286,6 +286,90 @@ For DHW alone (55°C target): costs **$3.10/month** in pump electricity to deliv
 | T4 | Kiln/furnace preheat | 200-600°C | **Preheat only** — resistance tops off |
 | T5 | High-temp kiln (ceramics) | 800-1200°C | Preheat saves 15-30% energy |
 
+### Lossy Sinks — Intentional Dissipation into Useful Work
+
+Not all thermal sinks need to be "efficient." Some applications intentionally dissipate heat into the environment — but that dissipation IS the purpose. These are **lossy by design**, and the "loss" is the product.
+
+| Sink | Temp Needed | How It Works | Annual Value |
+|------|------------|--------------|-------------|
+| **Heated driveway** | 2-5°C above freezing | Hydronic loop (glycol) under pavement | No shoveling, no salt, no ice injuries |
+| **Greenhouse (soil warming)** | 18-25°C soil | Buried PEX loop, low-grade heat | Year-round growing in Michigan climate |
+| **Greenhouse (air warming)** | 15-25°C air | Hydronic radiator or fan coil | Tropical plants in Zone 5 |
+| **Hot tub / soaking pool** | 38-42°C | Direct buffer tank feed | Wellness, zero operating cost |
+| **Sidewalk / patio de-icing** | 2-5°C above ambient | Embedded PEX under concrete | Safety, no chemical runoff |
+| **Root cellar climate control** | 10-15°C, stable | Low-rate hydronic + insulation | Food storage, fermentation |
+| **Aquaponics / fish tank** | 24-28°C water | Heat exchanger from buffer | Tropical fish + vegetables |
+| **Mushroom fruiting room** | 18-22°C, 90% RH | Gentle hydronic + humidifier | Year-round gourmet/medicinal mushrooms |
+| **Pottery drying room** | 30-40°C, low RH | Rack exhaust directly ducted | Consistent greenware drying |
+| **Fermentation chamber** | 18-35°C (controlled) | Small hydronic loop, thermostat | Beer, kombucha, tempeh, miso |
+
+#### The Greenhouse Case (Detailed)
+
+Michigan is Zone 5b (-15°F to -10°F winter lows). A passive greenhouse is useless from November to March. But a compute-heated greenhouse changes the math:
+
+```
+Heat loss through greenhouse envelope (worst case, -15°F outside, 65°F inside):
+  - 200 sq ft glazing × U-value 0.5 × 80°F delta = 8,000 BTU/hr ≈ 2,340W
+
+Our compute steady state: 515W (raw exhaust) → heat pump → 515W × COP 3-5 = 1,500-2,500W thermal
+
+Compute alone keeps a small greenhouse (100-120 sq ft) above freezing year-round.
+With supplemental insulation (double-wall polycarbonate): covers a 200 sq ft greenhouse to 50-55°F.
+With resistance boost (500W): tropical temps (70-75°F) in a 150 sq ft space.
+```
+
+**Result**: a 10×15 ft greenhouse running tropical temps year-round in Michigan, powered primarily by compute waste heat. Grow citrus, peppers, tropical herbs, starts for spring garden — in January.
+
+Cost to operate: ~$5-15/month for the heat pump + small resistance boost. Equivalent greenhouse heating with electric or propane: $80-150/month in winter.
+
+#### The Driveway Case (Detailed)
+
+A heated driveway uses glycol loops embedded in or under the pavement surface. It only needs to keep the surface 2-5°C above freezing — extremely low-grade heat.
+
+```
+Typical heated driveway (2-car, 400 sq ft):
+  - Heat loss: ~50 BTU/hr/sqft × 400 = 20,000 BTU/hr ≈ 5,860W at peak snow
+  - BUT: you only need it during precipitation events (maybe 200 hrs/year)
+  - Annual energy: 5,860W × 200h = 1,172 kWh
+
+Our sand battery at 100-150°C can time-shift compute heat to discharge during storms.
+A 500kg sand battery stores ~25 kWh = enough for 4+ hours of driveway de-icing per charge.
+Recharges overnight from compute exhaust.
+```
+
+**Result**: no shoveling, no salt damage, no slip injuries — powered by compute waste heat stored in sand, discharged on demand. Annual cost: effectively $0 (sand recharges from compute exhaust regardless).
+
+#### The Key Insight: "Lossy" = "Useful"
+
+These sinks are thermodynamically lossy — the heat eventually escapes to ambient. But that's fine because:
+
+1. The heat was **already waste** — it was going to ambient anyway
+2. The intermediate step (warm driveway, warm soil, warm water) **IS the product**
+3. The "loss" happens after the useful work is extracted
+4. Low-temperature sinks have the **highest COP** (less pump work needed)
+
+This inverts the normal engineering priority. Traditional systems minimize loss. We **maximize useful intermediate states** before the inevitable dissipation to ambient. Every joule passes through as many useful forms as possible on its way to entropy.
+
+```
+Traditional: Electricity → Compute → Heat → VENT (waste)
+
+Sovereign:   Electricity → Compute → Heat → DHW → (used, "lost" to drain)
+                                          → Greenhouse soil → (grows food, "lost" to ground)
+                                          → Driveway → (melts ice, "lost" to air)
+                                          → Sand battery → Sauna → ("lost" to bodies + air)
+                                          → Kiln → (fires clay, "lost" to art)
+                                          ...eventually all → ambient
+                                          But every intermediate step extracted value.
+```
+
+---
+
+### Lineage: gen4/architecture/GPU_HEAT_RECOVERY_OPERATIONS.md
+
+This concept was first articulated in gen4 as "Science as Space Heating" — the idea that a GPU running WDM simulations produces identical Joules to a GPU mining crypto, but the OUTPUT has scientific value. That document calculated seasonal heating offsets for 5 active GPUs in a Michigan climate.
+
+What's new in gen5: we're no longer just offsetting HVAC. We're building a **multi-sink thermal distribution system** where compute waste heat is the ONLY heat source for multiple applications simultaneously. The gen4 document was "hey, your GPU heats the room." The gen5 system is "your GPU heats the house, the water, the greenhouse, the driveway, the sauna, and dries your pottery — and the room is just one stop on the cascade."
+
 ---
 
 ## Seasonal Dynamics
