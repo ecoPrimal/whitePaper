@@ -1479,6 +1479,175 @@ This IS permaculture's energy principle: catch and store energy, use it at the h
 
 ---
 
+## Standalone Deployment — The Sovereign Pallet
+
+### The Vision
+
+Everything in this document assumes a house, a garage, a grid connection. Strip all of that away. What's the minimum self-sustaining energy + compute + thermal system that runs indefinitely with zero infrastructure?
+
+A pallet. Solar on top, battery inside, compute in the middle, thermal mass at the bottom. Drop it anywhere — a homeless encampment, a research station in the outback, a disaster relief zone, a remote village. It provides: heat, hot water, charging, WiFi, and compute. It runs science in the roughest and most remote parts of the world.
+
+### Why This Matters
+
+| Use Case | What the pallet provides |
+|----------|------------------------|
+| Homeless encampment | Heat (winter survival), hot water (hygiene), USB charging (phones = lifeline), WiFi (job applications, services) |
+| Remote research station | Compute (run science locally), data sync (mesh relay when satellite available), sensor aggregation, power for instruments |
+| Disaster relief | Communications hub, heat, light, water purification (UV from solar), charging |
+| Off-grid homestead | Full NUCLEUS primal stack, thermal sovereignty, autonomous operation |
+| Field science (your use case) | Run primalSpring in the wilderness, collect/validate data at the edge, relay results when connectivity exists |
+
+### The Pallet Specification
+
+```
+┌──────────────────────────────────────────────────────────┐
+│              SOVEREIGN PALLET (v0.1 concept)              │
+│                                                          │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │  SOLAR PANEL (fold-out wings)                      │  │
+│  │  200-400W total (2-4 panels, fold flat for transit)│  │
+│  │  Annual yield: 600-1200 kWh (location dependent)  │  │
+│  └────────────────────────────────────────────────────┘  │
+│                          │                                │
+│  ┌──────────────────────┐│┌──────────────────────────┐   │
+│  │  LFP BATTERY          ││  COMPUTE MODULE           │   │
+│  │  1-5 kWh              ││  Low-power SBC/NUC        │   │
+│  │  (night bridge +      ││  (RPi5 / NUC / Jetson)   │   │
+│  │   cloudy day buffer)  ││  10-65W depending on task │   │
+│  │                       ││  Runs: NUCLEUS (13 primals)│  │
+│  │  Charge controller    ││  WiFi AP + mesh relay     │   │
+│  │  + inverter (if AC)   ││  Sensor aggregation       │   │
+│  └──────────────────────┘│└──────────────────────────┘   │
+│                          │           │                    │
+│  ┌──────────────────────────────────┐│                   │
+│  │  THERMAL MODULE                   ││                   │
+│  │  Sand battery (25-50 kg, insulated)│                   │
+│  │  Small heat exchanger (compute→water)│                 │
+│  │  Insulated water bladder (5-10L DHW)│                  │
+│  │  USB/12V heated blanket port       │                   │
+│  └──────────────────────────────────┘│                   │
+│                                       │                   │
+│  ┌────────────────────────────────────┘                  │
+│  │  SERVICE PORTS (exterior)                              │
+│  │  • USB-A/C charging (x4-6 ports)                      │
+│  │  • 12V DC out (lights, heated blanket, tools)         │
+│  │  • Hot water tap (5-10L, 40-50°C)                     │
+│  │  • WiFi (mesh AP, range 50-100m)                      │
+│  │  • Ethernet (RJ45, local devices)                     │
+│  │  • Sensor in (temp, humidity, air quality, GPS)       │
+│  └───────────────────────────────────────────────────────┘
+│                                                          │
+│  Footprint: standard pallet (48" × 40" × 24" tall)      │
+│  Weight: 80-150 kg (forklift/2-person moveable)          │
+│  Weatherproof: IP65 enclosure, operate in rain/snow/dust │
+│  Autonomous: zero maintenance for 6-12 months minimum    │
+└──────────────────────────────────────────────────────────┘
+```
+
+### Power Budget (Standalone)
+
+| Mode | Compute (W) | Thermal (W) | Overhead (W) | Total (W) | Daily kWh | Solar Needed |
+|------|------------|-------------|-------------|-----------|-----------|-------------|
+| **Sleep** (night, no users) | 2 | 0 | 3 | 5 | 0.12 | — (battery) |
+| **Idle** (WiFi AP, sensors, charging) | 8 | 5 | 5 | 18 | 0.43 | 50W panel |
+| **Active** (compute + heating + charging) | 35 | 15 | 10 | 60 | 1.44 | 150W panel |
+| **Full** (GPU science + thermal + full AP) | 65 | 25 | 15 | 105 | 2.52 | 300W panel |
+
+A 200W solar panel in a decent location (4-5 peak sun hours) generates ~800-1000 Wh/day. That covers **Idle + Active** modes comfortably with battery buffer. Full mode needs 300W+ panels or accepts intermittent operation (compute when sun shines, sleep when it doesn't).
+
+### Bill of Materials (Pallet v0.1)
+
+| Component | Option A (Budget) | Option B (Field-grade) | Notes |
+|-----------|-------------------|----------------------|-------|
+| Solar | 2× 100W fold-flat ($150) | 2× 200W rigid ($300) | Fold-flat for transport |
+| Battery | 1.2 kWh LiFePO4 12V ($200) | 5 kWh server rack LFP ($800) | Size to location/need |
+| Charge controller | 30A MPPT ($50) | Victron SmartSolar ($150) | MPPT critical for variable sun |
+| Compute | Raspberry Pi 5 ($80) | Intel NUC / Jetson Orin Nano ($300-500) | Pi for comms, NUC/Jetson for science |
+| Storage | 1TB NVMe ($60) | 2TB NVMe + 4TB HDD ($150) | Science data + OS |
+| WiFi | Built-in (Pi/NUC) | Alfa long-range USB ($40) | 50-100m range for encampment |
+| Sand battery | 25kg in insulated box ($30) | 50kg steel drum + ceramic wrap ($80) | Thermal time-shift |
+| Heat exchanger | Copper coil in sand ($15) | Small plate exchanger ($50) | Compute→water thermal capture |
+| Water bladder | Insulated 10L bag ($20) | Pressurized insulated tank ($80) | Hot water output |
+| Enclosure | Weatherproof tote ($40) | Pelican-style hard case ($200) | IP65 minimum |
+| Wiring/connectors | 12V bus, USB ports, fuses ($50) | Marine-grade, Anderson plugs ($100) | Weatherproof connections |
+| **TOTAL** | **$695-850** | **$1,760-2,510** | |
+
+### Operating Modes
+
+**Humanitarian (encampment):**
+- Solar charges during day
+- WiFi AP always on (mesh relay for area)
+- USB charging available 24/7 (6 ports at 10W each)
+- Hot water available morning + evening (compute runs overnight, heats water)
+- 12V heated blanket ports for winter nights (sand battery discharges)
+- No maintenance required — autonomous indefinitely
+
+**Science (field station):**
+- Run primalSpring validation suites during day (solar powered)
+- Aggregate sensor data (weather, soil, water, air quality)
+- Store locally, sync via satellite/mesh when available
+- Compute-intensive science batched for peak solar hours
+- Results provenance-tracked via NestGate/RhizoCrypt (guideStone verified)
+
+**Relay (mesh node):**
+- songBird relay for mesh connectivity
+- bearDog trust negotiation for new nodes
+- cellMembrane topology management
+- Extends sovereign network into areas with zero infrastructure
+- Each pallet is a sovereign gate in the mesh
+
+### Scaling: Pallet Cluster
+
+One pallet = one gate. Multiple pallets = a mesh.
+
+```
+Pallet A (solar/compute) ←─── WiFi mesh ───→ Pallet B (solar/storage)
+         │                                              │
+         └──── WiFi mesh ────→ Pallet C (thermal focus) ─┘
+                                      │
+                               ┌──────┴──────┐
+                               │ Satellite    │
+                               │ uplink       │
+                               │ (when avail) │
+                               └─────────────┘
+```
+
+Three pallets in a triangle = redundant mesh, shared compute, shared thermal, shared solar. One fails, others compensate. Same NUCLEUS composition model, same k-derm topology, same sovereignty principles — just at pallet scale instead of house scale.
+
+### What Makes This Different From a "Solar Generator"
+
+Jackery/Bluetti/EcoFlow sell solar generators. They provide electricity. Full stop.
+
+The sovereign pallet provides:
+1. **Electricity** (charging, lighting) — same as commercial
+2. **Compute** (science, mesh relay, data processing) — not available commercially
+3. **Thermal** (heat, hot water from compute waste) — not available commercially
+4. **Network** (WiFi AP, mesh relay, sovereign identity) — not available commercially
+5. **Autonomy** (self-managing, no cloud dependency, no subscription) — philosophical difference
+6. **Provenance** (data produced is cryptographically verified, guideStone quality) — trust without institutions
+
+A Jackery is a battery with marketing. A sovereign pallet is a **gate in the mesh** that happens to be portable.
+
+### Humanitarian Design Principles
+
+1. **No training required** — plug in solar, it works. LED shows status (green=ready, yellow=charging, red=low).
+2. **No internet required** — operates fully standalone. Mesh is bonus, not dependency.
+3. **No consumables** — sand doesn't degrade, LFP lasts 10+ years, solar panels last 25+ years.
+4. **Weatherproof** — rain, snow, dust, heat. Operates -20°C to +50°C.
+5. **Theft-resistant** — heavy (80-150kg), not obviously valuable from outside, GPS tracked internally.
+6. **Repairable** — standard 12V components, no proprietary parts, any electrician can service.
+7. **Stackable** — pallets stack physically and digitally (mesh). Add capacity by adding units.
+
+### Lineage: lithoSpore → Sovereign Pallet
+
+lithoSpore was gen4's answer to "how does science travel?" — a USB stick with a full validated computational environment that boots anywhere. The sovereign pallet is the physical deployment of that same principle: **science that runs anywhere, proves itself, needs nothing from civilization.**
+
+lithoSpore gives you the software sovereignty (boot from USB, run science, verify results).
+The pallet gives you the hardware sovereignty (power from sun, heat from compute, network from mesh).
+Together: drop a pallet with a lithoSpore in it anywhere on Earth, and you have a sovereign research station.
+
+---
+
 ## Summary: The One Rule
 
 **Energy flows downhill. Our job is to extract value at every step of the descent.**
