@@ -168,7 +168,9 @@ The primal already exists. The sovereign pallet is its deployment surface for po
 
 > *The Samaritan did not ask how the man came to be on the road. He treated the wounds.*
 
-NIMBY says: "not in my backyard." It says: the person on the road should be somewhere else. It says: the preconditions are someone else's problem. It says: purity requirements (property values, neighborhood character, safety theater) make crossing to the other side the rational choice.
+NIMBY says: "not in my backyard." It is a statement of dismissal. The person on the road should be somewhere else. The preconditions are someone else's problem. Purity requirements (property values, neighborhood character, safety theater) make crossing to the other side the rational choice.
+
+We also say NIMBY — "not in my backyard" — but we mean: **the deficiency should not be in my backyard.** Not the person. The *lack*. The absence of hot water, of charging, of continuity, of dignity. That deficiency should not exist where I can correct it. So I correct it.
 
 We say: **this too is my brother.** The person at the pallet needs hot water, phone charging, and continuity of their service records. The pallet provides all three. No means test. No credential check. No intake form. No waiting list. Touch the sensor. Get your data. Charge your phone. Wash with hot water. You exist. Your history exists. It survived the sweep because it lives in the mesh, not in a filing cabinet at an office you can't get to because you don't have bus fare.
 
