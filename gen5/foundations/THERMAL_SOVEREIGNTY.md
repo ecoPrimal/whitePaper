@@ -842,6 +842,151 @@ The system compounds over time:
 
 ---
 
+## Cross-Threading — Hot and Cold as a Memory Hierarchy
+
+### The Insight
+
+Every device that produces heat creates cold as its byproduct (or vice versa). A fridge makes cold (product) + heat (waste). A heat pump makes hot (product) + cold (waste). Currently these "wastes" are vented — the fridge heats your kitchen, the AC heats outdoors.
+
+What if you **cross-connect** them? Route every device's waste into another device's input. The system becomes a loop where nothing vents to ambient until it's been through every useful transformation.
+
+### The Thermal Memory Hierarchy
+
+Just as compute has a memory hierarchy (registers → L1 → L2 → RAM → NVMe → cold storage), the thermal system has one too:
+
+```
+COMPUTE MEMORY HIERARCHY          THERMAL MEMORY HIERARCHY
+─────────────────────────         ─────────────────────────
+Registers (instant, tiny)    →    Compute exhaust (instant, ~50°C, always flowing)
+L1 cache (fast, small)       →    Water buffer tank (fast access, 60°C, ~80 gal)
+L2 cache (fast, medium)      →    Sand battery (minutes to access, 100-200°C, 500kg)
+RAM (medium, large)          →    Ground loop (hours to charge/discharge, seasonal)
+NVMe (slow, huge)            →    Deep earth (seasonal banking, massive capacity)
+
+            --- AND ON THE COLD SIDE ---
+
+L1 cold cache                →    Fridge/freezer (always cold, immediate access, small)
+L2 cold cache                →    Ice battery (make ice at night, melt for cooling by day)
+Cold NVMe                    →    Ground loop winter charge (bank winter cold for summer)
+```
+
+### Cross-Threading: Every Waste Feeds Another Process
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     CROSS-THREADED THERMAL SYSTEM                    │
+│                                                                     │
+│  ┌─────────┐    hot waste     ┌─────────────┐                      │
+│  │  FRIDGE  │ ─────────────→  │ DHW preheat  │ (fridge heats your  │
+│  │ (-18°C)  │                 │ or sand bank │  water instead of    │
+│  │          │ ←── cold waste  │             │  heating your kitchen)│
+│  └─────────┘    from heat pump└─────────────┘                      │
+│       │                             ▲                               │
+│       │ cold available              │ hot available                 │
+│       ▼                             │                               │
+│  ┌─────────────┐              ┌─────────────┐                      │
+│  │ Cold buffer  │              │ Compute rack │                      │
+│  │ (ice/glycol) │              │ (50°C exhaust)│                     │
+│  │ "cold cache" │              │ "hot source" │                      │
+│  └──────┬──────┘              └──────┬──────┘                      │
+│         │                            │                              │
+│         │ ┌──────────────────────────┘                              │
+│         │ │                                                         │
+│         ▼ ▼                                                         │
+│  ┌─────────────────────────────────────┐                            │
+│  │  HEAT ENGINE (Stirling/TEG/ORC)      │                            │
+│  │  Hot side: sand battery (150°C)      │                            │
+│  │  Cold side: ice buffer (-5°C)        │                            │
+│  │  Delta-T: 155°C                      │                            │
+│  │  Carnot limit: 1 - (268/423) = 37%  │                            │
+│  │  Real efficiency: 15-20%             │                            │
+│  │  OUTPUT: ELECTRICITY (from gradient) │                            │
+│  └─────────────────────────────────────┘                            │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### The Fridge as "Cold RAM"
+
+Your fridge/freezer is already maintaining a cold reservoir 24/7. Right now:
+- **Cold side** (inside): -18°C to 4°C — keeping food cold (the product)
+- **Hot side** (back coils): 35-45°C — heating your kitchen (waste, vented)
+
+Cross-threaded:
+- **Hot side** → route to DHW preheat or sand battery input. Your fridge helps heat your water. The kitchen stays cooler (the fridge's "waste" goes somewhere useful instead of fighting your AC).
+- **Cold side** → available as a cold reservoir for the heat engine. The bigger the delta-T between hot and cold, the more work you can extract.
+
+A standalone **cold battery** (insulated ice tank) takes this further:
+- Make ice at night (cheap electricity, or excess solar during day)
+- Use the ice as cold-side thermal mass for:
+  - Supplemental cooling (melt ice near server intake for hot days)
+  - Heat engine cold sink (increases delta-T = more electricity from gradient)
+  - Food preservation backup (power outage: ice keeps freezer cold for days)
+
+### The Delta-T Advantage
+
+A heat engine (Stirling, ORC, thermoelectric) converts a temperature DIFFERENCE into work. Efficiency scales with the delta:
+
+| Hot Reservoir | Cold Reservoir | Delta-T | Carnot Limit | Real η | Notes |
+|--------------|---------------|---------|-------------|--------|-------|
+| Sand 150°C | Ambient 25°C | 125°C | 30% | 10-15% | No cold battery |
+| Sand 150°C | Fridge exhaust 5°C | 145°C | 34% | 12-18% | Slightly better |
+| Sand 150°C | Ice battery -5°C | 155°C | 37% | 15-20% | **Meaningful gain** |
+| Sand 200°C | Ice battery -5°C | 205°C | 43% | 18-25% | Excellent |
+| Sand 300°C | Ice battery -15°C | 315°C | 55% | 25-35% | Near industrial |
+
+**Adding a cold reservoir to the system boosts heat-to-electricity conversion by 50-100%** versus ambient-only cold sink. The ice battery is cheap (water is free, insulated tank is $200-500), and it's being made "for free" by excess overnight electricity or solar.
+
+### Cross-Thread Map: Every Appliance Feeds Another
+
+| Device | Hot Output | Cold Output | Cross-Thread Target |
+|--------|-----------|-------------|-------------------|
+| Compute rack | 50°C exhaust | — | → Heat pump source |
+| Heat pump (heating) | 60-150°C to tank/sand | Cold exhaust (10-20°C) | Cold → garage cooling / ice making |
+| Heat pump (cooling/summer) | 40-60°C "waste" | Cool garage air | Hot → DHW / sand bank |
+| Fridge | 35-45°C back coils | -18°C interior | Hot → DHW preheat. Cold → engine cold sink |
+| Freezer (standalone) | 40-50°C coils (works harder) | -25°C interior | Hot → sand. Cold → engine cold sink |
+| Clothes dryer | 50-60°C exhaust air | — | → Heat pump source (heat recovery dryer) |
+| Oven/stove (cooking) | Waste heat to kitchen | — | → Vent to sand preheat if ducted |
+| Water heater (existing) | — | — | REPLACED by heat pump system |
+
+### The "Harder to Grab" Concept
+
+You asked: can we put energy somewhere "easy or harder to grab?" Yes — that's exactly the hierarchy:
+
+| Accessibility | Hot Side | Cold Side | Analogy |
+|--------------|----------|-----------|---------|
+| **Instant** (always flowing) | Compute exhaust, 50°C | Fridge interior, -18°C | L1 cache |
+| **Fast** (minutes) | Water buffer tank, 60°C | Ice tank, -5°C | RAM |
+| **Medium** (hours) | Sand battery, 150°C | Deep freezer mass, -25°C | NVMe |
+| **Slow** (days-weeks) | Ground loop, 15-25°C | Ground loop in winter, 4°C | Cold storage |
+| **Seasonal** (months) | Deep sand at 300°C | Deep ground in February | Tape archive |
+
+"Easy to grab" = low impedance thermal connection (direct duct, short pipe, thin insulation boundary)
+"Harder to grab" = high impedance (thick insulation, long pipe, deep ground) — but holds longer
+
+The system balances just like a memory hierarchy: hot/fast for immediate demand, slow/deep for seasonal banking. The cold side mirrors it perfectly.
+
+### Practical Cross-Threading (Phase 1)
+
+The simplest cross-thread to implement first:
+
+1. **Move the garage fridge/freezer next to the compute rack.** Its waste heat (35-45°C coils) supplements the exhaust stream feeding the heat pump. Its cold side slightly pre-cools intake air for the servers.
+
+2. **Route fridge condenser heat to DHW preheat.** A simple copper coil around the fridge's condenser loop, feeding into the cold-water inlet of the hot water system. Preheats incoming cold water by 5-10°C for free. Cost: $50-100 in copper tubing.
+
+3. **Insulated ice bucket as cold buffer.** Freeze water overnight (cheap rates / excess solar). Use the ice mass as supplemental server-intake cooling on hot days, or as cold sink for a small TEG (thermoelectric generator) mounted on the sand battery.
+
+A 100W TEG with hot side on sand (150°C) and cold side on ice (-5°C) produces:
+```
+100W × 5-8% efficiency = 5-8W continuous electricity
+5-8W × 24h × 365d = 44-70 kWh/year ≈ $5-8/year
+```
+
+Not much in electricity — but it proves the concept, provides trickle charging for monitoring electronics, and the REAL value is: it demonstrates that the system can convert stored heat back to electricity. The accounting baseline is real, not theoretical.
+
+---
+
 ## The System Boundary
 
 The sovereign mesh isn't just a network of computers. It's an **energy system** with compute as one transformation stage. Drawing the boundary correctly:
