@@ -18,6 +18,7 @@ The gen4-to-gen5 transition document lives in `gen4/thesis/THE_GEN5_TRANSITION.m
 | Document | Purpose | Status |
 |----------|---------|--------|
 | `SCIENTIFIC_CHALLENGES.md` | Synapse/DREAM challenges as gen5 evolution profile — real science benchmarks, not Kaggle/LeetCode. Challenge participation as credibility engine. | Active |
+| `SHOW_HN_PUBLICATION.md` | HN as sovereign peer review — rubric, pre-flight checklist, title candidates, first comment, comparison table, engagement protocol. Three-channel dissemination model. | Active |
 | `EXTERNAL_DEMAND_EVOLUTION.md` | How collaborator demand drives ecosystem evolution — springs gain new validation targets, primals gain new composition patterns, products gain new deployment contexts | Planned |
 
 ---
