@@ -100,7 +100,31 @@ Each item is binary (PASS/FAIL). All must PASS before submission.
 | N-5 | Limitation statement is specific and honest (not false modesty) | Review by collaborator if possible | overwatch |
 | N-6 | Response templates for top 5 predicted criticisms exist | Drafted in this document | overwatch |
 
-### Category 3: Operational Readiness (the "logistics")
+### Category 3: Ecosystem Standards (internal readiness — the system must BE what we claim)
+
+These are the ecosystem's own stadial/glacial criteria. We cannot claim "self-healing mesh" if the mesh isn't meshed. We cannot claim "14K checks" if tests fail. The system must be in the state we describe.
+
+| ID | Criterion | Current State | Required for Submission |
+|----|-----------|---------------|------------------------|
+| S-1 | All 7 stadial criteria CLEAR | **CLEAR** (Wave 111 assessment) | Remain CLEAR |
+| S-2 | LAN mesh operational (3+ gates) | **4-gate collective LIVE** (eastGate↔golgi↔ironGate+southGate) | Maintain 3+ |
+| S-3 | WAN mesh operational (1+ remote gate) | **flockGate peered** via golgi relay | Maintain reachable |
+| S-4 | Sovereignty S1-S4 graduated (inner membrane) | **ALL GRADUATED** (Jun 9) | No regression |
+| S-5 | primalSpring 0 test failures | **1097 tests, 0 fail** (Wave 133c) | Maintain 0 fail |
+| S-6 | pepti depot current (all ecobins match HEAD) | 30/30 present, **4 stale** (need rebuild) | All match HEAD |
+| S-7 | External collaborator engaged (gen5 proof) | **Gonzales NF engaged** (producing) | At least 1 active |
+| S-8 | `capability.call` works cross-gate | **Code READY**, deployment pending (WAN-DISPATCH-01) | Live demonstration |
+| S-9 | Zero P1 blockers in GLACIAL_SHIFT_READINESS | **ZERO P1** (since Wave 145) | Maintain zero |
+| S-10 | sporePrint (primals.eco) sovereign on inner membrane | **Pending** — still GitHub Pages (outer membrane) | Inner membrane LIVE |
+
+**Philosophy**: We submit when the system IS what the post claims. Not aspirationally, not "almost" — the tests pass, the mesh meshes, the sovereignty is sovereign. A stranger who reads the HN post and clones the repo should find exactly what was described. Anything less is the Rosalind anti-pattern.
+
+**Current gaps to close before submission**:
+- S-6: Pepti rebuild for 4 changed primals (songBird, skunkBat, nestGate, coralReef, sweetGrass)
+- S-8: WAN-DISPATCH-01 needs live validation after sporeGate redeploy
+- S-10: sporePrint NUCLEUS deploy on golgi (handoff filed, not yet cut over)
+
+### Category 4: Operational Readiness (the "logistics")
 
 | ID | Criterion | Measured By | Team |
 |----|-----------|-------------|------|
@@ -239,34 +263,53 @@ Thread link:
 
 ---
 
-## Actionable Evolution Targets (for spring teams)
+## Actionable Evolution Targets (for all teams)
 
-These are the concrete deliverables each team needs to produce for E-category (Evidence Integrity) to PASS:
+These are the concrete deliverables each team needs to produce. Organized by rubric category.
 
-### sporePrint team
+### sporePrint team (E-1, E-7, S-10)
 - [ ] All Lab page internal links resolve (no 404s)
-- [ ] `zola check` passes with 0 errors
+- [ ] Fix 5 stale `spring-catalog-status-science-and-evolution` URLs
+- [ ] Fix 6 GitHub URLs pointing to wrong org (`ecoPrimals` → `syntheticChemistry`)
+- [ ] `zola check` passes with 0 content errors (DOI timeouts acceptable)
 - [ ] Contact page live and tested
 - [ ] "Reproduce It Yourself" page reviewed for current Wave accuracy
+- [ ] sporePrint NUCLEUS deployed on golgi inner membrane (S-10)
 
-### Spring teams (wetSpring, groundSpring, hotSpring, etc.)
+### Spring teams (E-2, E-5, E-6)
 - [ ] `cargo test` passes from cold clone on fresh machine (no local-only dependencies)
+- [ ] wetSpring: `nautilus` feature default OFF (or dep resolved to published crate)
 - [ ] README includes: test count, paper count, how to run
 - [ ] Test names follow pattern: `test_{paper_author}_{year}_{method}` (traceable to citation)
 - [ ] CI badge green on GitHub (or badge removed if CI not configured)
 - [ ] No path dependencies on private repos in published Cargo.toml
 
-### primalSpring team
+### primalSpring team (E-4, S-5)
 - [ ] `registry_all_rust_tier_pass` green
 - [ ] Scenario count matches claimed number
 - [ ] `PRIMAL_GAPS.md` reflects current state (no stale entries)
+- [ ] Test count in sporePrint matches actual `cargo test` output
 
-### overwatch
+### Gate teams (S-2, S-3, S-6, S-8)
+- [ ] Pepti depot current — rebuild songBird, skunkBat, nestGate, coralReef, sweetGrass (S-6)
+- [ ] sporeGate: redeploy songBird with drawbridge auto-advertisement
+- [ ] flockGate: validate `capability.call("jupyter")` over WAN (S-8)
+- [ ] Maintain 3+ LAN gates meshed (S-2)
+- [ ] strandGate: SSH enrollment when physically accessible
+- [ ] grapheneGate: redeploy 13/13 from fresh pepti
+
+### Collaborator surface (S-7, gen5 proof)
+- [ ] Gonzales NF: at least one delivered pseudoSpore or preliminary data artifact
+- [ ] ABG: JupyterHub accessible and pipeline work demonstrable
+- [ ] At minimum, one "producing" or "published" collaborator per gen5/collaborators/README.md
+
+### overwatch (N-1 through N-6, O-1 through O-3)
 - [ ] Title finalized
 - [ ] First comment timed and revised
 - [ ] Response templates reviewed
 - [ ] Comparison table fact-checked against latest tool versions
 - [ ] Posting date selected and calendar-blocked
+- [ ] HN account karma buildup begun (authentic participation)
 
 ---
 
