@@ -251,19 +251,51 @@ With it, the organism can grow to arbitrary size while maintaining integrity.
 
 ---
 
+## Gatehouse Bond Escalation (Wave 133d)
+
+The trust model has a natural complement at the gatehouse boundary. Where the
+covalent mesh validates trust between peers (horizontal), the gatehouse brokers
+trust escalation from external clients (vertical).
+
+The gatehouse (bearDog + songBird drawbridge on sporeGate) accepts all incoming
+traffic as **weak** interactions and progressively promotes them through K-Derm
+layers as authentication is established:
+
+| Entry Point | Bond Transition | What Triggers Promotion |
+|-------------|----------------|------------------------|
+| Public HTTP | Weak → Weak | Read-only content, no auth (passive diffusion) |
+| JupyterHub login | Weak → Ionic | JupyterHub auth + BTSP scoped token |
+| Gate re-enrollment | Weak → Metallic | Mito-Beacon membership validation via songBird |
+| Mesh federation | Weak → Covalent | BTSP Phase 2 nuclear key session |
+
+The drawbridge (songBird's `capability.call` router) auto-advertises its
+routable capabilities to mesh peers, enabling the vertical escalation chain
+to connect with the horizontal covalent mesh. A remote gate's `capability.call`
+discovers the drawbridge via mesh federation, then routes through it to reach
+darkforest backends — the full trust chain from extracellular weak to
+cytoplasmic covalent.
+
+See `wateringHole/GATEHOUSE_DARKFOREST_STANDARD.md` §Bond Escalation,
+`wateringHole/BONDING_MODEL_STANDARD.md` §Bonding Escalation Path.
+
+---
+
 ## References
 
 - `wateringHole/DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
+- `wateringHole/GATEHOUSE_DARKFOREST_STANDARD.md` — bond escalation broker pattern (Wave 133d)
+- `wateringHole/BONDING_MODEL_STANDARD.md` — 5 bond types + escalation path
 - `wateringHole/SOVEREIGNTY_STANDARDS.md` — calibrate → shadow → cutover protocol
 - `gen5/foundations/SOVEREIGNTY_SHADOW_EVOLUTION.md` — S1-S4 track status
 - `gen5/foundations/KDERM_DIDERM_ENVELOPE.md` — VPS topology and bond degradation
 - `gen5/foundations/TRANSPORT_EVOLUTION.md` — nanowire → quorum sensing progression
-- `wateringHole/handoffs/PRIMALSPRING_WAVE72_LIVE_MESH_VALIDATION_JUN03_2026.md` — mesh AAR
+- `gen4/architecture/K_DERM_RECONCILIATION.md` — gen4→K-Derm vocabulary bridge
 - `wateringHole/NEURAL_API_PERCEPTRON_DESIGN.md` — learned routing architecture
 - `wateringHole/DISCOVERY_WIRE_CONTRACT.md` — RPC wire format for discovery
 
 ---
 
 *The inner membrane is going covalent. Gates are sharing capabilities, not just
-coexisting. The trust validation ensures the organism's immune system scales
+coexisting. The gatehouse brokers inward trust escalation. The diderm degrades
+outward. The trust validation ensures the organism's immune system scales
 with its growth. This is the foundation of distributed sovereign computation.*

@@ -66,6 +66,25 @@ Sovereignty is strongest at the core and degrades outward:
 | peptidoglycan → golgiBody-ext | Ionic | SSH relay | Directed, asymmetric |
 | golgiBody-ext → GitHub | Weak | `git push` over HTTPS | External, append-only |
 
+### Complementary: Bond Escalation (Gatehouse)
+
+Degradation has a mirror: **bond escalation** at the gatehouse. Where degradation
+weakens trust outward (covalent → weak), escalation strengthens trust inward
+(weak → covalent) as external traffic authenticates through K-Derm layers.
+
+The gatehouse (bearDog + songBird drawbridge) is the bond escalation broker:
+weak interactions arrive at the outer membrane, and the gatehouse validates and
+promotes them to ionic (BTSP scoped token), metallic (Mito-Beacon membership),
+or covalent (nuclear session) as authentication is established.
+
+```
+OUTWARD (VPS degradation):   Covalent → Metallic → Ionic → Weak
+INWARD (gatehouse escalation): Weak → Ionic → Metallic → Covalent
+```
+
+See `wateringHole/GATEHOUSE_DARKFOREST_STANDARD.md` §Bond Escalation,
+`wateringHole/BONDING_MODEL_STANDARD.md` §Bonding Escalation Path.
+
 ---
 
 ## Multi-golgiBody Architecture

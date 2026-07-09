@@ -256,6 +256,7 @@ documents cover:
 |-----------|---------|----------------------|
 | **Recursive nesting** | Every administrative domain is its own K-Derm system, nested recursively | "Nested diderm" hinted in HPC evolution but not formalized |
 | **Endosymbiosis** | External systems progressively internalize (Weak → Ionic → Metallic → Covalent) | Bonding escalation in sovereignty standards |
+| **Gatehouse bond escalation** | The gatehouse (bearDog + drawbridge) is the bond escalation broker — validates weak interactions and promotes to ionic/metallic/covalent as trust is established, while the darkforest boundary prevents leakage | Implicit in Tower mediation role, formalized in Wave 133d `GATEHOUSE_DARKFOREST_STANDARD.md` |
 | **Vesicle transport** | Braid as membrane coat — provenance attribution as SNARE protein targeting | sweetGrass attribution in transaction membrane |
 | **Membrane potential** | Resource load creates osmotic pressure across boundaries | Implicit in compute dispatch but not formalized |
 | **OrganoMetalSalt** | Composite bond type spanning multiple layers | Referenced in BTSP standard but not gen4 architecture |
@@ -290,3 +291,5 @@ The substance was always correct; K-Derm gives it unambiguous labels.
 | Membrane channels | `infra/wateringHole/MEMBRANE_CHANNEL_ARCHITECTURE.md` | Channel architecture |
 | K-NOME methodology | `infra/whitePaper/gen3/about/K_NOME_PROGRAMMING.md` | Parallel: K-NOME=how, K-Derm=shape |
 | Envelope types | `gardens/cellMembrane/crates/cellmembrane-types/src/envelope.rs` | Rust implementation |
+| Gatehouse bond escalation | `infra/wateringHole/GATEHOUSE_DARKFOREST_STANDARD.md` | Bond escalation broker pattern (Wave 133d) |
+| K-Derm diderm deployment | `infra/whitePaper/gen5/foundations/KDERM_DIDERM_ENVELOPE.md` | Physical diderm + bond degradation model |
