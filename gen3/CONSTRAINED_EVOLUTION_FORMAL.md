@@ -351,6 +351,69 @@ Critically, no one designed BarraCuda for physics. The FHE constraint required N
 
 The hotSpring control experiments (see `whitePaper/barraCUDA/sections/04_CONTROL_EXPERIMENTS.md`) validate this with 131 quantitative acceptance criteria across three phases. Phase A (Python control) established 86 checks. Phase C (GPU MD) added 45 more: the f64 WGSL shaders — built from the same `math_f64.wgsl` transcendental functions evolved for ML and nuclear EOS — now run full Yukawa OCP molecular dynamics on a consumer GPU. All 9 PP Yukawa cases pass with 0.000% energy drift. The same math that trains neural networks computes plasma physics forces. The evolution from FHE to physics is empirically confirmed — not by analogy, but by data.
 
+### 5.5 Cross-Language Evidence: RustScript as Control Experiment
+
+Section 2.1 argues that Rust is physics while TypeScript is "architecture without
+physics." Section 2.3 argues that low-level compilation matters because the binary
+is the genome. These are theoretical claims. The footPrint project provides empirical
+evidence.
+
+footPrint (`protoKarya/footPrint`) is a GIS home improvement planner built in
+TypeScript. It was developed in isolation as a practical tool — satellite map
+drawing, property planning, data overlays, parametric constraint solving. During
+development, an experiment was conducted: encode Rust's safety constraints as
+TypeScript types and runtime primitives. The result is RustScript — 12 zero-
+dependency TypeScript modules that implement the Rust constraint algebra:
+
+| Rust Constraint | RustScript | Enforcement |
+|----------------|-----------|-------------|
+| `&T` | `DeepReadonly<T>` | Compile-time |
+| `Result<T,E>` | `Result<T,E>` discriminated union | Compile-time |
+| `Option<T>` | `Option<T>` discriminated union | Compile-time |
+| Exhaustive match | `exhaustive(never)` | Compile-time |
+| Newtype `struct B(T)` | `Brand<T,B>` | Compile-time |
+| `&mut T` exclusive | `RefCell<T>` / `RefMut<T>` | **Runtime** |
+| Ownership / move | `Owned<T>`, `transfer`, `take` | **Runtime** |
+| Lifetimes `'a` | **Not expressible** | -- |
+| `Send` / `Sync` | **Not applicable** | -- |
+| Zero-cost abstractions | **Not possible** (JIT, not AOT) | -- |
+
+Of 20 Rust constraints evaluated, 17 are enforceable in TypeScript: 8 at compile
+time (zero runtime cost) and 9 via runtime wrappers (checked access, panics on
+violation). Three cannot be expressed at all: lifetimes, Send/Sync, and zero-cost
+abstractions — precisely the constraints that are tied to the memory model and
+compilation target.
+
+**The finding**: RustScript measurably improves TypeScript code. The ECS store uses
+`Result<ReadonlyEntity, EntityNotFound>` instead of `T | undefined`. The borrow
+tracking catches concurrent mutation bugs that would be silent in vanilla
+TypeScript. Branded types (`EntityId`, `HexColor`, `LayerId`) prevent the class
+of accidental-string-confusion bugs that dominate web application error reports.
+
+**The conclusion**: The improvement validates the thesis *by showing its limits*.
+When 9 of 17 enforceable constraints require runtime wrappers — when ownership is
+a class that panics instead of a compiler that rejects — the code is safer but
+the enforcement is degraded. The 3 constraints that cannot be expressed at all
+(lifetimes, Send/Sync, zero-cost abstractions) are the ones that matter most for
+systems work: they are what make binaries into genomes (§2.2), what make
+compilation into selection (§2.5), what make Rust into physics (§2.1).
+
+RustScript is the control experiment. It shows that Rust's constraints improve code
+in *any* language they touch — but that the improvement is maximal only when the
+compiler enforces them natively, at compile time, at zero cost. TypeScript with
+RustScript is safer TypeScript. Rust is safe by construction. The gap between
+"safer" and "safe by construction" is the gap between runtime panics and compile
+errors, between architecture-without-physics and physics.
+
+The footPrint project is now part of the ecoPrimals topology (Wave 136b,
+`protists/footPrint`, gate owner: flockGate). It will not become a primal —
+it will become a **primal composition**: petalTongue serves the frontend,
+nestGate provides persistence, songBird proxies data sources. The Express server
+disappears; the primals absorb its responsibilities. The TypeScript frontend
+remains as the product — browsers run JavaScript, and that is not a constraint
+the ecosystem needs to fight. But the backend is pure Rust, compiled to ecoBins,
+deployed as genomes. RustScript validated that decision. The primals execute it.
+
 ---
 
 ## References
