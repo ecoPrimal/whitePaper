@@ -136,18 +136,24 @@ Eero 6 retired (bridge mode collapse Jun 17-18).
 Phase C sovereign Akida driver achieved (Feb 2026): 3 ESN classifiers at 18.8K Hz,
 online (1+1)-ES evolution at 136 gen/sec.
 
-### northGate — Personal Gaming + Remote Compute
+### northGate — Personal Gaming + Remote Compute + AlphaFold Data
 
 | Component | Specification |
 |-----------|---------------|
 | **CPU** | AMD Ryzen 9 9950X3D |
 | **GPU** | NVIDIA RTX 5090 |
 | **RAM** | 96 GB DDR5 (2×48 GB) |
-| **Storage** | 1 TB NVMe (OS) + 4 TB NVMe (games) |
-| **Network** | 10G NIC (copper), CRS310 backbone |
+| **Storage** | 1 TB NVMe (OS) + 4 TB NVMe (games) + ~1 TB AlphaFold data |
+| **Network** | 10G NIC (copper), CRS310 backbone (house1 MikroTik) |
 | **OS** | Windows |
-| **Role** | Gaming primary, remote compute secondary |
+| **Role** | Gaming primary, remote access hub, mesh target, AlphaFold staging |
 | **RustDesk** | Sovereign relay |
+| **Data** | ~1 TB AlphaFold — pending move to westGate + reverse provenance trace |
+
+Primary remote access point for all other gates. Mesh target for songBird
+(Windows enrollment). AlphaFold data needs migration to westGate cold storage
+when westGate comes back online, with reverse provenance tracing through
+loamSpine to establish data lineage.
 
 ### ironGate — Agentic Development + Composition Validation
 
