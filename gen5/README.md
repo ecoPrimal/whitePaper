@@ -77,7 +77,8 @@ gen5/
 │   ├── IMPULSE_POTENTIAL_COORDINATION.md ← Triad integration (qS/wF/rP + SYNC impulses + divergence policy)
 │   ├── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
 │   ├── COVALENT_MESH_TRUST_VALIDATION.md ← Multi-gate trust model, Dark Forest invariants, 5-phase cross-validation
-│   └── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
+│   ├── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
+│   └── COMPOSITION_ROUTING_PATTERN.md    ← Live data compositions via drawbridge — protoKarya as organelles (Wave 138a)
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
