@@ -79,7 +79,8 @@ gen5/
 │   ├── COVALENT_MESH_TRUST_VALIDATION.md ← Multi-gate trust model, Dark Forest invariants, 5-phase cross-validation
 │   ├── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
 │   ├── COMPOSITION_ROUTING_PATTERN.md    ← Live data compositions via drawbridge — protoKarya as organelles (Wave 138a)
-│   └── RUSTSCRIPT_LAST_MILE.md           ← RustScript safety primitives for browser last mile (Wave 139a)
+│   ├── RUSTSCRIPT_LAST_MILE.md           ← RustScript safety primitives for browser last mile (Wave 139a)
+│   └── IDENTITY_ANCHORING_PATTERN.md     ← loamSpine meets external trust — Keyoxide/ORCID/Zenodo as sovereign identity (Wave 138b)
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -138,7 +139,8 @@ gen5/
 8. `foundations/COVALENT_MESH_TRUST_VALIDATION.md` — multi-gate trust model and Dark Forest invariants
 9. `foundations/COMPOSITION_ROUTING_PATTERN.md` — live data compositions via drawbridge (Wave 138a)
 10. `foundations/RUSTSCRIPT_LAST_MILE.md` — why RustScript, how it differs from TypeScript, absorption path (Wave 139a)
-11. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
+11. `foundations/IDENTITY_ANCHORING_PATTERN.md` — loamSpine meets external trust — Keyoxide/ORCID/Zenodo as sovereign identity (Wave 138b)
+12. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
 11. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
 
 ### For navigating the ecosystem landscape (Memory Palace)
