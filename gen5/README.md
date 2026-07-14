@@ -2,7 +2,7 @@
 
 **Status**: Active — live compositions routing, drawbridge data ingestion, collaborator activations underway
 **Lineage**: gen1 → gen2 → gen3 → gen4 → **gen5**
-**Date**: July 14, 2026 (Wave 138a)
+**Date**: July 14, 2026 (Wave 139a)
 
 ---
 
@@ -78,7 +78,8 @@ gen5/
 │   ├── SOVEREIGNTY_SHADOW_EVOLUTION.md  ← S1-S4 shadow tracks, membrane-shadow Rust coverage
 │   ├── COVALENT_MESH_TRUST_VALIDATION.md ← Multi-gate trust model, Dark Forest invariants, 5-phase cross-validation
 │   ├── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
-│   └── COMPOSITION_ROUTING_PATTERN.md    ← Live data compositions via drawbridge — protoKarya as organelles (Wave 138a)
+│   ├── COMPOSITION_ROUTING_PATTERN.md    ← Live data compositions via drawbridge — protoKarya as organelles (Wave 138a)
+│   └── RUSTSCRIPT_LAST_MILE.md           ← RustScript safety primitives for browser last mile (Wave 139a)
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
 │   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
@@ -136,7 +137,8 @@ gen5/
 7. `foundations/OVERWATCH_DISTRIBUTED_COORDINATION.md` — how sovereign infra enables floating coordination
 8. `foundations/COVALENT_MESH_TRUST_VALIDATION.md` — multi-gate trust model and Dark Forest invariants
 9. `foundations/COMPOSITION_ROUTING_PATTERN.md` — live data compositions via drawbridge (Wave 138a)
-10. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
+10. `foundations/RUSTSCRIPT_LAST_MILE.md` — why RustScript, how it differs from TypeScript, absorption path (Wave 139a)
+11. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
 11. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
 
 ### For navigating the ecosystem landscape (Memory Palace)
