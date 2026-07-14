@@ -29,10 +29,11 @@
 
 ### User: ecoPrimal
 **Bio**: "a tool that shapes itself"
-**Website**: none set
-**Repos**: 1 (rustChip, no description)
+**Website**: primals.eco (set 2026-07-14)
+**ORCID**: 0009-0004-2141-0321 (linked 2026-07-14)
+**Repos**: 1 (rustChip)
 
-**Problem**: The personal account is the commit author on everything. It has no bio explaining who you are, no website link, no context. Someone clicking your commit history lands on a blank profile.
+**Status (2026-07-14)**: Profile updated. No real name, no location, no institutional affiliation. ORCID linked. Bio is an easter egg connecting to attsi ("a tool that shapes itself"). Website points to primals.eco. ecoPrimal is the sole member of all 4 orgs. DataScienceBioLab removed.
 
 ---
 
@@ -84,13 +85,17 @@
 | projectFOUNDATION | **(none)** | Invisible | "Unified scientific lineage — cross-domain validation targets and provenance threads" |
 | esotericWebb | Has description | Fine | Keep |
 
-### User: ecoPrimal
+### User: ecoPrimal (UPDATED 2026-07-14)
 
-| Field | Current | Proposed |
-|-------|---------|----------|
-| Bio | "a tool that shapes itself" | "Microbiology + Data Science. Building sovereign scientific computing infrastructure. BS Micro, MS Data Science, MSU" |
-| Website | (none) | primals.eco |
-| Location | (none) | East Lansing, MI |
+| Field | Value | Rule |
+|-------|-------|------|
+| Bio | "a tool that shapes itself" | Easter egg connecting to attsi. DO NOT add real name, degrees, or location. |
+| Website | primals.eco | Set |
+| ORCID | 0009-0004-2141-0321 | Linked via GitHub OAuth |
+| Location | (blank) | KEEP BLANK — no geographic fingerprint |
+| Name | (blank) | KEEP BLANK — ecoPrimal is the synthetic identity |
+
+**WARNING**: The original proposed bio ("BS Micro, MS Data Science, MSU") and location ("East Lansing, MI") were SCRUBBED in Wave 138b. An AI bot was able to identify the human author by cross-referencing degree + institution with graduation records. See `PLATFORM_CREDENTIALS.md` for full scrub log.
 
 ---
 
@@ -165,8 +170,9 @@ gh repo edit sporeGarden/lithoSpore --description "Self-proving LTEE validation 
 gh repo edit sporeGarden/projectNUCLEUS --description "Sovereign compute node deployment — single-command scientific cluster bootstrap"
 gh repo edit sporeGarden/projectFOUNDATION --description "Unified scientific lineage — cross-domain validation targets and provenance threads"
 
-# User profile — requires gh api
-gh api -X PATCH /user -f bio="Microbiology + Data Science. Building sovereign scientific computing infrastructure. BS Micro, MS Data Science, MSU" -f blog="https://primals.eco" -f location="East Lansing, MI"
+# User profile — SCRUBBED 2026-07-14. DO NOT add real name, degrees, or location.
+# gh api -X PATCH /user -f blog="https://primals.eco"
+# Bio and location are intentionally blank/generic. See PLATFORM_CREDENTIALS.md.
 ```
 
 **Note**: Org-level bios and website URLs must be updated through the GitHub web UI at github.com/organizations/{org}/settings/profile — gh CLI cannot update org profiles.
