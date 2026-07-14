@@ -1,8 +1,8 @@
 # gen5/ — External Science Production and the Spore Cycle
 
-**Status**: Active — skeleton established, first collaborator engaged, coordination patterns documented
+**Status**: Active — live compositions routing, drawbridge data ingestion, collaborator activations underway
 **Lineage**: gen1 → gen2 → gen3 → gen4 → **gen5**
-**Date**: May 31, 2026 (Wave 65)
+**Date**: July 14, 2026 (Wave 138a)
 
 ---
 
@@ -135,8 +135,9 @@ gen5/
 6. `foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — how WaterFall enables collaborator gate routing
 7. `foundations/OVERWATCH_DISTRIBUTED_COORDINATION.md` — how sovereign infra enables floating coordination
 8. `foundations/COVALENT_MESH_TRUST_VALIDATION.md` — multi-gate trust model and Dark Forest invariants
-6. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
-7. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
+9. `foundations/COMPOSITION_ROUTING_PATTERN.md` — live data compositions via drawbridge (Wave 138a)
+10. `foundations/CONTEXT_BRAID_PATTERN.md` — how developer state weaving scales to external collaborators
+11. `../gen4/architecture/SOVEREIGNTY_EVOLUTION_NARRATIVE.md` — how we got to sovereign infrastructure (fossil)
 
 ### For navigating the ecosystem landscape (Memory Palace)
 1. `atlas/00_THE_MAP.md` — the full landscape, Paper 23 bridge, expedition start
@@ -151,20 +152,30 @@ gen5/
 
 ---
 
-## Status — May 2026
+## Status — July 2026
 
-### Sovereignty Infrastructure (Wave 65)
+### Sovereignty Infrastructure (Wave 138a)
 
-The K-Derm diderm envelope (3-node VPS: golgiBody/peptidoglycan/golgiBody-ext)
-provides the infrastructure gen5 needs for external collaboration.
-Collaborators will sync through the same WaterFall pipeline as internal
-gates, with scoped gate profiles. impulsePotential and context braids
-(Wave 63+) add structured coordination layers for cross-gate and
-cross-organization communication. `membrane-shadow` is now a 12-module
-Rust crate replacing all bash control scripts — `plasmid.fetch` and
-`temporal.cascade` are fully Rust. S1-S3 sovereignty shadows are live,
-DNS (ns1+ns2) is operational, and 5 gates are in the mesh. See the
-`foundations/` subdirectory for detailed coverage of each system.
+The K-Derm diderm envelope is live and public. 3-gate WireGuard mesh
+(eastGate ↔ sporeGate ↔ golgi) with bearDog TLS, songBird mesh
+federation, and signed ecobins (`RequireSigned` enforced). Wildcard
+DNS (`*.primals.eco`) routes all subdomains through Caddy on golgi —
+no Cloudflare changes needed for new compositions. `cellMembrane` is
+a 100% Rust deployment pipeline (bash fossilized in Wave 137b).
+
+### Live Compositions (Wave 138a)
+
+| Composition | Surface | Data Sources |
+|------------|---------|-------------|
+| sporePrint | `primals.eco` | Zola static site |
+| footPrint GIS | `primals.eco/footprint/` | USGS, OpenStreetMap, ArcGIS |
+| TOPO-VIS | `live.primals.eco` | songBird mesh topology |
+| JupyterHub | `lab.primals.eco` | ABG notebooks (ironGate GPU) |
+| Forgejo | `git.primals.eco` | 40 repos, full-depth mirrors |
+
+Compositions register with the drawbridge and expose capabilities via
+songBird mesh. External data enters through weak bonds → NestGate CAS.
+See `foundations/COMPOSITION_ROUTING_PATTERN.md` for the full pattern.
 
 ### Products Across the Generational Arc
 
@@ -178,15 +189,15 @@ DNS (ns1+ns2) is operational, and 5 gates are in the mesh. See the
 
 ### Collaborators
 
-| Collaborator | Status | Products | Domain |
-|-------------|--------|----------|--------|
-| Gonzales (NF) | **engaged** | helixVision + healthSpring + initioChem | Neurofibromatosis data mining |
-| ABG | producing | initioChem | Whole-cell modeling, CAZyme FEL |
-| Jones | active | blueFish | PFAS analytical chemistry |
-| Barrick | contacted | lithoSpore | LTEE microbial evolution |
-| Murillo | contacted | pseudoSpore pattern | Plasma physics, student theses |
-| Chuna | contacted | hotSpring workbench | Lattice QCD |
-| Eaves | contacted | pseudoSpore pattern | Dissertation reproducibility |
+| Collaborator | Status | Products / Compositions | Domain | Live Surface |
+|-------------|--------|------------------------|--------|-------------|
+| Gonzales (NF) | **engaged** | tideGlass + helixVision + healthSpring | Neurofibromatosis data mining | `tideglass.primals.eco` (planned) |
+| ABG | producing | JupyterHub + initioChem | Whole-cell modeling, CAZyme FEL | `lab.primals.eco` (live) |
+| Jones | active | blueFish | PFAS analytical chemistry | — |
+| Barrick | contacted | lithoSpore | LTEE microbial evolution | — |
+| Murillo | contacted | pseudoSpore pattern | Plasma physics, student theses | — |
+| Chuna | contacted | hotSpring workbench | Lattice QCD | — |
+| Eaves | contacted | pseudoSpore pattern | Dissertation reproducibility | — |
 
 ---
 

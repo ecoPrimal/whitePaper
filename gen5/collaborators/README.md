@@ -1,7 +1,7 @@
 # gen5/collaborators/ — External Science Production Catalog
 
-**Status**: Active — 7 collaborator relationships tracked, 1 engaged with foundation funding
-**Date**: May 28, 2026
+**Status**: Active — 7 collaborator relationships tracked, 1 engaged with foundation funding, compositions routing live
+**Date**: July 14, 2026 (Wave 138a)
 
 ---
 
@@ -58,17 +58,39 @@ The NF project illustrates this concretely: Andrea's NF gene expression results 
 
 ---
 
+## Live Composition Routing (Wave 138a)
+
+Collaborators interact with the ecosystem through **live compositions** — deployed
+products served via `*.primals.eco` subdomains. Each composition registers its
+capabilities through the drawbridge and ingests external data through weak bonds.
+
+| Collaborator | Composition | Subdomain | Status |
+|-------------|-------------|-----------|--------|
+| Gonzales NF | tideGlass + helixVision | `tideglass.primals.eco`, `helix.primals.eco` | PLANNED |
+| ABG | JupyterHub + initioChem | `lab.primals.eco` | LIVE |
+| Jones | blueFish | — | Specification only |
+| All | footPrint GIS | `primals.eco/footprint/` | LIVE |
+
+Collaborators never see primals. They see a JupyterHub, a GIS tool, a screening
+platform. The drawbridge mediates data ingestion. The mesh routes capabilities.
+NestGate CAS stores everything with provenance.
+
+See `gen5/foundations/COMPOSITION_ROUTING_PATTERN.md` for the full pattern.
+See `wateringHole/COMPOSITION_ROUTING_STANDARD.md` for the operational standard.
+
+---
+
 ## Documents
 
 | Document | Collaborator | Status |
 |----------|-------------|--------|
-| `GONZALES_NF.md` | Andrea Gonzales — NF data mining | Planned |
+| `GONZALES_NF.md` | Andrea Gonzales — NF data mining | Active |
 | `ABG_PROJECTS.md` | Alistaire / citizen science — 4 projects | Planned |
 | `BARRICK_LTEE.md` | Jeff Barrick — microbial evolution | Planned |
 | `MURILLO_STUDENTS.md` | Michael Murillo — student theses | Planned |
 | `CHUNA_QCD.md` | Alexei Bazavov — lattice QCD | Planned |
 | `EAVES_REVALIDATION.md` | Joelle Eaves — dissertation revalidation | Planned |
-| `JONES_BLUEFISH.md` | Dan Jones — PFAS consulting | Planned |
+| `JONES_BLUEFISH.md` | Dan Jones — PFAS consulting | Active |
 
 ---
 
