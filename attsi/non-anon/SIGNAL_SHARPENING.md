@@ -150,32 +150,73 @@ Recommendation: Remove from org profile. Anyone serious will find you through pr
 
 ---
 
-## gh Commands for Teams
+## gh Commands for Teams — EXECUTED Wave 139a (2026-07-14)
 
-```bash
-# Phase 1 — org bios require web UI, but repo descriptions:
+All repo descriptions below were applied via `gh repo edit`. Org-level bios and website URLs still require the GitHub web UI.
 
-# ecoPrimals repos
-gh repo edit ecoPrimals/toadStool --description "Compute dispatch for scientific pipelines — GPU/NPU/CPU routing, tolerance-based scheduling. Pure Rust"
-gh repo edit ecoPrimals/coralReef --description "GPU shader compilation for scientific workloads — WGSL to native compute kernels. Pure Rust"
-gh repo edit ecoPrimals/bearDog --description "Cryptographic identity and provenance signing for scientific artifacts. Pure Rust"
-gh repo edit ecoPrimals/songBird --description "Service discovery and health monitoring for distributed scientific compute. Pure Rust"
-gh repo edit ecoPrimals/nestGate --description "Long-term scientific data storage — ZFS tiering, NFS/SMB, provenance-aware. Pure Rust"
-gh repo edit ecoPrimals/biomeOS --description "Orchestration engine for composable scientific computing services. Pure Rust"
-gh repo edit ecoPrimals/squirrel --description "AI assistant coordination — MCP adapter for scientific pipeline mentoring. Pure Rust"
-gh repo edit ecoPrimals/loamSpine --description "Immutable computation lineage — certificate chain for reproducible science. Pure Rust"
+### ecoPrimals repos (DONE)
 
-# sporeGarden repos
-gh repo edit sporeGarden/lithoSpore --description "Self-proving LTEE validation artifact — 73 checks, 7 papers, <100ms. Portable guideStone for evolutionary biology"
-gh repo edit sporeGarden/projectNUCLEUS --description "Sovereign compute node deployment — single-command scientific cluster bootstrap"
-gh repo edit sporeGarden/projectFOUNDATION --description "Unified scientific lineage — cross-domain validation targets and provenance threads"
+| Repo | New Description |
+|------|----------------|
+| toadStool | Compute dispatch for scientific pipelines — GPU/NPU/CPU routing, tolerance-based scheduling. Pure Rust |
+| coralReef | GPU shader compilation for scientific workloads — WGSL to native compute kernels. Pure Rust |
+| bearDog | Cryptographic identity and provenance signing for scientific artifacts. Pure Rust |
+| songBird | Service discovery and health monitoring for distributed scientific compute. Pure Rust |
+| nestGate | Long-term scientific data storage — ZFS tiering, NFS/SMB, provenance-aware. Pure Rust |
+| biomeOS | Orchestration engine for composable scientific computing services. Pure Rust |
+| squirrel | AI assistant coordination — MCP adapter for scientific pipeline mentoring. Pure Rust |
+| loamSpine | Immutable computation lineage — certificate chain for reproducible science. Pure Rust |
+| barraCuda | GPU-accelerated math primitives for genomics, physics, and statistics. Pure Rust |
+| rhizoCrypt | DAG provenance tracking for reproducible computational experiments. Pure Rust |
+| sweetGrass | Attribution and licensing for scientific artifacts. Pure Rust |
+| petalTongue | Scientific visualization and dashboards for validation results. Pure Rust |
+| sourDough | Shared substrate primitives for the ecoPrimals scientific computing stack. Pure Rust |
+| skunkBat | Peer-to-peer transport for distributed scientific compute nodes. Pure Rust |
+| bingoCube | Entropy and randomness primitives for simulation and cryptography. Pure Rust |
+| sporePrint | Public science site for the ecoPrimals ecosystem — 300+ pages, provenance-verified content at primals.eco |
+| plasmidBin | Binary depot pipeline for reproducible scientific software deployment. Pure Rust |
 
-# User profile — SCRUBBED 2026-07-14. DO NOT add real name, degrees, or location.
-# gh api -X PATCH /user -f blog="https://primals.eco"
-# Bio and location are intentionally blank/generic. See PLATFORM_CREDENTIALS.md.
-```
+### sporeGarden repos (DONE)
 
-**Note**: Org-level bios and website URLs must be updated through the GitHub web UI at github.com/organizations/{org}/settings/profile — gh CLI cannot update org profiles.
+| Repo | New Description |
+|------|----------------|
+| lithoSpore | Self-proving LTEE validation artifact — 73 checks, 7 papers, <100ms. Portable guideStone for evolutionary biology |
+| projectNUCLEUS | Sovereign compute node deployment — single-command scientific cluster bootstrap |
+| projectFOUNDATION | Unified scientific lineage — cross-domain validation targets and provenance threads |
+| cellMembrane | Sovereign deployment pipeline — 100% Rust operations for scientific compute infrastructure |
+| metalForge | Metal-layer provisioning for sovereign scientific compute nodes |
+| initioChem | Ab initio quantum chemistry compositions — Hartree-Fock and DFT on consumer GPUs. Pure Rust |
+| helixVision | Protein structure prediction and molecular visualization compositions. Pure Rust |
+| blueFish | Marine ecology and oceanographic data compositions. Pure Rust |
+
+### protoKarya repos (DONE)
+
+| Repo | New Description |
+|------|----------------|
+| tideGlass | Sovereign GPS platform — archaeological and ecological geospatial data. Pure Rust |
+
+### User profile (DONE — Wave 138b + 139a)
+
+| Field | Value | Rule |
+|-------|-------|------|
+| Bio | "a tool that shapes itself" | Easter egg connecting to attsi. DO NOT add real name, degrees, or location. |
+| Website | primals.eco | Set |
+| ORCID | 0009-0004-2141-0321 | Linked via GitHub OAuth |
+| Location | (blank) | KEEP BLANK — no geographic fingerprint |
+| Name | (blank) | KEEP BLANK — ecoPrimal is the synthetic identity |
+
+**WARNING**: The original proposed bio ("BS Micro, MS Data Science, MSU") and location ("East Lansing, MI") were SCRUBBED in Wave 138b. An AI bot was able to identify the human author by cross-referencing degree + institution with graduation records. See `PLATFORM_CREDENTIALS.md` for full scrub log.
+
+### Org-level changes — DONE (Wave 139a, 2026-07-14, via `gh api -X PATCH /orgs/`)
+
+| Org | New Bio | Website |
+|-----|---------|---------|
+| ecoPrimals | Scientific computing infrastructure — composable Pure Rust services for reproducible research, provenance, and sovereign deployment. AGPL-3.0 | primals.eco |
+| syntheticChemistry | Sovereign scientific validation springs — physics, agriculture, biology, chemistry, health, ML, game science. 20,695+ checks across 175+ papers. AGPL-3.0 | primals.eco |
+| sporeGarden | Deployable scientific artifacts and creative products — portable validation, game engines, and field tools composed from ecoPrimals. AGPL-3.0 | primals.eco |
+| protoKarya | External science compositions — field tools and collaborator-facing products from the ecoPrimals ecosystem. AGPL-3.0 | primals.eco |
+
+All org emails cleared. All org locations cleared. All org websites now point to primals.eco.
 
 ---
 
