@@ -1,8 +1,8 @@
 # gen5/ — External Science Production and the Spore Cycle
 
-**Status**: Active — live compositions routing, drawbridge data ingestion, collaborator activations underway
+**Status**: Active — Tower Atomic COMPLETE, Nest Atomic Phase 0 underway, Gonzales NF as JOSS proof case
 **Lineage**: gen1 → gen2 → gen3 → gen4 → **gen5**
-**Date**: July 14, 2026 (Wave 139a)
+**Date**: July 26, 2026 (Wave 151c)
 
 ---
 
@@ -65,7 +65,9 @@ gen5/
 ├── thesis/
 │   ├── README.md                      ← Why gen5 exists
 │   ├── SCIENTIFIC_CHALLENGES.md       ← Synapse/DREAM challenges as gen5 evolution profile
-│   └── EXTERNAL_DEMAND_EVOLUTION.md   ← How collaborator demand drives ecosystem evolution
+│   ├── SHOW_HN_PUBLICATION.md         ← Show HN dissemination strategy and pre-flight rubric
+│   ├── JOSS_PUBLICATION.md            ← JOSS paper strategy — Gonzales NF as live system (Wave 151c)
+│   └── EXTERNAL_DEMAND_EVOLUTION.md   ← How collaborator demand drives ecosystem evolution (Planned)
 ├── foundations/
 │   ├── PUBLIC_DATA_SYSTEMS.md         ← Catalog of public data systems with provenance mapping
 │   ├── EXTERNAL_SOVEREIGNTY_PATTERN.md ← How sovereignty enables external collaboration via WaterFall
@@ -79,25 +81,29 @@ gen5/
 │   ├── COVALENT_MESH_TRUST_VALIDATION.md ← Multi-gate trust model, Dark Forest invariants, 5-phase cross-validation
 │   ├── OVERWATCH_DISTRIBUTED_COORDINATION.md ← Floating coordination position enabled by sovereign infrastructure
 │   ├── COMPOSITION_ROUTING_PATTERN.md    ← Live data compositions via drawbridge — protoKarya as organelles (Wave 138a)
+│   ├── CONTENT_ADDRESSED_CONVERGENCE.md  ← CAC: 6-layer content-addressed convergence (Wave 150)
+│   ├── THERMAL_SOVEREIGNTY.md            ← Physical thermal management and rack topology
 │   ├── RUSTSCRIPT_LAST_MILE.md           ← RustScript safety primitives for browser last mile (Wave 139a)
 │   └── IDENTITY_ANCHORING_PATTERN.md     ← loamSpine meets external trust — Keyoxide/ORCID/Zenodo as sovereign identity (Wave 138b)
 ├── products/
 │   ├── README.md                      ← sporeGarden journey catalog (theory → reality)
-│   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain
-│   ├── HELIX_VISION_JOURNEY.md        ← Conceptual → science validated → NF composition
-│   ├── BLUEFISH_JOURNEY.md            ← Jones lab → retirement → sovereign PFAS pipeline
-│   ├── INITIOCHEM_JOURNEY.md          ← ABG pseudoSpore → interactive FEL explorer
-│   ├── LITHOSPORE_JOURNEY.md          ← guideStone → USB → domain-agnostic chassis
-│   └── NF_CASE_STUDY.md              ← First multi-product composition for external PI
+│   ├── NF_CASE_STUDY.md              ← First multi-product composition for external PI (gen5 proof case)
+│   ├── SOVEREIGN_PALLET.md           ← Sovereign deployment pallet
+│   ├── ESOTERIC_WEBB_JOURNEY.md       ← V1 → V7, first gen4 product, creative domain (Planned)
+│   ├── HELIX_VISION_JOURNEY.md        ← Conceptual → science validated → NF composition (Planned)
+│   ├── BLUEFISH_JOURNEY.md            ← Jones lab → retirement → sovereign PFAS pipeline (Planned)
+│   ├── INITIOCHEM_JOURNEY.md          ← ABG pseudoSpore → interactive FEL explorer (Planned)
+│   ├── LITHOSPORE_JOURNEY.md          ← guideStone → USB → domain-agnostic chassis (Planned)
+│   └── TIDEGLASS_JOURNEY.md           ← GPS rebuild → sovereign NF drug discovery (Planned)
 ├── collaborators/
 │   ├── README.md                      ← External science production catalog
-│   ├── GONZALES_NF.md                 ← NF data mining (first gen5 instance)
+│   ├── GONZALES_NF.md                 ← NF data mining — first gen5 instance, JOSS proof case
 │   ├── JONES_BLUEFISH.md              ← PFAS consulting + blueFish product spec
-│   ├── ABG_PROJECTS.md                ← Citizen science community (4 projects)
-│   ├── BARRICK_LTEE.md                ← Microbial evolution (potential)
-│   ├── MURILLO_STUDENTS.md            ← Student thesis spores (potential)
-│   ├── CHUNA_QCD.md                   ← Lattice QCD workbench (potential)
-│   └── EAVES_REVALIDATION.md          ← Dissertation reproducibility (potential)
+│   ├── ABG_PROJECTS.md                ← Citizen science community — 4 projects (Planned)
+│   ├── BARRICK_LTEE.md                ← Microbial evolution — potential (Planned)
+│   ├── MURILLO_STUDENTS.md            ← Student thesis spores — potential (Planned)
+│   ├── CHUNA_QCD.md                   ← Lattice QCD workbench — potential (Planned)
+│   └── EAVES_REVALIDATION.md          ← Dissertation reproducibility — potential (Planned)
 ├── economics/
 │   └── README.md                      ← How gen5 feeds the flywheel
 └── atlas/
@@ -117,6 +123,13 @@ gen5/
 2. `products/README.md` — the sporeGarden journey catalog
 3. `products/NF_CASE_STUDY.md` — the first concrete instance
 4. `collaborators/README.md` — the external science catalog
+
+### For JOSS publication (Gonzales NF as live system)
+1. `thesis/JOSS_PUBLICATION.md` — JOSS strategy, requirements, timeline
+2. `products/NF_CASE_STUDY.md` — product composition and scientific spine
+3. `collaborators/GONZALES_NF.md` — relationship context and data sources
+4. `../gen3/baseCamp/12_immunological_anderson.md` — Fajgenbaum bridge paper
+5. `../attsi/non-anon/contact/gonzales/gps/README.md` — tideGlass rebuild specs
 
 ### For meeting prep (Gonzales NF project)
 1. `products/NF_CASE_STUDY.md` — product composition for NF
@@ -156,46 +169,61 @@ gen5/
 
 ---
 
-## Status — July 2026
+## Status — July 2026 (Wave 151c)
 
-### Sovereignty Infrastructure (Wave 138a)
+### Infrastructure (Wave 151c)
 
-The K-Derm diderm envelope is live and public. 3-gate WireGuard mesh
-(eastGate ↔ sporeGate ↔ golgi) with bearDog TLS, songBird mesh
-federation, and signed ecobins (`RequireSigned` enforced). Wildcard
-DNS (`*.primals.eco`) routes all subdomains through Caddy on golgi —
-no Cloudflare changes needed for new compositions. `cellMembrane` is
-a 100% Rust deployment pipeline (bash fossilized in Wave 137b).
+Tower Atomic is **COMPLETE**: 353x LAN latency (0.45ms vs 158ms), 1.7x WAN throughput
+vs WireGuard, 197 stress/pen test scenarios all PASS, genetic enrollment live,
+BTSP enforced on all primals (11/13 shipped ClientHello, nestGate + petalTongue pending).
 
-### Live Compositions (Wave 138a)
+K-Derm diderm envelope is live and public. 5-gate mesh (eastGate ↔ sporeGate ↔
+golgiBody ↔ flockGate ↔ ironGate) with bearDog per-object encryption, songBird
+mesh federation, and Tower Atomic shadow mode active on 3 gates. Wildcard DNS
+(`*.primals.eco`) routes through Caddy on golgiBody. `cellMembrane` is 100% Rust
+with sovereign depot auto-build pipeline (28 binaries × 2 architectures).
+
+Nest Atomic Phase 0 is **next**: nestGate BTSP ClientHello is the last blocker.
+Provenance trio membranes (rhizoCrypt, loamSpine, sweetGrass) are LIVE on
+cellMembrane VPS. Per-object encryption and CAS serving depend on nestGate BTSP.
+
+### Live Compositions (Wave 151c)
 
 | Composition | Surface | Data Sources |
 |------------|---------|-------------|
-| sporePrint | `primals.eco` | Zola static site |
+| sporePrint | `sporeprint.primals.eco` | Zola static site, SEO search doors |
 | footPrint GIS | `primals.eco/footprint/` | USGS, OpenStreetMap, ArcGIS |
 | TOPO-VIS | `live.primals.eco` | songBird mesh topology |
 | JupyterHub | `lab.primals.eco` | ABG notebooks (ironGate GPU) |
-| Forgejo | `git.primals.eco` | 40 repos, full-depth mirrors |
+| Forgejo | `git.primals.eco` | 43 repos, push mirrors to GitHub |
+| RustDesk | `remote.primals.eco` | Remote access relay |
 
-Compositions register with the drawbridge and expose capabilities via
-songBird mesh. External data enters through weak bonds → NestGate CAS.
-See `foundations/COMPOSITION_ROUTING_PATTERN.md` for the full pattern.
+### Dissemination Tracks
+
+| Track | Document | Status |
+|-------|----------|--------|
+| **JOSS** | `thesis/JOSS_PUBLICATION.md` | Strategy defined — Gonzales NF as live system paper |
+| **Show HN** | `thesis/SHOW_HN_PUBLICATION.md` | Pre-flight rubric defined; blocked on NF pseudoSpore |
+| **crates.io** | — | eastGate overwatch owns initial publishes; metadata fixes pending |
+| **CTF NDU** | `collaborators/GONZALES_NF.md` | Grant alignment documented; depends on NF preliminary data |
+| **primals.eco** | sporePrint | LIVE — permanent evidence record |
 
 ### Products Across the Generational Arc
 
 | Product | gen3 (validated) | gen4 (shipped) | gen5 (external science) |
 |---------|-----------------|----------------|------------------------|
-| esotericWebb | ludoSpring 791 tests | V7 live | Proves composition pattern |
+| esotericWebb | ludoSpring 791 tests | V7+ live | Proves composition pattern |
 | lithoSpore | wetSpring + neuralSpring | v0.1.0, 4 USBs to Barrick | Pending lab adoption |
 | initioChem | hotSpring 190/190 | Seeded v0.1.0 | ABG pseudoSpore delivered |
 | blueFish | wetSpring 40/40 | Seeded | Jones consulting active |
-| helixVision | 6,656+ wetSpring + 154 coralForge + 500+ hotSpring | Conceptual | NF project = first multi-product composition |
+| helixVision | 6,656+ wetSpring + 154 coralForge + 500+ hotSpring | Conceptual | NF multi-product composition |
+| **tideGlass** | healthSpring + wetSpring + neuralSpring | Assigned (GPS rebuild) | **Primary Gonzales NF deliverable** |
 
 ### Collaborators
 
 | Collaborator | Status | Products / Compositions | Domain | Live Surface |
 |-------------|--------|------------------------|--------|-------------|
-| Gonzales (NF) | **engaged** | tideGlass + helixVision + healthSpring | Neurofibromatosis data mining | `tideglass.primals.eco` (planned) |
+| Gonzales (NF) | **producing** | tideGlass + helixVision + healthSpring + initioChem + coralForge | NF data mining, JOSS proof case | `tideglass.primals.eco` (planned) |
 | ABG | producing | JupyterHub + initioChem | Whole-cell modeling, CAZyme FEL | `lab.primals.eco` (live) |
 | Jones | active | blueFish | PFAS analytical chemistry | — |
 | Barrick | contacted | lithoSpore | LTEE microbial evolution | — |
@@ -205,4 +233,4 @@ See `foundations/COMPOSITION_ROUTING_PATTERN.md` for the full pattern.
 
 ---
 
-*gen1 asked "can we?" gen2 asked "should we?" gen3 asked "does it work?" gen4 asked "who uses it?" gen5 asks "does someone else's science come out the other end?" The answer is being written in the NF datasets Andrea Gonzales points the tools at, in the CAZyme landscapes Alistaire validates, and in every collaborator who takes a pseudoSpore and makes it their own.*
+*gen1 asked "can we?" gen2 asked "should we?" gen3 asked "does it work?" gen4 asked "who uses it?" gen5 asks "does someone else's science come out the other end?" The answer is the Gonzales NF pipeline — a live drug discovery system running on sovereign infrastructure, submitted to JOSS, feeding CTF NDU grants, with Anderson-augmented Fajgenbaum MATRIX as the scientific engine. The NF package is a live system publication that builds into the Fajgenbaum matrix and QS Anderson frameworks as live isolations.*

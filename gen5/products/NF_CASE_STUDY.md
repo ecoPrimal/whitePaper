@@ -2,11 +2,12 @@
 
 **The Gonzales Neurofibromatosis Data Mining Project as gen5 Proof Case**
 
-**Date**: May 28, 2026
+**Date**: May 28, 2026 (updated July 26, 2026 — Wave 151c)
 **Author**: Kevin Mok (BS Microbiology, MSU 2018; MS Data Science, MSU 2025)
-**Status**: Engaged — meeting scheduled, product composition mapped
+**Status**: Producing — GPS platform assigned (June 5), JOSS target, CTF NDU aligned
 **License**: scyBorg triple — AGPL-3.0-or-later (code), ORC (system mechanics), CC-BY-SA 4.0 (this document)
 **Lineage**: gen3/baseCamp (wetSpring, healthSpring, neuralSpring) → gen4/products (helixVision, initioChem, blueFish) → gen5 (this document)
+**Dissemination**: JOSS paper (live system) → CTF NDU grant → NIH R01/R21 → Show HN
 
 ---
 
@@ -70,7 +71,38 @@ The Children's Tumor Foundation (CTF) NF Data Portal on Synapse.org hosts curate
 
 ## Product Composition
 
-This is the first project requiring multiple gen4 products working together. No single product is sufficient.
+This is the first project requiring multiple gen4 products working together. No single
+product is sufficient. The composition has two threads:
+
+### Thread 0: tideGlass — GPS Platform Rebuild (Primary Deliverable)
+
+**Role**: Sovereign rebuild of the GPS platform (Bin Chen Lab, Cell 2026).
+
+Andrea assigned Kevin the GPS platform rebuild on June 5, 2026. tideGlass is a
+Targeted GuideStone with 7 modules:
+
+| Module | Function | Spring |
+|--------|----------|--------|
+| tideglass-rges | Reverse Gene Expression Score (drug→expression) | wetSpring |
+| tideglass-rcl | Robust Collaborative Learning (noise cleaning) | neuralSpring |
+| tideglass-gps4drug | Structure→expression prediction + virtual screening | neuralSpring |
+| tideglass-screen | ZINC compound reversal screening | wetSpring |
+| tideglass-molsearch | MCTS multi-objective lead optimization | neuralSpring |
+| tideglass-octad | OCTAD parity validation | wetSpring |
+| tideglass-nf | NF1 reversal screening (Gonzales bridge) | healthSpring |
+
+Module 7 (tideglass-nf) is the novel contribution: screening NF Data Portal
+transcriptomic signatures against compound libraries using GPS reversal scoring
+augmented by Anderson tissue geometry and Fajgenbaum MATRIX pathway scoring.
+
+**Source**: [zenodo.org/records/17653393](https://zenodo.org/records/17653393) — Cell (2026)
+**GPS + Anderson synthesis**: GPS tells you WHAT compound reverses the disease
+signature. Anderson tells you WHERE the drug signal propagates in a given tissue
+geometry. Together they bypass species-extrapolation entirely.
+
+See `attsi/non-anon/contact/gonzales/gps/` for full rebuild specs (7 files).
+
+### Thread 1: Multi-Product NF Composition
 
 ### helixVision — Gene Expression Analysis
 
@@ -234,17 +266,57 @@ Total existing foundation: **782/782** (Andrea's published data) + **190/190** (
 
 ---
 
+## Sovereign Infrastructure (Wave 151c)
+
+The NF pipeline runs on infrastructure that is itself a contribution:
+
+### Tower Atomic (transport — COMPLETE)
+- bearDog (crypto) + songBird (routing) + skunkBat (defense)
+- 353x LAN latency, 1.7x WAN throughput vs WireGuard
+- Genetic enrollment with trust tiers, BTSP enforced
+- 197 stress/pen test scenarios, all PASS
+
+### Nest Atomic (data — Phase 0 in progress)
+- nestGate CAS: content-addressed storage for all pipeline outputs
+- Provenance Trio: rhizoCrypt (DAG) + loamSpine (ledger) + sweetGrass (attribution)
+- Per-object encryption via bearDog
+- Self-verifying pseudoSpore artifacts
+
+### Node Atomic (coordination — future)
+- biomeOS orchestrating multi-product composition graphs
+- rootPulse replacing waterFall cascade for sovereign VCS
+
+---
+
+## JOSS Publication Path
+
+This case study is the basis for a JOSS paper documenting the live NF pipeline.
+The paper covers:
+
+1. **Statement of need**: sovereign drug discovery for academic labs at zero cost
+2. **The system**: tideGlass + multi-product composition over Tower/Nest/Node Atomics
+3. **Anderson + Fajgenbaum as live isolations**: running code, not theoretical claims
+4. **Evidence**: 782/782 Gonzales checks, 197 primalSpring scenarios, 14K+ total
+5. **Usage**: NF pseudoSpore for CTF NDU preliminary data
+
+Full strategy: `gen5/thesis/JOSS_PUBLICATION.md`
+
+---
+
 ## Cross-References
 
+- `gen5/thesis/JOSS_PUBLICATION.md` — JOSS paper strategy for this case study
 - `gen5/collaborators/GONZALES_NF.md` — relationship context and collaboration status
 - `gen4/thesis/THE_GEN5_TRANSITION.md` — the architectural pattern this instantiates
 - `gen4/products/HELIX_VISION.md` — primary genomics product
 - `gen4/products/INITIOCHEM.md` — conformational dynamics product
 - `gen4/products/BLUEFISH.md` — analytical chemistry product (PFAS bridge)
+- `attsi/non-anon/contact/gonzales/gps/README.md` — GPS/tideGlass rebuild specs
 - `attsi/non-anon/contact/gonzales/onboarding/PRE_GRANT_PIPELINE.md` — the operational model
 - `attsi/non-anon/contact/gonzales/computational_brief.md` — Anderson framework applied to her data
 - `attsi/non-anon/contact/gonzales/onboarding/LAB_ONBOARDING_PACKAGE.md` — full lab integration plan
+- `gen3/baseCamp/12_immunological_anderson.md` — Fajgenbaum bridge paper
 
 ---
 
-*The NF project is not a collaboration proposal. It is a proof of concept for the gen5 operating model — where the ecosystem's validated computation serves an external scientist's question, the deliverable is science she owns, and the feedback makes the ecosystem stronger than it was before she arrived.*
+*The NF project is not a collaboration proposal. It is a proof of concept for the gen5 operating model — where the ecosystem's validated computation serves an external scientist's question, the deliverable is science she owns, and the feedback makes the ecosystem stronger than it was before she arrived. The JOSS paper documents this live system, making it citable, grantable, and credible.*
