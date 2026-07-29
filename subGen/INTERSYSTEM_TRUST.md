@@ -233,5 +233,28 @@ access control) but will need to be addressed for WAN federation.
 
 ---
 
-*subGen Wave 150x — Self-knowledge only, capability routing, genetic
-lineage, JSON-RPC 2.0, trust spectrum.*
+---
+
+## Wave 155i Updates
+
+- **biomeOS COORDINATED mode** — Neural API evolved from BOOTSTRAP (5 capabilities)
+  to COORDINATED (704 capabilities, 390 translations). E2E routing proven:
+  `content.put` → nestGate → BLAKE3 → ZFS, `storage.put` → nestGate KV store.
+- **27 signal graphs** — semantic dispatch operational across Tower (8), Nest (9),
+  Node (3), Meta (5), Braid (2)
+- **Capability registry drift fixed** — loamSpine now exposes `certificate.verify`,
+  `certificate.lifecycle`, `certificate.history` via both `capability_registry.toml`
+  and `niche.rs` METHODS array
+- **Provenance Trio 6/7** — Full chain: nestGate `content.put` → rhizoCrypt
+  `dag.session.create` + `dag.event.append` + `dag.merkle.root` → loamSpine
+  `spine.create` → sweetGrass `braid.create`. Only `entry.append` fails
+  (bearDog `crypto.sign_ed25519` stub).
+- **Windows capability routing** — blueGate runs 10 primals with TCP-only
+  transport. Environment-based discovery via `PRIMAL_BIND_MODE=tcp_only`.
+  CLI flag divergence across primals (--bind vs --host vs --bind-address).
+- **Zero-import enforced** — `cargo deny` bans cross-primal deps across all
+  13 active primals. Validated by CI.
+
+*subGen Wave 155i — Self-knowledge only. 704 capabilities in COORDINATED mode.
+E2E routing proven. Provenance Trio 6/7. Windows TCP transport operational.
+27 signal graphs.*

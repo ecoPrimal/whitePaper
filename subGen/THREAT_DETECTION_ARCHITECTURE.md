@@ -244,5 +244,27 @@ The audit trail records everything regardless of response decisions.
 
 ---
 
-*subGen Wave 150x — 8-category detection, metadata-only analysis,
-env-configurable thresholds, unidirectional observation pipeline.*
+---
+
+## Wave 155i Updates
+
+- **9th threat category**: `ConnectivityAnomaly` added — detects network fabric
+  degradation (correlates with K-Derm peptidoglycan failures, NAT rate-limit
+  collapses, dead dnsmasq). Outer→inner correlation.
+- **Real attacker data expanded**: 122 SSH brute-force + HTTP scanning IPs
+  from live gate logs (Wave 137b THREAT-ACTIVATE) — baseline calibrated against
+  production traffic.
+- **Process spawn tracker validated**: The Wave 150x crash-loop incident (11,161
+  systemd restarts) was the event that motivated `SpawnRateTracker`. Now validated
+  in production: catches crash loops, fork bombs, and runaway service restarts.
+- **Platform degradation**: Windows returns 0.0 for `/proc/stat` (as designed).
+  blueGate Tower 3/3 on Windows — skunkBat operates in degraded mode without
+  spawn-rate monitoring. Accepted trade-off.
+- **Composition broker telemetry**: biomeOS v4.45 feeds `baseline.observe` with
+  composition-level events (capability registration, signal graph dispatch,
+  BTSP session propagation). New observation dimensions for inner membrane
+  profiling.
+
+*subGen Wave 155i — 9-category detection. Metadata-only. ConnectivityAnomaly
+added. Spawn tracker production-validated. Composition broker telemetry live.
+Windows graceful degradation.*

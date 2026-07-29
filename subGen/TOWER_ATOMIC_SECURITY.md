@@ -238,5 +238,24 @@ sovereign transport stack.
 
 ---
 
-*subGen Wave 150x — BTSP Phase 1–3 as implemented. 353× LAN, 1.7× WAN.
-Cipher floor policy deployed. Bond-type enforcement live.*
+---
+
+## Wave 155i Updates
+
+- **BTSP 13/13** — all primals now ship ClientHello (was 11/13 at 150x)
+- **riboCipher framing** — biomeOS v4.45 adds `[0xEC, 0x01]` prefix to distinguish
+  BTSP-aware from legacy connections. Replaces peek-and-guess.
+- **Composition broker BTSP propagation** — biomeOS signal graph executor propagates
+  BTSP sessions across composition boundaries (Tower → Nest → Node). Family-scoped
+  socket trigger handshake.
+- **Windows transport** — BTSP over TCP proven on Windows (blueGate). UDS not
+  available; TCP fallback is the primary transport. Named pipe support exists in
+  songBird `platform/windows.rs` (341 lines) but not yet wired to orchestrator.
+- **Tower deployed on 5+ gates** — eastGate, westGate, strandGate, grapheneGate,
+  sporeGate, blueGate (Windows)
+- **songBird P0 FIXED** — `#[cfg(not(unix))]` blanket rejection replaced with
+  TCP fallback (`8c0adc8d` + `d9bda555`)
+
+*subGen Wave 155i — BTSP Phase 1–3. 353× LAN, 1.7× WAN. 13/13 primals.
+riboCipher framing shipped. Windows TCP transport proven. Composition broker
+propagates BTSP across atomic boundaries.*

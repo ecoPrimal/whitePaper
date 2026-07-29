@@ -238,6 +238,34 @@ is tuned for volumetric attacks and scanning.
 
 ---
 
-*subGen Wave 150x — K-Derm cell envelope mapped to LAN/VPS/public
-topology. Bond degradation at membrane boundaries. Unified detection
-across all three layers.*
+---
+
+## Wave 155i Updates
+
+- **9→10 gate WireGuard mesh** — blueGate enrolled as peer #9 (10.13.37.12).
+  Peptidoglycan anchor House 2 connected. Three WG peers active.
+- **Peptidoglycan failure survived** — Dead dnsmasq on sporeGate collapsed
+  sovereign DNS chain. sporeGate recovered. dnsmasq re-enabled. The
+  gram-negative model predicted this: peptidoglycan failure degrades inner
+  membrane services but outer membrane (Caddy TLS) remains operational.
+- **NAT rate-limit collapse** — Two incidents of Flint router NAT exhaustion
+  under RustDesk relay load. Fixed: RUSTDESK_MEMBRANE iptables chain isolated,
+  port 21114 REJECT with tcp-reset, rate limits (120 UDP/10s, 60 TCP/10s).
+- **Windows inner membrane** — blueGate runs Tower + Nest (10 primals) on
+  Windows via TCP-only transport. WireGuard tunnel active. Inner membrane
+  security posture holds — BTSP over TCP, no UDS. Named pipe transport
+  available in songBird code but not yet default.
+- **Multi-composition gates** — westGate runs 8 services + composition broker
+  (20 sockets). blueGate runs 10 primals. Security posture scales with
+  primal count on a single gate.
+- **Bond degradation in practice** — westGate E2E: public (Ionic: TLS) →
+  golgiBody (Metallic: BTSP HMAC) → LAN mesh (Covalent: per floor) →
+  target primal (MethodGate). Validated operationally.
+- **Open question #3 partially answered** — Multi-VPS topology still
+  single-VPS (golgiBody only). K-Derm 3-node (~$54/mo) designed but
+  not deployed. blueGate as peptidoglycan H2 anchor is the first
+  step toward multi-anchor topology.
+
+*subGen Wave 155i — 10-gate mesh. Peptidoglycan failure survived. NAT
+hardened. Windows inner membrane via TCP. Bond degradation validated
+end-to-end. Multi-composition gates operational.*

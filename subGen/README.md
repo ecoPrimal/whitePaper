@@ -1,93 +1,94 @@
-# subGen — Primal Security & Intersystem Architecture
+# subGen — Concrete Reality
 
-**Status**: Living documentation — evolves with primal implementations
-**Scope**: Security systems, defense in depth, intersystem trust, and transport
-security as they exist in deployed code. Not vision — realized architecture.
+**Status**: Living documentation — the project's operational truth
+**Wave**: 155i | **Date**: Jul 29, 2026
 
 ---
 
 ## Why subGen?
 
-The generational arc tells a story of increasing abstraction:
+The generational arc (`gen0/` through `gen5/`) tells the project's intellectual
+story — philosophy, methodology, vision, and what each generation asks. Those
+docs were authored at different moments, sometimes before the evolution they
+anticipated, sometimes alongside it. They are guideposts.
 
-- **gen4** asks "Who uses it?" — compositions, products, economics
-- **gen5** asks "Does someone else's science come out?" — external
-  collaboration, spore germination
-
-Both treat security as *architectural context* — referenced, assumed, but
-never the primary subject. Meanwhile, the security systems are live:
-
-- Tower Atomic exceeds WireGuard (353× LAN, 1.7× WAN)
-- Genetic enrollment deployed (mito gate + nuclear lineage → trust tiers)
-- 7-category threat detection operational
-- BTSP Phase 3 cipher negotiation with bond-type enforcement and cipher floor
-- MethodGate RPC authorization across 13 primals
-- Dark Forest validation suite (197 scenarios, all PASS)
-
-**subGen** documents the realized security architecture — the substrate that
-gen4 compositions and gen5 collaborator workflows depend on but don't describe.
-These are living documents that evolve with the code, not frozen vision papers.
+**subGen is different.** subGen documents what the project **has proven**, what
+it is **concretely pursuing**, and **who it is talking to**. No vision — realized
+architecture, measured thresholds, active outreach, and the single chain from
+here to gen5 success.
 
 ---
 
 ## Reading Order
 
-### Layer 1 — Doctrine
+### Layer 1 — Where We Are
 
-1. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — The layered security
-   model as implemented: network binding → transport encryption → RPC
-   authorization → threat detection → behavioral baseline → quarantine →
-   audit trail. How layers compose and where each enforces.
+1. **[THRESHOLDS_CROSSED.md](THRESHOLDS_CROSSED.md)** — What gen0–5 anticipated
+   vs what Wave 155i has actually proven. The historian's ledger. Includes the
+   latent economic value assessment.
 
-### Layer 2 — Transport & Trust
+2. **[GEN5_CRITICAL_PATH.md](GEN5_CRITICAL_PATH.md)** — The single chain from
+   bearDog crypto.sign → Provenance 7/7 → tideGlass → NF pseudoSpore → JOSS/CTF.
+   8 steps. Timeline estimates. What can start today.
 
-2. **[TOWER_ATOMIC_SECURITY.md](TOWER_ATOMIC_SECURITY.md)** — BTSP protocol
-   specification as implemented: Phase 1–3 handshake, cipher negotiation,
-   bond-type enforcement, cipher floor policy, session key derivation, wire
-   format. The protocol that replaces WireGuard.
+### Layer 2 — Who We're Talking To
 
-3. **[INTERSYSTEM_TRUST.md](INTERSYSTEM_TRUST.md)** — How primals discover,
-   verify, and communicate: JSON-RPC 2.0 contracts, capability routing via
-   songBird, genetic lineage verification via bearDog, covalent/metallic/ionic
-   bond types, trust-on-first-use, and revocation.
+3. **[OUTREACH_STATUS.md](OUTREACH_STATUS.md)** — Master tracker for all contact
+   tracks. Valve/Inkfish (email SENT Jul 29), Gonzales (producing), Jones
+   (emeritus), Barrick (USB delivered), ABG (producing), MSU faculty.
 
-### Layer 3 — Detection & Response
+### Layer 3 — Security Architecture (Realized)
 
-4. **[THREAT_DETECTION_ARCHITECTURE.md](THREAT_DETECTION_ARCHITECTURE.md)** —
-   skunkBat's 7-category detection system: port scan, brute force, DDoS,
-   data exfiltration, protocol violation, behavioral anomaly, process spawn
-   anomaly. Statistical baseline, confidence scoring, graduated response.
+4. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — Seven-layer security model
+   as deployed: network binding → BTSP → MethodGate → threat detection →
+   behavioral baseline → graduated response → audit trail.
 
-### Layer 4 — Topology
+5. **[TOWER_ATOMIC_SECURITY.md](TOWER_ATOMIC_SECURITY.md)** — BTSP protocol:
+   Phase 1–3 handshake, cipher negotiation, bond-type enforcement, cipher floor.
+   353× LAN, 1.7× WAN.
 
-5. **[MEMBRANE_SECURITY_MODEL.md](MEMBRANE_SECURITY_MODEL.md)** — K-Derm
-   cell envelope mapped to network topology: inner membrane (LAN mesh),
-   periplasmic space (golgiBody VPS), outer membrane (public surface).
-   How security posture differs at each layer and how bonds traverse
-   membrane boundaries.
+6. **[INTERSYSTEM_TRUST.md](INTERSYSTEM_TRUST.md)** — Self-knowledge only,
+   capability routing via songBird, genetic lineage via bearDog, JSON-RPC 2.0,
+   trust spectrum from covalent to ionic.
 
----
+7. **[THREAT_DETECTION_ARCHITECTURE.md](THREAT_DETECTION_ARCHITECTURE.md)** —
+   skunkBat's 8-category detection: behavioral anomaly, intrusion, DoS, unknown
+   lineage, topology violation, config drift, process spawn, HTTP anomaly.
 
-## Relationship to Other Documentation
-
-| Source | Role | Relationship |
-|--------|------|--------------|
-| gen4 `architecture/` | Vision | subGen documents what gen4 envisioned |
-| gen5 `foundations/` | Forward design | subGen documents what gen5 assumes |
-| Primal READMEs | Implementation notes | subGen explains the cross-cutting architecture |
-| primalSpring scenarios | Validation | subGen describes what the scenarios test |
-| wateringHole standards | Policy | subGen explains how standards are enforced |
-
-## Cross-References
-
-- gen4: `NUCLEUS_SOVEREIGNTY_ARCHITECTURE.md`, `SOVEREIGN_COMPOSITION_EVOLUTION.md`,
-  `K_DERM_RECONCILIATION.md`, `CONTRACT_TESTING_THESIS_SKETCH.md`
-- gen5: `COVALENT_MESH_TRUST_VALIDATION.md`, `RIBOCIPHER_SIGNAL_EVOLUTION.md`,
-  `SOVEREIGNTY_SHADOW_EVOLUTION.md`, `TRANSPORT_EVOLUTION.md`
-- specs: `skunkBat/specs/RECONNAISSANCE_SPEC.md`, `skunkBat/specs/BTSP_TRANSPORT_SPEC.md`
-- live: `wateringHole/STANDARDS_AND_EXPECTATIONS.md`
+8. **[MEMBRANE_SECURITY_MODEL.md](MEMBRANE_SECURITY_MODEL.md)** — K-Derm cell
+   envelope: inner membrane (LAN mesh) → periplasmic space (VPS) → outer
+   membrane (public surface). Bond degradation at boundaries.
 
 ---
 
-*subGen Wave 150x: Initial corpus — 5 documents covering realized security
-architecture from network layer through application layer.*
+## Relationship to gen/ docs
+
+| Source | What It Does | subGen's Role |
+|--------|-------------|---------------|
+| `gen0/` | Why the project exists | subGen documents what was built |
+| `gen1/` | Can we build it? | subGen says: yes, and then some |
+| `gen2/` | Protocol and philosophy | subGen documents realized protocol |
+| `gen3/` | Does it work? (science) | subGen links science to operational evidence |
+| `gen4/` | Who uses it? (products) | subGen tracks product and gate deployments |
+| `gen5/` | External science exits? | subGen owns the critical path to that answer |
+| `attsi/` | Identity and outreach | subGen tracks outreach status and response |
+
+The gen/ docs are the *map*. subGen is the *GPS position*.
+
+---
+
+## What's New at 155i (vs 150x)
+
+The original subGen (Wave 150x) documented security architecture only.
+Wave 155i adds:
+
+- **THRESHOLDS_CROSSED** — Full generational assessment against current reality
+- **GEN5_CRITICAL_PATH** — The 8-step chain to gen5 success
+- **OUTREACH_STATUS** — Active contact tracker (Inkfish email SENT)
+- Security docs updated to reflect 155i state (9-gate mesh, composition broker,
+  Nest on Windows, 9 threat categories)
+
+---
+
+*subGen Wave 155i — 8 documents. Security architecture + thresholds + critical
+path + outreach. The project's operational truth.*

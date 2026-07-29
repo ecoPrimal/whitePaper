@@ -195,5 +195,18 @@ This separation ensures the test is not biased by the implementation.
 
 ---
 
-*subGen Wave 150x — Defense in depth as realized across 7 layers,
-validated by 197 scenarios.*
+---
+
+## Wave 155i Updates
+
+- **197 scenarios still all PASS** — Dark Forest suite extended through deep debt wave
+- **BTSP 13/13** — all primals ship bearDog ClientHello (was 11/13 at 150x)
+- **riboCipher framing shipped** — `[0xEC, 0x01]` prefix on all biomeOS IPC
+- **Composition broker** — biomeOS v4.45 propagates BTSP sessions across composition boundaries
+- **8→9 threat categories** — ConnectivityAnomaly added to skunkBat
+- **Process spawn tracker** — validated in production (Wave 150x crash-loop: 11,161 restarts caught)
+- **Windows transport** — Tower Atomic proven on Windows (blueGate 10/10, TCP-only)
+- **Cipher floor** — deployed on VPS-exposed gates; LAN gates configurable
+
+*subGen Wave 155i — Defense in depth across 7 layers, validated by 197 scenarios.
+BTSP 13/13. Composition broker propagates trust across atomic boundaries.*
