@@ -128,6 +128,22 @@ The approach is strongest when it includes:
 
 ---
 
+## Personal Connection
+
+Kevin is a Steam user since the Orange Box (2007) — Steam ID
+76561198002558137. ~19 years on the platform. This is not a cold
+contact from someone who Googled Valve. This is a community member
+who grew up on Steam, became a microbiologist, built sovereign
+compute in Rust on the same Vulkan substrate Valve championed,
+and realized the person funding the science he wants to do is the
+same person who built the platform he's been gaming on since he
+was a teenager.
+
+The connection between Valve and ecoPrimals isn't manufactured.
+Kevin chose Vulkan for GPU compute because it was the only
+vendor-neutral substrate. Valve funded Vulkan's ecosystem for
+the same reason. The convergence is independent.
+
 ## Risk
 
 Low-medium. Gabe Newell is known for responding to thoughtful emails

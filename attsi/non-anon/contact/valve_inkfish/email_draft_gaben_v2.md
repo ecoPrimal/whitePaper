@@ -51,9 +51,8 @@ A human reads and responds at this address.
 
 — Kevin Mok
 
-P.S. My Steam ID is [___________]. I've been a fan of what you're
-building with Inkfish since you started talking about deep-sea
-exploration. You're building sovereignty on the ocean. I've been
+P.S. Steam ID 76561198002558137 — been on the platform since the
+Orange Box. You're building sovereignty on the ocean. I've been
 building it on land. They're the same architecture.
 
 ---
@@ -88,8 +87,10 @@ The framing inversion:
 
 ### Steam ID
 
-Kevin needs to fill in his Steam ID. This is important — Gabe is
-known for responding to emails, especially from Steam users.
+76561198002558137 — Kevin has been on Steam since the Orange Box
+(2007). ~19 years. This is real community membership, not marketing.
+Gabe is known for responding to emails from Steam users who show
+genuine engagement.
 
 ### Pim Bongaerts — separate email?
 
@@ -106,7 +107,7 @@ This email would be:
 
 ### Prerequisites
 
-- [ ] Kevin's Steam ID filled in
+- [x] Kevin's Steam ID filled in (76561198002558137, Orange Box era)
 - [ ] attsi tone review
 - [ ] One Inkfish-related dataset processed as demo (proof of concept)
 - [ ] ecoPrimal LinkedIn populated

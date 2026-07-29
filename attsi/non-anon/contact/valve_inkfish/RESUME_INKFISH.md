@@ -11,6 +11,7 @@ ecoPrimals as a tool Kevin brings, not the point of the application.**
 eco.primal@pm.me | Michigan, USA
 LinkedIn: linkedin.com/in/ecoprimal
 GitHub: github.com/ecoPrimals
+Steam: 76561198002558137 (since 2007, Orange Box)
 
 ---
 
