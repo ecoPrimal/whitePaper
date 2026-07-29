@@ -121,7 +121,8 @@ disconnected operation in field environments.
 - Custom pipeline development in Rust (not just running tools)
 - Sovereign data infrastructure (runs on vessel hardware, no internet required)
 
-### Field & Logistics
+### Diving & Field
+- PADI certified scuba diver
 - U.S. Army veteran (Infantryman, 2012–2015): leadership under
   austere conditions, communications equipment management ($2M inventory),
   intelligence analysis, briefing/debriefing 130+ personnel
@@ -148,9 +149,9 @@ disconnected operation in field environments.
    for wet lab work and expedition berth is dramatically cheaper
    than traditional compute infrastructure or contracted bioinformaticians.
 
-4. **Military discipline in austere environments**: 3 years active duty
-   infantry. Comfortable in confined spaces, extended deployments,
-   strict protocols, and high-accountability environments.
+4. **Military discipline + PADI scuba**: 3 years active duty infantry.
+   PADI certified diver. Comfortable in confined spaces, extended
+   deployments, underwater, and high-accountability environments.
 
 5. **Microbiology perspective on marine ecosystems**: Coral holobionts
    are microbial ecosystems. Deep-sea chemosynthetic communities are

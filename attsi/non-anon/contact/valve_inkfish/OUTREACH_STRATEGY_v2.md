@@ -87,24 +87,28 @@ the cold email. Slower but more likely to get a warm reception.
 
 ---
 
-## What Kevin Is Asking For
+## What Kevin Is Offering
 
-Be explicit and specific:
+Kevin is NOT asking for anything. He's introducing himself.
 
-1. **A berth on an upcoming expedition** — as a wet lab scientist
-   focused on marine microbiome/eDNA sampling
-2. **Access to wet lab facilities** — DNA extraction, eDNA filtration,
-   sample preservation, microbial analysis
-3. **Permission to run bioinformatics on vessel hardware** — demo
-   the GPU pipeline on real expedition data
-4. **Patron/sponsor arrangement** — not a salary, not a contract.
-   Support for a scientist who brings his own tools.
+1. **Remote genomic data processing** — Kevin can run Inkfish
+   expedition data through GPU-accelerated pipelines from Michigan.
+   No vessel berth required. This works today.
+2. **Wet lab skills** — if Inkfish ever wants a microbiologist on
+   a vessel, Kevin has 5 years BSL2, DNA extraction, eDNA protocols,
+   and PADI scuba certification.
+3. **Sovereign compute infrastructure** — the tools exist, they're
+   AGPL-3.0, and they run offline on any Vulkan GPU. Inkfish can
+   use them with or without Kevin.
+4. **The identity behind ecoPrimals** — Gabe is the only person
+   who receives both the pseudonymous project identity and the
+   real human identity. This is a trust signal.
 
-What Kevin is NOT asking for:
-- Investment in ecoPrimals
-- A job at Valve
-- Help selling software
-- A press release
+What Kevin is NOT doing:
+- Asking for money, a job, a berth, or investment
+- Pitching software for Valve to integrate
+- Seeking press or endorsement
+- Making demands of any kind
 
 ---
 
