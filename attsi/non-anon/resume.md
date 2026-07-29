@@ -21,7 +21,7 @@ Applied computational tools to integrate sequencing data into broader biotechnol
 Collaborated with multidisciplinary teams to explore innovative solutions for sustainable biotechnological applications.
 PFAS Research Lab, Michigan State University, East Lansing, MI
  Research Specialist
- October 2024 – Present
+ October 2024 – October 2025
 Leveraged prior lab experience to scale the PFAS research lab’s capabilities for studying "forever chemicals" in environmental samples.
 Implemented strict Standard Operating Procedures (SOPs), including EPA guidelines, to ensure consistency and reliability in sample processing and analysis.
 Applied data science techniques and biomolecular methods to support PFAS detection and remediation research.

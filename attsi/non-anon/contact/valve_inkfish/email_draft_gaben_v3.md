@@ -29,8 +29,9 @@ I'm a microbiologist — BS Microbiology and MS Data Science from
 Michigan State. Five years of wet lab: BSL2 fermentation, DNA
 extraction, microbial assays, spore trapping, environmental sampling.
 Summer research fellow at Sandia National Labs on algal bioreactor
-microbiology. Currently at MSU's PFAS research lab. PADI certified
-scuba diver. U.S. Army infantry veteran, three years active duty.
+microbiology. PADI certified scuba diver. U.S. Army infantry veteran,
+three years active duty. I've been working on ecoPrimals full-time
+since late 2025.
 
 For the last 14 months I've been building sovereign scientific
 computing in Rust — 3.6 million lines, 105,000 tests, running
@@ -63,7 +64,9 @@ The project: https://sporeprint.primals.eco
 The code: https://github.com/ecoPrimals
 
 — Kevin Mok
+   mokkevin@msu.edu
    eco.primal@pm.me
+   mokkevin@msu.edu
 
 ---
 

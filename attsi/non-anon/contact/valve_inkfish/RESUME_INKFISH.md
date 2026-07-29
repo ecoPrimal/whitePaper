@@ -42,11 +42,12 @@ disconnected operation in field environments.
 ## Wet Lab Experience
 
 **PFAS Research Lab** — Michigan State University
-*Research Specialist* | Oct 2024 – Present
+*Research Specialist* | Oct 2024 – Oct 2025
 - Environmental sample processing for PFAS ("forever chemicals") detection
 - EPA SOP implementation for sample consistency and regulatory compliance
 - Biomolecular methods + data science techniques for PFAS research
 - Interdisciplinary collaboration on remediation strategies
+- Position ended due to budget cuts; transitioned to full-time ecoPrimals development
 
 **MSU Bioeconomy Institute (MSUBI)** — Michigan State University
 *Biotechnician* | Jan 2019 – May 2024 (5 years)
@@ -86,7 +87,7 @@ disconnected operation in field environments.
 - DOE national lab environment, multidisciplinary collaboration
 
 **ecoPrimals** — Self-built sovereign scientific computing platform
-*Founder & Lead Architect* | May 2025 – Present (14 months, ongoing)
+*Founder & Lead Architect* | May 2025 – Present (full-time since Oct 2025)
 - 3.6 million lines of Rust, 105,000+ tests, AI-assisted development
 - **GPU-accelerated bioinformatics**: DADA2 16S pipeline running on
   any Vulkan GPU (no CUDA). Reproduced 63 published papers computationally
