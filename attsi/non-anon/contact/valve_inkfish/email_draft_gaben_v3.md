@@ -3,7 +3,7 @@
 **Status**: DRAFT — needs attsi review
 **From**: eco.primal@pm.me
 **To**: gaben@valvesoftware.com
-**Subject**: The human behind ecoPrimals — microbiologist, sovereign compute, Inkfish
+**Subject**: Orange Box to Inkfish — a microbiologist who builds on Vulkan
 
 **Context**: This is the only email ecoPrimal sends that fully identifies
 the human. Gabe Newell is the only recipient who gets both identities.
@@ -64,7 +64,6 @@ The project: https://sporeprint.primals.eco
 The code: https://github.com/ecoPrimals
 
 — Kevin Mok
-   mokkevin@msu.edu
    eco.primal@pm.me
    mokkevin@msu.edu
 
