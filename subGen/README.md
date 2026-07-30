@@ -1,7 +1,7 @@
 # subGen — Concrete Reality
 
 **Status**: Living documentation — the project's operational truth
-**Wave**: 155i | **Date**: Jul 29, 2026
+**Wave**: 155m | **Date**: Jul 30, 2026
 
 ---
 
@@ -77,18 +77,23 @@ The gen/ docs are the *map*. subGen is the *GPS position*.
 
 ---
 
-## What's New at 155i (vs 150x)
+## What's New at 155m (vs 155i)
+
+Wave 155m updates reflect the **gen4→gen5 boundary crossing**:
+
+- **THRESHOLDS_CROSSED** — gen4 marked COMPLETE. Infrastructure readiness 100%.
+  Provenance 7/7 DONE. 3 NUCLEUS gates. biomeOS v4.50. Sovereign CI live.
+- **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. 6 remaining steps. Timeline shortened.
+  Step 3 (tideGlass Phase 0) is now sole bottleneck. Can start immediately.
+- **OUTREACH_STATUS** — Inkfish email sent Jul 29 (response window active)
+- Security docs reflect 155m state (3 NUCLEUS gates, v4.50 lifecycle, 34 depot bins)
 
 The original subGen (Wave 150x) documented security architecture only.
-Wave 155i adds:
-
-- **THRESHOLDS_CROSSED** — Full generational assessment against current reality
-- **GEN5_CRITICAL_PATH** — The 8-step chain to gen5 success
-- **OUTREACH_STATUS** — Active contact tracker (Inkfish email SENT)
-- Security docs updated to reflect 155i state (9-gate mesh, composition broker,
-  Nest on Windows, 9 threat categories)
+Wave 155i added thresholds, critical path, outreach.
+Wave 155m marks the **gen4 completion checkpoint** — infrastructure is done.
 
 ---
 
-*subGen Wave 155i — 8 documents. Security architecture + thresholds + critical
-path + outreach. The project's operational truth.*
+*subGen Wave 155m — 13 documents. Security architecture + thresholds + critical
+path + outreach + postPrimordial security docs. gen4 COMPLETE. Infrastructure 100%.
+Science pipeline is the sole remaining work for gen5.*

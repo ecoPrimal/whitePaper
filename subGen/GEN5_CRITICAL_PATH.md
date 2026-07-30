@@ -1,7 +1,7 @@
 # gen5 Critical Path — From Here to External Science
 
 **Status**: Living document — the single chain to gen5 success
-**Wave**: 155i | **Date**: Jul 29, 2026
+**Wave**: 155m | **Date**: Jul 30, 2026
 
 ---
 
@@ -83,29 +83,29 @@ One chain answers this. Everything else is supporting work.
 
 ## Step-by-Step Status
 
-### Step 1: bearDog `crypto.sign_ed25519`
+### Step 1: bearDog `crypto.sign_ed25519` — **COMPLETE**
 
 **Owner**: bearDog code team
-**Status**: Returns health stub. Method exists. Real Ed25519 signing not wired.
-**Blocks**: Provenance Trio step 3b — `entry.append` fails without real signature.
-**Effort**: Moderate — bearDog has 11,993 tests, crypto infrastructure extensive.
-**P1 since**: Wave 155f
+**Status**: ~~Returns health stub.~~ **SHIPPED** (`3739e7078`) — real Ed25519 signing live.
+**Completed**: Wave 155j (Jul 29, 2026)
 
-### Step 2: Provenance Trio 7/7
+### Step 2: Provenance Trio 7/7 — **COMPLETE**
 
-**Owner**: westGate validation (rhizoCrypt, loamSpine, sweetGrass teams)
-**Status**: 6/7 steps pass on westGate. Step 3b (`entry.append`) fails on bearDog stub.
-**Evidence**: westGate AAR confirms all other steps operational. sweetGrass v0.8.0, G3 E2E validated.
-**Depends on**: Step 1
+**Owner**: westGate + blueGate validation
+**Status**: ~~6/7 steps pass.~~ **7/7 COMPLETE** — E2E validated on westGate (Linux/ZFS) + blueGate (Windows).
+**Evidence**: Full signed provenance chain: CAS → DAG → Merkle → Spine → Ed25519 → Attribution braid.
+**DID key**: `did:key:z6Mkryaa7n6hfpSbGaZwbqPMD6MzXukgdQK3XRKzwFSgce8o`
+**Completed**: Wave 155k (Jul 30, 2026)
 
-### Step 3: tideGlass Phase 0
+### Step 3: tideGlass Phase 0 — **NEXT**
 
 **Owner**: eastGate (overwatch directs; dedicated gate for compute TBD)
-**Status**: NOT STARTED
+**Status**: NOT STARTED — **now UNBLOCKED** (Steps 1-2 complete, Nest Atomic ready)
 **Data**: T1 ~35 GB from Zenodo, GEO, ChEMBL, ZINC
-**Gate**: biomeGate was specified in GPS docs (256 GB RAM, 96 GB VRAM). Alternatives: westGate, strandGate.
-**Depends on**: Independent of Steps 1-2 (can start now)
+**Gate**: westGate (ZFS 25.4TB, Nest Atomic live, Provenance 7/7) or strandGate (RTX 3090, NUCLEUS)
+**Depends on**: Independent — can start immediately
 **Supporting docs**: `attsi/non-anon/contact/gonzales/gps/README.md`, `DATA_MANIFEST.md`
+**Note**: This is now the **sole bottleneck** for gen5. Infrastructure is complete.
 
 ### Step 4: tideGlass Phase 1
 
@@ -189,17 +189,43 @@ infrastructure work — it's downloading data and reading Python.
 
 These are important but do not block the critical path:
 
-- Windows depot rebuild (P1 but not gen5 critical)
-- Windows CI gate (systemic P1 but not gen5 critical)
-- biomeOS graph executor riboCipher fix (P2)
-- blueGate Node Atomic (gen4 extension)
-- swiftGate Tower Atomic (gen4 extension)
-- AlphaFold bulk ingestion (gen5 secondary after NF)
-- Show HN (blocked on multiple items; deferred until NF pseudoSpore exists)
+- ~~Windows depot rebuild~~ — **DONE** (15/15, Sovereign CI live)
+- ~~biomeOS graph executor riboCipher fix~~ — **DONE** (v4.50)
+- ~~bearDog crypto.sign~~ — **DONE** (Step 1 complete)
+- ~~Provenance 7/7~~ — **DONE** (Step 2 complete)
+- steamGate (cross-platform expansion, gen4 extension)
+- darwinGate / iosGate (glacial, silicon deism)
+- AlphaFold bulk ingestion (gen5 secondary after NF — uses same Nest Atomic pipeline)
+- Show HN (blocked until NF pseudoSpore exists)
 - Inkfish collaboration (separate track, response-dependent)
 
 ---
 
-*subGen Wave 155i — gen5 critical path. 8 steps from bearDog crypto to JOSS.
-Steps 1 and 3 can start today in parallel. Optimistic: pseudoSpore by Oct 2026.
-Realistic: Jan 2027. Infrastructure is ready. The science pipeline is the bottleneck.*
+## Revised Timeline (Wave 155m)
+
+Steps 1 and 2 are **COMPLETE**. The remaining chain is Steps 3-8.
+
+| Step | Optimistic | Realistic | Notes |
+|------|-----------|-----------|-------|
+| ~~1. bearDog crypto~~ | ~~1 week~~ | — | **DONE** (155j) |
+| ~~2. Provenance 7/7~~ | ~~+1 day~~ | — | **DONE** (155k) |
+| 3. Phase 0 archaeology | 1–2 weeks | 2–3 weeks | Data download + dependency mapping |
+| 4. Phase 1 reproduce | 2–4 weeks | 4–6 weeks | RCL + GPS4Drug + figures |
+| 5. NF ingestion | 1–2 weeks | 2–3 weeks | Download + Nest Atomic pipeline |
+| 6. NF screen | 2–4 weeks | 4–8 weeks | RGES + ZINC + Anderson |
+| 7. PseudoSpore | 1 week | 2 weeks | Packaging + validation |
+| 8. JOSS/CTF | 2–4 weeks | 4–8 weeks | Writing + co-author + submission |
+| **Total** | **~8–12 weeks** | **~16–28 weeks** | From today to published |
+
+**If Step 3 starts today**:
+- Optimistic: NF pseudoSpore by **late September 2026**
+- Realistic: NF pseudoSpore by **December 2026**
+- JOSS submission: Q4 2026 (optimistic) or Q1 2027 (realistic)
+
+The critical path shortened by ~2-3 weeks vs 155i estimate because Steps 1-2 are done.
+
+---
+
+*subGen Wave 155m — gen5 critical path. Steps 1-2 COMPLETE (Provenance 7/7 live).
+6 remaining steps from tideGlass Phase 0 to JOSS. Step 3 can start immediately.
+Infrastructure is 100% ready. The science pipeline is the sole bottleneck.*

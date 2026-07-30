@@ -1,7 +1,7 @@
 # Thresholds Crossed — What the Project Has Proven
 
 **Status**: Living document — updated at wave boundaries
-**Wave**: 155i | **Date**: Jul 29, 2026
+**Wave**: 155m | **Date**: Jul 30, 2026
 
 ---
 
@@ -13,11 +13,13 @@
 | gen1 | Can we build it? | ~$11K HPC exists | **EXCEEDED** |
 | gen2 | What should we build? | Protocol defined | **EXCEEDED** |
 | gen3 | Does it work? | Science reproduced | **EXCEEDED** |
-| gen4 | Who uses it? | Products ship invisibly | **CROSSING** |
-| gen5 | Does external science exit? | Collaborator-owned artifact | **NOT YET** |
+| gen4 | Who uses it? | Products ship invisibly | **COMPLETE** |
+| gen5 | Does external science exit? | Collaborator-owned artifact | **INFRASTRUCTURE READY** |
 
-The project is at the **gen4→gen5 boundary**. gen4 is substantially complete.
-gen5's defining deliverable has not shipped.
+The project has crossed the **gen4→gen5 boundary**. gen4 is COMPLETE: 3 NUCLEUS gates,
+Provenance 7/7 E2E validated, Sovereign CI live, biomeOS v4.50 lifecycle manager.
+gen5's defining deliverable (NF pseudoSpore) has not shipped, but the infrastructure
+that gen5 requires is now fully operational.
 
 ---
 
@@ -117,42 +119,48 @@ gen5 defined success as: **a collaborator owns science that exited the ecosystem
 
 | Requirement | Evidence |
 |-------------|----------|
-| Tower Atomic complete | 5+ gates, 197 scenarios, BTSP 13/13 |
-| Nest Atomic live | westGate (Linux) + blueGate (Windows) |
-| CAS operational | 3,216 objects, BLAKE3, ZFS 25.3TB |
-| Composition broker | biomeOS v4.45, 704 caps, COORDINATED, E2E routing |
-| Provenance Trio | 6/7 (rhizoCrypt DAG + loamSpine ledger + sweetGrass braids). Only `crypto.sign_ed25519` stub remains. |
+| Tower Atomic complete | 6+ gates, 197 scenarios, BTSP 13/13 |
+| Nest Atomic live | westGate (Linux, ZFS) + blueGate (Windows) |
+| CAS operational | 3,252 objects, BLAKE3, ZFS 25.4TB |
+| Composition broker | biomeOS v4.50, 654 caps, 27 signal graphs, lifecycle manager |
+| **Provenance Trio 7/7** | **COMPLETE** — E2E validated on westGate (Linux) + blueGate (Windows) |
+| **bearDog crypto.sign_ed25519** | **SHIPPED** (`3739e7078`) — real Ed25519 signing, not stub |
+| **Windows depot complete** | **15/15 binaries** (membrane.exe NEW), BLAKE3 verified |
+| **Sovereign CI** | **LIVE** — push-to-deploy automated, J9-J11 killed |
 | Gonzales engaged | GPS assigned Jun 5, 2026. CTF NDU aligned. |
 | JOSS strategy | Draft complete, pre-flight rubric defined |
 | Show HN rubric | 28 items defined |
 | lithoSpore chassis | Delivered to Barrick (4 USBs, May 18) |
 | Public data catalog | ~115 systems cataloged with trust tiers |
+| **3 NUCLEUS gates** | westGate + blueGate + strandGate — all lifecycle-managed |
+| **Socket evaporation fixed** | biomeOS v4.50 — stable lifecycle NUCLEUS |
+| **Depot rebuilt** | 34 binaries (16 musl + 3 gnu + 15 windows) |
 
 ### What gen5 REQUIRED that is NOT DONE
 
 | Requirement | Blocker |
 |-------------|---------|
 | **tideGlass Phase 0** | Not started. GPS archaeology, Zenodo download, dependency mapping. |
-| **NF Data Portal ingestion** | Cataloged "not started". No pipeline. |
+| **NF Data Portal ingestion** | Cataloged "not started". No pipeline. (Nest Atomic now READY.) |
 | **One NF pseudoSpore** | No data → no artifact |
 | **JOSS paper.md** | No draft |
 | **tideglass.primals.eco** | DNS placeholder only |
 | **CTF NDU prelim data** | Depends on NF pseudoSpore |
 | **Show HN green** | Multiple blockers (sporePrint, wetSpring cold clone, pepti) |
-| **bearDog crypto.sign_ed25519** | Returns health stub. Blocks Provenance 7/7. |
-| **Windows depot pipeline** | 14 .exe from 07/16. No Windows CI gate. |
 | **Scientific spine doc** | Philip Anderson → Gonzales chain not wired to gen3 thesis narrative |
 
 ### gen5 Threshold Distance
 
 ```
-Infrastructure readiness:  ████████░░  ~80%  (Nest LIVE, broker LIVE, CAS, provenance 6/7)
+Infrastructure readiness:  ██████████  ~100% (NUCLEUS ×3, Prov 7/7, CI LIVE, v4.50, 34 bins)
 Collaborator engagement:   ██████░░░░  ~60%  (Gonzales producing; Inkfish email SENT)
 External data → artifact:  ██░░░░░░░░  ~15%  (ABG pseudoSpore partial; NF zero)
 Publication / grants:      ███░░░░░░░  ~25%  (strategy + alignment; no submission)
 ```
 
-The infrastructure is ready. The science pipeline is empty.
+**The infrastructure is COMPLETE.** gen4 is done. The ONLY remaining work is science
+pipeline execution: download data, run computations, package artifact, submit paper.
+Every infrastructure blocker that the GEN_REVIEW_151c identified is now resolved.
 
 ---
 
