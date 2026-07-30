@@ -37,7 +37,13 @@ here to gen5 success.
    tracks. Valve/Inkfish (email SENT Jul 29), Gonzales (producing), Jones
    (emeritus), Barrick (USB delivered), ABG (producing), MSU faculty.
 
-### Layer 3 — Security Architecture (Realized)
+### Layer 3 — Public Surface Strategy
+
+9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as
+   subGen presented to the world. Live science first, pseudoSpore grab pattern,
+   inter/intra membrane site architecture, Wave 155m update plan.
+
+### Layer 4 — Security Architecture (Realized)
 
 4. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — Seven-layer security model
    as deployed: network binding → BTSP → MethodGate → threat detection →
@@ -94,6 +100,7 @@ Wave 155m marks the **gen4 completion checkpoint** — infrastructure is done.
 
 ---
 
-*subGen Wave 155m — 13 documents. Security architecture + thresholds + critical
-path + outreach + postPrimordial security docs. gen4 COMPLETE. Infrastructure 100%.
-Science pipeline is the sole remaining work for gen5.*
+*subGen Wave 155m — 14 documents. Security architecture + thresholds + critical
+path + outreach + public surface strategy + postPrimordial security docs. gen4
+COMPLETE. Infrastructure 100%. Science pipeline + public surface are the remaining
+work for gen5.*
