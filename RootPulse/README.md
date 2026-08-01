@@ -2,24 +2,16 @@
 
 **Universal temporal tracking through primal coordination**
 
-**Updated**: June 1, 2026 (Wave 66)
-**Vocabulary**: `gen5/foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md`
+**Updated**: March 15, 2026
 
 ---
 
 ## White Paper Series
 
 RootPulse is not a primal. It is a coordination pattern — a set of TOML
-composition graphs that biomeOS dispatches over existing primals. Version
-control, game session provenance, scientific experiment tracking, and RPG
-session DAGs all use the same temporal primitives with different graph
-topologies.
-
-RootPulse is the ACTION domain of the coordination triad (qS SENSE /
-wF SYNC / rP ACTION). Where waterFall propagates state across gates,
-RootPulse creates the versioned artifacts that waterFall carries. The
-provenance trio (rhizoCrypt, loamSpine, sweetGrass) provides the recording
-substrate for both.
+graphs that biomeOS executes over existing primals. Version control,
+game session provenance, scientific experiment tracking, and RPG session
+DAGs all use the same temporal primitives with different graph topologies.
 
 ### Documents
 
@@ -73,9 +65,9 @@ See [04_DAG_VS_LINEAR.md](./04_DAG_VS_LINEAR.md) for the deep dive.
 
 ---
 
-## Composition Graphs (biomeOS)
+## Workflow Graphs (biomeOS)
 
-All RootPulse operations are TOML composition graphs dispatched by biomeOS:
+All RootPulse operations are TOML graphs executed by the Neural API:
 
 | Graph | Coordination | Phases |
 |-------|:------------:|--------|
@@ -115,67 +107,35 @@ different vocabulary.
 
 ---
 
-## gen4 Context — RootPulse as Conceptual Bridge
-
-RootPulse is the conceptual engine behind the gen3→gen4 transition. It proves
-that complex systems emerge from primal coordination — the same 6 primals
-with different TOML graphs produce version control, game session tracking,
-sample provenance, and medical records. This emergence proof is what makes
-gen4 possible: if temporal coordination emerges, so can game engines, science
-pipelines, and eventually a sovereign operating system.
-
-### gen4 Products That Use RootPulse Patterns
-
-| Product | RootPulse Pattern | What Emerges |
-|---------|-------------------|-------------|
-| esotericWebb | Session DAG + provenance lifecycle | Game session tracking with attribution |
-| helixVision | Sample → analysis → publication provenance | Field-to-publication chain-of-custody for genomic samples |
-| RPGPT Engine | Continuous + transactional | Campaign history with anti-cheat as chain-of-custody |
-
-### RootPulse → biomeOS OS Trajectory
-
-The temporal coordination that RootPulse provides is what an OS filesystem
-needs: version history, provenance, branching, federation. In the biomeOS OS
-trajectory (`gen4/architecture/BIOMEOS_OS_TRAJECTORY.md`), RootPulse patterns
-become the filesystem layer — files don't just exist, they have provenance.
-
-See `gen4/` for the full gen4 documentation (22 working papers).
-
----
-
-## Implementation Status (June 1, 2026)
+## Implementation Status (March 15, 2026)
 
 | Component | Status |
 |-----------|--------|
-| Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) | Production ready (2,308+ tests combined) |
-| 6-phase commit composition | Validated end-to-end |
-| Composition graphs (commit, branch, merge, diff, federate) | All defined in `primalSpring/graphs/signals/` |
-| Capability routing | 320+ translations across 27 domains |
+| Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) | Production ready (2,308 tests combined) |
+| 6-phase commit workflow | Validated end-to-end (March 13, 2026) |
+| Deploy graphs (commit, branch, merge, diff, federate) | All implemented in biomeOS |
+| Capability routing | 124 translations across 12 domains |
 | E2E tests (`provenance_trio_e2e.rs`) | 5 integration tests |
 | Cross-spring validation (ludoSpring exp052) | 37/37 checks passed |
 | Cross-domain provenance (exp062-066) | 228/228 checks (gaming, science, medical) |
-| `CompositionContext::signal("nest", "commit", ...)` | Implemented — dispatches to composition graph |
-| Agentic sync (wF + rP + trio) | **Wave 66** — `sync_resolve.toml` uses trio for provenance recording |
-| Phase A composition definition | **Complete** — 32 graphs including 5 rootPulse compositions |
 | `rootpulse` CLI frontend | Not yet implemented |
 | NestGate <-> LoamSpine content integration | Needs implementation |
 
-### What RootPulse needs from biomeOS (Phase B)
+### What RootPulse needs from biomeOS v2.42
 
-1. **Composition dispatch in NeuralRouter** — Phase B of the composition
-   layer: NeuralRouter recognizes composition-tier capabilities and loads
-   the corresponding graph instead of direct single-method routing.
-
-2. **Continuous + transactional mixed mode** — RPGPT needs 60 Hz game
+1. **Continuous + transactional mixed mode** — RPGPT needs 60 Hz game
    ticks (continuous) with provenance commits at session boundaries
    (transactional). Currently these are separate execution paths.
 
-3. **Continuous execution via Neural API** — `graph.start_continuous`,
+2. **Continuous execution via Neural API** — `graph.start_continuous`,
    `graph.pause`, `graph.resume`, `graph.stop` JSON-RPC methods so
    game sessions can be managed programmatically, not just via CLI.
 
-4. **ConditionalDag** — RPGPT needs conditional flows: if squirrel AI
+3. **ConditionalDag** — RPGPT needs conditional flows: if Squirrel AI
    is available, use AI narration; else use template narration.
+
+4. **Unified graph schema** — `[[nodes]]` (Neural API server) vs
+   `[[graph.nodes]]` (ContinuousExecutor) must converge.
 
 ---
 
@@ -192,25 +152,17 @@ See `gen4/` for the full gen4 documentation (22 working papers).
 
 ## Related Work
 
-- **[FUNCTIONAL_PATTERN_CONVERGENCE.md](../gen5/foundations/FUNCTIONAL_PATTERN_CONVERGENCE.md)** — The Two Threes (canonical triad/trio vocabulary)
-- **[Neural API](../neuralAPI/)** — biomeOS composition dispatch layer
-- **[waterFall](../waterFall/)** — Temporal ecosystem sync (SYNC domain of the triad)
-- **[waterFall/09_AGENTIC_SYNC.md](../waterFall/09_AGENTIC_SYNC.md)** — Agentic sync — fullest triad + trio composition
-- **[ludoSpring](../../ludoSpring/)** — RPGPT composition, exp052 trio validation
+- **[Neural API](../neuralAPI/)** — Orchestration layer that executes RootPulse graphs
+- **[biomeOS v2.41](../../phase2/biomeOS/)** — Graph executor, capability routing, 5,017 tests
+- **[ludoSpring V18](../../ludoSpring/)** — RPGPT composition, exp052 trio validation
 
 ### Primal Repositories
-- **rhizoCrypt** — Ephemeral DAG workspace (provenance trio)
-- **loamSpine** — Immutable linear history (provenance trio)
-- **sweetGrass** — Semantic attribution (provenance trio)
-- **bearDog** — Cryptographic primitives
-- **nestGate** — Content-addressed storage
-- **songbird** — Federated discovery
-
-### Fossil Record
-
-The `whitePaper_RootPulse/` subdirectory contains a gen4-era version of this
-documentation (December 2025). It is retained as fossil record — the parent
-`RootPulse/` directory is the living document.
+- **rhizoCrypt** — Ephemeral DAG workspace
+- **LoamSpine** — Immutable linear history
+- **sweetGrass** — Semantic attribution
+- **BearDog** — Cryptographic primitives
+- **NestGate** — Content-addressed storage
+- **Songbird** — Federated discovery
 
 ---
 

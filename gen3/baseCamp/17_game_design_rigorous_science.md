@@ -1,12 +1,10 @@
 # Paper 17: Game Design as Rigorous Science — Validated HCI Models for Interactive Systems
 
-**Status**: V37.1 — 98 experiments (83 science + 15 composition), 27 IPC capabilities, 734 workspace tests. **Live plasmidBin validation: 95/141 (67.4%)** — 5 experiments fully PASS against deployed primals. Track 26–28: primal composition gap discovery → science-via-composition → NUCLEUS game engine composition. 10 primal evolution gaps documented per-team. Projected 92.2% with rhizoCrypt UDS + loamSpine fix + barraCuda formula alignment. Handoff: `LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md`.
-**Date**: March 31, 2026
+**Status**: Validated — 66 experiments, 1349 checks, 138 tests, 3 playable prototypes, 3 external control groups, 4 cross-spring experiments, 3 RPGPT, 4 Games@Home, 1 trio integration, 2 extraction shooter/viz, 6 lysogeny, 1 fermenting, 5 cross-spring provenance
+**Date**: March 13, 2026
 **Faculty Anchor**: Csikszentmihalyi (1990, Flow), Fitts (1954), Yannakakis & Togelius (2018, computational game science)
 **Springs**: ludoSpring (game science), barraCuda (math primitives), toadStool (GPU dispatch), metalForge (cross-substrate), wetSpring (Anderson QS), biomeOS (NUCLEUS atomics), nestgate (NCBI data)
 **Bench Source**: 13 foundational HCI models validated through Python→Rust→GPU pipeline
-
-**Gen4 consumer note**: **esotericWebb** is the first gen4 product to consume ludoSpring’s game-science IPC surface at scale — the same JSON-RPC capability plane (session quality, flow, engagement, provenance-adjacent hooks) that papers 18–22 build on is what gen4 routes through for playable CRPG composition, without importing ludoSpring as a crate.
 
 ---
 
@@ -73,7 +71,7 @@ the metrics framework is content-agnostic.
 | BSP trees | Fuchs, Kedem, Naylor (1980) | `procedural::bsp` | 017 |
 | Tufte data-ink | Tufte (1983, 1990) | `metrics::tufte_gaming` | 003, 016, 022 |
 
-### 26 Tracks, 88 Experiments
+### 16 Tracks, 54 Experiments, 795 Checks
 
 | Track | Description | Experiments | Checks |
 |-------|-------------|-------------|--------|
@@ -93,16 +91,6 @@ the metrics framework is content-agnostic.
 | 14 — Provenance Trio | rhizoCrypt DAG + loamSpine certs + sweetGrass braids in game sessions | 052 | 37 |
 | 15 — Extraction Shooter | 12 fraud types, zone topology, spatial detection, consumable lifecycle | 053 | 65 |
 | 16 — Composable Viz | biomeOS graph + songbird discovery + petalTongue DataBinding — zero chimeric deps | 054 | 40 |
-| 17 — Lysogeny | Open recreation of proprietary game mechanics from prior-art math | 055–060 | 237 |
-| 18 — Fermenting | Full NFT lifecycle: mint, trade, loan, consume, achievements, atomic swap, trio IPC | 061 | 89 |
-| 19 — Cross-Spring Provenance | BearDog signing, field samples, consent-gated medical, cross-domain fraud, radiating attribution | 062–066 | 228 |
-| 20 — RPGPT Dialogue Plane | NPC knowledge, lie detection, memory DAG, ruleset swap, voices, trust, factions, plane transitions | 067–075 | 321 |
-| 21 — Deep Primal Integration | Squirrel AI, NestGate storage, petalTongue scene push, deep provenance trio, GPU compute | (code, not experiments) | — |
-| 22 — Deep Debt Evolution | Session decomposition, typed transitions, pluggable validation, toadStool IPC client | (code quality, V21) | — |
-| 23 — Ecosystem Absorption | toadStool direct dispatch, dual-format discovery, Python tolerance mirror, Write→Absorb→Lean | (cross-ecosystem, V22) | — |
-| 24 — Cross-Ecosystem Deep Debt | `#[expect(reason)]` dictionary, zero-panic validation, `extract_rpc_result()`, `deny.toml`, XDG paths, named constants | (ecosystem-wide, V23) | — |
-| 25 — Dependency + Build Fixes | barraCuda path deps, provenance trio path deps (phase2→primals), workspace member alignment | (V34, structural) | — |
-| **26 — Primal Composition** | **Gap discovery → local debt resolution → ecosystem evolution review. barraCuda IPC validated (30 methods), biomeOS v2.80 resolves 3/4 gaps, cross-primal overstep audit** | **084–088** | **34/50 (V35.2), expected 38–46/51 (V35.3)** |
 
 ### Key Results
 
@@ -147,21 +135,16 @@ Four experiments bridge ludoSpring game science with the broader ecosystem:
 
 ## Cross-Spring Requirements
 
-| Spring/Primal | Contribution | Status |
-|---------------|-------------|--------|
-| ludoSpring | 13 HCI models, 88 experiments, 734 workspace tests, 27 IPC capabilities | **Validated** (V35.3: 34/50 composition, ecosystem evolution review) |
+| Spring | Contribution | Status |
+|--------|-------------|--------|
+| ludoSpring | 13 HCI models, 54 experiments, 795 checks | **Validated** |
 | barraCuda | Math primitives (sigmoid, dot, lcg_step, state_to_f64) | **Consumed** |
-| toadStool | GPU dispatch for noise, raycaster, metrics, 3 game WGSL shaders + `compute.dispatch.*` direct dispatch | **Deep integration** (V23) |
+| toadStool | GPU dispatch for noise, raycaster, metrics | **Architecture validated** (exp030-033) |
 | metalForge | Cross-substrate routing (CPU/GPU/NPU) | **Architecture validated** (exp032-033) |
-| petalTongue | Live visualization (3 dashboards, 15 channel types, scene push, interaction stream) | **Deep integration** (V18) |
-| Squirrel | AI narration, NPC dialogue, internal voices (ai.query, ai.analyze, ai.suggest) | **IPC aligned** (V20) |
-| NestGate | Content-addressed storage (game state, NPC snapshots, rulesets — storage.store/retrieve) | **IPC aligned** (V20) |
-| rhizoCrypt | Session DAG, vertex queries, Merkle proofs (dag.session.*, dag.vertex.*, dag.frontier.*) | **Deep integration** (V18-V23) |
-| loamSpine | Certificates (NPC personality, ruleset, character), spines (spine.certificate.*, spine.waypoint.*) | **Deep integration** (V18-V23) |
-| sweetGrass | Attribution braids, dehydration records (braid.create, provenance.graph, attribution.chain) | **Deep integration** (V18-V23) |
-| biomeOS | NUCLEUS atomic coordination, deploy graphs, Neural API. v2.80: bundled bootstrap, barraCuda domain (30 method translations), `graph.save` schema fix | **Deep integration** (V35.3: capability routing validated, 3/4 gaps resolved) |
-| wetSpring | Anderson QS model (W disorder parameter) + Python tolerance mirror pattern | **Cross-validated** (exp044 + V23) |
-| nestgate (data) | NCBI E-utilities data pipeline | **Validated direct** (exp041/043) |
+| petalTongue | Live visualization (3 dashboard binaries, 7 channel types) | **Wired** |
+| biomeOS | NUCLEUS atomic coordination for game workloads | **Validated** (exp033 architecture + exp042 Tower Atomic live) |
+| wetSpring | Anderson QS model (W disorder parameter) | **Cross-validated** (exp044 confirms W model) |
+| nestgate | NCBI E-utilities data pipeline | **Validated direct** (exp041/043 — nestgate module wiring pending) |
 
 ---
 
@@ -189,89 +172,6 @@ Three experiments prove the metrics framework works on content not generated by 
 | 16 (Anaerobic-Aerobic QS) | Phase transition visualization through terrain generation |
 | **18 (RPGPT)** | **Sovereign RPG engine: all 13 HCI models measure session quality. Anti-cheat = chain-of-custody isomorphism. Ingestible open rulesets (PF2e/FATE/Cypher) as loamSpine certs. Provenance trio (rhizoCrypt/sweetGrass/loamSpine) as game state engine. exp045 validates ruleset control systems (49 checks). exp053 proves anti-cheat thesis with 12 fraud types.** |
 | **19 (Games@Home)** | **Distributed human computation: stack resolution as folding (exp048), every game as novel data (exp049), game tree as design metric (exp050), Games@Home isomorphism (exp051). exp054 validates composable primal architecture for multi-player coordination.** |
-
----
-
-## V35–V35.3: Primal Composition as Next Evolution Tier
-
-The evolution path for ludoSpring's science is:
-
-```
-Python baseline → Rust validation → barraCuda CPU → barraCuda GPU
-→ PRIMAL COMPOSITION (V35–V35.3) → esotericWebb absorbs patterns
-```
-
-V35 introduces Track 26: instead of shipping a ludoSpring binary, replicate
-the validated science using ONLY primal composition (existing deployed primals
-composed via biomeOS deploy graphs and Neural API routing). Failures are
-documented gaps with specific primal owners and evolution targets.
-
-### Composition Trajectory
-
-| Version | Checks | Pass Rate | Key Advance |
-|---------|--------|-----------|-------------|
-| V35 (initial) | 47 | 5/47 (11%) | First live run — most failures were local experiment errors |
-| V35.1 (revalidation) | 50 | 21/50 (42%) | barraCuda IPC confirmed, coralReef transport clarified |
-| V35.2 (local debt) | 50 | **34/50 (68%)** | Fixed graph.save key, capability domains, exp dry-run logic |
-| V36 (science-via-composition) | 91 | 34+/51 | 5 new experiments: HCI math via barraCuda IPC composition |
-| V37 (NUCLEUS game engine) | 141 | — | 5 more: session lifecycle, content ownership, dialogue, population, NUCLEUS |
-| **V37.1 (plasmidBin live)** | **141** | **95/141 (67.4%)** | **First live run against deployed primals. 5 experiments fully PASS** |
-
-### V37.1 Live Results (Mar 31, 2026)
-
-11 primals deployed from `infra/plasmidBin/` (barraCuda from source build — not yet in plasmidBin).
-All sockets at `/run/user/$UID/biomeos/`.
-
-| Experiment | Target | V37.1 live | Status |
-|-----------|--------|------------|--------|
-| exp084 | barraCuda math over IPC | 12/15 | Neural API routing gap |
-| exp085 | Shader compile→dispatch | 7/8 | toadStool↔coralReef discovery gap |
-| exp086 | Tensor composition | **10/10** | **PASS** |
-| exp087 | Neural API graph orchestration | 3/8 | Capability registration gap |
-| exp088 | 60Hz continuous game loop | 2/10 | Capability registration gap |
-| exp089 | Psychomotor (Fitts/Hick/Steering) | 4/8 | barraCuda formula mismatch |
-| exp090 | GameFlow tensor (Flow/DDA/Engagement) | **13/13** | **PASS** |
-| exp091 | PCG/Noise (Perlin/WFC) | 7/8 | barraCuda perlin3d lattice bug |
-| exp092 | Composite pipeline (GOMS/Four Keys) | **8/8** | **PASS** |
-| exp093 | Continuous 60Hz session | **6/6** | **PASS** (0.18ms max tick) |
-| exp094 | Session lifecycle (Nest Atomic) | 3/8 | rhizoCrypt: no UDS |
-| exp095 | Content ownership (Trio) | 0/8 | rhizoCrypt no UDS + loamSpine panic |
-| exp096 | NPC dialogue (NUCLEUS) | 5/10 | rhizoCrypt/Squirrel/petalTongue |
-| exp097 | Population dynamics (tensor) | **10/10** | **PASS** |
-| exp098 | NUCLEUS game session (full stack) | 5/6 | rhizoCrypt: no UDS |
-
-### Key Findings for the Thesis
-
-1. **Transport is fast enough**: 0.18ms max per-tick latency on UDS (93× under 16ms budget).
-   Primal composition meets 60Hz with massive headroom.
-2. **barraCuda math is correct for most domains**: Flow (sigmoid), engagement (weighted_mean),
-   stats (mean, std_dev), tensor (create/reduce/matmul), noise (perlin2d), population dynamics
-   (replicator, Markov, Wright-Fisher) all match Python baselines exactly.
-3. **Three formula-level gaps remain in barraCuda**: Fitts (Shannon vs Welford), Hick
-   (log2(n) vs log2(n+1)), perlin3d (lattice invariant broken). These are math specification
-   disagreements, not infrastructure failures.
-4. **Registration is still the primary bottleneck**: Running primals do not auto-register
-   capabilities with the Neural API. Only 5 ecosystem-level capabilities visible.
-5. **Provenance Trio transport gap**: rhizoCrypt and loamSpine lack Unix domain socket support,
-   blocking all provenance chain experiments. sweetGrass and NestGate work over UDS.
-6. **BearDog IPC contract**: Expects base64 data (not raw strings) and `{"message": ...}` for
-   signing (not `{"data": ...}`). Once discovered, works perfectly.
-7. **NestGate requires family_id**: All `storage.*` methods need `family_id` parameter.
-   Works correctly once provided.
-
-### Evolution Pressure (V37.1 — per-primal targets)
-
-- ~~barraCuda: build + publish binary, wire math as JSON-RPC~~ **DONE** (Sprint 23+)
-- ~~coralReef: raw JSON-RPC mode for UDS~~ **DONE** (Iter 70)
-- ~~biomeOS: bundle bootstrap graph~~ **DONE** (v2.80, `include_str!()`)
-- **rhizoCrypt: Add `--unix` flag** (CRITICAL — blocks 4 experiments, +9 checks)
-- **loamSpine: Fix infant_discovery.rs:233 runtime nesting** (CRITICAL — blocks 1 experiment, +6 checks)
-- **barraCuda: Align Fitts/Hick formulas** (HIGH — Shannon variant default, +4 checks)
-- **barraCuda: Publish ecoBin to plasmidBin** (HIGH — deployment gap)
-- **biomeOS: Auto-register primal capabilities** (HIGH — +14 checks)
-- **barraCuda: Fix perlin3d lattice invariant** (MEDIUM — +1 check)
-- **toadStool: Discover coralReef via socket scan** (MEDIUM — +1 check)
-- primalSpring: Absorb ludoSpring composition graphs and experiment patterns
 
 ---
 

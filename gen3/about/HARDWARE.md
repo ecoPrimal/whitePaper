@@ -1,31 +1,24 @@
-# Sovereign Cluster HPC — Node Inventory
+# Basement HPC — Node Inventory
 
 **Total Investment**: ~$15,000
-**Location**: Sovereign residential cluster
+**Location**: Basement, Lansing MI area
 **Network**: Local ethernet mesh with 10 Gigabit backbone (switch acquired, NICs installed, cables pending)
-**Last Updated**: May 15, 2026
+**Last Updated**: March 16, 2026
 
 ---
 
 ## Overview
 
 The ecoPrimals ecosystem runs on a heterogeneous cluster of physical machines,
-assembled from consumer and secondary market hardware over several years.
+purchased and assembled over several years. westGate was originally built during
+Army service (2012–2015). southGate was a gaming tower upgraded for the mesh.
+northGate was all new parts. Everything else was Facebook Marketplace finds and
+Newegg sales.
 
 The hardware is heterogeneous by nature — DDR3 to DDR5, RTX 2070 to RTX 5090,
 32 GB to 256 GB RAM — and the architecture treats this heterogeneity as a
 feature. Each gate runs the NUCLEUS atomics that match its hardware, and biomeOS
 coordinates the mesh so workloads land on the right gate.
-
-As of May 2026, the hardware composes through a **gram-negative membrane model**:
-- **Intracellular** (this inventory): the covalent HPC mesh
-- **Inner membrane**: gate network boundary (UFW, iptables, hidepid)
-- **Periplasm**: routing + telemetry (routing_config.toml, membrane_telemetry.sh)
-- **Outer membrane**: VPS (157.230.3.183) running Tower composition
-- **Extracellular**: internet, DNS, CDN
-
-See `gen4/architecture/SOVEREIGN_HPC_EVOLUTION.md` for the full membrane model,
-bonding at each layer, and evolution path (10G → HBM2 fleet → multi-VPS mesh).
 
 ---
 
@@ -36,7 +29,7 @@ The mesh has evolved from fixed "one GPU per gate" to a two-tier model:
 | Tier | Purpose | Cards |
 |------|---------|-------|
 | **Display** | Desktop output, lightweight ML, Cursor IDE | Small GDDR cards (RTX 4060, 5060, 4070) — permanent per gate |
-| **Work** | Heavy compute, HPC, HBM2 testing, science | Large swappable cards (RTX 3090, Titan V, MI50, Tesla K80) — slot into any gate's PCIe |
+| **Work** | Heavy compute, HPC, HBM2 testing, science | Large swappable cards (RTX 3090, Titan V, MI50) — slot into any gate's PCIe |
 
 Every gate is a system that can be parallelized by adding more GPUs on PCIe.
 Conceptually, a PCIe x16 slot can split across multiple smaller cards (e.g.,
@@ -45,48 +38,28 @@ hardware data flows. The 3090s and HBM2 cards physically move between boards
 based on current workload.
 
 biomeGate is the current **HBM2 test bench** — the hotSpring team works there,
-with Titan V, MI50, and Tesla K80 cards rotating in for sovereign HBM2 and
-related compiler work via coralReef.
+and the Titan Vs + MI50s are slotted in for sovereign HBM2 compiler development
+via coralReef.
 
 ---
 
 ## Towers
 
-### northGate — Personal Gaming + Remote Compute
+### northGate — Flagship AI/LLM Compute
 
 | Component | Specification |
 |-----------|---------------|
-| **CPU** | AMD Ryzen 9 9950X3D |
+| **CPU** | Intel i9-14900K |
 | **Display GPU** | — (RTX 5090 serves both roles) |
 | **Work GPU** | NVIDIA RTX 5090 |
-| **RAM** | 96 GB DDR5 (2×48 GB, speed-optimized) |
-| **Storage** | 1 TB NVMe (OS/drivers) + 4 TB NVMe (games) |
+| **RAM** | 192 GB DDR5 |
+| **Storage** | 1 TB Samsung 990 Pro + 4 TB Samsung 990 EVO |
 | **Network** | 10G NIC (copper) |
-| **Role** | Personal gaming primary, remote compute secondary |
+| **Role** | Primary AI/LLM compute, main hub |
 
-Evolved from flagship AI/LLM node. The i9-14900K and half the DDR5 moved to
-ironGate; northGate received a 9950X3D for gaming. Storage reduced from ~8 TB
-to 5 TB. Demonstrates the "friend/family remote compute without disrupting
-normal use" pattern — NUCLEUS primals run in the background while the owner
-games. The RTX 5090 remains the most capable single GPU in the mesh.
-
-### ironGate — Agentic Development + Composition Validation (Currently dedicated ABG gate)
-
-| Component | Specification |
-|-----------|---------------|
-| **CPU** | Intel i9-14900K (RMA replacement — 3rd unit, IPC burnout on original) |
-| **Display GPU** | NVIDIA RTX 5070 |
-| **RAM** | 96 GB DDR5 (2×48 GB, speed-optimized) |
-| **Storage** | 3.6 TB NVMe |
-| **OS** | Pop!_OS 22.04 |
-| **Role** | Agentic development, composition validation, clean deploys |
-
-Node Atomic. Split from northGate — inherited the i9-14900K (after two RMAs for
-IPC burnout) and half the DDR5. First gate bootstrapped entirely from zero via
-`bootstrap.sh --fresh`. Agentic-native: Cursor-driven development from day one.
-Second SM120 (Blackwell) device in the mesh alongside northGate's RTX 5090.
-Owns primalSpring (composition + deploy quality, shared with eastGate for BTSP),
-ludoSpring, and groundSpring.
+Heavy Node Atomic. Where Squirrel routes large inference jobs and toadStool runs
+GPU-intensive barraCuda workloads. The RTX 5090 is the most capable single GPU
+in the mesh.
 
 ### southGate — Gaming + Heavy Compute
 
@@ -100,7 +73,8 @@ ludoSpring, and groundSpring.
 | **PCIe** | Available slots for work cards |
 | **Role** | Gaming + heavy compute |
 
-Balanced Node Atomic. 128 GB RAM. Dual boot for gaming (Windows) and compute (Linux). Work cards
+Balanced Node Atomic. Originally a gaming tower, upgraded for the mesh with
+128 GB RAM. Dual boot for gaming (Windows) and compute (Linux). Work cards
 (3090s) slot in as needed for compute runs.
 
 ### eastGate — Utility Compute + Neuromorphic
@@ -131,7 +105,7 @@ dependency.
 | **GPU** | NVIDIA RTX 3090 + AMD RX 6950 XT |
 | **NPU** | 1× BrainChip Akida (PCIe) |
 | **RAM** | 256 GB ECC DDR4 |
-| **Storage** | 2× 2 TB NVMe + 4× 4 TB NVMe (Hyper M.2), all NVMe |
+| **Storage** | 2× 2 TB NVMe + 4× 4 TB NVMe (Hyper M.2) + HDD/SSD pool |
 | **OS** | Pop!_OS |
 | **Role** | Bioinformatics, multi-GPU + neuromorphic |
 
@@ -146,30 +120,26 @@ shaders run on both NVIDIA and AMD, validating the universal compute claim.
 |-----------|---------------|
 | **CPU** | AMD Threadripper 3970X (32 cores / 64 threads) |
 | **Display GPU** | NVIDIA RTX 5060 |
-| **Work GPUs** | Installed: 1× NVIDIA Titan V (12 GB HBM2) + 1× NVIDIA Tesla K80 (24 GB GDDR5, 2×12 GB). Float pool: 2nd Titan V + 2× AMD Instinct MI50 (when not slotted elsewhere) |
+| **HBM2 (work)** | 2× NVIDIA Titan V (12 GB HBM2 each) + 2× AMD Instinct MI50 (16 GB HBM2 each) |
 | **NPU** | 1× BrainChip Akida (moved from strandGate) |
 | **RAM** | 256 GB DDR4 (non-ECC) |
 | **Storage** | 1 TB NVMe (boot) + 2× 2 TB NVMe (work/scratch) |
-| **PCIe** | 3-card limit (display + 2 work) until PCIe extension experiments |
 | **Role** | HBM2 sovereign compiler development, semi-mobile heavy compute |
 
 Heavy Node Atomic and the project's **HBM2 test bench**. The hotSpring team
 works here. The Threadripper 3970X provides 32 cores for CPU-parallel baselines
-and verification. The RTX 5060 handles display and lightweight ML. The mesh
-still carries **4 HBM2 cards** (2× Titan V + 2× MI50, 56 GB aggregate HBM2) for
-coralReef; not all are installed at biomeGate at once. The Tesla K80 adds Kepler
-GK210 coverage alongside the Volta/Vega HBM2 stack.
+and verification. The RTX 5060 handles display and lightweight ML. The 4 HBM2
+cards (56 GB aggregate, ~28 TFLOPS FP64) are the coralReef sovereign compiler
+development targets:
 
-| Card | Qty | Memory | FP64 (where relevant) | Arch | coralReef / bench |
-|------|-----|--------|------------------------|------|-------------------|
-| Titan V | 2 | 12 GB HBM2 each | 7.4 TFLOPS | Volta SM70 | `sm_70` |
-| MI50 | 2 | 16 GB HBM2 each | 6.6 TFLOPS | Vega 20 GCN 5.0 | `gfx906` |
-| Tesla K80 | 1 | 24 GB GDDR5 (2×12 GB) | — | Kepler GK210 | biomeGate (installed) |
+| Card | Qty | HBM2 | FP64 | Arch | coralReef Target |
+|------|-----|------|------|------|------------------|
+| Titan V | 2 | 12 GB each | 7.4 TFLOPS | Volta SM70 | `sm_70` |
+| MI50 | 2 | 16 GB each | 6.6 TFLOPS | Vega 20 GCN 5.0 | `gfx906` |
 
 The Titan V runs NVK for driver-independent verification. The MI50s came with
 3D-printed blower shrouds for standard case use. PCIe lanes are expandable —
-the Threadripper's 64 lanes can support a fuller array plus display GPU once the
-3-slot practical limit is extended.
+the Threadripper's 64 lanes support the full HBM2 array plus display GPU.
 
 ### westGate — Cold Storage Archive
 
@@ -182,7 +152,7 @@ the Threadripper's 64 lanes can support a fuller array plus display GPU once the
 | **Network** | 10G NIC (copper) |
 | **Role** | Cold storage, NAS, caching layer |
 
-Heavy Nest Atomic. The oldest gate, still running.
+Heavy Nest Atomic. The oldest gate — built during Army service, still running.
 The 76 TB ZFS pool is the cold storage archive for the entire mesh. nestGate on
 westGate manages content-addressed blob storage with ZFS snapshots (100 snapshots
 in 0.17s). DDR3 and an i7-4771 are not fast, but cold storage needs reliable and
@@ -209,9 +179,9 @@ Balanced Node Atomic. Compact form factor for deployments that need to move.
 | **RAM** | 64 GB DDR5 |
 | **Storage** | 2 TB NVMe |
 | **OS** | Ubuntu 24.04.3 |
-| **Role** | Flock compute / covalent mesh |
+| **Role** | Brother's node / flock compute |
 
-Remote covalent mesh node. Connected to the mesh via covalent
+Node Atomic operated by a family member. Connected to the mesh via covalent
 bonding (shared family seed). Demonstrates the multi-household covalent mesh
 pattern.
 
@@ -222,7 +192,7 @@ pattern.
 | **CPU** | Intel i7-6700K |
 | **GPU** | NVIDIA RTX 3070 |
 | **RAM** | 32 GB DDR4 (2×16 @ ~3400) |
-| **Storage** | NVMe (PCIe 3.0) |
+| **Storage** | SATA / NVMe (PCIe 3.0) |
 | **OS** | Pop!_OS |
 | **Role** | Staging / utility compute |
 
@@ -252,12 +222,11 @@ available PCIe slots can host work cards.
 
 | Card | Qty | VRAM | Type | Current Location |
 |------|-----|------|------|------------------|
-| RTX 3090 | 2 | 24 GB GDDR6X each | GDDR work | strandGate (1 resident) + 1 float |
-| Titan V | 2 | 12 GB HBM2 each | HBM2 work | Float pool (1 installed at biomeGate when slotted) |
-| MI50 | 2 | 16 GB HBM2 each | HBM2 work | Float pool |
-| Tesla K80 | 1 | 24 GB GDDR5 (2×12 GB) | Kepler GK210 | biomeGate |
+| RTX 3090 | 3 | 24 GB GDDR6X each | GDDR work | strandGate (1 resident) + 2 swappable |
+| Titan V | 2 | 12 GB HBM2 each | HBM2 work | biomeGate (HBM2 bench) |
+| MI50 | 2 | 16 GB HBM2 each | HBM2 work | biomeGate (HBM2 bench) |
 
-**Total work card pool**: 8 cards, 128 GB aggregate VRAM (48 GB GDDR6X + 56 GB HBM2 + 24 GB GDDR5 on K80)
+**Total work card pool**: 7 cards, 128 GB aggregate VRAM (72 GB GDDR + 56 GB HBM2)
 
 ---
 
@@ -315,48 +284,18 @@ model.
 
 ---
 
-## Outer Membrane (VPS — cellMembrane)
-
-The sovereign cluster extends beyond the LAN via a VPS outer membrane,
-covalently bonded to the gate cluster via SSH. This is infrastructure, not
-a cloud dependency — owned, controlled, reproducible.
-
-| Resource | Value |
-|----------|-------|
-| **Provider** | DigitalOcean nyc1 |
-| **Cost** | $12/month (2 GB RAM, 1 vCPU, 50 GB SSD) |
-| **IP** | 157.230.3.183 |
-| **Services** | Songbird TURN, RustDesk hbbs/hbbr, BearDog, SkunkBat, Caddy TLS |
-| **TLS surface** | `membrane.primals.eco` (Let's Encrypt E8, auto-renewal) |
-| **Content cache** | 19 MB sporePrint (synced from gate NestGate) |
-| **Bonding** | Covalent to gate (SSH key), Ionic to external (BTSP tokens) |
-| **Sovereignty proof** | HTTP parity 68ms TTFB (vs GitHub Pages 89ms), BearDog 3ms RPC |
-| **Deployed** | May 14, 2026 (TLS surface May 15) |
-
-The VPS is a sacrificial outer membrane — it can be destroyed and reprovisioned
-from gate state without data loss. All persistent state lives intracellularly.
-
----
-
 ## Networking
 
 | Component | Specification | Status |
 |-----------|---------------|--------|
-| 10G Switch | 10 Gigabit Ethernet | **Acquired** |
-| 10G NICs (copper) ×4 | northGate, southGate, eastGate, westGate | **Installed** |
-| 10G Cables (Cat6a / DAC) | ~$50-100 estimated | **Pending** — sole blocker for backbone activation |
-| 1G Mesh | biomeGate, strandGate, swiftGate, flockGate, kinGate, blueGate | Active |
-| NUC M6 P2P | USB-C ethernet to ironGate (10.99.0.0/30) | Active |
-| VPS ↔ Gate | SSH over internet (~15ms RTT NYC↔Michigan) | Active |
+| 10G Switch | 10 Gigabit Ethernet | Acquired |
+| 10G NICs (copper) ×4 | northGate, southGate, eastGate, westGate | Installed |
+| 10G Cables (Cat6a / DAC) | — | Pending purchase |
 
 The 10G backbone connects the four primary towers. Once cabled, the covalent
 mesh's inter-gate bandwidth jumps from 1 Gbps to 10 Gbps — relevant for
 nestGate blob replication, toadStool distributed compute, and songBird
 federation traffic.
-
-**Planned 10G configuration**: MTU 9000 (jumbo frames), dedicated VLAN for
-inter-gate covalent traffic, Songbird auto-discovery of 10G peers for larger
-payload allocation.
 
 ---
 
@@ -375,21 +314,20 @@ payload allocation.
 
 | Resource | Total |
 |----------|-------|
-| **Towers** | 11 |
+| **Towers** | 10 |
 | **Small form factor** | 4 (1× NucBox + 3× Intel NUC) |
-| **CPU Cores** | 154+ (across all gates) |
-| **GPU VRAM (display-class GPUs)** | ~72 GB (RTX 5090 32 GB + RTX 5070 12 GB + RTX 5060 8 GB + RTX 4070 12 GB + RTX 4060 8 GB) |
-| **GPU VRAM (work pool inventory)** | 128 GB (2× RTX 3090 48 GB + 2× Titan V 24 GB + 2× MI50 32 GB + 1× Tesla K80 24 GB) |
-| **GPU VRAM (installed per gate, excl. float)** | ~180 GB (5090/5070/4060/4070 + strandGate 3090+6950 + biomeGate 5060+Titan V+K80 + 2070S + three RTX 3070-class) |
-| **GPU VRAM (float pool not installed)** | ~68 GB (1× RTX 3090 + 1× Titan V + 2× MI50) |
-| **GPU VRAM (total, unique cards)** | ~248 GB |
+| **CPU Cores** | 130+ (across all gates) |
+| **GPU VRAM (display tier)** | ~44 GB (RTX 5090 32 GB + RTX 5060 8 GB + RTX 4070 12 GB + RTX 4060 8 GB — resident per gate) |
+| **GPU VRAM (work pool)** | ~128 GB (3× RTX 3090 72 GB + 2× Titan V 24 GB + 2× MI50 32 GB) |
+| **GPU VRAM (other gates)** | ~36 GB (RTX 2070S 8 GB + RTX 3070 FE 8 GB + RTX 3070 Ti 8 GB + RTX 3070 8 GB + RX 6950 XT 16 GB) |
+| **GPU VRAM (total)** | ~208 GB |
 | **HBM2** | 56 GB (2× Titan V + 2× MI50) |
-| **System RAM** | ~1.0 TB (across all gates; northGate reduced from 192 to 96 GB in ironGate split) |
-| **Storage** | ~122 TB total (~46 TB NVMe across gates + ~76 TB HDD ZFS on westGate only) |
+| **System RAM** | ~1.2 TB (across all gates) |
+| **Storage** | ~105 TB+ (76 TB ZFS cold + NVMe hot across nodes) |
 | **GPU Vendors** | NVIDIA + AMD (barraCuda universal compute validated on both) |
-| **GPU Architectures** | Kepler (K80) + Pascal → Turing → Ampere → Ada → Blackwell (NVIDIA) + Volta (HBM2) + Vega 20 (HBM2) + RDNA 2 (AMD) |
+| **GPU Architectures** | Pascal → Turing → Ampere → Ada → Blackwell (NVIDIA) + Volta (HBM2) + Vega 20 (HBM2) + RDNA 2 (AMD) |
 | **coralReef HBM2 Targets** | `sm_70` (Volta), `gfx906` (Vega 20) |
-| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through 9950X3D through Threadripper 3970X through Dual EPYC 7452) |
+| **CPU Vendors** | Intel + AMD (i7-4771 through i9-14900K, 5800X through Threadripper 3970X through Dual EPYC 7452) |
 | **Memory Types** | DDR3, DDR4, DDR4 ECC, DDR5 |
 | **NPU** | 3× BrainChip Akida AKD1000 |
 | **HSM** | 4× SoloKey FIDO2 + Android StrongBox |
@@ -403,7 +341,7 @@ A traditional HPC deploys identical nodes and distributes identical workloads.
 That's metallic bonding in the NUCLEUS model: delocalized, homogeneous,
 sub-specialized.
 
-This sovereign cluster is the opposite. Every gate is different. DDR3 sits next to
+This basement HPC is the opposite. Every gate is different. DDR3 sits next to
 DDR5. A 12-year-old i7 sits next to a brand-new i9. NVIDIA sits next to AMD.
 HBM2 sits next to GDDR6X. A Celeron NUC runs the same primal binaries as a
 64-core EPYC. That's covalent bonding: heterogeneous hardware, united by genetic
@@ -418,15 +356,4 @@ hardware demanded it.
 
 ---
 
-**11 towers, 4 HBM2 cards, 3 NPUs, 1 Tesla K80, 1 VPS outer membrane.
-Sovereign compute on consumer hardware, wrapped in a gram-negative organism.**
-
----
-
-## Changelog
-
-- **May 15, 2026**: Added VPS outer membrane section, updated networking table
-  with status and 10G config plan, added membrane model context + gen4
-  cross-reference, updated Last Updated date.
-- **April 3, 2026**: Initial gen3 inventory (11 towers, work card pool, 10G
-  backbone status, neuromorphic, mobile/security hardware).
+**Built from scratch. Assembled in a basement. 10 towers, 4 HBM2 cards, 3 NPUs, ~$15,000. One developer. The metal is real.**

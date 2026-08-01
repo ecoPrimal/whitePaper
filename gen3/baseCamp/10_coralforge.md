@@ -1,7 +1,7 @@
 # Sub-Thesis 10: coralForge — Sovereign Structure Prediction for Evolutionary Biology
 
 **Date:** March 1, 2026
-**Status:** GPU tier closed. 210+ validation checks (Py 62/62, Rs 55/55, GPU Tensor 26/26, pure GPU 24/24, confidence GPU 5/5, BarraCuda CPU 3/3 coralForge, cross-spring 40/40). All CPU→GPU pipeline proven. LTEE application designed. 15 df64 WGSL shaders. Pipeline pending real PDB data. **coralReef Iter 65**: Sovereign pipeline at **8/10 layers**. Layer 8 (WPR/ACR) **SOLVED** (Exp 087, W1-W7 fixed). Layer 7 (SEC2 binding) SOLVED (Exp 085, B1-B7 fixed). Cross-driver profiling (Exp 086): interface problem confirmed. ACR bootstraps FECS/GPCCS. Layer 9 under investigation (falcon halt release). AMD DRM dispatch fully validated (6/6 PASS). RTX 5060 Blackwell DRM cracked (SM120). NVIDIA sovereign dispatch nearing: 2 layers remain.
+**Status:** GPU tier closed. 210+ validation checks (Py 62/62, Rs 55/55, GPU Tensor 26/26, pure GPU 24/24, confidence GPU 5/5, BarraCuda CPU 3/3 coralForge, cross-spring 40/40). All CPU→GPU pipeline proven. LTEE application designed. 15 df64 WGSL shaders. Pipeline pending real PDB data. **coralReef Phase 11**: sovereign GPU method dispatch proven on Titan V — push buffer encoding fixed (Kepler+ mthd_incr field swap), SET_OBJECT/INVALIDATE_SHADER_CACHES/SET_SHADER_LOCAL_MEMORY_WINDOW all surviving. Path to fully sovereign SASS dispatch (bypassing NAK/NVK/Vulkan) now clear — QMD constant buffer binding is the remaining P0 blocker.
 **Domain:** Structural biology × constrained evolution × sovereign computing
 **Novelty:** No prior work implements AlphaFold2/3 primitives in pure Rust f64
 with complete CPU→GPU portability on consumer hardware

@@ -1,135 +1,7 @@
 # baseCamp Extension Plan: Technical Learnings and Evolution
 
-**Date:** March 23, 2026 (hotSpring Exp 071 sovereign PFIFO pipeline update + wetSpring V134 + ludoSpring V30 + airSpring V0.10.0 deep evolution execution + Songbird v0.2.1-wave64 cross-ecosystem naming convergence)
-**Foundation:** baseCamp papers 01–22, barraCuda v0.3.7 standalone (wgpu 28, DeviceCapabilities API), wetSpring V134 (379 experiments, **1,530** unit + **27** doc tests, 91.20% coverage, zero duplicate math, Anderson hormesis framework carried forward from V130), **V132:** `ValidationSink`, `PROVENANCE_REGISTRY`, IPC normalization, workspace `lints.workspace`, ecosystem wiring (sweetGrass braids, `StreamItem`, `performance_surface`), **V133:** `validate_all` meta-runner, `GpuContext`/`TensorSession`, `check_relative`/`check_abs_or_rel`, `performance_surface` complete, `ipc/message.rs` + `dispatch_strategy.rs`, feature-gate cleanup, airSpring v0.10.0 (938 lib + 316 integration/doc + 62 forge = 1,316 Rust tests; 91 binaries, 87 experiments, barraCuda default-features=false gpu+domain-pde, `GpuDriverProfile`→`DeviceCapabilities` migration, rpc.rs smart refactor to rpc/ module, `#[allow]`→`#[expect]` round 2 (66 files), 7 proptest scientific invariants, `f64_i8` NPU cast helper, MCP tools/list + tools/call wired in primal dispatch — 10 ecology tools discoverable by Squirrel AI, platform-agnostic IPC Transport enum (Unix + TCP, ecoBin compliant), 63 provenance baselines, zero clippy warnings pedantic+nursery, `#![forbid(unsafe_code)]`, zero C deps), ludoSpring V30 (82 experiments, 675+19 tests, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler split, CI, deploy graph, scyBorg triple license, zero `#[allow()]`, zero-panic validation, `#![forbid(unsafe_code)]`), Songbird v0.2.1-wave64 (10,020 tests, 30/30 crates pedantic+nursery clean, 14 JSON-RPC methods with `normalize_method()` ecosystem naming tolerance, capability-based 5-tier discovery, zero production unwrap/panic/unreachable, CONTEXT.md, workspace lint unification)
-
----
-
-## Sovereign GPU Command Submission: PFIFO Pipeline Cracking (hotSpring Exp 071, March 21, 2026)
-
-**Source:** hotSpring Exp 071, coralReef coral-driver diagnostic matrix
-**Connects to:** baseCamp #14 (Sovereign Compute Hardware), sovereign compute thesis
-
-### What Was Proven
-
-A 54-configuration diagnostic matrix systematically tests every combination of
-GPU channel initialization strategies on GV100 (Titan V) via VFIO — no kernel
-driver, no proprietary firmware at the command submission layer.
-
-**11 sovereign pipeline layers — L10 root cause definitive (Exp 122, March 25). K80 validates full stack without security (Exp 123-K):**
-
-| Layer | Component | Status |
-|-------|-----------|--------|
-| 0-1 | PCIe/VFIO + PFB/MMU (warm state) | ✅ |
-| 2-3 | PFIFO Engine + Scheduler | ✅ Re-initialized from cold |
-| 4-5 | Channel + PBDMA Context | ✅ 12 configs scheduler-accepted |
-| 6 | MMU Page Table Translation | ✅ FBHUB fault buffer config (Exp 076) |
-| 7 | SEC2 Falcon Binding + DMA | ✅ B1-B7 fixed (Exp 085), bind_stat=5. PDE sole determinant (Exp 110) |
-| 8 | WPR/ACR Payload | ✅ W1-W7 fixed (Exp 087), ACR bootstraps |
-| 9 | FECS Boot + GR Register Init | ✅ BOOTVEC + ITFEN + INTR_ENABLE (Exp 091) |
-| 9.5 | ACR DMA + Page Table Format | ✅ **PDE FIX** (Exp 104), **HS achieved** (Exp 112, SCTL=0x3002) |
-| 10 | HS Authentication | 🔴 **ROOT CAUSE DEFINITIVE** (Exp 122): WPR2 HW-locked, FWSEC inaccessible, PMU-dependent. Bypassed on Kepler (K80) |
-| 11 | GR Context Init + Shader Dispatch | 🔓 **K80 (Kepler)**: no security barriers. PIO FECS/GPCCS boot. Exp 123-K designed, hardware arriving 2026-03-26 |
-
-### Key Technical Discovery: PFIFO Re-Initialization
-
-After nouveau unbind, PFIFO is disabled and PBDMAs hold stale channel contexts.
-A 5-phase sequence reliably re-initializes in ~25ms:
-
-1. PMC-level PFIFO reset (bit 8 of register 0x200)
-2. PFIFO soft enable (0→1 transition at 0x2200)
-3. Preempt ALL active runlists via GV100_PREEMPT (0x2638)
-4. Wait for INTR_RL_COMPLETE (BIT30) acknowledgment
-5. Force-clear PBDMA operational and context-save registers
-
-This produces clean PBDMA states (`STATE=0x00000000`) ready for new channels.
-
-### Root Cause: MMU Translation Failure
-
-The PBDMA loads the GPFIFO base address (GPU VA 0x1000) from the channel context
-but returns `0xbad00200` (PBUS timeout) when attempting to fetch entries. The GPU's
-internal FBHUB MMU cannot translate the 5-level page table chain (PD3→PD2→PD1→PD0→PT0)
-to reach host system memory via the IOMMU.
-
-### Sovereign Compute Implications
-
-The diagnostic matrix proves the channel→scheduler→PBDMA pipeline works without
-any proprietary firmware or kernel driver at those layers. The remaining gap is
-purely a memory mapping issue — the GPU MMU needs correctly-formatted page tables
-that map GPU virtual addresses to IOMMU-visible host physical addresses.
-
-Once this works, GPFIFO command submission is sovereign: the host writes commands
-into DMA buffers and the GPU executes them without any driver involvement. This
-is the foundation for the full sovereign compute pipeline (FECS/GPCCS firmware
-load → shader dispatch).
-
-### Cross-Spring Relevance
-
-The PFIFO re-initialization sequence and register map are GV100-specific but the
-*pattern* — PMC domain reset, engine enable, scheduler preempt, PBDMA context
-clearing — applies to any NVIDIA Volta+ GPU and conceptually to AMD's equivalent
-(SDMA/IH for command submission). The diagnostic matrix approach generalizes to
-any GPU where the command submission path needs reverse engineering.
-
----
-
-## DRM Dispatch Dual-Track: Bypassing Naga Poisoning (hotSpring Exp 072, March 21, 2026)
-
-**Source:** hotSpring Exp 072, coralReef coral-driver AMD/NVIDIA backends
-**Connects to:** baseCamp #14 (Sovereign Compute Hardware), Exp 055 (Naga Poisoning)
-
-### Strategic Context
-
-The sovereign VFIO path (Exp 071) has 6/10 layers but is blocked at MMU page table
-translation. In parallel, coralReef's coral-driver has **fully coded DRM dispatch
-paths** for both AMD (`AmdDevice` with PM4/CS) and NVIDIA (`NvDevice` with new UAPI
-VM_INIT/VM_BIND/EXEC). DRM dispatch lets the kernel handle MMU, firmware, and
-scheduling while we supply the shader binary.
-
-### Naga Bypass → Sovereign Frontend (coral-parse)
-
-Exp 055 proved DF64 transcendentals produce zeros on ALL Vulkan backends due to a
-naga WGSL→SPIR-V codegen bug. DRM dispatch bypasses this entirely:
-
-- WGSL → coral-reef → native GPU ISA (SASS for NVIDIA, GCN/RDNA for AMD)
-- Native ISA → coral-driver DRM (`DRM_AMDGPU_CS` or `DRM_NOUVEAU_EXEC`) → GPU
-
-**Update (March 30, 2026 — Iter 71):** `coral-parse` now replaces naga entirely as
-the default frontend. Pure-Rust WGSL/SPIR-V/GLSL parsers eliminate the naga
-dependency from the default build (28 transitive deps removed). naga remains
-available as an optional Cargo feature for diff-testing. The full sovereign
-pipeline is now: WGSL → coral-parse → CoralIR → native ISA → coral-driver → GPU.
-No naga, no SPIR-V intermediate, no Vulkan. 1264 tests pass with zero naga.
-
-### Hardware Status (Updated March 21, 2026)
-
-- **AMD MI50** (GCN5/GFX906): **E2E COMPUTE DISPATCH ACHIEVED** — WGSL → coral-reef
-  → coral-driver PM4 → MI50 → 64/64 readback verified (March 21). 7 GCN5 encoding
-  bugs found and fixed: VOP3 opcode translation (GFX9 vs RDNA2 opcodes differ despite
-  identical field layout), wave64 dispatch, GLOBAL segment, SGPR workgroup IDs,
-  ACQUIRE_MEM L2 flush, s_waitcnt. **Naga bypass validated end-to-end.** MI50 has
-  1/4 rate f64 (3.5 TFLOPS, 4× faster than RDNA2). Next: DF64 Lennard-Jones kernel.
-- **NVIDIA Titan V** (Volta/SM70): new UAPI coded, blocked by missing PMU firmware
-  for `CHANNEL_ALLOC`.
-- **NVIDIA K80** (Kepler/SM35): incoming, no PMU needed, validates both DRM and
-  sovereign paths. Bridge hardware for the stack.
-
-### Key Discovery: VOP3 Opcode Architecture
-
-GFX9 (GCN5) and RDNA2 share identical VOP3a instruction word layout but use different
-opcode VALUES for VOP3-only instructions. Group A (MAD/FMA/BFE/BFI, RDNA2 320-351)
-shifts by +128 on GFX9. Group B (F64/MUL_HI) has per-instruction mapping. Every entry
-validated via `llvm-mc --mcpu=gfx906`. This is a critical lesson for multi-generation
-AMD backend support — opcode tables are not portable across generations.
-
-### Implications for Sovereign Compute Thesis
-
-DRM and sovereign are complementary, not competing:
-- DRM provides working reference for MMU page tables and command format
-- Sovereign provides vendor independence and deeper hardware understanding
-- DRM GCN5 E2E success feeds back to sovereign: PM4 format, wave64 dispatch,
-  memory model, and instruction encoding now validated against real hardware
-- K80 bridges both (unlocked firmware → sovereign works; legacy nouveau → DRM works)
+**Date:** March 13, 2026 (V114 + ludoSpring V14 update)
+**Foundation:** baseCamp papers 01–22, barraCuda v0.3.5 standalone (wgpu 28), wetSpring V114 (371 experiments, 9,886+ checks), ludoSpring V14 (66 experiments, 1349 checks, 187 tests, 93.2% coverage, deep audit complete), airSpring v0.7.5
 
 ---
 
@@ -318,9 +190,9 @@ The bottleneck is always data acquisition, not compute.
 
 ---
 
-## ludoSpring Extensions (V18, March 15, 2026)
+## ludoSpring Extensions (V14, March 14, 2026)
 
-**Source:** ludoSpring V30 — 82 experiments, 675+19 tests, 91.27% coverage, Papers 17-22 in baseCamp
+**Source:** ludoSpring V14 — 66 experiments, 1349 checks, 212 tests, Papers 17-20 in baseCamp
 **Connects to:** baseCamp #17 (Game Design as Rigorous Science), #18 (RPGPT), #19 (Games@Home), #20 (Novel Ferment Transcript), Papers 01, 12, 13, 16
 
 ### What ludoSpring Brings to the Ecosystem
@@ -331,21 +203,10 @@ alone does not — has implications for every spring that builds interactive sys
 medical UIs (healthSpring), lab dashboards (petalTongue), scientific visualization
 (all springs).
 
-V18 evolves ludoSpring into a first-class biomeOS niche citizen per the Spring-as-Niche
-Deployment Standard. The `game` capability domain (12 methods) is registered with
-semantic mappings via Neural API. Deploy graphs (`ludospring_deploy.toml`,
-`ludospring_gaming_niche.toml`) and niche YAML (`ludospring-game.yaml`) are ready
-for `biomeos deploy`. IPC handlers include `lifecycle.status` for primal discovery,
-and `capability.list` returns operation dependencies and cost estimates for the
-Pathway Learner. Clean SIGTERM shutdown with domain deregistration.
-
-V15 built the GPU dispatch and mixed hardware foundation:
-Tier A WGSL compute shaders (Perlin 2D, fBm, engagement batch, DDA raycaster) with
-CPU parity validation. metalForge evolved to capability-based routing (SubstrateKind,
-Capability enum, route(), fallback_chain — matching sibling spring pattern). NPU→GPU
-direct PCIe transfer model. toadStool JSON-RPC 2.0 dispatch client wire format.
-biomeOS DeploymentGraph (5-node topology, 60Hz budget). All modules ≥ 90% test
-coverage. Clippy pedantic + nursery clean. `#![forbid(unsafe_code)]` everywhere.
+V14 is a deep audit and quality evolution release. All 22 library modules achieve
+≥ 90% test coverage. Clippy pedantic + nursery clean. Zero files over 1000 LOC.
+Python baselines embed runtime provenance. Tolerances centralized with citations.
+Zero-copy NDJSON streaming in telemetry parser. SPDX headers on all files.
 
 V10-V13 added 22 new experiments (exp045-066) proving: ingestible ruleset architecture
 (RPGPT), distributed human computation (Games@Home), provenance trio integration,
@@ -381,10 +242,6 @@ scaffolds, cross-domain fraud unification, radiating attribution).
 | Cross-domain fraud unification | ludoSpring | exp065 | 74 | **DONE** |
 | Radiating attribution | ludoSpring + sunCloud | exp066 | 41 | **DONE** |
 | Deep audit: coverage ≥ 90% all modules | ludoSpring | 212 tests | — | **DONE (V14)** |
-| GPU dispatch: Tier A WGSL shaders | ludoSpring + barraCuda (exp030) | exp030 +8 | 24 | **DONE (V15)** |
-| metalForge capability routing | ludoSpring (metalForge/forge) | 9 tests | — | **DONE (V15)** |
-| Mixed hardware: NPU→GPU PCIe bypass | ludoSpring (exp032) | exp032 +6 | 18 | **DONE (V15)** |
-| NUCLEUS: capability routing + toadStool dispatch + biomeOS graph | ludoSpring (exp033) | exp033 +8 | 19 | **DONE (V15)** |
 
 ### Key Architectural Lessons (V10)
 
@@ -406,12 +263,11 @@ natural candidate for barraCuda GPU dispatch.
 ludoSpring has 8 Tier A modules ready for GPU promotion (pure math, embarrassingly
 parallel). The pipeline is:
 
-1. **Local validation** (complete) — all 75 experiments, 394 tests + 12 proptest, ≥ 90% coverage. Tier A WGSL shaders validated (exp030: Perlin, fBm, engagement, raycaster — 24/24 GPU parity)
-2. **Niche deployment** (complete, V18) — UniBin binary, deploy graphs, niche YAML, Neural API domain registration, `lifecycle.status`, operation dependencies + cost estimates, dispatch metrics
-3. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU. Wire format validated (exp033: JSON-RPC 2.0 compute.submit). metalForge capability routing ready for absorption.
-4. **coralReef shader compilation** — sovereign WGSL→native for game workloads
-5. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
-6. **Fraud batching** — spatial fraud detectors as GPU compute shaders (new from exp053)
+1. **Local validation** (current) — all 66 experiments on CPU, 212 tests, ≥ 90% coverage
+2. **ToadStool GPU dispatch** — noise, raycaster, metrics batch on GPU
+3. **coralReef shader compilation** — sovereign WGSL→native for game workloads
+4. **metalForge cross-substrate** — game pipeline stages dispatched to optimal hardware
+5. **Fraud batching** — spatial fraud detectors as GPU compute shaders (new from exp053)
 
 ### NUCLEUS Integration Path
 
@@ -534,27 +390,12 @@ RPGPT scaffolds evolution goals that benefit all domains:
 - **Composable IPC**: JSON-RPC wire types for live trio deployment
 - **Deployment graph**: `provenance_node_atomic.toml` (Tower + Trio)
 
-### Operational Status (May 2026 — projectNUCLEUS Provenance Pipeline)
-
-The provenance trio is now **live and exercised end-to-end** via projectNUCLEUS `provenance_pipeline.sh`. The following JSON-RPC methods were validated over direct TCP/HTTP (not Neural API routing):
-
-| Primal | Method | Status |
-|--------|--------|--------|
-| rhizoCrypt | `dag.session.create`, `dag.event.append` (`DataCreate`, `ExperimentStart`, `Result`), `dag.merkle.root` | **Operational** — 24 events, Merkle root produced |
-| loamSpine | `spine.create`, `entry.append` (`DataAnchor`, `SessionCommit`) | **Operational** — permanent ledger with BLAKE3 byte arrays |
-| sweetGrass | `braid.create` | **Operational** — ed25519-witnessed W3C PROV-O JSON-LD braid |
-| NestGate | `storage.store`, `storage.list` | **Operational** — 14 content-addressed artifacts stored |
-
-Pattern: shell script wraps `toadstool execute` with pre/post RPC calls to the trio. Real NCBI data (PRJNA488170, 11.9M reads) processed through 10 workloads with full provenance chain.
-
 ### What Needs Building
 
 | Component | Team | Priority | Status |
 |-----------|------|----------|--------|
-| BearDog signing on every operation | BearDog | High | **Model validated (exp064)** — wire format proven. sweetGrass auto-signs braids via Tower. Explicit `crypto.sign` call from wrapper not yet exercised |
+| BearDog signing on every operation | BearDog | High | **Model validated (exp064)** — wire format proven, needs live IPC swap |
 | Radiating attribution calculator | sweetGrass + sunCloud | High | **Model validated (exp066)** — decay, role weighting, conservation proven |
-| Native `--archive` in toadStool | toadStool | High | Currently external wrapper; should be native TOML `[provenance]` section |
-| Hex string acceptance in loamSpine | loamSpine | Medium | `data_hash`/`merkle_root` require `[u8; 32]` byte arrays, not hex strings |
 | Public chain anchor entry type | loamSpine | Medium | Pending |
 | Owner inventory query | loamSpine | Medium | Pending |
 | Cross-session derivation links | rhizoCrypt | Medium | Pending |
@@ -627,7 +468,7 @@ This validates the core thesis from Paper 18 (RPGPT): anti-cheat IS chain-of-cus
 | wetSpring pipeline adoption | wetSpring | High | Adapt exp062 SampleType/ProcessingStep to field genomics |
 | healthSpring clinical adoption | healthSpring | High | Adapt exp063 RecordType to PK/PD/microbiome/biosignal/TRT tracks |
 | BearDog ZK circuit | BearDog | Medium | Full zero-knowledge proofs for exp063 access control |
-| Cross-institution provenance | songbird + biomeOS | Medium | Multi-lab / multi-provider consent chains. Songbird v0.2.1-wave64: 14 JSON-RPC methods, `normalize_method()` for naming tolerance, capability-based crypto discovery |
+| Cross-institution provenance | songbird + biomeOS | Medium | Multi-lab / multi-provider consent chains |
 | FHIR/HL7 interop | healthSpring + loamSpine | Medium | Map consent certificates to FHIR resources |
 | ISO 17025 compliance matrix | wetSpring + loamSpine | Medium | Formal requirement → trio operation mapping |
 | Patient portal | petalTongue | Low | Consent status + access history visualization |
@@ -645,154 +486,3 @@ This validates the core thesis from Paper 18 (RPGPT): anti-cheat IS chain-of-cus
 | 17 (Game Design) | Same provenance patterns, different domain vocabulary (exp065) |
 | 18 (RPGPT) | Anti-cheat = chain-of-custody proven computationally (exp065) |
 | 20 (NFT Economics) | Every sample and record is a Novel Ferment Transcript |
-
----
-
-## airSpring V0.9.0 Audit Execution Learnings (March 18, 2026)
-
-**Source:** airSpring V0.9.0 — 87 experiments, 894 lib + 299 integration tests, comprehensive audit execution
-**Connects to:** baseCamp #03 (Precision Microbiome), #06 (No-Till Anderson), #08 (NPU IoT), #12 (Immunological Anderson), #16 (Anaerobic-Aerobic QS)
-
-### Cast Module Pattern — Upstream Absorption Candidate
-
-airSpring built a `cast` module with 9 type-safe numeric cast helpers (`usize_f64`, `f64_usize`, `u32_usize`, `u64_usize`, `u64_f64`, etc.) that replace raw `as` casts throughout the library. Combined with `#![deny(clippy::cast_precision_loss, clippy::cast_possible_truncation, clippy::cast_sign_loss)]` in `lib.rs`, this enforces safe casting at compile time while allowing pragmatic raw casts in validation binaries via Cargo.toml `[lints]`.
-
-**Cross-ecosystem relevance:** Every spring has the same problem. neuralSpring has `safe_cast` (S162), healthSpring has `cast_helpers`. This is a strong barraCuda upstream absorption candidate — centralize once, all springs lean on it.
-
-### Module Refactoring Pattern — Domain-Responsibility Split
-
-`soil_moisture.rs` (672 LOC) was refactored into 4 submodules:
-
-| Submodule | Responsibility | LOC |
-|-----------|---------------|-----|
-| `topp.rs` | Topp equation (permittivity to water content) | 127 |
-| `texture.rs` | USDA soil texture classification + hydraulic props | 179 |
-| `saxton_rawls.rs` | Saxton and Rawls 2006 pedotransfer functions | 216 |
-| `water.rs` | PAW, SWD, irrigation trigger calculations | 90 |
-
-Public API unchanged — `mod.rs` re-exports everything. Tests stay with their code. This is the correct pattern for splitting large modules across all springs: split by domain responsibility, not just line count.
-
-### Three-Tier Discovery Pattern — Standard for All Primals
-
-All primal discovery now follows: (1) environment override, (2) named socket scan, (3) capability probe. This eliminates hardcoded socket paths from deployment manifests and enables zero-configuration primal discovery via biomeOS socket resolution. Applied to: coralReef (shader), Squirrel (inference), petalTongue (visualization), toadStool (compute), nestGate (data).
-
-### Benchmark JSON Provenance — Traceable Validation
-
-Hardcoded Python baseline values were migrated from Rust source code to benchmark JSON files with provenance metadata (`baseline_script`, `baseline_commit`, `date`, `tolerance`). This makes every validation target traceable to the exact Python run that produced it.
-
-### CI Lint Strategy — Cargo.toml as Single Source
-
-Cargo.toml `[lints.clippy]` should be the single source of lint configuration. CLI flags like `-W clippy::pedantic` conflict with specific `allow` overrides. airSpring's CI now uses `cargo clippy --all-targets -- -D warnings` (no `-W` flags), letting Cargo.toml control all lint levels.
-
-### What Papers Gain
-
-| Paper | What V0.9.0 Adds |
-|-------|-----------------|
-| #03 (Microbiome) | soil_moisture module now cleanly separated for orchard theta(t) extensions |
-| #06 (No-Till) | Benchmark provenance pattern for all Anderson coupling expected values |
-| #08 (NPU IoT) | petalTongue discovery enables real-time NPU dashboard visualization |
-| #12 (Immunological) | Cast safety in GpuDiversity and CytokineBrain numerical paths |
-| #16 (Anaerobic QS) | Three-tier discovery for cross-spring soil O2 zonation pipeline |
-
-## airSpring V0.10.0 Cross-Ecosystem Absorption Learnings (March 18, 2026)
-
-### MCP Tool Definitions — Standard Pattern for All Springs
-
-All springs should expose typed MCP tool definitions for Squirrel AI integration.
-Pattern: `McpTool` struct with `name`, `description`, `input_schema`, plus `list_tools()`
-and `tool_to_method()` dispatch. airSpring exposes 10 ecology tools; wetSpring exposes 8
-life science tools. The struct and test patterns are identical — candidate for upstream
-promotion to `barracuda::ipc::mcp`.
-
-### Python Baseline Provenance Registry — Structured Traceability
-
-`provenance.rs` with `PythonBaseline` records provides compile-time-checked provenance
-for every validation binary. Categories: PythonParity, GpuParity, Analytical, Published.
-Canonical commit epochs prevent drift. Both airSpring (11 records) and wetSpring (14 records)
-use this pattern — candidate for shared upstream type.
-
-### Kahan Compensated Summation — Delegate to barraCuda
-
-`barracuda::shaders::precision::cpu::kahan_sum()` provides O(1) accumulation error.
-Springs should use `eco::numerics::kahan_sum()` wrappers rather than `Iterator::sum()`
-for precision-critical aggregation paths.
-
-### ecoBin deny.toml — 14 C-Dependency Bans
-
-Template for all springs: ban openssl-sys, libz-sys, zstd-sys, curl-sys, ring, native-tls,
-libgit2-sys, libssh2-sys, bzip2-sys, lzma-sys, zlib-ng-sys, libdbus-sys, libsqlite3-sys.
-Plus `unlicensed = "deny"` in `[licenses]`.
-
-### Lint Convention Clarification
-
-- `#[expect(reason)]` ONLY where the lint is **known** to fire (compile error if not)
-- `#[allow(reason)]` for blanket test module suppressions (unwrap_used, expect_used)
-
-### API Safety: assert! → Result in Public Libraries
-
-All public library functions that validate input should return `Result<T, Error>`, not panic.
-Pattern: `wind_speed_at_2m()` evolved from `assert!` to `Result<f64, InvalidInput>`.
-
-### NaN-Safe Float Ordering
-
-`f64::total_cmp` replaces `partial_cmp().unwrap_or(Equal)` everywhere.
-
-### What Papers Gain from V0.10.0
-
-| Paper | What V0.10.0 Adds |
-|-------|-----------------|
-| #01 (FAO-56 ET₀) | MCP tool `airspring_et0` enables Squirrel AI to compute ET₀ interactively |
-| #03 (Microbiome) | `airspring_diversity` MCP tool for ecology-aware AI interpretation |
-| #04 (Water Balance) | Provenance registry tracks exact Python baseline commit for WB validation |
-| #06 (No-Till) | `airspring_dual_kc` MCP tool for cover crop coefficient queries |
-| #09 (Richards) | `airspring_richards` MCP tool + kahan_sum for PDE accumulation precision |
-| #14 (Climate Scenarios) | `airspring_spi_drought` MCP tool for drought analysis |
-
----
-
-## SovereignInit Pipeline: nouveau Replaced (hotSpring Exp 164-165, April 8, 2026)
-
-**Source:** hotSpring Exp 164-165, coralReef coral-driver `sovereign_init.rs`
-**Connects to:** baseCamp #14 (Sovereign Compute Hardware), PFIFO section above, DRM dual-track section
-
-### What Was Proven
-
-Full compute dispatch (f32, f64, multi-workgroup, Lennard-Jones forces) via DRM on Titan V (Exp 164, 5/5 E2E phases pass). Then: **every nouveau initialization subsystem replaced with pure Rust** (Exp 165).
-
-### SovereignInit 8-Stage Pipeline
-
-`NvVfioComputeDevice::open_sovereign(bdf)` orchestrates:
-
-| Stage | Replaces | What |
-|-------|----------|------|
-| 0 | `nouveau_devinit` | HBM2/VRAM training via VBIOS DEVINIT interpreter. Auto cold/warm detection. |
-| 1 | `mc_init()` | PMC engine gating. |
-| 2 | `gr_init()` topology | GPC/TPC/SM/FBP/PBDMA fuse-read enumeration. |
-| 3 | `fb_init()` | PFB/FBPA memory controller configuration. |
-| 4 | `secboot + acr` | `FalconBootSolver` — 15 strategies for SEC2→ACR→FECS/GPCCS chain. |
-| 5 | `gr_init()` registers | Standalone `apply_gr_bar0_init()` + FECS method probe. |
-| 6 | `fifo_init()` | PBDMA/runlist enumeration, engine→runlist binding. |
-| 7 | `gr_init_ctx()` | Optional. FECS exception config, context alloc, golden save. |
-
-### Firmware-as-Ingredient Architecture
-
-GPU falcon firmware (PMU, SEC2, FECS, GPCCS) is treated as **ingredients** — proprietary binary blobs loaded and sequenced by Rust, executed by hardware. The Rust driver manages all orchestration; hardware executes its own code. This is the GPU equivalent of how toadStool interfaces with motherboard BIOS/UEFI.
-
-`Hbm2Controller` typestate pipeline (`Configured → Training → Trained`) with `TrainingBackend` enum: VbiosInterpreter (current), DifferentialReplay (future), FalconUpload (future). Ember RPC `ember.gpu.train_hbm2` wraps training in fork-isolation for crash safety.
-
-### Cross-Spring Impact
-
-- **coralReef**: Primary absorption target. GR init functions extracted to standalone module-level fns (shared by DRM + VFIO paths). `FalconBootSolver` ready for fleet deployment.
-- **toadStool**: Firmware probe pattern aligns (`FirmwareInventory::probe()` ↔ `FalconProbe::discover()`). HBM2 training is GPU equivalent of BIOS POST.
-- **barraCuda**: `open_sovereign()` returns compute-ready device for direct dispatch. SM auto-detection from topology discovery.
-- **All springs**: 165+ experiments in fossil record. Sovereign compute on NVIDIA proven end-to-end. AMD DRM already proven (6/6 pass). Cross-vendor pipeline is next.
-
-### Remaining Blockers
-
-1. Cold-boot Titan V hardware validation (pipeline implemented, needs real run)
-2. HBM2 PHY calibration data for VBIOS interpreter
-3. GSP RPC client for Turing+ (pattern known, transport differs)
-
-### Handoff Reference
-
-Full handoff: `ecoPrimals/infra/wateringHole/handoffs/HOTSPRING_SOVEREIGN_INIT_PIPELINE_HANDOFF_APR08_2026.md`

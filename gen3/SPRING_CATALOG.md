@@ -101,8 +101,8 @@ The springs are organized into two tiers:
 ### 1.3 wetSpring — Life Science & Analytical Chemistry
 
 **Domain**: 16S metagenomics, LC-MS feature extraction, PFAS screening, microbial ecology
-**Grade**: V127 — 47 CPU + 47 GPU bio modules, 1 runtime dependency (flate2)
-**Checks**: 5,707+ validation checks across 376 experiments. 1,443+ Rust tests (0 failures), 214 named tolerances, 354 binaries (306 validate + 23 benchmark + 25 other). 63/63 papers reproduced, 46 at full CPU+GPU+metalForge. barraCuda v0.3.5 (150+ primitives consumed). IPC resilience (`RetryPolicy` + `CircuitBreaker`), 4-format capability parsing, batch Anderson spectral module, stable numerics (`log_sum_exp`, Kahan summation). 24 capabilities across 16 domains. JSON-RPC 2.0 server with batch requests and notifications. Zero local WGSL, zero unsafe, zero TODO/FIXME, zero mocks in production. Leverage guide: `wateringHole/WETSPRING_LEVERAGE_GUIDE.md`.
+**Grade**: V86 — 30 sovereign Rust modules, 1 runtime dependency
+**Checks**: 5,421+ validation checks (1,578 GPU) across 260+ experiments. 1,247 Rust tests, 92 named tolerances, 189 binaries (174 validate + 15 benchmark). 52/52 papers, 50/50 three-tier. ToadStool S68, 79 primitives consumed. 10 new Python baselines (Track 4 soil + NPU spectral). Cross-spring evolution validated (23/23 checks across 5 Springs). ESN bridge to ToadStool esn_v2 (BioEsn + multi-head). Deep debt elimination: all modules under 652 lines, 0 magic numbers, 0 unsafe, 0 mocks in production. Specs: `CROSS_SPRING_EVOLUTION.md`.
 **Faculty**: Christopher Waters (MMG, MSU — undergrad professor), Kevin Liu (CMSE, MSU — master's professor), Jesse Cahill & Chuck Smallwood (Sandia), A. Daniel Jones (BMB/Chemistry, MSU — PFAS job), Rika Anderson (Biology, Carleton — vent metagenomics, pangenomics, phage ecology), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — cytokine signaling, AD, dose-response), Erika Lisabeth (ADDRC Director, MSU — HTS, drug repurposing, EphA3), Richard Neubig (Drug Discovery Director, MSU — GPCR, Rho/MRTF/SRF skin fibrosis)
 **Repository**: git@github.com:syntheticChemistry/wetSpring.git
 **License**: AGPL-3.0
@@ -140,29 +140,53 @@ The springs are organized into two tiers:
 
 ### 1.4 groundSpring — Measurement Noise & Uncertainty
 
-**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems, spectral theory, quasispecies, rare biosphere, tissue Anderson, warm dense matter, ESN regime classification
-**Grade**: Phase 0 (Python) + Phase 1 (Rust) + Phase 2 (GPU) + Phase 3 (Hardware) + Phase 4 (NUCLEUS) — V104
-**Checks**: 395/395 Rust validation checks (all PASS), 936 Rust tests, 287 Python tests, 102 barraCuda delegations (61 CPU + 41 GPU)
-**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization, Almost-Mathieu, transport, band edge), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution, drift, uncertainty bridge, rare biosphere), Andrea J. Gonzales (Paper 12 — immunological Anderson, tissue geometry, drug scoring)
+**Domain**: Sensor noise characterization, inverse problems, error propagation, sensing systems, spectral theory, quasispecies, rare biosphere, jackknife, freeze-out
+**Grade**: Phase 0 + Phase 1 (Rust) complete across 8 scientific domains
+**Checks**: 236/236 Rust validation checks (all PASS), 280 Rust tests, 21/21 mathematical parity (Python == Rust)
+**Faculty**: Alexei Bazavov (CMSE + Physics, MSU), Christopher Waters (MMG, MSU), Kevin Liu (CMSE, MSU), Emily Dolson (CSE, MSU), Ilya Kachkovskiy (Math, MSU — Anderson localization, Almost-Mathieu, transport, band edge), Rika Anderson (Biology, Carleton — stochastic vs deterministic evolution, drift, uncertainty bridge, rare biosphere)
 **Repository**: git@github.com:syntheticChemistry/groundSpring.git
-**License**: AGPL-3.0-or-later
+**License**: AGPL-3.0
 
-**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains. 37 Rust modules across 5 pillars: Signal vs Noise, Inverse Problems, Sensing Systems, Temporal Dynamics, Spatial Propagation. 102 barraCuda delegations cover stats, spectral, ops, linalg, optimize, bio, and ESN domains. metalForge provides cross-substrate dispatch (CPU, GPU via RTX 4070/Titan V, NPU via AKD1000).
+**What it validates**: groundSpring establishes the uncertainty budget for every other spring. It decomposes measurement error into correctable bias and irreducible noise, quantifies which inputs dominate output uncertainty, and demonstrates how noise propagates through inverse problems. The framework — decompose, identify dominant source, quantify noise floor — is universal across domains. Phase 1 adds spectral theory (Anderson, Almost-Mathieu, band edge), transport, quasispecies, rare biosphere, jackknife, freeze-out, and spectral reconstruction.
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| 0 (Python) | 29 experiments across 5 pillars | 287 tests | Unified noise characterization framework |
-| 1 (Rust) | 35 experiments across 8 domains | 395/395 | 37 library modules, 102 barracuda delegations |
-| 2 (GPU) | metalForge cross-substrate | 12 binaries | RTX 4070, Titan V, AKD1000 NPU validated |
-| 4 (NUCLEUS) | biomeOS niche deployment | 4 binaries | measurement.* domain, JSON-RPC 2.0, capability discovery |
+| 0 (Python) | 5 experiments across 4 domains | 71/71 | Unified noise characterization framework |
+| 1 (Rust) | 21 experiments across 8 domains, dual-mode CI | 236/236 | 24 library modules, 27 barracuda delegations (22 CPU + 5 GPU) |
 
-**BarraCuda delegation**: 102 active (61 CPU + 41 GPU). 1 Tier B remaining (PRNG alignment). All Tier C absorbed. P1 batch primitives ready for absorption (uncertainty_budget, regime_classification, Tikhonov defaults, freeze-out scan).
+**Experiment catalog**:
 
-**Papers completed**: 7 faculty, 30+ papers reproduced. Waters (signal specificity, bistable, multi-signal QS), Liu (RAWR, resampling convergence), Kachkovskiy (Anderson, Almost-Mathieu, transport, band edge), Dolson (quasispecies), R. Anderson (drift, uncertainty bridge, rare biosphere), Bazavov (jackknife, freeze-out, spectral recon), Gonzales (tissue Anderson, drug scoring).
+| # | Domain | Checks | Key Finding |
+|---|--------|--------|-------------|
+| 001 | Agricultural sensors | 36 | EC5 bias-dominated (77%); site calibration removes most error |
+| 002 | ERA5 observation gap | 13 | Representation noise dominates model-observation gap |
+| 003 | FAO-56 ET₀ error propagation | 15 | Humidity dominates at 66% of total variance |
+| 004 | Sequencing noise rarefaction | 15 | Genus saturation at 5,000 reads; phyla robust at 100 reads |
+| 005 | Seismic source inversion | 9 | ±2km horizontal, ±8.5km depth from ±0.5s noise |
+| 006 | Signal specificity | 12 | Waters bistable, multi-signal QS |
+| 007 | RAWR resampling | 11 | Liu resampling convergence |
+| 008 | Anderson localization | 8 | Kachkovskiy 1D/2D/3D |
+| 009 | Almost-Mathieu localization | 8 | Kachkovskiy spectral theory |
+| 010 | Bistable switching | 9 | Waters ODE dynamics |
+| 011 | Multi-signal QS | 8 | Waters quorum sensing |
+| 012 | Spin chain transport | 18 | Kachkovskiy transport |
+| 013 | Resampling convergence | 8 | Liu RAWR |
+| 014 | Drift vs selection | 7 | R. Anderson evolution |
+| 015 | Uncertainty bridge | 8 | R. Anderson |
+| 016 | Rare biosphere | 10 | R. Anderson |
+| 017 | Quasispecies threshold | 6 | Dolson |
+| 018 | Band edge structure | 10 | Kachkovskiy |
+| 019 | Jackknife estimation | 9 | Bazavov |
+| 020 | Freeze-out inverse | 8 | Bazavov |
+| 021 | Spectral reconstruction | 8 | Bazavov |
+
+**Papers completed**: Waters (signal specificity, bistable, multi-signal QS), Liu (RAWR, resampling convergence), Kachkovskiy (Anderson, Almost-Mathieu, transport, band edge), Dolson (quasispecies), R. Anderson (drift, uncertainty bridge, rare biosphere), Bazavov (jackknife, freeze-out, spectral recon).
 
 **Papers queued**: Remaining candidates. See `groundSpring/specs/PAPER_REVIEW_QUEUE.md`.
+
+**BarraCuda gaps NOW**: FFT (resolved in hotSpring), batched_multinomial (Tier C), eigenvector solver (Tier C), grid search GPU (now implemented CPU). Most gaps resolved. **Cholesky solve batch** is the main NEW gap.
 
 **Cross-spring impact**: groundSpring Exp 003 told airSpring that humidity sensors matter most. Exp 004 told wetSpring that 5,000 reads is the genus saturation depth. Exp 001 told neuralSpring how much sensor noise to expect in transfer learning. Spectral theory (Anderson, Almost-Mathieu, band edge) shared with hotSpring and wetSpring. Transport, quasispecies, rare biosphere feed wetSpring and neuralSpring. **Bazavov experiments (019-021) connect directly to hotSpring lattice QCD**: freeze-out inverse validates thermodynamic observable extraction, spectral reconstruction validates ill-posed inversion from Euclidean correlators, and jackknife provides the standard error estimation used in every lattice QCD publication. Combined pipeline: hotSpring (GPU simulation) → groundSpring (inverse problem + error bars) → neuralSpring (surrogate acceleration).
 
@@ -186,7 +210,7 @@ The springs are organized into two tiers:
 
 **Domain**: Neural surrogates, transformers, sequence models, transfer learning, scholarly reproduction, structure prediction (coralForge)
 **Grade**: Phase 0 → 0+ → 0++ → Rust → BarraCuda CPU → GPU Tensor → metalForge WGSL → Pipeline → Cross-dispatch → Mixed-hardware → Multi-GPU → coralForge. **Most complete validation pipeline of any spring.**
-**Checks**: 397/397 Python + 4000+ Rust+GPU = **4,500+ total** (1128 lib + 61 playGround + 73 forge tests, 260 binaries, 220/220 validate\_all, zero C deps via Tower Atomic, OrExit<T> zero-panic, deny.toml, structured logging, structured IpcError, typed compute.dispatch)
+**Checks**: 397/397 Python + 4000+ Rust+GPU = **4,500+ total** (1128 lib + 61 playGround + 73 forge tests, 260 binaries, 220/220 validate\_all, zero C deps via Tower Atomic, OrExit<T> zero-panic, deny.toml, structured logging)
 **Faculty**: Emily Dolson (CSE, MSU — master's professor), Kevin Liu (CMSE, MSU — master's professor), Christopher Waters (MMG, MSU — undergrad professor), Alexei Bazavov (CMSE + Physics, MSU), Ilya Kachkovskiy (Math, MSU — spectral/optimization landscape), Rika Anderson (Biology, Carleton — pangenomics, constrained evolution empirics), Andrea J. Gonzales (Pharmacology & Toxicology, MSU — Hill equation, PK modeling, CytokineBrain)
 **Repository**: git@github.com:syntheticChemistry/neuralSpring.git
 **License**: AGPL-3.0
@@ -221,41 +245,37 @@ The springs are organized into two tiers:
 
 ---
 
-### 1.6 healthSpring — Human Health: PK/PD, Microbiome, Biosignal, Endocrinology, Comparative Medicine, Drug Discovery
+### 1.6 healthSpring — Human Health: PK/PD, Microbiome, Biosignal, Endocrinology
 
-**Domain**: Pharmacokinetics, dose-response, population modeling, gut microbiome analytics, ECG biosignal processing, testosterone replacement therapy, endocrinology, comparative medicine, drug discovery, NLME
-**Grade**: V27 — 7 tracks, 73 experiments, 601 tests, Tier 0+1+2+3 complete
-**Checks**: 601 Rust tests + 194 Python cross-validation = **795 healthSpring checks**
+**Domain**: Pharmacokinetics, dose-response, population modeling, gut microbiome analytics, ECG biosignal processing, testosterone replacement therapy, endocrinology
+**Grade**: V3 — 4 tracks, 17 experiments, Tier 0 + Tier 1 complete
+**Checks**: 192 Python + 179 binary + 103 lib = **474 healthSpring checks** (1,162+ including upstream)
 **Faculty**: Andrea J. Gonzales (MSU Pharmacology & Toxicology), Dr. Charles Mok (Allure Medical — clinical TRT reference)
 **Repository**: git@github.com:syntheticChemistry/healthSpring.git
 **License**: AGPL-3.0-or-later
 
-**What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis. V25 extends to comparative medicine (species-agnostic PK, cross-species Anderson, canine AD models) and drug discovery (MATRIX scoring, ADDRC HTS, compound screening, iPSC validation). V27 absorbs ODE→WGSL codegen from wetSpring (3 `OdeSystem` impls via barraCuda `BatchedOdeRK4`), uncertainty quantification from groundSpring (bootstrap/jackknife/bias-variance/Monte Carlo), and hardens IPC cast safety.
+**What it validates**: healthSpring proves the ecoPrimals math infrastructure extends to human clinical applications. PK/PD models validated against canine data in neuralSpring transfer directly to human therapeutics via allometric scaling. The Anderson localization framework from wetSpring/hotSpring applies to gut microbiome colonization resistance. The "claim verification pipeline" — extracting quantifiable claims from clinical practice literature (Mok 2018) and validating against published registry data (Saad, Sharma, Kapoor) — is a novel methodology. The testosterone-gut axis (Exp037) bridges microbiome diversity and endocrine outcomes via Anderson localization, validating the cross-track hypothesis.
 
 **Phase inventory**:
 
 | Phase | What | Checks | Key Result |
 |-------|------|--------|------------|
-| Tier 0 (Python) | 73 experiments across 7 tracks | 194 | All controls pass |
-| Tier 1 (Rust CPU) | healthSpring ecoPrimal crate (pkpd, microbiome, biosignal, endocrine, comparative, discovery, NLME) | 601 | All lib + binary tests pass |
-| Tier 2 (GPU) | 6 WGSL shaders + 3 ODE→WGSL codegen systems, fused pipeline | 42/42 parity | GPU scaling confirmed (Exp085) |
-| Tier 3 (metalForge) | NUCLEUS dispatch with PCIe P2P bypass | 35/35 | Mixed hardware validated (Exp087) |
+| Tier 0 (Python) | 17 experiments across 4 tracks | 192/192 | All controls pass |
+| Tier 1 (Rust CPU) | healthspring-barracuda crate (pkpd, microbiome, biosignal, endocrine) | 282 | 103 lib tests + 179 binary checks |
+| Tier 2 (GPU) | Planned — population PK, Anderson eigensolve, FFT biosignal | — | Pending barraCuda absorption |
 
 **Track inventory**:
 
 | Track | Domain | Experiments | Key Models |
 |-------|--------|-------------|------------|
-| 1 — PK/PD | Pharmacokinetics, dose-response | Exp001-006, 077 | Hill equation, 1/2-compartment PK, PBPK, allometric mAb, population Monte Carlo, Michaelis-Menten |
-| 2 — Microbiome | Gut ecology, colonization resistance | Exp010-013, 078-080 | Shannon/Simpson/Pielou/Chao1, Anderson gut lattice, C. diff, FMT, antibiotics, SCFA, serotonin |
-| 3 — Biosignal | ECG, HRV, SpO2, EDA, arrhythmia | Exp020-023, 081-082 | Pan-Tompkins, HRV time/freq, PPG SpO2, EDA stress, multi-channel fusion |
-| 4 — Endocrinology | Testosterone PK, TRT outcomes | Exp030-038 | IM/pellet depot PK, age decline, metabolic/CV/diabetes outcomes, testosterone-gut axis |
-| 5 — NLME | Population PK estimation | Exp075-076 | FOCE/SAEM (sovereign NONMEM/Monolix), NCA, CWRES/VPC/GOF diagnostics |
-| 6 — Comparative Medicine | Cross-species health | Exp100-106 | Species-agnostic PK, cross-species Anderson, canine AD, feline hyperthyroid |
-| 7 — Drug Discovery | Compound screening | Exp090-094 | MATRIX scoring, ADDRC HTS, iPSC validation, Rho/MRTF fibrosis |
+| 1 — PK/PD | Pharmacokinetics, dose-response | Exp001-005 | Hill equation, 1/2-compartment PK, allometric mAb, population Monte Carlo |
+| 2 — Microbiome | Gut ecology, colonization resistance | Exp010-012 | Shannon/Simpson/Pielou/Chao1, Anderson gut lattice, C. diff resistance score |
+| 3 — Biosignal | ECG detection | Exp020 | Pan-Tompkins QRS, derivative/squaring/MWI pipeline |
+| 4 — Endocrinology | Testosterone PK, TRT outcomes | Exp030-037 | IM/pellet depot PK, age decline, metabolic/CV/diabetes outcomes, population TRT Monte Carlo (10K patients), testosterone-gut axis (cross-track 2×4) |
 
-**Upstream dependencies**: wetSpring (diversity, Anderson lattice, ODE→WGSL pattern), neuralSpring (Hill/IC50, PK models, allometric scaling), groundSpring (uncertainty budget — bootstrap, jackknife, bias-variance)
+**Upstream dependencies**: wetSpring (diversity, Anderson lattice), neuralSpring (Hill/IC50, PK models, allometric scaling), groundSpring (planned uncertainty budget)
 
-**Participates in**: gen3/baseCamp Paper 13, ToadStool validation (GPU compute live), NestGate (NCBI data pipeline), biomeOS NUCLEUS (distributed pipeline live), metalForge (PCIe P2P dispatch)
+**Participates in**: gen3/baseCamp Paper 13, ToadStool validation (planned GPU compute), NestGate (planned NCBI data pipeline), biomeOS NUCLEUS (planned distributed pipeline)
 
 ---
 
@@ -297,8 +317,8 @@ The springs are organized into two tiers:
 
 | Metric | Value |
 |--------|-------|
-| Total springs | 7 (5 established + healthSpring + ludoSpring) |
-| Total quantitative checks | **12,510+** passing (11,161 established + 795 healthSpring + 554 ludoSpring) |
+| Total springs | 7 (all public, AGPL-3.0) |
+| Total quantitative checks | **12,189+** passing (11,161 established + 474 healthSpring + 554 ludoSpring) |
 | Scientific domains covered | Physics, agriculture, biology, chemistry, geophysics, ML, neuromorphic computing, **human health (PK/PD, microbiome, biosignal, endocrinology)**, **game science (HCI, PCG, interactive systems)** |
 | Papers reproduced | 70+ (published, peer-reviewed, across all springs) |
 | Papers queued for review | 60+ candidates across all springs + 8 Mok-derived experiments |
