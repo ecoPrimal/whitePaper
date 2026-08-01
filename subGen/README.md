@@ -1,7 +1,7 @@
 # subGen — Concrete Reality
 
 **Status**: Living documentation — the project's operational truth
-**Wave**: 155m | **Date**: Jul 30, 2026
+**Wave**: 155n post-threshold | **Date**: Aug 1, 2026
 
 ---
 
@@ -37,13 +37,38 @@ here to gen5 success.
    tracks. Valve/Inkfish (email SENT Jul 29), Gonzales (producing), Jones
    (emeritus), Barrick (USB delivered), ABG (producing), MSU faculty.
 
-### Layer 3 — Public Surface Strategy
+### Layer 2.5 — Platform Identity
+
+12. **[ECOPRIMAL_RESUME.md](ECOPRIMAL_RESUME.md)** — The ecoPrimals platform resume.
+    What the project has built, proven, and can do — published by ecoPrimal, not by
+    the human architect. Infrastructure metrics, science data evidence, portability
+    proof, architecture summary, verification instructions. Sendable to collaborators,
+    grant panels, and industry contacts as the project's own credential.
+
+### Layer 3 — Gardens (Application Layer)
+
+11. **[SOVEREIGN_IDENTITY_GARDEN.md](SOVEREIGN_IDENTITY_GARDEN.md)** — Biometric-anchored
+    sovereign identity for unhoused populations. Zero-knowledge attestations replace
+    repeated intake. The person IS the credential — fingerprints survive camp sweeps,
+    arrests, and winters. No central database. No honeypot. Maps directly to bearDog,
+    rhizoCrypt, sweetGrass, loamSpine, and BTSP. Explains why silicon deism matters:
+    the system must run on any device at any agency.
+
+### Layer 4 — Silicon Deism Hardware
+
+10. **[SILICON_DEISM_HARDWARE_GUIDE.md](SILICON_DEISM_HARDWARE_GUIDE.md)** — Hardware
+    acquisition and familiarization guide for proving silicon deism across 3 ISAs
+    (x86_64, ARM64, RISC-V), 3 OS families (Linux, Windows, macOS), and 3 deployment
+    topologies (LAN, WAN cloud, WAN friend). Board comparisons, specs, pricing,
+    and pre-hardware familiarization tasks.
+
+### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as
    subGen presented to the world. Live science first, pseudoSpore grab pattern,
    inter/intra membrane site architecture, Wave 155m update plan.
 
-### Layer 4 — Security Architecture (Realized)
+### Layer 6 — Security Architecture (Realized)
 
 4. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — Seven-layer security model
    as deployed: network binding → BTSP → MethodGate → threat detection →
@@ -83,24 +108,27 @@ The gen/ docs are the *map*. subGen is the *GPS position*.
 
 ---
 
-## What's New at 155m (vs 155i)
+## What's New at 155n post-threshold (vs 155m)
 
-Wave 155m updates reflect the **gen4→gen5 boundary crossing**:
+Wave 155n post-threshold reflects the **gen5 thesis proven on live data**:
 
-- **THRESHOLDS_CROSSED** — gen4 marked COMPLETE. Infrastructure readiness 100%.
-  Provenance 7/7 DONE. 3 NUCLEUS gates. biomeOS v4.50. Sovereign CI live.
-- **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. 6 remaining steps. Timeline shortened.
-  Step 3 (tideGlass Phase 0) is now sole bottleneck. Can start immediately.
-- **OUTREACH_STATUS** — Inkfish email sent Jul 29 (response window active)
-- Security docs reflect 155m state (3 NUCLEUS gates, v4.50 lifecycle, 34 depot bins)
+- **THRESHOLDS_CROSSED** — gen5 thesis PROVEN. First real science data (PDB+ChEMBL 33.79GB)
+  ingested through full CAS+Provenance pipeline. NUCLEUS on 5 gates. southGate portability
+  proven (22/22 PASS). 7 glacial goals COMPLETE.
+- **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. Step 3 (tideGlass Phase 0) UNBLOCKED —
+  ChEMBL 37 + PDB structures now in CAS. Data available for tideGlass modules.
+- **SOVEREIGN_IDENTITY_GARDEN** — G24-G28. Gate-first phasing (cameras/sensors
+  before phone deployment). Application-layer garden on primals.
+- Security docs still valid. southGate 22/22 proves the BTSP thesis without WireGuard.
 
 The original subGen (Wave 150x) documented security architecture only.
 Wave 155i added thresholds, critical path, outreach.
-Wave 155m marks the **gen4 completion checkpoint** — infrastructure is done.
+Wave 155m marked gen4 completion. Wave 155n proves gen5 on live data.
 
 ---
 
-*subGen Wave 155m — 14 documents. Security architecture + thresholds + critical
-path + outreach + public surface strategy + postPrimordial security docs. gen4
-COMPLETE. Infrastructure 100%. Science pipeline + public surface are the remaining
-work for gen5.*
+*subGen Wave 155n — 17 documents. gen5 THESIS PROVEN ON LIVE DATA.
+5 NUCLEUS gates. 7 glacial goals COMPLETE. 31 tracked. 33.79 GB real science
+data at 100% provenance. Portability proven (southGate). Peptidoglycan DNS
+fixed. Springs+gardens active. Science pipeline + public surface + gardens
+are the remaining work for gen5.*

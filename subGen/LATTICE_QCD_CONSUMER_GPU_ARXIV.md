@@ -75,6 +75,15 @@ and β = 2N/g² is the inverse coupling. Hybrid Monte Carlo (HMC) with leapfrog
 integration generates gauge configurations. Metropolis accept/reject ensures
 detailed balance.
 
+**Momentum generation**: Initial HMC momenta are sampled on CPU from a
+standard normal distribution and transferred to GPU for the leapfrog
+trajectory. This `cpu_mom` approach was adopted after identifying a
+systematic bias in the GPU PRNG polyfill that caused plaquette values
+to diverge from the CPU reference. Gauge link updates, force computations,
+and the Metropolis step remain fully GPU-accelerated. The overhead of
+CPU momentum generation is negligible relative to the leapfrog integration
+(< 0.1% of trajectory time at 16⁴ volume).
+
 ### 2.2 DF64 Precision
 
 Consumer GPUs (GeForce, Radeon) allocate far fewer FP64 ALUs than FP32 — typically
@@ -211,6 +220,11 @@ vs ~$0.03 amortized on sovereign hardware.
 - Accept rates at larger volumes may require step-size tuning for
   production physics. Current results demonstrate algorithmic correctness,
   not optimized production parameters.
+- GPU PRNG quality: The WebGPU PRNG polyfill introduces systematic bias
+  in momentum sampling that affects plaquette equilibrium values. The
+  current `cpu_mom` workaround generates momenta on CPU. A GPU-native
+  fix using a validated PRNG (e.g., Philox counter-based) is in
+  development.
 
 ### 4.3 Vendor Neutrality
 
