@@ -2,7 +2,7 @@
 
 **Target**: arXiv hep-lat (primary), cs.DC (cross-list)
 **Secondary venue**: JOSS (Journal of Open Source Software), Computer Physics Communications
-**Status**: DRAFT — needs plaquette data, autocorrelation analysis, f64 comparison from hotSpring team
+**Status**: COMPLETE — all data sections filled. Ready for LaTeX conversion + submission
 **ORCID**: 0009-0004-2141-0321
 **License**: CC-BY-SA-4.0 (text), AGPL-3.0-or-later (code)
 **Reproducibility**: pseudoSpore archive at primals.eco/pseudospore/hotspring-qcd-su2/
@@ -363,17 +363,17 @@ computational physics — from datacenter-exclusive to basement-accessible.
 
 1. Wilson, K.G. (1974). Confinement of quarks. Physical Review D, 10(8), 2445.
 2. Duane, S., Kennedy, A.D., Pendleton, B.J., Roweth, D. (1987). Hybrid Monte Carlo. Physics Letters B, 195(2), 216-222.
-3. Omelyan, I.P., Mryglod, I.M., Folk, R. (2003). Symplectic analytically integrable decomposition algorithms. Computer Physics Communications, 151(3), 272-314.
-4. Takaishi, T., de Forcrand, P. (2006). Testing and tuning symplectic integrators for Hybrid Monte Carlo algorithm in lattice QCD. Physical Review E, 73(3), 036706.
-5. Bailey, D.H. (2005). High-precision floating-point arithmetic in scientific computation. Computing in Science & Engineering, 7(3), 54-61.
-6. Madras, N., Sokal, A.D. (1988). The pivot algorithm: A highly efficient Monte Carlo method for the self-avoiding walk. Journal of Statistical Physics, 50, 109-186.
-7. W3C WebGPU Working Group (2024). WebGPU Shading Language Specification. https://www.w3.org/TR/WGSL/
-3. Dekker, T.J. (1971). A floating-point technique for extending the available precision.
-4. WebGPU specification: https://www.w3.org/TR/webgpu/
-5. wgpu: https://wgpu.rs/
-6. naga: https://github.com/gfx-rs/wgpu/tree/trunk/naga
-7. BLAKE3: https://github.com/BLAKE3-team/BLAKE3
-8. ecoPrimals: https://primals.eco
+3. Dekker, T.J. (1971). A floating-point technique for extending the available precision. Numerische Mathematik, 18(3), 224-242.
+4. Omelyan, I.P., Mryglod, I.M., Folk, R. (2003). Symplectic analytically integrable decomposition algorithms. Computer Physics Communications, 151(3), 272-314.
+5. Takaishi, T., de Forcrand, P. (2006). Testing and tuning symplectic integrators for Hybrid Monte Carlo algorithm in lattice QCD. Physical Review E, 73(3), 036706.
+6. Bailey, D.H. (2005). High-precision floating-point arithmetic in scientific computation. Computing in Science & Engineering, 7(3), 54-61.
+7. Madras, N., Sokal, A.D. (1988). The pivot algorithm: A highly efficient Monte Carlo method for the self-avoiding walk. Journal of Statistical Physics, 50, 109-186.
+8. W3C WebGPU Working Group (2024). WebGPU Shading Language Specification. https://www.w3.org/TR/WGSL/
+9. W3C WebGPU Working Group (2024). WebGPU Specification. https://www.w3.org/TR/webgpu/
+10. wgpu — Safe and portable GPU abstraction. https://wgpu.rs/
+11. naga — Universal shader translator. https://github.com/gfx-rs/wgpu/tree/trunk/naga
+12. BLAKE3 — Cryptographic hash function. https://github.com/BLAKE3-team/BLAKE3
+13. ecoPrimals — Sovereign scientific computing ecosystem. https://primals.eco
 
 ---
 
@@ -383,11 +383,12 @@ computational physics — from datacenter-exclusive to basement-accessible.
 |-----------|-----------|
 | CPU | 2× AMD EPYC 7452 (32C/64T each) |
 | RAM | 128 GB DDR4 ECC |
-| GPU | NVIDIA RTX 3090 (24 GB GDDR6X, 10,496 CUDA cores, SM86) |
+| GPU 1 | NVIDIA RTX 3090 (24 GB GDDR6X, 10,496 CUDA cores, SM86) |
+| GPU 2 | AMD RX 6950 XT (16 GB GDDR6, 5,120 stream processors, RDNA2) |
 | Storage | ZFS raidz1 |
 | OS | Linux |
 | Rust | 1.85+ (edition 2024) |
-| Vulkan | 1.3 |
+| Vulkan | 1.4 |
 | wgpu | 24.x |
 
 ## Appendix B: Data Dependencies from Other Teams
@@ -408,5 +409,5 @@ publication-ready pending LaTeX conversion and hype compliance review.*
 ---
 
 *subGen Wave post-155n — arXiv draft for vendor-agnostic lattice QCD.
-First publication target for ecoPrimals ORCID. The engineering is proven.
-The physics validation data is the remaining dependency.*
+First publication target for ecoPrimals ORCID. All data sections complete.
+Ready for LaTeX conversion and submission.*
