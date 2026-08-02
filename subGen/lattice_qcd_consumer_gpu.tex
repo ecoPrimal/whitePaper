@@ -11,8 +11,9 @@
 
 \begin{document}
 
-\title{Vendor-Agnostic Lattice QCD on Consumer GPUs\\
-via WebGPU/WGSL with Cryptographic Provenance}
+\title{Toward Vendor-Agnostic Lattice QCD on Consumer GPUs:\\
+SU(2) Hybrid Monte Carlo with DF64 WebGPU/WGSL\\
+and Cryptographic Provenance}
 
 \author{ecoPrimals Collaboration}
 \affiliation{Independent Research, ORCID 0009-0004-2141-0321}
@@ -21,24 +22,26 @@ via WebGPU/WGSL with Cryptographic Provenance}
 \date{\today}
 
 \begin{abstract}
-We present a vendor-agnostic implementation of SU(2) lattice gauge theory
-using WebGPU compute shaders (WGSL) on consumer-grade GPUs. The
-implementation runs on any GPU with Vulkan~1.2+ support---NVIDIA, AMD,
-and Intel---without CUDA, ROCm, or any vendor SDK. Double-float precision
-(DF64) emulation achieves ${\sim}14$ significant digits on FP32 ALUs,
-enabling physics-grade accuracy on consumer hardware designed for gaming
-workloads. We demonstrate Hybrid Monte Carlo (HMC) trajectory generation
-across lattice volumes from $4^4$ to $8^4$, with the AMD RX~6950~XT
-achieving $190\times$ speedup over multi-threaded CPU at $8^4$.
-Both NVIDIA and AMD GPUs produce statistically identical plaquette
-values ($|\Delta|/\sigma < 1$ vs.\ CPU reference), with inter-GPU
-agreement at $3.1 \times 10^{-9}$---five orders of magnitude below
-statistical uncertainty. All computed trajectories carry a full
-cryptographic provenance chain (BLAKE3 content hashing, DAG tracking,
-append-only ledger, Ed25519 signatures, and W3C PROV-O attribution).
-Source code, compute shaders, trajectory data, and provenance records
-are published as a downloadable pseudoSpore artifact under
-AGPL-3.0-or-later.
+We present the first step toward vendor-agnostic lattice QCD on consumer
+GPUs: an SU(2) pure gauge theory implementation using WebGPU compute
+shaders (WGSL). The implementation runs on any GPU with Vulkan~1.2+
+support---NVIDIA, AMD, and Intel---without CUDA, ROCm, or any vendor
+SDK. Double-float precision (DF64) emulation achieves ${\sim}14$
+significant digits on FP32 ALUs. We demonstrate Hybrid Monte Carlo (HMC)
+trajectory generation on $4^4$ and $8^4$ lattices, with the AMD
+RX~6950~XT achieving $190\times$ speedup over multi-threaded CPU at
+$8^4$. Both NVIDIA and AMD GPUs produce statistically identical
+plaquette values ($|\Delta|/\sigma < 1$ vs.\ CPU reference), with
+inter-GPU agreement at $3.1 \times 10^{-9}$---five orders of magnitude
+below statistical uncertainty. A three-path validation methodology
+isolates a GPU PRNG polyfill bias and validates the deterministic MD
+pipeline independently. All computed trajectories carry a full
+cryptographic provenance chain (BLAKE3, DAG, ledger, Ed25519, W3C
+PROV-O). This work establishes Rung~1 of a lattice QCD program: SU(2)
+execution and arithmetic validation. SU(3) gauge theory, Dirac
+operators, and dynamical fermions constitute subsequent rungs. Source
+code, shaders, data, and provenance are published as a pseudoSpore
+artifact under AGPL-3.0-or-later.
 \end{abstract}
 
 \maketitle
@@ -88,6 +91,35 @@ scientific computing ecosystem~\cite{ecoprimals}.
   validation script
 \end{itemize}
 
+\subsection{Scope and Ladder}
+
+This paper reports Rung~1 of a lattice QCD program. Each rung adds
+physics complexity while retaining the vendor-agnostic WebGPU/WGSL
+stack:
+
+\begin{table}[h]
+\caption{Lattice QCD research program.}
+\label{tab:ladder}
+\begin{ruledtabular}
+\begin{tabular}{clc}
+Rung & Physics & Status \\
+\midrule
+\textbf{1} & \textbf{SU(2) pure gauge HMC} & \textbf{This work} \\
+2 & SU(3) pure gauge & Planned \\
+3 & Quenched QCD (Dirac operator) & Planned \\
+4 & Dynamical fermions (full QCD) & Planned \\
+5 & (2+1)-flavor QCD & Planned \\
+6 & Finite-temperature QCD & Planned \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Rung~1 validates the execution environment, DF64 arithmetic, and
+multi-vendor portability on the simplest non-Abelian gauge group.
+Subsequent rungs require additional WGSL kernels (SU(3) matrices,
+Dirac operator, fermion force) but share the same dispatch, precision,
+and provenance infrastructure.
+
 %% ================================================================
 \section{Method}
 \label{sec:method}
@@ -101,8 +133,19 @@ action~\cite{wilson1974}:
   \label{eq:wilson}
 \end{equation}
 where $U_P$ is the ordered product of link variables around an elementary
-plaquette and $\beta = 2N/g^2$ is the inverse coupling. Hybrid Monte
-Carlo~\cite{duane1987} (HMC) with Omelyan 2MN
+plaquette and $\beta = 2N/g^2$ is the inverse coupling. The average
+plaquette observable is defined as:
+\begin{equation}
+  \langle P \rangle = \frac{1}{6V} \sum_{x} \sum_{\mu < \nu}
+    \frac{1}{N}\,\mathrm{Re}\,\mathrm{Tr}\, U_{\mu\nu}(x),
+  \label{eq:plaquette}
+\end{equation}
+where $V = L^4$ is the lattice volume and the factor of 6 counts the
+oriented plaquette planes in 4 dimensions. $\langle P \rangle = 1$ for a
+cold (unit) configuration and $\langle P \rangle \to 0$ for a fully
+disordered (hot) configuration.
+
+Hybrid Monte Carlo~\cite{duane1987} (HMC) with Omelyan 2MN
 integration~\cite{omelyan2003,takaishi2006} generates gauge
 configurations. Metropolis accept/reject ensures detailed balance.
 
@@ -143,6 +186,24 @@ $|\Delta| \leq 5.5 \times 10^{-10}$ for accumulated plaquette (1,536
 oriented plaquettes on $4^4$). Native \texttt{f64} GPU agrees to machine
 epsilon ($4 \times 10^{-17}$). See Sec.~\ref{sec:df64precision} for full
 comparison.
+
+\begin{table}[h]
+\caption{Precision path matrix: arithmetic used per HMC component.}
+\label{tab:precmatrix}
+\begin{ruledtabular}
+\begin{tabular}{lccc}
+Component & CPU ref.\ & GPU (DF64) & GPU (native f64) \\
+\midrule
+Momentum generation & f64 & \texttt{cpu\_mom} (f64) & \texttt{cpu\_mom} (f64) \\
+Gauge force          & f64 & DF64 (FP32$\times$2) & f64 \\
+Leapfrog integration & f64 & DF64 (FP32$\times$2) & f64 \\
+Link update (Cayley) & f64 & DF64 (FP32$\times$2) & f64 \\
+Kinetic energy       & f64 & DF64 (FP32$\times$2) & f64 \\
+Plaquette measurement & f64 & DF64 (FP32$\times$2) & f64 \\
+Metropolis accept    & f64 & DF64 (FP32$\times$2) & f64 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
 
 \subsection{Shader Pipeline}
 
@@ -368,9 +429,9 @@ Electricity (compute)              & ${\sim}\$15$/mo \\
 \end{ruledtabular}
 \end{table}
 
-Comparable cloud HPC (AWS p4d.24xlarge, A100): ${\sim}\$32$/hour. A
-1.7-hour production run (10K trajectories at $16^4$) costs ${\sim}\$55$
-on cloud vs.\ ${\sim}\$0.03$ amortized on sovereign hardware.
+Comparable cloud HPC (AWS p4d.24xlarge, A100): ${\sim}\$32$/hour.
+Even modest production runs cost tens of dollars on cloud vs.\ pennies
+amortized on sovereign hardware.
 
 \subsection{Validation Methodology: Three-Path Comparison}
 \label{sec:validation}
@@ -412,23 +473,47 @@ native \texttt{f64} path).
 Production data in this paper uses Path~C: CPU-generated momenta with
 GPU molecular dynamics.
 
-\subsection{Limitations}
+\subsection{Limitations of the Present Result}
 
 \begin{itemize}
 \item DF64 achieves ${\sim}14$ digits, not full IEEE~754 \texttt{f64}
   (15.95 digits). For observables requiring machine-epsilon precision,
   native FP64 hardware remains necessary.
-\item SU(2) only in current implementation. SU(3) requires additional
-  Gell-Mann matrix infrastructure.
-\item Lattice sizes tested up to $16^4$. Larger volumes ($32^4$+)
-  limited by GPU VRAM. Multi-GPU dispatch not yet implemented.
-\item Accept rates at larger volumes may require step-size tuning for
-  production physics.
-\item GPU PRNG quality: the WebGPU PRNG polyfill introduces systematic
-  bias in momentum sampling. The current \texttt{cpu\_mom} workaround
-  generates momenta on CPU. A GPU-native fix using a validated PRNG
+\item SU(2) only. SU(3) gauge theory and fermion sectors are subsequent
+  rungs (Table~\ref{tab:ladder}).
+\item Production data at $4^4$ and $8^4$. Larger volumes ($12^4$,
+  $16^4$) have been tested for performance but lack full plaquette
+  validation at publication time.
+\item Single coupling value ($\beta = 2.3$) for production data. A
+  $\beta$-scan across 1.8--2.5 is in the experiment queue.
+\item GPU PRNG polyfill introduces systematic bias in momentum sampling
+  (9.5\% variance deficit at $4^4$). The \texttt{cpu\_mom} workaround
+  generates momenta on CPU; a GPU-native fix using a validated PRNG
   (e.g., Philox counter-based) is in development.
 \end{itemize}
+
+\subsection{Remaining Validation Work}
+
+The following experiments are queued to strengthen the preprint before
+submission:
+
+\begin{table}[h]
+\caption{Rung~1 experiment queue.}
+\label{tab:experiments}
+\begin{ruledtabular}
+\begin{tabular}{lcc}
+Experiment & Priority & Status \\
+\midrule
+$\beta$-scan (1.8--2.5) at $8^4$ & Must & Queued \\
+Increased statistics (4--8 seeds, 1000 traj) & Must & Queued \\
+HMC diagnostics ($\Delta H$, reversibility) & Must & Queued \\
+PRNG QQ plots and tail statistics & Must & Queued \\
+Plaquette normalization check (cold/hot) & Must & Queued \\
+$12^4$ and $16^4$ production & Should & Queued \\
+pseudoSpore signed release (v1.0.0-rung1) & Should & Queued \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
 
 \subsection{Vendor Neutrality}
 
@@ -463,23 +548,29 @@ chain.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We demonstrated that lattice gauge theory computations can be performed
-on consumer GPUs using vendor-agnostic WebGPU/WGSL shaders with DF64
-precision emulation. The implementation produces statistically valid
-physics ($|\Delta|/\sigma < 1$ vs.\ CPU reference) on both NVIDIA and
-AMD hardware using identical shader source. The entire stack is
-open-source, runs on commodity hardware, and requires no vendor SDK.
+We demonstrated that SU(2) lattice gauge theory---the simplest
+non-Abelian gauge theory---can be computed on consumer GPUs using
+vendor-agnostic WebGPU/WGSL shaders with DF64 precision emulation.
+The implementation produces statistically valid physics
+($|\Delta|/\sigma < 1$ vs.\ CPU reference) on both NVIDIA and AMD
+hardware using identical shader source. A three-path validation
+methodology isolates a GPU PRNG polyfill defect while confirming the
+deterministic MD pipeline is bit-exact against CPU.
 
-The combination of vendor-neutral compute, cryptographic provenance, and
-commodity hardware deployment represents a step toward democratizing
-computational physics---from datacenter-exclusive to
-basement-accessible.
+This constitutes Rung~1 of a lattice QCD program
+(Table~\ref{tab:ladder}). SU(3) pure gauge theory, Dirac operators,
+and dynamical fermions are subsequent steps that reuse the same
+dispatch, precision, and provenance infrastructure. The combination of
+vendor-neutral compute, cryptographic provenance, and commodity
+hardware deployment represents a step toward sovereign computational
+physics---from datacenter-exclusive to basement-accessible.
 
 %% ================================================================
 \begin{acknowledgments}
-Computations were performed on sovereign hardware (strandGate). No cloud
-compute, no institutional HPC allocation, and no vendor SDK were used.
-The ecoPrimals ecosystem is an independent research effort.
+Computations were performed on sovereign hardware (strandGate,
+biomeGate). No cloud compute, no institutional HPC allocation, and no
+vendor SDK were used. The ecoPrimals ecosystem is an independent
+research effort.
 \end{acknowledgments}
 
 %% ================================================================
