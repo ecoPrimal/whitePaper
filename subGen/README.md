@@ -62,6 +62,18 @@ here to gen5 success.
     topologies (LAN, WAN cloud, WAN friend). Board comparisons, specs, pricing,
     and pre-hardware familiarization tasks.
 
+### Layer 4.5 — arXiv Publication
+
+13. **[ARXIV_RUNG1_STATUS.md](ARXIV_RUNG1_STATUS.md)** — Status of the first
+    arXiv preprint: "Toward Vendor-Agnostic Lattice QCD on Consumer GPUs:
+    SU(2) HMC with DF64 WebGPU/WGSL and Cryptographic Provenance." Rung 1 of
+    6-rung lattice QCD ladder. Experiment queue in progress. Links to full
+    draft, LaTeX source, and handoffs.
+
+14. **[LATTICE_QCD_CONSUMER_GPU_ARXIV.md](LATTICE_QCD_CONSUMER_GPU_ARXIV.md)** —
+    Complete arXiv preprint markdown source. Rung 1: SU(2) execution and
+    arithmetic validation. Under refinement per AI review.
+
 ### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as
@@ -127,8 +139,9 @@ Wave 155m marked gen4 completion. Wave 155n proves gen5 on live data.
 
 ---
 
-*subGen Wave 155n — 17 documents. gen5 THESIS PROVEN ON LIVE DATA.
-5 NUCLEUS gates. 7 glacial goals COMPLETE. 31 tracked. 33.79 GB real science
-data at 100% provenance. Portability proven (southGate). Peptidoglycan DNS
-fixed. Springs+gardens active. Science pipeline + public surface + gardens
-are the remaining work for gen5.*
+*subGen Wave post-155n — 19 documents. gen5 THESIS PROVEN ON LIVE DATA.
+5 NUCLEUS gates. 7 glacial goals COMPLETE. 38.2 GB real science data at
+100% provenance. First arXiv preprint (Rung 1: SU(2)) under validation.
+6-rung lattice QCD ladder defined. Experiment queue handed to hotSpring.
+Science pipeline + public surface + publication program are the remaining
+work for gen5.*
