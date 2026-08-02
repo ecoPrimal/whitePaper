@@ -164,9 +164,11 @@ validated cpu_mom path (CPU-generated momenta, GPU molecular dynamics).
 
 Both GPUs (RTX 3090 and RX 6950 XT) produce identical plaquette values to
 the reported precision — the GPU result is hardware-independent when using
-the same WGSL shaders. The |Δ|/σ < 1 agreement demonstrates that GPU
-molecular dynamics produces statistically identical physics to the CPU
-reference implementation across both lattice volumes.
+the same WGSL shaders. Cross-GPU agreement: |Δ|_GPU-GPU = 3.1×10⁻⁹ at 8⁴,
+five orders of magnitude below statistical error. The |Δ|/σ < 1 agreement
+demonstrates that GPU molecular dynamics produces statistically identical
+physics to the CPU reference implementation across both lattice volumes
+and both GPU architectures.
 
 CPU reference: ⟨|ΔH|⟩ = 1.1×10⁻³ (4⁴), 4.5×10⁻³ (8⁴), confirming correct
 integrator convergence in both regimes.
@@ -218,6 +220,22 @@ RDNA2's superior compute unit scheduling for the workgroup dispatch pattern
 used in the lattice kernels. This demonstrates that vendor-agnostic WGSL
 can be competitive with — or exceed — vendor-locked implementations on
 different architectures without code changes.
+
+**Cross-GPU validation**: Both GPUs run from the same thermalized lattice
+(CPU-generated, identical bit state) with identical momentum sequences
+(cpu_mom path, same seed). The inter-GPU plaquette agreement:
+
+| Lattice | ⟨P⟩ RTX 3090 | ⟨P⟩ RX 6950 XT | |Δ|_GPU-GPU | σ_stat |
+|---------|-------------|----------------|-----------|--------|
+| 4⁴      | 0.1502381012 | 0.1502381093 | 8.1e-9 | 5.1e-4 |
+| 8⁴      | 0.1509276352 | 0.1509276383 | 3.1e-9 | 1.1e-4 |
+
+The inter-GPU difference (3–8 × 10⁻⁹) is 5 orders of magnitude below
+the statistical uncertainty, confirming that both architectures execute
+the same mathematical operations to within DF64 accumulated precision.
+The small residual reflects cumulative DF64 rounding across ~4,000
+integration steps on different floating-point hardware — both producing
+correct samples from the same gauge-theory distribution.
 
 ### 3.5 Autocorrelation
 
