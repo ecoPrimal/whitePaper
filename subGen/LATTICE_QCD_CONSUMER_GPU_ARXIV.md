@@ -300,6 +300,29 @@ Production data in this paper uses Path C: CPU-generated momenta with
 GPU molecular dynamics, achieving full GPU throughput with validated
 physics.
 
+#### PRNG Polyfill Bias Characterization
+
+Direct measurement of GPU Box-Muller output distribution (1,228,800 samples
+from 5,120 link dispatches on each GPU):
+
+| Metric | GPU (WGSL f64 transcendentals) | CPU (IEEE 754 native) | Expected |
+|--------|-------------------------------|----------------------|----------|
+| σ | 0.6727 | 0.7079 | 0.7071 |
+| Variance (⟨p²⟩) | 0.4525 | 0.5011 | 0.5000 |
+| **Variance bias** | **−9.50%** | +0.23% | 0% |
+| Excess kurtosis | +0.84 | −0.003 | 0 |
+
+Both GPUs (RTX 3090 and RX 6950 XT) produce bit-identical incorrect
+output, confirming the bug resides in WGSL's `log(f64)` and `cos(f64)`
+implementations within the naga shader compiler / GPU driver, not in
+hardware-specific floating-point behavior. The 9.5% kinetic energy
+deficit shifts the effective temperature of the gauge field ensemble,
+producing the observed plaquette divergence (⟨P⟩ = 0.507 vs correct
+⟨P⟩ = 0.151 at β = 2.3).
+
+This finding applies to any physics simulation using Box-Muller via
+WGSL f64 transcendentals on current (2026) Vulkan drivers.
+
 ### 4.3 Limitations
 
 - DF64 achieves ~14 digits, not full IEEE 754 f64 (15.95 digits). For
@@ -312,11 +335,12 @@ physics.
 - Accept rates at larger volumes may require step-size tuning for
   production physics. Current results demonstrate algorithmic correctness,
   not optimized production parameters.
-- GPU PRNG quality: The WebGPU PRNG polyfill introduces systematic bias
-  in momentum sampling that affects plaquette equilibrium values. The
-  current `cpu_mom` workaround generates momenta on CPU. A GPU-native
-  fix using a validated PRNG (e.g., Philox counter-based) is in
-  development.
+- GPU PRNG quality: WGSL `log(f64)` and `cos(f64)` transcendentals
+  produce a 9.5% variance deficit in Box-Muller output (excess kurtosis
+  +0.84), causing incorrect equilibrium sampling. This is a
+  shader-compiler/driver issue, not hardware-specific (identical on NVIDIA
+  and AMD). The `cpu_mom` workaround generates momenta on CPU with
+  negligible overhead (~1 ms vs ~15-65 ms GPU MD per trajectory).
 
 ### 4.4 Vendor Neutrality
 
