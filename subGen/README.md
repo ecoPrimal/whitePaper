@@ -1,7 +1,7 @@
 # subGen — Concrete Reality
 
 **Status**: Living documentation — the project's operational truth
-**Wave**: 155n post-threshold | **Date**: Aug 1, 2026
+**Wave**: 155f data-braided | **Date**: Aug 2, 2026
 
 ---
 
@@ -30,6 +30,13 @@ here to gen5 success.
 2. **[GEN5_CRITICAL_PATH.md](GEN5_CRITICAL_PATH.md)** — The single chain from
    bearDog crypto.sign → Provenance 7/7 → tideGlass → NF pseudoSpore → JOSS/CTF.
    8 steps. Timeline estimates. What can start today.
+
+### Layer 1.5 — Data Estate
+
+13. **[DATA_FEDERATION_STATUS.md](DATA_FEDERATION_STATUS.md)** — westGate as
+    scientific data root. 361 GB across 32 datasets, ~260K files, 100% provenance.
+    All tideGlass modules data-ready. Size-to-value analysis for remaining datasets.
+    AlphaFold staged approach. API keys and accounts inventory.
 
 ### Layer 2 — Who We're Talking To
 
@@ -120,28 +127,31 @@ The gen/ docs are the *map*. subGen is the *GPS position*.
 
 ---
 
-## What's New at 155n post-threshold (vs 155m)
+## What's New at 155f data-braided (vs 155n)
 
-Wave 155n post-threshold reflects the **gen5 thesis proven on live data**:
+Wave 155f reflects **westGate as a sovereign scientific data root**:
 
-- **THRESHOLDS_CROSSED** — gen5 thesis PROVEN. First real science data (PDB+ChEMBL 33.79GB)
-  ingested through full CAS+Provenance pipeline. NUCLEUS on 5 gates. southGate portability
-  proven (22/22 PASS). 7 glacial goals COMPLETE.
-- **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. Step 3 (tideGlass Phase 0) UNBLOCKED —
-  ChEMBL 37 + PDB structures now in CAS. Data available for tideGlass modules.
-- **SOVEREIGN_IDENTITY_GARDEN** — G24-G28. Gate-first phasing (cameras/sensors
-  before phone deployment). Application-layer garden on primals.
-- Security docs still valid. southGate 22/22 proves the BTSP thesis without WireGuard.
+- **DATA_FEDERATION_STATUS** (NEW) — 361 GB across 32 datasets, ~260K files,
+  100% provenance coverage. All 7 tideGlass modules data-ready. 6 API keys
+  configured (NCBI, Synapse, Copernicus, COSMIC, BRENDA). Size-to-value analysis
+  for remaining datasets including AlphaFold staged approach recommendation.
+- **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. **Step 5 (NF Ingestion) COMPLETE.**
+  Step 3 FULLY UNBLOCKED — 295 GB of tideGlass data on ZFS with provenance.
+  The bottleneck is now code/analysis, not data/infrastructure.
+- All prior wave content (security docs, outreach, thresholds) still valid.
 
-The original subGen (Wave 150x) documented security architecture only.
-Wave 155i added thresholds, critical path, outreach.
-Wave 155m marked gen4 completion. Wave 155n proves gen5 on live data.
+Previous milestones:
+- Wave 150x: security architecture
+- Wave 155i: thresholds, critical path, outreach
+- Wave 155m: gen4 completion
+- Wave 155n: gen5 thesis proven on live data
+- **Wave 155f: data-braided scientific database operational**
 
 ---
 
-*subGen Wave post-155n — 19 documents. gen5 THESIS PROVEN ON LIVE DATA.
-5 NUCLEUS gates. 7 glacial goals COMPLETE. 38.2 GB real science data at
-100% provenance. First arXiv preprint (Rung 1: SU(2)) under validation.
-6-rung lattice QCD ladder defined. Experiment queue handed to hotSpring.
-Science pipeline + public surface + publication program are the remaining
-work for gen5.*
+*subGen Wave 155f — 19 documents. gen5 THESIS PROVEN ON LIVE DATA.
+5 NUCLEUS gates. 7 glacial goals COMPLETE. 361 GB across 32 datasets at
+100% provenance. All 7 tideGlass modules data-ready. 6 API keys. First arXiv
+preprint (Rung 1: SU(2)) under validation. westGate = sovereign scientific
+data root. The bottleneck is now code/analysis — data and infrastructure
+are complete.*

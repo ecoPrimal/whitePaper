@@ -1,7 +1,7 @@
 # gen5 Critical Path — From Here to External Science
 
 **Status**: Living document — the single chain to gen5 success
-**Wave**: 155m | **Date**: Jul 30, 2026
+**Wave**: 155f | **Date**: Aug 2, 2026
 
 ---
 
@@ -100,12 +100,12 @@ One chain answers this. Everything else is supporting work.
 ### Step 3: tideGlass Phase 0 — **NEXT**
 
 **Owner**: eastGate (overwatch directs; dedicated gate for compute TBD)
-**Status**: NOT STARTED — **now UNBLOCKED** (Steps 1-2 complete, Nest Atomic ready)
-**Data**: T1 ~35 GB from Zenodo, GEO, ChEMBL, ZINC
-**Gate**: westGate (ZFS 25.4TB, Nest Atomic live, Provenance 7/7) or strandGate (RTX 3090, NUCLEUS)
+**Status**: NOT STARTED — **FULLY UNBLOCKED** (Steps 1-2 complete, all 7 module datasets on ZFS)
+**Data**: **295 GB across 7 modules on westGate ZFS with 100% provenance** — ChEMBL 37, PubChem, ZINC, BindingDB, LINCS L1000, GTEx, GEO SOFT, PDB mmCIF, PDB70, MONDO, Reactome, TCGA Xena, COSMIC v104, RefSeq, NCBI Gene, UniProt (SP+TrEMBL), NF Data Portal (Synapse)
+**Gate**: westGate (ZFS 50.4TB, Nest Atomic live, Provenance 7/7) or strandGate (RTX 3090, NUCLEUS)
 **Depends on**: Independent — can start immediately
-**Supporting docs**: `attsi/non-anon/contact/gonzales/gps/README.md`, `DATA_MANIFEST.md`
-**Note**: This is now the **sole bottleneck** for gen5. Infrastructure is complete.
+**Supporting docs**: `attsi/non-anon/contact/gonzales/gps/README.md`, `DATA_MANIFEST.md`, `subGen/DATA_FEDERATION_STATUS.md`
+**Note**: This is now the **sole bottleneck** for gen5. Infrastructure AND data are complete.
 
 ### Step 4: tideGlass Phase 1
 
@@ -114,13 +114,12 @@ One chain answers this. Everything else is supporting work.
 **Validation targets**: RCL SNR >1.5x, GPS4Drug R² within 5%, RGES r=0.52±0.05, MCTS IC50 fold >4x
 **Depends on**: Step 3
 
-### Step 5: NF Data Portal Ingestion
+### Step 5: NF Data Portal Ingestion — **COMPLETE**
 
 **Owner**: westGate Nest Atomic team
-**Status**: Data cataloged (`PUBLIC_DATA_SYSTEMS.md`), not downloaded
-**Pipeline**: NF Portal → download → nestGate `content.put` → BLAKE3 → rhizoCrypt DAG → sweetGrass braid
-**Depends on**: Steps 1-2 (for full provenance) + Step 3 (for context)
-**Can start partially**: Data download is independent. Full provenance needs Step 2.
+**Status**: **DONE** — 658 files (666 MB) downloaded from Synapse, 100% provenance
+**Data on ZFS**: NF1 HTS drug screening (8K compounds), 595 dose-response curves, NF2 Synodos kinomics (peptide/protein/differential), NF2 drug screen processed data
+**Completed**: Wave 155f (Aug 2, 2026)
 
 ### Step 6: NF Reversal Screen
 
@@ -195,7 +194,7 @@ These are important but do not block the critical path:
 - ~~Provenance 7/7~~ — **DONE** (Step 2 complete)
 - steamGate (cross-platform expansion, gen4 extension)
 - darwinGate / iosGate (glacial, silicon deism)
-- AlphaFold bulk ingestion (gen5 secondary after NF — uses same Nest Atomic pipeline)
+- AlphaFold bulk ingestion (gen5 secondary — staged approach recommended, see `DATA_FEDERATION_STATUS.md`)
 - Show HN (blocked until NF pseudoSpore exists)
 - Inkfish collaboration (separate track, response-dependent)
 
