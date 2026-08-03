@@ -25,7 +25,8 @@ identical plaquette values (|Δ|/σ < 1 vs CPU reference), with inter-GPU
 agreement at 3.1 × 10⁻⁹ — five orders of magnitude below statistical
 uncertainty. A controlled three-path comparison isolates a systematic bias
 in WGSL transcendental polyfills to the stochastic momentum generator while
-proving the deterministic molecular dynamics path bit-exact against CPU.
+proving the deterministic molecular dynamics path agrees with CPU to
+machine precision (|Δ| ≤ 4×10⁻¹⁷ for native f64 path).
 All computed trajectories carry a full cryptographic provenance chain
 (BLAKE3 content hashing, DAG tracking, append-only ledger, Ed25519 signatures,
 and W3C PROV-O attribution). Source code, compute shaders, trajectory data,
@@ -108,6 +109,16 @@ where V is the lattice volume and the sum runs over all 6 oriented plaquette
 planes at each site. Cold start (U=I) gives P=1; thermalized configurations
 at β=2.3 give P ≈ 0.150. All GPU-vs-CPU comparisons use this normalization.
 
+**Note on normalization convention**: The reported values (~0.15 at β=2.3)
+are a factor of four below the conventional SU(2) plaquette (~0.60) found
+in published Monte Carlo datasets. This discrepancy is under active
+investigation — it may indicate an additional 1/N² or 1/4 factor in the
+measurement code, or a coupling convention difference in the action. The
+GPU-vs-CPU agreement (|Δ|/σ < 1) and cross-GPU agreement (3.1×10⁻⁹) are
+unaffected because both implementations use the same normalization. The
+resolution of this factor is the first item in the experiment queue
+(Section 4.4). See Appendix C for the diagnostic protocol.
+
 **Momentum generation**: Initial HMC momenta are sampled on CPU from a
 standard normal distribution and transferred to GPU for the leapfrog
 trajectory. This `cpu_mom` approach was adopted after identifying a
@@ -154,14 +165,13 @@ as a validation tool, not a production path.
 
 Compute shaders are authored in WGSL and compiled via:
 
-    WGSL source → naga parser → SPIR-V IR → native backend
-                                              ├── PTX (NVIDIA, sm_86+)
-                                              ├── GCN/RDNA (AMD)
-                                              └── Xe (Intel)
+    WGSL source → naga parser → SPIR-V IR → Vulkan driver → native GPU ISA
 
-The compilation is performed by coralReef, a sovereign shader compiler built on
-the naga crate. Dispatch is managed by toadStool via the wgpu WebGPU implementation
-backed by Vulkan 1.2.
+Naga compiles WGSL to SPIR-V intermediate representation. The Vulkan driver
+on each GPU performs the final compilation from SPIR-V to native instructions
+(PTX on NVIDIA, GCN/RDNA IL on AMD, Xe on Intel). The compilation is managed
+by coralReef (built on the naga crate) and dispatched by toadStool via the
+wgpu WebGPU implementation backed by Vulkan 1.2+.
 
 Key compute kernels:
 - `gauge_update_df64.wgsl` — SU(2) gauge link update with DF64 arithmetic
@@ -313,11 +323,13 @@ Omelyan integrator.
 | RTX 3090 (used) | ~$800 |
 | Host system (EPYC 7452 × 2, 128 GB) | ~$2,500 |
 | Electricity (compute portion) | ~$15/month |
-| **Total for 10K trajectories** | **~$0.03** |
 
-Comparable cloud HPC (AWS p4d.24xlarge with A100): ~$32/hour.
-The amortized compute cost per trajectory on sovereign hardware is
-negligible compared to cloud pricing at any tested volume.
+At 8⁴ on the RX 6950 XT (15.6 ms/traj), the system produces ~230,000
+trajectories/hour. Hardware amortization over a conservative 3-year
+lifespan makes the per-trajectory cost negligible. Comparable cloud HPC
+(AWS p4d.24xlarge with A100) costs ~$32/hour. A direct cost-per-trajectory
+comparison requires standardized volume and trajectory counts, which will
+be reported with the 12⁴ and 16⁴ production data.
 
 ### 4.2 Validation Methodology: Three-Path Comparison
 
@@ -340,9 +352,9 @@ implementation in WGSL using software `log`, `sqrt`, `cos`).
 This methodology generalizes: any GPU physics code deployed via
 vendor-agnostic shader languages should validate not only deterministic
 computation (force, action, integration) but also stochastic generation
-components independently. The GPU MD arithmetic — including SU(3) gauge
+components independently. The GPU MD arithmetic — including SU(2) gauge
 force, Cayley link update, kinetic energy, and Metropolis accept/reject —
-is proven bit-exact against CPU (|Δ| ≤ 4×10⁻¹⁷ for native f64 path).
+agrees with CPU to machine precision (|Δ| ≤ 4×10⁻¹⁷ for native f64 path).
 
 Production data in this paper uses Path C: CPU-generated momenta with
 GPU molecular dynamics, achieving full GPU throughput with validated
@@ -392,33 +404,30 @@ WGSL f64 transcendentals on current (2026) Vulkan drivers.
 
 ### 4.4 Remaining Validation Work
 
-The following experiments will strengthen the preprint before journal
-submission:
+The following experiments are ordered by priority. Items 1–3 are blockers
+for arXiv submission; items 4–8 strengthen the preprint.
 
-| Experiment | Purpose | Status |
-|-----------|---------|--------|
-| β-scan (1.8, 2.0, 2.2, 2.3, 2.4, 2.5) | Verify engine follows theory across coupling range | TODO |
-| Multiple seeds (4-8 per volume) | Independent statistics, hot/cold start comparison | TODO |
-| 1000-5000 post-thermalization trajectories | Strengthen headline validation | TODO |
-| ΔH histogram and ⟨exp(-ΔH)⟩ check | HMC correctness | TODO |
-| Acceptance rate vs step size | Integrator validation | TODO |
-| Forward-reverse trajectory error | Reversibility | TODO |
-| SU(2) unitarity/determinant drift | Numerical stability | TODO |
-| Energy violation scaling with δτ | Integrator order | TODO |
-| Momentum Gaussian QQ plot | Quantify PRNG bias shape | TODO |
-| Comparison to published SU(2) data | External validation | TODO |
-| 12⁴ and 16⁴ full production | Extend volume range | TODO |
+| # | Experiment | Purpose | Status |
+|---|-----------|---------|--------|
+| 1 | Resolve plaquette ×4 normalization | Determine whether 0.15 vs 0.60 is a reporting or action bug | **BLOCKER** |
+| 2 | Action–force finite-difference test | Validate HMC equations (F_q vs numerical ∂S/∂q) | **BLOCKER** |
+| 3 | Short β-scan (1.8, 2.0, 2.2, 2.3, 2.4, 2.5) | Establish physical normalization vs published SU(2) data | **BLOCKER** |
+| 4 | Reversibility and ΔH scaling | ΔH histogram, ⟨exp(-ΔH)⟩, step-size scaling, forward-reverse error | TODO |
+| 5 | Multiple seeds (4-8) + longer chains (1000-5000) | Independent statistics, bootstrap/jackknife errors | TODO |
+| 6 | PRNG distribution characterization | Gaussian QQ plot, tail statistics, Box-Muller comparison | TODO |
+| 7 | 12⁴ and 16⁴ full production | Extend volume range with plaquette + ΔH + VRAM | TODO |
+| 8 | Freeze and sign pseudoSpore v1.0.0 | Version tag, BLAKE3 root, Ed25519 key, driver metadata | TODO |
 
-These are not blockers for the preprint but are needed before journal
-peer review.
+See Appendix C for the diagnostic protocol for item 1.
 
 ### 4.5 Vendor Neutrality
 
 The WebGPU/WGSL approach eliminates vendor lock-in at the shader level.
-The same WGSL source compiles to PTX (NVIDIA), GCN/RDNA IL (AMD), and
-Xe bytecode (Intel) via the naga compiler. This is the first lattice
-gauge theory implementation we are aware of that runs unmodified on
-all three major GPU vendors.
+The same WGSL source compiles via naga to SPIR-V, which the Vulkan driver
+translates to native GPU ISA on each architecture. Physics validation in
+this paper covers NVIDIA (RTX 3090, SM86) and AMD (RX 6950 XT, RDNA2).
+The architecture is designed to support Vulkan-capable Intel GPUs; physics
+validation on Intel Xe hardware is planned but not yet completed.
 
 ---
 
@@ -498,7 +507,55 @@ no vendor SDK.
 | Vulkan | 1.4 |
 | wgpu | 24.x |
 
-## Appendix B: Data Dependencies from Other Teams
+## Appendix B: Plaquette Normalization Diagnostic Protocol
+
+The reported plaquette values (~0.15 at β=2.3) are exactly 1/4 of the
+conventional SU(2) value (~0.60). This requires resolution before
+arXiv submission.
+
+### Diagnostic A: Print every normalization component
+
+For a cold 4⁴ lattice (U=I), record through the **exact production path**:
+
+    raw trace sum = Σ_{x,μ<ν} (1/2) Re Tr U_{μν}    → expect 1536
+    6V = 6 × 256                                       → 1536
+    24V = 24 × 256                                     → 6144
+    P = raw_sum / 6V                                   → expect 1.0
+
+If P = 0.25 on cold start, the code divides by 24V instead of 6V (or
+applies an extra 1/N factor).
+
+### Diagnostic B: Audit coupling in all three equations
+
+Verify the same β convention in:
+
+    S_g = β Σ_P (1 - (1/N) Re Tr U_P)     ← action
+    F_q = -∂S_g/∂q                          ← force
+    ΔH = S_g(new) + K(new) - S_g(old) - K(old) ← Metropolis
+
+Look for: β/2 vs β, quaternion trace factors, division by 4 dimensions,
+averaging over directions inside a kernel AND on the host, N=2 applied
+twice, `num_links = 4V` used where `num_plaquettes = 6V` is needed.
+
+### Diagnostic C: Numerical force derivative
+
+For one link component q, test:
+
+    F_q  ?=  -(S_g(q+ε) - S_g(q-ε)) / 2ε
+
+Run for several random links and configurations. A missing global factor
+of 4 will appear immediately.
+
+### Diagnostic D: Short external-reference β-scan
+
+At 8⁴, generate short CPU ensembles at β = 1.0, 2.0, 2.3, 3.0. Plot
+conventional plaquette. If multiplying every result by 4 repairs the
+curve against published data, the defect is in the measurement (not
+the action/force). If not, the action needs fixing.
+
+---
+
+## Appendix C: Data Dependencies from Other Teams
 
 | Dependency | Team | Status | Required For |
 |-----------|------|--------|-------------|
@@ -510,8 +567,10 @@ no vendor SDK.
 | Three-path validation methodology | hotSpring | **COMPLETE** | Section 4.2 |
 | Multi-vendor physics agreement | hotSpring | **COMPLETE** | Section 3.4 |
 
-*All data sections now filled with production data from strandGate. Paper is
-publication-ready pending LaTeX conversion and hype compliance review.*
+*Data sections filled with production data from strandGate. Plaquette
+normalization under investigation (×4 discrepancy vs published SU(2)).
+Experiment queue in progress — normalization resolution is the first
+blocker for arXiv submission.*
 
 ---
 

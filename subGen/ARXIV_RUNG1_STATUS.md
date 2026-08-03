@@ -1,7 +1,7 @@
 # arXiv Rung 1 — SU(2) Preprint Status
 
-**Status**: Experiment queue in progress — waiting on hotSpring data
-**Wave**: post-155n | **Date**: Aug 2, 2026
+**Status**: **BLOCKED** — plaquette ×4 normalization must be resolved first
+**Wave**: post-155n | **Date**: Aug 2, 2026 (updated)
 **Paper**: `LATTICE_QCD_CONSUMER_GPU_ARXIV.md` (this directory)
 **LaTeX**: `lattice_qcd_consumer_gpu.tex` (this directory)
 
@@ -43,24 +43,28 @@ This is SU(2) lattice gauge theory, not lattice QCD. The title says
 
 ---
 
-## Experiment Queue (waiting on hotSpring)
+## Experiment Queue (reordered — normalization first)
 
-| Experiment | Priority | Owner | Blocks |
-|-----------|----------|-------|--------|
-| β-scan (1.8–2.5) | HIGH | hotSpring | Submission |
-| Multiple seeds (4-8 per volume) | HIGH | hotSpring | Submission |
-| 1000-5000 trajectory chains | HIGH | hotSpring | Submission |
-| ΔH histogram + Creutz equality | HIGH | hotSpring | Submission |
-| Acceptance vs step size | HIGH | hotSpring | Submission |
-| Forward-reverse reversibility | HIGH | hotSpring | Submission |
-| SU(2) unitarity/det drift | HIGH | hotSpring | Submission |
-| Energy violation vs δτ | MEDIUM | hotSpring | Submission |
-| Momentum Gaussian QQ plot | MEDIUM | hotSpring | Submission |
-| Published SU(2) comparison | MEDIUM | hotSpring | Submission |
-| 12⁴/16⁴ full production | MEDIUM | hotSpring | Paper completeness |
-| pseudoSpore version freeze | MEDIUM | Node Atomic | Section 5 |
+**CRITICAL**: Do NOT run items 4-8 until items 1-3 are resolved.
+
+| # | Experiment | Priority | Owner | Blocks |
+|---|-----------|----------|-------|--------|
+| 1 | **Resolve plaquette ×4 normalization** | **BLOCKER** | hotSpring | Everything |
+| 2 | Action–force finite-difference test | **BLOCKER** | hotSpring | Submission |
+| 3 | Short β-scan (1.8–2.5) vs published SU(2) data | **BLOCKER** | hotSpring | Submission |
+| 4 | Reversibility + ΔH scaling | HIGH | hotSpring | Submission |
+| 5 | Multiple seeds + longer chains | HIGH | hotSpring | Submission |
+| 6 | PRNG distribution characterization | MEDIUM | hotSpring | Submission |
+| 7 | 12⁴/16⁴ full production | MEDIUM | hotSpring | Paper completeness |
+| 8 | pseudoSpore version freeze | MEDIUM | Node Atomic | Section 5 |
+
+The ×4 discrepancy: reported ⟨P⟩ ≈ 0.15 at β=2.3, published SU(2) is
+≈ 0.60. Exactly 4×. May be measurement normalization (extra 1/N² or 1/4)
+or action coupling convention (effective β/4). See paper Appendix B for
+diagnostic protocol.
 
 Full experiment specs: `wateringHole/handoffs/HOTSPRING_RUNG1_EXPERIMENT_QUEUE.md`
+Normalization AAR: `wateringHole/aars/SPOREPRINT_PLAQUETTE_NORMALIZATION_AAR.md`
 
 ---
 
