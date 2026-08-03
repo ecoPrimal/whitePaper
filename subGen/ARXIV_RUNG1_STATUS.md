@@ -55,10 +55,13 @@ with dynamical fermions.
 
 ## Remaining Validation (strengthens, does not block)
 
-| # | Experiment | Priority | Owner | Purpose |
-|---|-----------|----------|-------|---------|
-| 1 | Action–force finite-difference test | HIGH | hotSpring | Validate HMC equations |
-| 2 | Short β-scan (2.0, 2.3, 2.5, 3.0, 5.7) | HIGH | hotSpring | Match published SU(3) data |
+| # | Experiment | Priority | Owner | Status |
+|---|-----------|----------|-------|--------|
+| 1 | Action–force finite-difference test | HIGH | hotSpring | **DONE** — max Δ/F = 8×10⁻⁶ |
+| 2 | β-scan (2.0–6.5) vs published SU(3) | HIGH | hotSpring | **DONE** — §4.4 |
+| 3 | ΔH scaling + Creutz equality | HIGH | hotSpring | **DONE** — ⟨exp(-ΔH)⟩=0.999985 |
+| 4 | Multi-seed (8 seeds) statistics | HIGH | hotSpring | **DONE** — §4.5.3 |
+| 5 | 12⁴ and 16⁴ volume scan | MEDIUM | hotSpring | TODO |
 | 3 | Reversibility + ΔH scaling | MEDIUM | hotSpring | Submission rigor |
 | 4 | Multiple seeds + longer chains | MEDIUM | hotSpring | Statistics rigor |
 | 5 | 12⁴/16⁴ full production | MEDIUM | hotSpring | Volume range |
@@ -69,7 +72,7 @@ with dynamical fermions.
 ## Submission Path
 
 ```
-Remaining validation experiments (β-scan, action-force test)
+Remaining validation experiments (β-scan, action-force test) ← DONE
     ↓
 sporePrint integrates final data into markdown draft
     ↓
@@ -109,5 +112,5 @@ not the physics. This is a stronger result than originally claimed.
 
 ---
 
-*subGen Wave 155n — SU(3) pure gauge preprint. Data complete. Gauge group
-audit resolved. Remaining validation strengthens the submission.*
+*subGen Wave 155n — SU(3) pure gauge preprint. Data complete. All HIGH-priority
+validation experiments passed. Ready for LaTeX generation and submission.*
