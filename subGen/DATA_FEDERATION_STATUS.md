@@ -20,7 +20,7 @@ and served to the 10 Gbps LAN mesh at zero egress cost forever.
 
 ---
 
-## What We Have (519 GB, 130 Datasets, 535+ Files)
+## What We Have (525 GB, 130 Datasets, 535+ Files)
 
 ### Proteomics & Structural Biology (283 GB, 16 datasets)
 
@@ -28,7 +28,7 @@ and served to the 10 Gbps LAN mesh at zero egress cost forever.
 |---------|------|-------|--------|----------------------|
 | UniProt TrEMBL (FASTA + DAT) | 110 GB | 1 | UniProt FTP | wetSpring, healthSpring |
 | PDB mmCIF (full RCSB mirror) | 88 GB | 257,179 | RCSB rsync | hotSpring, neuralSpring, tideGlass |
-| AlphaFold v6 (42/46 proteomes) | 73 GB | 42 | EBI FTP | neuralSpring, coralForge, tideGlass |
+| AlphaFold v6 (46/46 ref proteomes) | 79 GB | 46 | EBI FTP | neuralSpring, coralForge, tideGlass |
 | UniRef90 | 68 GB | 2 | UniProt FTP | neuralSpring (coralForge) |
 | PDB70 HHsearch profiles | 27 GB | 1 | MPI Bioinformatics | neuralSpring |
 | InterPro protein domains + protein2ipr | 13 GB | 2 | EBI FTP | wetSpring, tideGlass |
@@ -236,7 +236,7 @@ All credentials encrypted in `wateringHole/vault/cred_bundle.tar.gpg` on golgiBo
 |--------|------------|-----------------|
 | 1. Drug compound libraries | ChEMBL + PubChem + ZINC + BindingDB + GPS Platform = **28 GB** | SMILES → structure, drug-target binding, GPS reversal scoring |
 | 2. Gene expression signatures | LINCS L1000 + GTEx + GEO = **26 GB** | Perturbation → reversal gene set enrichment scoring |
-| 3. Protein structures | PDB mmCIF + PDB70 + AlphaFold (42 proteomes) + Pfam = **211 GB** | Docking, homology modeling, binding pocket search, domain analysis |
+| 3. Protein structures | PDB mmCIF + PDB70 + AlphaFold (46 proteomes) + Pfam = **217 GB** | Docking, homology modeling, binding pocket search, domain analysis |
 | 4. Disease ontology | MONDO + Reactome + KEGG + HPO + DO + Open Targets = **1.5 GB** | Disease → gene → pathway → drug mapping, target prioritization |
 | 5. Cancer reference | TCGA + GEO SOFT + COSMIC + GDC clinical = **24 GB** | Tumor expression baseline, somatic mutation context, clinical metadata |
 | 6. Genomic reference | RefSeq + NCBI Gene + UniProt (SP+TrEMBL) + Ensembl = **192 GB** | Genome annotation, protein function, gene ontology, ID mapping |
@@ -326,7 +326,7 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 
 | Data | Size | What It Enables |
 |------|------|-----------------|
-| AlphaFold v6 (42 proteomes) | 73 GB | Structure prediction validation |
+| AlphaFold v6 (46 proteomes, complete) | 79 GB | Structure prediction validation |
 | Pfam-A full alignment | 23 GB | Protein family analysis for ML training |
 | PDB70 profiles | 27 GB | Homology search for structure prediction |
 | OpenAPS reference | 0.5 MB | Glucose prediction algorithm baseline |
@@ -354,7 +354,7 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 
 | Dataset | Est. Size | Status | ETA |
 |---------|-----------|--------|-----|
-| AlphaFold v6 (remaining 4 proteomes) | ~5 GB | 42/46 complete | 30 min |
+| ~~AlphaFold v6~~ | ~~79 GB~~ | **46/46 COMPLETE** | Done |
 | Anderson Guaymas Basin FASTQ (PRJNA362212) | ~84 GB | 7 GB of 4 runs | 6 hours |
 | Anderson Mid-Cayman Rise FASTQ (PRJNA234377) | ~127 GB | Queued (after Guaymas) | 12 hours |
 | Baltic bloom FASTQ (PRJNA524461) | ~4 GB | Queued | 1 hour |
@@ -399,7 +399,7 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 
 ## The AlphaFold Decision — Revisited
 
-We now have **42 of 46 reference proteomes** (73 GB) covering all model organisms
+We now have **all 46 reference proteomes** (79 GB) covering all model organisms
 plus major pathogens, parasites, and crop species. This gives us:
 
 - Human, Mouse, Rat, Zebrafish, Drosophila, C. elegans, Yeast
@@ -427,7 +427,7 @@ to arbitrary proteins.
 | Provenance pass rate | 100% |
 | Boot persistence | Hardened (ZFS auto-import, systemd ordering, snapshot/scrub) |
 | Network | 1 Gbps fiber ingress, 10 Gbps LAN mesh |
-| Active downloads | AlphaFold (4 remaining), Anderson Guaymas FASTQ (~84 GB) |
+| Active downloads | AlphaFold **COMPLETE** (46/46), Anderson Guaymas FASTQ (~84 GB) |
 
 ---
 
