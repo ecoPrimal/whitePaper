@@ -450,8 +450,129 @@ the actual scoring matrices from the Cell 2026 paper.
 
 ---
 
-*subGen Wave 155f — Data federation status. 782 GB across 130 datasets, 1315+
+## Operational Incident: Bandwidth Saturation (Aug 3, 2026)
+
+During the data federation campaign, 6+ parallel downloads saturated the
+1 Gbps fiber ingress, causing complete loss of internet for all devices on
+the home network. westGate required a hard reboot; ZFS pool required manual
+re-import.
+
+**Full AAR**: `wateringHole/aars/WESTGATE_BANDWIDTH_SATURATION_AAR.md`
+
+**Architectural conclusion**: Bandwidth governance cannot be a shell flag
+(`--limit-rate`). It must be a primal capability:
+
+- `topology.bandwidth.budget` — ingress/egress capacity and allocation
+- `topology.bandwidth.request` — reserve bandwidth before starting transfers
+- `topology.bandwidth.release` — return allocation when done
+- `topology.bandwidth.pressure` — backpressure when network is stressed
+
+This is a sporeGate topology team deliverable. The same mechanism that
+prevents westGate from starving the home network also prevents consumer
+gates from starving westGate during `content.replicate.pull`. No gate can
+starve another. No operation can starve a gate. The mesh self-regulates.
+
+See also: Data Federation as Primal Composition plan (Phases 0–6) for the
+full architectural evolution from ad-hoc scripts to manifest-driven signal
+compositions with bandwidth governance.
+
+---
+
+## Evolution Front: Ad-Hoc Scripts to Primal Compositions
+
+westGate is the first gate with live data systems. The 1+ TB data estate was
+acquired through 7 ad-hoc Python/shell scripts that call primal UDS sockets
+directly, bypassing biomeOS signal dispatch entirely. This creates a new
+evolution front: migrating from "scripts that work" to "compositions that
+compose, federate, and self-heal."
+
+**Full AAR**: `wateringHole/aars/WESTGATE_DATA_EVOLUTION_FRONT_AAR.md`
+
+### Current State: The Gap
+
+| Layer | Ad-Hoc (runs today) | Composition (specified) | Status |
+|-------|---------------------|-------------------------|--------|
+| Fetch | curl / rsync / aiohttp scripts | `content.fetch` (nestGate UDS handler) | Handler landed, not wired |
+| Orchestration | `manifest_download.py` direct RPC | `nest.declare/acquire/complete` signal graphs | **Registered** in biomeOS |
+| Provenance | `bulk_ingest.py` direct RPC | `nest.store` + `braid.partial/complete` | Both work independently |
+| Governance | Shell `--limit-rate` flags | `topology.bandwidth.*` (cellMembrane) | Spec only, no runtime |
+| Federation | `federation_test.py` (untested) | `nest.sync` + `nest.federate` | Registered, untested at scale |
+
+### Revalidation (Aug 3, 2026)
+
+All existing datasets were re-ingested through the real provenance chain,
+replacing stub provenance (health.check + empty spines) with genuine DAG
+sessions, Merkle roots, and attribution braids:
+
+- **130 datasets** (< 10 GB) revalidated: **130/130 OK** (100% pass rate)
+- **1,314 DAG events** created with `DataCreate` event type
+- **130 braids** created with real session IDs and Merkle roots
+- Large datasets (alphafold_structures 321K files, sra_fastq 785 files) processing in background
+- Every dataset now has a cryptographically verifiable Merkle root
+
+### 3 Federation Signal Graphs (newly registered)
+
+| Signal | Purpose | Primals |
+|--------|---------|---------|
+| `nest.declare_dataset` | Pre-braid: hash manifest, open DAG session, create intent braid | nestGate, rhizoCrypt, loamSpine, sweetGrass, bearDog |
+| `nest.acquire_file` | Per-file: bandwidth check, content.fetch/put, DAG event, spine entry | cellMembrane, nestGate, rhizoCrypt, loamSpine |
+| `nest.complete_dataset` | Finalize: dehydrate, commit spine, sign, final braid, publish | rhizoCrypt, loamSpine, bearDog, sweetGrass, nestGate |
+
+These are now dispatchable via `signal.dispatch` alongside the existing nest
+signals (store, commit, retrieve, verify, sync, federate, ingest_dataset,
+ingest_spore, emit_spore).
+
+### Data Tiering for 10G LAN Mesh
+
+westGate is the data root. The tiering model spans hardware and trust:
+
+**Hardware tiers** (ZFS manages transparently):
+
+| Tier | Hardware | Size |
+|------|----------|------|
+| 0 | L3 cache | 32 MB |
+| 1 | DDR4 / ARC | 64 GB |
+| 2 | NVMe | 2 TB (hot) |
+| 3 | SSD / L2ARC | 2 TB (warm) |
+| 4 | HDD raidz1 | 50 TB (cold) |
+
+**Trust tiers** (provenance policy):
+
+| Tier | Policy | Serving |
+|------|--------|---------|
+| T1 Primary | Fetch, hash, consume directly | Serve from CAS; any gate can pull |
+| T2 Secondary | Revalidate against T1 before trust | Serve with provenance proof |
+| T3 Derived | Reproduction target only | Not served proactively |
+
+**LAN serving flow** (when strandGate needs AlphaFold):
+
+```
+strandGate → signal.dispatch(nest.declare_dataset) → biomeOS routes via songBird
+westGate → topology.bandwidth.request(egress, 2000 Mbps)
+westGate → content.replicate.push at 10 Gbps
+strandGate → dag.verify + certificate.verify + braid.resolve
+Data available locally — no further WAN traffic
+```
+
+### Upstream Evolution Roadmap
+
+| Priority | Deliverable | Owner |
+|----------|-------------|-------|
+| P0 | `topology.bandwidth.*` runtime (cellMembrane Option A) | sporeGate topology |
+| P1 | Wire `content.fetch` into `nest.acquire_file` graph | biomeOS + nestGate |
+| P1 | Cross-gate replication test over 10G trunk | westGate + strandGate |
+| P2 | Fix socket evaporation (v4.50+ prune cycle) | biomeOS team |
+| P2 | Data catalog query API (sweetGrass braid traversal) | sweetGrass team |
+| P3 | ZFS auto-import on boot | sporeGate infra |
+
+---
+
+*subGen Wave 155f — Data federation status. 1+ TB across 130+ datasets, 1315+
 files, 100% provenance coverage. AlphaFold 46/46 complete. SRA FASTQ 5/5
 BioProjects complete (267 GB). All tideGlass modules data-ready including GPS
-Platform. 5 API keys configured. Credential vault on golgiBody. westGate is a
-sovereign scientific data root serving the 10G mesh at zero egress cost.*
+Platform. 5 API keys configured. Credential vault on golgiBody. 3 federation
+signal graphs registered in biomeOS. Revalidation complete (130/130 datasets,
+1314 DAG events, real Merkle roots). westGate is a sovereign scientific data
+root serving the 10G mesh at zero egress cost. Evolution front active:
+ad-hoc scripts → primal compositions. Bandwidth governance and cross-gate
+replication are the next unlocks.*
