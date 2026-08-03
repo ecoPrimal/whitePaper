@@ -20,7 +20,7 @@ and served to the 10 Gbps LAN mesh at zero egress cost forever.
 
 ---
 
-## What We Have (525 GB, 130 Datasets, 535+ Files)
+## What We Have (782 GB, 130 Datasets, 1315+ Files)
 
 ### Proteomics & Structural Biology (283 GB, 16 datasets)
 
@@ -122,12 +122,15 @@ and served to the 10 Gbps LAN mesh at zero egress cost forever.
 | Cell Ontology | 3.5 MB | 1 | OBO Foundry | healthSpring |
 | STRING v12.0 human PPIs | 80 MB | 1 | STRING-DB | tideGlass |
 
-### SRA FASTQ Sequencing Reads (4+ GB, 2 datasets — growing)
+### SRA FASTQ Sequencing Reads (267 GB, 5 datasets — COMPLETE)
 
 | Dataset | Size | Files | Source | Springs/Gardens Served |
 |---------|------|-------|--------|----------------------|
-| PRJNA1224988 cyano bloom (175 runs, complete) | 2.9 GB | 350 | ENA FTP | wetSpring (Smallwood) |
-| PRJNA362212 Anderson Guaymas Basin (downloading) | 7+ GB | 1+ | ENA FTP | wetSpring (Anderson) |
+| PRJNA234377 Anderson Mid-Cayman Rise (12 metagenomes) | 150 GB | 24 | ENA FTP | wetSpring (Anderson) |
+| PRJNA362212 Anderson Guaymas Basin (4 metagenomes) | 113 GB | 8 | ENA FTP | wetSpring (Anderson) |
+| PRJNA1224988 cyano bloom (175 paired-end runs) | 2.9 GB | 350 | ENA FTP | wetSpring (Smallwood) |
+| PRJNA552483 Florida red tide (69 runs) | 1.3 GB | 137 | ENA FTP | wetSpring |
+| PRJNA524461 Baltic cyanobacterial bloom (131 runs) | 825 MB | 261 | ENA FTP | wetSpring |
 
 ### Ecology & Microbiome (400 MB, 8 datasets)
 
@@ -271,8 +274,7 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 | UniProt (SP + TrEMBL + isoforms) | 111 GB | Complete protein annotation database |
 | UniRef90 | 68 GB | Clustered sequences for homology search |
 | NCBI Gene (7 files) | 9.8 GB | Gene function, GO terms, orthologs, RefSeq mapping |
-| SRA FASTQ (cyano bloom, complete) | 2.9 GB | 175 paired-end sequencing runs for bloom analysis |
-| SRA FASTQ (Guaymas Basin, downloading) | 7+ GB | Deep-sea vent metagenomes (Anderson) |
+| SRA FASTQ (5 BioProjects, complete) | 267 GB | Deep-sea vent + bloom metagenomes (Anderson, Smallwood) |
 | NCBI Assembly summaries | 1.8 GB | RefSeq+GenBank complete assembly catalog |
 | RefSeq Human GRCh38 + RNA | 1.1 GB | Reference genome + transcripts |
 | Atlantic salmon genome | 715 MB | Ssal_v3.1 for fish genomics (ABG bake3011) |
@@ -337,7 +339,7 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 |------|------|-----------------|
 | LTEE REL606 | 9.4 MB | Evolution baseline genome |
 | breseq | 47 MB | Mutation detection (Barrick Lab) |
-| SRA FASTQ (cyano bloom) | 2.9 GB | Microbial evolution time-series |
+| SRA FASTQ (5 BioProjects) | 267 GB | Microbial evolution + deep-sea metagenomes |
 
 ### blueFish — PFAS Environmental Analysis
 
@@ -354,11 +356,11 @@ databases directly from the Bin Chen lab's Cell 2026 paper.
 
 | Dataset | Est. Size | Status | ETA |
 |---------|-----------|--------|-----|
-| ~~AlphaFold v6~~ | ~~79 GB~~ | **46/46 COMPLETE** | Done |
-| Anderson Guaymas Basin FASTQ (PRJNA362212) | ~84 GB | 7 GB of 4 runs | 6 hours |
-| Anderson Mid-Cayman Rise FASTQ (PRJNA234377) | ~127 GB | Queued (after Guaymas) | 12 hours |
-| Baltic bloom FASTQ (PRJNA524461) | ~4 GB | Queued | 1 hour |
-| Florida red tide FASTQ (PRJNA552483) | ~4 GB | Queued | 1 hour |
+| ~~AlphaFold v6~~ | 79 GB | **46/46 COMPLETE** | Done |
+| ~~Anderson Guaymas Basin FASTQ~~ | 113 GB | **COMPLETE** (8 files) | Done |
+| ~~Anderson Mid-Cayman Rise FASTQ~~ | 150 GB | **COMPLETE** (24 files) | Done |
+| ~~Baltic bloom FASTQ~~ | 825 MB | **COMPLETE** (261 files) | Done |
+| ~~Florida red tide FASTQ~~ | 1.3 GB | **COMPLETE** (137 files) | Done |
 
 ### Needs User Registration / Browser Download
 
@@ -420,14 +422,14 @@ to arbitrary proteins.
 | Metric | Value |
 |--------|-------|
 | ZFS pool | ONLINE, 0 errors, raidz1 5×14TB |
-| ZFS used / available | 650 GB / 63.0 TB (1.02%) |
+| ZFS used / available | 782 GB / 63.0 TB (1.24%) |
 | L2ARC (read cache) | 2TB SSD active |
 | NUCLEUS primals | 13/13 running (25 UDS sockets) |
 | CAS objects | ~10,000+ |
 | Provenance pass rate | 100% |
 | Boot persistence | Hardened (ZFS auto-import, systemd ordering, snapshot/scrub) |
 | Network | 1 Gbps fiber ingress, 10 Gbps LAN mesh |
-| Active downloads | AlphaFold **COMPLETE** (46/46), Anderson Guaymas FASTQ (~84 GB) |
+| Active downloads | None — all batch downloads complete |
 
 ---
 
@@ -448,8 +450,8 @@ the actual scoring matrices from the Cell 2026 paper.
 
 ---
 
-*subGen Wave 155f — Data federation status. 519 GB across 130 datasets, 535+
-files, 100% provenance coverage. 42/46 AlphaFold proteomes. SRA FASTQ flowing.
-All tideGlass modules data-ready including GPS Platform. 5 API keys configured.
-Credential vault on golgiBody. westGate is a sovereign scientific data root
-serving the 10G mesh at zero egress cost.*
+*subGen Wave 155f — Data federation status. 782 GB across 130 datasets, 1315+
+files, 100% provenance coverage. AlphaFold 46/46 complete. SRA FASTQ 5/5
+BioProjects complete (267 GB). All tideGlass modules data-ready including GPS
+Platform. 5 API keys configured. Credential vault on golgiBody. westGate is a
+sovereign scientific data root serving the 10G mesh at zero egress cost.*
