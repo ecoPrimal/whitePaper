@@ -34,9 +34,11 @@ here to gen5 success.
 ### Layer 1.5 — Data Estate
 
 13. **[DATA_FEDERATION_STATUS.md](DATA_FEDERATION_STATUS.md)** — westGate as
-    scientific data root. 361 GB across 32 datasets, ~260K files, 100% provenance.
-    All tideGlass modules data-ready. Size-to-value analysis for remaining datasets.
-    AlphaFold staged approach. API keys and accounts inventory.
+    scientific data root. **519 GB across 130 datasets**, 535+ files, 100%
+    provenance. All tideGlass modules data-ready including GPS Platform scoring
+    artifacts. 42/46 AlphaFold v6 proteomes. SRA FASTQ flowing. 9 scientific
+    domains covered. 5 API keys configured, credential vault on golgiBody.
+    AlphaFold decision analysis. Updated size-to-value roadmap.
 
 ### Layer 2 — Who We're Talking To
 
@@ -131,12 +133,16 @@ The gen/ docs are the *map*. subGen is the *GPS position*.
 
 Wave 155f reflects **westGate as a sovereign scientific data root**:
 
-- **DATA_FEDERATION_STATUS** (NEW) — 361 GB across 32 datasets, ~260K files,
-  100% provenance coverage. All 7 tideGlass modules data-ready. 6 API keys
-  configured (NCBI, Synapse, Copernicus, COSMIC, BRENDA). Size-to-value analysis
-  for remaining datasets including AlphaFold staged approach recommendation.
+- **DATA_FEDERATION_STATUS** (MAJOR UPDATE) — 519 GB across 130 datasets, 535+
+  files, 100% provenance coverage. All 7 tideGlass modules data-ready including
+  GPS Platform v5+v6 scoring artifacts from Gonzales/Chen Cell 2026. 42/46
+  AlphaFold v6 proteomes (73 GB). SRA FASTQ pipeline flowing (cyano bloom
+  complete, Guaymas Basin in progress). 9 scientific domains. 5 API keys
+  configured (NCBI, Synapse, Copernicus, COSMIC, BRENDA). Credential vault
+  encrypted and pushed to golgiBody. Comprehensive blocker list for user action.
+  Size-to-value analysis for remaining datasets.
 - **GEN5_CRITICAL_PATH** — Steps 1-2 COMPLETE. **Step 5 (NF Ingestion) COMPLETE.**
-  Step 3 FULLY UNBLOCKED — 295 GB of tideGlass data on ZFS with provenance.
+  Step 3 FULLY UNBLOCKED — 482 GB of tideGlass data on ZFS with provenance.
   The bottleneck is now code/analysis, not data/infrastructure.
 - All prior wave content (security docs, outreach, thresholds) still valid.
 
@@ -145,13 +151,14 @@ Previous milestones:
 - Wave 155i: thresholds, critical path, outreach
 - Wave 155m: gen4 completion
 - Wave 155n: gen5 thesis proven on live data
-- **Wave 155f: data-braided scientific database operational**
+- **Wave 155f: data-braided scientific database operational (519 GB sovereign)**
 
 ---
 
 *subGen Wave 155f — 19 documents. gen5 THESIS PROVEN ON LIVE DATA.
-5 NUCLEUS gates. 7 glacial goals COMPLETE. 361 GB across 32 datasets at
-100% provenance. All 7 tideGlass modules data-ready. 6 API keys. First arXiv
-preprint (Rung 1: SU(2)) under validation. westGate = sovereign scientific
-data root. The bottleneck is now code/analysis — data and infrastructure
-are complete.*
+5 NUCLEUS gates. 7 glacial goals COMPLETE. 519 GB across 130 datasets at
+100% provenance. All 7 tideGlass modules data-ready. 42/46 AlphaFold
+proteomes. SRA FASTQ flowing. 5 API keys. Credential vault on golgiBody.
+First arXiv preprint (Rung 1: SU(2)) under validation. westGate = sovereign
+scientific data root. The bottleneck is now code/analysis — data and
+infrastructure are complete.*

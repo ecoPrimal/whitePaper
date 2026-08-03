@@ -1,7 +1,7 @@
 # gen5 Critical Path — From Here to External Science
 
 **Status**: Living document — the single chain to gen5 success
-**Wave**: 155f | **Date**: Aug 2, 2026
+**Wave**: 155f | **Date**: Aug 3, 2026
 
 ---
 
@@ -101,11 +101,11 @@ One chain answers this. Everything else is supporting work.
 
 **Owner**: eastGate (overwatch directs; dedicated gate for compute TBD)
 **Status**: NOT STARTED — **FULLY UNBLOCKED** (Steps 1-2 complete, all 7 module datasets on ZFS)
-**Data**: **295 GB across 7 modules on westGate ZFS with 100% provenance** — ChEMBL 37, PubChem, ZINC, BindingDB, LINCS L1000, GTEx, GEO SOFT, PDB mmCIF, PDB70, MONDO, Reactome, TCGA Xena, COSMIC v104, RefSeq, NCBI Gene, UniProt (SP+TrEMBL), NF Data Portal (Synapse)
-**Gate**: westGate (ZFS 50.4TB, Nest Atomic live, Provenance 7/7) or strandGate (RTX 3090, NUCLEUS)
+**Data**: **482 GB across 7 modules on westGate ZFS with 100% provenance** — ChEMBL 37, PubChem, ZINC, BindingDB, GPS Platform v5+v6 (Zenodo), LINCS L1000, GTEx, GEO SOFT (15 series), PDB mmCIF, PDB70, AlphaFold v6 (42 proteomes), Pfam-A, InterPro, MONDO, Reactome, HPO, DO, KEGG, Open Targets, TCGA (full GDC + Xena), COSMIC v104, ClinVar, gnomAD, RefSeq, NCBI Gene (7 files), UniProt (SP+TrEMBL+isoforms), Ensembl, GENCODE, STRING, BioGRID, NF Data Portal (Synapse)
+**Gate**: westGate (ZFS 50.7TB, Nest Atomic live, Provenance 7/7) or strandGate (RTX 3090, NUCLEUS)
 **Depends on**: Independent — can start immediately
 **Supporting docs**: `attsi/non-anon/contact/gonzales/gps/README.md`, `DATA_MANIFEST.md`, `subGen/DATA_FEDERATION_STATUS.md`
-**Note**: This is now the **sole bottleneck** for gen5. Infrastructure AND data are complete.
+**Note**: This is now the **sole bottleneck** for gen5. Infrastructure AND data are complete. GPS Platform v5+v6 scoring artifacts from Gonzales/Chen Cell 2026 are on ZFS.
 
 ### Step 4: tideGlass Phase 1
 
@@ -225,6 +225,8 @@ The critical path shortened by ~2-3 weeks vs 155i estimate because Steps 1-2 are
 
 ---
 
-*subGen Wave 155m — gen5 critical path. Steps 1-2 COMPLETE (Provenance 7/7 live).
-6 remaining steps from tideGlass Phase 0 to JOSS. Step 3 can start immediately.
-Infrastructure is 100% ready. The science pipeline is the sole bottleneck.*
+*subGen Wave 155f — gen5 critical path. Steps 1-2 COMPLETE (Provenance 7/7 live).
+Step 5 COMPLETE (NF ingestion). 5 remaining steps from tideGlass Phase 0 to JOSS.
+Step 3 can start immediately with 482 GB of tideGlass data including GPS Platform
+scoring artifacts. 519 GB total sovereign data across 130 datasets. Infrastructure
+is 100% ready. The science pipeline is the sole bottleneck.*
