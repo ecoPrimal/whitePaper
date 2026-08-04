@@ -191,6 +191,45 @@ The provenance chain is independently verifiable using standard tools
 (b3sum for BLAKE3, any Ed25519 implementation for signatures, any
 PROV-O parser for attribution).
 
+### 2.5 Parallel Thermalization and Configuration Caching
+
+Lattice HMC thermalization — the Monte Carlo equilibration of gauge
+fields from a random hot start — is the primary bottleneck for
+larger-volume production runs on consumer hardware. A single 16⁴
+thermalization (200 Omelyan trajectories, 40 leapfrog steps each)
+requires ~2.5 hours on one EPYC 7452 core, during which the GPU
+sits idle.
+
+We decompose the workflow into a producer-consumer pipeline:
+
+1. **Producer** (CPU): a parallel thermalizer dispatches the full
+   (dims, β, seed) grid across available CPU cores using work-stealing
+   (rayon). Each thermalized configuration is serialized to disk as a
+   raw f64 array with a BLAKE3 content hash as cache key. The key
+   depends deterministically on (dims, β, seed, n_therm, integrator),
+   so identical parameters always resolve to the same cached file.
+
+2. **Consumer** (GPU): the production binary checks the cache before
+   each β-point. On hit, the thermalized configuration is loaded
+   from disk in < 1 second — no CPU thermalization needed. On miss,
+   it falls back to inline thermalization and caches the result.
+
+On our test platform (2× AMD EPYC 7452, 128 hardware threads), we
+thermalize 9 independent 16⁴ configurations (3 β-values × 3 seeds)
+plus 1 24⁴ configuration simultaneously. The parallel pass completes
+in approximately the same wall time as a single serial thermalization,
+providing a ~10× throughput improvement for grid surveys. Memory
+overhead is modest: each 16⁴ configuration occupies 36 MB in the
+flat representation (65,536 sites × 4 directions × 18 f64 per SU(3)
+matrix), so even 64 parallel thermalizations use < 2.4 GB of the
+system's 251 GB.
+
+The content-addressed cache extends naturally to the provenance
+pipeline: each cached configuration carries a BLAKE3 hash that
+enters the DAG as a compute artifact, enabling full lineage from
+hot start through thermalization through GPU production to final
+observables.
+
 ---
 
 ## 3. Results
