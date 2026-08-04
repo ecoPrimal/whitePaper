@@ -1,7 +1,7 @@
 # arXiv Rung 1 — SU(3) Pure Gauge Preprint Status
 
-**Status**: **DATA COMPLETE** — gauge group audit resolved, production data validated
-**Wave**: 155n | **Date**: Aug 3, 2026 (updated)
+**Status**: **DATA COMPLETE + INFRA LIVE** — parallel thermalization, config cache, production ongoing
+**Wave**: 155v | **Date**: Aug 4, 2026 (updated)
 **Paper**: `LATTICE_QCD_CONSUMER_GPU_ARXIV.md` (this directory)
 **LaTeX**: `lattice_qcd_consumer_gpu.tex` (this directory)
 
@@ -62,7 +62,7 @@ with dynamical fermions.
 | 3 | ΔH scaling + Creutz equality | HIGH | hotSpring | **DONE** — ⟨exp(-ΔH)⟩=0.999985 |
 | 4 | Multi-seed (8 seeds) statistics | HIGH | hotSpring | **DONE** — §4.5.3 |
 | 5 | 12⁴ volume scan (5 β points) | MEDIUM | hotSpring | **DONE** — §4.4 (Δ<0.1% at β≥6.0) |
-| 6 | 16⁴ + 24⁴ production | MEDIUM | hotSpring | **IN PROGRESS** (RTX 3090, overnight) |
+| 6 | 16⁴ + 24⁴ production | MEDIUM | hotSpring | **IN PROGRESS** — parallel therm: 10 configs × 64 EPYC threads, config cache LIVE |
 | 6 | pseudoSpore version freeze | MEDIUM | Node Atomic | Section 5 |
 
 ---
@@ -110,5 +110,7 @@ not the physics. This is a stronger result than originally claimed.
 
 ---
 
-*subGen Wave 155n — SU(3) pure gauge preprint. Data complete. All HIGH-priority
-validation experiments passed. Ready for LaTeX generation and submission.*
+*subGen Wave 155v — SU(3) pure gauge preprint. Data complete. All HIGH-priority
+validation experiments passed. Parallel thermalization infrastructure LIVE: 10 configs
+thermalizing across 64 EPYC threads, BLAKE3-addressed config cache, cache-aware GPU
+production pipeline. Ready for LaTeX generation and submission.*

@@ -302,7 +302,12 @@ without modification. The math is the same; only the problem size changes.
 
 ---
 
-*subGen Wave 155q — GPU Scaling Hypothesis. Memory budget analysis for Rungs 1-5.
+*subGen Wave 155v — GPU Scaling Hypothesis. Memory budget analysis for Rungs 1-5.
 Both cards fit 32⁴ Nf=2+1 (Rung 4) comfortably. All infrastructure implemented.
 Validation campaigns estimated: Rung 2 (~hours), Rung 3 (~days), Rung 4 (~days),
 Rung 5 (~days). Path to publication at each rung is clear.*
+
+*Update (155v): Parallel thermalization infrastructure eliminates the CPU bottleneck.
+`arxiv_thermalize_grid` (rayon, 64 EPYC threads) + BLAKE3-addressed config cache +
+cache-aware `arxiv_volume_scan`. Wall-time estimates above are for serial single-thread;
+with parallel thermalization, CPU prep is amortized to a single parallel pass.*
