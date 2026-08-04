@@ -1,24 +1,31 @@
 # westGate Science Landscape — Data Estate, Use Cases, and Spring Guidance
 
 **Status**: Living document — science capabilities enabled by colocated sovereign data
-**Wave**: 155p/156a | **Date**: Aug 3, 2026
-**Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 1.19 TB used / 49.5 TB free)
+**Wave**: 155v/156d | **Date**: Aug 4, 2026
+**Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 3.65 TB allocated / 60 TB free)
+**Hardware**: AMD Ryzen 7 5700X (8C/16T), 64 GB DDR4, RTX 3070 (8 GB), Pop!_OS 22.04
 **Audience**: Spring subteams, overwatch, gate operators spinning up parallel IDEs
 
 ---
 
 ## Why This Document
 
-westGate holds **~1.2 TB across 131 datasets (1.17M files) spanning 17+ domains**,
-all provenance-tracked (BLAKE3 → rhizoCrypt DAG → loamSpine Merkle → bearDog
-Ed25519 → sweetGrass attribution). This document maps that data estate to the
-science it enables — what's compelling on westGate alone, what unlocks with the
-mesh, and which datasets each spring subteam should know about.
+westGate holds **3.65 TB across 154 datasets spanning 17+ domains**, with the
+provenance pipeline running at **43 files/s sustained** through the canonical
+chain (BLAKE3 → CAS → batch DAG event → session-level Merkle commit → bearDog
+Ed25519 → sweetGrass braid). 25 primal sockets live in membrane. Full NUCLEUS
+tower operational. This document maps that data estate to the science it enables.
 
 The principle: **grab once at 1 Gbps (internet), serve forever at 10 Gbps (LAN),
 zero egress cost.** Every dataset downloaded once becomes a permanent sovereign
 asset reusable by any gate, any spring, any experiment — with cryptographic
 provenance proving where it came from and that it hasn't been modified.
+
+**Provenance pipeline**: Canonical architecture — per-file CAS + batch DAG
+events only (no per-file spine entries). Session-level spine commit at
+dehydration. bearDog signature wired into sweetGrass braid. 122x throughput
+improvement over the initial per-file spine pattern (0.3/s → 43/s).
+See `PROVENANCE_TRIO_ARCHITECTURE.md` for the full analysis.
 
 ---
 
@@ -298,28 +305,39 @@ Full details in `infra/wateringHole/scripts/data_blockers.md`.
 
 | Spring | Cargo Workspace | Deploy Graph | Data on ZFS | biomeOS Registered | Boot Status |
 |--------|----------------|-------------|-------------|-------------------|-------------|
-| **groundSpring** | 2 crates + 3 experiments | v2.0.0 | 3.6 GB | YES | **READY** |
-| **airSpring** | per-experiment + metalForge | v2.0.0 | 3.6 GB (shared) | YES | **READY** |
-| **wetSpring** | barracuda + experiments | v2.0.0 | 481 GB | YES | **READY** |
-| **tideGlass** | scope.toml only | NOT YET | 123 GB | NO | **DATA READY** |
+| **groundSpring** | 2 crates + 3 experiments (1,166 tests) | v2.0.0 | 3.6 GB | YES | **READY** |
+| **airSpring** | per-experiment + metalForge (1,240 tests) | v2.0.0 | 3.6 GB (shared) | YES | **READY** |
+| **wetSpring** | barracuda + experiments (2,210 tests) | v2.0.0 | 481 GB | YES | **READY** |
+| **tideGlass** | 9-crate workspace (176 tests) | Cell graph v2.0.0 | 123 GB | Cell graph | **CODE + DATA READY** |
 
 **Blocker for all**: biomeOS deploy executor is shipped but not operationalized.
 ironGate proves the chain first (Phase 1: esotericWebb), then westGate springs
 follow (Phase 4).
 
-**tideGlass-specific**: Needs Cargo workspace creation and biomeOS deploy graph.
-The tideGlass subteam spinning up today can begin with Phase 0 Python validation
-(no NUCLEUS needed) while the workspace is built.
+**tideGlass**: Full Rust rebuild complete — 9 crates (`tideglass-core`, `-rges`,
+`-rcl`, `-gps4drug`, `-screen`, `-molsearch`, `-octad`, `-nf`, `-bin`), 176
+tests, G56 Neural API routing, CAS wiring with graceful degradation, convergence
+gate. Cell deploy graph at `gardens/tideGlass/graphs/cells/tideglass_cell.toml`.
+**Data gap**: GPS platform data still NumPy/pickle format in CAS — needs JSON
+conversion for Rust consumption.
+
+**westGate data team provides**: ZFS storage, CAS indexing, provenance braiding,
+convergence checks, data format readiness. Spring teams own their code.
 
 ---
 
 ## VII. Background Jobs
 
-| Job | Status | Notes |
-|-----|--------|-------|
-| alphafold_structures revalidation | Running | 575K files through provenance chain |
-| alphafold-bulk.service | Running | 214M structure download (systemd, restart-safe) |
-| alphafold_full_sync.sh | Timer (daily 03:00) | Proteome sync + sequences |
+| Job | Status | Rate | Notes |
+|-----|--------|------|-------|
+| alphafold-bulk.service | Running | 56/s | 190K/246M done. Systemd, restart-safe. |
+| alphafold-prov.service | **Running** | **43/s** | Provenance trailer — 81K braided, 0 errors. Canonical pipeline (CAS + batch DAG). |
+| alphafold-sync.timer | Daily 03:00 | rsync | Proteome sync + sequences |
+
+The provenance trailer runs the canonical pipeline: BLAKE3 → CAS → batch DAG
+append (200 events/RPC) with periodic partial dehydration. No per-file spine
+entries. The trailer catches up during download pauses. At 43/s, the 6.1M
+queued files will be braided in ~40 hours.
 
 These complete independently and don't block spring bootup.
 
@@ -345,18 +363,25 @@ These complete independently and don't block spring bootup.
 
 ### What's Next
 
-- **tideGlass Phase 0**: Python validation of RGES module against GPS paper
-  benchmarks (tideGlass subteam, starting today)
+- **GPS data format**: Convert NumPy/pickle → JSON for tideGlass Rust consumption
+  (westGate data team — unblocks tideGlass science)
+- **Convergence sweep**: Run `convergence_check.py` across all 154 datasets,
+  publish results for spring teams (westGate data team)
 - **Phase 4 spring boot**: Once ironGate proves the deploy chain, westGate
   springs boot with `biomeOS graph.execute` against their deploy graphs
 - **Phase 5 mesh**: songBird content.get E2E validation between ironGate ↔
   westGate, enabling healthSpring and neuralSpring cross-gate data access
-- **Data estate growth**: 49.5 TB available. Current 1.2 TB is 2.4% utilized.
-  AlphaFold full 214M structures will add ~15 TB over time.
+- **Data estate growth**: 60 TB available. Current 3.65 TB is 5.7% utilized.
+  AlphaFold full 246M structures will add ~15 TB over time.
+- **Neural API migration**: Spring consumers should route CAS through
+  `neural-api-westgate-tower-155f.sock` for capability-based discovery,
+  not direct `nestgate-westgate-tower-155f.sock` calls
 
 ---
 
 *westGate is a sovereign scientific data root. Every byte is hashed, tracked, and
-signed. The springs don't query external APIs — they query local CAS with
-cryptographic proof of origin. This is what "grab once, serve forever" looks like
-in practice.*
+signed. The provenance pipeline runs at 43 files/s through the canonical
+architecture — per-file CAS + batch DAG, session-level spine commit, bearDog
+signature in the sweetGrass braid. The springs don't query external APIs — they
+query local CAS with cryptographic proof of origin. This is what "grab once,
+prove forever" looks like in practice.*
