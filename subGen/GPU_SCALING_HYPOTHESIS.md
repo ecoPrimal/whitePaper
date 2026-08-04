@@ -123,20 +123,23 @@ begin and published comparison data is abundant.
 
 ## Wall Time Estimates
 
-Based on measured throughput at 8⁴ on RX 6950 XT (15.6 ms/traj for pure gauge)
-and assuming linear volume scaling for force computation:
+Based on measured throughput at 8⁴ (RX 6950 XT) and 12⁴ (RTX 3090):
 
 ### Pure Gauge (Rung 1)
 
-| Lattice | Volume | ms/traj (est.) | 1000 traj | 5000 traj |
-|---------|--------|----------------|-----------|-----------|
-| 8⁴ | 4,096 | 15.6 (measured) | 16 s | 78 s |
-| 12⁴ | 20,736 | ~80 | 80 s | 6.5 min |
-| 16⁴ | 65,536 | ~250 | 4.2 min | 21 min |
-| 24⁴ | 331,776 | ~1,300 | 22 min | 1.8 hr |
-| 32⁴ | 1,048,576 | ~4,000 | 67 min | 5.6 hr |
-| 40⁴ | 2,560,000 | ~10,000 | 2.8 hr | 14 hr |
-| 48⁴ | 5,308,416 | ~20,000 | 5.6 hr | 28 hr |
+| Lattice | Volume | ms/traj | 1000 traj | 5000 traj | Source |
+|---------|--------|---------|-----------|-----------|--------|
+| 8⁴ | 4,096 | 15.6 | 16 s | 78 s | measured (RX 6950 XT) |
+| 12⁴ | 20,736 | **611** | **10.2 min** | **51 min** | **measured (RTX 3090)** |
+| 16⁴ | 65,536 | ~1,900 (est.) | ~32 min | ~2.6 hr | projected |
+| 24⁴ | 331,776 | ~9,800 (est.) | ~2.7 hr | ~13.6 hr | projected from 12⁴ |
+| 32⁴ | 1,048,576 | ~31,000 (est.) | ~8.6 hr | ~43 hr | projected |
+| 40⁴ | 2,560,000 | ~75,000 (est.) | ~21 hr | ~104 hr | projected |
+| 48⁴ | 5,308,416 | ~156,000 (est.) | ~43 hr | ~217 hr | projected |
+
+Note: 12⁴ measured with cpu_mom path (CPU momenta + GPU MD, N_md=30, dt=0.015).
+The 8⁴ measurement used pure GPU path with fewer MD steps — not directly comparable.
+All projections above scale from the 12⁴ measurement, which is the production path.
 
 ### Nf=2 RHMC (Rung 3)
 
@@ -147,10 +150,10 @@ Hasenbusch) or ~3-4× (with Hasenbusch).
 
 | Lattice | Volume | ms/traj (no Has.) | ms/traj (Has.) | 1000 traj (Has.) |
 |---------|--------|-------------------|----------------|------------------|
-| 12⁴ | 20,736 | ~450 | ~280 | 4.7 min |
-| 16⁴ | 65,536 | ~1,400 | ~900 | 15 min |
-| 24⁴ | 331,776 | ~7,500 | ~4,500 | 75 min |
-| 32⁴ | 1,048,576 | ~23,000 | ~14,000 | 3.9 hr |
+| 12⁴ | 20,736 | ~3,400 | ~2,100 | 35 min |
+| 16⁴ | 65,536 | ~10,700 | ~6,700 | 1.9 hr |
+| 24⁴ | 331,776 | ~54,000 | ~34,000 | 9.4 hr |
+| 32⁴ | 1,048,576 | ~171,000 | ~107,000 | 30 hr |
 
 ### Nf=2+1 (Rung 4)
 
@@ -159,9 +162,9 @@ iterations, roughly half the cost of the light sector).
 
 | Lattice | ms/traj (est.) | 1000 traj |
 |---------|----------------|-----------|
-| 16⁴ | ~1,400 | 23 min |
-| 24⁴ | ~7,000 | 1.9 hr |
-| 32⁴ | ~21,000 | 5.8 hr |
+| 16⁴ | ~16,000 | 4.4 hr |
+| 24⁴ | ~81,000 | 22 hr |
+| 32⁴ | ~256,000 | 71 hr |
 
 ### Finite Temperature (Rung 5)
 
@@ -169,11 +172,11 @@ Asymmetric lattices are cheaper per trajectory (smaller total volume):
 
 | Geometry | Volume | ms/traj (Nf=2+1 est.) | 1000 traj |
 |----------|--------|------------------------|-----------|
-| 16³×8 | 32,768 | ~700 | 12 min |
-| 24³×8 | 110,592 | ~2,400 | 40 min |
-| 32³×8 | 262,144 | ~5,600 | 93 min |
-| 32³×12 | 393,216 | ~8,400 | 2.3 hr |
-| 48³×12 | 1,327,104 | ~28,000 | 7.8 hr |
+| 16³×8 | 32,768 | ~8,000 | 2.2 hr |
+| 24³×8 | 110,592 | ~27,000 | 7.5 hr |
+| 32³×8 | 262,144 | ~64,000 | 18 hr |
+| 32³×12 | 393,216 | ~96,000 | 27 hr |
+| 48³×12 | 1,327,104 | ~324,000 | 90 hr |
 
 ---
 
@@ -184,42 +187,42 @@ Asymmetric lattices are cheaper per trajectory (smaller total volume):
 | Volume | β range | Trajectories | Status |
 |--------|---------|-------------|--------|
 | 4⁴, 8⁴ | 2.0–6.5 | 100-500 | **DONE** (CPU+GPU validated) |
-| 12⁴ | 5.7–6.2 | 1000 | **IN PROGRESS** (GPU, overnight) |
-| 16⁴ | 5.9–6.2 | 2000 | **IN PROGRESS** (GPU, overnight) |
-| 24⁴ | 6.0 | 1000 | **IN PROGRESS** (GPU, overnight) |
-| 32⁴ | 6.0 | 1000 | NEXT (GPU-only, ~7 hr) |
+| 12⁴ | 5.7–6.2 | 1000 | **DONE** (GPU, 611ms/traj, Δ<0.1% at β≥6.0) |
+| 16⁴ | 5.9–6.2 | 2000 | **IN PROGRESS** (GPU, RTX 3090) |
+| 24⁴ | 6.0 | 1000 | **IN PROGRESS** (GPU, RTX 3090) |
+| 32⁴ | 6.0 | 1000 | NEXT (GPU-only, ~8.6 hr est.) |
 
 ### Rung 2 (Next Paper) — Validate Dirac
 
 | Task | Volume | Published Comparison | Estimated Time |
 |------|--------|---------------------|----------------|
-| Pion correlator (quenched) | 16⁴ | Bali 2000, MILC | ~30 min |
-| Meson spectrum (quenched) | 24⁴ | CP-PACS 2001 | ~2 hr |
-| Polyakov loop susceptibility | 16³×8 | Karsch 1994 | ~15 min |
+| Pion correlator (quenched) | 16⁴ | Bali 2000, MILC | ~30 min (gauge gen) + CG |
+| Meson spectrum (quenched) | 24⁴ | CP-PACS 2001 | ~3 hr (gauge gen) + CG |
+| Polyakov loop susceptibility | 16³×8 | Karsch 1994 | ~15 min (gauge gen) |
 
 ### Rung 3 (Third Paper) — Dynamical Fermions
 
 | Task | Volume | Published Comparison | Estimated Time |
 |------|--------|---------------------|----------------|
-| Nf=2 plaquette vs β | 16⁴ | MILC, HotQCD | ~25 min/point |
-| Nf=2 pion mass vs am | 16⁴ | MILC | ~25 min/point |
-| Deconfinement Tc (Nf=2) | 16³×8 | Karsch, Laermann | ~12 min/point |
+| Nf=2 plaquette vs β | 16⁴ | MILC, HotQCD | ~2 hr/point |
+| Nf=2 pion mass vs am | 16⁴ | MILC | ~2 hr/point |
+| Deconfinement Tc (Nf=2) | 16³×8 | Karsch, Laermann | ~1 hr/point |
 
 ### Rung 4 — Physical QCD
 
 | Task | Volume | Published Comparison | Estimated Time |
 |------|--------|---------------------|----------------|
-| Nf=2+1 EOS | 24³×8 | HotQCD, Wuppertal-Budapest | ~40 min/point |
-| Light hadron spectrum | 24⁴ | BMW, MILC | ~2 hr/mass |
-| Scale setting (w₀) | 24⁴ | BMW 2014 | ~2 hr |
+| Nf=2+1 EOS | 24³×8 | HotQCD, Wuppertal-Budapest | ~8 hr/point |
+| Light hadron spectrum | 24⁴ | BMW, MILC | ~22 hr/mass |
+| Scale setting (w₀) | 24⁴ | BMW 2014 | ~22 hr |
 
 ### Rung 5 — Finite Temperature
 
 | Task | Volume | Published Comparison | Estimated Time |
 |------|--------|---------------------|----------------|
-| Tc/√σ | 32³×8,10,12 | Bazavov 2012 | ~6 hr total |
-| Pressure p(T)/T⁴ | 32³×8..16 | HotQCD 2014 | ~12 hr total |
-| Chiral condensate vs T | 24³×6,8,10 | Ding 2019 | ~4 hr total |
+| Tc/√σ | 32³×8,10,12 | Bazavov 2012 | ~54 hr total |
+| Pressure p(T)/T⁴ | 32³×8..16 | HotQCD 2014 | ~100 hr total |
+| Chiral condensate vs T | 24³×6,8,10 | Ding 2019 | ~30 hr total |
 
 ---
 
