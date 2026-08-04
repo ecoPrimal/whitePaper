@@ -518,25 +518,47 @@ Thermalization performed in parallel across 64 CPU cores (AMD EPYC 7452)
 via content-addressed configuration caching (BLAKE3), then loaded by
 GPU production binary with zero cold-start overhead:
 
-[DATA IN PROGRESS — parallel thermalization: 10 configs × 64 EPYC threads]
+**16⁴ lattice** — 200 thermalization (parallel, 64 EPYC threads) + 1000
+production per GPU, dt=0.01, N_md=40. Dual-GPU: same cached config run on
+both NVIDIA and AMD. Cross-vendor plaquette agreement within statistical error:
 
-| Lattice | β | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
-|---------|-----|-----------------|--------|-----------|--------|-----|
-| 16⁴ | 5.9 | — | — | 0.5637 | GLS98 | — |
-| 16⁴ | 6.0 | — | — | 0.5934 | GL98 | — |
-| 16⁴ | 6.2 | — | — | 0.6136 | B00 | — |
-| 24⁴ | 6.0 | — | — | 0.5934 | GL98 | — |
+| Lattice | β | GPU | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
+|---------|-----|-----|-----------------|--------|-----------|--------|-----|
+| 16⁴ | 5.9 | RTX 3090 | 0.58142 | 1.34e-4 | 0.5637 | GLS98 | +3.15% |
+| 16⁴ | 5.9 | RX 6950 XT | 0.58158 | 1.93e-4 | 0.5637 | GLS98 | +3.17% |
+| 16⁴ | 6.0 | RTX 3090 | **0.59351** | **1.88e-4** | **0.5934** | GL98 | **+0.02%** |
+| 16⁴ | 6.0 | RX 6950 XT | **0.59342** | **9.28e-5** | **0.5934** | GL98 | **+0.00%** |
+| 16⁴ | 6.2 | RTX 3090 | **0.61338** | **1.12e-4** | **0.6136** | B00 | **-0.04%** |
+| 16⁴ | 6.2 | RX 6950 XT | **0.61338** | **1.34e-4** | **0.6136** | B00 | **-0.04%** |
+| 24⁴ | 6.0 | — | — | — | 0.5934 | GL98 | — |
+
+Cross-vendor agreement (same cached config, same β):
+
+| β | |Δ(NVIDIA−AMD)| | Relative |
+|-----|------------------|----------|
+| 5.9 | 1.55 × 10⁻⁴ | 2.67 × 10⁻⁴ |
+| 6.0 | 9.54 × 10⁻⁵ | 1.61 × 10⁻⁴ |
+| 6.2 | **3.75 × 10⁻⁶** | **6.12 × 10⁻⁶** |
+
+At β=6.2, the inter-GPU plaquette agreement reaches 6 parts per million —
+within statistical error and consistent with independent stochastic
+trajectories from a shared starting configuration. The 16⁴ cross-vendor
+parity confirms the 8⁴ result (§3.4) at a physically meaningful volume
+where finite-volume effects are negligible (Δ < 0.05% at β ≥ 6.0).
 
 As lattice volume increases (L/a = 8 → 12 → 16 → 24), the finite-volume
 suppression of ⟨P⟩ systematically decreases, converging toward the published
-infinite-volume values. The 12⁴ data already demonstrates sub-percent
-agreement at weak coupling (β ≥ 6.0). The 8⁴ → 12⁴ comparison shows the
-expected volume scaling:
+infinite-volume values. The full volume scaling at β=6.0:
 
-| β | 8⁴ ⟨P⟩ | 12⁴ ⟨P⟩ | Published (∞-vol) | 8⁴ Δ/% | 12⁴ Δ/% |
-|-----|---------|---------|-------------------|---------|---------|
-| 6.0 | 0.58623 | 0.59364 | 0.5934 | −1.2% | +0.04% |
-| 6.2 | — | 0.61354 | 0.6136 | — | −0.01% |
+| β | 8⁴ ⟨P⟩ | 12⁴ ⟨P⟩ | 16⁴ ⟨P⟩ | Published (∞-vol) | 8⁴ Δ/% | 12⁴ Δ/% | 16⁴ Δ/% |
+|-----|---------|---------|---------|-------------------|---------|---------|---------|
+| 6.0 | 0.58623 | 0.59364 | 0.59346 | 0.5934 | −1.2% | +0.04% | **+0.01%** |
+| 6.2 | — | 0.61354 | 0.61338 | 0.6136 | — | −0.01% | **−0.04%** |
+
+The volume convergence from 8⁴ through 16⁴ demonstrates correct finite-size
+scaling: the 16⁴ data at β ≥ 6.0 agrees with published infinite-volume values
+to better than 0.05%, confirming that systematic finite-volume effects are
+resolved at this lattice size.
 
 This convergence pattern is the canonical signature of a correct lattice
 QCD implementation: finite-volume artifacts decrease as O(exp(−mL)) where
