@@ -1,7 +1,7 @@
 # arXiv Rung 1 — SU(3) Pure Gauge Preprint Status
 
-**Status**: **DATA COMPLETE + INFRA LIVE** — parallel thermalization, config cache, production ongoing
-**Wave**: 155v | **Date**: Aug 4, 2026 (updated)
+**Status**: **16⁴ DUAL-GPU PRODUCING** — cross-vendor parity scan running on both GPUs
+**Wave**: 156d | **Date**: Aug 4, 2026 PM (updated)
 **Paper**: `LATTICE_QCD_CONSUMER_GPU_ARXIV.md` (this directory)
 **LaTeX**: `lattice_qcd_consumer_gpu.tex` (this directory)
 
@@ -62,7 +62,7 @@ with dynamical fermions.
 | 3 | ΔH scaling + Creutz equality | HIGH | hotSpring | **DONE** — ⟨exp(-ΔH)⟩=0.999985 |
 | 4 | Multi-seed (8 seeds) statistics | HIGH | hotSpring | **DONE** — §4.5.3 |
 | 5 | 12⁴ volume scan (5 β points) | MEDIUM | hotSpring | **DONE** — §4.4 (Δ<0.1% at β≥6.0) |
-| 6 | 16⁴ + 24⁴ production | MEDIUM | hotSpring | **IN PROGRESS** — parallel therm: 10 configs × 64 EPYC threads, config cache LIVE |
+| 6 | 16⁴ + 24⁴ production | MEDIUM | hotSpring | **PRODUCING** — 9/10 configs cached. `arxiv_dual_gpu_scan` running RTX 3090 + RX 6950 XT. 24⁴ thermalizing. |
 | 6 | pseudoSpore version freeze | MEDIUM | Node Atomic | Section 5 |
 
 ---
