@@ -1,8 +1,8 @@
 # westGate Science Landscape — Data Estate, Use Cases, and Spring Guidance
 
 **Status**: Living document — science capabilities enabled by colocated sovereign data
-**Wave**: 155v/156d | **Date**: Aug 4, 2026 PM
-**Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 3.65 TB allocated / 60 TB free)
+**Wave**: 156d | **Date**: Aug 4, 2026 PM
+**Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 3.21 TB used / 47.5 TB free)
 **Hardware**: AMD Ryzen 7 5700X (8C/16T), 64 GB DDR4, RTX 3070 (8 GB), Pop!_OS 22.04
 **Audience**: Spring subteams, overwatch, gate operators spinning up parallel IDEs
 
@@ -10,11 +10,12 @@
 
 ## Why This Document
 
-westGate holds **3.65 TB across 154 datasets spanning 17+ domains**, with the
+westGate holds **3.21 TB across 153 datasets spanning 17+ domains**, with the
 provenance pipeline running at **43 files/s sustained** through the canonical
 chain (BLAKE3 → CAS → batch DAG event → session-level Merkle commit → bearDog
-Ed25519 → sweetGrass braid). 25 primal sockets live in membrane. Full NUCLEUS
-tower operational. This document maps that data estate to the science it enables.
+Ed25519 → sweetGrass braid). 13 primals + biomeOS neural-api live in membrane (14/14).
+Full NUCLEUS tower operational on **biomeOS v4.57** (`nucleus attach` available).
+This document maps that data estate to the science it enables.
 
 The principle: **grab once at 1 Gbps (internet), serve forever at 10 Gbps (LAN),
 zero egress cost.** Every dataset downloaded once becomes a permanent sovereign
@@ -310,17 +311,18 @@ Full details in `infra/wateringHole/scripts/data_blockers.md`.
 | **wetSpring** | barracuda + experiments (2,210 tests) | v2.0.0 | 481 GB | YES | **READY** |
 | **tideGlass** | 9-crate workspace (176 tests) | Cell graph v2.0.0 | 123 GB | Cell graph | **CODE + DATA READY** |
 
-**biomeOS cell attach**: `biomeos nucleus attach` SHIPPED upstream (v4.57). westGate
-currently running v4.56 — depot update needed. ironGate proves the chain first
-(Phase 1: esotericWebb cell boot UNBLOCKED), then westGate springs follow (Phase 4).
-Cell TOMLs exist for all 4 springs — see `westgate.toml` `[science.cell_graphs]`.
+**biomeOS cell attach**: `biomeos nucleus attach` SHIPPED upstream (v4.57). **westGate
+now running v4.57** (source-built, 14/14 HEALTHY). ironGate proved the chain
+(Phase 1: esotericWebb cell boot SUCCEEDED, 21/22 PASS). westGate springs are
+**Phase 4 UNBLOCKED**. Cell TOMLs exist for all 4 springs — see `westgate.toml`
+`[science.cell_graphs]`.
 
 **tideGlass**: Full Rust rebuild complete — 9 crates (`tideglass-core`, `-rges`,
-`-rcl`, `-gps4drug`, `-screen`, `-molsearch`, `-octad`, `-nf`, `-bin`), 176
+`-rcl`, `-gps4drug`, `-screen`, `-molsearch`, `-octad`, `-nf`, `-bin`), 177
 tests, G56 Neural API routing, CAS wiring with graceful degradation, convergence
 gate. Cell deploy graph at `gardens/tideGlass/graphs/cells/tideglass_cell.toml`.
-**Data gap**: GPS platform data still NumPy/pickle format in CAS — needs JSON
-conversion for Rust consumption.
+**GPS data CONVERTED**: 11 JSON outputs (103.4 MB) CAS-ingested with BLAKE3.
+Covers 2198 gene lists, MLP weights, RCL ensembles, compound matrices.
 
 **westGate data team provides**: ZFS storage, CAS indexing, provenance braiding,
 convergence checks, data format readiness. Spring teams own their code.
@@ -364,26 +366,27 @@ These complete independently and don't block spring bootup.
 
 ### What's Next
 
-- **biomeOS depot update**: Update from v4.56 to v4.57 for `nucleus attach`
-  (westGate ops — enables cell boot locally)
-- **GPS data format**: Convert NumPy/pickle → JSON for tideGlass Rust consumption
-  (westGate data team — unblocks tideGlass science)
-- **Convergence sweep**: Run `convergence_check.py` across all 154 datasets,
-  publish results for spring teams (westGate data team)
-- **Phase 4 spring boot**: Cell TOMLs exist for all 4 springs. biomeOS cell
-  attach is shipped upstream. westGate boots after ironGate Phase 1 proves chain.
-  `biomeos nucleus attach --cell tideglass_cell.toml` once v4.57 deployed.
+- ~~**biomeOS depot update**~~: **DONE** — v4.57 deployed (source-built), 14/14 HEALTHY
+- ~~**GPS data format**~~: **DONE** — 11 JSON outputs (103.4 MB) CAS-ingested
+- ~~**Convergence sweep**~~: **DONE** — 0/153 CONVERGED, 89 PARTIAL, 32 PRIMORDIAL
+- **tideGlass cell boot**: `biomeos nucleus attach --cell tideglass_cell.toml`
+  on westGate — **UNBLOCKED** (v4.57 deployed, GPS data converted)
+- **Bulk convergence campaign**: Batch provenance across 89 PARTIAL + 32
+  PRIMORDIAL datasets. Canonical pipeline proven at 43/s. Run `revalidate_data.py`
+  or targeted `bulk_ingest.py` passes.
 - **Phase 5 mesh**: songBird content.get dispatch validated upstream (22 bonds).
   westGate songBird healthy on UDS but discovery/federation degraded (no WG).
   Need WG activation or Tower Atomic LAN direct for inter-gate content.get.
 - **Tower Atomic LAN**: westGate at 192.168.4.149/22, WireGuard not active.
   All Tower Atomic components shipped (bearDog BTSP, riboCipher, songBird TCP).
-  353× faster than WG on LAN. Transition: dnsmasq resolves primal.eco to LAN IPs.
-- **Data estate growth**: 60 TB available. Current 3.65 TB is 5.7% utilized.
+  353× faster than WG on LAN. K-derm dnsmasq deployed, all 11 gates resolving.
+- **Data estate growth**: 47.5 TB available. Current 3.21 TB is 6.3% utilized.
   AlphaFold full 246M structures will add ~15 TB over time.
 - **Neural API migration**: Spring consumers should route CAS through
   `neural-api-westgate-tower-155f.sock` for capability-based discovery,
   not direct `nestgate-westgate-tower-155f.sock` calls
+- **Depot CDN fix**: golgi depot still serves v4.56 binary. westGate built
+  from source. Other gates need depot fix or source build.
 
 ---
 
