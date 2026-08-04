@@ -473,10 +473,13 @@ values are slightly above published values, consistent with the 12⁴ lattice
 being large enough that residual finite-volume effects are within the
 systematic uncertainty of the strong-coupling reference values.
 
-**16⁴ and 24⁴ lattices** — 500 thermalization + 2000 production (16⁴),
-dt=0.01, N_md=40. Production run in progress on RTX 3090:
+**16⁴ and 24⁴ lattices** — 200 thermalization + 1000 production (16⁴),
+dt=0.01, N_md=40. Production run in progress on RTX 3090.
+Thermalization performed in parallel across 64 CPU cores (AMD EPYC 7452)
+via content-addressed configuration caching (BLAKE3), then loaded by
+GPU production binary with zero cold-start overhead:
 
-[DATA IN PROGRESS — production run active, ~93% GPU utilization]
+[DATA IN PROGRESS — parallel thermalization: 10 configs × 64 EPYC threads]
 
 | Lattice | β | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
 |---------|-----|-----------------|--------|-----------|--------|-----|
