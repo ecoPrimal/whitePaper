@@ -1,7 +1,7 @@
 # subGen — Concrete Reality
 
 **Status**: Living documentation — the project's operational truth
-**Wave**: 155f data-braided | **Date**: Aug 2, 2026
+**Wave**: 156a latency-folded | **Date**: Aug 5, 2026
 
 ---
 
@@ -70,6 +70,13 @@ here to gen5 success.
     (x86_64, ARM64, RISC-V), 3 OS families (Linux, Windows, macOS), and 3 deployment
     topologies (LAN, WAN cloud, WAN friend). Board comparisons, specs, pricing,
     and pre-hardware familiarization tasks.
+
+15. **[LATENCY_FOLDING_HARDWARE.md](LATENCY_FOLDING_HARDWARE.md)** — Hardware
+    topology for data CAS systems. 4-tier storage architecture (RAM/NVMe/SSD/HDD)
+    proven on westGate convoy. Latency folding as design principle — each tier
+    folds away a latency class. Braiding NUC pattern, NVMe partitioning, future
+    build recommendations. Why the Rust primals were never the bottleneck (~5ms/file)
+    and storage topology was the unstated assumption gen1–gen4 never addressed.
 
 ### Layer 4.5 — arXiv Publication
 
@@ -151,14 +158,16 @@ Previous milestones:
 - Wave 155i: thresholds, critical path, outreach
 - Wave 155m: gen4 completion
 - Wave 155n: gen5 thesis proven on live data
-- **Wave 155f: data-braided scientific database operational (519 GB sovereign)**
+- Wave 155f: data-braided scientific database operational (519 GB sovereign)
+- **Wave 156a: latency folding proven — 4-tier storage architecture, convoy at 217/s, braiding NUC pattern**
 
 ---
 
-*subGen Wave 155f — 19 documents. gen5 THESIS PROVEN ON LIVE DATA.
-5 NUCLEUS gates. 7 glacial goals COMPLETE. 519 GB across 130 datasets at
-100% provenance. All 7 tideGlass modules data-ready. 42/46 AlphaFold
-proteomes. SRA FASTQ flowing. 5 API keys. Credential vault on golgiBody.
-First arXiv preprint (Rung 1: SU(2)) under validation. westGate = sovereign
-scientific data root. The bottleneck is now code/analysis — data and
-infrastructure are complete.*
+*subGen Wave 156a — 20 documents. gen5 THESIS PROVEN ON LIVE DATA.
+5 NUCLEUS gates. 7 glacial goals COMPLETE. 529+ GB CAS pool across 130+
+datasets at 100% provenance. All 7 tideGlass modules data-ready. 46/46
+AlphaFold proteomes. SRA FASTQ complete. Convoy braiding at 217/s on NVMe
+hot tier. 4-tier storage architecture (RAM/NVMe/SSD/HDD) proven and
+documented. Latency folding as hardware design principle. Braiding NUC
+pattern defined. westGate = sovereign scientific data root. The bottleneck
+is code/analysis — data, infrastructure, and storage topology are proven.*
