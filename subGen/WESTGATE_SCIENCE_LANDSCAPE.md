@@ -13,9 +13,12 @@
 westGate holds **3.21 TB across 153 datasets spanning 17+ domains**, with the
 provenance pipeline running at **145 files/s** (4-worker native socket convoy)
 through the canonical chain (BLAKE3 → CAS → batch DAG event → session-level
-Merkle commit → bearDog Ed25519 → sweetGrass braid). CAS pool at 452 GB.
-13 primals + biomeOS neural-api live in membrane (14/14).
-Full NUCLEUS tower operational on **biomeOS v4.57** (`nucleus attach` available).
+Merkle commit → bearDog Ed25519 → sweetGrass braid). CAS pool at **529 GB**
+(growing). 13 primals + biomeOS neural-api live in membrane (14/14).
+Full NUCLEUS tower operational on **biomeOS v4.57**. **tideGlass cell ATTACHED
+and RUNNING** — 17 IPC methods, direct CAS, petalTongue discovered.
+**nestGate TCP :8080 LIVE** (dual-mode UDS+TCP). **songBird federation ENABLED**
+(TCP :7700, mesh initialized, awaiting ironGate connectivity).
 This document maps that data estate to the science it enables.
 
 The principle: **grab once at 1 Gbps (internet), serve forever at 10 Gbps (LAN),
