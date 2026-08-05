@@ -123,23 +123,23 @@ begin and published comparison data is abundant.
 
 ## Wall Time Estimates
 
-Based on measured throughput at 8⁴ (RX 6950 XT) and 12⁴ (RTX 3090):
+Based on measured throughput at 8⁴, 12⁴, and 16⁴:
 
 ### Pure Gauge (Rung 1)
 
-| Lattice | Volume | ms/traj | 1000 traj | 5000 traj | Source |
-|---------|--------|---------|-----------|-----------|--------|
-| 8⁴ | 4,096 | 15.6 | 16 s | 78 s | measured (RX 6950 XT) |
-| 12⁴ | 20,736 | **611** | **10.2 min** | **51 min** | **measured (RTX 3090)** |
-| 16⁴ | 65,536 | ~1,900 (est.) | ~32 min | ~2.6 hr | projected |
-| 24⁴ | 331,776 | ~9,800 (est.) | ~2.7 hr | ~13.6 hr | projected from 12⁴ |
-| 32⁴ | 1,048,576 | ~31,000 (est.) | ~8.6 hr | ~43 hr | projected |
-| 40⁴ | 2,560,000 | ~75,000 (est.) | ~21 hr | ~104 hr | projected |
-| 48⁴ | 5,308,416 | ~156,000 (est.) | ~43 hr | ~217 hr | projected |
+| Lattice | Volume | AMD ms/traj | NVIDIA ms/traj | 1000 traj (AMD) | Source |
+|---------|--------|-------------|----------------|-----------------|--------|
+| 8⁴ | 4,096 | 15.6 | — | 16 s | measured |
+| 12⁴ | 20,736 | — | **611** | — | measured (RTX 3090) |
+| **16⁴** | 65,536 | **273** | **2,567** | **4.6 min** | **measured (dual-GPU)** |
+| 24⁴ | 331,776 | ~1,380 (est.) | ~13,000 (est.) | ~23 min | projected from 16⁴ |
+| **32⁴** | 1,048,576 | ~4,400 (est.) | ~41,000 (est.) | **~1.2 hr** | projected |
+| 40⁴ | 2,560,000 | ~10,600 (est.) | ~100,000 (est.) | ~2.9 hr | projected |
+| 48⁴ | 5,308,416 | ~22,000 (est.) | ~208,000 (est.) | ~6.1 hr | projected |
 
-Note: 12⁴ measured with cpu_mom path (CPU momenta + GPU MD, N_md=30, dt=0.015).
-The 8⁴ measurement used pure GPU path with fewer MD steps — not directly comparable.
-All projections above scale from the 12⁴ measurement, which is the production path.
+Note: AMD RX 6950 XT is 9.4× faster than RTX 3090 at 16⁴ (DF64 emulation
+efficiency). All projections above scale from the 16⁴ measured throughput.
+The AMD card is the production GPU; NVIDIA serves as cross-validation reference.
 
 ### Nf=2 RHMC (Rung 3)
 
@@ -182,15 +182,16 @@ Asymmetric lattices are cheaper per trajectory (smaller total volume):
 
 ## Production Campaign Plan
 
-### Rung 1 (This Paper) — IN PROGRESS
+### Rung 1 (This Paper) — 32⁴ MINIMAL PUBLISH TARGET
 
 | Volume | β range | Trajectories | Status |
 |--------|---------|-------------|--------|
 | 4⁴, 8⁴ | 2.0–6.5 | 100-500 | **DONE** (CPU+GPU validated) |
 | 12⁴ | 5.7–6.2 | 1000 | **DONE** (GPU, 611ms/traj, Δ<0.1% at β≥6.0) |
-| 16⁴ | 5.9–6.2 | 2000 | **IN PROGRESS** (GPU, RTX 3090) |
-| 24⁴ | 6.0 | 1000 | **IN PROGRESS** (GPU, RTX 3090) |
-| 32⁴ | 6.0 | 1000 | NEXT (GPU-only, ~8.6 hr est.) |
+| 16⁴ | 5.9–6.2 | 1000 dual | **DONE** (dual-GPU, cross-vendor Δ=6 ppm) |
+| 24⁴ | 6.0 | 1000 | **THERMALIZING** (CPU, 150/200) |
+| **32⁴** | **5.9–6.2** | **1000** | **NEXT** — minimal publishable volume. 3 β × 1 seed = 3 configs thermalizing. ~2.4 GB/config. |
+| 48⁴ | 6.0 | 500 | STRETCH — validates VRAM headroom. ~12 GB/config. |
 
 ### Rung 2 (Next Paper) — Validate Dirac
 
@@ -311,3 +312,15 @@ Rung 5 (~days). Path to publication at each rung is clear.*
 `arxiv_thermalize_grid` (rayon, 64 EPYC threads) + BLAKE3-addressed config cache +
 cache-aware `arxiv_volume_scan`. Wall-time estimates above are for serial single-thread;
 with parallel thermalization, CPU prep is amortized to a single parallel pass.*
+
+*Update (156d): 16⁴ dual-GPU production COMPLETE. Measured throughput:*
+
+| GPU | 16⁴ ms/traj | traj/s |
+|-----|-------------|--------|
+| **RX 6950 XT** | **273** | **3.7** |
+| RTX 3090 | 2567 | 0.4 |
+
+*AMD is 9.4× faster than NVIDIA at 16⁴ — likely due to more efficient DF64 emulation
+on RDNA 2 vs Ampere at this problem size. This inverts the naive expectation from
+raw FLOPS or memory bandwidth specs. For Rung 2+ campaigns, the RX 6950 XT is the
+production GPU; the RTX 3090 serves as the cross-validation reference.*
