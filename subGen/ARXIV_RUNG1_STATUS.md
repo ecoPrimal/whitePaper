@@ -70,13 +70,18 @@ with dynamical fermions.
 ## Submission Path
 
 ```
-Remaining validation experiments (β-scan, action-force test) ← DONE
+16⁴ dual-GPU scan completes (RUNNING — RTX 3090 + RX 6950 XT)
     ↓
-sporePrint integrates final data into markdown draft
+Integrate final 16⁴ cross-vendor data into paper sections
     ↓
 sporePrint regenerates LaTeX (tectonic build)
     ↓
-Final compliance review
+PRE-SUBMISSION REVIEW — 3 known reviewers:
+  • Michael Murillo (MSU — computational physics)
+  • Thomas Chuna (LANL — lattice/kinetic theory)
+  • Alexei Bazavov (MSU — lattice QCD specialist)
+    ↓
+Incorporate reviewer feedback
     ↓
 arXiv hep-lat submission (cross-list cs.DC)
     ↓

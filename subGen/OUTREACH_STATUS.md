@@ -130,13 +130,33 @@ bearDog crypto.sign_ed25519 (P1)
 
 ---
 
-### 6. MSU Faculty Network
+### 6. arXiv Rung 1 Reviewer Panel — QCD Preprint
+
+| Field | Value |
+|-------|-------|
+| **Status** | **PRE-SUBMISSION REVIEW PENDING** |
+| **Paper** | "Vendor-Agnostic Lattice QCD on Consumer GPUs: SU(3) Pure Gauge HMC with DF64 WebGPU/WGSL and Cryptographic Provenance" |
+| **Target** | arXiv hep-lat (primary), cs.DC (cross-list) |
+
+| Reviewer | Affiliation | Domain Relevance | Relationship |
+|----------|-------------|------------------|--------------|
+| **Michael Murillo** | MSU | Plasma physics, computational physics, dense matter. Validates computational methodology + GPU scaling claims. | Known — MSU faculty network. |
+| **Thomas Chuna** | LANL | Lattice physics, kinetic theory. Validates SU(3) HMC correctness + DF64 precision claims. | Known — physics/LANL contact. |
+| **Alexei Bazavov** | MSU | **Lattice QCD specialist.** Validates gauge theory physics, plaquette analysis, beta-scan, autocorrelation, HMC diagnostics. Most domain-specific reviewer possible. | Known — MSU faculty. |
+
+**Send protocol**: Share preprint PDF + pseudoSpore artifact link. Ask for technical feedback before arXiv submission. Frame as: "Rung 1 of a consumer-GPU QCD program — does the physics check out?"
+
+**Timing**: After 16⁴ dual-GPU scan completes and LaTeX is regenerated. Paper data is COMPLETE — remaining is integration of final cross-vendor data.
+
+---
+
+### 7. MSU Faculty Network (General)
 
 | Field | Value |
 |-------|-------|
 | **Status** | **CONTACTED / MAPPED** |
-| **Contacts** | Murillo (neuromorphic), Kachkovskiy (math/spectral), Eaves (anthro), Chuna (physics/LANL) |
-| **Spring links** | neuralSpring, hotSpring, healthSpring |
+| **Contacts** | Kachkovskiy (math/spectral), Eaves (anthro) |
+| **Spring links** | neuralSpring, healthSpring |
 | **Next** | Faculty profiles in gen3 `FACULTY_SPRING_PROFILES`. No active deliverables pending. |
 
 ---
@@ -146,10 +166,11 @@ bearDog crypto.sign_ed25519 (P1)
 ```
         CONTACTED       ENGAGED        PRODUCING      PUBLISHED
             │               │               │              │
- Murillo ───┤               │               │              │
+ Murillo ───┼── QCD REVIEW ─┤  preprint      │              │
+ Chuna ─────┼── QCD REVIEW ─┤  preprint      │              │
+ Bazavov ───┼── QCD REVIEW ─┤  preprint      │              │
  Kachkovskiy┤               │               │              │
  Eaves ─────┤               │               │              │
- Chuna ─────┤               │               │              │
             │               │               │              │
  Barrick ───┼───────────────┤  USB delivered │              │
             │               │               │              │
@@ -165,10 +186,10 @@ bearDog crypto.sign_ed25519 (P1)
 
 **gen5 success metric**: At least one track reaches PUBLISHED — collaborator-owned science exits the ecosystem.
 
-**Closest to PUBLISHED**: Gonzales/NF (if tideGlass Phase 0 starts) or ABG (if initioChem pseudoSpore ships).
+**Closest to PUBLISHED**: **arXiv Rung 1** (data COMPLETE, paper drafted, 3 reviewers identified — Murillo/Chuna/Bazavov). Then Gonzales/NF (when tideGlass Phase 0 starts).
 
 ---
 
-*subGen Wave 155i — Outreach master tracker. Inkfish email SENT. Gonzales producing.
-Six active tracks across marine biology, drug discovery, PFAS, microbial evolution,
-whole-cell biology, and faculty network.*
+*subGen Wave 156d — Outreach master tracker. arXiv Rung 1 QCD reviewer panel formed
+(Murillo/Chuna/Bazavov — all known). Paper data COMPLETE, awaiting 16⁴ integration +
+LaTeX regen. Inkfish email SENT (Jul 29). Gonzales producing. Seven active tracks.*
