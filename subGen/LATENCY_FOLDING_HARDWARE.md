@@ -1,6 +1,6 @@
 # Latency Folding — Hardware Topology for Data CAS Systems
 
-**Status**: PROVEN | **Wave**: 156a | **Date**: Aug 5, 2026
+**Status**: PROVEN | **Wave**: 156a latency-folded | **Date**: Aug 5, 2026 PM
 **Gate**: westGate (Data NAS — 62 GB DDR4, 2TB NVMe, 2TB SSD, 5×14TB raidz1)
 **Team**: Hardware / Overwatch
 **Audience**: Gate builders, infra teams, future hardware acquisition
@@ -150,10 +150,15 @@ always be flash-backed.
 ### NVMe Partitioning Works
 
 westGate's 2TB NVMe is the OS drive. Only 177 GB is used for the OS (11%).
-We pointed CAS writes at a directory on the same NVMe and convoy performance
-jumped from 80/s to 217/s. The OS workload (light systemd, primals, journal)
-does not contend with CAS writes because the access patterns are orthogonal
-(sequential OS reads vs random CAS writes, both fast on flash).
+We pointed CAS writes at a directory on the same NVMe by repointing the XDG
+symlink (`~/.local/share/nestgate/storage` → `/mnt/cas-hot`). Convoy
+throughput jumped to **313/s instantaneous** (2.4× over spinner baseline).
+Note: the `NESTGATE_STORAGE_PATH` env var is a dead letter — nestGate
+resolves storage through `data_dir.join("storage")` using XDG paths. The
+symlink is the actual tier control surface. The OS workload (light systemd,
+primals, journal) does not contend with CAS writes because the access
+patterns are orthogonal (sequential OS reads vs random CAS writes, both fast
+on flash). After 1 hour the hot tier held 303 GB, absorbing at ~107 MB/s.
 
 For future builds: dedicated NVMe per role is cleaner, but sharing works
 fine when one role is light (OS) and the other is heavy (CAS). The 1.6 TB
@@ -349,8 +354,10 @@ the topology of every other gate.
 ---
 
 *subGen Wave 156a — Latency folding proven on westGate hardware. Convoy at
-217/s on NVMe hot tier (2.7× over all-spinner). Rust primals at ~5ms/file,
-storage was always the bottleneck. 4-tier architecture (RAM/NVMe/SSD/HDD)
-documented. Braiding NUC pattern defined. Future builds: dedicated NVMe per
+313/s instantaneous on NVMe hot tier (2.4× over spinner baseline). Rust
+primals at ~5ms/file — every issue was topology, latency, or jelly strings,
+never the binaries. 4-tier architecture (RAM/NVMe/SSD/HDD) documented.
+`NESTGATE_STORAGE_PATH` env var is dead letter; XDG symlink is the actual
+tier control surface. Braiding NUC pattern defined. Future builds: dedicated NVMe per
 role, 128 GB RAM, 10G backbone, separate read/write paths. The hardware
 thesis holds — it just needed the right topology.*

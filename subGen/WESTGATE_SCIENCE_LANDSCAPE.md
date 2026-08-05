@@ -1,7 +1,7 @@
 # westGate Science Landscape — Data Estate, Use Cases, and Spring Guidance
 
 **Status**: Living document — science capabilities enabled by colocated sovereign data
-**Wave**: 156d | **Date**: Aug 5, 2026 AM
+**Wave**: 156d | **Date**: Aug 5, 2026 PM
 **Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 3.21 TB used / 47.5 TB free)
 **Hardware**: AMD Ryzen 7 5700X (8C/16T), 64 GB DDR4, RTX 3070 (8 GB), Pop!_OS 22.04
 **Audience**: Spring subteams, overwatch, gate operators spinning up parallel IDEs
@@ -11,15 +11,18 @@
 ## Why This Document
 
 westGate holds **3.21 TB across 153 datasets spanning 17+ domains**, with the
-provenance pipeline running at **145 files/s** (4-worker native socket convoy)
-through the canonical chain (BLAKE3 → CAS → batch DAG event → session-level
-Merkle commit → bearDog Ed25519 → sweetGrass braid). CAS pool at **529 GB**
-(growing). 13 primals + biomeOS neural-api live in membrane (14/14).
-Full NUCLEUS tower operational on **biomeOS v4.57**. **tideGlass cell ATTACHED
-and RUNNING** — 17 IPC methods, direct CAS, petalTongue discovered.
-**nestGate TCP :8080 LIVE** (dual-mode UDS+TCP). **songBird federation ENABLED**
-(TCP :7700, mesh initialized, awaiting ironGate connectivity).
-This document maps that data estate to the science it enables.
+provenance pipeline running at **313 files/s instantaneous** (4-worker native
+socket convoy on NVMe hot tier, 2.4× over spinner baseline) through the
+canonical chain (BLAKE3 → CAS → batch DAG event → session-level Merkle
+commit → bearDog Ed25519 → sweetGrass braid). CAS pool at **866 GB ZFS +
+303 GB NVMe hot** (growing, 44% through 11M file backlog). 13 primals +
+biomeOS neural-api live in membrane (14/14). Full NUCLEUS tower operational
+on **biomeOS v4.57**. **tideGlass cell ATTACHED and RUNNING** — 17 IPC
+methods, direct CAS, petalTongue discovered. **nestGate TCP :8080 LIVE**
+(dual-mode UDS+TCP). **songBird federation ENABLED** (TCP :7700, mesh
+initialized, awaiting ironGate connectivity). **Rust primals at ~5ms/file —
+every issue traced to topology, latency, and jelly strings, never the
+binaries.** This document maps that data estate to the science it enables.
 
 The principle: **grab once at 1 Gbps (internet), serve forever at 10 Gbps (LAN),
 zero egress cost.** Every dataset downloaded once becomes a permanent sovereign
