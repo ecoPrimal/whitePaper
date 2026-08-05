@@ -1,7 +1,7 @@
 # westGate Science Landscape — Data Estate, Use Cases, and Spring Guidance
 
 **Status**: Living document — science capabilities enabled by colocated sovereign data
-**Wave**: 156d | **Date**: Aug 4, 2026 PM
+**Wave**: 156d | **Date**: Aug 5, 2026 AM
 **Gate**: westGate (Data NAS — ZFS raidz1, 5×14TB, 3.21 TB used / 47.5 TB free)
 **Hardware**: AMD Ryzen 7 5700X (8C/16T), 64 GB DDR4, RTX 3070 (8 GB), Pop!_OS 22.04
 **Audience**: Spring subteams, overwatch, gate operators spinning up parallel IDEs
@@ -11,9 +11,10 @@
 ## Why This Document
 
 westGate holds **3.21 TB across 153 datasets spanning 17+ domains**, with the
-provenance pipeline running at **43 files/s sustained** through the canonical
-chain (BLAKE3 → CAS → batch DAG event → session-level Merkle commit → bearDog
-Ed25519 → sweetGrass braid). 13 primals + biomeOS neural-api live in membrane (14/14).
+provenance pipeline running at **145 files/s** (4-worker native socket convoy)
+through the canonical chain (BLAKE3 → CAS → batch DAG event → session-level
+Merkle commit → bearDog Ed25519 → sweetGrass braid). CAS pool at 452 GB.
+13 primals + biomeOS neural-api live in membrane (14/14).
 Full NUCLEUS tower operational on **biomeOS v4.57** (`nucleus attach` available).
 This document maps that data estate to the science it enables.
 
@@ -24,8 +25,12 @@ provenance proving where it came from and that it hasn't been modified.
 
 **Provenance pipeline**: Canonical architecture — per-file CAS + batch DAG
 events only (no per-file spine entries). Session-level spine commit at
-dehydration. bearDog signature wired into sweetGrass braid. 122x throughput
-improvement over the initial per-file spine pattern (0.3/s → 43/s).
+dehydration. bearDog signature wired into sweetGrass braid. **460x total
+throughput improvement** (0.3/s → 43/s spine alignment → 145/s native socket
+convoy). Primals were never the bottleneck — nestGate handles 16K RPCs/s,
+rhizoCrypt processes 200-event batches in <1ms. The bottleneck was Python
+glue code (socat subprocess spawning, double file reads). Convoy pattern
+proven for parallel provenance processing.
 See `PROVENANCE_TRIO_ARCHITECTURE.md` for the full analysis.
 
 ---
@@ -371,9 +376,12 @@ These complete independently and don't block spring bootup.
 - ~~**Convergence sweep**~~: **DONE** — 0/153 CONVERGED, 89 PARTIAL, 32 PRIMORDIAL
 - **tideGlass cell boot**: `biomeos nucleus attach --cell tideglass_cell.toml`
   on westGate — **UNBLOCKED** (v4.57 deployed, GPS data converted)
+- ~~**Convoy provenance**~~: **RUNNING** — 4-worker native socket convoy at
+  145/s (3.8x over single trailer). 7.9M files, ETA ~15h. Primals at 4-5%
+  CPU — bottleneck is spinning disk I/O, not primal architecture.
 - **Bulk convergence campaign**: Batch provenance across 89 PARTIAL + 32
-  PRIMORDIAL datasets. Canonical pipeline proven at 43/s. Run `revalidate_data.py`
-  or targeted `bulk_ingest.py` passes.
+  PRIMORDIAL datasets. Convoy pattern proven at 145/s. Reusable for estate-wide
+  provenance sweep.
 - **Phase 5 mesh**: songBird content.get dispatch validated upstream (22 bonds).
   westGate songBird healthy on UDS but discovery/federation degraded (no WG).
   Need WG activation or Tower Atomic LAN direct for inter-gate content.get.
@@ -391,8 +399,10 @@ These complete independently and don't block spring bootup.
 ---
 
 *westGate is a sovereign scientific data root. Every byte is hashed, tracked, and
-signed. The provenance pipeline runs at 43 files/s through the canonical
+signed. The provenance convoy runs at 145 files/s through the canonical
 architecture — per-file CAS + batch DAG, session-level spine commit, bearDog
-signature in the sweetGrass braid. The springs don't query external APIs — they
-query local CAS with cryptographic proof of origin. This is what "grab once,
-prove forever" looks like in practice.*
+signature in the sweetGrass braid. The primals themselves were always the fast
+path (nestGate 16K RPCs/s, rhizoCrypt <1ms batch) — the 460x improvement came
+from fixing the glue, not the architecture. The springs don't query external
+APIs — they query local CAS with cryptographic proof of origin. This is what
+"grab once, prove forever" looks like in practice.*
