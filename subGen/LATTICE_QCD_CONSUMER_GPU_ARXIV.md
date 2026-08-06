@@ -752,19 +752,35 @@ Cross-vendor agreement (same cached config, same β):
 | 6.2 | **3.75 × 10⁻⁶** | **6.12 × 10⁻⁶** |
 
 **Extended dual-GPU production run** (1000 trajectories per GPU, same
-cached config seed=42, measured Aug 6 2026):
+cached config seed=42, measured Aug 6 2026). Full 3-point β-scan:
 
-| GPU | Architecture | 16⁴ β=5.9 ⟨P⟩ | σ | Accept | τ_int | ms/traj |
-|-----|-------------|----------------|---|--------|-------|---------|
-| RTX 3090 | Ampere SM86 | 0.58163847 | 1.90×10⁻⁴ | 100% | 39.0 | 2,535.2 |
-| RX 6950 XT | RDNA 2 Navi21 | 0.58155848 | 1.74×10⁻⁴ | 100% | 31.9 | 274.9 |
+| β | GPU | ⟨P⟩ | σ_stat | Accept | τ_int | ms/traj |
+|-----|-----|-----|--------|--------|-------|---------|
+| 5.9 | RTX 3090 | 0.58163847 | 1.90×10⁻⁴ | 100% | 39.0 | 2,535.2 |
+| 5.9 | RX 6950 XT | 0.58155848 | 1.74×10⁻⁴ | 100% | 31.9 | 274.9 |
+| 6.0 | RTX 3090 | 0.59345099 | 1.45×10⁻⁴ | 100% | 27.5 | 2,551.2 |
+| 6.0 | RX 6950 XT | 0.59356851 | 2.02×10⁻⁴ | 99% | 50.7 | 278.0 |
+| 6.2 | RTX 3090 | 0.61339089 | 1.20×10⁻⁴ | 99% | 23.6 | 2,538.5 |
+| 6.2 | RX 6950 XT | 0.61338445 | 1.50×10⁻⁴ | 99% | 35.6 | 276.8 |
 
-Cross-vendor |Δ⟨P⟩| = 8.0×10⁻⁵ — within statistical error (both σ > 1.7×10⁻⁴).
-The AMD card is **9.2× faster** than NVIDIA at this volume, despite lower raw FP32
-TFLOPS (23.65 vs 35.58 TF). The performance asymmetry is attributed to RDNA 2's
-128 MB Infinity Cache capturing the 16⁴ DF64 working set (~150 MB) far more
-effectively than Ampere's 6 MB L2, combined with wave64 execution and dual-issue
-FP32 ALU scheduling that maps efficiently to DF64 hi/lo pair arithmetic.
+Cross-vendor agreement at each coupling:
+
+| β | |Δ(NVIDIA−AMD)| | Relative | Within σ? |
+|-----|------------------|----------|-----------|
+| 5.9 | 8.00 × 10⁻⁵ | 1.38 × 10⁻⁴ | Yes (< 1σ) |
+| 6.0 | 1.18 × 10⁻⁴ | 1.98 × 10⁻⁴ | Yes (< 1σ) |
+| 6.2 | **6.44 × 10⁻⁶** | **1.05 × 10⁻⁵** | Yes (< 0.1σ) |
+
+At β=6.2, inter-GPU agreement reaches **10 parts per million** — consistent with
+independent stochastic evolution from identical initial configurations.
+
+The AMD RX 6950 XT is consistently **9.1–9.2× faster** than the RTX 3090 across
+all β values (274.9–278.0 ms/traj vs 2,535–2,551 ms/traj), despite lower raw
+FP32 TFLOPS (23.65 vs 35.58 TF). The performance asymmetry is attributed to
+RDNA 2's 128 MB Infinity Cache capturing the 16⁴ DF64 working set (~150 MB) far
+more effectively than Ampere's 6 MB L2, combined with wave64 execution and
+dual-issue FP32 ALU scheduling that maps efficiently to DF64 hi/lo pair
+arithmetic.
 
 At β=6.2, the inter-GPU plaquette agreement reaches 6 parts per million —
 within statistical error and consistent with independent stochastic

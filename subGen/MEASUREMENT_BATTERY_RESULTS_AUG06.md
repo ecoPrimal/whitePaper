@@ -12,16 +12,24 @@
 First production-scale cross-vendor comparison at 16⁴ with 1000 HMC
 trajectories per GPU from the same cached config:
 
-### 16⁴ β=5.9 seed=42 (1000 trajectories each)
+### Full 3-point β-scan at 16⁴ (1000 trajectories per GPU per β)
 
-| GPU | Architecture | ms/traj | ⟨P⟩ | σ(P) | Accept | τ_int |
-|-----|-------------|---------|-----|------|--------|-------|
-| NVIDIA RTX 3090 | Ampere (SM86) | 2,535.2 | 0.58163847 | 1.90×10⁻⁴ | 100% | 39.0 |
-| AMD RX 6950 XT | RDNA 2 (NAVI21) | **274.9** | 0.58155848 | 1.74×10⁻⁴ | 100% | 31.9 |
+| β | GPU | ms/traj | ⟨P⟩ | σ(P) | Accept | τ_int |
+|-----|-----|---------|-----|------|--------|-------|
+| 5.9 | RTX 3090 | 2,535.2 | 0.58163847 | 1.90×10⁻⁴ | 100% | 39.0 |
+| 5.9 | RX 6950 XT | **274.9** | 0.58155848 | 1.74×10⁻⁴ | 100% | 31.9 |
+| 6.0 | RTX 3090 | 2,551.2 | 0.59345099 | 1.45×10⁻⁴ | 100% | 27.5 |
+| 6.0 | RX 6950 XT | **278.0** | 0.59356851 | 2.02×10⁻⁴ | 99% | 50.7 |
+| 6.2 | RTX 3090 | 2,538.5 | 0.61339089 | 1.20×10⁻⁴ | 99% | 23.6 |
+| 6.2 | RX 6950 XT | **276.8** | 0.61338445 | 1.50×10⁻⁴ | 99% | 35.6 |
 
-**Cross-vendor agreement**: |Δ⟨P⟩| = 8.0×10⁻⁵ (within statistical error)
+**Cross-vendor agreement**:
+- β=5.9: |Δ⟨P⟩| = 8.0×10⁻⁵ (within 1σ)
+- β=6.0: |Δ⟨P⟩| = 1.18×10⁻⁴ (within 1σ)
+- β=6.2: |Δ⟨P⟩| = **6.44×10⁻⁶** (10 ppm — within 0.1σ)
 
-**AMD is 9.2× faster** than NVIDIA at 16⁴ DF64 HMC.
+**AMD is 9.1–9.2× faster** than NVIDIA across all β values.
+Total scan wall time: 140.9 minutes (6000 trajectories total across 2 GPUs × 3 β).
 
 ### Performance Analysis
 
@@ -186,11 +194,11 @@ These results directly populate:
 
 ---
 
-## 6. Still Running
+## 6. Status
 
+- **Dual-GPU scan**: **COMPLETE** — 3 β points × 2 GPUs × 1000 traj = 6000 trajectories in 141 min
 - **Battery**: 27 configs remaining (SU(3) 24⁴ and 16⁴ — ~3h)
-- **Dual-GPU**: 16⁴ β=6.0 on RTX 3090 (600/1000) — AMD waiting
-- **Thermalization**: `arxiv_thermalize_sun` SU(3) 24⁴ (23h+, ongoing)
+- **Thermalization**: `arxiv_thermalize_sun` SU(3) 24⁴ (24h+, ongoing)
 
 ---
 
