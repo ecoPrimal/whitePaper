@@ -194,21 +194,24 @@ ALL its pools — warm and cold — and manage the transitions internally.
 **What broke**: We repointed the XDG symlink from ZFS→NVMe with no drain
 mechanism. CAS objects accumulated permanently on NVMe. Worse, the
 single-path dedup check (`object_path.exists()`) only checked the NVMe
-path, so ~600 GB of data already on ZFS was re-written to NVMe. The
-correct dedup check must span all tiers.
+path, so ~600 GB of data already on ZFS was re-written to NVMe.
 
-**What already exists in nestGate source (unwired)**:
-- `nestgate-config/substrate_tiers.rs`: `SubstrateTiers` discovers warm
-  and cold paths from `NESTGATE_WARM_PATHS` / `NESTGATE_COLD_PATHS` env
-  vars, detects rotational media, measures capacity
-- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` with
-  ZFS `send/receive` between tiers
-- `nestgate-cache/multi_tier.rs`: `MultiTierCache` with promotion/demotion
+**What we deployed (Aug 6, 2026)**: Three changes to `nestgate-rpc`,
+wiring `SubstrateTiers` into the `content.put` hot path:
 
-**What's missing**: `nestgate-rpc/content_handlers/cas.rs` uses
-`get_storage_base_path()` (single path) with zero references to
-`SubstrateTiers`. The write path needs to be tier-aware: write to warm,
-dedup across all tiers, drain to cold on commit.
+| Function | What It Does |
+|----------|-------------|
+| `content_cas_write_path()` | Routes new CAS writes to first warm tier (`NESTGATE_WARM_PATHS`) |
+| `content_cas_find_across_tiers()` | Dedup walks all warm + cold `SubstrateMount` paths before writing |
+| `warm_tier_capacity()` | `statvfs` check rejects writes below `NESTGATE_WARM_MIN_FREE_BYTES` (10 GB) |
+
+Env config: `NESTGATE_WARM_PATHS=/mnt/cas-hot`, `NESTGATE_COLD_PATHS=/mnt/nestgate/cold/zfs/cas`.
+Verified live: warm writes ✓, same-tier dedup ✓, cross-tier dedup ✓.
+
+**What remains unwired**:
+- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` — drain
+  hook on `spine.commit` (P1)
+- `nestgate-cache/multi_tier.rs`: `MultiTierCache` promotion/demotion (future)
 
 ### L2ARC Is Read-Only and That's Correct
 

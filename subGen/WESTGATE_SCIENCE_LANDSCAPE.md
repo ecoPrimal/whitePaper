@@ -11,18 +11,22 @@
 ## Why This Document
 
 westGate holds **3.21 TB across 153 datasets spanning 17+ domains**, with the
-provenance pipeline running at **313 files/s instantaneous** (4-worker native
-socket convoy on NVMe hot tier, 2.4× over spinner baseline) through the
-canonical chain (BLAKE3 → CAS → batch DAG event → session-level Merkle
-commit → bearDog Ed25519 → sweetGrass braid). CAS pool at **866 GB ZFS +
-303 GB NVMe hot** (growing, 44% through 11M file backlog). 13 primals +
-biomeOS neural-api live in membrane (14/14). Full NUCLEUS tower operational
-on **biomeOS v4.57**. **tideGlass cell ATTACHED and RUNNING** — 17 IPC
-methods, direct CAS, petalTongue discovered. **nestGate TCP :8080 LIVE**
-(dual-mode UDS+TCP). **songBird federation ENABLED** (TCP :7700, mesh
-initialized, awaiting ironGate connectivity). **Rust primals at ~5ms/file —
-every issue traced to topology, latency, and jelly strings, never the
-binaries.** This document maps that data estate to the science it enables.
+provenance pipeline **COMPLETE** — **10,994,802 events braided** across
+11,119,514 queue files (100% coverage). 4-worker native socket convoy
+peaked at **313 files/s instantaneous** on NVMe hot tier (2.4× over spinner
+baseline) through the canonical chain (BLAKE3 → CAS → batch DAG event →
+session-level Merkle commit → bearDog Ed25519 → sweetGrass braid).
+**Multi-tier CAS deployed** — `content.put` now writes to warm (NVMe),
+dedup-checks across all tiers (warm + cold), and applies high-water mark
+backpressure (10 GB floor). CAS pool at **~1.1 TB** across NVMe warm +
+ZFS cold. 13 primals + biomeOS neural-api live in membrane (14/14). Full
+NUCLEUS tower operational on **biomeOS v4.57**. **tideGlass cell ATTACHED
+and RUNNING** — 17 IPC methods, direct CAS, petalTongue discovered.
+**nestGate TCP :8080 LIVE** (dual-mode UDS+TCP). **songBird federation
+ENABLED** (TCP :7700, mesh initialized, awaiting ironGate connectivity).
+**Rust primals at ~5ms/file — every issue traced to topology, latency, and
+jelly strings, never the binaries.** Multi-tier CAS was incident→deployed
+in one session. This document maps that data estate to the science it enables.
 
 The principle: **grab once at 1 Gbps (internet), serve forever at 10 Gbps (LAN),
 zero egress cost.** Every dataset downloaded once becomes a permanent sovereign
