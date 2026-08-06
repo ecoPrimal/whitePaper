@@ -1,6 +1,6 @@
 # Latency Folding — Hardware Topology for Data CAS Systems
 
-**Status**: PROVEN | **Wave**: 156a latency-folded | **Date**: Aug 5, 2026 PM
+**Status**: PROVEN + PROFILED | **Wave**: 156d | **Date**: Aug 6, 2026
 **Gate**: westGate (Data NAS — 62 GB DDR4, 2TB NVMe, 2TB SSD, 5×14TB raidz1)
 **Team**: Hardware / Overwatch
 **Audience**: Gate builders, infra teams, future hardware acquisition
@@ -251,6 +251,110 @@ Steps 2 and 3 are decoupled — braiding happens at NVMe speed, archival
 happens later at sequential speed. This eliminates the contention that
 collapsed convoy throughput when both happened on spinners simultaneously.
 
+### Profiled Tier Speeds (Aug 6, 2026)
+
+Benchmarked with `dd` on westGate production hardware under load (rsync
+drain + bulk braider running simultaneously):
+
+| Tier | Device | Read | Write | Measured |
+|------|--------|------|-------|----------|
+| T0 | RAM (ZFS ARC, 62 GB max) | **5.9 GB/s** | — | `dd` from cached ZFS file |
+| T1 | NVMe (Samsung 970 EVO+ 2TB, PCIe 4.0 x4) | **2.5 GB/s** | **1.5 GB/s** | `dd` to `/mnt/cas-hot`, `oflag=direct` |
+| T2 | SSD (Crucial BX500 2TB, SATA III, L2ARC) | **~500 MB/s** | — | SATA ceiling, dedicated read cache |
+| T3 | HDD (5×14TB raidz1, SATA) | **161 MB/s** seq | **~28 MB/s** rand | `dd iflag=nocache` cold read |
+
+Key ratios:
+- ARC→NVMe: 2.4× (RAM is fastest, as expected)
+- NVMe→HDD: **15.5× read**, **53× write** (this is why braiding on spinners was 0.1/s)
+- SSD→HDD: 3.1× (L2ARC absorbs half of ARC misses at this ratio)
+- NVMe write vs 10G NIC: 1.5 GB/s vs 1.25 GB/s — NVMe slightly exceeds backbone
+
+ARC utilization: 8.7 GB active / 62 GB max. ZFS is conservative at 9% pool
+fill. ARC hit rate: 96.5%. L2ARC hit rate: 48.6%. Combined cache hit rate
+(ARC + L2ARC): ~98.1%.
+
+These speeds informed the bulk braiding approach: stage datasets from HDD→NVMe
+at 161 MB/s sequential, then braid from NVMe reads at 2.5 GB/s. The staging
+rsync is the bottleneck (HDD-limited), but once staged, braiding runs at
+NVMe speed — the same throughput profile as the convoy.
+
+---
+
+## westGate Upgrade Path (Same Chassis)
+
+westGate runs on MSI B550 TOMAHAWK MAX WIFI (AM4, Ryzen 7 5700X). The board
+has expansion capacity that can resolve every topology issue encountered:
+
+### Current Expansion Inventory
+
+| Slot | Current Occupant | Status |
+|------|-----------------|--------|
+| M2_1 (PCIe 4.0 x4, CPU) | Samsung 970 EVO+ 2TB (OS + CAS) | Occupied |
+| M2_2 (PCIe 3.0 x4, chipset) | Empty | **AVAILABLE** |
+| PCIe x16 (4.0, CPU) | RTX 3070 | Occupied |
+| PCIe x16 (3.0 x4, chipset) | Empty | **AVAILABLE** (HBA card) |
+| PCIe x1 (3.0, chipset) | Empty | **AVAILABLE** |
+| SATA 1-6 | 5× HDD + 1× SSD | All occupied |
+| RAM (4× DDR4 DIMM, 128 GB max) | 64 GB (configuration TBD) | Upgrade possible |
+| NIC | 10 Gbps (enp4s0) | Active |
+
+### Phase 1: No-Cost Fixes (Now — Done)
+
+- Multi-tier CAS deployed (warm writes, cross-tier dedup, backpressure)
+- High-water mark prevents ENOSPC on OS drive
+- `NESTGATE_WARM_PATHS`/`NESTGATE_COLD_PATHS` replace symlink routing
+
+### Phase 2: Dedicated CAS NVMe ($0 — Crucial T500 2TB on hand)
+
+Add the Crucial T500 2TB (from existing inventory) in the empty M2_2 slot:
+
+| What | Detail |
+|------|--------|
+| Slot | M2_2, PCIe 3.0 x4 (~3.5 GB/s ceiling) |
+| Drive | Crucial T500 2TB (PCIe 4.0 x4, DRAM-cached, 1200 TBW) |
+| Mount | `/mnt/cas-hot` (dedicated, not root partition) |
+| Config | `NESTGATE_WARM_PATHS=/mnt/cas-hot` only |
+| Impact | OS drive isolated. NVMe ENOSPC becomes impossible. |
+
+The T500 is PCIe 4.0 but will run at PCIe 3.0 x4 speeds in M2_2 (~3.5 GB/s
+read / ~3.0 GB/s write). Still 2× faster than the current 970 EVO+ measured
+speeds. DRAM cache + high TBW endurance make it ideal for sustained CAS writes.
+
+### Phase 3: RAM to 128 GB ($0 — biomeGate DDR4-3200 pull)
+
+Full swap of current 2×32 GB DDR4-3600 with 4×32 GB DDR4-3200 from biomeGate:
+
+| What | Detail |
+|------|--------|
+| Current | 2×32 GB DDR4-3600 CL18 (Corsair Vengeance) |
+| Install | 4×32 GB DDR4-3200 (matched kit, biomeGate pull) |
+| Freed | 2×32 GB DDR4-3600 → compute gate redeployment |
+| ARC impact | ~110 GB available for ARC (up from ~62 GB max) |
+| Trade-off | ~11% bandwidth reduction (3600→3200), 2× capacity gain |
+
+For a NAS gate, doubling ARC capacity at slightly lower bandwidth is an
+unambiguous win. ARC reads at DDR4-3200 (~5.2 GB/s) are still 4× NVMe
+and 32× HDD random. The freed DDR4-3600 kit goes where latency matters
+more than capacity.
+
+### Phase 4: HDD Expansion (Future, Not Urgent)
+
+Currently at 9% pool utilization (4.75 TB / 50.7 TB). Options:
+- Replace 5×14 TB with 5×20 TB (same raidz1, 70 TB usable)
+- Add HBA card (LSI 9207-8i) in PCIe x4 slot + 3-4 more HDDs → raidz2
+- raidz2 preferred at 6+ disks for 2-disk redundancy
+
+### Phase 2+3 Combined Cost: $0 (ecosystem repurposing)
+
+Both upgrades use hardware already in the ecosystem inventory:
+- Crucial T500 2TB NVMe — on hand, unused
+- 4×32 GB DDR4-3200 — pulled from biomeGate (8× DIMMs was overwhelming its CPU)
+- 2×32 GB DDR4-3600 — freed from westGate → redeployed to a compute gate
+
+One maintenance window (~20 min), one power cycle, zero purchases. Resolves
+all known topology jelly strings: dedicated NVMe for CAS, doubled RAM for
+ARC. The ecosystem's surplus hardware is its own upgrade path.
+
 ---
 
 ## The Braiding NUC Pattern
@@ -356,12 +460,14 @@ No re-download, no re-braiding. The mesh delivers already-proven data.
 
 | Issue | Impact | Resolution | Future Fix |
 |-------|--------|------------|------------|
-| NVMe shared with OS | Works but unclean | Directory on OS partition | Dedicated NVMe for CAS |
-| SSD locked to L2ARC | No write tier available | Used NVMe for writes | 2 SSDs or NVMe+SSD split |
-| Single raidz1 pool | Reads and writes share spinners | NVMe hot tier eliminated write contention | Separate pools or dedicated NVMe |
-| 62 GB RAM (low for NAS) | ARC limited to ~40 GB | Works but leaves performance on table | 128 GB in next build |
-| ZFS COW random write amplification | 80 IOPS → 247 IOPS on spinners | Sequential migration after braiding | Flash-backed braiding tier standard |
-| No 10G on NUC tier | Can't do braiding NUC yet | Direct braiding on NAS for now | 10G NUC or 2.5G NUC |
+| NVMe shared with OS | ENOSPC crashed convoy | Multi-tier CAS + backpressure deployed | Dedicated NVMe (M2_2 slot, ~$120) |
+| SSD locked to L2ARC | No SSD write tier | NVMe handles writes; SSD correct as L2ARC | Keep SSD as L2ARC (proven pattern) |
+| Single raidz1 pool | R/W contention on spinners | NVMe hot tier eliminated write contention | raidz2 at scale for redundancy |
+| 62 GB RAM (low for NAS) | ARC at 8.7/62 GB active | Works at current scale | 128 GB DDR4 (~$120) |
+| ZFS COW write amplification | 80 IOPS → 247 disk IOPS | Flash-backed braiding tier standard | Always braid on NVMe, never spinners |
+| No braiding NUC yet | All I/O on NAS | Direct braiding on NAS for now | NUC when ironGate joins mesh |
+| Cross-tier dedup missing | 600 GB re-written to NVMe | `resolve_cas_object` walks all tiers | Deployed ✓ |
+| No backpressure | NVMe filled to 100% | `warm_tier_min_free` (10 GB floor) | sweetGrass convergence-aware flow |
 
 ---
 
@@ -402,11 +508,33 @@ the topology of every other gate.
 
 ---
 
-*subGen Wave 156a — Latency folding proven on westGate hardware. Convoy at
-313/s instantaneous on NVMe hot tier (2.4× over spinner baseline). Rust
-primals at ~5ms/file — every issue was topology, latency, or jelly strings,
-never the binaries. 4-tier architecture (RAM/NVMe/SSD/HDD) documented.
-`NESTGATE_STORAGE_PATH` env var is dead letter; XDG symlink is the actual
-tier control surface. Braiding NUC pattern defined. Future builds: dedicated NVMe per
-role, 128 GB RAM, 10G backbone, separate read/write paths. The hardware
-thesis holds — it just needed the right topology.*
+## Ideal Dedicated CAS Gate — Bill of Materials
+
+For a purpose-built CAS gate (westGate-next or a new gate):
+
+| Component | Spec | Est. Cost | Rationale |
+|-----------|------|-----------|-----------|
+| CPU | AMD Ryzen 9 7950X (16C/32T) or EPYC 4244P (8C/16T ECC) | $400-800 | Primals are I/O bound; more cores = more convoy workers + ARC mgmt |
+| RAM | 128 GB DDR5 (Ryzen) or DDR5 ECC (EPYC) | $300-500 | ~96 GB for ARC. Single highest-ROI spec for a CAS gate |
+| NVMe #1 (OS) | 500 GB - 1 TB (any reliable) | $50-80 | System only. No CAS data. Eliminates ENOSPC class entirely |
+| NVMe #2 (Hot CAS) | 2-4 TB high-endurance (Samsung 990 Pro, WD SN850X) | $150-300 | `NESTGATE_WARM_PATHS` exclusive. Write endurance > speed |
+| SSD (L2ARC) | 2-4 TB SATA (Crucial MX500, Samsung 870 EVO) | $100-200 | Dedicated ZFS L2ARC. SATA is fine — L2ARC is sequential read |
+| HDD | 8×20 TB raidz2 (~256 TB usable, 2-disk redundancy) | $2,000-3,000 | Cold archive. Sequential writes from NVMe drain. HBA card for SATA |
+| Network | 10G SFP+ (or 2×10G bonded) | $30-100 | Federation backbone. NVMe or ARC behind it to avoid bottleneck |
+| Board | AM5 (B650/X670) or EPYC SP5 | $200-500 | AM5: 3-4 M.2 slots. EPYC: 128 PCIe lanes, ECC |
+
+**Total estimated**: ~$4,000-5,000 (Ryzen build), ~$6,000-8,000 (EPYC build).
+
+**westGate minimal upgrade** (same chassis): Crucial T500 2TB (M2_2) + 4×32 GB DDR4-3200 (biomeGate pull) = **$0** (ecosystem repurposing).
+
+---
+
+*subGen Wave 156d — Latency folding proven and profiled on westGate hardware.
+Tier speeds measured: ARC 5.9 GB/s, NVMe 2.5/1.5 GB/s R/W, SSD ~500 MB/s,
+HDD 161 MB/s seq / 28 MB/s rand. Convoy at 313/s on NVMe (2.4× over spinner
+baseline). Multi-tier CAS deployed with cross-tier dedup, warm routing, and
+high-water mark backpressure. Upgrade path defined: Phase 2 (Crucial T500 2TB, on hand) + Phase 3
+(4×32 GB DDR4-3200, biomeGate pull) = $0 to resolve all known jelly
+strings. Ideal dedicated CAS gate spec'd at $4-8K. Braiding NUC pattern for
+download/braid offload. The hardware thesis holds — commodity hardware at
+sovereign cost, but only with the right storage topology.*
