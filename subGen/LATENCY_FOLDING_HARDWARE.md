@@ -164,6 +164,52 @@ For future builds: dedicated NVMe per role is cleaner, but sharing works
 fine when one role is light (OS) and the other is heavy (CAS). The 1.6 TB
 of free NVMe on westGate was sitting idle — a latent capability.
 
+### Hot Tier Is Ephemeral Working Memory — Not Permanent Storage
+
+The NVMe hot tier worked brilliantly for 5 hours (313/s), then filled the
+1.8 TB OS drive to 100% and crashed the convoy. The failure mode revealed
+the correct architectural pattern:
+
+**The hot tier is rhizoCrypt's braiding workspace.** Data lands on NVMe
+during active provenance sessions. Once `loamSpine spine.commit` seals
+the session, the committed data is archival — it should drain to cold
+(ZFS raidz1, optimized for sequential bulk writes). The hot tier should
+never hold more than one session's worth of in-flight data.
+
+```
+nestGate content.put → NVMe warm tier (fast random write)
+rhizoCrypt dag.event  → session accumulates on warm
+loamSpine spine.commit → provenance sealed
+    ↓ commit triggers drain
+content.archive warm → cold (sequential rsync/zfs send)
+    ↓ warm tier freed
+NVMe ready for next session
+```
+
+This is analogous to ZFS's ZIL (intent log) at the application layer.
+Writes land on fast storage, accumulate through a transaction (provenance
+session), and flush to main pool on commit. The nest atomic should own
+ALL its pools — warm and cold — and manage the transitions internally.
+
+**What broke**: We repointed the XDG symlink from ZFS→NVMe with no drain
+mechanism. CAS objects accumulated permanently on NVMe. Worse, the
+single-path dedup check (`object_path.exists()`) only checked the NVMe
+path, so ~600 GB of data already on ZFS was re-written to NVMe. The
+correct dedup check must span all tiers.
+
+**What already exists in nestGate source (unwired)**:
+- `nestgate-config/substrate_tiers.rs`: `SubstrateTiers` discovers warm
+  and cold paths from `NESTGATE_WARM_PATHS` / `NESTGATE_COLD_PATHS` env
+  vars, detects rotational media, measures capacity
+- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` with
+  ZFS `send/receive` between tiers
+- `nestgate-cache/multi_tier.rs`: `MultiTierCache` with promotion/demotion
+
+**What's missing**: `nestgate-rpc/content_handlers/cas.rs` uses
+`get_storage_base_path()` (single path) with zero references to
+`SubstrateTiers`. The write path needs to be tier-aware: write to warm,
+dedup across all tiers, drain to cold on commit.
+
 ### L2ARC Is Read-Only and That's Correct
 
 The Crucial BX500 2TB as ZFS L2ARC provides a 65.9% hit rate on reads —
