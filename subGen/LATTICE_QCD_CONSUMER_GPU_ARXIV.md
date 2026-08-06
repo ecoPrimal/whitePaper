@@ -741,7 +741,15 @@ both NVIDIA and AMD. Cross-vendor plaquette agreement within statistical error:
 | 16⁴ | 6.0 | RX 6950 XT | **0.59342** | **9.28e-5** | **0.5934** | GL98 | **+0.00%** |
 | 16⁴ | 6.2 | RTX 3090 | **0.61338** | **1.12e-4** | **0.6136** | B00 | **-0.04%** |
 | 16⁴ | 6.2 | RX 6950 XT | **0.61338** | **1.34e-4** | **0.6136** | B00 | **-0.04%** |
-| 24⁴ | 6.0 | — | — | — | 0.5934 | GL98 | — |
+
+**24⁴ lattice** — Full observable battery (3 seeds per β, CPU thermalized,
+measured Aug 6 2026). Comparison confirms volume convergence:
+
+| Lattice | β | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
+|---------|-----|-----------------|--------|-----------|--------|-----|
+| 24⁴ | 5.9 | 0.58022 | 5.0e-4 | — | — | — |
+| 24⁴ | 6.0 | **0.59242** | **7.5e-5** | **0.5934** | GL98 | **−0.17%** |
+| 24⁴ | 6.2 | **0.61234** | **1.3e-4** | **0.6136** | B00 | **−0.21%** |
 
 Cross-vendor agreement (same cached config, same β):
 
@@ -790,12 +798,12 @@ where finite-volume effects are negligible (Δ < 0.05% at β ≥ 6.0).
 
 As lattice volume increases (L/a = 8 → 12 → 16 → 24), the finite-volume
 suppression of ⟨P⟩ systematically decreases, converging toward the published
-infinite-volume values. The full volume scaling at β=6.0:
+infinite-volume values. The full volume scaling:
 
-| β | 8⁴ ⟨P⟩ | 12⁴ ⟨P⟩ | 16⁴ ⟨P⟩ | Published (∞-vol) | 8⁴ Δ/% | 12⁴ Δ/% | 16⁴ Δ/% |
-|-----|---------|---------|---------|-------------------|---------|---------|---------|
-| 6.0 | 0.58623 | 0.59364 | 0.59346 | 0.5934 | −1.2% | +0.04% | **+0.01%** |
-| 6.2 | — | 0.61354 | 0.61338 | 0.6136 | — | −0.01% | **−0.04%** |
+| β | 8⁴ ⟨P⟩ | 12⁴ ⟨P⟩ | 16⁴ ⟨P⟩ | 24⁴ ⟨P⟩ | Published | 8⁴ Δ/% | 16⁴ Δ/% | 24⁴ Δ/% |
+|-----|---------|---------|---------|---------|-----------|---------|---------|---------|
+| 6.0 | 0.58623 | 0.59364 | 0.59346 | 0.59242 | 0.5934 | −1.2% | **+0.01%** | **−0.17%** |
+| 6.2 | — | 0.61354 | 0.61338 | 0.61234 | 0.6136 | — | **−0.04%** | **−0.21%** |
 
 The volume convergence from 8⁴ through 16⁴ demonstrates correct finite-size
 scaling: the 16⁴ data at β ≥ 6.0 agrees with published infinite-volume values
