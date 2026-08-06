@@ -532,13 +532,13 @@ Every HMC trajectory in this work carries a cryptographic provenance record:
 5. **W3C PROV-O attribution**: Machine-readable provenance linking experiment
    to publication
 
-The pseudoSpore artifact at `primals.eco/pseudospore/hotspring-qcd-su3/`
+The pseudoSpore artifact at `primals.eco/pseudospore/hotspring-qcd-sun/`
 contains all computed trajectories, WGSL shader source, compiled SPIR-V,
 and provenance records. Independent verification:
 
 ```bash
 # Download artifact
-pseudospore pull hotspring-qcd-su3
+pseudospore pull hotspring-qcd-sun
 
 # Verify any trajectory's provenance chain
 pseudospore verify --trajectory 42 --check-blake3 --check-dag

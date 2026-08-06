@@ -27,18 +27,43 @@ commands for build + run.
 
 ## SHOULD Priority (1 remaining)
 
-### M7 / X2: pseudoSpore URL Verification
-**What**: Paper references `primals.eco/pseudospore/hotspring-qcd-sun/` which may not resolve.
-**Why**: Dead link in paper is an immediate reject signal.
-**Action needed**:
-1. Verify if `primals.eco` DNS resolves
-2. If Node Atomic isn't deployed yet, either:
-   - (a) Change URL to GitHub releases: `github.com/ecoPrimals/hotspring-qcd-sun/releases`
-   - (b) Add footnote: "URL will be active upon publication"
-   - (c) Stand up a static page at the URL before submission
-3. Also fix `hotspring-qcd-su3` reference in §4.1 (should be `hotspring-qcd-sun`)
-**Owner**: User decision + Node Atomic / westGate coordination
-**Blocker**: Infrastructure deployment
+### M7 / X2: pseudoSpore URL — nestgate.io Serving Route
+
+**What**: Paper references `primals.eco/pseudospore/hotspring-qcd-sun/` which
+needs to resolve to a live, CAS-backed pseudoSpore bundle with inline
+BLAKE3 verification.
+
+**Architecture decision** (strandGate establishes pattern, upstream wires):
+
+```
+Paper URL: primals.eco/pseudospore/hotspring-qcd-sun/
+    │
+    ▼ (golgi Caddy route)
+nestgate.io/pseudospore/hotspring-qcd-sun/
+    │
+    ▼ (nestgate.io route handler)
+CAS query → serve configs + braids + validation + provenance
+```
+
+**What strandGate defines** (pattern for upstream):
+- pseudoSpore bundle structure: configs/, shaders/, provenance/, validate.sh
+- BLAKE3 manifest (data.toml) — lithoSpore already generates this
+- Content is pushed to ironGate CAS via songBird
+- nestgate.io serves from CAS with BLAKE3 verification inline
+
+**What upstream needs to wire**:
+1. **golgi**: Caddy route `primals.eco/pseudospore/* → nestgate.io/pseudospore/*`
+2. **nestgate.io**: `/pseudospore/{name}/` route handler that:
+   - Lists bundle contents from CAS (nestGate `content.query`)
+   - Serves files with BLAKE3 hash displayed
+   - Shows provenance chain (braid → DAG → spine)
+   - Offers `validate.sh` download for offline verification
+3. **nestGate**: pseudoSpore bundle ingestion (`content.ingest` on the bundle dir)
+4. **Fix**: `hotspring-qcd-su3` reference in §4.1 → `hotspring-qcd-sun`
+
+**Owner**: overwatch (nestgate.io route) + golgi (Caddy) + strandGate (bundle content)
+**Pattern established by**: strandGate (this is the first compute pseudoSpore)
+**Blocker**: nestgate.io `/pseudospore/` handler (new section, ~13th of 12 current)
 
 ---
 
@@ -66,12 +91,30 @@ Build instructions added to §6.
 
 ## Summary for Upstream / Overwatch
 
-| Item | Owner | Upstream Dependency | ETA |
-|------|-------|-------------------|-----|
-| M7/X2 (URL) | User + westGate/Node Atomic | primals.eco infra | Decision needed |
-| C5 (wgpu bug) | toadStool | gfx-rs/wgpu GitHub | 1 hr |
+| Item | Owner | System | What's Needed |
+|------|-------|--------|---------------|
+| M7/X2 (pseudoSpore URL) | overwatch + golgi | nestgate.io + golgi Caddy | `/pseudospore/` route handler + Caddy proxy |
+| C5 (wgpu bug) | toadStool | gfx-rs/wgpu (GitHub) | Issue filing with WGSL repro case |
 
-**Total effort**: ~1 hr upstream coordination + 1 user decision on URL strategy.
+### Publishing System Map (for overwatch dissemination)
+
+| Layer | System | URL | Role for arXiv |
+|-------|--------|-----|----------------|
+| **Artifact serving** | nestgate.io | `nestgate.io/pseudospore/hotspring-qcd-sun/` | CAS-backed pseudoSpore bundle (configs + braids + validation) |
+| **Outer routing** | golgi (Caddy) | `primals.eco/pseudospore/hotspring-qcd-sun/` | Paper-facing URL, routes to nestgate.io |
+| **Science narrative** | sporePrint | `sporeprint.primals.eco` | Public context, claims, broader story |
+| **Source code** | Forgejo | `git.primals.eco/ecoPrimals/` | Sovereign git (GitHub mirror for accessibility) |
+| **Artifact factory** | lithoSpore (CLI) | — | Generates pseudoSpore bundles from hotSpring outputs |
+| **Raw CAS** | ironGate | (songBird mesh) | 12.7 TB content-addressed store, serves nestgate.io |
+| **Provenance** | trio (rhizoCrypt + loamSpine + sweetGrass) | (UDS primals) | BLAKE3 → DAG → spine → braid chain on all artifacts |
+
+**Pattern**: strandGate defines the compute pseudoSpore bundle format.
+lithoSpore packages it. Content pushes to ironGate CAS. nestgate.io serves
+it with inline verification. golgi routes the outer URL. Reviewer visits
+`primals.eco/pseudospore/hotspring-qcd-sun/`, sees configs, braids, and
+can run `validate.sh` to check everything locally.
+
+**Total effort**: ~2 hr upstream wiring (nestgate.io handler + Caddy route) + 1 hr bug filing.
 
 After these 2 items: **42/42 DONE — submission ready.**
 
