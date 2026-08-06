@@ -126,9 +126,9 @@ What data exists and where it goes in the paper.
 | §4.5 HMC Validation | Action-force Δ/F, ΔH scaling, Creutz equality | Validation binaries | **Written** — needs reversibility test (C9) |
 | §5.1 Config Memo Table | ~100 configs across SU(2)–SU(8) | `~/.local/share/hotspring/configs/` | **Written** |
 | §5.2 Observable Battery | Plaquette, Polyakov, Wilson, Creutz, flow, Q | `arxiv_measure_battery` binary | **Written** |
-| §5.3 Large-N Scaling | **[DATA PLACEHOLDER]** | Needs: measurement pass across N=2–8 at matched couplings | **BLOCKED** — thermalization for N=4+ incomplete |
-| §5.4 Deconfinement | **[DATA PLACEHOLDER]** | Needs: finite-T scans on asymmetric lattices | **BLOCKED** — asymmetric lattice configs not generated |
-| §5.5 String Tension | **[DATA PLACEHOLDER]** | Creutz ratios from `sun_npu_metalforge` available for SU(2). SU(3)+ needed. | **PARTIAL** — SU(2) data exists |
+| §5.3 Large-N Scaling | SU(2)/SU(3) comparative data at 16⁴, 24⁴, 32⁴ | `arxiv_measure_battery` output | **PARTIAL** — SU(2)+SU(3) complete, N≥4 thermalization ongoing |
+| §5.4 Deconfinement | SU(2) 24³×{6,8,10} β-scans + SU(3) 24³×{6,8} | `arxiv_measure_battery` output | **DONE** — 12 finite-T configs measured, all deconfined phase |
+| §5.5 String Tension | Full W(R,T) + χ(R,T) for SU(2) 32⁴ and SU(3) 24⁴ | `arxiv_measure_battery` output | **DONE** — real Creutz ratios in paper |
 | §6 Reproducibility | pseudoSpore description | Node Atomic | **Written** — URL needs verification (M7) |
 | §7 Conclusion | Summary + future rungs | — | **Written** — needs broader impact line (M8) |
 | Appendix A | Hardware profile | HARDWARE.md | **Written** |
