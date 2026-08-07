@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
-"""Generate publication figures for arXiv Rung 1 preprint.
+"""[SUPERSEDED] Publication figures — now generated via petalTongue.
 
-Produces 4 figures for rubric items B6 and X4:
-  1. Thermalization time-history (plaquette vs trajectory)
-  2. β-scan with published comparison
-  3. Cross-vendor comparison (NVIDIA vs AMD)
-  4. Jackknife error vs bin size
+This matplotlib script is retained for reference but is no longer the
+primary figure pipeline. Production figures are generated natively in
+Rust via petalTongue's Grammar of Graphics engine:
 
-Output: PDF and PNG in subGen/figures/
+    cargo run --release --features petaltongue-viz --bin arxiv_viz_provider
+
+Source: hotspring/barracuda/src/bin/arxiv_viz_provider.rs
+Output: subGen/figures/fig{1-6}_{name}.svg + .pdf (via rsvg-convert)
+
+The petalTongue pipeline produces the same data visualizations but with:
+- Native Rust (no Python dependency)
+- Grammar of Graphics declarative API
+- Same source serves live dashboard (nestgate.io) AND static arXiv figs
+- SVG output with proper axes, labels, Tufte constraints
+
+Legacy matplotlib output (4 figures) retained in figures/ alongside
+the 6 new petalTongue figures.
 """
 
 import numpy as np

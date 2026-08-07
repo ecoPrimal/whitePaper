@@ -1265,10 +1265,16 @@ results is required.
 
 ## Figures
 
-- **Figure 1**: Plaquette thermalization time-history (8⁴, β=2.3, hot start → equilibrium). Shows clear plateau formation within ~5 HMC trajectories.
-- **Figure 2**: β-scan comparison — this work (16⁴, 24⁴) vs published SU(3) pure gauge data (Necco-Sommer 2002, Bali et al. 2000).
-- **Figure 3**: Cross-vendor plaquette agreement (NVIDIA RTX 3090 vs AMD RX 6950 XT) and per-trajectory residual at β=6.2. Inter-GPU deviation: <6 ppm.
-- **Figure 4**: Jackknife error ratio σ_JK(bin)/σ_JK(1) vs bin size, demonstrating plateau at √(2τ_int) confirming decorrelation.
+All figures are generated natively in Rust via petalTongue's Grammar of Graphics
+engine (`arxiv_viz_provider` binary → `GrammarCompiler` → `SvgCompiler` → PDF).
+Source: `hotspring/barracuda/src/bin/arxiv_viz_provider.rs`.
+
+- **Figure 1**: SU(N) plaquette β-scan — 69 configs (SU(2) + SU(3)) across β=2.2–6.3, multi-volume. Shows correct monotonic increase and phase structure.
+- **Figure 2**: Cross-vendor plaquette agreement — NVIDIA RTX 3090 vs AMD RX 6950 XT at 3 β values (5.9, 6.0, 6.2), 1000 trajectories each. |Δ| = 6.4×10⁻⁶ at β=6.2 (10 ppm).
+- **Figure 3**: Finite-volume convergence — SU(3) plaquette at 16⁴ vs 24⁴, demonstrating <0.01% agreement (effectively infinite volume at β ≥ 5.9).
+- **Figure 4**: Creutz ratios χ(R,R) — string tension approach from Wilson loop data on SU(2) 32⁴ and SU(3) 24⁴.
+- **Figure 5**: Topological charge Q distribution — SU(3) across all 33 configs, showing proper sector sampling (Q ∈ [-6.5, +3.2], no freezing).
+- **Figure 6**: GPU performance comparison — DF64 ms/traj at 16⁴: AMD RX 6950 XT 9.2× faster than NVIDIA RTX 3090 across all β values.
 
 ---
 
