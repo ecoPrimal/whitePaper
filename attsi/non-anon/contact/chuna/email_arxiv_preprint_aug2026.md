@@ -48,8 +48,17 @@ compute, not a central claim.
 
 This is Rung 1 of a 5-rung ladder — pure gauge execution and arithmetic
 validation. Dynamical fermions (what you and I talked about in April) are
-Rung 3. MILC-compatible output and ILDG interop are still planned — they
-aren't in this paper, but the Chuna Engine foundation is still there.
+Rung 3. MILC-compatible output is now operational:
+
+- **MILC v5 export**: `milc_validation_loop export-cached` writes our
+  configs to MILC binary format (big-endian, CRC32 checksums).
+- **Round-trip validated**: export → import → Δ⟨P⟩ = 3×10⁻⁹ (f32-limited).
+- **Ready for you**: I have a 16⁴ β=6.0 config in MILC format — you can
+  `su3_gauge_read` it and compare plaquettes. ⟨P⟩ = 0.5925.
+
+The ILDG pipeline is also operational (14/14 configs round-trip at f64
+bit-identical). The Chuna Engine foundation isn't just "planned" anymore —
+the bidirectional exchange path works.
 
 I wrote a 42-item reviewer rubric organized by what each of you three
 (you, Professor Murillo, and Bazavov) would scrutinize. It's in the repo

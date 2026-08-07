@@ -59,12 +59,12 @@
 | M4 | Comparison to portable lattice codes | **DONE** | §1.1 differentiates from Grid, QUDA, Chroma, MILC. Cites [27-30]. Three-point differentiation: no vendor SDK, DF64 on FP32, cryptographic provenance. |
 | M5 | Rust + WGSL maturity | **DONE** | Honest paragraph added to §1.1: acknowledges WGSL limitations (no shared memory atomics, no warp intrinsics), states tradeoff explicitly (lower peak throughput for vendor independence + memory safety). |
 | M6 | Scaling to larger lattices | **DONE** | 16⁴ and 24⁴ production complete. 32⁴ fits in 24 GB (2.4 GB for SU(3)). Memory bound noted in status docs. |
-| M7 | pseudoSpore URL resolves | **OPEN** | URL in paper may not resolve. Need: verify or remove before send. |
+| M7 | pseudoSpore URL resolves | **DONE** | Verified Aug 7: primals.eco 301→ sporeprint.primals.eco → HTTP 200. URL resolves. |
 | M8 | Broader scientific impact | **DONE** | Paragraph added to §7: MD force accumulation, DFT (FFT-based Kohn-Sham), FEM (SpMV) identified as analogous domains. Provenance layer described as generic. |
 | M9 | Reproduction commands tested | **DONE** | §6 updated with build instructions: `git clone`, `cargo run` commands, Rust version (1.92.0), build time (~45s), feature flag explanation. Tested on local checkout. |
 | M10 | Dual submission path | **DONE** | arXiv hep-lat → CPC/SciPost stated in status docs. |
 
-**Murillo score**: 9 DONE / 1 OPEN
+**Murillo score**: 10 DONE / 0 OPEN
 
 ---
 
@@ -73,7 +73,7 @@
 | # | Item | Status | Evidence / Notes |
 |---|------|--------|------------------|
 | X1 | Data placeholders in paper body | **DONE** | All three `[DATA: ...]` blocks replaced with proper tables/status notes. No raw placeholders remain. |
-| X2 | pseudoSpore URL says "su2" | **OPEN** | Header says `hotspring-qcd-sun/` — partially fixed (SU(N) not su2). Verify final URL. |
+| X2 | pseudoSpore URL says "su2" | **DONE** | Fixed to `hotspring-qcd-sun/`. URL verified Aug 7 — resolves at sporeprint.primals.eco. |
 | X3 | Thin reference list | **DONE** | Expanded to 32 references. Added Gattringer-Lang, Necco-Sommer, Bali, Wolff, Clark-Kennedy, Drouffe-Zuber, Boyle (Grid), Clark (QUDA), Edwards (Chroma), Bazavov (MILC), Higham, Salmon. |
 | X4 | No figures | **DONE** | 4 publication figures generated (PDF+PNG): (1) thermalization time-history, (2) β-scan with Necco-Sommer/Bali comparison, (3) cross-vendor NVIDIA/AMD residual, (4) jackknife bin-size plateau. Script: `subGen/generate_figures.py`. |
 | X5 | Ecosystem jargon | **DONE** | §2.4 genericized — internal crate names moved to footnote. §2.3 cleaned. §1 ecoPrimals reference removed from body. Appendix C rewritten. |
@@ -83,7 +83,7 @@
 | X9 | Appendix B self-deprecating | **DONE** | Rewritten as "SU(N) Implementation Verification" — verification table with properties and tests, no narrative of historical mistakes. |
 | X10 | Section numbering inconsistency | **DONE** | §4 retitled "Validation and Discussion" with topic-flow sentence. Subsections ordered: provenance → methodology → data → limitations → extensions. |
 
-**Cross-reviewer score**: 9 DONE / 1 OPEN
+**Cross-reviewer score**: 10 DONE / 0 OPEN
 
 ---
 
@@ -93,16 +93,16 @@
 |----------|------|------|-------|
 | Bazavov (B1–B12) | 12 | 0 | 12 |
 | Chuna (C1–C10) | 9 | 1 | 10 |
-| Murillo (M1–M10) | 9 | 1 | 10 |
-| Cross-Reviewer (X1–X10) | 9 | 1 | 10 |
-| **Total** | **40** | **2** | **42** |
+| Murillo (M1–M10) | **10** | 0 | 10 |
+| Cross-Reviewer (X1–X10) | **10** | 0 | 10 |
+| **Total** | **41** | **1** | **42** |
 
 ### Priority Breakdown of OPEN Items
 
 | Priority | Items | Count |
 |----------|-------|-------|
 | **MUST** (send-blocking) | ~~B6~~, ~~B7~~, ~~B12~~, ~~X1~~, ~~X4~~ | 0 (ALL DONE) |
-| **SHOULD** (significantly strengthens) | ~~B5~~, ~~B8~~, ~~C2~~, ~~C3~~, ~~C6~~, ~~C9~~, ~~M2~~, M7, ~~X8~~, ~~X10~~ | 1 |
+| **SHOULD** (significantly strengthens) | ~~B5~~, ~~B8~~, ~~C2~~, ~~C3~~, ~~C6~~, ~~C9~~, ~~M2~~, ~~M7~~, ~~X8~~, ~~X10~~ | 0 (ALL DONE) |
 | **NICE** (polish) | ~~C4~~, C5, ~~C8~~, ~~C10~~, ~~M3~~, ~~M5~~, ~~M8~~, ~~M9~~ | 1 |
 
 (Note: B1, B2, B3, B4, B11 moved to DONE. C1, C7 moved to DONE. M4 moved to DONE. X3, X5, X6, X7, X9 moved to DONE. X2 partially fixed.)
@@ -345,4 +345,4 @@ the production pipeline for collaborator-facing ILDG output.
 
 ---
 
-*subGen — Remaining work tracker for arXiv Rung 1 preprint. **40/42 rubric items DONE (95%)**, 2 OPEN (**0 MUST**, 1 SHOULD, 1 NICE). Bazavov: 12/12 CLEAN. Chuna: 9/10. Murillo: 9/10. Cross-reviewer: 9/10. External action items compiled in `ARXIV_EXTERNAL_ACTIONS.md`. Remaining: M7/X2 (URL decision) + C5 (upstream bug filing). ~1 hour total effort to 42/42.*
+*subGen — Remaining work tracker for arXiv Rung 1 preprint. **41/42 rubric items DONE (98%)**, 1 OPEN (**0 MUST**, 0 SHOULD, 1 NICE). Bazavov: 12/12 CLEAN. Chuna: 9/10. Murillo: 10/10 CLEAN. Cross-reviewer: 10/10 CLEAN. External action items compiled in `ARXIV_EXTERNAL_ACTIONS.md`. Remaining: C5 (upstream bug filing — nice-to-have, not send-blocking). Updated Aug 7, 2026: M7 verified (URL resolves), X2 fixed, MILC export operational, Lanczos N=10k benchmarked.*
