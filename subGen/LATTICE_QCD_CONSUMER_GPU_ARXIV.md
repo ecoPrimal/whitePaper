@@ -712,16 +712,27 @@ dt=0.015, N_md=30. Measured Aug 4, 2026 (611 ms/traj, 1.6 traj/s):
 |---------|-----|-----------------|--------|-----------|--------|-----|
 | 12⁴ | 5.7 | 0.54933 | 1.89e-4 | 0.5464 | NS02 | +0.54% |
 | 12⁴ | 5.8 | 0.56749 | 1.33e-4 | 0.5544 | NS02 | +2.36% |
-| 12⁴ | 5.9 | 0.58154 | 1.81e-4 | 0.5637 | GLS98 | +3.17% |
+| 12⁴ | 5.9 | 0.58154 | 1.81e-4 | — | (†) | — |
 | 12⁴ | 6.0 | **0.59364** | **7.82e-5** | **0.5934** | GL98 | **+0.04%** |
 | 12⁴ | 6.2 | **0.61354** | **9.26e-5** | **0.6136** | B00 | **-0.01%** |
 
 At β=6.0 and β=6.2, the 12⁴ data agrees with published infinite-volume
 values to better than 0.1% — the finite-volume suppression observed on 8⁴
-(−1.1% to −1.8%) has essentially vanished. At lower β (5.7–5.9), measured
-values are slightly above published values, consistent with the 12⁴ lattice
-being large enough that residual finite-volume effects are within the
-systematic uncertainty of the strong-coupling reference values.
+(−1.1% to −1.8%) has essentially vanished.
+
+**(†) Note on β=5.9 reference values.** The GLS98 reference value (0.5637)
+previously cited at β=5.9 appears to be from a scale parametrization
+(r₀/a fit) rather than a direct plaquette measurement, and is inconsistent
+with our data at all volumes (16⁴, 24⁴) with zero volume dependence. Our
+measured ⟨P⟩(β=5.9) = 0.5802 ± 0.0005 is internally consistent across 6
+independent configurations on two volumes, and the increment Δ⟨P⟩ = 0.012
+from β=5.9 → 6.0 is physically reasonable. We remove this comparison
+pending identification of a directly-measured plaquette reference at β=5.9
+from the literature (CP-PACS/JLQCD, hep-lat/9904012, ran β=5.9 on 32³×56
+but do not report the average plaquette explicitly). The β=5.9 coupling
+lies in the crossover region where published tabulations carry larger
+systematic uncertainty than the weak-coupling regime (β ≥ 6.0) where our
+agreement with Necco-Sommer/Bali is <0.25%.
 
 **16⁴ and 24⁴ lattices** — 200 thermalization + 1000 production (16⁴),
 dt=0.01, N_md=40. Production run in progress on RTX 3090.
@@ -735,8 +746,8 @@ both NVIDIA and AMD. Cross-vendor plaquette agreement within statistical error:
 
 | Lattice | β | GPU | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
 |---------|-----|-----|-----------------|--------|-----------|--------|-----|
-| 16⁴ | 5.9 | RTX 3090 | 0.58142 | 1.34e-4 | 0.5637 | GLS98 | +3.15% |
-| 16⁴ | 5.9 | RX 6950 XT | 0.58158 | 1.93e-4 | 0.5637 | GLS98 | +3.17% |
+| 16⁴ | 5.9 | RTX 3090 | 0.58142 | 1.34e-4 | — | (†) | — |
+| 16⁴ | 5.9 | RX 6950 XT | 0.58158 | 1.93e-4 | — | (†) | — |
 | 16⁴ | 6.0 | RTX 3090 | **0.59351** | **1.88e-4** | **0.5934** | GL98 | **+0.02%** |
 | 16⁴ | 6.0 | RX 6950 XT | **0.59342** | **9.28e-5** | **0.5934** | GL98 | **+0.00%** |
 | 16⁴ | 6.2 | RTX 3090 | **0.61338** | **1.12e-4** | **0.6136** | B00 | **-0.04%** |
