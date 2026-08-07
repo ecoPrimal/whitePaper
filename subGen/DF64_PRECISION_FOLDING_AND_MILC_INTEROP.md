@@ -5,6 +5,47 @@
 
 ---
 
+## 0. Prior Art: The 15-Tier Precision Continuum (Already in barraCuda)
+
+This work does NOT start from scratch. The ecoPrimals already has the
+conceptual framework built into the primal architecture:
+
+- **barraCuda `PrecisionTier`** (15 tiers: Binary → DF128):
+  The full precision-throughput continuum, from 1-bit XNOR hashing
+  to 104-bit quad-precision, defined as a first-class enum.
+
+- **hotSpring `PrecisionBrain`** + `PrecisionRouting`:
+  Self-routing precision system that probes hardware at startup,
+  intersects capabilities with physics domain requirements, and
+  dispatches to the optimal tier automatically.
+
+- **`PhysicsDomain` routing** (15 variants):
+  LatticeQcd, Dielectric, Eigensolve, GradientFlow, NuclearEos,
+  MolecularDynamics, KineticFluid, etc. Each domain declares what
+  precision it *needs*; the brain matches to what the hardware *can do*.
+
+- **Tolerance ladder** (hotSpring `tolerances/`):
+  Physically-justified thresholds per domain — machine precision,
+  numerical method convergence, physical model limits, literature bounds.
+  The EXACT tolerances for each tier are codified.
+
+- **`PrecisionEval`**: Per-shader benchmarking across all tiers (compile time,
+  dispatch throughput, ULP error), giving empirical data for routing decisions.
+
+**What this document adds**: the mathematical theory of WHY folding works,
+HOW to stabilize DF64 specifically for QCD, the DF32 (f16-pair) frontier
+that represents a new tier below the existing continuum, and MILC format
+interop as the validation anchor.
+
+The 15-tier system is the **ladder** — we're now explaining the rungs
+and showing you can tile up AND down based on hardware availability.
+The concept: any rung can be synthesized from the rung below it via
+pair arithmetic, or degraded from the rung above via truncation.
+The PrecisionBrain already routes between rungs; what's new is
+recognizing that the rungs themselves are constructible on demand.
+
+---
+
 ## 1. The Precision Folding Concept
 
 ### 1.1 Foundational Insight
@@ -448,9 +489,67 @@ single most convincing validation artifact for a MILC collaboration member.
 
 ---
 
+## 8. Connection to Existing Primal Architecture
+
+### 8.1 The Precision Continuum IS the Folding Ladder
+
+barraCuda's 15-tier `PrecisionTier` already encodes the folding concept:
+
+```
+Binary → Int2 → Q4 → Q8 → FP8 → BF16 → F16 → TF32 → F32 → DF64 → F64 → F64Precise → QF128 → DF128
+  ↑         ↑         ↑          ↑         ↑          ↑         ↑          ↑
+  1 bit     4 bit     8 bit      10 bit    23 bit     48 bit    52 bit     104 bit
+```
+
+Each transition between adjacent "pair" tiers (F16→DF32, F32→DF64,
+F64→DF128) is a precision fold. The ladder exists — we can tile up
+or down depending on:
+- What hardware is physically present (probed by PrecisionBrain)
+- What precision the physics domain requires (declared by PhysicsDomain)
+- What throughput/latency budget is available (measured by PrecisionEval)
+
+### 8.2 Hardware-Dependent Tiling
+
+The key insight: on **different hardware**, different rungs are optimal:
+
+| Hardware | Best tier for QCD | Reason |
+|:---------|:------------------|:-------|
+| RTX 4090 (Ada) | DF64 | 128:1 FP32:FP64 ratio, massive L2 |
+| RX 6950 XT (RDNA2) | DF64 | 128MB Infinity Cache, 9.2× over NVIDIA |
+| Tensor Core (H100) | DF32 on Tensor + DF64 on CUDA | Mixed-precision pipeline |
+| Apple M4 (unified) | DF64 | 16 FP32 cores, no native f64 |
+| Akida NPU | Int8/Int4 + CPU | NPU for classification, CPU for precision |
+| EPYC CPU | Native f64 | Full precision, thermalization source |
+
+The PrecisionBrain ALREADY handles this routing — it probes at startup and
+selects the optimal tier. What's new: recognizing that the tiers themselves
+can be SYNTHESIZED on hardware that doesn't natively support them, via
+pair arithmetic. You don't need f64 hardware to get f64-class precision.
+You don't need f32 hardware to get f32-class precision (DF32 on f16 hardware).
+
+### 8.3 The Tolerance Ladder as Precision Validator
+
+hotSpring's `tolerances/` module provides the ACCEPTANCE CRITERIA for each
+precision level. When we fold precision (DF64 instead of native f64), the
+tolerance ladder tells us whether the result is acceptable:
+
+- `PRECISION_MATRIX_DF64_ABS`: DF64-specific tolerance for matrix operations
+- `PRECISION_MATRIX_FP64_DF128_ABS`: When we need MORE than f64
+- `GPU_VS_CPU_F64`: Cross-platform precision parity threshold
+- `LATTICE_COLD_PLAQUETTE_ABS`: Physics-derived acceptance for QCD
+
+The ladder answers: "Is DF64 good enough for this physics?" — and for
+lattice QCD where statistical uncertainty is O(10⁻⁴), the answer is
+overwhelmingly YES (DF64 error is O(10⁻¹⁰)).
+
+---
+
 *strandGate subGen — Precision folding is a mathematical concept we are
-applying to consumer GPUs. DF64 already unblocked what native f64 was
-preventing. The next steps: stabilize it (compensation), make it provably
-correct (certified bounds), and fold further down (DF32 on Tensor Cores).
-Each fold opens a new tier of compute that was previously locked behind
-hardware pricing.*
+applying to consumer GPUs, building on the 15-tier precision continuum
+already designed into barraCuda. DF64 already unblocked what native f64
+was preventing. The next steps: stabilize it (compensation), make it
+provably correct (certified bounds), and fold further down (DF32 on
+Tensor Cores). Each fold opens a new tier of compute that was previously
+locked behind hardware pricing. The PrecisionBrain routes, the tolerance
+ladder validates, and the folding math makes any rung constructible from
+hardware you already have.*
