@@ -1272,6 +1272,43 @@ provenance layer is similarly generic and could serve any reproducibility-
 critical simulation pipeline where independent verification of computed
 results is required.
 
+### 7.1 Precision Continuum as Experimental Axis
+
+The 15-tier precision continuum (1-bit binary through 104-bit DF128)
+implemented in our framework enables a systematic study not possible with
+fixed-precision codes: precision itself becomes an experimental variable
+alongside coupling constant, volume, and gauge group.
+
+**Planned measurements** (Rung 1.5):
+- SU(3) plaquette at 16⁴ β=6.0 across tiers: F32 → DF64 → F64 → DF128
+- Acceptance rate as f(precision) at fixed step size — determines minimum
+  viable precision for each HMC component independently
+- DF32 (f16-pair) prototype on the molecular dynamics integrator, where
+  only symplecticity (not absolute precision) matters
+- Mixed-precision pipeline: CPU-f64 momenta + GPU-DF32 force + GPU-DF64
+  Metropolis — independently characterizing each component's precision floor
+
+This produces a **precision phase diagram** for lattice QCD: for each
+observable and each algorithm component, what is the minimum precision
+tier that preserves correctness? The answer directly maps to hardware
+requirements — if the MD integrator only needs DF32 (21 bits), it can
+run on Tensor Cores at 10× the current throughput.
+
+The system routes automatically via the `PrecisionBrain`: given a physics
+domain declaration and probed hardware capabilities, it selects the fastest
+tier that meets the domain's precision floor. Adding hardware (NPU, Tensor
+Core, new GPU architecture) expands the available tiers without code changes.
+
+### 7.2 MILC Interoperability
+
+A native MILC v5 format reader/writer enables direct data exchange with
+the reference lattice QCD implementation. The round-trip validation protocol
+(read MILC config → compute ⟨P⟩ → compare to MILC's header value)
+constitutes a categorically stronger correctness proof than matching
+published literature values alone. Public configurations (Bernard & Soni,
+NERSC Gauge Connection) provide the test data; requesting a small config
+from the MILC collaboration for paired testing is the ultimate validation.
+
 ---
 
 ## Figures
