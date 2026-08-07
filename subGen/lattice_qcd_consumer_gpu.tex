@@ -241,6 +241,27 @@ The provenance chain is independently verifiable using standard tools
 (\texttt{b3sum} for BLAKE3, any Ed25519 implementation for signatures,
 any PROV-O parser for attribution).
 
+\subsection{Silicon Substrate Architecture}
+
+The system dispatches computation across three silicon substrates based on
+precision and parallelism requirements:
+
+\begin{itemize}
+\item \textbf{CPU} (native f64): HMC control flow, thermalization,
+  validation oracle
+\item \textbf{GPU} (DF64 on FP32 ALUs): data-parallel stencil operations---force,
+  plaquette, sparse matrix-vector products
+\item \textbf{NPU} (int8 spiking inference): real-time phase classification
+  and online monitoring at $<$2\,W
+\end{itemize}
+
+All substrates operate on the same BLAKE3 content-addressed configuration
+data and share a common provenance chain. Different workflow phases have
+different precision floors: Monte Carlo accept/reject demands ${\sim}14$
+digits (DF64), but phase classification requires only 8 bits of observable
+resolution. Routing each operation to the substrate matching its precision
+floor maximizes throughput per watt without sacrificing correctness.
+
 %% ================================================================
 \section{Results}
 \label{sec:results}
@@ -565,6 +586,15 @@ vendor-neutral compute, cryptographic provenance, and commodity
 hardware deployment represents a step toward sovereign computational
 physics---from datacenter-exclusive to basement-accessible.
 
+More broadly, the architecture demonstrates silicon-agnostic scientific
+computing: CPU (native f64 thermalization), GPU (DF64 stencil compute),
+and NPU (int8 phase classification) operate within a single
+provenance-tracked pipeline. Each substrate handles what it does best---the
+scientific output is independent of which silicon produced it. Adding new
+substrates (Tensor Cores, neuromorphic accelerators, FPGAs) requires only
+registering their precision tier; the dispatch layer routes work without
+algorithmic changes.
+
 %% ================================================================
 \begin{acknowledgments}
 Computations were performed on sovereign hardware (strandGate,
@@ -590,6 +620,7 @@ CPU     & $2\times$ AMD EPYC 7452 (32C/64T each) \\
 RAM     & 128\,GB DDR4 ECC \\
 GPU\,1  & NVIDIA RTX 3090 (24\,GB GDDR6X, SM86) \\
 GPU\,2  & AMD RX 6950\,XT (16\,GB GDDR6, RDNA2) \\
+NPU     & BrainChip Akida AKD1000 (80 NPs, 10\,MB SRAM, PCIe, $<$2\,W) \\
 Storage & ZFS raidz1 \\
 OS      & Linux \\
 Rust    & 1.85+ (edition 2024) \\

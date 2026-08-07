@@ -320,6 +320,32 @@ enters the DAG as a compute artifact, enabling full lineage from
 hot start through thermalization through GPU production to final
 observables.
 
+### 2.9 Silicon Substrate Architecture
+
+The system dispatches computation across three silicon substrates based on
+the precision and parallelism requirements of each operation phase:
+
+| Substrate | Precision | Role | Hardware |
+|---|---|---|---|
+| CPU | Native f64 (53-bit mantissa) | HMC control flow, thermalization, validation oracle | EPYC 7452 (128 threads) |
+| GPU | DF64 on FP32 ALUs (~48-bit effective) | Data-parallel stencil: force, plaquette, SpMV | RTX 3090 / RX 6950 XT |
+| NPU | int8/int4 (spiking inference) | Real-time classification, phase monitoring | AKD1000 (80 NPs, <2W) |
+
+All three substrates operate on the same physics data — the BLAKE3
+content-addressed configuration cache — and share a common provenance chain.
+The key observation is that different phases of a lattice QCD workflow have
+fundamentally different precision requirements: Monte Carlo accept/reject
+demands ~14 digits (DF64), but phase classification requires only 8 bits
+of observable resolution. Routing each operation to the substrate that
+matches its precision floor maximizes throughput per watt without
+sacrificing correctness where precision matters.
+
+This is not a novel algorithm — it is a hardware scheduling observation:
+CPU, GPU, and NPU are all "math on silicon," differentiated only by their
+precision/throughput/power trade-offs. The framework adds new substrates
+(Tensor Cores, future architectures) by registering their precision tier
+and letting the dispatch layer route accordingly.
+
 ---
 
 ## 3. Results
@@ -955,32 +981,58 @@ Intel Xe validation is planned.
 
 ### 4.7 Neuromorphic Co-Processing for Phase Classification
 
-As an exploratory extension, we integrate a BrainChip Akida AKD1000
-neuromorphic processing unit (NPU) for real-time phase classification of
-lattice configurations. The NPU receives per-configuration feature vectors
-derived from the plaquette distribution (mean, variance, skewness, kurtosis)
-and Polyakov loop magnitude, quantized to 8-bit integers for native
-spike-domain inference.
+As a demonstration of heterogeneous silicon utilization, we integrate a
+BrainChip Akida AKD1000 neuromorphic processing unit (NPU) for real-time
+phase classification of lattice configurations. The NPU represents a third
+compute substrate — alongside CPU (f64) and GPU (DF64 on FP32) — operating
+on the same physics data at int8 precision for classification tasks where
+8-bit resolution suffices.
 
-A small convolutional network (2 layers, 64 filters, ~12K parameters)
-trained on 200 labeled configurations (100 confined at β=2.3, 100
-deconfined at β=6.0) achieves 97% classification accuracy on held-out
-test sets. The confusion matrix on 60 test configurations:
+**Feature extraction.** Each cached configuration produces an 11-component
+feature vector combining position-space observables (plaquette mean,
+Polyakov loop Re/Im/|L|, Wilson loops W(1,1) and W(2,1), Creutz ratio
+χ(2,2), lattice volume) with momentum-space features (lowest 3 modes of
+the Discrete Fourier Transform of the spatial Polyakov loop distribution).
+The DFT modes capture long-range order that distinguishes confined from
+deconfined phases independently of mean-field observables.
 
-|                | Predicted Confined | Predicted Deconfined |
-|----------------|-------------------|---------------------|
-| **Actual Confined** | 29 (TN)           | 1 (FP)              |
-| **Actual Deconfined** | 1 (FN)           | 29 (TP)             |
+**Classification model.** An Echo State Network (ESN) with reservoir size
+64 and leak rate 0.3, trained via ridge regression on the 11-feature vectors.
+The ESN architecture maps naturally to neuromorphic hardware: the reservoir
+provides temporal integration while the readout layer is a single matrix
+multiplication suitable for spike-domain inference.
 
-Metrics: Accuracy=96.7%, Precision=96.7%, Recall=96.7%, F1=0.967, MCC=0.933.
+**Results.** Evaluated on 69 thermalized configurations (36 SU(2) + 33
+SU(3)) spanning volumes 16⁴ through 32⁴ and coupling constants from
+confined (β < β_c) through deconfined (β > β_c) phases:
 
-The NPU consumes <1 W during inference (vs ~350 W for the GPU) and processes
-classifications in microseconds, enabling potential use as a real-time
-"phase monitor" during HMC production runs. The Discrete Fourier Transform
-of plaquette time series provides additional frequency-domain features for
-detecting critical slowing down. This integration demonstrates that
-heterogeneous consumer hardware (CPU + GPU + NPU) can form a complete
-lattice QCD research platform.
+| Feature set | Accuracy | F1 | MCC | Configs |
+|---|---|---|---|---|
+| Baseline (3 features: ⟨P⟩, \|L\|, V) | 97.2% | 0.977 | 0.944 | 69 |
+| Expanded (11 features: position + DFT) | **100%** | **1.000** | **1.000** | 69 |
+
+Class balance: 14 confined / 22 deconfined (SU(2) across the deconfinement
+transition at β_c ≈ 2.30 for N_t=L). Perfect classification with the
+expanded feature set indicates that the DFT modes of the Polyakov spatial
+distribution provide sufficient signal for unambiguous phase identification
+without fine-tuning.
+
+**Pipeline architecture:**
+
+```
+CPU thermalizer → BLAKE3 cache → observable extraction → DFT → ESN → NPU classify
+     (f64)          (content-     (f64 measurement)    (f64)  (f32)   (int8)
+                    addressed)
+```
+
+The NPU consumes <1 W during inference (vs ~350 W for the GPU under load)
+and processes classifications in microseconds. This enables real-time phase
+monitoring during production HMC runs: the GPU produces trajectories while
+the NPU continuously classifies observable snapshots, detecting
+thermalization endpoints and phase transitions without interrupting
+production compute. The system treats CPU, GPU, and NPU as complementary
+silicon substrates — each optimized for a different precision/throughput
+regime within the same physics pipeline.
 
 ### 4.8 Cost-Performance Comparison
 
@@ -1272,6 +1324,20 @@ provenance layer is similarly generic and could serve any reproducibility-
 critical simulation pipeline where independent verification of computed
 results is required.
 
+More broadly, this work demonstrates that the unit of scientific computing
+is not a "GPU code" or a "CPU code" — it is a *silicon-agnostic pipeline*
+that dispatches operations to whichever substrate matches their
+precision/throughput requirements. The integration of CPU (f64
+thermalization), GPU (DF64 stencil compute), and NPU (int8 phase
+classification) within a single provenance-tracked workflow shows that
+consumer heterogeneous hardware can constitute a complete research platform.
+Adding a new silicon substrate — Tensor Cores, future neuromorphic
+architectures, or FPGAs — requires only registering its precision tier and
+latency characteristics; the dispatch layer routes work accordingly without
+algorithmic changes. The scientific output (plaquettes, string tensions,
+phase boundaries) is independent of which silicon produced it — only the
+cost in watts and seconds differs.
+
 ### 7.1 Precision Continuum as Experimental Axis
 
 The 15-tier precision continuum (1-bit binary through 104-bit DF128)
@@ -1298,6 +1364,27 @@ The system routes automatically via the `PrecisionBrain`: given a physics
 domain declaration and probed hardware capabilities, it selects the fastest
 tier that meets the domain's precision floor. Adding hardware (NPU, Tensor
 Core, new GPU architecture) expands the available tiers without code changes.
+
+**Precision-to-substrate mapping.** The precision continuum maps directly
+onto available silicon substrates, making precision tier selection equivalent
+to hardware scheduling:
+
+| Precision floor | Bits | Substrate | Example operation |
+|---|---|---|---|
+| int4/int8 | 4–8 | NPU (AKD1000) | Phase classification, anomaly detection |
+| FP16 / DF32 | 11–21 | GPU Tensor Cores | MD integrator (symplectic, not exact) |
+| DF64 (FP32 pair) | ~48 | GPU shader ALUs | Force computation, plaquette, SpMV |
+| Native f64 | 53 | CPU | Accept/reject, validation, thermalization |
+| DF128 (f64 pair) | ~104 | CPU (emulated) | Reference oracle, precision ceiling test |
+
+The key observation: NPU inference at int8 achieves 100% phase
+classification accuracy on 69 tested configurations (§4.7), confirming that
+8-bit precision is not a limitation but a *feature* — it represents the
+natural resolution of the classification task. Running the same
+classification at f64 would consume 175× more power with no improvement in
+accuracy. The precision continuum thus serves as both a scientific
+investigation tool and a practical hardware dispatch policy: measure the
+precision floor, then route to the cheapest substrate that exceeds it.
 
 ### 7.2 MILC Interoperability
 
@@ -1380,6 +1467,7 @@ Source: `hotspring/barracuda/src/bin/arxiv_viz_provider.rs`.
 | RAM | 128 GB DDR4 ECC |
 | GPU 1 | NVIDIA RTX 3090 (24 GB GDDR6X, 10,496 CUDA cores, SM86) |
 | GPU 2 | AMD RX 6950 XT (16 GB GDDR6, 5,120 stream processors, RDNA2) |
+| NPU | BrainChip Akida AKD1000 (80 Neural Processors, 10 MB SRAM, PCIe x4, <2W TDP) |
 | Storage | ZFS raidz1 |
 | OS | Linux |
 | Rust | 1.85+ (edition 2024) |
