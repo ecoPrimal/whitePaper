@@ -352,7 +352,24 @@ With 32⁴ data:
 
 ---
 
+---
+
+## 9. Measurement Battery Complete (18h GPU Run)
+
+Concurrent with hardware exploration, `arxiv_measure_battery` ran for 18 hours:
+- **57 SU(3) configs** measured (54 valid, 3 unthermalised excluded)
+- **Lattices**: 16⁴, 24⁴, 32⁴ + asymmetric 24³×{6,8,10}
+- **β range**: 5.80–6.30 (strong to weak coupling)
+- **Observables**: Plaquette, Polyakov, Wilson loops (4×4), Creutz ratios, Q_top
+- **Result**: Plaquette within 0.3% of literature (Bali, Necco, MILC)
+- **Throughput**: constant 234 sites/s across all volumes (perfect linear scaling)
+
+See: `SU3_MEASUREMENT_BATTERY_AUG09_2026.md` for full results.
+
+---
+
 *Wave 157a — 15/15 silicon units accessible. IC cliff confirmed at 128 MB.
 Cross-GPU pipeline viable (0.16% overhead). AMD thermalizes, NVIDIA measures.
 250-2500× faster than MILC for stencil. **32⁴ HMC in 521.7 ms on consumer GPU.**
-Full silicon census complete.*
+57 configs measured (18h). Plaquette agrees with literature to 0.3%.
+Full silicon census + production physics complete.*
