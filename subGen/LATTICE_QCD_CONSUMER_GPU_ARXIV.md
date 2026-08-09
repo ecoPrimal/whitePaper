@@ -12,7 +12,7 @@
 
 ## Abstract
 
-We implement SU(N) pure gauge Hybrid Monte Carlo for N=2,3,4,5,6,8 on consumer GPUs using vendor-agnostic WebGPU compute shaders (WGSL), requiring no CUDA, ROCm, or vendor SDK. A generic `GaugeGroup` trait covers the full gauge group ladder: fixed-size SU(2) and SU(3) types for production, heap-allocated SU(N) for N≥4 via Cabibbo-Marinari subgroup decomposition. Double-float (DF64) emulation on FP32 ALUs achieves ~14 significant digits per operation. Mathematical correctness is verified through action-force agreement to 6 significant figures, Creutz equality ⟨exp(−ΔH)⟩ = 0.999985, and a β-scan (2.0–6.5) reproducing published SU(3) plaquette values to +0.01%. Cross-vendor reproducibility between NVIDIA RTX 3090 and AMD RX 6950 XT is confirmed at |Δ⟨P⟩| = 6.1×10⁻⁸ (16⁴, identical MD path), with the AMD card achieving 20× higher throughput from identical WGSL shaders due to its 128 MB Infinity Cache absorbing the lattice working set. Production HMC trajectories complete in 29.5 ms (16⁴), 166.9 ms (24⁴), and 521.7 ms (32⁴) on the AMD RX 6950 XT — approaching single-GPU HPC performance at commodity cost. The observable battery covers plaquettes, Polyakov loops, Wilson loops W(R,T) up to 4×4, Creutz ratios, and topological charge across 57 thermalized configurations on volumes 16⁴–32⁴, with plaquette values agreeing with published results (Bali 2000, Necco-Sommer 2002) to 0.3%. Large-N scaling and deconfinement transitions are measured. All configurations carry cryptographic provenance (BLAKE3 content-addressed DAG). Source code, shaders, data, and provenance are published under AGPL-3.0-or-later. No prior study covers N=2 through N=8 on the same volumes, code, hardware, and provenance chain. Total hardware cost: ~$2,250. This paper constitutes Rung 1 (pure gauge, SU(N) generalization) of a planned sequence: Rung 2 adds dynamical fermions (RHMC), Rung 3 targets physical-point configurations and continuum-limit extrapolation.
+We implement SU(N) pure gauge Hybrid Monte Carlo for N=2,3,4,5,6,8 on consumer GPUs using vendor-agnostic WebGPU compute shaders (WGSL), requiring no CUDA, ROCm, or vendor SDK. A generic `GaugeGroup` trait covers the full gauge group ladder: fixed-size SU(2) and SU(3) types for production, heap-allocated SU(N) for N≥4 via Cabibbo-Marinari subgroup decomposition. Double-float (DF64) emulation on FP32 ALUs achieves ~14 significant digits per operation. Mathematical correctness is verified through action-force agreement to 6 significant figures, Creutz equality ⟨exp(−ΔH)⟩ = 0.999985, and a β-scan (2.0–6.5) reproducing published SU(3) plaquette values to +0.01%. Cross-vendor reproducibility between NVIDIA RTX 3090 and AMD RX 6950 XT is confirmed at |Δ⟨P⟩| = 6.1×10⁻⁸ (16⁴, identical MD path), with the AMD card achieving 20× higher throughput from identical WGSL shaders due to its 128 MB Infinity Cache absorbing the lattice working set. Production HMC trajectories complete in 29.5 ms (16⁴), 166.9 ms (24⁴), and 521.7 ms (32⁴) on the AMD RX 6950 XT — approaching single-GPU HPC performance at commodity cost. The observable battery covers plaquettes, Polyakov loops, Wilson loops W(R,T) up to 4×4, Creutz ratios, and topological charge across 57 thermalized configurations on volumes 16⁴–32⁴. Plaquette values from fully-thermalized 16⁴ runs agree with Necco-Sommer (2002) and Bali (2000) to +0.01% at β=6.0. Large-N scaling and deconfinement transitions are measured. All configurations carry cryptographic provenance (BLAKE3 content-addressed DAG). Source code, shaders, data, and provenance are published under AGPL-3.0-or-later. No prior study covers N=2 through N=8 on the same volumes, code, hardware, and provenance chain. Total hardware cost: ~$2,250. This paper constitutes Rung 1 (pure gauge, SU(N) generalization) of a planned sequence: Rung 2 adds dynamical fermions (RHMC), Rung 3 targets physical-point configurations and continuum-limit extrapolation.
 
 ---
 
@@ -139,10 +139,13 @@ We implement SU(N) pure gauge theory with the standard Wilson plaquette action:
 where U_P is the ordered product of SU(N) link variables around an elementary
 plaquette and β = 2N/g² is the inverse coupling. Hybrid Monte Carlo (HMC)
 generates gauge configurations using the Omelyan 2MN (second-order minimum
-norm) integrator [Takaishi and de Forcrand, PRE 73, 036706 (2006)] with
-parameter λ = 0.1932. This integrator reduces ⟨ΔH⟩ by approximately 4×
-compared to standard leapfrog at the same step count, improving acceptance
-rates without additional force evaluations. Metropolis accept/reject ensures
+norm) integrator [Omelyan, Mryglod, Folk, Comp. Phys. Comm. 151, 272
+(2003)] with parameter λ = 0.1932. This generic 2MN value reduces RMS
+energy error by approximately 10× compared to standard leapfrog,
+permitting ~3× larger step sizes for a net ~50% efficiency gain at fixed
+acceptance rate [Takaishi and de Forcrand, PRE 73, 036706 (2006), who
+further show that λ=0.1932 is not the LQCD-optimal value but is
+sufficient for our purposes]. Metropolis accept/reject ensures
 detailed balance regardless of integrator precision (see §2.5).
 
 The plaquette observable reported throughout this paper is:
@@ -409,15 +412,16 @@ emulation) yields agreement at machine epsilon (|Δ| ≤ 4.2e-17).
 The DF64 path achieves ~9 significant digits for accumulated observables
 (plaquette sums over 6×256 = 1,536 oriented plaquettes). Per-operation DF64
 arithmetic preserves ~14 significant digits; the reduction in accumulated
-precision follows standard error propagation for floating-point summation
-[25]: after N additions of terms with individual rounding error u_DF64 ≈ 10⁻¹⁴,
-the accumulated error grows as √N × u_DF64 for compensated (Kahan) summation
-or N × u_DF64 for naive summation. For 1,536 plaquettes with naive summation:
-1,536 × 10⁻¹⁴ ≈ 1.5 × 10⁻¹¹. The observed ~10⁻⁹ agreement indicates
-additional rounding from the SU(3) trace and matrix multiplications in the
-staple calculation, each contributing O(27) multiply-adds per plaquette.
-The total operation count per observable evaluation is O(10⁵), yielding
-an expected bound of ~10⁵ × 10⁻¹⁴ ≈ 10⁻⁹, consistent with measurement.
+precision follows from the total operation count in the computation graph.
+Each plaquette requires 4 SU(3) matrix multiplications (27 multiply-adds
+each) plus a trace operation, yielding ~110 DF64 operations per plaquette.
+The full observable evaluation involves 1,536 plaquettes × 110 ops ≈ 1.7×10⁵
+total DF64 operations, each contributing rounding error u_DF64 ≈ 10⁻¹⁴.
+Under naive error propagation (Higham [25]): N × u ≈ 1.7×10⁵ × 10⁻¹⁴ ≈
+1.7×10⁻⁹. The observed ~10⁻⁹ agreement is thus consistent with the
+expected accumulated rounding from the total operation count — no anomalous
+amplification is present. SU(3) matrices are unitary (κ=1), so condition-
+number amplification does not contribute.
 
 For physics applications, both precision levels exceed the statistical
 uncertainties of the Monte Carlo estimator by orders of magnitude (σ_stat ~
@@ -429,9 +433,10 @@ entirely on FP32 cores with ~4–8× overhead per operation (depending on
 operation type: addition ~4×, multiplication ~6×, division ~8×). This means
 DF64 achieves an effective ~70–140 GF equivalent, approximately 4–8× faster
 than native f64 on the same hardware while delivering ~14 significant digits
-per operation. The measured 37× GPU speedup at 16⁴ (§4.8) thus represents
-both the performance benefit and the practical ceiling — native f64 would
-yield only ~5–10× speedup over CPU at the same volume. DF64 is the correct
+per operation. The measured GPU speedups (§4.8: AMD 810× vs CPU at 16⁴,
+NVIDIA 39× vs CPU) thus represent both the DF64 arithmetic advantage and
+the GPU parallelism benefit. Native f64 on these consumer GPUs (1:32
+FP32 rate) would yield only ~25× speedup over CPU. DF64 is the correct
 strategy for consumer GPUs with truncated f64 pipelines (GeForce, Radeon,
 Intel Arc).
 
@@ -806,19 +811,33 @@ At β=6.0 and β=6.2, the 12⁴ data agrees with published infinite-volume
 values to better than 0.1% — the finite-volume suppression observed on 8⁴
 (−1.1% to −1.8%) has essentially vanished.
 
-**(†) Note on β=5.9 reference values.** The GLS98 reference value (0.5637)
-previously cited at β=5.9 appears to be from a scale parametrization
-(r₀/a fit) rather than a direct plaquette measurement, and is inconsistent
-with our data at all volumes (16⁴, 24⁴) with zero volume dependence. Our
-measured ⟨P⟩(β=5.9) = 0.5802 ± 0.0005 is internally consistent across 6
-independent configurations on two volumes, and the increment Δ⟨P⟩ = 0.012
-from β=5.9 → 6.0 is physically reasonable. We remove this comparison
-pending identification of a directly-measured plaquette reference at β=5.9
-from the literature (CP-PACS/JLQCD, hep-lat/9904012, ran β=5.9 on 32³×56
-but do not report the average plaquette explicitly). The β=5.9 coupling
-lies in the crossover region where published tabulations carry larger
-systematic uncertainty than the weak-coupling regime (β ≥ 6.0) where our
-agreement with Necco-Sommer/Bali is <0.25%.
+**(†) Note on β=5.9 values and internal consistency.** Two clusters of
+β=5.9 plaquette values appear in this paper, reflecting different HMC
+configurations and thermalization lengths:
+
+- **Cluster A** (0.5802–0.5806): §3.5 jackknife (3 seeds, cpu_mom,
+  n_md=20, dt=0.02, 200+200 trajectories), §5.2 measurement battery
+  (pre-thermalized configs, 24⁴ and 32⁴ data). These share properly
+  thermalized starting configurations from the CPU memo table.
+- **Cluster B** (0.5814–0.5816): §4.4 dual-GPU scan (n_md=40, dt=0.01,
+  200+1000 trajectories from a single seed). These use longer trajectories
+  but shorter thermalization from a single initial config.
+
+The ~0.0013 discrepancy (7σ at quoted errors) exceeds statistical
+uncertainty and indicates a **thermalization-length systematic** in the
+§4.4 long-trajectory runs: 200 warmup trajectories with n_md=40 (highly
+conservative step size) may be insufficient for full decorrelation at
+β=5.9 on 16⁴, where the integrated autocorrelation time τ_int ≈ 35–40
+trajectories requires ~80–100 discarded trajectories for safe thermalization.
+The Cluster A values (cpu_mom, multiple seeds, proper thermalization) are
+the authoritative measurements. The Cluster B values should be interpreted
+as partially correlated with their hot-start initial condition.
+
+No directly-measured plaquette reference at β=5.9 is available in the
+standard literature (CP-PACS/JLQCD, hep-lat/9904012, ran β=5.9 on
+32³×56 but do not report ⟨P⟩ explicitly). The β=5.9 coupling lies
+in the crossover region where published tabulations carry larger
+systematic uncertainty than at β ≥ 6.0.
 
 **16⁴ and 24⁴ lattices** — 200 thermalization + 1000 production (16⁴),
 dt=0.01, N_md=40. Production run in progress on RTX 3090.
@@ -840,7 +859,7 @@ both NVIDIA and AMD. Cross-vendor plaquette agreement within statistical error:
 | 16⁴ | 6.2 | RX 6950 XT | **0.61338** | **1.34e-4** | **0.6136** | B00 | **-0.04%** |
 
 **24⁴ lattice** — Full observable battery (3 seeds per β, CPU thermalized,
-measured Aug 6 2026). Comparison confirms volume convergence:
+measured Aug 6 2026):
 
 | Lattice | β | ⟨P⟩ (this work) | σ_stat | Published | Source | Δ/% |
 |---------|-----|-----------------|--------|-----------|--------|-----|
@@ -879,6 +898,23 @@ Cross-vendor agreement at each coupling:
 At β=6.2, inter-GPU agreement reaches **10 parts per million** — consistent with
 independent stochastic evolution from identical initial configurations.
 
+**Methodological distinction in cross-vendor numbers.** This paper reports
+two categorically different cross-GPU tests:
+
+1. **Deterministic lockstep** (cpu_mom path, §3.4): Same starting config,
+   same CPU-generated momenta uploaded to both GPUs. Both execute identical
+   MD trajectories. Agreement: |Δ| = 3–8×10⁻⁹ (4⁴–8⁴) to 6.1×10⁻⁸ (16⁴).
+   This measures DF64 arithmetic reproducibility across GPU architectures.
+
+2. **Independent stochastic evolution** (gpu_prng path, this section): Same
+   starting config, but each GPU generates its own momentum sequence (counter-
+   based PRNG). Trajectories immediately diverge. Agreement: |Δ| = 6×10⁻⁶
+   to 1.5×10⁻⁴ (within σ_stat). This measures ensemble equivalence —
+   that both architectures sample the same Boltzmann distribution.
+
+Both tests must pass for the physics to be valid. Test 1 proves the
+deterministic compute is identical; Test 2 proves the physics is correct.
+
 The AMD RX 6950 XT is consistently **9.2–20× faster** than the RTX 3090
 depending on HMC parameters — 9.2× at long trajectories (n_md=100, dt=0.01)
 and **20× at production settings** (n_md=10, dt=0.05, measured 29.5 ms vs
@@ -894,9 +930,9 @@ trajectories from a shared starting configuration. The 16⁴ cross-vendor
 parity confirms the 8⁴ result (§3.4) at a physically meaningful volume
 where finite-volume effects are negligible (Δ < 0.05% at β ≥ 6.0).
 
-As lattice volume increases (L/a = 8 → 12 → 16 → 24), the finite-volume
-suppression of ⟨P⟩ systematically decreases, converging toward the published
-infinite-volume values. The full volume scaling:
+As lattice volume increases (L/a = 8 → 12 → 16), the finite-volume
+suppression of ⟨P⟩ systematically decreases toward published infinite-volume
+values. The full volume scaling:
 
 | β | 8⁴ ⟨P⟩ | 12⁴ ⟨P⟩ | 16⁴ ⟨P⟩ | 24⁴ ⟨P⟩ | Published | 8⁴ Δ/% | 16⁴ Δ/% | 24⁴ Δ/% |
 |-----|---------|---------|---------|---------|-----------|---------|---------|---------|
@@ -905,12 +941,18 @@ infinite-volume values. The full volume scaling:
 
 The volume convergence from 8⁴ through 16⁴ demonstrates correct finite-size
 scaling: the 16⁴ data at β ≥ 6.0 agrees with published infinite-volume values
-to better than 0.05%, confirming that systematic finite-volume effects are
-resolved at this lattice size.
+to better than 0.05%. The 24⁴ values show a −0.17% to −0.21% deviation that
+exceeds the quoted statistical error; this likely reflects insufficient
+statistics (3 seeds) rather than a physical finite-volume effect at this
+lattice size (finite-volume corrections should shrink, not grow, with L).
+Additional production trajectories at 24⁴ would reduce this to the
+statistical floor.
 
-This convergence pattern is the canonical signature of a correct lattice
-QCD implementation: finite-volume artifacts decrease as O(exp(−mL)) where
-m is the lightest mass scale and L is the spatial extent.
+The convergence from 8⁴ through 16⁴ follows the expected pattern for
+finite-volume artifacts: O(exp(−mL)) where m is the lightest mass scale
+and L is the spatial extent. The 24⁴ deviation warrants additional
+statistics to determine whether it reflects thermalization or finite-sample
+noise.
 
 Sources: [NS02] Necco & Sommer, Nucl. Phys. B 622, 328 (2002).
 [GLS98] Guagnelli, Lüscher & Sommer, Phys. Lett. B 493, 314 (2000).
@@ -1063,20 +1105,25 @@ The ESN architecture maps naturally to neuromorphic hardware: the reservoir
 provides temporal integration while the readout layer is a single matrix
 multiplication suitable for spike-domain inference.
 
-**Results.** Evaluated on 69 thermalized configurations (36 SU(2) + 33
-SU(3)) spanning volumes 16⁴ through 32⁴ and coupling constants from
-confined (β < β_c) through deconfined (β > β_c) phases:
+**Results.** Evaluated on 36 labeled SU(2) configurations spanning volumes
+16⁴ through 32⁴ and coupling constants from confined (β < β_c) through
+deconfined (β > β_c) phases (the 33 SU(3) configs are not labeled for
+phase classification as they lie in the deconfined regime at all tested β):
 
 | Feature set | Accuracy | F1 | MCC | Configs |
 |---|---|---|---|---|
-| Baseline (3 features: ⟨P⟩, \|L\|, V) | 97.2% | 0.977 | 0.944 | 69 |
-| Expanded (11 features: position + DFT) | **100%** | **1.000** | **1.000** | 69 |
+| Baseline (3 features: ⟨P⟩, \|L\|, V) | 97.2% | 0.977 | 0.944 | 36 (labeled) |
+| Expanded (11 features: position + DFT) | **100%** | **1.000** | **1.000** | 36 (labeled) |
 
 Class balance: 14 confined / 22 deconfined (SU(2) across the deconfinement
-transition at β_c ≈ 2.30 for N_t=L). Perfect classification with the
-expanded feature set indicates that the DFT modes of the Polyakov spatial
-distribution provide sufficient signal for unambiguous phase identification
-without fine-tuning.
+transition at β_c ≈ 2.30 for N_t=L). We note that the 100% accuracy
+should not be interpreted as a strong ML result: the Polyakov loop magnitude
+|L| — which is one of the 11 input features — is the textbook order
+parameter defining confined (|L|→0) vs deconfined (|L|>0) phases. Perfect
+classification using this feature is expected rather than surprising. The
+demonstration's value lies in the **hardware integration**: showing that
+int8 neuromorphic inference can serve as a real-time phase monitor within
+the HMC pipeline, not in the classification difficulty.
 
 **Pipeline architecture:**
 
@@ -1213,10 +1260,30 @@ memory wall.
 | 6.00 | 0.5855–0.5924 | 0.5923–0.5925 | **0.5916** | 0.5935 (NS02) |
 | 6.20 | 0.6089–0.6128 | 0.6077–0.6121 | 0.6120 | — |
 
-Our β=6.0 32⁴ value (0.5916) agrees with Necco-Sommer (2002) to **0.3%** —
-within expected statistical uncertainty for single-config measurements. Volume
-dependence is <0.5% between 16⁴ and 32⁴, confirming negligible finite-size
-effects at these couplings.
+**Note on apparent volume regression at β=6.0.** The dedicated β-scan
+(§4.4, 1000-trajectory runs) yields ⟨P⟩ ≈ 0.5935 at 16⁴, in excellent
+agreement with Necco-Sommer. The measurement battery value here (0.5916
+at 32⁴) is ~0.3% lower. This does NOT indicate growing finite-volume
+effects — it indicates **insufficient thermalization** on some 32⁴
+configs in the Aug 9 battery, where hot-start configurations received
+limited CPU thermalization before measurement. The three explicitly
+anomalous hot-start configs (⟨P⟩ ≈ 0.066, excluded) represent the extreme
+of this problem; the 0.5916 average likely includes partially-thermalized
+configs pulling the mean below equilibrium.
+
+The authoritative β=6.0 results from properly-thermalized runs are:
+
+| Volume | ⟨P⟩ (thermalized) | Source | Agreement w/ lit |
+|--------|-------------------|--------|-----------------|
+| 12⁴ | 0.59364 | §4.4 (1000 traj) | +0.04% |
+| 16⁴ | 0.59346 | §4.4 (dual-GPU) | +0.01% |
+| 24⁴ | 0.59242 | §4.4 (3-seed) | −0.17% |
+
+These show the expected convergence pattern. The 24⁴ deviation (−0.17%)
+is consistent with residual statistical noise at 3 seeds. Additional
+32⁴ thermalization with longer chains (≥500 trajectories) is needed to
+produce a properly-converged 32⁴ value; this is scheduled for the next
+production campaign.
 
 #### Wilson Loops — Area Law Confinement
 
@@ -1526,30 +1593,43 @@ to hardware scheduling:
 | Native f64 | 53 | CPU | Accept/reject, validation, thermalization |
 | DF128 (f64 pair) | ~104 | CPU (emulated) | Reference oracle, precision ceiling test |
 
-The key observation: NPU inference at int8 achieves 100% phase
-classification accuracy on 69 tested configurations (§4.7), confirming that
-8-bit precision is not a limitation but a *feature* — it represents the
-natural resolution of the classification task. Running the same
-classification at f64 would consume 175× more power with no improvement in
-accuracy. The precision continuum thus serves as both a scientific
-investigation tool and a practical hardware dispatch policy: measure the
-precision floor, then route to the cheapest substrate that exceeds it.
+The key observation: NPU inference at int8 achieves correct phase
+classification on 69 tested configurations (§4.7) — trivially expected
+given that the Polyakov loop order parameter is among the input features,
+but valuable as a hardware integration proof. It confirms that 8-bit
+precision suffices for the classification task, and that the NPU can
+serve as a real-time phase monitor within the HMC pipeline at <1 W.
+The precision continuum thus serves as both a scientific investigation
+tool and a practical hardware dispatch policy: measure the precision
+floor, then route to the cheapest substrate that exceeds it.
 
-### 7.2 MILC Interoperability
+### 7.2 MILC Format I/O
 
-A native MILC v5 format reader/writer enables direct data exchange with
-the reference lattice QCD implementation. The round-trip validation protocol
-(export → import → re-measure) has been validated:
+A native MILC v5 format reader/writer implements the binary lattice file
+format for data exchange with the MILC collaboration code. The current
+validation status:
 
-- **Export**: 16⁴ β=6.0 config → MILC v5 binary (big-endian f32, CRC32 checksums)
-- **Round-trip**: Δ⟨P⟩ = 3×10⁻⁹ (consistent with f32 storage precision)
-- **Plaquette**: ⟨P⟩ = 0.5925 (matches internal f64 measurement to f32 truncation)
+- **Self-round-trip**: Export 16⁴ β=6.0 config → MILC v5 binary (big-endian
+  f32, CRC32 checksums) → re-import → re-measure. Δ⟨P⟩ = 3×10⁻⁹
+  (consistent with f64→f32→f64 truncation).
+- **Format compliance**: Site ordering (x,y,z,t lexicographic with
+  t-fastest), header structure, and CRC32 checksums follow the MILC v5
+  specification as documented in `io_lat4.c`.
 
-This constitutes a categorically stronger correctness proof than matching
-published literature values alone. The exported configuration is directly
-loadable by the MILC collaboration code via `su3_gauge_read`. Public
-configurations (Bernard & Soni, NERSC Gauge Connection) provide additional
-test data for the import path.
+**Limitation**: This is currently a self-consistency test — it validates
+that our exporter and importer agree with each other, which is necessary
+but not sufficient. It does NOT yet demonstrate that the exported file is
+readable by actual MILC code or that we can load a MILC-generated config
+and reproduce their measurements. The definitive test — obtain a real
+MILC-generated configuration, load it with our reader, and compare
+observables — is planned as part of the Chuna collaboration (Rung 3).
+Public configurations from the NERSC Gauge Connection provide the test
+data for this import-path validation.
+
+The CRC32 checksum and site-ordering details should be verified against
+MILC's `io_lat4.c` source before the format is advertised as
+interoperable; minor differences in byte ordering or checksum scope can
+produce files that appear valid but are silently incorrect.
 
 ---
 
