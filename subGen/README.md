@@ -101,6 +101,53 @@ here to gen5 success.
     Full capacity analysis: 22⁴ → 73⁴ (121×). Buffer elimination via ROP, subgroup,
     precision folding. Impact on all 5 arXiv rungs. Implementation priority.
 
+19. **[RUNG_STRATEGY_COMPRESSED_AUG09.md](RUNG_STRATEGY_COMPRESSED_AUG09.md)** —
+    Compressed 3-phase publication plan. Phase 1: Rung 1+2 reviewer send. Phase 2:
+    Rung 3+4 arXiv with MILC engine. Phase 3: Rung 5+ exceeding labs. scyBorg coverage.
+
+20. **[PREPRINT_LIVE_SCIENCE_SYSTEM.md](PREPRINT_LIVE_SCIENCE_SYSTEM.md)** —
+    Live science architecture: westGate CAS + ironGate NFT + sporePrint web +
+    pseudoSpore pull + validate.sh. How reviewers interact with the inspectable system.
+
+21. **[RUNG3_DYNAMICAL_FERMIONS_SCAFFOLD.md](RUNG3_DYNAMICAL_FERMIONS_SCAFFOLD.md)** —
+    Rung 3 scaffold: RHMC with staggered quarks on GPU. Section outline, data plan,
+    MILC comparison protocol. Code complete, data pending.
+
+22. **[RUNG4_NF2P1_PHYSICAL_POINT_SCAFFOLD.md](RUNG4_NF2P1_PHYSICAL_POINT_SCAFFOLD.md)** —
+    Rung 4 scaffold: Nf=2+1 toward physical point. Two-sector RHMC, scale setting,
+    progressive mass reduction. Code paths implemented.
+
+23. **[RUNG5_FINITE_TEMPERATURE_SCAFFOLD.md](RUNG5_FINITE_TEMPERATURE_SCAFFOLD.md)** —
+    Rung 5 scaffold: Finite-T QCD crossover. Ns³×Nτ lattices, equation of state,
+    continuum extrapolation. Most cost-effective path to exceeding labs.
+
+24. **[EVOLUTION_STRATEGY_HIGHER_RUNGS.md](EVOLUTION_STRATEGY_HIGHER_RUNGS.md)** —
+    Targetable performance gap analysis: QUDA/Grid/openQCD/SIMULATeQCD vs barracuda.
+    Every gap is engineering not physics. coralReef sovereign dispatch as force
+    multiplier. Distributed idle gaming mesh vs HPC queue. Publication sizes by rung.
+
+25. **[BRAID_VALIDATION_CHAIN.md](BRAID_VALIDATION_CHAIN.md)** —
+    CAS + NFT braid chain spec: produce → store → sign → serve → validate → reproduce.
+    validate.sh specification. pseudoSpore bundle contents. Reviewer interaction modes.
+
+26. **[SILICON_FOLD_EXPLORATION_AUG09_2026.md](SILICON_FOLD_EXPLORATION_AUG09_2026.md)** —
+    Full silicon fold results: AMD 20× faster (Infinity Cache), NVENC 61:1 compression,
+    NPU 0.02% overhead, 13/15 units exercised. Volume scaling 4⁴-16⁴. RT cores
+    accessible via wgpu 28. Routing table for toadStool. Data braid entries.
+
+27. **[BANDWIDTH_RIVER_TILING_AUG09_2026.md](BANDWIDTH_RIVER_TILING_AUG09_2026.md)** —
+    PCIe utilization at 1.7% (river vs traffic). AMD Infinity Cache = no cliff (16⁴
+    natural tile). NVIDIA L2 cliff at 8 MB. Tiling concept: 16⁴ moves through larger
+    grids. Double-buffered structured streaming. Bidirectional PCIe. Tensor core
+    characterization for coralReef. RiverScheduler abstraction for barraCuda.
+
+28. **[SILICON_GENEALOGY_LATENT_VALUE_AUG09_2026.md](SILICON_GENEALOGY_LATENT_VALUE_AUG09_2026.md)** —
+    Generation-specific silicon profiling framework. NVIDIA Ampere vs AMD RDNA2 as
+    production eras, not brand competition. Measured: NVIDIA wins raw everything (1.3-1.9×),
+    AMD wins QCD 10-20× via Infinity Cache. Root cause: intra-dispatch working set
+    thrashing at 6 MB L2. Hardware acquisition guidance. Dispatch count scaling proof.
+    Natural tile sizes. eBay shopping guide for QCD cards.
+
 ### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as

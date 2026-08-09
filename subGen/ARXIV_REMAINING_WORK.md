@@ -129,7 +129,7 @@ What data exists and where it goes in the paper.
 | §5.3 Large-N Scaling | SU(2)/SU(3) comparative data at 16⁴, 24⁴, 32⁴ | `arxiv_measure_battery` output | **PARTIAL** — SU(2)+SU(3) complete, N≥4 thermalization ongoing |
 | §5.4 Deconfinement | SU(2) 24³×{6,8,10} β-scans + SU(3) 24³×{6,8} | `arxiv_measure_battery` output | **DONE** — 12 finite-T configs measured, all deconfined phase |
 | §5.5 String Tension | Full W(R,T) + χ(R,T) for SU(2) 32⁴ and SU(3) 24⁴ | `arxiv_measure_battery` output | **DONE** — real Creutz ratios in paper |
-| **NEW: §3.5 Silicon Offloading** | ROP/TMU/subgroup, 121× capacity, cooperative multi-GPU | `profile_lattice_capacity.rs` | **DATA COMPLETE** — needs writing |
+| **NEW: §3.6 Silicon Offloading** | ROP/TMU/subgroup, 121× capacity, cooperative multi-GPU | `profile_lattice_capacity.rs` | **DONE** — §3.6 written Aug 9 |
 | §6 Reproducibility | pseudoSpore description | Node Atomic | **Written** — URL needs verification (M7) |
 | §7 Conclusion | Summary + future rungs | — | **Written** — needs broader impact line (M8) |
 | Appendix A | Hardware profile | HARDWARE.md | **Written** |
