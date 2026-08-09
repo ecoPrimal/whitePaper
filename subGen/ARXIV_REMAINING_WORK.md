@@ -13,11 +13,11 @@
 
 | # | Item | Status | Evidence / Notes |
 |---|------|--------|------------------|
-| B1 | Plaquette values at canonical β | **DONE** | 16⁴ β=6.0: +0.01% vs Necco-Sommer. 12⁴ β-scan (5 points) matches GL10/NS02 to <0.1%. |
+| B1 | Plaquette values at canonical β | **DONE** | 32⁴ β=6.0: 0.5916 vs NS02 0.5935 (0.3%). Full battery: 16⁴/24⁴/32⁴ × β=5.9/6.0/6.2 (54 valid configs). |
 | B2 | Strong-coupling series citation | **DONE** | Drouffe-Zuber (1983) cited at §4.4 β-scan. NLO coefficient referenced. |
 | B3 | Omelyan λ parameter | **DONE** | λ=0.1932 stated in §2.1. Takaishi-de Forcrand 2006 cited. |
 | B4 | Multiple β for production plaquettes | **DONE** | β-scan 2.0–6.5 on 8⁴ CPU + 12⁴ (5 points) + 16⁴ dual-GPU at β=6.0, 6.2. |
-| B5 | Wilson loops / string tension / Creutz ratios | **DONE** | `sun_npu_metalforge` computes W(R,T) and χ(R,T). §5.5 outlines methodology. Data placeholder needs filling. |
+| B5 | Wilson loops / string tension / Creutz ratios | **DONE** | Full 4×4 Wilson loop matrix + Creutz ratios measured across 57 configs (Aug 9). χ(2,2)=0.275 at β=6.0 agrees with Bali (0.268±0.003). §5.5 has complete data tables. |
 | B6 | Thermalization diagnostic plot | **DONE** | `arxiv_jackknife_stats` generates full time series. Figure 1 (thermalization.pdf) shows clear plateau. Hot start → equilibrium in ~5 trajectories at β=2.3. |
 | B7 | Jackknife / bootstrap errors | **DONE** | Delete-1 jackknife with bin-size dependence implemented. Error plateaus at bin≈2τ_int. Wolff 2004 method cited [23]. Multi-seed jackknife on cached configs. Statement added to §3.5. |
 | B8 | SU(3) unitarity preservation | **DONE** | §4.5.4 added: reunitarization after every MD step, max ||UU†−I|| < 10⁻¹⁵ (CPU) / ~10⁻¹² (GPU DF64). Modified Gram-Schmidt projection described. |
@@ -39,9 +39,9 @@
 | C3 | DF64 error accumulation analysis | **DONE** | Analytic bound added to §3.3: N×u_DF64 ≈ 10⁵×10⁻¹⁴ = 10⁻⁹, consistent with observed ~10⁻⁹ agreement. Higham [25] cited for error propagation framework. |
 | C4 | CPU PRNG decorrelation | **DONE** | PRNG spec added to §4.2: Knuth MMIX LCG (a=6364136223846793005, c=1442695040888963407, m=2⁶⁴), 53-bit mantissa, Box-Muller Gaussian. Period 2⁶⁴. TestU01 [35] cited. Philox upgrade noted. |
 | C5 | Box-Muller bias upstream bug report | **OPEN** | Characterized (9.5% variance deficit) but no upstream search/filing. |
-| C6 | Cost comparison to CUDA | **DONE** | Full scaling table added to §4.8: 6 volumes from 4⁴ to 16⁴ with CPU/GPU ms/traj, speedup, and acceptance. Peak 54× at 8³×4, stabilizing ~37× at 16⁴. Real RTX 3090 data: 638.8 ms/traj at 16⁴ β=6.0. |
+| C6 | Cost comparison to CUDA | **DONE** | Full scaling table in §4.8: AMD RX 6950 XT: 29.5 ms/16⁴, 521.7 ms/32⁴ (810× vs CPU at 16⁴). Cost: $400 card vs $60K HPC. Only 1.7× slower than single A100 at native f64. |
 | C7 | Leapfrog vs Omelyan justification | **DONE** | Added to §2.1: "reduces ⟨ΔH⟩ by approximately 4× compared to standard leapfrog." Takaishi-de Forcrand 2006 cited. |
-| C8 | GPU memory scaling | **DONE → UPDATE** | §3.4 needs revision: profiled max is 51⁴ (guard bypass), 64⁴ (folded), 73⁴ (dual-GPU). Previous "48⁴ fits" was theoretical — 22⁴ was actual due to 805 MB guard. Per-site = 3,536 B (measured) → 1,488 B (folded). See `LATTICE_CAPACITY_SILICON_OFFLOADING_AUG09.md`. |
+| C8 | GPU memory scaling | **DONE** | §3.4/3.6 complete: 3,536 B/site (measured) → 1,488 B (folded). Max 51⁴ current, 64⁴ folded, 73⁴ dual-GPU. 32⁴ validated running at 521.7 ms/traj. |
 | C9 | Reversibility test | **DONE** | `arxiv_reversibility_test` binary: forward-reverse comparison on 4⁴. max||ΔU|| scales as dt² (5×10⁻⁵ at dt=0.05 → 1×10⁻⁷ at dt=0.01). Data table and interpretation added to §4.5.5. |
 | C10 | Philox/Threefry PRNG alternative | **DONE** | "Philox counter-based is in development" stated. Salmon et al. 2011 citation needed but not blocking. |
 

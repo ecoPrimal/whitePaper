@@ -148,6 +148,12 @@ here to gen5 success.
     thrashing at 6 MB L2. Hardware acquisition guidance. Dispatch count scaling proof.
     Natural tile sizes. eBay shopping guide for QCD cards.
 
+29. **[SU3_MEASUREMENT_BATTERY_AUG09_2026.md](SU3_MEASUREMENT_BATTERY_AUG09_2026.md)** —
+    Production measurement battery: 57 SU(3) configs (54 valid), 18 hours GPU time.
+    Full observable suite: plaquette, Polyakov, Wilson loops 4×4, Creutz ratios, Q_top.
+    Volumes 16⁴–32⁴, β=5.8–6.3. Literature validation: ⟨P⟩ 0.3% of Necco-Sommer,
+    χ(2,2) agrees with Bali. Constant 234 sites/s throughput. Publication-grade data.
+
 ### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as

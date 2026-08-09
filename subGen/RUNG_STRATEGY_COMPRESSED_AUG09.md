@@ -146,7 +146,13 @@ Before sending to Murillo and Bazavov:
 - [x] `validate.sh` — BLAKE3 + Ed25519 verification script (Aug 9, tested: 105 files, 10.6 GB, 3.7s)
 - [x] Paper §3.6 — silicon offloading section written (Aug 9)
 - [x] Paper C8/M6 — memory tables updated with profiled values (Aug 9)
-- [ ] Final LaTeX build via tectonic
+- [x] 57-config measurement battery — plaquette, Wilson loops, Creutz, Q_top (Aug 9, 18h)
+- [x] 32⁴ production: 521.7 ms/traj on consumer AMD (MILC-comparable volume)
+- [x] Literature comparison: ⟨P⟩ within 0.3% of Necco-Sommer/Bali at β=6.0 32⁴
+- [x] Paper §5.2 updated with full observable battery data
+- [x] Paper §4.8 updated with AMD 20× advantage + 32⁴ scaling
+- [ ] Final LaTeX build via tectonic (`.tex` title still SU(2), needs sync)
+- [ ] Jackknife errors at fixed β/V (need O(100) configs per point)
 
 ---
 

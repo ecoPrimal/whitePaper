@@ -1,7 +1,7 @@
 # arXiv Rung 1 — SU(3) Pure Gauge Preprint Status
 
-**Status**: **16⁴ DUAL-GPU COMPLETE** — cross-vendor parity CONFIRMED (Δ=6 ppm at β=6.2)
-**Wave**: 156d | **Date**: Aug 4, 2026 PM (updated)
+**Status**: **32⁴ PRODUCTION COMPLETE** — 57 configs measured, literature agreement 0.3%, AMD 20× advantage
+**Wave**: 157a | **Date**: Aug 9, 2026 (updated)
 **Paper**: `LATTICE_QCD_CONSUMER_GPU_ARXIV.md` (this directory)
 **LaTeX**: `lattice_qcd_consumer_gpu.tex` (this directory)
 
@@ -31,15 +31,16 @@ with dynamical fermions.
 
 | Section | Content | Status |
 |---------|---------|--------|
-| 3.1 Lattice Scaling | 4⁴, 8⁴ timing on RTX 3090 + RX 6950 XT | DONE |
-| 3.2 Plaquette Values | β=2.3, cpu_mom path, GPU-vs-CPU agreement | DONE |
+| 3.1 Lattice Scaling | 4⁴→32⁴ timing: AMD 29.5ms (16⁴), 521.7ms (32⁴) | DONE |
+| 3.2 Plaquette Values | β=5.9/6.0/6.2 across 16⁴–32⁴, literature 0.3% | DONE |
 | 3.3 DF64 Precision | Per-op accuracy, accumulated accuracy, precision matrix | DONE |
-| 3.4 Multi-Vendor | NVIDIA/AMD from same WGSL, 8⁴ agreement 3.1×10⁻⁹, **16⁴ agreement 6 ppm** | DONE |
-| 3.5 Autocorrelation | τ_int, N_eff at both volumes | DONE |
-| 4.1 Cost Analysis | Sovereign vs cloud pricing | DONE |
-| 4.2 PRNG Discovery | Three-path isolation, cpu_mom validation, 9.5% variance deficit | DONE |
-| 4.5 Vendor Neutrality | WGSL→PTX/GCN compilation pipeline | DONE |
-| 5 Reproducibility | pseudoSpore artifact description | DONE |
+| 3.4 Multi-Vendor | NVIDIA/AMD from same WGSL, |Δ|=6.1×10⁻⁸ at 16⁴ | DONE |
+| 3.5 Autocorrelation | τ_int, N_eff, jackknife bin-size | DONE |
+| 3.6 Silicon Offloading | ROP/TMU/subgroup capacity: 51⁴→73⁴ | DONE |
+| 4.8 Cost-Performance | AMD 810× vs CPU, $400 card vs $60K HPC | DONE |
+| 5.2 Observable Battery | 57 configs, plaquette/Wilson/Creutz/Q_top | DONE |
+| 5.5 Creutz Ratios | Full χ(R,T) matrix, Bali comparison | DONE |
+| 6 Reproducibility | pseudoSpore + validate.sh | DONE |
 
 ---
 
