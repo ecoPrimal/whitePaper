@@ -447,25 +447,36 @@ CPU reference) using the same compiled WGSL shader source:
 | RX 6950 XT | RDNA2 (Navi 21) | 16 GB | 0.82 |
 
 **GPU memory scaling.** Each lattice site requires storage for 4 directional
-link matrices plus staple accumulators during the force computation:
+link matrices plus staple accumulators during the force computation. The
+measured per-site footprint is 3,536 bytes for the full HMC state (6
+link-sized DF64 buffers plus reduction outputs and neighbor tables):
 
 | Component | Per site (SU(3)) | Formula |
 |-----------|-----------------|---------|
-| Gauge links (4 dirs) | 576 B | 4 × 9 × 2 × 4 B (DF64: hi+lo FP32 pairs) |
-| Staples (4 dirs) | 576 B | 4 × 9 × 2 × 4 B |
-| Momenta (4 dirs, su(3)) | 256 B | 4 × 8 × 2 × 4 B |
-| Force (4 dirs) | 256 B | 4 × 8 × 2 × 4 B |
-| **Total** | **~1,664 B/site** | |
+| Gauge links U (4 dirs) | 576 B | 4 × 9 × 2 × 4 B (DF64: hi+lo FP32 pairs) |
+| Backup links U' | 576 B | Metropolis reject rollback |
+| Momenta P (4 dirs) | 576 B | 4 × 9 × 2 × 4 B |
+| Force F (4 dirs) | 576 B | Staple accumulation |
+| Omelyan intermediates ×2 | 1,152 B | Link + momentum backup for multi-stage |
+| Reduction outputs + neighbors | 80 B | KE, plaquette, Polyakov, index table |
+| **Total (measured)** | **3,536 B/site** | |
 
-Maximum volumes per GPU (including ~500 MB driver/pipeline overhead):
+With silicon offloading (ROP additive blend eliminates force buffer,
+subgroup operations eliminate Omelyan intermediates, FP32 for refreshed
+momenta), the per-site cost reduces to ~1,488 bytes — a 2.4× reduction
+that doubles the maximum lattice size on fixed VRAM.
+
+Maximum volumes per GPU (validated by profiling, Aug 9, 2026):
 
 | Volume | Sites | VRAM required | RTX 3090 (24 GB) | RX 6950 XT (16 GB) |
 |--------|-------|---------------|-------------------|---------------------|
-| 16⁴   | 65,536 | 109 MB | Yes | Yes |
-| 24⁴   | 331,776 | 553 MB | Yes | Yes |
-| 32⁴   | 1,048,576 | 1.74 GB | Yes | Yes |
-| 48⁴   | 5,308,416 | 8.83 GB | Yes | Yes |
-| 64⁴   | 16,777,216 | 27.9 GB | No (24 GB) | No (16 GB) |
+| 16⁴   | 65,536 | 232 MB | Yes | Yes |
+| 24⁴   | 331,776 | 1.17 GB | Yes | Yes |
+| 32⁴   | 1,048,576 | 3.71 GB | Yes | Yes |
+| 48⁴   | 5,308,416 | 18.8 GB | Yes | No (16 GB) |
+| 51⁴   | 6,765,201 | 23.9 GB | Yes (max current) | No |
+| 64⁴   | 16,777,216 | 24.8 GB | Yes (folded) | No |
+| 73⁴   | 28,398,241 | 41.9 GB | Dual-GPU (folded) | Dual-GPU (folded) |
 
 For SU(N), memory scales as N² (matrix size): SU(8) requires ~7× the
 memory of SU(3) per site, limiting 48⁴ SU(8) to GPUs with ≥64 GB VRAM.

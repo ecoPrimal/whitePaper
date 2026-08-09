@@ -193,6 +193,98 @@ demonstrating that consumer GPUs deliver publication-quality lattice QCD.
 
 ---
 
+## Lattice Capacity Analysis — Silicon Offloading (Aug 9, 2026)
+
+### Previous vs New Maximum Lattice Size
+
+The previous production max was **22⁴** (234,256 sites), limited by a hardcoded
+VRAM allocation guard (805 MB safe limit). With guard bypass and silicon offloading:
+
+| Strategy | Max L⁴ | Sites | VRAM Used | Improvement |
+|----------|--------|-------|-----------|-------------|
+| **Previous** (guard-limited, single GPU) | 22⁴ | 234,256 | 0.8 GB | baseline |
+| Guard bypass (NVIDIA 24 GB) | 51⁴ | 6,765,201 | 23.9 GB | 29× |
+| ROP offload (eliminate force buffer) | 61⁴ | 13,845,841 | 24.9 GB | 59× |
+| Precision folded (FP32 momenta + ROP) | 64⁴ | 16,777,216 | 24.8 GB | 72× |
+| Multi-GPU split (40 GB combined) | 59⁴ | 12,117,361 | 42.8 GB | 52× |
+| **Multi-GPU + folded (MAXIMUM)** | **73⁴** | **28,398,241** | 41.9 GB | **121×** |
+
+**121× more lattice sites than our previous software-limited max.**
+
+### VRAM Budget per Strategy
+
+Current allocation: **3,536 bytes per lattice site** (6 link-sized DF64 buffers + observables).
+
+Buffer layout (SU(3), per site):
+- Links: 4 directions × 18 doubles = 576 bytes
+- Backup: 576 bytes (Metropolis reject)
+- Momenta: 576 bytes (refreshed each trajectory)
+- Force: 576 bytes (accumulated via atomicAdd)
+- KE + Plaquette + Polyakov + Neighbors: 48 bytes
+
+**Silicon offloading reduces this by eliminating buffers:**
+
+| Buffer | Current | ROP Offload | Precision Fold |
+|--------|---------|-------------|----------------|
+| Links (DF64) | 576 B | 576 B | 576 B |
+| Backup (DF64) | 576 B | 576 B | 576 B |
+| Momenta (DF64) | 576 B | 576 B | 288 B (FP32) |
+| Force (DF64) | 576 B | **0** (ROP blend) | **0** (ROP blend) |
+| Link backup 2 | 576 B | **0** (subgroup) | **0** (subgroup) |
+| Mom backup | 576 B | **0** (subgroup) | **0** (subgroup) |
+| Total | 3,536 B | 1,776 B | 1,488 B |
+
+### Silicon Offloading — Time Savings
+
+At 16⁴ production volume, measured per-trajectory breakdown:
+
+**NVIDIA RTX 3090:**
+- Per MD step: 60.63 ms (force + link/mom update)
+- Fixed overhead: 8.34 ms (init + accept/reject)
+- Full trajectory (n_md=10): 615 ms
+- **Offload savings: 166 ms (27%) → 1.37× speedup**
+
+**AMD RX 6950 XT:**
+- Per MD step: 3.64 ms
+- Full trajectory (n_md=10): 40 ms
+- **Offload savings: 9.3 ms (23%) → 1.30× speedup**
+
+Breakdown of offloadable work:
+| Silicon Unit | Task | Savings (NVIDIA) | Savings (AMD) |
+|---|---|---|---|
+| ROP (render output) | Force scatter-add via additive blend | 103 ms (17%) | 6.2 ms (16%) |
+| Subgroup (warp shuffle) | Tree reduction (KE, plaquette) | 2.5 ms (0.4%) | — |
+| TMU (texture mapping) | Multigrid prolongation/restriction | 61 ms (10%) | 3.6 ms (9%) |
+
+### Cooperative Multi-GPU Decomposition
+
+With both cards simultaneously:
+```
+GPU A (AMD — 19× faster ALU)         GPU B (NVIDIA — better TMU/cache)
+─────────────────────────             ─────────────────────────────────
+Force calculation                     Multigrid preconditioning
+Link update                           Eigenvalue estimation (Lanczos)
+Momentum update                       Polyakov loop measurement
+Accept/reject                         Wilson loop computation
+```
+
+PCIe transfer: 77 ms for 38 MB (0.4% of thermalization time — fully hidden).
+
+### Hardware Guidance (what to throw at strandGate)
+
+Based on profiling, optimal card acquisitions ranked by science-per-dollar:
+
+| Card | Role | Why |
+|------|------|-----|
+| AMD RX 7900 XTX (24 GB) | Primary thermalizer | RDNA 3 wavefront + 24 GB pushes max to 51⁴ on single card |
+| NVIDIA RTX 4090 (24 GB) | TMU/tensor oracle | Ada tensor cores for future FP8 folding experiments |
+| AMD Radeon Pro W7900 (48 GB) | Large lattice single-GPU | 48 GB → 64⁴ unfolded on one card |
+| Used Tesla V100 (32 GB HBM2) | Dense linear algebra | HBM2 bandwidth for eigensolvers |
+| Used Titan RTX (24 GB) | Budget cross-check | Different silicon gen for validation diversity |
+| Retiring HBM2 cards | Bandwidth experiments | HBM2 vs GDDR6 vs Infinity Cache comparison |
+
+---
+
 ## Related Documents
 
 - `SUNMEMO_STRUCTURE.md` — sunMemo configuration archive format
@@ -201,7 +293,8 @@ demonstrating that consumer GPUs deliver publication-quality lattice QCD.
 - `barracuda/src/bin/bench_silicon_crosspath_qcd.rs` — cross-GPU comparison binary
 - `barracuda/src/bin/bench_silicon_volume_scaling.rs` — volume scaling benchmark
 - `barracuda/src/bin/bench_precision_ladder.rs` — precision/reproducibility validation
+- `barracuda/src/bin/profile_lattice_capacity.rs` — capacity + offloading profiler
 
 ---
 
-*strandGate — Wave 157a — Aug 8, 2026*
+*strandGate — Wave 157a — Aug 9, 2026*

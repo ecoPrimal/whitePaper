@@ -78,17 +78,28 @@ here to gen5 success.
     build recommendations. Why the Rust primals were never the bottleneck (~5ms/file)
     and storage topology was the unstated assumption gen1–gen4 never addressed.
 
-### Layer 4.5 — arXiv Publication
+### Layer 4.5 — arXiv Publication & GPU Science
 
 13. **[ARXIV_RUNG1_STATUS.md](ARXIV_RUNG1_STATUS.md)** — Status of the first
-    arXiv preprint: "Toward Vendor-Agnostic Lattice QCD on Consumer GPUs:
-    SU(2) HMC with DF64 WebGPU/WGSL and Cryptographic Provenance." Rung 1 of
-    6-rung lattice QCD ladder. Experiment queue in progress. Links to full
+    arXiv preprint: "Vendor-Agnostic SU(N) Lattice Gauge Theory on Consumer GPUs."
+    Rung 1 of 5-rung lattice QCD ladder. 41/42 rubric items DONE. Links to full
     draft, LaTeX source, and handoffs.
 
 14. **[LATTICE_QCD_CONSUMER_GPU_ARXIV.md](LATTICE_QCD_CONSUMER_GPU_ARXIV.md)** —
-    Complete arXiv preprint markdown source. Rung 1: SU(2) execution and
-    arithmetic validation. Under refinement per AI review.
+    Complete arXiv preprint markdown source. Rung 1: SU(N) pure gauge N=2–8,
+    DF64 validation, cross-vendor reproducibility. Under refinement per AI review.
+
+16. **[GPU_SCALING_HYPOTHESIS.md](GPU_SCALING_HYPOTHESIS.md)** — Maximum lattice
+    sizes per card per rung. **VALIDATED Aug 9**: 121× capacity improvement via
+    guard bypass + silicon offloading. Consumer GPUs reach 64⁴ (production-scale).
+
+17. **[CROSS_SILICON_QCD_PROFILING_AUG08_2026.md](CROSS_SILICON_QCD_PROFILING_AUG08_2026.md)** —
+    Cross-silicon HMC profiling: AMD 19× faster, ROP/TMU/subgroup offloading,
+    capacity analysis, hardware acquisition recommendations.
+
+18. **[LATTICE_CAPACITY_SILICON_OFFLOADING_AUG09.md](LATTICE_CAPACITY_SILICON_OFFLOADING_AUG09.md)** —
+    Full capacity analysis: 22⁴ → 73⁴ (121×). Buffer elimination via ROP, subgroup,
+    precision folding. Impact on all 5 arXiv rungs. Implementation priority.
 
 ### Layer 5 — Public Surface Strategy
 

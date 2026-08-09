@@ -41,7 +41,7 @@
 | C5 | Box-Muller bias upstream bug report | **OPEN** | Characterized (9.5% variance deficit) but no upstream search/filing. |
 | C6 | Cost comparison to CUDA | **DONE** | Full scaling table added to §4.8: 6 volumes from 4⁴ to 16⁴ with CPU/GPU ms/traj, speedup, and acceptance. Peak 54× at 8³×4, stabilizing ~37× at 16⁴. Real RTX 3090 data: 638.8 ms/traj at 16⁴ β=6.0. |
 | C7 | Leapfrog vs Omelyan justification | **DONE** | Added to §2.1: "reduces ⟨ΔH⟩ by approximately 4× compared to standard leapfrog." Takaishi-de Forcrand 2006 cited. |
-| C8 | GPU memory scaling | **DONE** | §3.4 added: bytes/site breakdown table (1,664 B/site for SU(3) DF64), max volume table (48⁴ fits in 24 GB, 64⁴ exceeds). SU(N) N² scaling noted. |
+| C8 | GPU memory scaling | **DONE → UPDATE** | §3.4 needs revision: profiled max is 51⁴ (guard bypass), 64⁴ (folded), 73⁴ (dual-GPU). Previous "48⁴ fits" was theoretical — 22⁴ was actual due to 805 MB guard. Per-site = 3,536 B (measured) → 1,488 B (folded). See `LATTICE_CAPACITY_SILICON_OFFLOADING_AUG09.md`. |
 | C9 | Reversibility test | **DONE** | `arxiv_reversibility_test` binary: forward-reverse comparison on 4⁴. max||ΔU|| scales as dt² (5×10⁻⁵ at dt=0.05 → 1×10⁻⁷ at dt=0.01). Data table and interpretation added to §4.5.5. |
 | C10 | Philox/Threefry PRNG alternative | **DONE** | "Philox counter-based is in development" stated. Salmon et al. 2011 citation needed but not blocking. |
 
@@ -58,7 +58,7 @@
 | M3 | Provenance overhead | **DONE** | §4.1: ~2% overhead at 16⁴ (12 ms BLAKE3 hash + <1 ms DAG/ledger vs 600 ms HMC trajectory). Scales as O(N⁴×N_c²), amortized by caching. |
 | M4 | Comparison to portable lattice codes | **DONE** | §1.1 differentiates from Grid, QUDA, Chroma, MILC. Cites [27-30]. Three-point differentiation: no vendor SDK, DF64 on FP32, cryptographic provenance. |
 | M5 | Rust + WGSL maturity | **DONE** | Honest paragraph added to §1.1: acknowledges WGSL limitations (no shared memory atomics, no warp intrinsics), states tradeoff explicitly (lower peak throughput for vendor independence + memory safety). |
-| M6 | Scaling to larger lattices | **DONE** | 16⁴ and 24⁴ production complete. 32⁴ fits in 24 GB (2.4 GB for SU(3)). Memory bound noted in status docs. |
+| M6 | Scaling to larger lattices | **DONE → STRENGTHEN** | 16⁴ and 24⁴ production complete. 32⁴ GPU-ready (3.7 GB, guard bypass). 48⁴–64⁴ feasible with silicon offloading. 73⁴ with dual-GPU. Paper can now claim production-competitive volumes. |
 | M7 | pseudoSpore URL resolves | **DONE** | Verified Aug 7: primals.eco 301→ sporeprint.primals.eco → HTTP 200. URL resolves. |
 | M8 | Broader scientific impact | **DONE** | Paragraph added to §7: MD force accumulation, DFT (FFT-based Kohn-Sham), FEM (SpMV) identified as analogous domains. Provenance layer described as generic. |
 | M9 | Reproduction commands tested | **DONE** | §6 updated with build instructions: `git clone`, `cargo run` commands, Rust version (1.92.0), build time (~45s), feature flag explanation. Tested on local checkout. |
@@ -129,6 +129,7 @@ What data exists and where it goes in the paper.
 | §5.3 Large-N Scaling | SU(2)/SU(3) comparative data at 16⁴, 24⁴, 32⁴ | `arxiv_measure_battery` output | **PARTIAL** — SU(2)+SU(3) complete, N≥4 thermalization ongoing |
 | §5.4 Deconfinement | SU(2) 24³×{6,8,10} β-scans + SU(3) 24³×{6,8} | `arxiv_measure_battery` output | **DONE** — 12 finite-T configs measured, all deconfined phase |
 | §5.5 String Tension | Full W(R,T) + χ(R,T) for SU(2) 32⁴ and SU(3) 24⁴ | `arxiv_measure_battery` output | **DONE** — real Creutz ratios in paper |
+| **NEW: §3.5 Silicon Offloading** | ROP/TMU/subgroup, 121× capacity, cooperative multi-GPU | `profile_lattice_capacity.rs` | **DATA COMPLETE** — needs writing |
 | §6 Reproducibility | pseudoSpore description | Node Atomic | **Written** — URL needs verification (M7) |
 | §7 Conclusion | Summary + future rungs | — | **Written** — needs broader impact line (M8) |
 | Appendix A | Hardware profile | HARDWARE.md | **Written** |

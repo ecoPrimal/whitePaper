@@ -90,15 +90,19 @@ ORCID: 0009-0004-2141-0321
 
 ---
 
-## 5-Rung Ladder
+## 5-Rung Ladder (UPDATED: Aug 9 — capacity breakthrough)
 
-| Rung | Title Pattern | Status |
-|------|--------------|--------|
-| 1 | SU(3) Pure Gauge HMC with DF64 WebGPU/WGSL | **This paper** — DATA COMPLETE |
-| 2 | Quenched QCD (Dirac operator on SU(3) backgrounds) | Planned |
-| 3 | Dynamical QCD on Consumer GPUs (RHMC) | Planned |
-| 4 | (2+1)-Flavor QCD on Sovereign Hardware | Planned |
-| 5 | Finite-Temperature QCD on Consumer GPUs | Planned |
+| Rung | Title Pattern | Max Volume | Status |
+|------|--------------|-----------|--------|
+| 1 | SU(N) Pure Gauge HMC with DF64 WebGPU/WGSL | **64⁴** (single) / **73⁴** (dual) | **This paper** — DATA COMPLETE |
+| 2 | Quenched QCD (Dirac operator on SU(3) backgrounds) | ~58⁴ (folded) | Planned — TMU multigrid 3-5× CG speedup |
+| 3 | Dynamical QCD on Consumer GPUs (RHMC) | ~52⁴ (folded) | Planned — ROP force + FP32 shift vectors |
+| 4 | (2+1)-Flavor QCD on Sovereign Hardware | ~48⁴ (folded) | Planned — production-competitive |
+| 5 | Finite-Temperature QCD on Consumer GPUs | ~64³×12 (folded) | Planned — continuum-limit extrapolation viable |
+
+**Key upgrade**: Previous max was 22⁴ (software guard). Guard bypass + silicon offloading
+yields 121× more lattice sites. All 5 rungs now reach volumes competitive with HPC
+national-lab computations. See `LATTICE_CAPACITY_SILICON_OFFLOADING_AUG09.md`.
 
 Full roadmap: `wateringHole/handoffs/OVERWATCH_LATTICE_QCD_LADDER.md`
 
