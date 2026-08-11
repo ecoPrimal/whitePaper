@@ -179,7 +179,7 @@ swarmVine code changes — only callers using the existing `gossip.inject` RPC:
 |-----------|-----------|----------|
 | **TCP** (current) | Direct peer-to-peer, riboCipher prefix | LAN gossip between known gates |
 | **songBird mesh relay** | `gossip.spread` piggybacked on `:7700` mesh | Cross-subnet, NAT traversal, rides the bird |
-| **mDNS/SSDP discovery** | Multicast for automatic peer detection | Zero-config LAN enrollment (southGate, darwinGate) |
+| **mDNS/SSDP discovery** | Multicast for automatic peer detection | Zero-config LAN enrollment (southGate, graftGate) |
 | **QUIC** | Multiplexed, encrypted, connection migration | Mobile gates, unreliable networks |
 | **bearDog-signed entries** | Ed25519 signature on gossip payload | Trust chain for entries crossing trust boundaries |
 

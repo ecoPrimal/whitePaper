@@ -193,7 +193,7 @@ These are important but do not block the critical path:
 - ~~bearDog crypto.sign~~ — **DONE** (Step 1 complete)
 - ~~Provenance 7/7~~ — **DONE** (Step 2 complete)
 - steamGate (cross-platform expansion, gen4 extension)
-- darwinGate / iosGate (glacial, silicon deism)
+- graftGate / iosGate (glacial, silicon deism)
 - AlphaFold bulk ingestion (gen5 secondary — staged approach recommended, see `DATA_FEDERATION_STATUS.md`)
 - Show HN (blocked until NF pseudoSpore exists)
 - Inkfish collaboration (separate track, response-dependent)
