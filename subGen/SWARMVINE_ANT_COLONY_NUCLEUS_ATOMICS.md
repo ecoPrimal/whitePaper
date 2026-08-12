@@ -1,8 +1,8 @@
 # SwarmVine Ant Colony Pattern & NUCLEUS Atomic Composition
 
 **Status**: Overwatch architecture analysis — gossip substrate evolution
-**Wave**: 157e | **Date**: Aug 10, 2026
-**Gate**: westGate (overwatch)
+**Wave**: 157k | **Date**: Aug 12, 2026
+**Gate**: eastGate (overwatch)
 **Team**: Hardware / Overwatch
 **Audience**: All primal teams, biomeOS signal team, spring subteams, overwatch
 
@@ -16,10 +16,15 @@ interactions with skunkBat (vine-bat pre-accept loop). What emerged is a pattern
 recognition: swarmVine is an **ant colony** — and the NUCLEUS atomic model maps
 directly to how primals compose into the three atomic systems.
 
+Wave 157k proved the model: graftGate achieved Full NUCLEUS via biomeOS Neural API
+(`nucleus start --mode full`) — 21 ACTIVE domains, 1830 capabilities, <60s on a
+platform biomeOS had never been tested against. The composition graph runtime is
+validated. iosGate achieved first deploy (6th OS family).
+
 This document captures:
-1. The ant colony pattern and its gossip vector evolution
-2. How swarmVine fits into the Tower Atomic composition
-3. The NUCLEUS atomic model (Tower / Node / Nest)
+1. The NUCLEUS atomic model (Tower / Node / Nest) and the bonding model
+2. The bearDog genetics hierarchy (mito-beacon / nuclear / genetic child)
+3. The ant colony pattern and gossip vector evolution
 4. Interaction patterns between primals at full composition
 
 ---
@@ -27,29 +32,41 @@ This document captures:
 ## The NUCLEUS Atomic Model
 
 NUCLEUS gates run three atomic systems — named by analogy to subatomic particles
-not because they are small, but because they compose into something larger.
+not because they are small, but because they **compose into something larger**.
 
-### Tower Atomic — The Electron (Communication & Topology)
+The key insight is the **bonding model**: Tower Atomic is the electron — shared
+across all compositions like electrons in chemical bonds. Nest Atomic and Node
+Atomic always include Tower. A gate running "just Nest" is really running
+Tower + Nest primals. The Tower electron cloud provides encryption, routing,
+defense, and gossip to every composition.
 
-The electron orbits the nucleus. It mediates all electromagnetic interaction — all
-communication between atoms. Tower Atomic is the **communication substrate**:
+### Tower Atomic — The Electron (Security & Communication)
+
+The electron mediates all electromagnetic interaction — all communication
+between atoms. In chemistry, electrons are shared or transferred depending
+on bond type (covalent, ionic, metallic). Tower Atomic works the same way:
+it is the **shared communication and security substrate** present in every
+composition.
 
 | Primal | Role | Analogy |
 |--------|------|---------|
-| **songBird** | Capability discovery, mesh routing, peer registry | The orbital — defines reachability, shape of the communication shell |
-| **swarmVine** | Epidemic gossip, cross-gate state propagation | The field — carries information between gates without direct coupling |
-| **skunkBat** | Metadata validation, pre-accept defense | The spin — determines acceptance or rejection of incoming interactions |
-| **cellMembrane** | Transport layer, riboCipher enforcement | The charge — the fundamental property that enables all interaction |
+| **bearDog** | Crypto, signing, key management, genetic engine, entropy hierarchy | The charge — the fundamental property that enables all secure interaction. Mito-beacon for family recognition, nuclear keys for gate identity, genetic children for interaction identity. |
+| **songBird** | Capability discovery, mesh routing, peer registry, lineage transport | The orbital — defines reachability, shape of the communication shell. Carries bearDog lineage genetics across the mesh. |
+| **skunkBat** | Metadata validation, pre-accept defense, gossip immunity | The spin — determines acceptance or rejection of incoming interactions |
+| **swarmVine** | Epidemic gossip, cross-gate state propagation, enmeshment | The field — carries information between gates without direct coupling. The ant colony nervous system. |
 
-**Current state** (Wave 157e): songBird alive with 11 registrations and 1 mesh peer.
-swarmVine alive with tarpc transport, TCP 7800 listening, vine-bat loop active.
-cellMembrane deployed, riboCipher enforced. skunkBat alive, responding to
-`metadata.analyze`.
+bearDog and songBird were always core Tower primals. skunkBat and swarmVine
+are formally Tower because they enable enmeshment and defense — which all
+other atomics depend on. Every composition inherits Tower's security (bearDog),
+routing (songBird), defense (skunkBat), and gossip (swarmVine).
 
-### Node Atomic — The Proton (Compute & Silicon)
+### Node Atomic — The Proton (Tower + Compute & Silicon)
 
 The proton is the massive, positively-charged particle. It defines the element's
-identity — what the atom *is*. Node Atomic is the **compute substrate**:
+identity — what the atom *is*. Node Atomic is the **compute substrate** — but it
+always includes Tower, because compute without secure communication is inert.
+
+**Node Atomic = Tower Atomic AND:**
 
 | Primal | Role | Analogy |
 |--------|------|---------|
@@ -57,15 +74,19 @@ identity — what the atom *is*. Node Atomic is the **compute substrate**:
 | **barraCuda** | GPU IPC, shader dispatch, silicon-aware routing | The mass — the raw computational capability, hardware-bound |
 | **coralReef** | GEMM compilation, shader optimization | The binding energy — how efficiently compute resources combine |
 
-**Current state**: toadStool dispatching workloads (v0.2.0, 16 cores, 63 GB).
-barraCuda alive with NVIDIA 0x2484 detected. coralReef GEMM Phase 2 validated
-on strandGate.
+A Node Atomic gate (strandGate, biomeGate) has bearDog crypto, songBird
+mesh, skunkBat defense, swarmVine gossip — AND toadStool dispatch, barraCuda
+GPU, coralReef shaders. The compute trio uses Tower's gossip to advertise
+GPU availability and Tower's crypto to sign computational results.
 
-### Nest Atomic — The Neutron (Data & Provenance)
+### Nest Atomic — The Neutron (Tower + Data & Provenance)
 
 The neutron is the neutral, stabilizing particle. Without neutrons, nuclei above
 hydrogen are unstable — they fly apart. Nest Atomic is the **data substrate** that
-holds everything together:
+holds everything together — but it always includes Tower, because data without
+secure transport and identity is untrusted.
+
+**Nest Atomic = Tower Atomic AND:**
 
 | Primal | Role | Analogy |
 |--------|------|---------|
@@ -73,22 +94,123 @@ holds everything together:
 | **rhizoCrypt** | DAG sessions, Merkle trees, ephemeral working memory | The decay path — the neutron's internal structure, how data transforms |
 | **loamSpine** | Certificates, spine commits, signed audit trail | The binding — what keeps the nucleus from flying apart, the audit chain |
 | **sweetGrass** | Attribution, braids, convergence check | The stability — determines whether the isotope is stable or radioactive |
-| **bearDog** | Ed25519 signing, key management, encryption | The weak force — rare but decisive interactions that change state |
 
-**Current state**: Full provenance chain operational. 100 braids, 3 datasets
-finalized. Ed25519 signing live (first signed commits in ecosystem history).
-Pen test 86/87 PASS.
+The provenance trio uses bearDog (from Tower) for Ed25519 signing at every
+step of the chain: nestGate stores → rhizoCrypt builds DAGs → loamSpine signs
+the audit trail → sweetGrass braids the attribution → bearDog signs. The
+security comes from the Tower electron cloud, not from Nest itself.
 
-### The Electron Cloud — Visualization & Interaction Layer
+### NUCLEUS — The Full Atom
 
-Above the three atomics sits the interaction layer — how humans and systems
-observe and interact with the atom:
+NUCLEUS is not a flat list of primals — it is a **graph of composition sub-graphs**.
+Tower + Nest + Node, plus the surfaces and orchestration that make it a live platform.
 
-| Primal | Role | Analogy |
-|--------|------|---------|
-| **petalTongue** | Visualization, WebGL scenes, data rendering | The photon — carries the observable information to the viewer |
-| **squirrel** | AI orchestration, agentic interaction | The observer — interacts with the system, collapses possibilities into actions |
-| **biomeOS** | Neural API, capability dispatch, graph execution | The Hamiltonian — the operator that governs evolution and routing |
+**NUCLEUS = Tower + Nest + Node + surfaces/interactions:**
+
+| Primal | Role in NUCLEUS | Analogy |
+|--------|----------------|---------|
+| **biomeOS** | Neural API, capability dispatch, graph execution. Orchestrator AND force carrier between atomics. | The Hamiltonian — governs evolution, routing, and interaction between atomic forces |
+| **petalTongue** | Visualization, WebGL scenes, data rendering | The photon — carries observable information to the viewer |
+| **squirrel** | AI orchestration, agentic interaction (theoretically many instances on subtasks) | The observer — interacts with the system, collapses possibilities into actions |
+| **cellMembrane** | Sovereignty boundary, transport, depot, riboCipher enforcement | The membrane — selectively permeable boundary that defines self vs non-self |
+
+biomeOS is doing double duty: it's the Hamiltonian that starts and orders primals,
+but it's also the **force carrier** between atomics via Neural API. When
+`capability.call("content", "get", ...)` routes from a Node primal to a Nest
+primal, that's biomeOS mediating the interaction between the proton and neutron.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  NUCLEUS = graph(Tower, Nest, Node, surfaces)            │
+│  biome.yaml = composition manifest (BYOB per gate)       │
+│  biomeOS = Hamiltonian (orchestrator + force carrier)     │
+├─────────────────────────────────────────────────────────┤
+│  ┌─── Tower Atomic (the electron cloud) ──┐              │
+│  │ bearDog → songBird → skunkBat → swarmVine│  shared    │
+│  └────────────────────────────────────────┘  across all  │
+│                                                          │
+│  ┌─── Nest Atomic (Tower + data) ─────────┐              │
+│  │ Tower + nestGate → rhizoCrypt →         │  CAS + DAG  │
+│  │         loamSpine → sweetGrass          │  + braids   │
+│  └────────────────────────────────────────┘              │
+│                                                          │
+│  ┌─── Node Atomic (Tower + compute) ──────┐              │
+│  │ Tower + toadStool → barraCuda →         │  dispatch   │
+│  │         coralReef                       │  + shaders  │
+│  └────────────────────────────────────────┘              │
+│                                                          │
+│  ┌─── Surfaces / Interactions ────────────┐              │
+│  │ biomeOS (Hamiltonian + force carrier)   │              │
+│  │ petalTongue (photon — visualization)    │              │
+│  │ squirrel (observer — AI agent)          │              │
+│  │ cellMembrane (membrane — sovereignty)   │              │
+│  └────────────────────────────────────────┘              │
+├─────────────────────────────────────────────────────────┤
+│  primalSpring = experimental ground for compositions     │
+│  Prototypes biome.yaml, validates sub-graph lifecycle    │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## bearDog Genetics & Entropy Hierarchy
+
+bearDog is not just "crypto and signing" — it is the **genetic engine** that
+manages the entire identity hierarchy from species to individual to interaction.
+
+### Three Layers of Identity
+
+| Layer | Question | Mechanism | Biological Analogy |
+|-------|----------|-----------|-------------------|
+| **Mito-Beacon** | "Are you family?" | Shared mitochondrial beacon seed — family secret | Mitochondrial DNA — inherited, identifies the species |
+| **Nuclear** | "Which individual are you?" | Gate's own derivation chain from root — Ed25519 keypair | Nuclear DNA — unique to the individual |
+| **Genetic Child** | "What did our interaction produce?" | Fresh key spawn when two systems meet — inherits from both parents | Sexual reproduction — child inherits from both parents |
+
+The mito-beacon is the broadest identity: everyone in the ecosystem family has it.
+riboCipher uses the mito-beacon signal (`0xED` prefix) to *hear* the birdSong/BTSP.
+If you can decode it, you're family. Discovery never exposes authorization material.
+
+The nuclear identity is per-gate. eastGate has its own keys, westGate has its own
+keys. Gates closer to the root (shorter derivation chain) get higher trust tiers.
+
+The genetic child is the generative principle: every meaningful point of contact
+between two different systems produces a new identity that inherits behaviors from
+both parents. The interaction isn't just authenticated — it's *reproductive*.
+
+### Bond Escalation = K-Derm Crossing
+
+The bond types from chemistry map to the trust escalation through the K-Derm layers:
+
+```
+Weak (extracellular)           → bearDog TLS termination      = stranger
+  → Ionic (outer → periplasm)  → BTSP scoped token            = authenticated stranger
+    → Metallic (peri → plasma) → Mito-Beacon membership proof  = family member
+      → Covalent (plasma → cyto) → Nuclear session             = trusted individual
+                                   (fresh genetic child spawn)
+```
+
+Each crossing is a K-Derm boundary. The reverse path (covalent → weak) is
+**Ceremony** — controlled temporal decay. The outward path across VPS layers
+is **bond degradation**.
+
+**Endosymbiosis**: External systems progressively internalize — weak → ionic →
+metallic → covalent over time, like the biological process where independent
+organisms become organelles.
+
+### Entropy Hierarchy Controls Trust Ceiling
+
+bearDog enforces this structurally, not by configuration:
+
+```
+Hardware RNG (SoloKey FIDO2)  →  highest entropy, human-mixed
+  → OS entropy (kernel CSPRNG) →  machine entropy
+    → Software CSPRNG (ChaCha20) →  derived entropy
+```
+
+The entropy source determines the *ceiling* of trust a node can achieve. A human
+node with FIDO2 hardware entropy has the highest trust ceiling. An automated node
+with only software entropy has a lower ceiling. This is how the system distinguishes
+human sovereignty from automated operation — embedded in the cryptographic structure.
 
 ---
 
@@ -116,17 +238,19 @@ SwarmVine maps directly:
 | Three pheromone types | `GossipTopic::Tower`, `Data`, `Compute` | LIVE |
 | Colony immune system | Vine-bat pre-accept via skunkBat `metadata.analyze` | LIVE |
 | Nonce deduplication | 4096-entry nonce history prevents amplification | LIVE |
-| Scout exploration | Local primals calling `gossip.inject` after events | NOT YET |
-| Riding on a bird | `TransportEndpoint::MeshRelay` via songBird | TYPE EXISTS, NOT IMPLEMENTED |
+| Scout exploration | Local primals calling `gossip.inject` after events | 9/16 PRIMALS LIVE |
+| Riding on a bird | `TransportEndpoint::MeshRelay` via songBird | TYPE EXISTS, MeshRelay ENABLED on ironGate |
 | Riding on a bear | bearDog-signed gossip entries for trust chains | NOT YET |
-| Multi-surface crawling | UDS + TCP + QUIC + mDNS discovery | TCP ONLY for cross-gate |
+| Multi-surface crawling | UDS + TCP + QUIC + mDNS discovery | TCP for cross-gate, UDS for local |
 | Persistent trails | Durable gossip state surviving restarts | NOT YET (in-memory only) |
+| **Deployment pheromone** | `deploy.result` gossip for fleet convergence | SPEC'D (Phase 1 target) |
 
-### Current Architecture (Wave 157e)
+### Current Architecture (Wave 157k)
 
 ```
                    ┌─────────────────────────────────────┐
-                   │          swarmVine (westGate)         │
+                   │        swarmVine (any NUCLEUS gate)   │
+                   │        186 tests, 90.8% coverage      │
                    │                                      │
                    │  ┌─────────┐  ┌────────┐  ┌───────┐ │
                    │  │  Tower  │  │  Data  │  │Compute│ │
@@ -146,42 +270,42 @@ SwarmVine maps directly:
                    │    └──────────┬──────────┘           │
                    └───────────────┼──────────────────────┘
                                    │
-                    ┌──────────────┼──────────────┐
-                    │              │              │
-               TCP :7800     TCP :7800      TCP :7800
-               (UNREACHABLE) (UNREACHABLE)
-                    │              │              │
-              sporeGate       ironGate        (future)
+               ┌───────────────────┼───────────────────┐
+               │                   │                   │
+          TCP :7800           TCP :7800           TCP :7800
+               │                   │                   │
+          westGate            ironGate           southGate
+        (1170 ingested)    (594 ingested)      (342 ingested)
+                                              (bidirectional)
 ```
 
 ### Gossip Vector Evolution
 
-The current swarmVine has one gossip vector: TCP peer-to-peer with hardcoded
-addresses. The ant colony pattern implies many more:
+**Phase 1 — Scout Injection (9/16 primals now LIVE)**
 
-**Phase 1 — Scout Injection (no new code in swarmVine)**
-
-Local primals inject gossip entries after significant events. This requires no
-swarmVine code changes — only callers using the existing `gossip.inject` RPC:
-
-| Event | Injector | Topic | Key | Payload |
-|-------|----------|-------|-----|---------|
-| Braid finalized | `native_braid.py` or sweetGrass | Data | `braid.head:{dataset}` | `{braid_id, files, bytes, spine_id}` |
-| CAS high-water | convergence drain | Data | `cas.pressure:{gate}` | `{usage_pct, tier, action}` |
-| Build complete | sporeGate harvest | Tower | `depot.build:{primal}` | `{blake3, arch, version}` |
-| GPU available | toadStool | Compute | `gpu.available:{gate}` | `{device, vram, personality}` |
-| Signing ceremony | bearDog | Tower | `key.rotated:{gate}` | `{public_key, algorithm}` |
-| Service health change | any primal | Tower | `health:{gate}:{primal}` | `{status, version}` |
+| Event | Injector | Topic | Key | Status |
+|-------|----------|-------|-----|--------|
+| Braid finalized | sweetGrass | Data | `braid.head:{dataset}` | NOT YET |
+| CAS high-water | convergence drain | Data | `cas.pressure:{gate}` | NOT YET |
+| Build complete | sporeGate harvest | Tower | `depot.build:{primal}` | NOT YET |
+| GPU available | toadStool | Compute | `gpu.available:{gate}` | LIVE |
+| Signing ceremony | bearDog | Tower | `key.rotated:{gate}` | NOT YET |
+| Service health | any primal | Tower | `health:{gate}:{primal}` | LIVE (endpoint.alive) |
+| **Deploy result** | biomeOS | Tower | `deploy.result:{gate}` | **SPEC'D** |
+| Compute events | barraCuda | Compute | various | **22/22 LIVE** |
+| CAS sites | nestGate | Data | various | 11 sites wired |
+| Session lifecycle | esotericWebb | Tower | various | 2 events LIVE |
+| All events | wetSpring | Data | various | 4/4 LIVE |
 
 **Phase 2 — Multi-Surface Transport**
 
-| Transport | Mechanism | Use Case |
-|-----------|-----------|----------|
-| **TCP** (current) | Direct peer-to-peer, riboCipher prefix | LAN gossip between known gates |
-| **songBird mesh relay** | `gossip.spread` piggybacked on `:7700` mesh | Cross-subnet, NAT traversal, rides the bird |
-| **mDNS/SSDP discovery** | Multicast for automatic peer detection | Zero-config LAN enrollment (southGate, graftGate) |
-| **QUIC** | Multiplexed, encrypted, connection migration | Mobile gates, unreliable networks |
-| **bearDog-signed entries** | Ed25519 signature on gossip payload | Trust chain for entries crossing trust boundaries |
+| Transport | Mechanism | Use Case | Status |
+|-----------|-----------|----------|--------|
+| **TCP** | Direct peer-to-peer, riboCipher prefix | LAN gossip between known gates | LIVE (7-gate mesh) |
+| **songBird mesh relay** | `gossip.spread` piggybacked on `:7700` mesh | Cross-subnet, NAT traversal, rides the bird | MeshRelay ENABLED on ironGate |
+| **mDNS/SSDP discovery** | Multicast for automatic peer detection | Zero-config LAN enrollment | NOT YET |
+| **QUIC** | Multiplexed, encrypted, connection migration | Mobile gates, unreliable networks | NOT YET |
+| **bearDog-signed entries** | Ed25519 signature on gossip payload | Trust chain for entries crossing trust boundaries | NOT YET |
 
 **Phase 3 — Persistent Trails & Convergence**
 
@@ -196,8 +320,20 @@ swarmVine code changes — only callers using the existing `gossip.inject` RPC:
 
 ## Tower Atomic Composition — How It Fully Evolves
 
-When Tower Atomic reaches full composition, swarmVine becomes the connective
-tissue between all gates. The interaction patterns:
+Tower Atomic is the shared electron cloud. Every other composition inherits it.
+When Tower reaches full composition, the four primals form a self-reinforcing loop:
+
+### bearDog ↔ songBird (Genetics Travels the Mesh)
+
+bearDog provides the identity — mito-beacon for family recognition, nuclear keys
+for gate identity, genetic children for interaction identity. songBird carries
+those lineage genetics across the mesh via routing and federation.
+
+```
+bearDog signs identity    →  songBird transports across mesh
+songBird discovers peer   →  bearDog validates genetic lineage
+meeting of two gates      →  genetic child spawned with inherited behaviors
+```
 
 ### songBird ↔ swarmVine (The Bird Carries the Ant)
 
@@ -229,19 +365,23 @@ remote entry arrives  →  swarmVine calls skunkBat metadata.analyze
 from a specific origin gate trigger reputation scoring. The bat remembers which
 ants brought poisoned food.
 
-### cellMembrane ↔ swarmVine (The Charge Enables the Field)
+### bearDog ↔ skunkBat (Genetics Inform Defense)
 
-cellMembrane provides riboCipher transport — the `[0xEC, 0x01]` prefix that
-authenticates all cross-primal communication. swarmVine already uses riboCipher
-for both TCP gossip and skunkBat queries.
+bearDog's genetic lineage information feeds skunkBat's trust decisions. A gossip
+entry from a gate with shorter nuclear derivation distance (higher trust tier)
+gets more lenient validation than one from a distant gate.
 
-**Evolution**: cellMembrane could provide per-gate encryption keys for gossip
-payloads, enabling encrypted gossip channels between trusted gates without
-requiring bearDog per-entry signatures.
+```
+bearDog knows gate lineage  →  skunkBat weighs trust in validation
+skunkBat detects anomaly    →  bearDog can revoke genetic trust
+```
 
 ---
 
-## Cross-Atomic Interactions
+## Cross-Atomic Interactions (Mediated by biomeOS Neural API)
+
+The cross-atomic interactions are mediated by biomeOS Neural API — `capability.call`
+routes between primals in different atomics. biomeOS is the force carrier.
 
 ### Tower ↔ Nest (Electron ↔ Neutron: How Communication Serves Data)
 
@@ -255,6 +395,9 @@ westGate braids AlphaFold  →  swarmVine injects Data gossip
                            →  ironGate's nestGate knows what's available
                            →  content.replicate pulls on demand
 ```
+
+The provenance chain at every step uses bearDog (Tower) for signing. The
+security of the data comes from the shared electron cloud.
 
 ### Tower ↔ Node (Electron ↔ Proton: How Communication Serves Compute)
 
@@ -282,40 +425,11 @@ wetSpring reads NCBI data from CAS  →  GPU processes diversity analysis
                                      →  ironGate can federate the result
 ```
 
----
-
-## The Visualization & Interaction Layer
-
-### petalTongue — The Photon
-
-petalTongue renders the observable state. When swarmVine gossip carries
-`Data` entries about braid HEADs, petalTongue can render a live topology
-map showing which gates hold which data. When `Compute` gossip carries
-GPU utilization, petalTongue renders the compute landscape.
-
-**Evolution**: `gossip.subscribe` with a WebSocket bridge to petalTongue
-gives live topology visualization — watching the ant trails form in real time.
-
-### squirrel — The Observer
-
-squirrel provides agentic interaction. An AI agent can query swarmVine
-`gossip.query` to understand the current state of the mesh, then make
-decisions about where to route work or which data to request.
-
-**Evolution**: squirrel subscribes to gossip topics and triggers automated
-responses — "when a new braid HEAD appears for dataset X on gate Y,
-initiate replication to gate Z."
-
-### biomeOS — The Hamiltonian
-
-biomeOS Neural API is the operator that governs system evolution. It resolves
-capabilities, dispatches RPCs, and will eventually execute computation graphs.
-swarmVine feeds biomeOS with fresh topology information via gossip, and
-biomeOS uses that to make better routing decisions.
-
-**Evolution**: biomeOS graph executor uses swarmVine gossip as input to
-capability resolution — "route this content.get to the gate with the freshest
-CAS for this hash" based on `Data` gossip rather than static registration.
+Both Nest and Node have Tower — the electron cloud is shared. When data
+crosses from Nest to Node, the bearDog genetics and songBird routing from
+Tower make that crossing secure and traceable. The genetic child of the
+Nest↔Node interaction inherits the provenance chain from Nest and the
+compute attestation from Node.
 
 ---
 
@@ -329,69 +443,42 @@ into proper primal composition:
 | Convergence drain path hardcoded in systemd | Python script in `deprecated/` | nestGate tier-aware ingest with rhizoCrypt convergence DAG |
 | songBird registration via shell script | `songbird-register.sh` oneshot | Primals self-register via `primal.announce` on startup |
 | swarmVine peers hardcoded in env var | `SWARMVINE_PEERS=sporeGate,ironGate` | Dynamic discovery via songBird `mesh.peers` + mDNS |
-| No gossip injection from any primal | Zero entries in gossip table | Primals inject after significant events (braid, build, GPU) |
-| Cross-gate gossip unreachable | TCP to fixed IPs, both down | songBird mesh relay + automatic peer discovery |
+| No gossip injection from any primal | ~~Zero entries~~ **9/16 primals LIVE** | Primals inject after significant events (braid, build, GPU) |
+| Cross-gate gossip unreachable | ~~TCP to fixed IPs~~ **7-gate mesh, MeshRelay ENABLED** | songBird mesh relay + automatic peer discovery |
 | Braid orchestration in Python | `native_braid.py` (4/7 jelly strings remaining) | biomeOS graph executor with Tower Atomic routing |
+| **No deployment feedback** | Human writes AARs | biomeOS `deploy.result` gossip (SPEC'D) |
 
 ---
 
-## Findings from Overwatch Validation
+## Execution Priority
 
-### What Works
+### Immediate
 
-- **14/14 services alive** on westGate
-- **Vine-bat pre-accept loop** operational (skunkBat validates gossip before acceptance)
-- **Three gossip domains** (Tower, Data, Compute) properly typed and separated
-- **TTL-based epidemic spread** with nonce deduplication
-- **Transport abstraction** in type system (UDS, TCP, MeshRelay)
-- **Ed25519 signing** live — foundation for signed gossip entries
-- **biomeOS FD leak fixed** — stable at 17 FDs after 2h
+1. **Depot rebuild** — 4 fixed primals (songBird, swarmVine, toadStool, biomeOS) not yet in depot. Rebuild from current HEADs.
+2. **biomeOS deploy.result gossip** — Phase 1 of deployment signaling evolution. Emit structured gossip after `composition.orchestrate`.
 
-### What Needs Evolution
+### Near-term
 
-- **swarmVine gossip peers unreachable** — sporeGate:7800 and ironGate:7800 both down. Need songBird mesh relay or LAN topology fix.
-- **Zero gossip entries injected** — no primal currently uses `gossip.inject`. The colony has no scouts.
-- **`MeshRelay` transport** is a type variant returning `Unsupported`. songBird relay needs implementation.
-- **Gossip state is ephemeral** — 10-minute TTL, in-memory only. Restarts lose everything.
-- **swarmVine uses tarpc on UDS** — JSON-RPC dispatch exists on the TCP gossip port but local IPC is tarpc-only, making it inaccessible to Python orchestration and biomeOS Neural API routing.
-
-### What Surprised Us
-
-- swarmVine's architecture is cleaner than expected for a v0.1.0 primal. The three-domain gossip model, vine-bat validation, and transport abstraction show forethought.
-- The `GossipEntry.for_forwarding()` method (TTL decrement + clone) is the exact ant trail evaporation mechanism.
-- skunkBat integration is graceful: if skunkBat is unreachable, default to allow. The colony works without guards; guards make it stronger.
-
----
-
-## Execution Priority for Overwatch
-
-### Immediate (can be done from overwatch)
-
-1. **Inject gossip from `native_braid.py`** — after braid finalization, call `gossip.inject` with a `Data` topic entry for the new braid HEAD. Zero swarmVine code changes needed.
-2. **Fix convergence drain systemd path** — ✅ DONE (pointed to `deprecated/` path).
-3. **Verify songBird mesh includes swarmVine port** — ensure `mesh.peers` responses include swarmVine port (7800) so dynamic peer discovery works.
-
-### Near-term (upstream primal evolution)
-
+3. **bearDog-signed gossip entries** — Ed25519 signatures on gossip payloads for cross-trust-boundary propagation. Genetic child of bearDog ↔ swarmVine interaction.
 4. **songBird mesh relay for gossip** — implement `MeshRelay` transport variant so swarmVine can gossip through songBird's `:7700` mesh when direct TCP fails.
 5. **Self-registration** — primals call `primal.announce` on startup instead of relying on `songbird-register.sh`.
-6. **JSON-RPC adapter on swarmVine UDS** — so biomeOS Neural API can route to swarmVine for gossip queries.
 
 ### Glacial (full composition)
 
-7. **bearDog-signed gossip entries** — Ed25519 signatures on gossip payloads for cross-trust-boundary propagation.
-8. **CRDT convergent state** — long-lived entries that merge rather than expire.
-9. **biomeOS graph executor** — replace Python braid orchestration with biomeOS-dispatched computation graphs using gossip as input.
+6. **Genetic children for cross-gate interactions** — every meaningful gate↔gate interaction spawns a session with inherited behaviors from both nuclear identities.
+7. **CRDT convergent state** — long-lived entries that merge rather than expire.
+8. **biomeOS graph executor** — replace Python braid orchestration with biomeOS-dispatched computation graphs using gossip as input.
 
 ---
 
 *swarmVine is an ant. Small, quiet, rides on a bird or a bear, crawls in the soil,
 talks to other ants. When it finds the resource — the connection, the data, the
 capability — it leads in a line as ants do, laying a trail that strengthens with
-each ant that follows. The colony is just beginning. The trails are just starting
-to form. But the nervous system — three pheromone types, nonce dedup, TTL
-evaporation, vine-bat immunity — is already in place. The scouts are what's missing.
-Once the primals begin injecting gossip after their significant events, the ant
-trails will start mapping the ecosystem. And then the colony finds its food.*
+each ant that follows. The colony has 9 scouts now. The trails are forming. The
+deployment pheromone is spec'd. The genetics hierarchy gives every ant its identity
+— mito-beacon for family, nuclear for self, genetic child for every interaction.
+And biomeOS, the Hamiltonian, mediates the forces between the atomics through
+Neural API — not just orchestrating the graph, but carrying the interactions
+between protons, neutrons, and electrons.*
 
-*Wave 157e — overwatch validation. 14/14 alive. The ant is awake.*
+*Wave 157k — post-pandemic evolution. 7 NUCLEUS gates. The ant colony converges.*
