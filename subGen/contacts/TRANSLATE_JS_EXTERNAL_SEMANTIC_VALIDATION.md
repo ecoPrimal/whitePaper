@@ -213,4 +213,89 @@ If these consume the same semantic exposure without changing the primals, petalT
 
 ---
 
-*Public contact. Source: email outreach from translate.js maintainer (Guan). No prior relationship. Evaluated for external semantic validation of petalTongue presentation boundary.*
+---
+
+## Codebase Assessment (Aug 2026)
+
+| Metric | Value |
+|--------|-------|
+| Created | 2021 (rewrite v2.0 in 2022) |
+| Latest version | 4.1.0.20260526 |
+| GitHub | github.com/xnx3/translate — 3,049 stars, 477 forks |
+| Gitee | gitee.com/mail_osc/translate — 2,002 stars |
+| npm | `i18n-jsautotranslate` (~436/week) |
+| Core LOC | ~14,349 (single JS file) |
+| Dependencies | **0** (pure vanilla ES5 JS) |
+| Bundle (unminified) | 584 KB |
+| Bundle (minified) | ~157 KB |
+| Tests | **None** (`npm test` = "no test specified") |
+| CI | Minimal (publish + release only, no test/lint) |
+| TypeScript | Minimal (Vue3 wrapper only, ~80 lines) |
+| Contributors | 20 (primary: 管雷鸣/Guan Leiming `xnx3` = 1,045/~98%) |
+| License | **MIT** |
+| Coverage | Unknown (no test infrastructure) |
+
+### How It Works
+
+Runtime DOM machine-translation engine — NOT a traditional i18n framework. No `.json` locale files, no `t('key')` API.
+
+1. Walks live DOM recursively (`childNodes`)
+2. Extracts translatable text (respects `notranslate` class, `translate="no"` attr)
+3. Hash-deduplicates translation units
+4. Calls translation backend (configurable: Edge browser API, hosted service, self-hosted, AI)
+5. **Mutates DOM in place** with translated strings
+6. MutationObserver for SPA/dynamic content
+
+### Translation Backends
+
+| Channel | Description |
+|---------|-------------|
+| `client.edge` | Browser-side Edge translation API — free, no server |
+| `translate.service` | Author's hosted API (default fallback) |
+| Self-hosted | Java `translate.core`, `translate100` HuggingFace model |
+| AI backends | SiliconFlow, Qwen3, enterprise configs |
+
+### Up to ecoPrimals Standards?
+
+**Strengths**: Zero deps, MIT license, 4+ years production hardened, massive scale (author claims billions of API calls), extensive Chinese documentation, DOM edge-case coverage (iframes, Vue, meta tags, SSE streaming).
+
+**Critical gaps**: **No automated tests whatsoever**. No TypeScript types. Monolithic 14K-line single file. Single-author bus factor. Code quality is integration-tested-by-fire, not test-driven. Chinese-primary documentation.
+
+**This is NOT up to ecoPrimals code standards for primal integration.** But it doesn't need to be — it's an **external consumer** for validation, not internal infrastructure.
+
+### Can We RustScript the Translator?
+
+**Partially.** ~40% of the logic is portable to Rust/WASM:
+- Text tokenization + grouping
+- Language detection
+- Cache key hashing (BLAKE3 instead of their hash)
+- Batch translation request planning
+- Invariant validation
+
+**~60% is inherently browser-bound:**
+- DOM tree walking (needs `web-sys` bindings)
+- MutationObserver lifecycle
+- DOM text replacement / render-back
+- Framework integration (Vue/React)
+
+**Better path**: petalTongue renders locale-aware HTML **server-side** (true semantic i18n from Rust). Use translate.js client-side only as an **external validation fuzz tester**. If we want RustScript translation, implement the semantic boundary + invariant checking in Rust/WASM, keep a thin JS shim (~500 lines) for DOM access.
+
+**What RustScript translation enables:**
+- BLAKE3-hashed translation cache (provenance-aware)
+- Translation units as sweetGrass-braided artifacts (who translated what, when, verified by whom)
+- petalTongue serves translation as a capability (`translate.text`, `translate.semantic`) via Neural API
+- Any gate can serve multilingual content through the mesh
+- Jargon translation becomes a capability — same pipeline translates "sweetGrass attribution braid" → "cryptographically signed provenance chain" for external audiences
+- Machine-to-machine translation: primal signals → external API formats (OpenAPI, GraphQL, MCP)
+
+### Recommendation: Take As-Is vs Fork
+
+**Take as-is for Validation Class V.** Do NOT fork or integrate into the codebase. The value is as an **independent external consumer** testing petalTongue's semantic boundary. Forking destroys the independence that makes the validation meaningful.
+
+If multilingual is needed in production: build server-side locale rendering in petalTongue (Rust-native). translate.js stays as the external validator that proves the semantic surface is correct.
+
+If Guan responds positively: define a minimal petalTongue semantic fixture, hand it to him without ecosystem internals, see if translate.js can consume it. Document successes AND failures.
+
+---
+
+*Public contact. Source: email outreach from translate.js maintainer (Guan Leiming / xnx3). No prior relationship. Evaluated for external semantic validation of petalTongue presentation boundary.*

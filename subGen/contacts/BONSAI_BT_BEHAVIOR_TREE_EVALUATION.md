@@ -193,4 +193,62 @@ Behavior is the missing decision layer between sensing and acting.
 
 ---
 
-*Public contact. Source: Reddit/GitHub. No prior relationship with maintainer (Kristoffer Sollimann). Evaluated for architectural fit with Neural API and squirrel agent orchestration.*
+---
+
+## Codebase Assessment (Aug 2026)
+
+| Metric | Value |
+|--------|-------|
+| Created | May 23, 2022 |
+| Latest version | 0.13.0 |
+| MSRV | 1.80.0 |
+| Stars | 876 / Forks: 37 |
+| Commits | 207 |
+| Core LOC | 5,284 Rust |
+| Test LOC | 2,087 (39% ratio) |
+| Workspace total | 7,477 LOC |
+| Default deps | **0** (zero runtime dependencies) |
+| With `visualize` | 4 (petgraph, serde, serde_json, tungstenite) |
+| Behavior node types | 16 |
+| Public Rust exports | ~36 |
+| Python exports | 26 |
+| Rust tests | 106 |
+| Python tests | 106 |
+| `unsafe` usage | **0** |
+| Contributors | 10 (primary: Kristoffer Rakstad Solberg ~85%, secondary: Anmol Kathail — Python/visualizer) |
+| License | **MIT** |
+| Coverage | ~70-75% (Codecov) |
+| Clippy | `-D warnings` enforced in pre-commit |
+
+### Project Timeline
+
+```
+2022 Q2   Created. v0.3.x–v0.4.x (graphviz, reset_bt)
+2023 Q4   Blackboard generics (v0.6.0)
+2024 Q4   Serde made optional (v0.8)
+2025 Q1   Major API break: tick/blackboard (v0.9.0)
+2026 Q1   Race primitive (v0.11.0)
+2026 Q2   Live visualizer (v0.12.0), Python bindings, reactive composites (v0.13.0)
+```
+
+### Production Users
+
+- Utah Robotics Lunabotics 2026 rover autonomy (3rd of 50 NASA competition)
+- Titanfall 2 / Northstar mod NPC AI (catornot/bp-ort)
+- AnotherlandServer MMORPG NPC behaviors
+
+### Up to ecoPrimals Standards?
+
+**Strengths**: Zero-dep core, zero unsafe, clippy enforced, deterministic sync tick, MIT license, generic blackboard maps to Neural API state, reactive composites for distributed preemption.
+
+**Gaps**: 0.x semver (expect breaking changes), serde coupled to `visualize` feature (no standalone serialization), no typed blackboard ports (open issue #61), small bus factor (1+1 maintainers), no CONTRIBUTING.md, release automation incomplete (v0.13 not tagged on GitHub).
+
+### Recommendation: Take As-Is vs Fork
+
+**Take as-is** (`bonsai-bt = "0.13"` pinned). The core is clean enough to embed. If tree serialization without the visualizer becomes needed, fork and add a `serde`-only feature — trivial patch, ~20 lines. No need to maintain a full fork unless the project goes dormant.
+
+If biomeOS grows its own behavior-tree semantics significantly (typed ports, cross-gate tree sharing, provenance-per-tick), evolve a thin adapter crate (`ecoPrimals-bt`) that wraps bonsai and adds ecosystem-specific types. The bonsai core stays upstream.
+
+---
+
+*Public contact. Source: Reddit/GitHub. No prior relationship with maintainer (Kristoffer Rakstad Solberg). Evaluated for architectural fit with Neural API and squirrel agent orchestration.*
