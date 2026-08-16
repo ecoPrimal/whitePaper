@@ -1,6 +1,16 @@
 # Node Atomic Silicon Validation — strandGate
 
-**Status**: CROSSED → PRODUCTION | **Wave**: 157i | **Date**: Aug 11, 2026
+**Status**: Node Atomic IPC composition + wgpu-backed QCD validated | **Wave**: 157i | **Date**: Aug 11, 2026
+
+> **Scope note (added Aug 16, 2026).** Every GPU result in this document was
+> measured through **wgpu/Vulkan with a vendor driver present** — RADV on AMD,
+> the proprietary stack on NVIDIA. That is what makes the cross-vendor
+> agreement meaningful: the same WGSL, two independent vendor stacks.
+>
+> It is *not* the sovereign VFIO path, which has never executed a shader on any
+> NVIDIA GPU. "Sovereign compute trio" here names the Node Atomic composition
+> (coralReef compiles, barraCuda supplies the math, toadStool dispatches), not
+> freedom from vendor code at runtime.
 **Gate**: strandGate (Dual EPYC 7452, RTX 3090 24GB + RX 6950 XT 16GB)
 
 ---
