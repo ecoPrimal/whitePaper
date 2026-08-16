@@ -179,7 +179,7 @@ Behavior is the missing decision layer between sensing and acting.
 - Real usage: Utah Robotics Lunabotics 2026 rover autonomy stack
 - What's NOT sophisticated yet: typed dataflow between nodes, advanced decorator semantics
 
-**Recommendation**: Investigate making behavior-tree semantics a first-class biomeOS Neural API primitive. Initially embed `bonsai-bt`, let experience determine whether the ecosystem needs its own generalized representation. Do not make ecoPrimals structurally dependent on the exact API yet.
+**Decision**: Fork bonsai-bt into ecoPrimals as a new meta-primal (DECIDE layer). AGPL3 + scyBorg triple license. sourDough scaffold. Full primal subsystem with Neural API capabilities, provenance integration, and PathwayLearner wiring. See `BONSAI_INGESTION_PLAN.md` for full pipeline.
 
 ---
 
@@ -243,11 +243,13 @@ Behavior is the missing decision layer between sensing and acting.
 
 **Gaps**: 0.x semver (expect breaking changes), serde coupled to `visualize` feature (no standalone serialization), no typed blackboard ports (open issue #61), small bus factor (1+1 maintainers), no CONTRIBUTING.md, release automation incomplete (v0.13 not tagged on GitHub).
 
-### Recommendation: Take As-Is vs Fork
+### Decision: Fork → Full Primal Subsystem
 
-**Take as-is** (`bonsai-bt = "0.13"` pinned). The core is clean enough to embed. If tree serialization without the visualizer becomes needed, fork and add a `serde`-only feature — trivial patch, ~20 lines. No need to maintain a full fork unless the project goes dormant.
+**Fork and evolve** into an ecoPrimals meta-primal. The core is clean and small enough (5,284 LOC) to fully ingest and evolve. AGPL3 + scyBorg triple license. sourDough scaffold into standard primal workspace. Core BT improvements offered back upstream (MIT). Ecosystem-specific types (EcoAction, EcoBlackboard, provenance) stay in fork.
 
-If biomeOS grows its own behavior-tree semantics significantly (typed ports, cross-gate tree sharing, provenance-per-tick), evolve a thin adapter crate (`ecoPrimals-bt`) that wraps bonsai and adds ecosystem-specific types. The bonsai core stays upstream.
+This is a one-human project recognizing another. Small enough to fully understand, clean enough to build on, production-proven enough to trust as foundation.
+
+See `BONSAI_INGESTION_PLAN.md` for full pipeline: Phase 0 (ingest + review) → Phase 1 (sourDough scaffold) → Phase 2 (ecosystem evolution) → Phase 3 (Neural API capabilities) → Phase 4 (protocol compliance) → Phase 5 (meta-primal integration).
 
 ---
 
