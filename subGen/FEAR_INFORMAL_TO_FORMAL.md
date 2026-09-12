@@ -314,3 +314,13 @@ Now they answer to everything.
 
 *Working document. Part of the fEAR framework.*
 *Kevin Mok, August 28, 2026*
+
+---
+
+## PRIMAL INSTANTIATION
+
+The informal→formal inversion is instantiated as **Subsystem 7 (FORMALIZATION)**
+in guerillaGorilla's domain taxonomy. See:
+
+- `../guerillaGorilla/DOMAIN_TAXONOMY.md` — Full 7-subsystem taxonomy
+- `../guerillaGorilla/CASE_VALIDATION.md` — 9 years informal → 8+ formal proceedings (validated Week 1)
