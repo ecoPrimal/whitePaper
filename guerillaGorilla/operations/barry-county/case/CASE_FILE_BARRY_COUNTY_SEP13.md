@@ -21,41 +21,183 @@ Court.
 
 ## SOURCE INTELLIGENCE
 
-### Primary Source
-Rita Williams, "A Barry County Order Appeared After My Amicus
-Brief. The Record Needs to Prove When," Clutch Justice,
-September 12, 2026.
-https://clutchjustice.com/2026/09/12/barry-county-docket-timing-amicus-brief/
+### Primary Sources
 
-### Cases Referenced
-- **In re Foley** — Michigan Supreme Court Case No. 170670
-  (Rita's amicus filed Sep 11, 2026)
-- **People v Arizola** — Michigan Court of Appeals No. 377625
-  (Rita's second amicus filed Sep 12, 2026)
-- **Separate Barry County matter** — docket containing Entry 135
-  (case number not published by Rita — respect her operational
-  security, but request in private communication)
+1. Rita Williams, "A Barry County Order Appeared After My Amicus
+   Brief. The Record Needs to Prove When," Clutch Justice,
+   September 12, 2026.
+   https://clutchjustice.com/2026/09/12/barry-county-docket-timing-amicus-brief/
 
-### Judge
-**Michael Schipper** — Barry County District Court Judge
-- Named on Entry 135
-- Currently under JTC review (confirmed by Rita)
-- JTC-confirmed 2014 misconduct finding
-- Michigan Supreme Court remand, Docket No. 167549 (sentencing)
+2. **Brief Amicus Curiae of Rita Williams** in *In re Foley*,
+   Michigan Supreme Court Case No. 170670, filed Sep 11, 2026.
+   (evidence/Brief_Amicus_Curiae_Foley_Revised.pdf)
+
+3. Rita Williams, "When a Court Stamp Disappears: Why White-Out
+   on a Barry County Motion Undermines Justice," Clutch Justice,
+   Feb 15, 2026 (updated Mar 26, 2026).
+
+4. Rita Williams, "Whatever Happened to Sigmund Rumpf?" Clutch
+   Justice, July 1, 2026.
+
+### Cases
+
+| Case | Number | Significance |
+|------|--------|-------------|
+| **In re Foley** | MSC No. 170670 / COA No. 381330 / TC No. 2020-656-DM | Rita's amicus filed Sep 11, 2026. Post-divorce custody. Service failures to incarcerated litigant. |
+| **People v Arizola** | MCOA No. 377625 | Rita's second amicus filed Sep 12, 2026. Schipper sentencing pattern. |
+| **MSC No. 167549** | MSC No. 167549 | Schipper sentencing remand. Rita filed prison mail delivery correspondence Jul 8, 2026. |
+| **Barry County 2022-0000000523-FH** | TC No. 2022-0000000523-FH | Underlying case in MSC 167549. Docket entries DISAPPEARED Jul 8, reappeared Aug 7. |
+| **Separate Barry County matter** | Not published | Contains Entry 135 (the backdated entry from Rita's Sep 12 article). |
+
+### Judges / Defendants
+
+| Name | Role | Status |
+|------|------|--------|
+| **Hon. Vicky L. Alspaugh** | Circuit Court Judge, **named defendant** in Foley | Active defendant |
+| **Hon. William Doherty** | Chief Judge, **named defendant** in Foley | Active defendant |
+| **Hon. Michael Schipper** | District Court Judge, named on Entry 135 | Under JTC review. 2014 JTC misconduct finding. MSC remand 167549. |
+
+### Key Attorneys
+- **Brad Gee** — opposing counsel in Foley's domestic case.
+  Copied on Foley's Oct 3, 2022 address correction. AGC
+  grievance filed against him reflects same address issue.
+- **Cummings, McClorey, Davis & Acho, P.L.C.** — defense
+  counsel for Barry County / judges in MSC 170670.
+  Allan C. Vander Laan, Douglas J. Curlew, Kevin J. Campbell.
 
 ---
 
-## TIMELINE OF THE FRAUD
+## THE PATTERN: NOT ONE ENTRY — SYSTEMATIC MANIPULATION
 
-| Time | Event | Source |
+Rita's amicus brief (pp. 1-3) documents a pattern that goes
+FAR beyond Entry 135. This is not a single anomaly. It is a
+system of record manipulation spanning years:
+
+### Incident 1: Disappearing Docket Entries (Jul-Aug 2026)
+
+**Case:** Barry County 2022-0000000523-FH (underlying case in
+MSC 167549 — the Schipper sentencing remand)
+
+- USPS tracking 9205590324992801759012 confirms: incarcerated
+  litigant's motion for relief from judgment physically
+  delivered to Barry County Circuit Court on **July 1, 2026**
+- USPS tracking 9205590324992801759753 confirms: same filings
+  delivered to Barry County Prosecutor's Office on **July 2**
+- Circuit court docket initially reflected the motions as
+  filed July 1, 2026
+- **July 8, 2026:** Rita files correspondence with MSC about
+  prison mail delivery → **SAME DAY, the circuit court docket
+  entries for those filings DISAPPEARED**
+- Entries did not reappear until **August 7, 2026** — AFTER
+  Rita produced the USPS delivery records proving the filings
+  had been delivered
+- **August 11, 2026:** Court enters order denying the motions
+  and claims it was mailed to the litigant by first-class mail
+- **MDOC certified records production:** NO record of that
+  order, or any comparable correspondence from the county,
+  EVER reaching the incarcerated litigant
+
+**This is the same pattern as Entry 135: court claims mail
+was sent, MDOC records show nothing arrived.**
+
+### Incident 2: White-Out on Court Stamp (Feb 2026)
+
+**Source:** Clutch Justice, Feb 15, 2026 (updated Mar 26, 2026)
+
+- A stamped Barry County court filing never reached the
+  Register of Actions
+- The received stamp was **obscured with correction fluid**
+  (White-Out) before the document was returned
+- **Subject of a PENDING SCAO investigation** into the conduct
+  of a Barry County **chief probation officer**
+- Physical destruction of evidence on a court document
+
+### Incident 3: Backdated Docket Entry (Sep 11-12, 2026)
+
+**Source:** Clutch Justice, Sep 12, 2026
+
+- Entry 135 absent at 3:42 PM Sep 11
+- Entry 135 present by ~9:49 AM Sep 12
+- Dated September 10 (one day before amicus filed)
+- "Sent to Defendant via last known address" — MDOC FOIA
+  shows no mail arrived
+- Judge Schipper named on entry
+
+### Incident 4: Service Pattern in Foley (2022-2026)
+
+**Source:** Rita's amicus brief, pp. 5-6
+
+- Foley's correct mailing address placed on record TWICE:
+  - Oct 3, 2022: written communication from deputy clerk
+  - Jun 16, 2023: FOC referee read address into the record
+- Mail addressed to Foley CONTINUED going to INCORRECT address
+  after EACH correction
+- Opposing counsel Brad Gee was copied on the Oct 3, 2022
+  correction and his own AGC grievance response reflects the
+  same address issue
+- Both the court AND opposing counsel had the correct address
+  and mail still went to the wrong one
+
+### Rita's Legal Kill Shot (Brief p. 7)
+
+> "A service rule that yields whenever a litigant later
+> demonstrates awareness is not a service rule. It is a
+> standing invitation to mail nothing and see what the
+> litigant discovers on his own, and if that is enough to
+> satisfy MCR 3.203 and MCR 2.107, then service was never
+> actually required at all."
+
+### Pattern Summary
+
+| Incident | What | When | Evidence |
+|----------|------|------|----------|
+| Foley service | Mail to wrong address despite 2 corrections | 2022-2026 | Amicus brief pp. 5-6 |
+| White-Out | Physical destruction of court stamp | Feb 2026 | SCAO investigation pending |
+| Disappearing entries | Docket entries vanished after Rita flagged issues | Jul 8, 2026 | USPS tracking confirms delivery |
+| Fake mailing claim | Court says "mailed" — MDOC says nothing arrived | Aug 11, 2026 | MDOC certified records |
+| Entry 135 backdating | Entry appears overnight, backdated | Sep 11-12, 2026 | Rita's documented timeline |
+
+**This is not negligence. This is a system. Five incidents,
+three years, physical and electronic manipulation, involving
+multiple judges, at least one court officer under SCAO
+investigation, and a judge under JTC review.**
+
+### USPS Evidence Already in Hand
+
+Rita has USPS delivery confirmation with tracking numbers:
+- **9205590324992801759012** — Barry County Circuit Court,
+  delivered July 1, 2026
+- **9205590324992801759753** — Barry County Prosecutor's
+  Office, delivered July 2, 2026
+
+These prove the court RECEIVED filings that then DISAPPEARED
+from the docket. The USPS doesn't lie. The court does.
+
+---
+
+## TIMELINE OF THE FRAUD (COMPREHENSIVE)
+
+| Date | Event | Source |
 |------|-------|--------|
+| Oct 3, 2022 | Foley's correct address placed on record via deputy clerk letter (CC'd to Brad Gee) | Amicus p.5 |
+| Jun 16, 2023 | FOC referee reads Foley's correct address into the record | Amicus p.5 |
+| 2022-2026 | Mail to Foley continues going to WRONG address despite corrections | Amicus pp.5-6 |
+| Feb 15, 2026 | Rita publishes: White-Out on Barry County court stamp | Clutch Justice |
+| Jul 1, 2026 | USPS delivers incarcerated litigant's motions to Barry County Circuit Court | USPS 9205590324992801759012 |
+| Jul 2, 2026 | USPS delivers same filings to Barry County Prosecutor's Office | USPS 9205590324992801759753 |
+| Jul 1, 2026 | Circuit court docket reflects motions as filed July 1 | Amicus p.2 |
+| **Jul 8, 2026** | Rita files MSC correspondence about prison mail delivery → **SAME DAY docket entries DISAPPEAR** | Amicus p.2, MSC Entry 46 |
+| Aug 7, 2026 | Docket entries reappear (AFTER Rita produces USPS records) | Amicus p.2 |
+| Aug 11, 2026 | Court denies motions, claims order mailed by first-class mail | Amicus p.2 |
+| Aug 11+, 2026 | MDOC certified records: NO record of order EVER reaching litigant | Amicus p.3 |
 | Sep 10, 2026 | **Printed date** on Entry 135 — "Order" | Docket |
-| Sep 11, 2:44 PM | Rita files amicus in In re Foley (MSC 170670) | Rita |
-| Sep 11, 3:35 PM | MSC e-filing system accepts the amicus | Rita |
-| Sep 11, 3:42 PM | Rita checks Barry County docket — **Entry 135 DOES NOT EXIST** | Rita |
-| Sep 11–12, overnight | Entry 135 **appears** on the docket, dated Sep 10 | Rita |
-| Sep 12, ~9:49 AM | Rita confirms Entry 135 is now visible | Rita |
-| Sep 12 | Rita publishes article documenting the gap | Clutch Justice |
+| Sep 11, 2:44 PM | Rita files amicus in *In re Foley* (MSC 170670) | Amicus |
+| Sep 11, 3:35 PM | MSC e-filing system accepts the amicus | Amicus |
+| Sep 11, 3:42 PM | Rita checks Barry County docket — **Entry 135 DOES NOT EXIST** | Clutch Justice |
+| Sep 11-12, overnight | Entry 135 **appears** on the docket, dated Sep 10 | Clutch Justice |
+| Sep 12, ~9:49 AM | Rita confirms Entry 135 is now visible | Clutch Justice |
+| Sep 12 | Rita publishes article documenting Entry 135 gap | Clutch Justice |
+| Sep 12 | Rita files second amicus in *People v Arizola* (MCOA 377625) | Rita |
 
 ### The 18-Hour Window
 
