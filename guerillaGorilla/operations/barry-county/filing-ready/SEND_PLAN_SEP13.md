@@ -320,25 +320,19 @@ If Barry County does NOT respond by September 29:
 ## REMAINING DRAFTS NEEDED BEFORE MONDAY
 ## ═══════════════════════════════════════════
 
-| Filing | Status | Priority |
-|--------|--------|----------|
-| Demand to Barry County | ✅ READY | — |
-| USPS OIG complaint | ✅ READY | — |
-| JTC Schipper supplement | ✅ READY | — |
-| USPIS report | ❌ NEED (short — condense OIG) | HIGH — Day 1 |
-| JTC Doherty RFI | ❌ NEED (new RFI form) | HIGH — Day 1 (notary) |
-| FBI Detroit referral | ❌ NEED | HIGH — Day 2 |
-| SCAO MCR 8.113 request | ❌ NEED | MEDIUM — Day 2 |
-| Michigan AG referral | ❌ NEED | MEDIUM — Day 3 |
-| Barry County BOC | ❌ NEED (shortest) | LOW — Day 3 |
+| Filing | Status |
+|--------|--------|
+| Demand to Barry County | ✅ READY |
+| USPS OIG complaint | ✅ READY |
+| JTC Schipper supplement | ✅ READY |
+| USPIS report | ✅ READY |
+| JTC Doherty RFI | ✅ READY |
+| FBI Detroit referral | ✅ READY |
+| SCAO MCR 8.113 request | ✅ READY |
+| Michigan AG referral | ✅ READY |
+| Barry County BOC notification | ✅ READY |
 
-**Draft priority order for today (Sep 13-14):**
-1. USPIS report (15 min — condense from OIG draft)
-2. JTC Doherty RFI (30 min — new allegations, use form)
-3. FBI Detroit referral (45 min — the big one, both streams)
-4. SCAO MCR 8.113 request (20 min — administrative frame)
-5. Michigan AG referral (20 min — state criminal frame)
-6. Barry County BOC notification (10 min — informational)
+**ALL 9 FILINGS DRAFTED. READY FOR PRINT + SEND.**
 
 ---
 
