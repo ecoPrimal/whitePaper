@@ -1,58 +1,46 @@
-# LinkedIn Profile Update — Kevin Mok (Personal)
-# https://www.linkedin.com/in/kevin-mok-3b319b234/
-# Date: September 12, 2026
-
-**Goal**: Project full image and capability WITHOUT premium.
-Not fully public on ecoPrimals yet, but linking enough that
-anyone who looks you up sees a serious person — not a random
-citizen. Journalists, congressional offices, regulators will
-all check this.
-
-**Identity bridge**: This is the first intentional public link
-from Kevin Mok → ecoPrimals. The ecoPrimal GitHub identity
-remains pseudonymous — we're adding a one-way pointer FROM
-Kevin's LinkedIn TO the project, not the reverse.
+# LinkedIn Profile Update — Kevin Mok
+# Step-by-Step Checklist (matches LinkedIn UI)
+# September 12, 2026
 
 ---
 
-## Quick Edit URLs (click → paste → save)
+# ═══════════════════════════════════════════════
+# STEP 1: HEADLINE (already started — verify)
+# ═══════════════════════════════════════════════
+# Click pencil icon on your profile intro card
 
-Open each link, paste the content from the section below, hit Save.
-
-| Section | Direct Edit URL |
-|---------|----------------|
-| **Intro (headline, website)** | https://www.linkedin.com/in/kevin-mok-3b319b234/edit/forms/intro/new/ |
-| **About** | https://www.linkedin.com/in/kevin-mok-3b319b234/edit/forms/summary/new/ |
-| **Add Experience** | https://www.linkedin.com/in/kevin-mok-3b319b234/edit/forms/position/new/ |
-| **Add Education** | https://www.linkedin.com/in/kevin-mok-3b319b234/edit/forms/education/new/ |
-| **Add Featured** | https://www.linkedin.com/in/kevin-mok-3b319b234/details/featured/ |
-| **Skills** | https://www.linkedin.com/in/kevin-mok-3b319b234/details/skills/ |
-| **Contact Info** | https://www.linkedin.com/in/kevin-mok-3b319b234/edit/forms/contact-info/new/ |
-
-**Order**: Headline → About → Experience (newest first) → Education → Featured → Skills → Contact
-
----
-
-## Headline (220 char max)
-
+**Headline** (220 char max — paste into the Headline field):
 ```
 Research Scientist | Sandia National Labs Fellow (2024) | M.S. Data Science + B.S. Microbiology, MSU | U.S. Army Veteran | Founder, ecoPrimals — Sovereign Scientific Computing in Rust
 ```
 
+**Website** (in same intro editor, under Contact Info):
+```
+https://primals.eco
+```
+
+**Pronouns**: He/Him ✅ (already set)
+
+☐ Done
+
+
 ---
 
-## About / Summary (2,600 char max)
+# ═══════════════════════════════════════════════
+# STEP 2: ABOUT
+# ═══════════════════════════════════════════════
+# Click "+" next to About in the "Add to profile" menu
+
+Paste this entire block (2,285 chars — under 2,600 limit):
 
 ```
 Scientist, veteran, builder. I work at the convergence of microbiology, data science, and systems engineering — where contamination tracing meets graph theory meets GPU compute.
 
-The through-line across my career is one question: does the claim match the primary source? Whether that's a sequencing pipeline drifting from validated baselines, a microbial contaminant in a BSL2 fermentor, or a network of public records that don't reconcile — the methodology is identical. Observe. Measure. Compare against the published claim. Document the discrepancy. Let the data decide.
+Does the claim match the primary source? Whether it's a sequencing pipeline drifting from validated baselines, a microbial contaminant in a BSL2 fermentor, or a network of public records that don't reconcile — the methodology is identical. Observe. Measure. Compare. Document the discrepancy. Let the data decide.
 
-The training stack that produces this:
+→ U.S. Army COIST (2012–2015): Intelligence analysis, OSINT, pattern recognition, terrain modeling from satellite imagery. The Army teaches you to build a picture from partial data and brief it to decision-makers. That methodology never leaves you.
 
-→ U.S. Army COIST (2012–2015): Intelligence analysis, OSINT, pattern recognition, terrain modeling from satellite imagery. The Army teaches you to build a picture of the adversary from partial data and brief it to people who make decisions. That methodology never leaves you.
-
-→ B.S. Microbiology (MSU, 2018): Contamination identification, culture isolation, aseptic technique. Microbiology is the discipline of identifying what's actually growing versus what you intended to grow. The rigor transfers to any domain where claims require verification.
+→ B.S. Microbiology (MSU, 2018): Contamination identification, culture isolation, aseptic technique. The discipline of identifying what's actually growing versus what you intended to grow.
 
 → M.S. Data Science (MSU, 2025): Vector analysis, spatial statistics, graph theory, network analysis, mixed-effects models, remote sensing, machine learning. The math that connects COIST intelligence to computational biology to institutional analysis.
 
@@ -60,76 +48,82 @@ The training stack that produces this:
 
 → 5 years BSL2 bench work (MSU Bioeconomy Institute): Fungi, mycobacteria, anaerobes, GMOs. Mass spectrometry, HPLC, enzyme kinetics. Hands on the equipment, not just the keyboard.
 
-→ ecoPrimals (2023–present): 3.6M lines of Rust. 175+ peer-reviewed papers reproduced with explicit numerical tolerances across 9 scientific domains. GPU-accelerated bioinformatics, lattice QCD on consumer hardware, encrypted mesh networking, neuromorphic computing. Self-hosted on a 7-node distributed compute mesh I built from commodity hardware. No cloud. No CUDA lock-in. AGPL-3.0 — free forever.
+→ ecoPrimals (2023–present): 3.6M lines of Rust. 175+ papers reproduced across 9 scientific domains. GPU-accelerated bioinformatics, lattice QCD on consumer hardware, encrypted mesh networking, neuromorphic computing. Self-hosted on a 7-node compute mesh I built from commodity hardware. No cloud. No CUDA lock-in. AGPL-3.0.
 
-The convergence: military intelligence taught me to profile networks. Microbiology taught me to trace contamination to its source. Data science gave me the math — graph theory for network topology, spatial statistics for geographic clustering, mixed-effects models for variance decomposition. GPU computing gave me the throughput. The result is a unified analytical methodology that works whether the system is microbial, computational, or institutional.
+The convergence: military intelligence taught me to profile networks. Microbiology taught me to trace contamination to its source. Data science gave me graph theory for network topology, spatial statistics for geographic clustering, mixed-effects models for variance decomposition. GPU computing gave me the throughput. One unified methodology — microbial, computational, or institutional.
 
 https://primals.eco | https://github.com/ecoPrimals
 ```
+
+☐ Done
+
 
 ---
 
-## Experience (copy each into LinkedIn)
+# ═══════════════════════════════════════════════
+# STEP 3: POSITIONS (7 total — add newest first)
+# ═══════════════════════════════════════════════
+# Click "+" next to Position for EACH one
+# Add them in this order (newest → oldest)
 
-### Position 1 — Current
 
-**Title**: Founder & Lead Architect
-**Company**: ecoPrimals (create company page or use "Self-employed")
-**Employment type**: Self-employed
-**Start**: January 2023
-**End**: Present
-**Location**: Lansing, Michigan
-**Description**:
+## Position 3A: ecoPrimals (CURRENT)
+
+| Field | Value |
+|-------|-------|
+| Title | Founder & Lead Architect |
+| Company | ecoPrimals |
+| Employment type | Self-employed |
+| Start date | January 2023 |
+| End date | (leave "Present" checked) |
+| Location | Lansing, Michigan |
+
+**Description** (paste — fits 2,000 char limit):
 ```
-Designing and building a sovereign scientific computing ecosystem in pure Rust — the convergence of every discipline I've trained in.
+Sovereign scientific computing ecosystem in pure Rust — the convergence of every discipline I've trained in.
 
-ecoPrimals asks one question: can a single operator reproduce published science on commodity hardware, without cloud dependencies, across multiple domains simultaneously? The answer is yes, and the validation is public.
+3.6M lines of Rust · 43 repositories · 93,700+ tests · 175+ peer-reviewed papers reproduced · 952 GPU compute shaders via Vulkan/WGSL (any GPU, not just NVIDIA) · 15 infrastructure binaries · 9 scientific validation environments
 
-SCALE:
-• 3.6M lines of Rust across 43 repositories
-• 93,700+ automated tests, 20,695+ quantitative validation checks
-• 175+ peer-reviewed papers reproduced with explicit numerical tolerances
-• 952 GPU compute shaders via Vulkan/WGSL — any GPU vendor, not just NVIDIA
-• 15 infrastructure binaries + 9 scientific validation environments
+DOMAINS (each validated against published literature):
+• Metagenomics — GPU-accelerated DADA2, 16S, UniFrac (63 papers)
+• Computational physics — Lattice QCD, Anderson localization, spectral methods (74 experiments)
+• Precision agriculture — FAO-56 ET, Richards equation, irrigation scheduling
+• Pharmacology — PK/PD, gut microbiome, clinical validation
+• Neural architectures — LSTM, ESN, HMM, GNN benchmarks
+• Uncertainty quantification — jackknife, model selection, drift vs. selection
+• Remote sensing — spatial statistics, geographic clustering
 
-SCIENTIFIC DOMAINS (each validated against published literature):
-• Metagenomics — GPU-accelerated DADA2, 16S pipelines, UniFrac diversity metrics (63 papers)
-• Computational physics — Lattice QCD (SU(3) Wilson gauge action), Anderson localization, spectral methods (74 experiments)
-• Precision agriculture — FAO-56 evapotranspiration, Richards equation soil physics, irrigation scheduling
-• Pharmacology — PK/PD modeling, gut microbiome, clinical validation
-• Neural architectures — LSTM, ESN, HMM, GNN validated against published benchmarks
-• Uncertainty quantification — Jackknife, model selection, drift vs. selection analysis
-• Remote sensing — Spatial statistics, geographic clustering, satellite-derived indices
+INFRASTRUCTURE (self-built):
+• 7-node compute mesh, 10G backbone, two physical sites
+• 3× BrainChip Akida neuromorphic processors
+• Multi-vendor GPUs: NVIDIA 5090/3090×3/Titan V×2, AMD MI50×2/6950 XT
+• ~1 TB RAM, ~30 TB NVMe, 76 TB cold storage
+• Encrypted mesh networking exceeding WireGuard performance
+• Self-hosted CI: Forgejo → build → binary depot
 
-INFRASTRUCTURE (self-built, self-hosted):
-• 7-node distributed compute mesh across two physical sites with 10G backbone
-• 3× BrainChip Akida AKD1000 neuromorphic processors
-• Multi-vendor GPU pool: NVIDIA (5090, 3090×3, Titan V×2), AMD (MI50×2, 6950 XT), Intel
-• ~1 TB aggregate RAM, ~30 TB NVMe + 76 TB HDD cold storage
-• Encrypted mesh networking (Tower Atomic) exceeding WireGuard performance
-• Sovereign CI pipeline: Forgejo → self-hosted build → binary depot → autonomous gate enrollment
+WHERE THE TRAINING CONVERGES:
+COIST intelligence → network profiling → system architecture
+Microbiology → contamination tracing → validation pipeline design
+Data science → graph theory, spatial stats → scientific domain coverage
+GPU computing → Vulkan/WGSL dispatch → computational throughput
 
-METHODOLOGY:
-K-NOME — constrained optimization methodology. Human provides architectural constraint (where to look, what to verify), AI provides implementation acceleration (code generation, cross-referencing, document processing). The same methodology applies to every domain: define the validation target, reproduce independently, compare against published claim, document the discrepancy. If the results agree, reality is confirmed. If they disagree, the math determines who is wrong.
-
-HOW THE TRAINING CONVERGES HERE:
-• COIST intelligence → network profiling, terrain analysis, briefing methodology → applied to research network mapping and system architecture
-• Microbiology → contamination tracing, experimental rigor, failure mode analysis → applied to validation pipeline design (every "paper reproduction" is contamination identification: does MY result match THEIR result?)
-• Data science → graph theory, spatial statistics, mixed-effects models, remote sensing → applied to scientific domain coverage (each spring IS a statistical validation study)
-• GPU computing → Vulkan/WGSL shader dispatch across vendors → the throughput layer that makes the validation computationally tractable
-
-AGPL-3.0 throughout. Free for humans, education, and nonprofits.
-
+AGPL-3.0. Free for humans, education, and nonprofits.
 https://primals.eco | https://github.com/ecoPrimals
 ```
 
-### Position 2
+☐ Done
 
-**Title**: Research Specialist
-**Company**: Michigan State University
-**Start**: October 2024
-**End**: October 2025
-**Location**: East Lansing, Michigan
+
+## Position 3B: PFAS Research Lab
+
+| Field | Value |
+|-------|-------|
+| Title | Research Specialist |
+| Company | Michigan State University |
+| Start date | October 2024 |
+| End date | October 2025 |
+| Location | East Lansing, Michigan |
+
 **Description**:
 ```
 PFAS Research Lab — studying "forever chemicals" in environmental samples.
@@ -139,13 +133,19 @@ PFAS Research Lab — studying "forever chemicals" in environmental samples.
 • Scaled lab capabilities leveraging 5 years of prior BSL2 experience at MSU Bioeconomy Institute
 ```
 
-### Position 3
+☐ Done
 
-**Title**: Research Fellow (URA Graduate Student Summer Fellowship)
-**Company**: Sandia National Laboratories
-**Start**: June 2024
-**End**: August 2024
-**Location**: Albuquerque, New Mexico
+
+## Position 3C: Sandia National Laboratories
+
+| Field | Value |
+|-------|-------|
+| Title | Research Fellow (URA Graduate Student Summer Fellowship) |
+| Company | Sandia National Laboratories |
+| Start date | June 2024 |
+| End date | August 2024 |
+| Location | Albuquerque, New Mexico |
+
 **Description**:
 ```
 Selected as one of 11 fellows nationally for the URA-Sandia Graduate Student Summer Fellowship.
@@ -155,13 +155,19 @@ Investigated the effects of bacterial toxins on raceway algae using high-through
 Fellowship profile: https://ura-hq.org/stem-research/sandia-graduate-student-summer-fellowship/2024-sandia-graduate-fellows-2/
 ```
 
-### Position 4
+☐ Done
 
-**Title**: Biotechnician
-**Company**: MSU Bioeconomy Institute
-**Start**: January 2019
-**End**: May 2024
-**Location**: East Lansing, Michigan
+
+## Position 3D: MSU Bioeconomy Institute
+
+| Field | Value |
+|-------|-------|
+| Title | Biotechnician |
+| Company | MSU Bioeconomy Institute |
+| Start date | January 2019 |
+| End date | May 2024 |
+| Location | East Lansing, Michigan |
+
 **Description**:
 ```
 Five years in a fast-paced BSL2 contract research lab.
@@ -173,37 +179,55 @@ Five years in a fast-paced BSL2 contract research lab.
 • Trained new hires on aseptic technique, chemical assays, and automated systems
 ```
 
-### Position 5
+☐ Done
 
-**Title**: Research Assistant
-**Company**: Hausbeck Plant Pathology Lab, Michigan State University
-**Start**: May 2018
-**End**: January 2019
-**Location**: East Lansing, Michigan
+
+## Position 3E: Hausbeck Plant Pathology Lab
+
+| Field | Value |
+|-------|-------|
+| Title | Research Assistant |
+| Company | Michigan State University |
+| Start date | May 2018 |
+| End date | January 2019 |
+| Location | East Lansing, Michigan |
+
 **Description**:
 ```
-Prepared spore capture reels for Hirst-type spore traps (BSL2). Processed samples for spore counting and DNA extraction of cucurbit downy mildew. Maintained spore traps on farms across Mid-Michigan. Liaison between local farmers and research team.
+Hausbeck Plant Pathology Lab. Prepared spore capture reels for Hirst-type spore traps (BSL2). Processed samples for spore counting and DNA extraction of cucurbit downy mildew. Maintained spore traps on farms across Mid-Michigan. Liaison between local farmers and research team.
 ```
 
-### Position 6
+☐ Done
 
-**Title**: Undergraduate Research Assistant
-**Company**: ROME Lab, Michigan State University
-**Start**: January 2018
-**End**: May 2018
-**Location**: East Lansing, Michigan
+
+## Position 3F: ROME Lab
+
+| Field | Value |
+|-------|-------|
+| Title | Undergraduate Research Assistant |
+| Company | Michigan State University |
+| Start date | January 2018 |
+| End date | May 2018 |
+| Location | East Lansing, Michigan |
+
 **Description**:
 ```
-Designed experiments for isolating bacteria from rumen samples. Prepared selective media for biodiversity characterization of carbon degraders. Analyzed sequences using Ribosomal Database Project (RDP). Presented findings at UURAF.
+ROME Lab — rumen microbial ecology. Designed experiments for isolating bacteria from rumen samples using serial enrichment and dilution techniques. Prepared selective media for biodiversity characterization of carbon degraders. Analyzed sequences using Ribosomal Database Project (RDP). Presented findings at UURAF.
 ```
 
-### Position 7
+☐ Done
 
-**Title**: Infantryman
-**Company**: U.S. Army — 25th Infantry Division
-**Start**: 2012
-**End**: 2015
-**Location**: Schofield Barracks, Hawaii
+
+## Position 3G: U.S. Army
+
+| Field | Value |
+|-------|-------|
+| Title | Infantryman |
+| Company | U.S. Army — 25th Infantry Division |
+| Start date | 2012 |
+| End date | 2015 |
+| Location | Schofield Barracks, Hawaii |
+
 **Description**:
 ```
 Company Intelligence Support Team (COIST):
@@ -218,18 +242,28 @@ Radio Transmission Operator (RTO):
 • Trained diverse workforce on equipment use and communication protocols
 ```
 
+☐ Done
+
+
 ---
 
-## Education
+# ═══════════════════════════════════════════════
+# STEP 4: EDUCATION (2 entries)
+# ═══════════════════════════════════════════════
+# Click "+" next to Education for EACH one
 
-### Degree 1
-**School**: Michigan State University
-**Degree**: Master of Science (M.S.)
-**Field of study**: Data Science
-**Start**: 2023
-**End**: 2025
-**Grade**: (leave blank)
-**Activities and societies**: URA-Sandia Graduate Student Fellow (2024)
+
+## Education 4A: M.S. Data Science
+
+| Field | Value |
+|-------|-------|
+| School | Michigan State University |
+| Degree | Master of Science (M.S.) |
+| Field of study | Data Science |
+| Start date | 2023 |
+| End date | 2025 |
+| Activities | URA-Sandia Graduate Student Fellow (2024) |
+
 **Description**:
 ```
 Interdisciplinary program bridging statistics, computer science, and domain science.
@@ -244,164 +278,180 @@ Core technical areas:
 • Uncertainty quantification — Bayesian methods, jackknife, bootstrap, variance decomposition
 
 Languages: Python, R, SQL
-Applied to: bioinformatics (ecoPrimals/wetSpring), computational physics (ecoPrimals/hotSpring), precision agriculture (ecoPrimals/airSpring), pharmacometrics (ecoPrimals/healthSpring)
+Applied to: bioinformatics, computational physics, precision agriculture, pharmacometrics
 ```
 
-### Degree 2
-**School**: Michigan State University
-**Degree**: Bachelor of Science (B.S.)
-**Field of study**: Microbiology
-**Start**: 2014
-**End**: 2018
-**Activities and societies**: Minor in Bioethics
+☐ Done
+
+
+## Education 4B: B.S. Microbiology
+
+| Field | Value |
+|-------|-------|
+| School | Michigan State University |
+| Degree | Bachelor of Science (B.S.) |
+| Field of study | Microbiology |
+| Start date | 2014 |
+| End date | 2018 |
+| Activities | Minor in Bioethics |
+
 **Description**:
 ```
-Microbiology & Molecular Genetics. Concentration in microbial identification, culture techniques, and molecular biology.
+Microbiology & Molecular Genetics.
 
 Key coursework: Medical Microbiology, Virology, Molecular Pathogenesis, Molecular Genetics, Biochemistry, Organic Chemistry, Bioethics.
 
-The discipline that trained me to distinguish what's actually growing from what you intended to grow — contamination identification at the colony level. That rigor applies to any system where claims require verification against primary sources.
+The discipline that trained me to distinguish what's actually growing from what you intended to grow — contamination identification at the colony level.
 
 Undergraduate research: ROME Lab (rumen microbial ecology), Hausbeck Plant Pathology Lab (cucurbit downy mildew spore trapping and DNA extraction). Presented at UURAF.
 ```
 
----
+☐ Done
 
-## Featured (link cards — add these)
-
-1. **URA-Sandia Graduate Fellowship Profile**
-   URL: https://ura-hq.org/stem-research/sandia-graduate-student-summer-fellowship/2024-sandia-graduate-fellows-2/
-   Description: One of 11 fellows selected nationally. Summer 2024.
-
-2. **ecoPrimals — Sovereign Scientific Computing**
-   URL: https://primals.eco
-   Description: 3.6M lines of Rust. 175+ papers reproduced. GPU-accelerated genomics, physics, and more.
-
-3. **ecoPrimals on GitHub**
-   URL: https://github.com/ecoPrimals
-   Description: 43 repositories, 93,700+ tests. AGPL-3.0.
-
-4. **ecoPrimal (developer profile)**
-   URL: https://github.com/ecoPrimal
-   Description: Lead developer. "A tool that shapes itself."
 
 ---
 
-## Skills (add/reorder — these are LinkedIn search keywords)
+# ═══════════════════════════════════════════════
+# STEP 5: FEATURED (4 link cards)
+# ═══════════════════════════════════════════════
+# Click "+" next to Featured → choose "Link"
+# Add each URL, then edit the title/description
 
-**Data Science & Mathematics:**
-- Data Science
+
+## Featured 5A:
+| Field | Value |
+|-------|-------|
+| URL | https://ura-hq.org/stem-research/sandia-graduate-student-summer-fellowship/2024-sandia-graduate-fellows-2/ |
+| Title | URA-Sandia Graduate Fellowship — 2024 Fellow |
+| Description | One of 11 fellows selected nationally. Summer 2024. |
+
+☐ Done
+
+## Featured 5B:
+| Field | Value |
+|-------|-------|
+| URL | https://primals.eco |
+| Title | ecoPrimals — Sovereign Scientific Computing |
+| Description | 3.6M lines of Rust. 175+ papers reproduced. GPU-accelerated genomics, physics, and more. |
+
+☐ Done
+
+## Featured 5C:
+| Field | Value |
+|-------|-------|
+| URL | https://github.com/ecoPrimals |
+| Title | ecoPrimals on GitHub |
+| Description | 43 repositories, 93,700+ tests. AGPL-3.0. |
+
+☐ Done
+
+## Featured 5D:
+| Field | Value |
+|-------|-------|
+| URL | https://github.com/ecoPrimal |
+| Title | ecoPrimal — Lead Developer |
+| Description | "A tool that shapes itself." |
+
+☐ Done
+
+
+---
+
+# ═══════════════════════════════════════════════
+# STEP 6: SKILLS (add one by one)
+# ═══════════════════════════════════════════════
+# Click "+" next to Skills → type each one
+# LinkedIn will autocomplete most of these
+# Add the ★ ones first (most important for search)
+
+★ Data Science
+★ Bioinformatics
+★ Microbiology
+★ Scientific Computing
+★ Rust (Programming Language)
+★ Python
+★ GPU Computing
+★ Machine Learning
+★ Intelligence Analysis
+★ Open-Source Intelligence (OSINT)
+★ High-Throughput Sequencing
+
+Then add:
+- R (Programming Language)
+- SQL
 - Statistical Analysis
 - Graph Theory
 - Network Analysis
 - Spatial Statistics
-- Mixed-Effects Models
-- Multivariate Analysis
 - Remote Sensing
-- Machine Learning
-- Uncertainty Quantification
-- Vector Analysis
-- Time Series Analysis
-
-**Scientific Computing:**
-- Rust (Programming Language)
-- GPU Computing (Vulkan/WGSL)
-- Scientific Computing
-- High-Performance Computing
-- Distributed Systems
-- Neuromorphic Computing
+- Mixed-Effects Models
 - Computational Biology
-- Bioinformatics
-- Lattice QCD
-
-**Programming:**
-- Rust (Programming Language)
-- Python
-- R (Programming Language)
-- SQL
-- Visual Basic
-- WGSL (WebGPU Shading Language)
-
-**Biological Sciences:**
-- Microbiology
-- Molecular Genetics
-- High-Throughput Sequencing
-- Metagenomics
-- 16S rRNA Analysis
-- Environmental Science
-- PFAS Research
-- Fermentation
-
-**Laboratory:**
-- BSL2 Laboratory Operations
-- Aseptic Technique
+- Distributed Systems
+- Linux Systems Administration
 - Mass Spectrometry
 - HPLC
-- Enzyme Kinetics
-- Chemical Assays
 - DNA Extraction
-- Microscopy
-- Spore Trapping
-
-**Systems & Infrastructure:**
-- Linux Systems Administration
-- Self-Hosted Infrastructure
-- ZFS
-- 10 Gigabit Networking
-- Mesh Networking
-- Cryptographic Systems
-
-**Intelligence & Analysis:**
-- Intelligence Analysis (COIST)
-- Open-Source Intelligence (OSINT)
-- Pattern Recognition
-- Terrain Analysis
-- Network Profiling
-- Secure Communications
+- Fermentation
+- Environmental Science
 - Technical Writing
-- Briefing & Debriefing
+- Pattern Recognition
+- Cryptographic Systems
+- High-Performance Computing
+
+☐ Done
+
 
 ---
 
-## Website field
-```
-https://primals.eco
-```
+# ═══════════════════════════════════════════════
+# STEP 7: CONTACT INFO
+# ═══════════════════════════════════════════════
+# Click pencil on your intro → Contact info section
 
-## Contact info
-```
-Email: mokkevin@msu.edu
-Phone: (586) 453-7233
-Website: https://primals.eco
-```
+| Field | Value |
+|-------|-------|
+| Email | mokkevin@msu.edu |
+| Phone | (586) 453-7233 |
+| Website | https://primals.eco |
+
+☐ Done
+
 
 ---
 
-## What NOT to add (yet)
+# ═══════════════════════════════════════════════
+# OPTIONAL (skip for now, add later if wanted)
+# ═══════════════════════════════════════════════
 
-- ❌ Don't mention the Banks case, legal work, or bluegate-tenancy
-- ❌ Don't link any case documents or outreach emails
-- ❌ Don't reference "pro se litigant" or any court cases
-- ❌ Don't break the ecoPrimal pseudonymity in the other direction
-  (Kevin's LinkedIn points TO ecoPrimals; ecoPrimal's GitHub does NOT
-  point back to Kevin Mok)
-- ❌ Don't add the attsi philosophical identity
-- ❌ Don't list metal.md infrastructure details (node names, GPU inventory)
+## Projects (the "+" button in your screenshot)
+# Can add ecoPrimals as a Project too — but it's
+# already covered as a Position. Skip for now.
 
-## What this accomplishes
+## Licenses & certifications
+# Nothing to add unless you want to list your
+# administrator cert or military certs.
 
-When someone Googles "Kevin Mok MSU" or clicks your LinkedIn from
-an email signature, they see:
+## Publications
+# Skip until ecoPrimals papers are on arXiv/Zenodo.
 
-1. **Army veteran** (COIST intelligence — this is why your OSINT is good)
-2. **Sandia National Labs fellow** (national lab credibility)
-3. **5 years BSL2 lab work** (not a keyboard warrior)
-4. **M.S. Data Science + B.S. Microbiology** (dual-domain expertise)
-5. **PFAS researcher** (environmentally relevant, MSU institutional)
-6. **Founder of a 3.6M LOC scientific computing project** (builder)
-7. **primals.eco** link for anyone who wants to go deeper
+## Volunteer experience
+# Could add DaSean's case framed as "community advocacy"
+# but NOT YET — don't tip the case on LinkedIn.
 
-This is the profile of someone a journalist trusts as a source,
-a congressional office takes seriously, and a regulator doesn't
-dismiss. Not a conspiracy theorist — a scientist who documents
-discrepancies for a living.
+## Courses
+# Skip — the MSDS technical areas are in the Education
+# description already.
+
+
+---
+
+# ═══════════════════════════════════════════════
+# SAFETY RULES
+# ═══════════════════════════════════════════════
+
+❌ Don't mention Banks, Smith, or any case
+❌ Don't reference "pro se litigant" or courts
+❌ Don't link bluegate-tenancy or case documents
+❌ Don't break ecoPrimal → Kevin Mok reverse link
+❌ Don't add attsi identity
+❌ Don't list node names from metal.md

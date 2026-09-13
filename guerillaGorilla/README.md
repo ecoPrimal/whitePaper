@@ -78,13 +78,28 @@ The operator is the one who decides where to walk.
    action to fEAR cycle, STRIDe components, and domain taxonomy subsystems.
    Results (ongoing). Framework generalization.
 
-### Layer 5 — Future
+### Layer 5 — Operations (Live)
 
-7. **[AUTOMATION_ROADMAP.md](AUTOMATION_ROADMAP.md)** *(planned)* — PACER API
+7. **[operations/](operations/)** — Active guerillaGorilla operations.
+   Each subdirectory is an independent case/campaign with its own
+   case file, filing-ready documents, and evidence.
+
+   - **[operations/barry-county/](operations/barry-county/)** — Wire & mail
+     fraud investigation. Barry County docket manipulation, MiCOURT audit
+     trail demand, USPS OIG + JTC + FBI notifications. Cross-protection
+     Mode 2 with Rita Williams / Clutch Justice. *Opened Sep 13, 2026.*
+
+   bluegate-tenancy (Banks/Smith) remains its own repo — that's the
+   original case validation. Operations under guerillaGorilla are new
+   deployments of the framework to cases beyond the original validation.
+
+### Layer 6 — Future
+
+8. **[AUTOMATION_ROADMAP.md](AUTOMATION_ROADMAP.md)** *(planned)* — PACER API
    automation, FOIA template pipelines, ROD scripted pulls, filing workflow
    automation. The gorilla starts walking on its own.
 
-8. **[REPO_STRUCTURE.md](REPO_STRUCTURE.md)** *(planned)* — How this
+9. **[REPO_STRUCTURE.md](REPO_STRUCTURE.md)** *(planned)* — How this
    subdirectory becomes a standalone repo. Evidence repo separation for
    outside attorney collaboration. Provenance architecture for legal artifacts.
 
