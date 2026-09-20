@@ -160,6 +160,15 @@ here to gen5 success.
    subGen presented to the world. Live science first, pseudoSpore grab pattern,
    inter/intra membrane site architecture, Wave 155m update plan.
 
+15. **[PUBLIC_RECORD_VALIDATION_SPRING.md](PUBLIC_RECORD_VALIDATION_SPRING.md)** —
+    The publicRecord arm as a cross-domain validation spring for constrained
+    evolution. detroit.primals.eco applies the same constraint set (sovereign
+    infrastructure, auditable baselines, open provenance) to public accountability.
+    85%+ infrastructure reuse. Convergent patterns. Muller's ratchet detected and
+    corrected. The Ara-3 citrate moment — a novel capability activated by
+    environmental pressure. Maps to Chapter 15 extension or standalone Chapter 17
+    for the dissertation.
+
 ### Layer 6 — Security Architecture (Realized)
 
 4. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — Seven-layer security model
