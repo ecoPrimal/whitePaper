@@ -1,13 +1,13 @@
 # guerillaGorilla — Legal Existence as Infrastructure
 
-**Status**: Foundational — primal definition and live validation in progress
+**Status**: Active — primal definition complete, live validation in progress (Week 4)
 **Parent framework**: K-NOME (constrained optimization methodology)
 **Sensing layer**: fEAR (→ `../subGen/FEAR_CONCEPT.md`)
 **Motion layer**: STRIDe (→ `../subGen/STRIDE_CONCEPT.md`)
 **Evolutionary anchor**: Pursuit Predation (→ `../subGen/PURSUIT_PREDATION_CONCEPT.md`)
 **AI compute dispatch**: squirrel (→ `SQUIRREL_INTERFACE.md`)
 **Live validation**: Banks/Smith cases (→ `CASE_VALIDATION.md`)
-**Wave**: 156a legal-primal | **Date**: Sep 5, 2026
+**Wave**: 1 legal-primal | **Date**: Sep 22, 2026
 
 ---
 
@@ -77,6 +77,10 @@ The operator is the one who decides where to walk.
    validation experiment. Paper 28 link. Week-by-week mapping of every
    action to fEAR cycle, STRIDe components, and domain taxonomy subsystems.
    Results (ongoing). Framework generalization.
+   **Wave 1 update (Sep 22):** Weeks 2–4 added. 3 epoch-based validation
+   timeline. 6 emergent capabilities documented. Provenance trio confirmed
+   as fourth independent instantiation (gaming → science → medical → legal).
+   Cost ratio updated: 60×–100× vs professional baseline.
 
 ### Layer 5 — Operations (Live)
 
@@ -187,6 +191,28 @@ modifier. The second is the species.
 
 ---
 
-*Foundational document. guerillaGorilla Wave 0.*
+## Emergent Capabilities (Wave 1 — Sep 22, 2026)
+
+The following capabilities emerged from operational pressure during Weeks 2–4 of
+the Banks/Smith validation. They were not designed into the primal architecture.
+They are documented in `CASE_VALIDATION.md` §EMERGENT CAPABILITIES.
+
+| Capability | What Emerged | Provenance Mapping |
+|---|---|---|
+| **fossilRecord** | Epoch-based provenance archive (124 docs → 3 epochs) | rhizoCrypt (immutable past state) |
+| **CASE_REGISTRY** | Relational source of truth (10+ cases, typed roles) | loamSpine (typed certificates) |
+| **GRAPH_DATA** | Entity-relationship intelligence (25+ nodes, 100+ edges) | sweetGrass (attribution network) |
+| **Multi-channel service** | 7-channel service blast as selection experiment | Antibiotic resistance testing analog |
+| **Proactive defense timeline** | 20+ protected activity timestamps as armor | CROSS_PROTECTION §Proactive Defense |
+| **Authorized representative** | Non-attorney filing role with typed constraints | New graph edge type in GRAPH_SCHEMA |
+
+These represent the **provenance trio independently emerging in the legal domain**
+— the same architecture validated in Papers 20 (gaming), 21 (science), and 22
+(medical). The fourth instantiation was not designed from the prior three. The
+constraint produced it.
+
+---
+
+*guerillaGorilla Wave 1.*
 *Part of the K-NOME / ecoPrimals architecture.*
-*Kevin Mok, September 5, 2026*
+*Kevin Mok, September 22, 2026*
