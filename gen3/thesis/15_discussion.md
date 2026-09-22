@@ -115,11 +115,29 @@ This extends to multi-substrate work: `hotSpring/metalForge/` pipelines dispatch
 
 Capability hunting is the ecological analog of resource foraging: organisms don't build food, they find it by probing their environment. Monolithic frameworks (CUDA/PyTorch) are factory farming — efficient at scale, blind to what's already in the environment. The constrained evolution methodology forces foraging, and foraging produces discoveries that scaling cannot.
 
-### 15.7.3 Scientific Computing Accessibility
+### 15.7.3 Legal Domain as Fourth Provenance Instantiation
+
+The constrained evolution thesis predicts that similar constraints produce similar architectures regardless of domain. Papers 20–22 demonstrated >80% structural similarity across gaming, science, and medical provenance systems. Paper 28 (baseCamp) documents a **fourth independent instantiation** in the legal domain — and uniquely, this instantiation was not designed from the prior three.
+
+During the live validation of guerillaGorilla (the legal existence primal, `guerillaGorilla/CASE_VALIDATION.md`), three capabilities emerged from operational pressure without reference to Papers 20–22:
+
+1. **Epoch-based archival** (fossilRecord) — immutable past state organized by temporal epoch with supersession chains. Structurally identical to rhizoCrypt.
+2. **Relational case registry** (CASE_REGISTRY) — typed metadata, role-scoped filing authority, centralized source of truth. Structurally identical to loamSpine certificates.
+3. **Entity-relationship intelligence** (GRAPH_DATA / GRAPH_SCHEMA) — attribution network with temporal edges, reusable schema. Structurally identical to sweetGrass.
+
+The provenance trio emerged because the constraints — managing 10+ legal proceedings, 5 respondents, 2 jurisdictions, 124+ artifacts, and 20+ agency complaints — are isomorphic to the constraints in gaming (item provenance), science (sample chain-of-custody), and medical (consent management). The operator did not design the legal provenance system by consulting Papers 20–22. The constraints produced it independently.
+
+This is the strongest cross-domain evidence for the constrained evolution thesis: not merely that the same architecture can be applied to a new domain, but that **the same constraints independently produce the same architecture in a domain the architect was not optimizing for.**
+
+The legal domain also introduces a novel selection pressure absent from scientific domains: **adversarial counter-evolution** (Paper 28 §10.3). Unlike nature (which does not strategize) or published science (which is inert), the legal adversary adapts. The K-NOME methodology must evolve its artifacts against an adapting opponent — making the legal domain a uniquely challenging validation environment for constrained evolution.
+
+See `gen3/baseCamp/28_constrained_evolution_legal_case_construction.md` and `guerillaGorilla/CASE_VALIDATION.md` for the full framework and live validation data.
+
+### 15.7.4 Scientific Computing Accessibility
 
 The cost model ($0.044 per paper-parity plasma run, ~$0.93 total for 11,161+ checks) demonstrates that sovereign scientific computing on consumer hardware is viable. The f64 discovery reframes the accessibility question: the hardware is already in researchers' machines. The barrier is software (CUDA lock-in), not silicon. If the methodology generalizes, it has implications for reproducibility, institutional HPC dependency, and Global South participation in computational science.
 
-### 15.7.4 Biological Validation (Chapter 14)
+### 15.7.5 Biological Validation (Chapter 14)
 
 The proposed LTEE sequencing — using the same tools validated by the springs to analyze the frozen fossil record — would provide a direct biological test. Success would strengthen the principle; failure would refine its scope.
 
