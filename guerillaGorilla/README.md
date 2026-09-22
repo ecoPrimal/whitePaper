@@ -82,6 +82,13 @@ The operator is the one who decides where to walk.
    as fourth independent instantiation (gaming → science → medical → legal).
    Cost ratio updated: 60×–100× vs professional baseline.
 
+### Layer 4.5 — Emergence (Walk-Friendly)
+
+6b. **[EMERGENCE_CATALOG.md](EMERGENCE_CATALOG.md)** — Compact inventory of
+    every emergent capability for naming and codification. Organized by
+    category (sensing, motion, architecture, composition, defense) with
+    naming seeds and overlap notes. **Designed for walks, not keyboards.**
+
 ### Layer 5 — Operations (Live)
 
 7. **[operations/](operations/)** — Active guerillaGorilla operations.
@@ -124,10 +131,17 @@ the legal domain.
 | `DEFENSE_IN_DEPTH.md` | Security model applies to legal evidence protection |
 | `INTERSYSTEM_TRUST.md` | Trust model applies to attorney collaboration interface |
 
-fEAR, STRIDe, and Pursuit Predation were authored in subGen as working
-concepts (Aug 28-30, 2026). guerillaGorilla is their instantiation as a
-primal — the thing that actually runs, with defined inputs, outputs,
-validation criteria, and a live case producing measurable results.
+guerillaGorilla is the **source primal** — the legal existence domain
+from which fEAR, STRIDe, and Pursuit Predation emerged as named
+frameworks. The operational reality of adversarial legal proceedings
+(COIST/OSINT background, journalist collaboration, multi-agency
+pressure) produced the sensing and motion patterns. Those patterns
+were then formalized in subGen (Aug 28–30, 2026) as abstractions
+applicable beyond law. But the directionality is:
+
+**guerillaGorilla (domain) → fEAR/STRIDe/Pursuit Predation (abstraction) → subGen (documentation)**
+
+The primal produced the frameworks, not the reverse.
 
 ---
 
