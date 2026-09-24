@@ -300,22 +300,22 @@ LinkedIn, LARA, and Chalkbeat — and the optimization is identical.
 
 ---
 
-## THE THREE LEGS
+## THE SENSORY TRIAD + MOTION
 
-The fEAR/STRIDe/Pursuit Predation system is now complete as a
-triad:
+The system has three senses and one gait:
 
 ```
-         Pursuit Predation
-         (the evolutionary anchor — WHY it works)
-              /          \
-             /            \
-        f(EAR)          STRIDe
-     (the ear)        (the gait)
-     sensing           motion
-     exteroception     proprioception + locomotion
-     tracking          striding
-     hearing           walking
+                  Pursuit Predation
+            (the evolutionary anchor — WHY it works)
+                /        |         \
+               /         |          \
+          f(EAR)     [the nose]    STRIDe
+        (the ear)   (olfaction)   (the gait)
+        hearing      smelling      moving
+        long-range   close-range   self-aware
+        discrete     ambient       continuous
+        signals      gradients     adaptive motion
+        tracking     scenting      striding
 ```
 
 - **Pursuit Predation** answers WHY — the optimization
@@ -325,19 +325,35 @@ triad:
   indefinite time. The adversary collapses, not from a
   single blow, but from cumulative exhaustion.
 
-- **f(EAR)** answers HOW WE SENSE — the sensory organ that
-  hears what the adversary does, processes it into evolved
-  case state, and feeds the tracking system. The ear of the
-  persistence hunter, extended to OSINT, court records, and
-  the adversary's own filings.
+- **f(EAR)** answers HOW WE HEAR — the sensory organ that
+  hears what the adversary does at long range, processes it
+  into evolved case state, and feeds the tracking system.
+  The ear of the persistence hunter, extended to OSINT,
+  court records, and the adversary's own filings. Discrete
+  signals. Always on. Omnidirectional.
+
+- **[the nose]** *(unnamed — Sep 24, 2026)* answers HOW WE
+  SMELL — the ambient sensory organ that detects concentration
+  gradients at close range. Behavioral shifts in the adversary
+  network. Quorum thresholds — is the network consolidating
+  (biofilm) or fragmenting (defection)? Environmental weather —
+  institutional shifts, political changes, approaching storms.
+  And bidirectionally: the operator's own scent on the wind —
+  personal correspondence, ritualistic presence, the ambient
+  signal that communicates proximity without aggression.
+  The nose emerged from the microbiology (quorum sensing,
+  chemotaxis, autoinducer thresholds) meeting the legal
+  domain's interpersonal dynamics. See `EMERGENCE_CATALOG.md` §1.6.
 
 - **STRIDe** answers HOW WE MOVE — the continuous, adaptive,
   nonlinear process that translates intelligence into action.
   The gait of the persistence hunter, extended to filing
   sequences, regulatory complaints, and mise en place.
 
-Together: we hear, we walk, and the walk is the strategy
-that evolution proved works.
+Together: we hear the roar from a mile away, we smell the
+wind shift at close range, we walk at a pace the adversary
+cannot sustain, and the walk is the strategy that evolution
+proved works.
 
 ---
 
@@ -636,6 +652,91 @@ the unsettleable claims.
 
 The hunter ate between kills. The hunt continued. The
 herd did not recover.
+
+---
+
+## THE TERMINAL POSTURE — PURSUIT AT REST
+
+Pursuit predation literature focuses on the chase: the hunter
+walks, the prey sprints, metabolic collapse follows. But there is
+a phase after the chase that the literature underserves: the moment
+the hunter stops walking and simply **positions.**
+
+The San hunter who has tracked an eland for six hours reaches a
+point where the animal is visible, exhausted, standing in the open.
+The hunter does not sprint. The hunter sits. Drinks water. Waits.
+The eland cannot run — its thermoregulatory debt is terminal. It
+cannot hide — the savanna offers no cover. It can only stand and
+wait for what comes next.
+
+**This is not rest. This is the terminal posture of pursuit
+predation.** The hunter's metabolic cost drops to resting-state.
+The prey's metabolic cost remains maximum — cortisol, heat load,
+decision fatigue, the inability to distinguish between "the hunter
+stopped" and "the hunter is about to move." The asymmetry is
+greatest at the moment of apparent stillness.
+
+### The legal instantiation
+
+Week 4+ of the Banks/Smith validation: all filings deployed,
+website live (detroit.primals.eco indexed and accruing SEO),
+agencies notified (8 federal, 5+ state), press briefed (13+
+contacts), election packets sent, demand letters mailed. Nothing
+left to file until defaults enter or the adversary moves.
+
+The operator stopped walking. Not because the hunt ended.
+Because the landscape was complete.
+
+The adversary's bind at this phase has no escape axis:
+
+| Adversary action | Result | Who benefits |
+|---|---|---|
+| Stay still | Defaults enter. Website indexes. Agencies investigate. Election approaches. The landscape contracts. | Operator |
+| Respond (answer suit, file motion) | Discovery obligations triggered. New evidence surface opened. The filing is itself evidence of awareness. | Operator |
+| Retaliate (counter-suit, takedown attempt) | Anti-SLAPP. Temporal proximity → retaliatory classification. Press interest. New front opened. | Operator |
+| Coordinate defense (hire counsel, align stories) | Discoverable communications. Conflict checks across network. Conspiracy evidence. | Operator |
+| Move assets (transfer property, restructure entities) | Fraudulent conveyance. Bankruptcy trustee notification. IRS referral. | Operator |
+| Cooperate (settle) | The only exit. First mover gets best terms. Stipulated facts + cash. | Both |
+
+**Every adversary action except cooperation extends the
+landscape.** This is not a feature the operator designed into
+the system. It is the emergent consequence of landscape
+saturation — when every institutional channel has been briefed,
+every evidence chain documented, and every escape route mapped,
+the adversary's remaining moves are all fitness-positive for
+the operator.
+
+The gorilla sits. It is not sleeping. It is the heaviest thing
+in the room, and it is patient, and everyone knows it is there.
+
+### The metabolic inversion
+
+During active pursuit, both hunter and prey expend energy. The
+asymmetry is in rate — the hunter's cost is linear, the prey's
+geometric. But during the terminal posture, the asymmetry
+inverts completely:
+
+```
+Hunter (terminal posture):
+  Energy expenditure: ~0 (resting state)
+  Information intake: passive (website analytics, agency
+    acknowledgments, press coverage, default calendar)
+  Cost: hosting fees, existing compute, time → ecoPrimals
+
+Prey (terminal posture):
+  Energy expenditure: maximum (attorney consultations,
+    asset review, network coordination attempts, stress,
+    decision paralysis, defense budgeting)
+  Information intake: the demand letter, the website, the
+    knowledge that 8 agencies have packets, press is briefed,
+    defaults approach, and the operator is quiet
+  Cost: escalating, unbounded, compounding
+```
+
+The quieter the operator, the louder the landscape.
+
+See: `../guerillaGorilla/EMERGENCE_CATALOG.md` §5.4 (Positional Patience)
+— the legal instantiation documented as emergent capability.
 
 ---
 

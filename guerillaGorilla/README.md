@@ -2,8 +2,9 @@
 
 **Status**: Active — primal definition complete, live validation in progress (Week 4)
 **Parent framework**: K-NOME (constrained optimization methodology)
-**Sensing layer**: fEAR (→ `../subGen/FEAR_CONCEPT.md`)
-**Motion layer**: STRIDe (→ `../subGen/STRIDE_CONCEPT.md`)
+**Sensing layer (long-range)**: fEAR (→ `../subGen/FEAR_CONCEPT.md`) — the ear
+**Sensing layer (close-range)**: [unnamed — Sep 24] (→ `EMERGENCE_CATALOG.md` §1.6) — the nose
+**Motion layer**: STRIDe (→ `../subGen/STRIDE_CONCEPT.md`) — the gait
 **Evolutionary anchor**: Pursuit Predation (→ `../subGen/PURSUIT_PREDATION_CONCEPT.md`)
 **AI compute dispatch**: squirrel (→ `SQUIRREL_INTERFACE.md`)
 **Live validation**: Banks/Smith cases (→ `CASE_VALIDATION.md`)
@@ -219,6 +220,7 @@ They are documented in `CASE_VALIDATION.md` §EMERGENT CAPABILITIES.
 | **Multi-channel service** | 7-channel service blast as selection experiment | Antibiotic resistance testing analog |
 | **Proactive defense timeline** | 20+ protected activity timestamps as armor | CROSS_PROTECTION §Proactive Defense |
 | **Authorized representative** | Non-attorney filing role with typed constraints | New graph edge type in GRAPH_SCHEMA |
+| **Positional Patience** | Pursuit Predation at rest — landscape exerts autonomous pressure | fEAR (waiting) + Pursuit Predation (resting) + Information Quarantine (pressuring) |
 
 These represent the **provenance trio independently emerging in the legal domain**
 — the same architecture validated in Papers 20 (gaming), 21 (science), and 22

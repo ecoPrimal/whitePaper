@@ -743,6 +743,15 @@ Additions to the original outline:
     filings). The pattern detection worked: the retaliation was classified, not merely
     detected.
 
+13. **Positional Patience as Emergent Posture** — Week 4+ operational shift from
+    active deployment to patient readiness. Landscape construction complete (filings,
+    website, agencies, press, SEO). The primal enters a resting metabolic state
+    where pressure is exerted autonomously. Adversary faces a no-escape bind:
+    inaction triggers defaults, action opens new channels, cooperation is the only
+    exit. This is the Pursuit Predation principle at its terminal expression —
+    the predator seated at the waterhole, metabolic cost approaching zero while
+    the prey's decision cost is maximum. Documented in EMERGENCE_CATALOG §5.4.
+
 ---
 
 *Case validation document. guerillaGorilla Wave 1.*

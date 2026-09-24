@@ -354,7 +354,7 @@ ability to respond.
 
 ## PRIMAL INSTANTIATION
 
-fEAR is instantiated as the **sensing layer** of **guerillaGorilla** — the
+fEAR is instantiated as the **long-range sensing layer** of **guerillaGorilla** — the
 legal primal in the ecoPrimals ecosystem. See:
 
 - `../guerillaGorilla/README.md` — Primal overview and reading order
@@ -364,3 +364,25 @@ legal primal in the ecoPrimals ecosystem. See:
 
 guerillaGorilla uses **squirrel** (AI compute primal) as the processing substrate
 for fEAR's signal. See `../guerillaGorilla/SQUIRREL_INTERFACE.md`.
+
+### The companion sense — olfaction (Sep 24, 2026)
+
+fEAR is the ear — long-range, discrete signals, acoustic. A third sensory modality
+emerged (unnamed, documented in `../guerillaGorilla/EMERGENCE_CATALOG.md` §1.6) that
+covers what fEAR cannot: **close-range ambient sensing through concentration gradients.**
+
+Where fEAR hears a court filing land, the olfactory sense smells the room change at a
+hearing. Where fEAR processes a PACER entry, the nose detects whether the adversary
+network is consolidating (biofilm formation — circling wagons) or fragmenting (individual
+defection — quorum collapse). The model is quorum sensing from microbiology: individual
+signals below threshold are noise, but when concentration crosses a threshold the
+collective behavior shifts and the nose detects the shift before any discrete signal
+would announce it.
+
+The olfactory sense is also **bidirectional** — the operator both senses the adversary's
+ambient state AND projects their own scent (personal correspondence, ritualistic presence,
+the creative channel that communicates proximity without aggression). fEAR is receive-only.
+The nose both receives and transmits on the same chemical channel.
+
+The sensory triad: fEAR (the ear) + [unnamed] (the nose) + STRIDe's R⇄I loop (vision/proprioception).
+The evolutionary anchor: Pursuit Predation (the gait that uses all three).
