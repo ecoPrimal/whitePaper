@@ -162,7 +162,7 @@ here to gen5 success.
 
 15. **[PUBLIC_RECORD_VALIDATION_SPRING.md](PUBLIC_RECORD_VALIDATION_SPRING.md)** —
     The publicRecord arm as a cross-domain validation spring for constrained
-    evolution. detroit.primals.eco applies the same constraint set (sovereign
+    evolution. [detroit.primals.eco](https://detroit.primals.eco) applies the same constraint set (sovereign
     infrastructure, auditable baselines, open provenance) to public accountability.
     85%+ infrastructure reuse. Convergent patterns. Muller's ratchet detected and
     corrected. The Ara-3 citrate moment — a novel capability activated by
@@ -173,7 +173,7 @@ here to gen5 success.
     Full standardization pass review (Wave 157). Publish pipeline (6-step automated),
     `caddy.deploy` (vhost generation + SSH deploy + rollback), SEO triple notification
     (IndexNow + GSC + Google Indexing API), `verify_consistency` (sitemap vs site.json
-    cross-check). Proven on detroit.primals.eco: 120 URLs, 32 pages, 43 nodes,
+    cross-check). Proven on [detroit.primals.eco](https://detroit.primals.eco): 120 URLs, 32 pages, 43 nodes,
     57 edges, 5/5 security headers. All endpoints 200.
 
 ### Layer 6 — Security Architecture (Realized)
