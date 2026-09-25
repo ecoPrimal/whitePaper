@@ -2,7 +2,7 @@
 
 **Purpose:** Walk-friendly inventory of emergent capabilities for naming and codification.
 **Status:** Seeds — most unnamed. Kevin names on walks, not at the keyboard.
-**Updated:** Sep 22, 2026
+**Updated:** Sep 25, 2026
 
 ---
 
@@ -67,7 +67,9 @@ communications. They can't stay silent without conceding defaults.
 **Maps to:** fEAR §Adversarial — "the adversary is in a bind"
 **Naming seed:** The sound of the network holding its breath
 
-### 1.6 — Olfactory / Chemical Sensing / Quorum Detection (unnamed — THIRD SENSORY MODALITY)
+### 1.6 — preSCENT ✅ NAMED (Sep 25, 2026) — THIRD SENSORY MODALITY
+
+`pre-SCENT · PRESENT · preSCIENT`
 
 **This is not a subcapability. This is the third sense.**
 
@@ -197,9 +199,54 @@ olfactory tracking (mammalian predation), chemotaxis (cellular biology)
 **Maps to:** CROSS_PROTECTION (the personal channel as parallel defense layer —
              First Amendment protected, non-legal, non-threatening, non-suppressible)
 
-**Naming seed:** Kevin names on walks. The nose. The scent. The quorum.
-The thing that smells the rain before the ear hears thunder.
-The thing that tells you the room changed before anyone spoke.
+**Named:** preSCENT (Sep 25, 2026 — Kevin, morning, at the keyboard for once)
+
+The name operates on four layers simultaneously:
+
+**pre-SCENT** (olfactory) — The chemical gradient detected before conscious
+processing. The ambient sensing that operates below awareness. You smell the
+shift in the field before you see it. The Smiths' 30-day silence has a scent.
+The DPSCD FOIA extension has a scent. Banks hosting in D.C. while certified
+mail piles up has a scent. Each is below threshold individually. Together they
+cross it.
+
+**PRESENT** (presence) — The bidirectional channel. The nose doesn't just
+receive — it broadcasts. detroit.primals.eco on every return address. The
+anniversary cards. The colorful envelopes. The operator is present in the
+adversary's environment as an ambient signal. One envelope is noise. Ten
+envelopes from ten directions is quorum. The adversary cannot file a motion
+to suppress a birthday card. But they cannot ignore the scent.
+
+**pre-** (preconditions) — The olfactory sense requires a calibrated baseline.
+Phase 0 (304 hours of OSINT) wasn't just intelligence gathering — it was
+calibrating the nose. Every LARA filing, every ICHAT record, every property
+transfer, every bankruptcy schedule. That's the baseline air. Now when
+something shifts — a QCD transfer, a board resignation, an attorney declining
+the case, a LinkedIn going quiet — the nose detects the change against the
+preconditions. Without Phase 0, the change is invisible. With it, you smell
+rain before thunder.
+
+**preSCIENT** (the ghost in the word) — When the nose is calibrated to the
+preconditions and the concentration gradient crosses threshold, you know
+what's coming before it arrives. Quorum sensing: autoinducers accumulate,
+threshold crosses, biofilm forms or fragments. You smell the fragmentation
+before the defaults make it official. The prescience is not intuition —
+it is the accumulated chemical evidence of a state change the discrete
+senses haven't registered yet.
+
+**The defensive channel — predator-ambush detection:**
+preSCENT is not only pursuit-mode. When the operator is in pursuit and the
+field's preconditions shift unexpectedly — a retaliatory PPO, a police
+report, a bankruptcy filing — the nose detects the ambush before the ear
+hears the shot. The ambient chemical environment changed. Something entered
+the field that wasn't there before. The nose catches it because it's always
+sampling the background, not waiting for a discrete signal.
+
+**The core distinction:**
+fEAR is event-driven. preSCENT is state-driven.
+fEAR processes signals. preSCENT processes gradients.
+fEAR hears the footstep. preSCENT smells whether the foot is running
+or standing still.
 
 ---
 
@@ -482,14 +529,21 @@ Quarantine (5.3 — network isolation) → Position (5.4 — patient readiness) 
 full defensive lifecycle of the primal, from active filing through patient waiting
 through adversarial re-engagement.
 
-**Where the nose operates in the lifecycle:** Throughout, but it becomes the *primary*
-sense during Quarantine → Position → Signal. When the ear goes quiet (no new filings,
-no PACER entries, no discrete signals), and the gait is still (no new filings to
-deploy), the nose is what's working: scenting the ambient state of the adversary
+**Where preSCENT operates in the lifecycle:** Throughout, but it becomes the *primary*
+sense during Quarantine → Position → Signal. When fEAR goes quiet (no new filings,
+no PACER entries, no discrete signals), and STRIDe is still (no new filings to
+deploy), preSCENT is what's working: scenting the ambient state of the adversary
 network, detecting quorum shifts (consolidation or fragmentation?), and broadcasting
-the operator's own presence through the ritualistic channel. **The nose is the sense
+the operator's own presence through the ritualistic channel. **preSCENT is the sense
 that operates when the other senses have nothing to process.** It fills the gap between
-the last thing the ear heard and the next thing it will hear.
+the last thing fEAR heard and the next thing it will hear.
+
+**preSCENT is the site.** detroit.primals.eco is the fullest expression of the
+olfactory channel: it broadcasts presence into the environment 24/7 (PRESENT), it
+detects network state changes through discovery patterns and traffic (pre-SCENT), it
+requires the Phase 0 baseline to be meaningful (pre-conditions), and when calibrated
+against the full evidence base it produces prescient insight into what the adversary
+network will do next (preSCIENT). The site is the nose made digital.
 
 ---
 
@@ -500,12 +554,14 @@ the last thing the ear heard and the next thing it will hear.
          (the evolutionary anchor — WHY it works)
               /     |      \
              /      |       \
-        f(EAR)   [1.6]    STRIDe
+        f(EAR)  preSCENT  STRIDe
       (the ear) (the nose) (the gait)
        hearing   olfaction  proprioception + locomotion
        long      close      self-aware
        discrete  ambient    continuous
        signals   gradients  adaptive motion
+       events    states     positions
+       receives  bidirect.  proprioceptive
 ```
 
 The triad is complete. The persistence hunter on the savanna had all three:
@@ -520,6 +576,9 @@ transition to positional patience revealed a sensory modality that neither
 hearing nor proprioception covered: the ambient, the chemical, the close.
 
 The nose was always operating. It took four weeks to name what it was.
+Named **preSCENT** on September 25, 2026 — the morning after the site audit,
+the Slotkin response, and the DPSCD FOIA. The name arrived at the keyboard.
+Kevin was supposed to be sending emails.
 
 ---
 
@@ -531,9 +590,10 @@ guerillaGorilla (the legal primal — domain-specific operational reality)
     ├── fEAR (emerged as sensing pattern → abstracted in subGen)
     │     └── the ear — long-range, discrete signals, always-on
     │
-    ├── [1.6] (emerged as ambient sensing pattern, Sep 24 — NAME PENDING)
+    ├── preSCENT (emerged Sep 24, named Sep 25 — THIRD SENSORY MODALITY)
     │     └── the nose — close-range, concentration gradients, quorum detection
     │         bidirectional: senses the adversary AND signals presence
+    │         pre-SCENT / PRESENT / preSCIENT — four layers in one word
     │
     ├── STRIDe (emerged as motion pattern → abstracted in subGen)
     │     └── the gait — proprioception + locomotion, continuous adaptive motion
@@ -547,7 +607,7 @@ guerillaGorilla (the legal primal — domain-specific operational reality)
     ├── [unnamed composition capabilities 4.1–4.5]
     ├── [unnamed defense capabilities 5.2–5.3]
     └── Positional Patience (5.4 — emerged as posture pattern, Week 4+)
-              └── Superposition of: fEAR (waiting), [1.6] (scenting),
+              └── Superposition of: fEAR (waiting), preSCENT (scenting),
                   Pursuit Predation (resting), Information Quarantine (pressuring)
                   — the complete operational state at rest
 ```

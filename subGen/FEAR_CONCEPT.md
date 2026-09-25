@@ -365,24 +365,41 @@ legal primal in the ecoPrimals ecosystem. See:
 guerillaGorilla uses **squirrel** (AI compute primal) as the processing substrate
 for fEAR's signal. See `../guerillaGorilla/SQUIRREL_INTERFACE.md`.
 
-### The companion sense — olfaction (Sep 24, 2026)
+### The companion sense — preSCENT (identified Sep 24, named Sep 25, 2026)
 
-fEAR is the ear — long-range, discrete signals, acoustic. A third sensory modality
-emerged (unnamed, documented in `../guerillaGorilla/EMERGENCE_CATALOG.md` §1.6) that
-covers what fEAR cannot: **close-range ambient sensing through concentration gradients.**
+fEAR is the ear — long-range, discrete signals, acoustic. **preSCENT** is the nose —
+close-range, ambient, chemical. Together with STRIDe (the gait), they form the
+sensory triad of the persistence hunter.
 
-Where fEAR hears a court filing land, the olfactory sense smells the room change at a
-hearing. Where fEAR processes a PACER entry, the nose detects whether the adversary
-network is consolidating (biofilm formation — circling wagons) or fragmenting (individual
-defection — quorum collapse). The model is quorum sensing from microbiology: individual
+`pre-SCENT · PRESENT · preSCIENT`
+
+The name operates on four layers:
+- **pre-SCENT** — olfactory. The gradient detected before conscious processing.
+- **PRESENT** — presence. The bidirectional broadcast. The operator's scent on the wind.
+- **pre-** — preconditions. The calibrated baseline from Phase 0 OSINT.
+- **preSCIENT** — prescience. When gradient crosses threshold, you know what's coming.
+
+Where fEAR hears a court filing land, preSCENT smells the room change at a hearing.
+Where fEAR processes a PACER entry, preSCENT detects whether the adversary network
+is consolidating (biofilm — circling wagons) or fragmenting (quorum collapse —
+individual defection). The model is quorum sensing from microbiology: individual
 signals below threshold are noise, but when concentration crosses a threshold the
-collective behavior shifts and the nose detects the shift before any discrete signal
+collective behavior shifts and preSCENT detects the shift before any discrete signal
 would announce it.
 
-The olfactory sense is also **bidirectional** — the operator both senses the adversary's
-ambient state AND projects their own scent (personal correspondence, ritualistic presence,
-the creative channel that communicates proximity without aggression). fEAR is receive-only.
-The nose both receives and transmits on the same chemical channel.
+preSCENT is **bidirectional** — the operator both senses the adversary's ambient state
+AND projects their own scent (personal correspondence, ritualistic presence, the
+detroit.primals.eco URL on every return address envelope). fEAR is receive-only.
+preSCENT both receives and transmits on the same chemical channel.
 
-The sensory triad: fEAR (the ear) + [unnamed] (the nose) + STRIDe's R⇄I loop (vision/proprioception).
-The evolutionary anchor: Pursuit Predation (the gait that uses all three).
+preSCENT is also the **ambush detector** — the defensive olfactory channel. When the
+operator is in pursuit and the field's preconditions shift unexpectedly (a retaliatory
+filing, a police report, a bankruptcy), preSCENT detects the ambush before fEAR hears
+the shot. The ambient environment changed. Something entered the field.
+
+The core distinction: fEAR is event-driven. preSCENT is state-driven.
+fEAR processes signals. preSCENT processes gradients.
+fEAR hears the footstep. preSCENT smells whether the foot is running or standing still.
+
+The sensory triad: **fEAR** (the ear) + **preSCENT** (the nose) + **STRIDe** (the gait).
+The evolutionary anchor: Pursuit Predation (the hunt that uses all three).

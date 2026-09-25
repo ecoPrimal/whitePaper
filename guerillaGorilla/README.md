@@ -3,7 +3,7 @@
 **Status**: Active — primal definition complete, live validation in progress (Week 4)
 **Parent framework**: K-NOME (constrained optimization methodology)
 **Sensing layer (long-range)**: fEAR (→ `../subGen/FEAR_CONCEPT.md`) — the ear
-**Sensing layer (close-range)**: [unnamed — Sep 24] (→ `EMERGENCE_CATALOG.md` §1.6) — the nose
+**Sensing layer (close-range)**: preSCENT (→ `EMERGENCE_CATALOG.md` §1.6) — the nose
 **Motion layer**: STRIDe (→ `../subGen/STRIDE_CONCEPT.md`) — the gait
 **Evolutionary anchor**: Pursuit Predation (→ `../subGen/PURSUIT_PREDATION_CONCEPT.md`)
 **AI compute dispatch**: squirrel (→ `SQUIRREL_INTERFACE.md`)

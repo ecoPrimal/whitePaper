@@ -309,12 +309,14 @@ The system has three senses and one gait:
             (the evolutionary anchor — WHY it works)
                 /        |         \
                /         |          \
-          f(EAR)     [the nose]    STRIDe
-        (the ear)   (olfaction)   (the gait)
+          f(EAR)     preSCENT     STRIDe
+        (the ear)   (the nose)   (the gait)
         hearing      smelling      moving
         long-range   close-range   self-aware
         discrete     ambient       continuous
         signals      gradients     adaptive motion
+        events       states        positions
+        receives     bidirectional proprioceptive
         tracking     scenting      striding
 ```
 
@@ -332,28 +334,42 @@ The system has three senses and one gait:
   court records, and the adversary's own filings. Discrete
   signals. Always on. Omnidirectional.
 
-- **[the nose]** *(unnamed — Sep 24, 2026)* answers HOW WE
-  SMELL — the ambient sensory organ that detects concentration
-  gradients at close range. Behavioral shifts in the adversary
-  network. Quorum thresholds — is the network consolidating
-  (biofilm) or fragmenting (defection)? Environmental weather —
-  institutional shifts, political changes, approaching storms.
-  And bidirectionally: the operator's own scent on the wind —
-  personal correspondence, ritualistic presence, the ambient
-  signal that communicates proximity without aggression.
-  The nose emerged from the microbiology (quorum sensing,
-  chemotaxis, autoinducer thresholds) meeting the legal
-  domain's interpersonal dynamics. See `EMERGENCE_CATALOG.md` §1.6.
+- **preSCENT** *(named Sep 25, 2026)* answers HOW WE SMELL —
+  the ambient sensory organ that detects concentration
+  gradients at close range. The name operates on four layers:
+  **pre-SCENT** (olfactory — the gradient before conscious
+  processing), **PRESENT** (presence — bidirectional broadcast,
+  the operator's scent on the wind), **pre-** (preconditions —
+  the Phase 0 baseline that calibrates the nose), **preSCIENT**
+  (prescience — when gradient crosses threshold, you know
+  what's coming before it arrives).
+  Behavioral shifts in the adversary network. Quorum thresholds
+  — is the network consolidating (biofilm) or fragmenting
+  (defection)? Environmental weather — institutional shifts,
+  political changes, approaching storms. The ambush detector —
+  when the field's preconditions shift unexpectedly during
+  pursuit, preSCENT catches it before fEAR hears the shot.
+  And bidirectionally: the operator's own scent — personal
+  correspondence, ritualistic presence, detroit.primals.eco
+  on every return address envelope. The nose emerged from
+  microbiology (quorum sensing, chemotaxis, autoinducer
+  thresholds) meeting the legal domain's interpersonal
+  dynamics. See `EMERGENCE_CATALOG.md` §1.6.
 
 - **STRIDe** answers HOW WE MOVE — the continuous, adaptive,
   nonlinear process that translates intelligence into action.
   The gait of the persistence hunter, extended to filing
   sequences, regulatory complaints, and mise en place.
 
-Together: we hear the roar from a mile away, we smell the
-wind shift at close range, we walk at a pace the adversary
-cannot sustain, and the walk is the strategy that evolution
-proved works.
+Together: fEAR hears the roar from a mile away, preSCENT smells
+the wind shift at close range, STRIDe walks at a pace the
+adversary cannot sustain, and Pursuit Predation is the strategy
+that evolution proved works.
+
+The core distinction between the senses: fEAR is event-driven,
+preSCENT is state-driven. fEAR hears the footstep. preSCENT
+smells whether the foot is running or standing still. STRIDe
+knows where OUR foot is, and moves it.
 
 ---
 

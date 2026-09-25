@@ -752,9 +752,19 @@ Additions to the original outline:
     the predator seated at the waterhole, metabolic cost approaching zero while
     the prey's decision cost is maximum. Documented in EMERGENCE_CATALOG §5.4.
 
+14. **preSCENT Named — Third Sensory Modality Complete** — The olfactory sense
+    identified Sep 24 and named Sep 25, 2026. `pre-SCENT · PRESENT · preSCIENT` —
+    four layers in one word. Close-range ambient sensing through concentration
+    gradients. Bidirectional: detects adversary network state AND broadcasts
+    operator presence. detroit.primals.eco is the digital instantiation —
+    broadcasting presence 24/7 while detecting network state through discovery
+    patterns. The sensory triad is now complete: fEAR (ear) + preSCENT (nose)
+    + STRIDe (gait). The persistence hunter has all three senses named.
+    Documented in EMERGENCE_CATALOG §1.6.
+
 ---
 
 *Case validation document. guerillaGorilla Wave 1.*
 *Part of the K-NOME / ecoPrimals / baseCamp Paper 28 series.*
-*Kevin Mok, September 22, 2026*
+*Kevin Mok, September 22, 2026 (updated Sep 25, 2026)*
 *ACTIVE EXPERIMENT — results updating as case progresses*
