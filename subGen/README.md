@@ -169,6 +169,13 @@ here to gen5 success.
     environmental pressure. Maps to Chapter 15 extension or standalone Chapter 17
     for the dissertation.
 
+30. **[STANDARDIZATION_PASS_REVIEW.md](STANDARDIZATION_PASS_REVIEW.md)** —
+    Full standardization pass review (Wave 157). Publish pipeline (6-step automated),
+    `caddy.deploy` (vhost generation + SSH deploy + rollback), SEO triple notification
+    (IndexNow + GSC + Google Indexing API), `verify_consistency` (sitemap vs site.json
+    cross-check). Proven on detroit.primals.eco: 120 URLs, 32 pages, 43 nodes,
+    57 edges, 5/5 security headers. All endpoints 200.
+
 ### Layer 6 — Security Architecture (Realized)
 
 4. **[DEFENSE_IN_DEPTH.md](DEFENSE_IN_DEPTH.md)** — Seven-layer security model
