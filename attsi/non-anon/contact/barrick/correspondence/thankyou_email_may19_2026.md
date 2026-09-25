@@ -1,0 +1,40 @@
+# Thank-You Email — Barrick & Lenski Labs
+
+**From**: mokkevin@msu.edu
+**To**: Jeff Barrick (barricklab contact)
+**Subject**: Thank you — and a few follow-ups
+
+---
+
+Dr. Barrick,
+
+Thank you for having me in to meet the lab yesterday. The conversations were genuinely enlightening — hearing directly from each person gave me a much clearer picture of how the lab operates and how diverse the research is, from LTEE daily operations through symbiont engineering to synthetic biology reliability. I especially appreciated the time with Dr. Lenski. Meeting someone who effectively started the field of experimental evolution, and hearing him reflect on the history of the project — including the value of science and experiments whose significance isn't immediately visible — was something I won't forget.
+
+Regardless of the position outcome, I'd like to support the lab's work wherever I can — in design, analysis, or just helping think through computational approaches. The LTEE is an extraordinary experiment and the questions your group is asking are exactly the kind of problems I want to work on.
+
+**The USB I brought.** I didn't get the chance to walk through it during the visit, but I brought four copies of a self-contained validation artifact I built for LTEE data. It reproduces results from seven published papers (Wiser 2013, Barrick 2009, Good 2017, Blount 2008/2012, Tenaillon 2016, and the BioBrick burden study) in both Python and Rust, with cross-tier parity checks — 73 science checks, all passing. Run `./validate` on any Linux machine; no install, no internet, no dependencies. I'd be happy to leave copies with the lab or walk through it remotely. Source: [github.com/sporeGarden/lithoSpore](https://github.com/sporeGarden/lithoSpore).
+
+**The broader project.** The validation artifact is one product of a larger effort I've been building in Rust — validated pipelines for genomics, population genetics, physics, and ML, all with cross-tier parity. Some of the lab had already looked at the site ([primals.eco](https://primals.eco)). Last year I built the core infrastructure while still employed; this year has been the science layer — eight domains, 12,500+ validation checks against 70+ published papers. That's the context for the claim I made at lunch about consuming more AI-assisted coding tokens than a Microsoft team. I don't actively track token usage — I treat it like an h-score, reviewing the data when it arrives but never optimizing for it directly, because the moment you do you start optimizing for the metric instead of the work. The real point is that AI-assisted development is a genuine force multiplier for a solo researcher, and those same methods transfer directly to accelerating lab analysis.
+
+**An idea the visit sparked.** Talking with Anthony and Kathleen about symbiont delivery — and thinking about it alongside my fermentation background at MSUBI — connected something for me.
+
+Anthony's *Serratia* work with the aphid bacteriocyte is essentially a proto-mitochondrial relationship: bacteria housed in host-derived membrane vesicles, vertically transmitted, heading toward obligate integration. Kathleen's bee gut engineering faces a related challenge from the other direction — oral inoculation is planktonic delivery into a complex community, and colonization efficiency is the bottleneck.
+
+This mirrors a pattern I saw in agriculture at the Bioeconomy Institute. Seed inoculants consistently outperform field spray for establishing microbial colonization. The usual explanation is proximity to the root, but I think the real variable is geometry. Bacteria on a seed coat occupy a bounded 3D micro-niche at high local density — conditions where diffuse signaling stays coherent and gene expression is coordinated from the moment of germination. Autoinducers, but also siderophores, secondary metabolites, contact-dependent signals — the full landscape of secreted signals, two-component systems, and inter-cellular regulatory networks that communities use to coordinate. Field spray deposits bacteria across a 2D surface at low density, where those signals dissipate before they can drive collective behavior.
+
+Agriculture offers more geometries to test this against: no-till soil preserves 3D pore structure and fungal hyphal networks, while conventional tillage disrupts that architecture into a more homogeneous matrix. The Anderson framework predicts these should produce measurably different community signaling profiles, identifiable computationally through the same genes and regulatory elements we use to detect diffuse communication.
+
+The aphid bacteriocyte is nature's version of the same solution — a membrane-enclosed micro-niche that maintains density and signal coherence during transit. If that structure could be stabilized in vitro — synthetic symbiosomes via GUVs or microfluidic encapsulation — it would be a geometry-portable delivery vehicle: bringing the seed-coat advantage to contexts where seed coating isn't possible, like bee gut inoculation or field spray. Each vesicle delivers bacteria that arrive already signaling coherently instead of as scattered individuals. On a microwell plate, thousands of synthetic bacteriocytes with different internal geometries become a massively parallelized evolution experiment — the LTEE miniaturized with geometry as an experimental variable.
+
+This is speculative, but it sits at the intersection of the lab's projects: Anthony's culturable Serratia strains as test organisms, Kathleen's engineered Snodgrassella as the application, Isaac's ADP1 for reporter experiments, and the computational framework to predict which geometries sustain coordinated behavior.
+
+I enjoy thinking about these concepts, but what I find more rewarding is the challenge of actually testing them — running small experiments, gathering data, and using computation to drive everything back to the bench. The ideas are only as good as what they produce in the lab. That's why the RA II role appeals to me specifically: managing daily operations, supporting the people doing the science, and running the kinds of targeted experiments that turn computational predictions into wet lab evidence. I'd rather be the person who keeps the LTEE running and helps the lab move faster than the person who only theorizes about it.
+
+Thank you again for the opportunity. I hope the conversations gave you a sense of what I'd bring — and I meant what I said about wanting to support this work regardless of outcome.
+
+Best,
+
+Kevin Mok
+BS Microbiology, MS Data Science — Michigan State University
+(586) 453-7233
+primals.eco

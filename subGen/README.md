@@ -209,6 +209,26 @@ The gen/ docs are the *map*. subGen is the *GPS position*.
 
 ---
 
+## Legal Domain Expansion — guerillaGorilla
+
+The fEAR, STRIDe, and Pursuit Predation frameworks authored in subGen have
+been instantiated as a new primal: **guerillaGorilla** — legal existence as
+infrastructure. See `../guerillaGorilla/README.md` for the full primal
+definition, domain taxonomy, and live case validation (Paper 28).
+
+| subGen doc | guerillaGorilla connection |
+|---|---|
+| `FEAR_CONCEPT.md` | Sensing layer (adversarial perception) |
+| `STRIDE_CONCEPT.md` | Motion layer (operational process) |
+| `FEAR_INFORMAL_TO_FORMAL.md` | Subsystem 7: Formalization engine |
+| `PURSUIT_PREDATION_CONCEPT.md` | Evolutionary anchor (metabolic asymmetry) |
+
+guerillaGorilla dispatches to **squirrel** (AI compute primal) for legal
+intelligence — statute recall, document drafting, cross-referencing, strategic
+modeling. The operator provides direction, pattern recognition, and execution.
+
+---
+
 ## What's New at 155f data-braided (vs 155n)
 
 Wave 155f reflects **westGate as a sovereign scientific data root**:

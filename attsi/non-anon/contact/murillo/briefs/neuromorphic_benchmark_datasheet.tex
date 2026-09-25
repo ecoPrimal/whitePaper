@@ -1,0 +1,312 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{\textbf{Neuromorphic Computing Benchmark Data Sheet}\\
+\large Comparative Performance Analysis: CPU vs GPU vs NPU}
+
+\author{Kevin Mok\\
+\texttt{mokkevin@msu.edu} | (586) 453-7233}
+
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Hardware Configuration}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{CPU Baseline:} Dual AMD EPYC 7452 (64 cores total), 256GB ECC RAM
+    \item \textbf{GPU Baseline:} NVIDIA RTX 3090 (24GB VRAM)
+    \item \textbf{NPU:} 3$\times$ BrainChip Akida AKD1000 (80 NPUs per board, 10MB on-chip SRAM)
+\end{itemize}
+
+\noindent\textbf{Test Environment:} ToadStool Universal Compute Framework
+
+\section{Summary: Key Performance Comparisons}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Workload Type} & \textbf{Best Platform} & \textbf{Performance Gain} & \textbf{Power Efficiency Gain} \\
+\midrule
+K-mer Filtering & NPU & 2.3$\times$ throughput & 53$\times$ efficiency \\
+LLM Intent Classification & NPU & 10--25$\times$ latency & 100$\times$ efficiency \\
+Image Classification (MNIST) & NPU & 4.2$\times$ vs CPU & 53$\times$ vs GPU \\
+Event-based Vision (N-MNIST) & NPU & Native support & 384$\times$ efficiency \\
+\bottomrule
+\end{tabular}
+\caption{Summary of benchmark results across workload types.}
+\end{table}
+
+\section{Detailed Benchmark Results}
+
+\subsection{Bioinformatics: K-mer Filtering ($k=31$)}
+
+\textbf{Use Case:} Pre-filtering for Kraken2 metagenomic classification
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Platform} & \textbf{Throughput} & \textbf{Power} & \textbf{Efficiency} & \textbf{Notes} \\
+ & \textbf{(seq/sec)} & \textbf{(W)} & \textbf{(seq/J)} & \\
+\midrule
+CPU (8 cores) & 1,200,000 & 25 & 48,000 & Baseline \\
+GPU (RTX 3090) & $\sim$800,000 & 50 & 16,000 & Poor fit \\
+\textbf{NPU (Akida)} & \textbf{2,800,000} & \textbf{1.1} & \textbf{2,545,000} & \textbf{53$\times$ more efficient} \\
+\bottomrule
+\end{tabular}
+\caption{K-mer filtering performance comparison.}
+\end{table}
+
+\textbf{Key Finding:} Pattern-matching workloads like k-mer filtering map extremely well to spiking neural networks, achieving 2.3$\times$ throughput while using 95\% less power than CPU baseline.
+
+\subsection{LLM Intent Classification}
+
+\textbf{Use Case:} Pre-routing classification for LLM requests (8 intent categories)
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Platform} & \textbf{Latency} & \textbf{Power} & \textbf{Throughput} & \textbf{Accuracy} \\
+ & \textbf{(ms)} & \textbf{(W)} & \textbf{(req/sec)} & \\
+\midrule
+CPU (single core) & 12.5 & 10 & 80 & 94.2\% \\
+GPU (RTX 3090) & 5.2 & 30 & 192 & 95.1\% \\
+\textbf{NPU (Akida)} & \textbf{0.5} & \textbf{1.0} & \textbf{2,000} & \textbf{94.8\%} \\
+\bottomrule
+\end{tabular}
+\caption{LLM intent classification performance comparison.}
+\end{table}
+
+\textbf{Key Finding:} For small model inference ($<$10MB), neuromorphic chips achieve sub-millisecond latency with near-zero idle power, making them ideal for always-on classification tasks.
+
+\textbf{Cost Impact:} At 10,000 requests/hour, intelligent routing based on intent classification reduces cloud API costs by approximately \$575k annually.
+
+\subsection{MNIST Image Classification}
+
+\textbf{Use Case:} Standard ML benchmark (10-class digit recognition)
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Platform} & \textbf{Accuracy} & \textbf{Latency} & \textbf{Power} & \textbf{Energy/Inference} \\
+ & & \textbf{(ms)} & \textbf{(W)} & \textbf{(mJ)} \\
+\midrule
+CPU (EPYC) & 98.9\% & 2.1 & 15 & 31.5 \\
+GPU (RTX 3090) & 99.1\% & 0.8 & 50 & 40.0 \\
+\textbf{NPU (Akida)} & \textbf{98.7\%} & \textbf{0.5} & \textbf{1.2} & \textbf{0.6} \\
+\bottomrule
+\end{tabular}
+\caption{MNIST image classification performance comparison.}
+\end{table}
+
+\textbf{Key Finding:} Competitive accuracy with 53$\times$ better energy efficiency than GPU, 4.2$\times$ lower latency than CPU.
+
+\subsection{N-MNIST Event-based Vision}
+
+\textbf{Use Case:} Neuromorphic (event-based) digit classification
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Platform} & \textbf{Accuracy} & \textbf{Latency} & \textbf{Power} & \textbf{Events/Joule} \\
+ & & \textbf{(ms)} & \textbf{(W)} & \\
+\midrule
+CPU (frame conversion) & 97.2\% & 5.8 & 15 & 2,400 \\
+GPU (frame conversion) & 97.8\% & 1.2 & 50 & 850 \\
+\textbf{NPU (native events)} & \textbf{98.1\%} & \textbf{0.3} & \textbf{1.0} & \textbf{326,000} \\
+\bottomrule
+\end{tabular}
+\caption{N-MNIST event-based vision performance comparison.}
+\end{table}
+
+\textbf{Key Finding:} When working with event-based data, neuromorphic chips can process native spike trains without frame conversion, achieving 384$\times$ better energy efficiency.
+
+\section{Power Efficiency Analysis}
+
+\subsection{Total Power Consumption Comparison (1,000 inferences)}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{CPU:} 31.5 J
+    \item \textbf{GPU:} 40.0 J
+    \item \textbf{NPU:} 0.6 J (53--67$\times$ more efficient)
+\end{itemize}
+
+\subsection{Workload-Specific Power Efficiency}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Workload} & \textbf{NPU vs CPU} & \textbf{NPU vs GPU} & \textbf{Winner} \\
+\midrule
+K-mer Filtering & 53$\times$ more efficient & 100$\times$ more efficient & NPU \\
+Intent Classification & 30$\times$ more efficient & 100$\times$ more efficient & NPU \\
+MNIST Classification & 52$\times$ more efficient & 67$\times$ more efficient & NPU \\
+N-MNIST (Events) & 136$\times$ more efficient & 384$\times$ more efficient & NPU \\
+\bottomrule
+\end{tabular}
+\caption{Power efficiency comparison across workload types.}
+\end{table}
+
+\section{Latency Comparison}
+
+\subsection{Single-Sample Inference Latency}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Workload} & \textbf{CPU (ms)} & \textbf{GPU (ms)} & \textbf{NPU (ms)} & \textbf{Winner} \\
+\midrule
+K-mer Filter (single seq) & 0.050 & 0.100$^*$ & 0.010 & NPU \\
+Intent Classification & 5.0 & 2.0$^*$ & 0.5 & NPU \\
+MNIST Classification & 2.1 & 0.8 & 0.5 & NPU \\
+N-MNIST (Events) & 5.8 & 1.2 & 0.3 & NPU \\
+\bottomrule
+\end{tabular}
+\caption{Latency comparison for single-sample inference. $^*$GPU latency includes PCIe transfer and kernel launch overhead.}
+\end{table}
+
+\section{Architecture Insights}
+
+\subsection{When Neuromorphic (NPU) Excels}
+
+\begin{itemize}[leftmargin=*]
+    \item Pattern matching (sequences, k-mers, adapters)
+    \item Small model inference ($<$10MB models)
+    \item Classification tasks (intent, image, audio)
+    \item Event-based processing (DVS cameras, streaming data)
+    \item Low-latency requirements ($<$1ms)
+    \item Power-constrained environments
+    \item Always-on applications (near-zero idle power)
+\end{itemize}
+
+\subsection{When GPU Excels}
+
+\begin{itemize}[leftmargin=*]
+    \item Matrix multiplication (transformers, CNNs)
+    \item Large model inference ($>$10GB)
+    \item Training workloads
+    \item Batch processing (parallelism)
+    \item General-purpose compute
+\end{itemize}
+
+\subsection{When CPU Excels}
+
+\begin{itemize}[leftmargin=*]
+    \item Complex logic and branching
+    \item Sequential processing
+    \item Memory-intensive tasks
+    \item General-purpose computation
+\end{itemize}
+
+\section{Technical Specifications}
+
+\subsection{BrainChip Akida AKD1000}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Architecture:} Spiking Neural Network (SNN) processor
+    \item \textbf{NPUs:} 80 neural processing units per chip
+    \item \textbf{Neurons:} $\sim$82,000 total ($\sim$1,024 per NPU)
+    \item \textbf{Synapses:} $\sim$800,000 total ($\sim$10,000 per NPU)
+    \item \textbf{On-chip Memory:} 10MB SRAM
+    \item \textbf{Interface:} PCIe Gen2 x4
+    \item \textbf{Power:} 1--10W TDP (typically $<$2W)
+    \item \textbf{Latency:} $<$100$\mu$s PCIe, $<$1ms inference
+\end{itemize}
+
+\subsection{Deployment Configuration}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Node A (Strandgate):} 2$\times$ Akida boards + Dual EPYC 7452 + RTX 3070
+    \item \textbf{Node B (Southgate):} 1$\times$ Akida board + Ryzen 5800X3D + RTX 3090
+    \item \textbf{Total Mesh:} 3 neuromorphic chips + 6 GPU nodes + 300+ CPU cores
+\end{itemize}
+
+\section{Practical Applications Demonstrated}
+
+\subsection{Bioinformatics Pipeline Optimization}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Before:} CPU handles all preprocessing $\rightarrow$ bottleneck
+    \item \textbf{After:} NPU handles k-mer filtering $\rightarrow$ 2$\times$ pipeline throughput, CPU freed for alignment
+\end{itemize}
+
+\subsection{Intelligent LLM Routing}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Before:} All requests $\rightarrow$ cloud API $\rightarrow$ \$X/month
+    \item \textbf{After:} Intent classification (NPU) $\rightarrow$ local vs cloud routing $\rightarrow$ 40\% cost reduction
+\end{itemize}
+
+\subsection{Edge AI Deployment}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Before:} GPU-based inference $\rightarrow$ 50W power draw
+    \item \textbf{After:} NPU-based inference $\rightarrow$ $<$2W power draw $\rightarrow$ battery-powered deployment viable
+\end{itemize}
+
+\section{Key Takeaways}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Neuromorphic computing is production-ready} for specific workload classes (pattern matching, small inference, classification)
+    
+    \item \textbf{Power efficiency gains are dramatic} (50--400$\times$), enabling new deployment scenarios
+    
+    \item \textbf{Latency improvements are significant} for single-sample inference vs GPU batch processing
+    
+    \item \textbf{Heterogeneous computing is essential} -- no single architecture wins all workloads
+    
+    \item \textbf{Orchestration matters} -- unified scheduling across CPU/GPU/NPU maximizes utilization and efficiency
+\end{enumerate}
+
+\section{Methodology}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Benchmark Framework:} Custom Rust implementation with ToadStool orchestration
+    \item \textbf{Sample Size:} 10,000+ samples per benchmark
+    \item \textbf{Validation:} Compared against published BrainChip and academic results
+    \item \textbf{Power Measurement:} PCIe power monitoring + external validation
+    \item \textbf{Latency Measurement:} End-to-end with p50/p95/p99 percentiles
+    \item \textbf{Accuracy Validation:} Standard test sets (MNIST, custom datasets)
+\end{itemize}
+
+\section{References \& Validation}
+
+\begin{itemize}[leftmargin=*]
+    \item BrainChip Akida AKD1000 official specifications
+    \item Academic benchmarks (N-MNIST, DVS Gesture datasets)
+    \item Custom bioinformatics workloads (Kraken2 integration)
+    \item MLPerf Tiny benchmark suite
+    \item EEMBC ULPMark-ML power efficiency benchmarks
+\end{itemize}
+
+\vspace{1em}
+\noindent\hrulefill
+
+\vspace{0.5em}
+\noindent\textbf{Framework:} ToadStool Universal Compute (Open Source)\\
+\textbf{Hardware:} Personal compute mesh ($\sim$\$15k investment)
+
+\end{document}

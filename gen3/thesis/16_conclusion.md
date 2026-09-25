@@ -40,6 +40,14 @@ This chapter restates the five contributions with supporting evidence, outlines 
 
 ---
 
+### 16.2.6 Contribution 6: Legal Domain Validation via guerillaGorilla
+
+**Claim**: The constrained evolution methodology generalizes beyond computational systems to adversarial legal proceedings. The guerillaGorilla primal — legal existence as infrastructure — demonstrates that K-NOME produces case architectures with properties absent from both typical pro se filings (unstructured, procedurally deficient) and typical attorney filings (formulaic, discovery-dependent, cost-optimized for billable hours). The provenance trio (rhizoCrypt / loamSpine / sweetGrass) independently emerged in the legal domain as the fourth instantiation, without reference to Papers 20–22.
+
+**Evidence**: Paper 28, `guerillaGorilla/CASE_VALIDATION.md` Weeks 1–4. Live validation: 2 civil suits, 5 PPOs, 20+ agency complaints, 7-channel service protocol, graph intelligence system. Cost ratio: 60–100× vs professional baseline ($2,500 vs $150K–250K). Judicial validation: Koenig found reasonable cause on domestic PPO (independent confirmation of threat assessment). All 7 legal subsystems activated and producing measurable outputs at increasing scale across 25 days.
+
+---
+
 ## 16.3 Future Work
 
 ### 16.3.1 LTEE Sequencing
