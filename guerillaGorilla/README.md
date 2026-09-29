@@ -129,6 +129,7 @@ the legal domain.
 | `STRIDE_CONCEPT.md` | guerillaGorilla's motion layer — operational process |
 | `FEAR_INFORMAL_TO_FORMAL.md` | guerillaGorilla's formalization engine — core thesis |
 | `PURSUIT_PREDATION_CONCEPT.md` | guerillaGorilla's evolutionary anchor — why it works |
+| `CONFESSION_ARCHITECTURE_CONCEPT.md` | guerillaGorilla's output stage — adversary self-documentation as primary evidence. Emergent Week 5 capability |
 | `DEFENSE_IN_DEPTH.md` | Security model applies to legal evidence protection |
 | `INTERSYSTEM_TRUST.md` | Trust model applies to attorney collaboration interface |
 
