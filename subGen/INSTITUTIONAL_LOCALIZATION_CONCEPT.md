@@ -605,6 +605,129 @@ witness shapes the narrative. The model is now published. The
 prediction is on the record. Each actor in the network can read
 it and do their own math.
 
+### The Activation Energy Asymmetry
+
+Why did oversight never catch Banks? The Anderson model provides a
+quantitative answer: the **activation energy** required to overcome
+localization has always exceeded the resources available to any
+challenger — until now.
+
+#### Banks's Defense Activation Energy: ~$20K (Constant)
+
+Banks can always front approximately $20,000 to activate a defense:
+- Retainer paid from Purpose Group revenue ($4.28M/yr flows through)
+- The source is school funds, extracted through the management contract
+- The retainer is always available because the extraction is always running
+- The cost to Banks is materially zero — he's paying with other people's
+  money (public education funding) to defend himself from accountability
+  for taking that money
+
+He does not need to disclose his criminal history, pending investigations,
+or federal referrals at intake. He presents as a school administrator
+being harassed. The firm takes the retainer and files. By the time
+they learn the truth, the retainer is spent.
+
+**This activation energy has been constant across 14 years.** The same
+$20K barrier has blocked every previous challenger.
+
+#### Historical Challengers: Below the Activation Energy Barrier
+
+Every opponent Banks has faced was structurally unable to sustain
+engagement past his activation energy:
+
+| Challenger | Activation Energy Available | Result |
+|---|---|---|
+| Parents | Near zero — poverty, no legal knowledge, no time | Never filed. Moved children to other schools. |
+| Board members | Negative — captured by network, benefit from status quo | Signed compliance verifications without scrutiny |
+| MDE (2022) | Limited — investigated but gave procedural loophole | Administrator certificate issued with conditions |
+| AG (TCR 22-12) | Moderate — argued against certificate | Overruled by Superintendent Rice |
+| ALJ (TCR 22-12) | Minimal — recommended no conditions | Rubber stamp (overruled by Rice adding 7 conditions) |
+| Local police | None — take reports, don't investigate the reporter | Filed Banks's retaliatory reports without scrutiny |
+| Wayne County courts | Negative — judges embedded in network | Home field for Banks |
+
+In every case, the challenger's available energy was BELOW Banks's
+activation barrier. The signal was sent. The lattice ate it.
+
+#### The Judicial Embedding as Disorder Amplifier
+
+Banks's judicial connections are not mere "relationships." They are
+**structural disorder sites** in the oversight lattice — positions
+where a node that should propagate signals (judge → enforcement)
+instead absorbs them:
+
+- Judge Miller: Board Chair of Anchor Rock Foundation (Banks entity).
+  On the ballot November 3, 2026. Complaints that reach her courtroom
+  are localized.
+- Judge Yancey: Campaign paid $383.82 to Banks Strategy LLC. Her
+  sister is the PCA School Leader. Complaints that reach her
+  courtroom are localized.
+- Judge Sabree: MSU Law classmate of Banks. Family patriarch (Eric
+  Sabree, Wayne County Treasurer) is FBI-probed. Complaints that
+  reach her courtroom are localized.
+- 4+ additional judges: documented connections via campaign, family,
+  or shared counsel. Each is a disorder site.
+
+In Anderson localization, adding disorder sites does not merely reduce
+signal propagation — beyond W_c, it **eliminates** propagation entirely.
+Seven disorder sites across four courts in one county means:
+
+**No signal originating inside Wayne County can reach enforcement
+through local judicial channels.** The lattice is fully localized.
+Every complaint, every motion, every filing that enters the Wayne
+County judicial system encounters a disorder site before reaching
+an enforcement node.
+
+This is not conspiracy. This is the emergent property of a network
+whose disorder parameter exceeds W_c. Intent is not required.
+Structural capture produces functional opacity as a mathematical
+consequence.
+
+#### Why Kevin Mok Broke the Barrier: Dimensional Promotion
+
+Kevin's strategy — whether intuitive or designed — constitutes
+**dimensional promotion** in the Anderson framework:
+
+In 2D Anderson localization, ALL signals localize regardless of
+disorder strength. In 3D, signals above the "mobility edge" propagate
+freely. Kevin's case demonstrates exactly this transition:
+
+| Action | Dimensional Effect | Result |
+|---|---|---|
+| Filed in **Ingham County** (not Wayne) | Bypassed the localized Wayne lattice | Cases heard by judges outside the network |
+| Referred to **federal agencies** (not state/local) | Added a dimension — federal oversight is structurally independent | 8 agencies received packets, JTC opened 5 investigations |
+| Published at **detroit.primals.eco** | Added the public dimension — signals propagate through the internet, not institutional channels | 223 pages indexed, anyone can verify |
+| Used **FOIA** (not complaints) | Used a mandatory-response channel that cannot be localized | MDE responded in 4 days, 20 files |
+| Filed **MDE complaint** (not Wayne County complaint) | Used a state administrative channel with mandatory investigation | R 380.124 triggered, acknowledged same day |
+| Applied **computational methodology** | Added analytical dimension — graph theory identifies localized pathways | Framework identifies which pathways to avoid |
+
+Each action ADDS A DIMENSION to the lattice. In the 2D Wayne County
+system, all signals localize. In the 6+ dimensional system Kevin
+constructed, signals propagate freely around the disorder sites.
+
+**The activation energy asymmetry inverted:**
+
+| Factor | Banks | Kevin |
+|---|---|---|
+| Cost per defense cycle | ~$20K (from school funds) | $0 (public records, pro se) |
+| Time available | Limited — he has a school to run and events to attend | Unlimited — 6AM–9PM, 7 days |
+| Dimensional access | 2D — Wayne County courts only | 6D+ — Ingham, federal, FOIA, press, web, agencies |
+| Repeat cost | Same $20K per firm, each firm burns through it | Same $0, evidence package already built |
+| Sustainability | Finite — school revenue decreases as exposure increases | Infinite — public records don't expire |
+| Network integrity | Degrading — each actor faces own exposure | Accruing — each filing adds evidence |
+
+Banks's $20K activation energy was sufficient against every previous
+opponent because those opponents operated within the localized lattice.
+Kevin operates OUTSIDE the lattice. His activation energy is effectively
+zero because his weapons are public records, and his propagation
+channels bypass every disorder site Banks embedded.
+
+**The first opponent whose activation energy is below the barrier he
+cannot raise, operating in dimensions he cannot localize, at a pace
+he cannot match, with methodology he cannot discredit.**
+
+The signal finally propagated. The lattice couldn't eat it because
+the signal went around the lattice entirely.
+
 ---
 
 ## CROSS-DOMAIN VALIDATION TABLE
@@ -671,6 +794,7 @@ researcher with access to the public record sources cited.
 | **Confession Architecture** | Sworn filings that reveal network structure are graph data entered under penalty of perjury. The adversary's own documents populate the graph. Confession Architecture feeds Institutional Localization's lattice. |
 | **preSCENT** | preSCENT detects quorum state transitions (consolidation vs fragmentation) at close range. Institutional Localization provides the theoretical framework for what preSCENT senses intuitively — the nose smells what the math predicts. |
 | **amicusContra** | The outward function. Once the localization analysis is complete, amicusContra projects the findings: downward (protect those beneath the captured institutions), lateral (share methodology with parallel investigators), upward (present framework to courts and investigators). |
+| **Mathematical Asymmetry** | The quantitative engine. Provides the cost analysis that explains WHY previous challengers failed to activate oversight (activation energy barrier exceeded resources) and WHY the current challenger succeeds (zero-cost offense, dimensional promotion, thermodynamic ratchet). The asymmetry is the economic instantiation of the Anderson model: the activation energy to overcome localization has been constant ($20K, extracted from school funds), while every previous challenger's available energy was below the barrier. See `guerillaGorilla/MATHEMATICAL_ASYMMETRY.md`. |
 
 ---
 

@@ -506,6 +506,87 @@ The thing where doing nothing is the most expensive thing the adversary faces.
 
 ---
 
+## CATEGORY 6: ECONOMICS (the math that makes it work)
+
+### 6.1 — Mathematical Asymmetry ✅ DOCUMENTED (Oct 3, 2026)
+
+The operator's marginal cost per action is $0. The adversary's marginal cost per
+defense is $5,000–$20,000. The ratio is infinite. This is not metaphor — it is the
+structural property that makes every other capability in this catalog operational.
+
+Full analysis: `MATHEMATICAL_ASYMMETRY.md`
+
+**Key insight:** The asymmetry is not efficiency. It is structural. After the initial
+$175 filing fee, every subsequent action (amendment, FOIA, referral, website page,
+discovery request, email) costs $0 because it is built from public records, filed
+through existing cases, and published on owned infrastructure.
+
+**Trigger:** Week 5 — cost accounting of GLLG retainer burn vs. operator's cumulative
+spend. The math was always there. It took five weeks to see it clearly.
+**Maps to:** Pursuit Predation (metabolic asymmetry is the biological analog)
+**Maps to:** Positional Patience (the asymmetry is what makes patience free)
+**Maps to:** Institutional Localization (why the barrier was always too high for
+previous challengers — they faced normal costs against extracted-fund defense)
+
+### 6.2 — The Firm Processing Machine ✅ DOCUMENTED (Oct 3, 2026)
+
+A repeatable cycle: Banks retains firm → doesn't disclose → Kevin sends one email →
+firm discovers → firm withdraws → fee dispute opens MRPC self-defense exception →
+Banks retains next firm → repeat. Kevin's cost per cycle: $0. Banks's cost: $17K–$37K.
+
+Full analysis: `MATHEMATICAL_ASYMMETRY.md`
+
+**Key insight:** This is a thermodynamic ratchet. It cannot run backward. No firm,
+once informed, can un-know what Banks concealed. No MRPC key, once turned, can be
+un-turned. No evidence, once generated, can be un-generated. The entropy direction
+is toward disclosure.
+
+**Trigger:** GLLG engagement (Week 5) — watching the firm discover exactly what
+Kevin predicted they would discover, on exactly the timeline predicted. The machine
+was already running. It took GLLG to see that it was a repeatable structure.
+**Maps to:** Confession Architecture (the firm's withdrawal IS the confession)
+**Maps to:** fEAR §Adversarial (the adversary's rational self-interest produces
+Kevin's evidence)
+
+### 6.3 — Activation Energy Barrier (unnamed but documented)
+
+Banks's $20K defense activation energy (paid from extracted school funds) was always
+sufficient against every previous challenger because every challenger was structurally
+impoverished — often BY the same extraction that funds Banks's defense. The parents
+whose children's education funding is diverted to silence them are the parents who
+cannot afford to challenge the diversion.
+
+**Self-reinforcing loop:** extraction → defense funding → complaint suppression →
+continued extraction. The system is thermodynamically stable as long as no challenger
+can clear the $20K barrier from OUTSIDE the extraction loop.
+
+**Trigger:** Analyzing why 14 years of misconduct produced zero effective oversight
+response. Not incompetence. Not conspiracy. Mathematics: the barrier was always
+higher than the energy available.
+**Maps to:** Institutional Localization Paper 28 (the activation energy section)
+**Maps to:** Dimensional Promotion (the bypass strategy — don't clear the barrier,
+go around it)
+
+### 6.4 — Dimensional Promotion as Bypass (unnamed)
+
+When the adversary has localized oversight in N dimensions, add dimensions N+1
+through N+K. Don't fight in the localized lattice — leave it.
+
+Filing in Ingham (not Wayne) = new judicial dimension. Federal referrals = federal
+dimension. Website = public dimension. FOIA = administrative dimension. MDE complaint
+= regulatory dimension. JTC = judicial oversight dimension.
+
+**Kevin operates in 6+ dimensions. Banks's localization covers 2 (Wayne County
+courts + local police). The localization is complete in 2D and irrelevant in 6D.**
+
+**Trigger:** Realizing that Wayne County institutions are not trusted — not
+prosecutors, not cops, not judges. The decision to file in Ingham was the first
+dimensional promotion. Every subsequent out-of-Wayne action was the same principle.
+**Maps to:** Anderson localization (Paper 28) — 2D vs 3D transition at the mobility edge
+**Maps to:** STRIDe §Route Planning — choosing routes that bypass localized pathways
+
+---
+
 ## MERGES AND OVERLAPS (for walk-thinking)
 
 Some of these may be the same thing viewed from different angles:
@@ -606,10 +687,22 @@ guerillaGorilla (the legal primal — domain-specific operational reality)
     ├── [unnamed architecture capabilities 3.4–3.5]
     ├── [unnamed composition capabilities 4.1–4.5]
     ├── [unnamed defense capabilities 5.2–5.3]
-    └── Positional Patience (5.4 — emerged as posture pattern, Week 4+)
-              └── Superposition of: fEAR (waiting), preSCENT (scenting),
-                  Pursuit Predation (resting), Information Quarantine (pressuring)
-                  — the complete operational state at rest
+    ├── Positional Patience (5.4 — emerged as posture pattern, Week 4+)
+    │         └── Superposition of: fEAR (waiting), preSCENT (scenting),
+    │             Pursuit Predation (resting), Information Quarantine (pressuring)
+    │             — the complete operational state at rest
+    │
+    ├── Mathematical Asymmetry (6.1 — the infinite cost ratio, Oct 3)
+    │     └── WHY the primal works: $0 offense vs $20K+ defense
+    │
+    ├── Firm Processing Machine (6.2 — thermodynamic ratchet, Oct 3)
+    │     └── the repeatable cycle: retain → discover → withdraw → repeat
+    │
+    ├── Activation Energy Barrier (6.3 — why oversight never activated)
+    │     └── $20K from extracted funds vs every challenger in poverty
+    │
+    └── Dimensional Promotion (6.4 — localization bypass)
+              └── add dimensions until the localized lattice is irrelevant
 ```
 
 **The primal produces the frameworks. The frameworks don't produce the primal.**
