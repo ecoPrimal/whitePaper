@@ -203,6 +203,17 @@ here to gen5 success.
    skunkBat's 8-category detection: behavioral anomaly, intrusion, DoS, unknown
    lineage, topology violation, config drift, process spawn, HTTP anomaly.
 
+31. **[THYMIC_NEGATIVE_SELECTION_FLEET_IMMUNE.md](THYMIC_NEGATIVE_SELECTION_FLEET_IMMUNE.md)** —
+    Three-wave fleet engagement: innate → adaptive → autoimmune → self-tolerant.
+    Tit-for-tat escalation, V(D)J content gate, negative selection, signal theory.
+    Residential proxy fleet neutralized via conserved-epitope behavioral targeting.
+
+32. **[GOSSIP_TAGGED_OPSONIZATION.md](GOSSIP_TAGGED_OPSONIZATION.md)** —
+    Behavioral fingerprinting, gossip-propagated identity, adaptive poison delivery.
+    Complement cascade architecture: detect → tag → propagate → poison. Behavioral
+    hash tracks fleet across ~1,000 rotating IPs. Adaptive scatter at 42% effective
+    ratio. Three hash clusters identified. Zero IPs stored.
+
 8. **[MEMBRANE_SECURITY_MODEL.md](MEMBRANE_SECURITY_MODEL.md)** — K-Derm cell
    envelope: inner membrane (LAN mesh) → periplasmic space (VPS) → outer
    membrane (public surface). Bond degradation at boundaries.
