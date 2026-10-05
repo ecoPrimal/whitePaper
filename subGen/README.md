@@ -31,7 +31,16 @@ here to gen5 success.
    bearDog crypto.sign → Provenance 7/7 → tideGlass → NF pseudoSpore → JOSS/CTF.
    8 steps. Timeline estimates. What can start today.
 
-### Layer 1.5 — Data Estate
+### Layer 1.5 — Data Estate & Pattern Reuse
+
+31. **[POINTER_LAYER_ORTHOGONAL_REUSE.md](POINTER_LAYER_ORTHOGONAL_REUSE.md)** —
+    Pointer-layer pattern proven through Forgejo DAG evolution on golgiBody
+    (1.8GB → 562MB). Documents how the provenance trio (rhizoCrypt/loamSpine/
+    sweetGrass) is structurally isomorphic to git's commit graph/branch refs/
+    hash chain — convergent evolution across orthogonal domains. Connects to
+    constrained evolution thesis (gen3 Ch.15), data federation, latency folding,
+    compute memoization, P2P crypto federation, and silicon deism. The pattern
+    for how data moves IS ITSELF a provenance-tracked pattern.
 
 13. **[DATA_FEDERATION_STATUS.md](DATA_FEDERATION_STATUS.md)** — westGate as
     scientific data root. **519 GB across 130 datasets**, 535+ files, 100%
@@ -263,7 +272,7 @@ Previous milestones:
 
 ---
 
-*subGen Wave 156a — 20 documents. gen5 THESIS PROVEN ON LIVE DATA.
+*subGen Wave 161+ — 21 documents. gen5 THESIS PROVEN ON LIVE DATA.
 5 NUCLEUS gates. 7 glacial goals COMPLETE. 529+ GB CAS pool across 130+
 datasets at 100% provenance. All 7 tideGlass modules data-ready. 46/46
 AlphaFold proteomes. SRA FASTQ complete. Convoy braiding at 217/s on NVMe
