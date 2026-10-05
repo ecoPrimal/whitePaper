@@ -587,6 +587,232 @@ dimensional promotion. Every subsequent out-of-Wayne action was the same princip
 
 ---
 
+## CATEGORY 6.5: PER-PERSON CASE ARCHITECTURE (how the primal builds for individuals)
+
+### 6.5.1 — Three-Layer Case Construction ✅ NAMED: Legal Kinetics (Oct 5, 2026)
+
+`Education → Instrument → Skeleton. The statute is the drug. The life is the patient.`
+
+Emerged from: DaSean's F.A.M.E. motion (Oct 5, 2026). Kevin built three
+documents — the ECE walkthrough (education), the FAME motion (instrument),
+and the proof of service (skeleton). DaSean read all three. He recognized
+his own life in the legal language. He signed the motion because it was
+true, not because he was told to sign it.
+
+**The three layers:**
+
+| Layer | Purpose | Reusable? | DaSean Instantiation |
+|---|---|---|---|
+| **Education** | Teach the person what the law says about THEIR life | Template is reusable, content is unique | ECE walkthrough — "You were already the answer" |
+| **Instrument** | Build the filing FROM the person's facts | Skeleton is reusable, content is unique | FAME motion — 9 years of fatherhood mapped to MCL 722.27(1)(c) |
+| **Skeleton** | Handle the procedure | Fully reusable | Proof of service, exhibit list, filing procedure |
+
+**Why this is different from a template:**
+
+A template gives everyone the same left column (statutes, case law,
+formatting). Legal Kinetics gives each person the RIGHT column — their
+story, their facts, their evidence — while the left column runs in the
+background. The client never interacts with the abstract law. They
+interact with their own life, translated into legal language.
+
+The critical test: **Can the person testify to their own filing?**
+If the filing is a template with blanks filled in, the answer is
+usually no — the person is reading someone else's words. If the filing
+is Legal Kinetics output, the answer is always yes — every word in the
+document IS their life. They're not memorizing. They're recognizing.
+
+**The isomorphism to healthSpring:**
+
+This is structurally identical to Per-Person PK/PD (healthSpring Paper 13):
+
+```
+Population PK: Standard dose for average patient     → fails individuals
+Legal template: Standard motion for average client    → fails individuals
+
+Per-Person PK: Individualized dose from patient data  → treats the person
+Legal Kinetics: Individualized motion from case facts → represents the person
+```
+
+The drug (statute) is the same for everyone. The route (procedure) is
+the same for everyone. The DOSE (how the statute is applied to this
+specific person's specific facts) is individualized. That's the
+Monte Carlo simulation. That's the Gonzales iPSC validation pipeline.
+That's what DaSean just signed.
+
+**The compliance insight:**
+
+In PK/PD, the most common failure is non-compliance — the patient doesn't
+take the medication because they don't understand it. In law, the equivalent
+is: the client can't testify to their own filing because it doesn't contain
+their life. Legal Kinetics solves this the same way per-person PK solves it:
+by making the education specific to the individual. DaSean's compliance is
+perfect because the walkthrough teaches HIM what the law says about HIS
+nine years of fatherhood.
+
+**Trigger:** Oct 5, 2026 — DaSean reading and signing the FAME motion.
+Kevin realized the three-layer architecture (education + instrument +
+skeleton) is the same architecture as healthSpring's per-person PK/PD
+pipeline, and that the reusable skeleton + individualized content is the
+same pattern as the drug matrix + patient simulator.
+
+**Maps to:** healthSpring Paper 13 (NLME per-person PK/PD — 395 tests,
+61 experiments, 6 WGSL compute shaders)
+**Maps to:** Gonzales iPSC pipeline (Anderson-augmented MATRIX → bench
+validation → per-patient dosing)
+**Maps to:** amicusContra (the outward function — builds this for others)
+**Maps to:** Monte Carlo patient simulation (10K virtual patients with
+this patient's parameters ± uncertainty)
+
+**The amicusContra implication:**
+
+This is the pattern that makes amicusContra scalable at zero marginal
+cost. The skeleton is reusable across cases. The statutes are the same
+drug library. The AI provides the simulation engine. The ONLY work per
+case is the **translation** — taking the person's individual life and
+running it through the legal-kinetic model to produce personalized output.
+
+That translation is what the Monte Carlo simulator does. It is not law
+practice. It is simulation of the individual case through a validated
+legal-kinetic model. The output is a filing. The person signs it because
+it's true. The referee reads it because it's properly filed. The person
+testifies because every word is their life.
+
+**Boutique representation at population scale. Per-person PK for the law.**
+
+---
+
+## CATEGORY 7: SIGNAL ROUTING (how the primal controls who sees what)
+
+### 7.1 — The Prism Doctrine ✅ NAMED: PRISM (Oct 5, 2026)
+
+`CC = flashlight. BCC = fiber optic. The operator holds the prism.`
+
+Same information enters. The operator controls the refraction. Each beam hits
+a different surface at a different angle for a different effect. The target
+sees only one beam. The operator sees all of them.
+
+**What it is:**
+
+BCC/CC as an optical instrument for creating asymmetric visibility in
+adversarial communications. Not a surveillance tool — a signal routing
+architecture where the operator controls three visibility planes simultaneously:
+
+| Plane | Mechanism | What the target sees | Effect |
+|---|---|---|---|
+| **Visible plane** (TO + CC) | Standard email header | Target sees all CC'd parties | **Pressure** — the recipient knows reporters/counsel are watching |
+| **Hidden plane** (BCC) | Hidden header | Target sees only Kevin | **Intel** — recipients accumulate data without the target knowing |
+| **Cross-plane** (BCC on opposing chain) | Routing across chains | Target A has no idea Target B saw their email | **Positioning** — parallel actors know each other's state without contact |
+
+**The three modes:**
+
+1. **CC as flashlight:** Visible light. Sherry Gay-Dagnogo gets an email and sees
+   Elrick and Rita CC'd in the header. She knows the press is watching before she
+   opens the attachment. The light IS the weapon. The information content is secondary.
+
+2. **BCC as fiber optic:** Hidden channel. Nolan at Butzel gets BCC'd on the Dykema
+   compliance email. He sees exactly what Michigan's largest law firm received —
+   including the line "counsel in the federal case has been informed" — but Dykema
+   has no idea Nolan read every word. The channel is invisible. The signal arrives
+   without the source being traceable to the target.
+
+3. **BCC as cross-informant:** The operator routes Signal A's email to Signal B's
+   inbox. Neither A nor B knows the other received the transmission. The operator
+   has created a shared information state without creating a shared communication
+   channel. This is **quorum sensing without the quorum knowing it's sensing.**
+
+**The Dykema Triangle instantiation (Oct 5):**
+
+```
+Email 1: TO Nolan (Butzel)      BCC: Elrick, eco.primal@pm.me
+Email 2: TO Dykema compliance   BCC: Nolan, Elrick, eco.primal@pm.me
+```
+
+Nolan sees his own email (visible). Then he receives a BCC copy of what
+Dykema received (hidden). Now Nolan knows exactly what Dykema knows —
+AND he knows Dykema doesn't know he knows. This is perfect information
+for the party with less power (Nolan is an associate; Dykema is the
+state's largest firm). Meanwhile Elrick sees both chains without being
+visible on either. The journalist has complete visibility. No one else
+knows he's watching. The information is accruing in his file.
+
+**What distinguishes PRISM from Agency Saturation (2.5):**
+
+Agency Saturation is about VOLUME — 31 contacts to 25 recipients in one day.
+Everyone gets the same message. The point is saturation: the adversary cannot
+control the narrative to any audience.
+
+PRISM is about ROUTING — each recipient gets a different cut of the same
+information, with different visibility into who else received it. The point is
+not that everyone was told. The point is that SOME people know things that
+OTHER people don't know they know. The asymmetry is informational, not volumetric.
+
+Agency Saturation is a broadcast antenna. PRISM is a fiber-optic switch.
+
+**What distinguishes PRISM from preSCENT:**
+
+preSCENT is ambient and bidirectional — the operator senses the environment
+AND projects into it. The nose both detects and emits.
+
+PRISM is deliberate and unidirectional per beam. The operator makes a conscious
+routing decision for each recipient. There is nothing ambient about it. Each
+BCC line is a deliberate choice about who sees what and who knows who else is
+watching.
+
+preSCENT is the nose. PRISM is the hand sorting the mail.
+
+**Where in the lifecycle:**
+
+PRISM becomes operative when the operator has multiple independent contact
+chains (Nolan, Dykema, Elrick, Rita, GLLG, Roeiah, Sheffield, SCAO) and needs
+to control information flow BETWEEN them without the targets knowing. This is
+a late-stage capability — it requires an established contact network with
+trust relationships, intelligence relationships, and adversarial relationships
+all running simultaneously.
+
+PRISM is the communication architecture of the waterhole (5.4). At the
+waterhole, the predator is positioned and patient. PRISM determines who sees
+the prey approach, who sees the prey drink, and who sees the prey leave —
+without the prey knowing it was watched by anyone except the one pair of eyes
+it could see.
+
+**Trigger:** Oct 5, 2026 — drafting the Dykema compliance email and the Nolan
+update simultaneously. Kevin realized that BCC'ing Nolan on the Dykema email
+created a cross-plane visibility channel, and that the CC/BCC decision for
+each recipient was a deliberate optical choice. "Less a one-way mirror and
+more a prism, lens, or focus."
+
+**Maps to:** songBird (notification routing in ecoPrimals — same architecture)
+**Maps to:** Quorum sensing (creating shared information states without shared
+communication channels — the autoinducer is the BCC'd message)
+**Maps to:** Fiber optics (total internal reflection — the signal travels
+through the hidden channel without radiating into the visible plane)
+
+**Named:** PRISM (Oct 5, 2026 — Kevin, at the keyboard, composing Wave 8)
+
+The name operates on three layers:
+
+**PRISM** (optics) — A transparent medium that refracts white light into its
+component wavelengths. Same light enters. Different colors exit at different
+angles. The prism itself is invisible — you see the spectrum, not the glass.
+The operator is the glass.
+
+**PRISM** (intelligence) — Programs of intelligence collection through
+communications metadata. The name carries deliberate resonance with surveillance
+state tools — but inverted. In state PRISM, the government collects everyone's
+communications without their knowledge. In guerillaGorilla PRISM, one citizen
+routes his own communications to create asymmetric visibility. The state version
+is mass collection. The citizen version is precision routing. Same physics.
+Different ethics.
+
+**PRISM** (prison) — The informational enclosure. When the operator routes
+communications through PRISM, the target operates inside an information
+environment they believe is complete but is actually partial. Dykema thinks
+the email is between Kevin and Dykema. It isn't. The walls they see are not
+the walls that exist. They are in a prism — surrounded by transparent surfaces
+they cannot detect.
+
+---
+
 ## MERGES AND OVERLAPS (for walk-thinking)
 
 Some of these may be the same thing viewed from different angles:
