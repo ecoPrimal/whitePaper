@@ -793,10 +793,65 @@ better). Both are needed.
 
 ---
 
-*subGen Wave 165e — Forge locked down to existence-only storefront. 2,073 pages
-leaked before lockdown (defense gap: ion channel too permissive). Post-lockdown:
-0 real pages served. Full immune system audit: 80% built, 0% wired for cross-gate.
-gossip.inject silently failing. Parasitic systems observation: all non-human
-automated access operates as inherently parasitic — the reason doesn't matter,
-they extract value from work they didn't do. The defense follows the biology:
-don't enumerate pathogens, define self. The settling pond hardens.*
+## The Boundary Violation — Personal Record
+
+### What They Actually Got
+
+Functionally, almost nothing that wasn't already public in some form.
+The thesis content lives on sporePrint. The outreach targets could be
+inferred. The technical architecture is AGPL-licensed and documented.
+The location is in the git commit history. Scatter caught 842 of 845
+whitePaper content requests. The 3 real responses were empty UI shells.
+
+**Zero documents. Zero PII content. Zero investigation methodology.**
+
+### What They Violated
+
+The content exposure is not the injury. The boundary violation is.
+
+whitePaper was private workspace. It contained personal documents —
+resumes, transcripts, contact lists, property profiles, interview
+preparation for a specific position at a specific institution. The
+fleet did not know and did not care what was inside. They crawled
+10,268 requests with zero static assets — pure document exfiltration
+behavior — and 516 unique file paths from whitePaper were exposed as
+URL metadata in the access logs.
+
+The content was scatter poison. The filenames were real. The filenames
+are metadata. Metadata is data. The fleet now has a structural map of
+a private workspace including document names that reveal personal
+identity, career pursuits, geographic location, contacts, and
+adversarial awareness.
+
+This is a boundary violation. The ecosystem's absolute rule, documented
+across sporePrint and the amicusContra framework, is:
+
+> **Take and get nothing. Give and get back.**
+
+The fleet took. They got almost nothing of substance. But they crossed
+a line that was clearly marked — `robots.txt` said "humans only," the
+billboard was published while they were still scraping, and they
+continued for hours. The forge was locked. whitePaper was made private.
+The gap is closed. The violation is recorded.
+
+### Remediation Path
+
+The operator of the residential proxy fleet — whoever they are — has
+personally antagonized the owner of this infrastructure. If they desire
+future positive interactions with this ecosystem, they might want to
+consider reaching out to apologize and remediate.
+
+The contact page exists. The science is open. The license is permissive.
+Legitimate collaboration has always been available. The fleet chose
+extraction over engagement. That choice has consequences — not
+retaliatory, but relational. Trust, once violated, requires the
+violator to rebuild it. The door is not closed. But it will not be
+opened from this side.
+
+---
+
+*subGen Wave 165e — Forge locked down to existence-only storefront.
+whitePaper made private (3:07 PM ET). 516 filepaths exposed as URL
+metadata before lockdown — content was scatter poison, names were real.
+Boundary violation documented. Remediation path: reach out, apologize,
+engage legitimately. The settling pond remembers.*
