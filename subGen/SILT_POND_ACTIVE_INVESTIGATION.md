@@ -279,6 +279,12 @@ their own interest:
 - **Linux/Chrome 113**: checked contact page, then searched for key findings
   → the decision-maker, considering engagement, wanting a summary
 
+| Eastern | Who | What | Signal |
+|---------|-----|------|--------|
+| 7:37:36 AM | Developer (Win) | `/identity.js` (404) → `/keywords` (404) | Wants API/structured access |
+| 7:37:37 AM | Data person (Mac) | `/identity.json` (200!) → `/atom.xml` → `/credential-audit` | Found machine-readable feeds |
+| 7:38:04 AM | Decision-maker (Linux) | `/contact/` → `/key-analysis` (404) | Considering engagement |
+
 **Investigation action**:
 1. **Immediate**: Add Caddy redirect `/network/political/misha-stallworth-west/`
    → `/network/political/stallworth-west-misha/` (fix the naming trap)
@@ -301,43 +307,45 @@ proxied by UA hash within 5-minute windows.
 
 ### Pre-dawn: The Midnight Reader (Attention)
 
-| UTC | Eastern | Pacific | UK | Actor | Page |
-|-----|---------|---------|-----|-------|------|
-| 04:42 | 12:42 AM | 9:42 PM | 5:42 AM | Mac human | `/analysis/cbc-events/` |
-| 05:02 | 1:02 AM | 10:02 PM | 6:02 AM | Windows human | `/analysis/funding-flow/` |
-| 05:09 | 1:09 AM | 10:09 PM | 6:09 AM | Windows human (same UA) | `/analysis/banks-holland-partnership/` |
-| 06:10 | 2:10 AM | 11:10 PM | 7:10 AM | Mac human | `/analysis/institutional-capture-graph/` |
+*All times Eastern (UTC−4). Raw logs record UTC.*
+
+| Eastern | Actor | Page |
+|---------|-------|------|
+| 12:42 AM | Mac human | `/analysis/cbc-events/` |
+| 1:02 AM | Windows human | `/analysis/funding-flow/` |
+| 1:09 AM | Windows human (same UA) | `/analysis/banks-holland-partnership/` |
+| 2:10 AM | Mac human | `/analysis/institutional-capture-graph/` |
 
 Two separate humans reading deep analysis pages in the small hours. The
 Windows reader followed the money: funding-flow → banks-holland-partnership
 in 7 minutes. The Mac reader read CBC events, then returned an hour later
 for the institutional capture graph. These are sustained analytical reads.
 
-**Timezone analysis**: The 05:02-06:10 window is either very late US or
-early-morning UK/Europe. If US Pacific (10 PM - 11 PM), it's plausible
-evening research. If UK (6-7 AM), it's someone starting their workday
-with detroit evidence. We cannot distinguish without IPs (by design).
+**Timezone note**: 1:02 AM Eastern = 10:02 PM Pacific = 6:02 AM UK.
+If US Pacific, it's plausible evening research. If UK, it's someone
+starting their workday with detroit evidence. We cannot distinguish
+without IPs (by design).
 
 ### Morning: The AI Channel (Attention + Propagation)
 
-| UTC | Actor | Page | Signal |
-|-----|-------|------|--------|
-| 08:07 | Mac human | `/network/political/misha-stallworth-west/` (404) | Political hierarchy naming trap |
-| 10:01 | Reflectionbot (AI retrieval) | `/robots.txt` then `/analysis/funding-flow/` | Someone asked an AI about the money |
-| 10:06 | Amazonbot | `/analysis/` | AI mapping analysis section |
+| Eastern | Actor | Page | Signal |
+|---------|-------|------|--------|
+| 4:07 AM | Mac human | `/network/political/misha-stallworth-west/` (404) | Political hierarchy naming trap |
+| 6:01 AM | Reflectionbot (AI retrieval) | `/robots.txt` then `/analysis/funding-flow/` | Someone asked an AI about the money |
+| 6:06 AM | Amazonbot | `/analysis/` | AI mapping analysis section |
 
 The Reflectionbot hit is the second independent attention signal on
 funding-flow. The bot checked robots.txt first (polite), then fetched
 the specific page. This is a direct response to a user query.
 
-### The 10:01 → 11:30 Hypothesis
+### The 6:01 AM → 7:30 AM Hypothesis
 
-**Timeline**: AI retrieval on funding-flow at 10:01 (6:01 AM ET). Group
-cluster on evidence at 11:30 (7:30 AM ET). 89-minute gap.
+**Timeline**: AI retrieval on funding-flow at 6:01 AM. Group cluster
+on evidence at 7:30 AM. 89-minute gap.
 
 **Hypothesis**: Someone asked an AI about detroit charter school funding
-at 6 AM. The AI pulled our analysis. The person read the synthesis, shared
-the link with their team. At 7:30 AM, the morning meeting happened.
+at 6:01 AM. The AI pulled our analysis. The person read the synthesis,
+shared the link with their team. At 7:30 AM, the morning meeting happened.
 
 **Alternative**: The events are unrelated. The 89-minute gap could be
 coincidence. The AI user might be in a different timezone entirely.
@@ -350,18 +358,18 @@ with 60-120 minute delay), the propagation pathway is real.
 **Three waves in 6 minutes, then specialized divergence:**
 
 ```
-11:30:42  Wave 1: 3 sessions arrive. All hit / → TCR-22-12 → FOIA → Brian Banks
-11:33:25  Wave 2: 3 new sessions + Wave 1 RELOADING same pages (304 conditionals)
-11:36:35  Wave 3: Mixed return — same sessions hitting same pages AGAIN
+7:30:42 AM  Wave 1: 3 sessions arrive. All hit / → TCR-22-12 → FOIA → Brian Banks
+7:33:25 AM  Wave 2: 3 new sessions + Wave 1 RELOADING same pages (304 conditionals)
+7:36:35 AM  Wave 3: Mixed return — same sessions hitting same pages AGAIN
 
-11:37:02  Analyst (Linux): / → search → contact → /key-analysis (404)
-11:37:36  Tech (Windows):  /identity.js (404) → /keywords (404)
-11:37:37  Methodical (Mac): /identity.json (200!) → /atom.xml → /credential-audit
-11:38:04  Analyst (Linux): /contact/ → /key-analysis (404, second try)
+7:37:02 AM  Analyst (Linux): / → search → contact → /key-analysis (404)
+7:37:36 AM  Tech (Windows):  /identity.js (404) → /keywords (404)
+7:37:37 AM  Methodical (Mac): /identity.json (200!) → /atom.xml → /credential-audit
+7:38:04 AM  Analyst (Linux): /contact/ → /key-analysis (404, second try)
 ```
 
 **The group cluster and the divergence are ONE EVENT.** The timing is
-continuous: 11:30 (evidence reading) → 11:37 (specialized probing).
+continuous: 7:30 AM (evidence reading) → 7:37 AM (specialized probing).
 The same group that opened the evidence is now exploring structured access.
 
 Three different OS/browser combinations in the divergence phase means
