@@ -1,10 +1,10 @@
 # siltPond — The Settling Basin for Active Investigation
 
-**Wave**: 165 | **Date**: Oct 6, 2026
-**Status**: ACTIVE — investigation threads + five-layer active defense implemented
-**Domain**: Investigation methodology, information hygiene, evidence triage, active defense
+**Wave**: 165d | **Date**: Oct 6, 2026
+**Status**: ACTIVE — investigation threads + five-layer active defense + billboard published
+**Domain**: Investigation methodology, information hygiene, evidence triage, active defense, public record of automated access
 **Upstream**: BLOOM_GUIDED_INVESTIGATION_PRIORITY.md, ADAPTIVE_IMMUNE_BLOOM_SENSOR.md, LAW_ENFORCEMENT_ESCALATION_TEMPLATE.md
-**Consumer**: northgate (prioritization), detroit (filtered public evidence), golgiBody (defense layers)
+**Consumer**: northgate (prioritization), detroit (filtered public evidence + billboard), golgiBody (defense layers)
 
 ---
 
@@ -594,6 +594,56 @@ proper channels. The signal IS the response.
 
 ---
 
+## The Billboard — Public Record of Automated Access (Wave 165d)
+
+**Published**: Oct 6, 2026, 12:05 PM ET on detroit.primals.eco/signal/
+
+The defense layers generated evidence. The evidence was published. The
+billboard names entities by their own self-declared User-Agent strings
+and documents their behavior from server access logs. No IP addresses.
+
+### Key Findings Published
+
+**Meta/Facebook** (`meta-externalagent`, `facebookexternalhit`):
+- 533 requests to git.primals.eco in 2h 40m
+- 446 blocked with 403 Forbidden — continued scraping
+- Read `robots.txt` 4 times ("humans only") — ignored it every time
+- 493 unique source code paths targeted — wateringHole (191), toadStool (143),
+  biomeOS (34), bearDog (33), songBird (25), squirrel (23)
+- **Continued scraping after the billboard was published** — 6 more requests
+  in the 4 minutes after their behavior was documented on the public internet
+- Meta did not access the investigation evidence. They targeted the
+  sovereign infrastructure source code — the medium, not the message.
+
+**Anonymous scanner fleet**: 390 WordPress/PHP vulnerability probes
+(116 unique paths), no User-Agent. Served canary credentials.
+
+**Residential proxy fleet**: 3,075+ tracked IPs, behavioral hash
+`49e77ea75aa7666e` (primary), 10+ mutation variants all detected.
+
+### Compliance Contrast
+
+The billboard explicitly documents which entities respected boundaries:
+- **Google**, **OpenAI**, **Bing**, **Ahrefs**, **Semrush**: checked
+  robots.txt, respected stated permissions, stayed within allowed domains
+- **Amazon**: allowed on detroit (public evidence), but documented reading
+  judge profiles and political-action-committee evidence — training pipeline
+  ingesting investigation data about named public officials
+
+### Connection to Investigation
+
+This is the extraction pattern made visible. The same dynamic the
+investigation documents in Detroit charter schools — public resources
+built for communities, captured by private interests who treat oversight
+as an obstacle — plays out in real time on the infrastructure built to
+expose it. Meta scrapes sovereign code while ignoring the civil rights
+evidence it documents. The scraping IS evidence.
+
+**Billboard location**: [detroit.primals.eco/signal/](https://detroit.primals.eco/signal/)
+**Cross-links**: sporePrint scraping notice, membrane_visibility, adaptive immune defense
+
+---
+
 ## Next Steps
 
 1. **Immediate**: Run the cross-domain bridge analysis on Oct 6 Caddy logs
@@ -609,14 +659,17 @@ proper channels. The signal IS the response.
    (scanner using fake AWS/GitHub creds triggers external alerts)
 7. **Abuse reports**: Review first queued reports on northgate before
    approving for delivery
+8. **Billboard update**: Refresh entity counts and add new entities as
+   they appear. Monitor Meta for behavioral change after publication.
+9. **Meta formal notice**: Consider drafting formal cease-and-desist
+   citing the published evidence record and CFAA implications
 
 ---
 
-*subGen Wave 165 — Active defense immune stack implemented. Five layers:
-tarpit (slow-drip P2), honeytokens (fake creds for scanner probes),
-abuse reports (X-ARF with manual gate), threat intelligence feed (daily
-JSON from spine), law enforcement escalation (IC3/InfraGard/MI AG template).
-All layers legal, all on our infrastructure. The immune system recruits
-external response through legitimate channels — cytokine signaling, not
-hack-back. Three investigation threads continue: funding-flow, cross-domain
-bridge, political network hierarchy. The settling pond deepens.*
+*subGen Wave 165d — Billboard published. Live evidence of automated access
+to the investigation site now on the public record at detroit.primals.eco/signal/.
+Meta/Facebook named with behavioral evidence: 533 requests, 446 blocked,
+robots.txt read 4x and ignored, continued after publication. Compliance contrast
+published — Google, OpenAI, Bing followed rules; Meta did not. The extraction
+pattern documented in the investigation is the extraction pattern observed on
+the infrastructure. The settling pond surfaces.*
