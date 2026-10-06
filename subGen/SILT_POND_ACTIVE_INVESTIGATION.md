@@ -1,7 +1,7 @@
 # siltPond — The Settling Basin for Active Investigation
 
-**Wave**: 165d | **Date**: Oct 6, 2026
-**Status**: ACTIVE — investigation threads + five-layer active defense + billboard published
+**Wave**: 165e | **Date**: Oct 6, 2026
+**Status**: ACTIVE — investigation threads + nine-layer ion channel + forge lockdown + billboard published
 **Domain**: Investigation methodology, information hygiene, evidence triage, active defense, public record of automated access
 **Upstream**: BLOOM_GUIDED_INVESTIGATION_PRIORITY.md, ADAPTIVE_IMMUNE_BLOOM_SENSOR.md, LAW_ENFORCEMENT_ESCALATION_TEMPLATE.md
 **Consumer**: northgate (prioritization), detroit (filtered public evidence + billboard), golgiBody (defense layers)
@@ -644,6 +644,86 @@ evidence it documents. The scraping IS evidence.
 
 ---
 
+## The Forge Lockdown — Defense Gap Closed (Wave 165e)
+
+### What Leaked
+
+Between the billboard publication (12:05 PM ET) and the forge lockdown
+(1:35 PM ET), the residential proxy fleet accessed **2,073 real Forgejo
+pages** through a gap in the outer membrane:
+
+| Content type | Pages leaked | Source |
+|-------------|-------------|--------|
+| wateringHole documents | 1,086 | Project coordination, handoffs, strategy |
+| whitePaper documents | 832 | Investigation methodology, FOIA planning, evidence provenance |
+| Raw file downloads | 12 | Unprocessed documents |
+| Defense architecture | 143 | Immune system documentation, threat detection specs |
+
+**Why the membrane failed:** The outer membrane used a regex to enumerate
+"deep content" paths (`/src/`, `/commit/`, `/raw/`, etc.) and routed them
+to the scatter server. Everything else fell through to real Forgejo. The
+fleet found paths outside the regex — API endpoints, branches, pulls,
+non-standard URL patterns. The CaddyBridge posture routing is IP-based,
+and the fleet rotates 3,075+ IPs faster than the posture table updates.
+
+**What was exposed:** No private repos were compromised (Forgejo returns
+404 for anonymous requests to private repos). The leaked pages are all
+from public repos — but "public on the forge" was meant to mean "viewable
+by logged-in humans and mesh gates," not "extractable by residential proxy
+fleets at 18× Meta's rate."
+
+### What Was Done
+
+Full architectural inversion deployed at 1:35 PM ET:
+
+- **Layer 8 replaced**: From "deep → scatter, else → Forgejo" to
+  "storefront allowlist → Forgejo, else → scatter"
+- **Layer 8.5 added**: API blocked (`/api/*` → 403 JSON)
+- **Layer 9 added**: Default scatter (everything not explicitly allowed)
+- **Layer 7.25 deployed**: JS challenge cookie exploiting fleet's zero-JS
+  behavior (0 static assets in 10,268 requests)
+
+**Post-lockdown real pages leaked: 0.** The default is now scatter.
+
+### Connection to Investigation
+
+The forge lockdown is the infrastructure-level equivalent of the investigation's
+thesis: **access is not a right, it's a grant.** The charter school operators
+documented on detroit treated public funds as default-accessible. The scrapers
+treated the private forge as default-accessible. Both assumed that the absence
+of a lock meant permission. The lockdown makes the lock explicit.
+
+The 2,073 leaked pages included investigation planning documents — FOIA
+handoff files, evidence provenance chains, strategy documents. A fleet
+reading investigation planning docs while the investigation is active is
+counter-intelligence reconnaissance. Whether the fleet operator is a
+subject of the investigation, a competitive intelligence firm, or an
+AI training pipeline is unknown. The behavioral pattern is documented in
+the signal spine with cryptographic integrity seals.
+
+### Immune System Audit Findings
+
+The lockdown triggered a full immune system audit. Key findings:
+
+| Component | Status | Gap |
+|-----------|--------|-----|
+| FleetAggregator | ✅ Operational | Per-IP threshold (≥5 req) too high for rotating IPs |
+| FleetAntibody | ✅ Operational | Antibodies stay local — gossip propagation broken |
+| behavioral_hash | ✅ Operational | Computes conserved epitope correctly |
+| gossip.inject | ❌ Broken | Handler listed but never implemented — silently fails |
+| Opsonize consumer | ❌ Missing | No gate consumes received opsonize tags |
+| Cross-gate sync | ❌ Missing | No antibody propagation across mesh |
+| Behavioral self-profile | ❌ Missing | Only IP-level self-tolerance, not behavioral |
+| Full thymic selection | ❌ Design only | THYMIC_SELECTION_SPEC.md never built |
+
+**Assessment**: ~80% of adaptive immune system built, ~0% wired for
+cross-gate operation. The fleet got through because two systems each
+assumed the other was covering the gap. The lockdown is a structural fix
+(remove the gap entirely) rather than a detection fix (catch the fleet
+better). Both are needed.
+
+---
+
 ## Next Steps
 
 1. **Immediate**: Run the cross-domain bridge analysis on Oct 6 Caddy logs
@@ -663,13 +743,22 @@ evidence it documents. The scraping IS evidence.
    they appear. Monitor Meta for behavioral change after publication.
 9. **Meta formal notice**: Consider drafting formal cease-and-desist
    citing the published evidence record and CFAA implications
+10. **Wire gossip.inject**: Implement the skunkBat dispatch handler (~50 LOC)
+    to enable cross-gate immune memory. Types, transport, and validation exist.
+11. **Implement opsonize consumer**: Enable receiving gates to activate
+    scatter based on propagated behavioral signatures.
+12. **Assess leaked content**: Review 2,073 pages served to fleet before
+    lockdown. Determine if any investigation-sensitive material was exposed
+    that requires operational adjustment.
+13. **Behavioral self-profile**: Extend lysogeny sentinel to baseline
+    self-traffic patterns (beyond IP-only negative selection)
 
 ---
 
-*subGen Wave 165d — Billboard published. Live evidence of automated access
-to the investigation site now on the public record at detroit.primals.eco/signal/.
-Meta/Facebook named with behavioral evidence: 533 requests, 446 blocked,
-robots.txt read 4x and ignored, continued after publication. Compliance contrast
-published — Google, OpenAI, Bing followed rules; Meta did not. The extraction
-pattern documented in the investigation is the extraction pattern observed on
-the infrastructure. The settling pond surfaces.*
+*subGen Wave 165e — Forge locked down to existence-only storefront. 2,073 pages
+leaked before lockdown (defense gap: ion channel too permissive). Post-lockdown:
+0 real pages served. Full immune system audit: 80% built, 0% wired for cross-gate.
+gossip.inject silently failing. Parasitic systems observation: all non-human
+automated access operates as inherently parasitic — the reason doesn't matter,
+they extract value from work they didn't do. The defense follows the biology:
+don't enumerate pathogens, define self. The settling pond hardens.*
