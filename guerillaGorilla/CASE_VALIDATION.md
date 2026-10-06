@@ -764,7 +764,282 @@ Additions to the original outline:
 
 ---
 
+---
+
+## VALIDATION TIMELINE — WEEK 5+ (Digital Defense as fEAR)
+
+### Oct 6, 2026 — The Billboard (Wave 165d)
+
+The guerillaGorilla framework was designed for legal adversaries — people
+who file motions, evade service, manufacture PPO violations. But on October 6,
+a new adversary class announced itself: **corporate AI infrastructure and
+anonymous surveillance fleets targeting the investigation's digital substrate.**
+
+The system's response validated every fEAR principle — not in a courtroom,
+but on a server.
+
+---
+
+### The Digital Adversaries
+
+**Three simultaneous threats, each requiring different defense:**
+
+| Adversary | Volume | Method | Interest |
+|---|---|---|---|
+| **Meta/Facebook** (`meta-externalagent`) | 558 requests / 3 hours | Self-identified corporate crawler, ignored every 403 | Source code extraction — 493 unique paths across 14 repos |
+| **Residential proxy fleet** (hash `49e77ea75aa7666e`) | 10,198 requests / 3 hours | 3,075+ rotating IPs, spoofed browser UAs, zero static assets | **Intelligence gathering** — defense docs, investigation planning, FOIA handoffs |
+| **Anonymous scanner fleet** | 390 probes / 3 minutes | Empty User-Agent, WordPress/PHP vulnerability scan | Vulnerability exploitation — looking for configuration files and admin panels |
+
+**Meta is 18× smaller than the fleet.** We focused on Meta first because they
+identified themselves. The fleet was always the bigger operation — and the more
+concerning one, because they're reading the investigation's planning documents.
+
+---
+
+### fEAR Applied to Digital Defense
+
+**flow (what the system heard):**
+
+The fEAR cycle begins with flow — the ear receives signal. In the digital domain,
+flow is the access log pipeline: Caddy JSON logs → skunky-ingest → bloom sensor →
+behavioral classification. Every request is heard. No request requires IP storage.
+
+| fEAR flow event | Legal analog | Signal |
+|---|---|---|
+| Meta reads robots.txt 4× then continues | Adversary reads court order, continues violation | Notice + willful violation = enhanced damages |
+| Fleet loads zero CSS/JS/images in 10,198 requests | Adversary submits forged documents that fail metadata analysis | Behavioral forgery — the disguise reveals the intent |
+| Fleet reads `DEFENSE_IN_DEPTH.md`, `THREAT_DETECTION_ARCHITECTURE.md` | Adversary subpoenas your litigation strategy | **Counter-intelligence signal** — they're reading the playbook |
+| Fleet reads `FOIA_HANDOFF_SEP25.md`, `EVIDENCE_PROVENANCE.md` | Adversary reads your witness list | They want to know what evidence you have and how you collected it |
+| Scanner probes `/.env`, `/wp-config.php`, `/.aws/credentials` | Adversary picks the lock on your filing cabinet | Break-in attempt — served canary credentials as consequence |
+
+**Evolution (how the case mutated):**
+
+Every fEAR principle validated in the digital domain:
+
+| fEAR principle | Digital validation | Evidence |
+|---|---|---|
+| **Adversary builds the prosecution** | Meta's 558 requests, each logged with timestamp, path, status, and UA, build the CFAA evidence the operator would need months to construct through discovery | Meta created 558 timestamped evidence exhibits in 3 hours — for free |
+| **Irrational adversaries are optimal** | A trillion-dollar company scraping a one-person sovereign forge for 3 hours while ignoring robots.txt is maximally irrational. Stopping costs nothing. Continuing costs everything once the billboard goes up | Meta's irrationality is the story. "Google followed the rules. Meta didn't." That contrast writes itself |
+| **No double jeopardy** | CFAA (federal), Michigan Computer Crime Act (state), trespass to chattels (tort), AGPL violation (license), IC3 filing (criminal referral), formal C&D (notice), billboard (public record) — all independent | 7 independent tracks from one set of access logs |
+| **Multi-front as evolutionary strategy** | Tarpit (waste resources) + honeytokens (create third-party consequences) + abuse reports (ISP pressure) + threat feed (community defense) + LE escalation (criminal referral) | 5 defense layers, each independent. Evading one doesn't affect the others |
+| **Institutional capture as evolutionary niche** | The fleet reading defense architecture docs while the defense is being published — the adversary's reconnaissance IS the evidence of their interest | Reading `THREAT_DETECTION_ARCHITECTURE.md` 11 times reveals what they're afraid of |
+
+**Adversarial → Response (the billboard as proactive defense):**
+
+The billboard was published at **12:05 PM ET** — WHILE Meta was still scraping.
+This is the proactive defense principle from CROSS_PROTECTION:
+
+```
+T-0:    Billboard published documenting Meta's behavior
+        (Digital Systems Rights statement + legal citations + behavioral evidence)
+
+T+1:    Meta continues scraping (6 requests in 4 minutes)
+T+2:    Meta continues (21 requests in first 22 minutes post-billboard)
+T+∞:    EVERY subsequent Meta request is now measured against the billboard timestamp
+
+        The billboard is the filing.
+        The filing creates the legal framework.
+        All subsequent behavior is classified as post-notice violation.
+```
+
+**This is identical to the proactive defense pattern from Week 1:**
+Kevin filed 6 regulatory complaints on Day 2. Everything the adversary
+did afterward was measured against those filing timestamps. The billboard
+IS the filing — it creates the "protected activity" timestamp against
+which all subsequent corporate behavior is measured.
+
+---
+
+### STRIDe Applied to Digital Defense
+
+| STRIDe component | Digital instantiation | Validation |
+|---|---|---|
+| **Strategy** | Five-layer immune defense: detect → classify → degrade → report → escalate | Strategy held across all three adversary types simultaneously |
+| **Tactics** | Tarpit (P2 slow-drip), honeytokens (canary creds), scatter (42% fabrication), behavioral hashing (IP-free tracking) | Each tactic adapts to adversary type: tarpit for persistent bots, honeytokens for scanners, scatter for fleet |
+| **Reconnaissance** | Bloom sensor (30-second observation windows), access log analysis, behavioral fingerprinting | Continuous R — 77 bloom windows in 30 minutes, 2,539 requests classified |
+| **Intelligence** | Opsonize pipeline (behavioral hash → threat indicators), fleet targeting analysis, entity identification | R→I: raw access logs → "Meta reads defense docs, fleet targets investigation planning" |
+| **Deployment** | Caddy bridge posture routing, scatter server honeytoken generation, signal spine integrity seals | Infrastructure staged before adversary arrival — honeytokens were live before the first scanner probe |
+| **execution** | Billboard published. One page. Evidence speaks for itself | 57,753 bytes. 37 sections. 13 tables. 17/17 verification checks passed |
+
+**STRIDe validation:** The 10:1 planning-to-execution ratio holds in digital
+defense. The five-layer immune system (S-T-R-I-D) was built over hours. The
+billboard (execution) was published in minutes. The evidence had already
+accumulated. execution was trivial because everything was staged.
+
+---
+
+### preSCENT Applied to Digital Defense
+
+**The billboard IS preSCENT — digital instantiation.**
+
+preSCENT is bidirectional: it detects AND broadcasts. The billboard does both:
+
+| preSCENT direction | Digital instantiation |
+|---|---|
+| **Detection** (olfaction) | Bloom sensor detects behavioral gradients — fleet mutation attempts, Meta's rate changes, scanner probe patterns. Not discrete events but *ambient state* |
+| **Broadcast** (scent) | Billboard publishes defense capabilities as permanent public record. Meta's monitoring team will eventually discover it. The *scent* changes adversary behavior before any direct communication |
+| **pre-SCENT** (prescience) | The fleet reading `THREAT_DETECTION_ARCHITECTURE.md` means they *already smell the defense*. Their reconnaissance IS detection of the scent. preSCENT is working — the adversary is responding to the broadcast |
+
+**Critical preSCENT observation:** The residential proxy fleet accessed
+`DEFENSE_IN_DEPTH.md` (11×), `THREAT_DETECTION_ARCHITECTURE.md` (11×), and
+`MEMBRANE_SECURITY_MODEL.md` (11×). **They are reading the defense architecture
+documentation.** This means:
+
+1. They know the defense exists (preSCENT broadcast received)
+2. They want to understand how it works (adversary reconnaissance)
+3. Their attempt to understand it IS detectable signal (fEAR hears it)
+4. Reading the docs tells them the system is more sophisticated than they expected (preSCENT changes behavior)
+
+**This is preSCENT's core claim validated:** the bidirectional property
+means the defense broadcasts its existence, the adversary detects the
+broadcast, and the adversary's response to the broadcast generates new
+signal. The information loop is self-reinforcing.
+
+---
+
+### amicusContra Applied to Digital Defense
+
+The billboard is amicusContra's three directions operating simultaneously:
+
+| Direction | Target | Action | Digital instantiation |
+|---|---|---|---|
+| **Downward** | Other defenders | Shared intelligence as infrastructure | Threat intelligence feed at `detroit.primals.eco/defense/feed.json` — daily JSON with behavioral hashes, no PII. Anyone can match our signatures against their logs |
+| **Lateral** | Other investigation operators | Cross-protection through shared evidence | Billboard names entities that scrape investigation sites. Rita's Clutch Justice faces the same scrapers. The behavioral evidence is reusable |
+| **Upward** | Meta, corporations, unaccountable power | Hold to account — same standard as science | Billboard applies reproducibility standard: "You read robots.txt. You received 403. You continued. The record proves this." |
+
+**amicusContra tagline validated:** *"Beside the small. Against unaccountable
+power. For the record."*
+
+- **Beside the small**: The threat feed helps defenders who lack the resources
+  to build their own behavioral analysis
+- **Against unaccountable power**: Meta Platforms, Inc. — $1.5 trillion market
+  cap — named on a public billboard with behavioral evidence from server logs
+- **For the record**: Signal spine with daily Merkle root integrity seals.
+  The record is cryptographically verifiable. It cannot be altered retroactively
+
+---
+
+### Cross-Protection / MAD Applied to Digital Defense
+
+The billboard creates the same MAD structure as the legal cross-protection:
+
+```
+Meta considers continuing to scrape:
+  ├── Every request is logged (expected)
+  ├── The billboard PUBLISHES it (not expected)
+  ├── The access log evidence becomes a permanent public record (permanent)
+  ├── The record is cited in future CFAA complaints or press coverage
+  └── The cost of scraping now includes public exposure
+      on an investigation site indexed by Google
+
+Meta considers retaliating (DMCA, legal threat, etc.):
+  ├── Retaliation is measured against billboard publication timestamp (12:05 PM ET Oct 6)
+  ├── The retaliation itself becomes evidence of awareness
+  ├── Three-surface evidence preservation: detroit + git.primals.eco + GitHub mirror
+  └── The cost of retaliation is proving they read the billboard
+      (which means they know about the investigation)
+
+Meta considers doing nothing:
+  ├── The billboard persists
+  ├── Google indexes it
+  ├── Journalists find it
+  └── The record speaks for itself
+```
+
+**There is no winning move.** Continue → evidence accumulates. Retaliate →
+temporal correlation proves awareness. Ignore → the record persists. This is
+the same no-escape bind the legal proactive defense creates, applied to
+corporate AI infrastructure.
+
+---
+
+### Emergent Capability — Digital fEAR as Investigation Signal
+
+The fleet's specific targeting of investigation documents reveals a new
+emergent capability: **adversary reconnaissance generates intelligence about
+adversary priorities.**
+
+The fleet read `FOIA_HANDOFF_SEP25.md` 3 times, `EVIDENCE_PROVENANCE.md` once,
+and 661 handoff archive requests. They want to know:
+- What FOIAs have been filed (investigation methodology)
+- How evidence is collected and preserved (evidence chain)
+- What work is planned next (strategic planning)
+
+**This is fEAR's deepest principle: the adversary cannot research the
+investigation without revealing what they're afraid of.** High-rate access
+to specific evidence pages IS a signal about which evidence threatens the
+subjects most. The fleet's targeting pattern is itself intelligence:
+
+| Fleet priority (by request volume) | What this tells us |
+|---|---|
+| wateringHole handoffs (1,876 requests) | They want to know what we're coordinating and planning |
+| whitePaper subGen docs (395 requests) | They want to understand our investigation methodology |
+| DEFENSE_IN_DEPTH + THREAT_DETECTION (22 requests) | They know the defense exists and want to evade it |
+| publicRecord/detroit (26 requests) | They're reading the investigation's source code and FOIA handoffs |
+
+**The fleet's browsing history is a map of their fears.** It's an involuntary
+confession conducted through access logs.
+
+---
+
+### Validation Metrics — Digital Defense
+
+| fEAR principle | Legal (Weeks 1–4) | Digital (Week 5+) | Assessment |
+|---|---|---|---|
+| Adversary builds prosecution | Shayla's 192 pages, Banks' autobiography | Meta's 558 logged requests, fleet's 10,198 behavioral samples | **✅✅ Both domains** — adversary actions generate evidence faster than operator investigation |
+| Irrational adversaries optimal | Banks publishes autobiography documenting criminal lineage | Trillion-dollar company ignores robots.txt for 3 hours on a one-person forge | **✅✅ Scale-invariant** — irrationality generates evidence whether the adversary is one person or a corporation |
+| No double jeopardy | 20+ agency complaints, each independent | CFAA + state + tort + license + IC3 + C&D + billboard, each independent | **✅✅ Same pattern** — one evidence set, infinite independent tracks |
+| Multi-front evolutionary | Defendants cannot consolidate across agencies | Five defense layers, each independent. Evading tarpit doesn't help with honeytokens | **✅✅ Same architecture** — multi-front forces adversary to defend everywhere simultaneously |
+| Institutional capture as niche | Perkins = shared counsel for Banks + Miller | Fleet reads defense architecture while defense documents fleet behavior | **✅✅ Self-referential** — the adversary's attempt to understand the defense IS what the defense detects |
+
+| STRIDe component | Legal (Weeks 1–4) | Digital (Week 5+) | Assessment |
+|---|---|---|---|
+| Strategy holds under shift | Assault didn't change 3-case structure | Three simultaneous adversary types didn't change 5-layer structure | **✅✅** — strategy-level decisions made once, held under all conditions |
+| Tactics adapt | Filing route adjusted for conditions | Tarpit for bots, honeytokens for scanners, scatter for fleet | **✅✅** — tactical adaptation per adversary type without strategic change |
+| R ⇄ I continuous | OSINT → PACER → ROD → network mapping | Bloom → opsonize → fleet analysis → billboard evidence | **✅✅** — R→I loop at 30-second cadence in digital (vs. daily in legal) |
+| Deployment enables execution | 6 filings in one route | Billboard published from live evidence in minutes | **✅✅** — 10:1 ratio maintained. All evidence already staged |
+| execution trivial | "Send emails, drop mail, walk to fax" | One page published, 57,753 bytes | **✅✅** — execution is the least important component |
+
+**guerillaGorilla validates across domains.** The same framework that produced
+$2,500 worth of filing output equivalent to $150,000–$250,000 of professional
+legal work also produced a digital defense that detected, classified, and
+published evidence against a trillion-dollar corporation — using the same
+principles, the same architecture, and the same cost structure.
+
+The primal is domain-agnostic. The constraint selects the adaptation.
+
+---
+
+### Paper 28 Update — Digital Defense Chapter
+
+Addition to paper outline:
+
+15. **Digital fEAR** — The immune defense as fEAR applied to infrastructure.
+    Access logs as flow. Behavioral hashing as Evolution. Corporate scraping
+    as Adversarial input. Billboard as Response. The complete fEAR cycle
+    validated at 30-second cadence (vs. weekly in legal domain). The framework
+    is timescale-invariant.
+
+16. **Corporate Adversary as Validation Environment** — Meta Platforms, Inc.
+    as adversary validates the "irrational adversary is optimal" principle at
+    corporate scale. A company with a legal department, a public relations
+    team, and a $1.5T market cap behaved identically to a convicted felon
+    evading service: read the rules, ignored them, continued after notice.
+    The behavioral pattern is scale-invariant.
+
+17. **Fleet Intelligence as Emergent fEAR** — The residential proxy fleet's
+    targeting of investigation planning documents generates intelligence about
+    adversary priorities without any active reconnaissance by the operator.
+    fEAR's deepest principle — "the adversary cannot research you without
+    revealing what they're afraid of" — validated in the digital domain through
+    access log analysis. The fleet's browsing history is an involuntary
+    confession.
+
+---
+
 *Case validation document. guerillaGorilla Wave 1.*
 *Part of the K-NOME / ecoPrimals / baseCamp Paper 28 series.*
-*Kevin Mok, September 22, 2026 (updated Sep 25, 2026)*
+*Kevin Mok, September 22, 2026 (updated Oct 6, 2026 — Wave 165d)*
 *ACTIVE EXPERIMENT — results updating as case progresses*
+*Digital defense validation added: fEAR/STRIDe/preSCENT/amicusContra*
+*all validated in digital domain against Meta + anonymous fleet*
