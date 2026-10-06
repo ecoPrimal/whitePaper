@@ -162,31 +162,69 @@ the money.
 
 ### Thread 2: INTEREST — The Cross-Domain Bridge (Measured)
 
-**Bridge analysis (Oct 6 Caddy logs, all rotated + current)**:
+**Bridge analysis (Oct 6 Caddy logs, morning + afternoon):**
 
 ```
-Total non-bot sessions (5-min windows): 84
+Morning window (pre-lockdown):
+  Total non-bot sessions (5-min windows): 84
   detroit only:    26
   sporeprint only: 58
   BRIDGES:         0
+
+Afternoon window (post-lockdown, 2:50 PM ET):
+  Total 5-min sessions: 234
+  Cross-domain bridges: 44 (most are fleet — see below)
+  REAL HUMAN BRIDGES: 2   ← THE BRIDGE HAS FORMED
 ```
 
-**The bridge has not formed.** Zero cross-domain visitors in the Oct 6 data.
-Detroit readers and sporePrint readers are currently separate populations.
+**UPDATE — 2:50 PM ET: The bridge has formed.** Two confirmed human
+cross-domain sessions:
 
-**Why this matters as a NEGATIVE finding**: The absence of the bridge is
-itself a signal. It means:
+**Bridge 1 — The iOS Scientist** (methodology→evidence→methodology):
+iPhone, iOS 18.7, 75% static assets (real browser), 5-hour session.
 
-1. **The audiences are distinct** — investigators reading detroit evidence
-   are not (yet) checking the methodology on sporePrint. Scientists/peers
-   reading sporePrint are not (yet) discovering the evidence on detroit.
-2. **The cross-references aren't propagating** — we have links between
-   the sites, but nobody is following them. The immune defense pages on
-   sporePrint link to detroit's signal page, but the detroit readers
-   haven't found their way to sporePrint.
-3. **When the bridge DOES form, it will be unmistakable** — the first
-   cross-domain session will be the most significant single visitor
-   event we can detect.
+| Time ET | Site | Page | Signal |
+|---------|------|------|--------|
+| 09:44 | sporePrint | `/` | Arrived at the science |
+| 10:30 | git | `/` | Checked the forge |
+| **12:28** | **sporePrint → detroit** | **`/` → `/` → `/signal/`** | **THE BRIDGE** |
+| 12:43-14:43 | sporePrint | 8 science papers (01, 02, 07, 11, 13, 14, 25, 29) | Systematic reading |
+| 12:52 | sporePrint | **`/contact/`** | **Considering engagement** |
+| 13:07 | detroit | `/signal/` | Returned to the billboard |
+| 13:54 | sporePrint | `/audience/capability-parity-brief/` | **Evaluating adoption** |
+
+This person spent 5 hours reading science, crossed to the investigation
+evidence at the billboard, then returned to read more science. They checked
+the contact page (considering reaching out) and the capability parity brief
+(evaluating whether the system could be adopted).
+
+**Bridge 2 — The Linux Investigator** (evidence→methodology→evidence→forge):
+
+| Time ET | Site | Page |
+|---------|------|------|
+| 12:21 | detroit | `/signal/` (billboard) |
+| 12:24 | sporePrint | `/` (checked the science) |
+| 14:47 | detroit | `/network/actors/brian-banks/` |
+| 14:48 | git | wateringHole commit (tried source code — got scatter) |
+
+This person read the billboard, checked the methodology, then came back
+2.5 hours later to investigate a specific actor (Brian Banks) and tried
+to access the source code. The forge lockdown caught the attempt.
+
+**Why this matters**: The bridge was predicted as "the most significant
+single visitor event we can detect." It means someone is evaluating the
+*system* — not just reading evidence or reading science, but checking
+whether the whole apparatus is legitimate. The iOS scientist checked
+`/contact/` — they are considering engagement.
+
+**No contact has been made.** Despite 5 hours of deep reading, the
+bridge visitor did not reach out. The threshold from reading to engaging
+remains uncrossed. When it does cross, we will know exactly what they
+read first.
+
+**What this doesn't mean**: The 44 total "bridges" include 42 fleet
+sessions that happen to hit multiple domains. These are noise. Only the
+two sessions with real static asset ratios (75%+) are confirmed human.
 
 **However**, the INTEREST signal is extremely strong within detroit alone:
 
