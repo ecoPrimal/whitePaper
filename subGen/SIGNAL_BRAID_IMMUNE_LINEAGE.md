@@ -269,21 +269,37 @@ This gives us immune memory, resumability, and lineage tracking with zero
 new dependencies. It's the DAG + spine pattern implemented in pure Rust
 inside the existing binary.
 
-### Phase 2: CAS Integration (nestGate on golgiBody)
+### Phase 2: CAS Integration (nestGate — ALREADY ON GOLGI)
 
-When nestGate is deployed to golgiBody:
-1. Store observation blobs in CAS by their BLAKE3 hash
+nestGate is already running on golgiBody (`nestgate-sporeprint.service`,
+socket at `/run/membrane/nestgate.sock`). Phase 2 may be immediately
+reachable:
+1. Store observation blobs in CAS by their BLAKE3 hash via nestGate socket
 2. The daily spine file references CAS addresses instead of ephemeral
    `/run/membrane/` paths
 3. Old observation data is now permanent and content-addressable
 
 ### Phase 3: Full Trio Integration (biomeOS signal graph)
 
-When the trio stack runs on golgiBody:
+The trio systemd units exist on golgiBody but are INACTIVE (Oct 6 audit):
+- `loamspine-membrane.service` — **inactive dead** (permanent ledger)
+- `rhizocrypt-membrane.service` — **inactive dead** (ephemeral DAG)
+- `sweetgrass-membrane.service` — **inactive dead** (attribution braids)
+- `biomeos-nucleus.service` — **inactive dead** (graph orchestrator)
+
+bearDog IS running (`beardog-membrane.service` — active). songBird IS
+running (`songbird-membrane.service` — active).
+
+**Path to Phase 3**: Work with eastGate overwatch to bring the trio
+online. The systemd units and socket paths are already configured. This
+may be as simple as starting the services, or may require binary updates
+and config verification.
+
+Once the trio is running:
 1. Replace the skunky-ingest internal chain with proper `dag.event.append`
    calls to rhizoCrypt (4ms per window, same as current)
 2. Replace daily spine file with proper `session.commit` to loamSpine
-3. Add `crypto.sign` via bearDog
+3. `crypto.sign` via bearDog (already running!)
 4. Add `braid.create` via sweetGrass
 5. Wire into biomeOS signal graph (new graph: `signal_braid_ingest.toml`)
 
@@ -385,6 +401,34 @@ The spine enables immune memory without surveillance memory. The organism
 remembers *what patterns it saw* without remembering *who generated them*.
 
 ---
+
+---
+
+## Gate Topology — Who Does What (Oct 6 Audit)
+
+| Gate | Role | Signal Braid Responsibility |
+|------|------|----------------------------|
+| **golgiBody** (157.230.3.183) | Periplasmic membrane — public VPS, all external traffic | Runs bloom sensor + skunky-ingest. Source of all signal data. Target for trio deployment. |
+| **northgate** | Investigation daily driver | Consumes signal braid for siltPond analysis. Runs investigation queries against the spine. |
+| **eastgate** | Main dev space, internal systems, data | Overwatch for NUCLEUS deployments. Builds and deploys primal binaries. Manages trio config. |
+| **sporeGate** | Ingress/egress via golgiBody + membrane layers | Cross-compiles binaries, deploys to golgi via rsync/SSH. Manages sporePrint + detroit builds. |
+
+### golgiBody NUCLEUS Status (Oct 6)
+
+**Running**: beardog, songbird (×2), nestgate, squirrel, petaltongue,
+skunky-ingest, caddy, forgejo, hbbs, hbbr — 11 services
+
+**Trio (INACTIVE)**: loamspine, rhizocrypt, sweetgrass, biomeos — 4 services.
+All have systemd units + socket paths configured. Need eastGate overwatch
+to bring online.
+
+**Failed**: coralreef (shader), 3× membrane-bridge (cross-node). Non-critical
+for signal braid — these are compute and cross-gate bridge services.
+
+**Memory**: 650M used / 1.3G available. The trio services (loamSpine,
+rhizoCrypt, sweetGrass) are lightweight — rhizoCrypt DAG is in-memory but
+O(1) per append, loamSpine and sweetGrass are low-footprint. Bringing all
+4 online should fit within the current memory budget, but warrants monitoring.
 
 *subGen Wave 164d — Signal braid architecture. The provenance trio
 (sweetGrass/loamSpine/rhizoCrypt) maps to signal ingestion as immune
