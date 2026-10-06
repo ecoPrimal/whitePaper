@@ -87,179 +87,296 @@ system breathes.
 
 ---
 
-## Active Investigation Threads
+## The Meta-Signal — Engagement Topology
 
-### Thread 1: The Funding-Flow Hit — Someone Asked an AI About the Money
+Before the individual threads, the framework.
 
-**Signal**: Oct 6, 10:01 UTC. Reflectionbot (AI retrieval agent) fetched
-`/analysis/funding-flow/`. This is not a training crawler — Reflectionbot
-serves user queries. Someone asked an AI system a question about detroit
-charter school funding, and the AI came to our site for the answer.
+All three investigation threads below are different projections of the same
+phenomenon: **informed people engaging with evidence in ways that reveal what
+they know and what they need**. The type of engagement IS the meta-data
+signal — data about the data:
 
-**Why this matters**: Of all the evidence on detroit — the credential fraud,
-the board voting patterns, the FOIA timelines, the actor network — someone's
-AI query was about the *money*. In a RICO investigation, the funding flow
-is the spine. Every other thread (credential laundering, board capture,
-regulatory failure) is a branch off the money. The person who asked about
-funding-flow may be the most informed visitor we've had.
+| Engagement Type | What It Measures | What It Reveals |
+|-----------------|-----------------|-----------------|
+| **Attention** | What they direct focus toward | What matters most to the informed actor |
+| **Interest** | How deeply they invest | How seriously they're taking the evidence |
+| **Divergence** | Where their model exceeds ours | What they know that we don't |
 
-**What we don't know**:
-- What question did they ask? We see only that the AI fetched our page.
-  The query itself is invisible to us.
-- Did our funding-flow analysis answer their question? If it did, the
-  evidence is propagating through AI channels — people are learning about
-  the network without visiting the site directly. If it didn't, there's
-  a gap in our evidence that an informed person noticed.
-- Is this the same person (or group) who triggered the 11:30 UTC cluster
-  90 minutes later? Someone asks an AI about the money at 10:01, and at
-  11:30 a group hits the evidence simultaneously? That's a morning meeting.
-  "Hey, I asked ChatGPT about that charter school funding thing and look
-  what it pulled up."
+These aren't three separate signal categories — they're three axes of a
+single coordinate system. Every visitor engagement has an attention vector
+(what they looked at), an interest depth (how long and how many pages), and
+a divergence measure (how far their navigation departed from our structure).
 
-**Investigation action**:
-1. Review the funding-flow analysis page — is the financial thread
-   complete enough to answer a sophisticated funding question?
-2. Map the gaps: which financial connections are asserted but not
-   yet sourced to specific 990s, contracts, or LARA filings?
-3. Prioritize FOIA requests that would fill funding-flow gaps —
-   these are now highest priority per the traveling salesman heuristic
-
-### Thread 2: The Cross-Domain Bridge — Who Reads Both Sites?
-
-**Signal**: Hypothesized, not yet measured. The bloom sensor classifies
-by content domain (detroit evidence vs sporePrint science). Caddy logs
-on golgiBody contain both domains. If any visitor reads sporePrint
-methodology AND detroit evidence in the same time window, that is the
-strongest possible human signal.
-
-**Why this matters**: A bot reads one site. A casual visitor reads one site.
-A curious person might read one site deeply. But a person who reads the
-*evidence* AND the *methodology* — the thing itself and the system that
-produced it — is doing due diligence. That's a journalist fact-checking
-the methodology before writing about the evidence. An attorney evaluating
-whether the evidence collection process would withstand challenge. A
-researcher studying the approach itself.
-
-The cross-domain bridge is the signal equivalent of someone reading the
-lab notebook AND the published paper. They want to know not just what we
-found, but whether they can trust how we found it.
-
-**What we can measure without storing any identifying data**:
-- Temporal overlap: requests to sporePrint and detroit within the same
-  30-second bloom window, from the same IP hash (which we don't store
-  past the window)
-- Content path: which sporePrint pages correlate with which detroit pages?
-  If someone reads `/science/32-gossip-tagged-opsonization/` on sporePrint
-  and then reads `/signal/` on detroit, they followed the methodology link
-  to verify it. That's a specific kind of reader.
-- Referrer chain: if someone navigates from sporePrint to detroit (or
-  vice versa), the referer header captures the bridge without capturing
-  the person
-
-**Investigation action**:
-1. Analyze Caddy access logs for temporal correlation between
-   sporePrint and detroit requests (same 5-minute window)
-2. Check referrer headers for direct cross-domain navigation
-3. If the bridge exists, classify what kinds of pages bridge:
-   methodology → evidence (fact-checking), or evidence → methodology
-   (evaluating our approach)?
-4. The bridge pattern, once identified, becomes a bloom sensor
-   classification rule: `ReaderType::CrossDomain` — the highest-confidence
-   human signal
-
-### Thread 3: The Political Network Hierarchy — The Structure Nobody Drew
-
-**Signal**: Oct 6, someone searched `/network/political/misha-stallworth-west/`
-(404). The page exists at `/actors/misha-stallworth-west/`. But the visitor
-expected a *hierarchical* URL: `/network/political/[name]`.
-
-**Why this matters**: The visitor has a mental model of the detroit network
-that is more structured than what we've published. They see:
-
-```
-/network/
-  /political/       ← dynasty families, board appointees, elected officials
-    /stallworth-west/
-    /stallworth/
-    /...
-  /financial/        ← management companies, fiscal agents, banking relationships
-    /...
-  /educational/      ← charter authorizers, credential issuers, accreditors
-    /...
-  /regulatory/       ← LARA, MDE, oversight bodies
-    /...
-```
-
-We have a flat actor index. They expected a graph. The graph they expected
-has *typed edges* — political, financial, educational, regulatory — and
-they navigated directly to a specific node in a specific category. This
-visitor didn't discover Misha Stallworth-West through our site. They
-already knew the name, the political context, and where they expected
-to find her in the hierarchy. They came to check whether we had organized
-the evidence the same way they think about the network.
-
-**What this tells us about the visitor's knowledge**:
-- They know the Stallworth political dynasty (the `-west` suffix suggests
-  awareness of specific family branches)
-- They conceptualize the charter school network as having distinct domains
-  (political, financial, educational) — not just a flat list of actors
-- They expected us to have organized the evidence this way, which means
-  either: (a) they've seen another source organize it this way, or
-  (b) their own investigation has produced this structure independently
-
-**Investigation action**:
-1. Categorize existing detroit actors into network domains:
-   - Political: elected officials, board appointees, dynasty members
-   - Financial: management company officers, fiscal agents, auditors
-   - Educational: charter authorizers, credential-granting institutions
-   - Regulatory: LARA officers, MDE officials, oversight contacts
-2. Map existing actor pages to their primary and secondary domains
-3. Build the `/network/` hierarchy — even if just as Caddy redirects
-   initially, then as a proper section with cross-reference views
-4. When the hierarchy goes live, the bloom sensor will capture which
-   domain categories get the most 404s — pointing to which part of
-   the network graph has the most interest and the most gaps
+The bloom sensor currently classifies by visitor TYPE (human, bot, AI).
+The engagement topology classifies by visitor SHAPE — the geometry of
+their interaction with the evidence. A sophisticated visitor classification
+system uses both: type tells you WHO is engaging, shape tells you HOW.
 
 ---
 
-## The 10:01 → 11:30 Hypothesis
+## Active Investigation Threads
 
-This is speculative. It belongs in the siltPond, not on detroit. But it's
-worth holding here because it's the kind of thread that either confirms
-or collapses with one more data point.
+### Thread 1: ATTENTION — The Funding-Flow Spine
 
-**Timeline**:
-- 10:01 UTC (6:01 AM Eastern): AI retrieval agent fetches `/analysis/funding-flow/`
-- 11:30 UTC (7:30 AM Eastern): 8+ sessions hit detroit simultaneously,
-  same path: `/ → TCR-22-12 → FOIA → Brian Banks`
-- 11:37 UTC: Analyst session checks `/keywords`, `/contact/`, `/credential-audit/`
+**Signal (measured Oct 6)**:
 
-**Hypothesis**: One person asked an AI about the funding flow at 6 AM.
-The AI pulled our analysis page. The person read the AI's synthesis and
-thought "holy shit, there's an entire evidence database here." They shared
-the link with their team. At 7:30 AM, the morning meeting happened and
-everyone opened the link. One person on the team — the methodological one —
-went deeper, checking whether the evidence is structured (keywords),
-whether they can contact us, and whether the credential analysis holds up.
+| Time (UTC) | Actor | Page | Signal |
+|------------|-------|------|--------|
+| 05:02 | Human (Windows) | `/analysis/funding-flow/` | Deep read at 1 AM ET / 10 PM PT |
+| 05:09 | Human (Windows, same UA) | `/analysis/banks-holland-partnership/` | **Followed the money to a specific partnership** |
+| 10:01 | Reflectionbot (AI retrieval) | `/analysis/funding-flow/` | Someone asked an AI about the money |
+| 10:06 | Amazonbot | `/analysis/` | AI mapping the analysis section |
 
-**Alternative explanations**:
-- The 10:01 and 11:30 events are unrelated (possible but the 90-minute
-  gap between AI hit and group cluster is suggestive)
-- The AI hit was from a different geography entirely (we can't know —
-  no IPs stored)
-- The group cluster was triggered by a social media share, not an AI
-  synthesis (the 6-minute window suggests a more intimate channel — chat
-  thread or email, not broadcast)
+**Two independent attention signals on the same page.** A human reader at
+05:02 UTC and an AI retrieval at 10:01 UTC both focused on funding-flow.
+These are almost certainly different actors — the human was browsing at
+1 AM Eastern (or 10 PM Pacific, or 6 AM UK), the AI retrieval was serving
+someone's question 5 hours later.
 
-**What would confirm or collapse this**:
-- If the next group cluster also follows an AI retrieval hit by 1-2 hours,
-  the pattern is real: AI → human discovery → team briefing → deep dive
-- If AI retrieval hits increase but group clusters don't, the AI channel
-  is propagating independently
-- If we see the same pattern from a different time zone (different offset
-  but same shape), it's happening in multiple organizations
+**The 05:02 reader followed the money.** They read funding-flow, then 7
+minutes later read banks-holland-partnership. The same Windows UA. This is
+someone who understood the financial spine and then followed a specific
+partnership branch. At 1 AM. That's either a researcher on the west coast
+(10 PM PT), a UK-based journalist starting their morning (6 AM GMT), or
+someone in Eastern time who couldn't sleep because of what they found.
 
-We hold this hypothesis in the siltPond until the data settles.
+**Why this matters**: In a RICO investigation, the funding flow is the
+spine — every other thread (credential laundering, board capture,
+regulatory failure) branches off the money. Two independent actors both
+focused on the financial analysis. The attention vector is converging on
+the money.
+
+**Investigation action**:
+1. Review the funding-flow analysis page for gaps — which financial
+   connections are asserted but not yet sourced to specific 990s, LARA
+   filings, or state contracts?
+2. Review banks-holland-partnership — what did the midnight reader find
+   or NOT find after following the money from the general flow to a
+   specific partnership?
+3. Prioritize FOIA requests that fill funding-flow gaps — these are now
+   highest-priority per the traveling salesman heuristic
+4. The 10:01 AI retrieval means the funding analysis is propagating
+   through AI channels — people are learning about the network without
+   visiting the site. Accuracy of the funding-flow page is critical
+   because AI synthesis will repeat whatever we have.
+
+### Thread 2: INTEREST — The Cross-Domain Bridge (Measured)
+
+**Bridge analysis (Oct 6 Caddy logs, all rotated + current)**:
+
+```
+Total non-bot sessions (5-min windows): 84
+  detroit only:    26
+  sporeprint only: 58
+  BRIDGES:         0
+```
+
+**The bridge has not formed.** Zero cross-domain visitors in the Oct 6 data.
+Detroit readers and sporePrint readers are currently separate populations.
+
+**Why this matters as a NEGATIVE finding**: The absence of the bridge is
+itself a signal. It means:
+
+1. **The audiences are distinct** — investigators reading detroit evidence
+   are not (yet) checking the methodology on sporePrint. Scientists/peers
+   reading sporePrint are not (yet) discovering the evidence on detroit.
+2. **The cross-references aren't propagating** — we have links between
+   the sites, but nobody is following them. The immune defense pages on
+   sporePrint link to detroit's signal page, but the detroit readers
+   haven't found their way to sporePrint.
+3. **When the bridge DOES form, it will be unmistakable** — the first
+   cross-domain session will be the most significant single visitor
+   event we can detect.
+
+**However**, the INTEREST signal is extremely strong within detroit alone:
+
+**The group cluster — 3 waves, 6 minutes**:
+
+| Wave | Time | Sessions | Pages | Behavior |
+|------|------|----------|-------|----------|
+| 1 | 11:30-11:31 | 2fa5, 0642, d850 | Same 4 evidence pages | Initial wave — link distributed |
+| 2 | 11:33-11:34 | a7af, 920f, 36c3 + 2fa5, 0642 reloading | Same pages + 304 conditional requests | Second wave + first wave refreshing |
+| 3 | 11:36-11:37 | 2fa5, 920f, d850 returning | Same pages + 304s + 304s | Third wave, checking for updates |
+
+Session `920f53a6` alone: **33 pages in 46 seconds**. That's not reading —
+that's systematically cataloging. Multiple 304 conditional requests on
+`/network/actors/brian-banks/` (browser saying "has this changed since I
+last loaded it?"). This person is either bookmarking and refreshing, or
+their browser is aggressively caching and re-validating.
+
+The 3-wave pattern with reload behavior is the signature of a shared link
+being opened in a group setting where people are discussing the content
+in real time. Open → read → discuss → reload to check a detail someone
+mentioned → continue discussion → reload again.
+
+### Thread 3: DIVERGENCE — The Naming Convention Trap
+
+**Signal (Oct 6, measured)**:
+
+The political network hierarchy **already exists**:
+
+```
+/network/political/
+  billy-mckinney/
+  eric-sabree/
+  kilpatrick-dynasty/
+  sherry-gay-dagnogo/
+  stallworth-alma/
+  stallworth-keith/
+  stallworth-thomas/
+  stallworth-west-misha/     ← LAST-FIRST ordering
+  vaughn-corletta/
+```
+
+**What the visitor searched**: `/network/political/misha-stallworth-west/`
+**What actually exists**: `/network/political/stallworth-west-misha/`
+**Also exists**: `/actors/misha-stallworth-west/` (FIRST-LAST ordering)
+
+The visitor's 404 is NOT about missing data. It's about **inconsistent
+naming conventions**. The `/actors/` section uses first-last (`misha-
+stallworth-west`). The `/network/political/` section uses last-first
+(`stallworth-west-misha`). The visitor had already seen the first-last
+convention (from `/actors/` or from the homepage) and applied it to the
+political hierarchy.
+
+**What this tells us about the visitor**:
+- They knew the political hierarchy existed (navigated directly to
+  `/network/political/`, not `/actors/`)
+- They knew Misha Stallworth-West by name
+- They'd previously seen the first-last convention and expected consistency
+- They knew the political context — searching under `/political/` not
+  `/actors/`, meaning they conceptualize the Stallworth-West as a political
+  actor specifically
+
+This is not a casual visitor. This is someone who has spent enough time
+with the evidence to develop naming expectations.
+
+**The broader divergence signal from the 11:37 window**:
+
+Three additional visitors at 11:37-11:38 (immediately after the group
+cluster) searched for things that don't exist OR checked for structured
+data access:
+
+| Time | UA | URI | Status | Signal |
+|------|-----|-----|--------|--------|
+| 11:37:36 | Windows/Chrome 114 | `/identity.js` | 404 | Looking for client-side identity API |
+| 11:37:37 | Windows/Chrome 114 | `/keywords` | 404 | Looking for keyword/tag index |
+| 11:37:37 | Mac/Safari | `/identity.json` | **200** | Found machine-readable identity endpoint |
+| 11:37:37 | Mac/Safari | `/atom.xml` | 200 | Found RSS feed |
+| 11:38:04 | Mac/Safari | `/analysis/credential-audit/` | 200 | Read credential audit analysis |
+| 11:38:04 | Linux/Chrome 113 | `/contact/` | 200 | Checked contact page |
+| 11:38:05 | Linux/Chrome 113 | `/key-analysis` | 404 | Looking for key findings summary |
+
+**Three different operating systems. Three different Chrome versions (113,
+114, and Safari). Three divergence patterns.** These are separate people,
+possibly from the same group that triggered the cluster, now each following
+their own interest:
+
+- **Windows/Chrome 114**: probing for JavaScript identity API + keyword index
+  → software developer or technical analyst checking for API access
+- **Mac/Safari**: found identity.json and atom.xml, read credential audit
+  → methodical reader checking machine-readable endpoints
+- **Linux/Chrome 113**: checked contact page, then searched for key findings
+  → the decision-maker, considering engagement, wanting a summary
+
+**Investigation action**:
+1. **Immediate**: Add Caddy redirect `/network/political/misha-stallworth-west/`
+   → `/network/political/stallworth-west-misha/` (fix the naming trap)
+2. **This week**: Audit ALL naming conventions across `/actors/` and
+   `/network/` hierarchies — ensure consistency or add bidirectional redirects
+3. **Build `/keywords`**: The demand for a keyword/tag index appeared twice
+   (two different sessions). This is a real navigation gap.
+4. **Build `/key-analysis`**: At least a redirect to a findings overview
+   or the signal page itself
+5. **Review `/identity.json`**: Someone found it and got 200 — what's in it?
+   Is it returning what they expected?
+
+---
+
+## The Full Timeline — Oct 6 Reconstruction
+
+This reconstruction uses only public data (User-Agent, URI, timestamp,
+status code). No IPs are stored or referenced. Session identity is
+proxied by UA hash within 5-minute windows.
+
+### Pre-dawn: The Midnight Reader (Attention)
+
+| UTC | Eastern | Pacific | UK | Actor | Page |
+|-----|---------|---------|-----|-------|------|
+| 04:42 | 12:42 AM | 9:42 PM | 5:42 AM | Mac human | `/analysis/cbc-events/` |
+| 05:02 | 1:02 AM | 10:02 PM | 6:02 AM | Windows human | `/analysis/funding-flow/` |
+| 05:09 | 1:09 AM | 10:09 PM | 6:09 AM | Windows human (same UA) | `/analysis/banks-holland-partnership/` |
+| 06:10 | 2:10 AM | 11:10 PM | 7:10 AM | Mac human | `/analysis/institutional-capture-graph/` |
+
+Two separate humans reading deep analysis pages in the small hours. The
+Windows reader followed the money: funding-flow → banks-holland-partnership
+in 7 minutes. The Mac reader read CBC events, then returned an hour later
+for the institutional capture graph. These are sustained analytical reads.
+
+**Timezone analysis**: The 05:02-06:10 window is either very late US or
+early-morning UK/Europe. If US Pacific (10 PM - 11 PM), it's plausible
+evening research. If UK (6-7 AM), it's someone starting their workday
+with detroit evidence. We cannot distinguish without IPs (by design).
+
+### Morning: The AI Channel (Attention + Propagation)
+
+| UTC | Actor | Page | Signal |
+|-----|-------|------|--------|
+| 08:07 | Mac human | `/network/political/misha-stallworth-west/` (404) | Political hierarchy naming trap |
+| 10:01 | Reflectionbot (AI retrieval) | `/robots.txt` then `/analysis/funding-flow/` | Someone asked an AI about the money |
+| 10:06 | Amazonbot | `/analysis/` | AI mapping analysis section |
+
+The Reflectionbot hit is the second independent attention signal on
+funding-flow. The bot checked robots.txt first (polite), then fetched
+the specific page. This is a direct response to a user query.
+
+### The 10:01 → 11:30 Hypothesis
+
+**Timeline**: AI retrieval on funding-flow at 10:01 (6:01 AM ET). Group
+cluster on evidence at 11:30 (7:30 AM ET). 89-minute gap.
+
+**Hypothesis**: Someone asked an AI about detroit charter school funding
+at 6 AM. The AI pulled our analysis. The person read the synthesis, shared
+the link with their team. At 7:30 AM, the morning meeting happened.
+
+**Alternative**: The events are unrelated. The 89-minute gap could be
+coincidence. The AI user might be in a different timezone entirely.
+
+**What would confirm**: If the pattern recurs (AI retrieval → group cluster
+with 60-120 minute delay), the propagation pathway is real.
+
+### Late Morning: The Group Cluster (Interest)
+
+**Three waves in 6 minutes, then specialized divergence:**
+
+```
+11:30:42  Wave 1: 3 sessions arrive. All hit / → TCR-22-12 → FOIA → Brian Banks
+11:33:25  Wave 2: 3 new sessions + Wave 1 RELOADING same pages (304 conditionals)
+11:36:35  Wave 3: Mixed return — same sessions hitting same pages AGAIN
+
+11:37:02  Analyst (Linux): / → search → contact → /key-analysis (404)
+11:37:36  Tech (Windows):  /identity.js (404) → /keywords (404)
+11:37:37  Methodical (Mac): /identity.json (200!) → /atom.xml → /credential-audit
+11:38:04  Analyst (Linux): /contact/ → /key-analysis (404, second try)
+```
+
+**The group cluster and the divergence are ONE EVENT.** The timing is
+continuous: 11:30 (evidence reading) → 11:37 (specialized probing).
+The same group that opened the evidence is now exploring structured access.
+
+Three different OS/browser combinations in the divergence phase means
+three different people, each following their expertise:
+- The **developer** (Windows/Chrome 114) checked for API access
+- The **data person** (Mac/Safari) checked machine-readable endpoints
+- The **decision-maker** (Linux/Chrome 113) checked contact and key findings
+
+This is a TEAM. Three specialists, each probing the aspects relevant to
+their role. The developer wants API access. The data person wants structured
+feeds. The decision-maker wants to know if they should reach out.
+
+We hold this interpretation in the siltPond. It's the most parsimonious
+explanation of 3 OSes, 3 Chrome versions, 3 divergence patterns, all
+within 60 seconds, all immediately following a group evidence read.
 
 ---
 
@@ -323,23 +440,29 @@ That's a journalist or an attorney. And they'll come back.
 
 ---
 
-## The Traveling Salesman — Updated Priority Queue
+## The Traveling Salesman — Updated Priority Queue (Post-Measurement)
 
-Based on the three active threads, the traveling salesman's weighted
-priority queue rebalances:
+Based on measured data (not hypotheses):
 
-| Data Target | Base Priority | Bloom Signal Boost | Estimated Cost | Net Priority |
-|-------------|--------------|-------------------|----------------|-------------|
-| Funding-flow gap analysis (990s, contracts) | High | +++ (AI retrieval hit) | Medium (FOIA 5-10 day) | **Highest** |
-| Political network categorization | Medium | ++ (structural 404) | Low (data exists, needs organization) | **High** |
-| Keyword/tag index for detroit | Medium | ++ (analyst 404) | Low (auto-generate from metadata) | **High** |
-| Key analysis / findings summary | Medium | + (analyst 404) | Medium (requires editorial synthesis) | **Medium** |
-| Cross-domain bridge measurement | High | + (hypothesized signal) | Low (log analysis only) | **High** |
-| Misha Stallworth-West redirect | Low | + (single 404) | Trivial (Caddy redirect) | **Quick win** |
+| Data Target | Signal Type | Signal Strength | Cost | Net Priority |
+|-------------|------------|----------------|------|-------------|
+| Funding-flow gap analysis (990s, contracts) | Attention | +++ (2 independent hits: human + AI) | Medium (FOIA) | **Highest** |
+| Banks-Holland partnership deep-dive | Attention | ++ (midnight reader followed money here) | Low (data exists, needs expansion) | **High** |
+| Naming convention audit + redirects | Divergence | ++ (informed visitor trapped) | Low (Caddy config) | **Quick win** |
+| `/keywords` tag index | Divergence | ++ (2 sessions searched for it) | Low (auto-generate) | **High** |
+| `/key-analysis` findings overview | Divergence | ++ (analyst searched twice) | Medium (editorial) | **Medium** |
+| Review `/identity.json` contents | Divergence | + (someone found and read it) | Trivial (check output) | **Quick win** |
+| Cross-domain bridge monitoring | Interest | measured: 0 bridges | Low (ongoing) | **Monitor** |
+| Group cluster follow-up | Interest | +++ (3 waves, 6 sessions, team probe) | None (watch for recurrence) | **Watch** |
 
-The funding-flow thread dominates because it combines the strongest signal
-(AI retrieval = someone actively seeking this specific data) with the
-highest investigation value (money trail = RICO spine).
+The funding-flow thread still dominates. But the naming convention fix
+and keyword index are now MEASURED priorities (two sessions searched for
+`/keywords`, not one). And the banks-holland-partnership is a new target:
+someone who already understood the funding flow went deeper into a specific
+partnership. What's on that page? Is it complete enough?
+
+The cross-domain bridge drops from "High" to "Monitor" — it hasn't formed
+yet, but when it does, it will be the strongest signal we have.
 
 ---
 
