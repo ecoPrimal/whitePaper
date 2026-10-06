@@ -1,10 +1,10 @@
 # siltPond — The Settling Basin for Active Investigation
 
-**Wave**: 164c | **Date**: Oct 6, 2026
-**Status**: ESTABLISHED — first investigation threads documented
-**Domain**: Investigation methodology, information hygiene, evidence triage
-**Upstream**: BLOOM_GUIDED_INVESTIGATION_PRIORITY.md, ADAPTIVE_IMMUNE_BLOOM_SENSOR.md
-**Consumer**: northgate (prioritization), detroit (filtered public evidence)
+**Wave**: 165 | **Date**: Oct 6, 2026
+**Status**: ACTIVE — investigation threads + five-layer active defense implemented
+**Domain**: Investigation methodology, information hygiene, evidence triage, active defense
+**Upstream**: BLOOM_GUIDED_INVESTIGATION_PRIORITY.md, ADAPTIVE_IMMUNE_BLOOM_SENSOR.md, LAW_ENFORCEMENT_ESCALATION_TEMPLATE.md
+**Consumer**: northgate (prioritization), detroit (filtered public evidence), golgiBody (defense layers)
 
 ---
 
@@ -522,6 +522,78 @@ to become a documented fact.
 
 ---
 
+## Active Defense — The Five-Layer Immune Stack
+
+**Wave 165 — Oct 6, 2026**
+
+Investigation is not just observing — it's defending the ability to observe.
+The five-layer active defense stack creates real-world consequences for
+persistent predators, all legal, all on our own infrastructure.
+
+### Layer Architecture
+
+```
+Layer 1  TARPIT         = mucus barrier        (slow them down, waste their resources)
+Layer 2  HONEYTOKENS    = complement system     (mark them so OTHER systems react)
+Layer 3  ABUSE REPORTS  = cytokine signaling    (recruit ISP/hosting immune response)
+Layer 4  THREAT INTEL   = MHC presentation      (show the pattern to everyone)
+Layer 5  LAW ENFORCE    = adaptive recruitment   (bring in specialized killer cells)
+```
+
+### Layer 1: Tarpit (IMPLEMENTED)
+
+P2 SlowDegrade no longer returns instant 429. Detected fleet connections now
+receive 200 OK with chunked transfer, then get drip-fed fabricated content
+at ~100 bytes/second for 30-60 seconds. Each tarpitted connection ties up
+one scanner thread. Maximum 100 concurrent tarpit connections (self-DoS
+protection). Falls back to instant 429 at capacity.
+
+### Layer 2: Honeytokens (IMPLEMENTED)
+
+Scanner probe paths (`/.env`, `/wp-config.php`, `/.git/config`, `/.aws/credentials`,
+etc.) now return fake-but-plausible credentials: AWS keys (AKIA format),
+GitHub PATs (ghp_ format), Stripe keys, database connection strings.
+All deterministic per seed (same path always gets same fake creds).
+
+When scanners harvest and USE these credentials:
+- AWS GuardDuty fires alerts on the fake AKIA keys
+- GitHub token scanning detects the fake PATs
+- The scanner's IP gets logged by THOSE systems
+- We touch nothing — the scanner creates their own consequences
+
+### Layer 3: Abuse Reports (IMPLEMENTED — manual gate)
+
+Fleet behavioral hashes trigger X-ARF formatted abuse reports queued in
+`/run/membrane/abuse-queue/`. Reports include behavioral hash, fleet scale,
+probe categories, and observation period. NO IP addresses in reports (provided
+only on request through secure channels). Reports are NEVER auto-sent — human
+review on northgate before delivery.
+
+### Layer 4: Threat Intelligence Feed (IMPLEMENTED)
+
+Daily JSON feed at `detroit.primals.eco/defense/feed.json` generated from
+signal spine commits. Contains behavioral hashes, detection heuristics,
+timing signatures, fleet size estimates. NO IP addresses. Merkle root from
+spine proves data integrity. Other defenders can match our signatures against
+their own logs.
+
+### Layer 5: Law Enforcement Escalation (TEMPLATE PREPARED)
+
+Filing package template in `LAW_ENFORCEMENT_ESCALATION_TEMPLATE.md`. Targets:
+IC3 (FBI cyber intake), InfraGard (FBI partnership), Michigan AG Cyber Unit,
+CISA. Evidence drawn from spine data, fleet observations, bloom sensor
+classification. Filed when investigation timing is right.
+
+### Key Legal Principle
+
+All five layers operate on OUR infrastructure or through LEGITIMATE channels.
+We do not redirect traffic to third-party systems. We do not hack back.
+The immune system does not redirect viruses to attack other organisms —
+it sends cytokine signals that recruit specialized immune cells through
+proper channels. The signal IS the response.
+
+---
+
 ## Next Steps
 
 1. **Immediate**: Run the cross-domain bridge analysis on Oct 6 Caddy logs
@@ -533,13 +605,18 @@ to become a documented fact.
    AI retrieval → group cluster → analyst shape recur?
 5. **Ongoing**: Every new 404 on detroit enters the siltPond as an
    investigation thread. The sediment accumulates. The water clarifies.
+6. **Active defense monitor**: Watch for honeytoken harvesting events
+   (scanner using fake AWS/GitHub creds triggers external alerts)
+7. **Abuse reports**: Review first queued reports on northgate before
+   approving for delivery
 
 ---
 
-*subGen Wave 164c — siltPond established as the pre-filtration investigation
-space. Three active threads: funding-flow (AI retrieval hit, RICO spine),
-cross-domain bridge (strongest human signal, unmeasured), political network
-hierarchy (visitor's knowledge graph exceeds our published structure). The
-10:01 → 11:30 hypothesis held in suspension. The settling pond is where
-investigation happens. Detroit is where evidence gets published. The time
-between them is the time it takes for murky water to clarify.*
+*subGen Wave 165 — Active defense immune stack implemented. Five layers:
+tarpit (slow-drip P2), honeytokens (fake creds for scanner probes),
+abuse reports (X-ARF with manual gate), threat intelligence feed (daily
+JSON from spine), law enforcement escalation (IC3/InfraGard/MI AG template).
+All layers legal, all on our infrastructure. The immune system recruits
+external response through legitimate channels — cytokine signaling, not
+hack-back. Three investigation threads continue: funding-flow, cross-domain
+bridge, political network hierarchy. The settling pond deepens.*
