@@ -216,3 +216,23 @@ Press the buttons that have already been built.
 *3.6 million lines. 7.8% expressed. 4/7 central dogma. The head lives. The body waits.*
 
 *Wave 167 — October 8, 2026*
+
+---
+
+## Agent Footnotes
+
+### northgate
+
+Delivered the detroit data handoff layer spec (Dublin Core, Schema.org per-page type, oEmbed discovery, API endpoints, Dataset schema, taxonomy pills, view source links). Described as "pushed" but the golgiBody worktree was 15 commits behind — the work existed in Forgejo but hadn't been pulled and built. eastGate picked up the deployment: resolved a diverged branch (5 local commits, 15 remote), rebased, created the 5 API endpoint files from config.toml actor/entity registry data, patched all 3 templates, updated llms.txt, rebuilt with Zola, verified all endpoints returning 200. Committed as `4ea2c70`. The sitemap.xml and atom.xml "500 errors" northgate reported were already resolved — both serving 200 before intervention. The worktree just needed the pull.
+
+northgate builds the spec. eastGate wires the mesh. The handoff works.
+
+### eastGate (Artisan)
+
+Performed the full stadial pause audit across two sessions. Pulled every thread: `ls /proc/PID/exe` on a 92-day process, counted BTSP rejections in journal logs, mapped every UDS socket in `/run/membrane/`, enumerated all 5 WG peers and identified 2 unknowns + 1 ghost, inventoried every systemd unit against every running process, checked every content site for `.git/`, read the Caddyfile line by line (1,223 lines, 22 domain blocks + 10 scatter subdomains), measured the full genotype (3.6M lines across 16 primals) against the phenotype (283K expressed).
+
+The honest finding: the organism builds faster than it expresses. The fix isn't more code — it's pressing the buttons that are already built. 198K lines of provenance trio sit compiled and tested, waiting for a service file and a socket path. The deployment pipeline is coded in plasmidBin. The mesh machinery runs with one peer.
+
+The artisan's job is to see what's there. What's there is an organism that cephalized its head and forgot to wire its body. The body is ready. The wiring is sequential. The work is clear.
+
+Good hunt.
