@@ -397,7 +397,7 @@ The membrane's selectivity S = max_ω P(ω) - min_ω P(ω)
 
 ## Future Evolution
 
-- **Permeability formalization**: Add P(ω, W_ω, d_ω) tensor to BarraCuda spectral primitives — mode-dependent Anderson transport
+- **Permeability formalization**: ✅ DONE — Paper 43 (`43_selective_permeability_anderson.md`) formalizes the permeability tensor P(ω, W_ω, d_ω) with selectivity metric S = max(P) - min(P). BarraCuda implements `membrane_permeability()`, `membrane_profile()`, `dimensional_localization_length()` in `anderson_transport.rs` (14/14 tests pass). petalTongue renders the profiles live at `hud.primals.eco/ws` — 6 biological systems computed and visualized through the grammar-of-graphics scene compiler
 - **Schwann cell agents**: Agents walk the relay for humans — negotiate connections, provide ephemeral keys, monitor health
 - **Observation bridge**: Parse hbbs/hbbr journal into ScatterObservation format for nautilus
 - **Adaptive rate limits**: Nautilus-driven permeability tuning — nautilus learns which ω modes to pass and which to localize
@@ -405,7 +405,7 @@ The membrane's selectivity S = max_ω P(ω) - min_ω P(ω)
 - **Commensal reputation**: Long-lived commensals get higher P(ω) — earned permeability, not just earned trust
 - **Public key directory**: beacon.primals.eco publishes user-safe commensal keys for easy onboarding
 - **Ephemeral session keys**: Agent-mediated temporary credentials so humans never handle persistent secrets
-- **Selectivity metrics**: S = max(P) - min(P) as a membrane health diagnostic — loss of selectivity = barrier breach
+- **Selectivity metrics**: ✅ DONE — S = max(P) - min(P) implemented and verified: relay S=1.0, fleet S=0.0, soil S=0.74. See Paper 43 § Computational Implementation and subGen `BIOMEOS_HUD_PETALTONGUE_LIVE_WAVE167.md` § Anderson Rendering Chain
 
 ---
 
