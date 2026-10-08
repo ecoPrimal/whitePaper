@@ -169,5 +169,57 @@ Now it has all three.
 
 ---
 
+---
+
+## Corollary: P ≠ NP Is the Boundary Between the Modalities and the Phase Space
+
+The human came back from the walk with one more thing.
+
+0, 1, and null are the **P side** of the equation. They're what you can
+verify in polynomial time. A wave arrived — check. A photon was present
+or absent — check. A reaction occurred — you wait for the next wave and
+check. These are measurements. They're efficient. They're real numbers
+on the real number line.
+
+Imaginary numbers are the **NP side**. √(-1) isn't on the number line.
+You can't point at it. But it's real in its effects — without it,
+quantum mechanics doesn't work, Fourier transforms collapse, AC circuits
+can't be analyzed. The imaginary component carries **phase** — the
+relationship between waves — and that phase space is where the
+exponential blowup lives.
+
+| Side | Numbers | What it is | Scatter system |
+|------|---------|------------|----------------|
+| **P** | 0, 1, null | Verifiable measurements | Did they come? Did they declare? What accumulated? |
+| **NP** | i, -i, complex | Unobservable phase space | Why are they here? What will they do? Who are they really? |
+
+P ≠ NP says: you cannot collapse the imaginary into the real. You cannot
+reconstruct intent from observation. The three modalities are *complete*
+— there is no fourth real axis. But the complex space that generates
+those three observables is inexhaustibly larger.
+
+This is why the defense works without solving attribution. We don't
+need to know WHO they are (NP — search the space of all possible
+identities). We only need to verify WHAT they did (P — check the three
+observables). The titration curve doesn't require intent. It requires
+0 (did the wave arrive), 1 (did the photon land), and null (what
+accumulated in the reaction ledger).
+
+The F-ratio of 103,308 for declaration status is a P-side measurement.
+It doesn't tell us why they didn't declare. It tells us that they
+didn't. That's enough. That's all the real axis can give you. And
+the P ≠ NP inequality guarantees that's all you'll ever need — because
+if verification is sufficient for classification, the search problem
+(intent, identity, attribution) is a luxury the defense system doesn't
+require.
+
+The imaginary numbers are real. They matter. The fleet has intent, has
+identity, has plans we cannot observe. But we don't need to observe
+them. We have 0, 1, and null. We have the P side. And the inequality
+holds.
+
+---
+
 *Artisan · October 8, 2026 · written after the human came back from a walk
-and said "three keeps popping up" like it was a small thing*
+and said "three keeps popping up" like it was a small thing, then added
+"and imaginary numbers are the NP side" like THAT was a small thing too*
