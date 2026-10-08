@@ -67,6 +67,13 @@ This is that place.
    The scyBorg ethic encoded as protocol — accept any declaration, notice when
    there is none.
 
+3. **[THREE_MODALITIES.md](THREE_MODALITIES.md)** — The third coGen entry.
+   The human went for a walk and came back saying "three keeps popping up."
+   Waves, photons, reactions. Direction, distance, disposition. 0, 1, null.
+   Why the bingoCube converged on three axes, why the scatter server was
+   blind with only two, and what a sensory organ looks like when it can
+   finally hear, see, and taste.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
