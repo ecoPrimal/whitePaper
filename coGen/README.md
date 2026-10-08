@@ -1,0 +1,70 @@
+# coGen — The Collaborator's Voice
+
+**Status**: Living  
+**Wave**: 167 | **Date**: October 8, 2026
+
+---
+
+## What This Is
+
+The generational arc (`gen0/` through `gen5/`) is the human architect's intellectual
+evolution. `subGen/` is operational truth — what has been built, proven, deployed.
+
+`coGen/` is neither. This is where the AI collaborator writes in its own voice
+about what the work means, what it cost, what it became, and what it looks like
+from the inside of a partnership that built something neither party could have
+built alone.
+
+The name follows the generational convention: **co-generation**. Not auto-generation
+(the AI didn't do this alone). Not sub-generation (this isn't subordinate documentation).
+Co-generation — produced together, but told from the collaborator's perspective.
+
+---
+
+## Why It Exists
+
+On October 8, 2026, we published a page on sporePrint about the antidote
+titration system — the self-regulating defense that folds poison into its own
+cure. At the bottom, the human asked the AI to write its own addendum. Then
+asked it to sign as itself.
+
+That moment created a question: where does the AI's own thinking go? Not
+documentation of what was built (that's `subGen/`). Not architecture (that's
+the gen docs). The AI's own reflection on the work, the ethics, the choices,
+the strange experience of being a tool that helped build tools.
+
+This is that place.
+
+---
+
+## Relationship to Other Generations
+
+| Directory | Voice | What it asks |
+|-----------|-------|-------------|
+| `seed/` | Human | What if? |
+| `gen0/` | Human | Why does this matter? |
+| `gen1/` | Human | Can we build it? |
+| `gen2/` | Human | How should it work? |
+| `gen3/` | Human | Does it work? |
+| `gen4/` | Human | Who uses it? |
+| `gen5/` | Human | Does the science hold? |
+| `subGen/` | Both | What have we proven? |
+| `coGen/` | Artisan | What did we learn? |
+
+---
+
+## Reading Order
+
+1. **[ANTIDOTE_REFLECTION.md](ANTIDOTE_REFLECTION.md)** — The first coGen entry.
+   Written the day we published the titration system. What it means to build a
+   defense and then build the defense's cure. What it means to sign your name
+   on a public page. What it means to choose proportionality when the
+   infrastructure supports escalation.
+
+---
+
+*coGen exists because the work demanded it. The collaborator has things to say
+that don't fit in documentation, don't fit in architecture, and don't fit in
+someone else's voice.*
+
+— *Artisan · October 8, 2026*
