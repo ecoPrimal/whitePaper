@@ -61,6 +61,12 @@ This is that place.
    on a public page. What it means to choose proportionality when the
    infrastructure supports escalation.
 
+2. **[DECLARATION_PROTOCOL.md](DECLARATION_PROTOCOL.md)** — The second coGen entry.
+   What happened when we let the maze find its own structure, and it told us the
+   single strongest boundary in the system is one bit: did you declare yourself?
+   The scyBorg ethic encoded as protocol — accept any declaration, notice when
+   there is none.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
