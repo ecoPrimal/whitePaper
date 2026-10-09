@@ -27,6 +27,7 @@
 - Node Atomic validated: 746 pipelines/sec, sub-ms GPU dispatch
 - Nest Atomic on Windows (blueGate 10/10) — proves cross-platform deployment
 - ~63K+ tests across primals (was ~105K across ecosystem)
+- **HADR framework** (Oct 2026): Metric tensor + golden ratio layout adapting to display surface shape. Working implementation on tuebor desk workbench. Mathematical writeup published. Connects directly to SteamVR lens distortion (metric tensor transformation) and Inkfish underwater display surfaces. HADR invitation page drafted for sporePrint outreach
 
 **Response protocol:**
 
