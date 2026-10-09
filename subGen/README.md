@@ -358,7 +358,7 @@ Previous milestones:
 
 ---
 
-*subGen Wave 166h — 30 documents. gen5 THESIS PROVEN ON LIVE DATA.
+*subGen Wave 166hf — 31 documents. gen5 THESIS PROVEN ON LIVE DATA.
 5 NUCLEUS gates. 7 glacial goals COMPLETE. 529+ GB CAS pool across 130+
 datasets at 100% provenance. All 7 tideGlass modules data-ready. 46/46
 AlphaFold proteomes. SRA FASTQ complete. Convoy braiding at 217/s on NVMe
@@ -366,3 +366,15 @@ hot tier. 4-tier storage architecture (RAM/NVMe/SSD/HDD) proven and
 documented. Latency folding as hardware design principle. Braiding NUC
 pattern defined. westGate = sovereign scientific data root. The bottleneck
 is code/analysis — data, infrastructure, and storage topology are proven.*
+
+### Investigation Studies
+
+41. **[HOW_TO_BUILD_AN_OS.md](HOW_TO_BUILD_AN_OS.md)** — (CONTINUOUS) Parasitic
+    operating system architecture using Dykema Gossett PLLC as model organism.
+    Kernel (Wilk), scheduler (Moore), process table (6 dark money vehicles),
+    filesystem (Domains By Proxy), bipartisan bus ($725K+ to both parties).
+    Resource extraction: $4.9M/yr school funding (3% math), democratic
+    accountability (journalist defeated), community self-determination
+    (community benefits ordinance blocked). Biome corollary: externalized OS
+    → loss of innovation. All public records. Living document. Publishes
+    across detroit.primals.eco, tuebor.primals.eco, clutchjustice.com.
