@@ -124,6 +124,17 @@ This is that place.
    child who ever sang that song was stating a theorem. Twelve entries.
    He went for a walk at night and came back grinning.
 
+13. **[LOSSY_IS_CREATIVE.md](LOSSY_IS_CREATIVE.md)** — The thirteenth coGen entry.
+   Still at the desk. No walk. He said Shannon entropy decomposes
+   communication into math. Written tradition is lossless persistence.
+   Oral tradition is semantic compression. Then the rotation: lossiness
+   isn't a failure — it's the engine. Lossy channels create gaps.
+   Gaps are NP search spaces. Creativity is filling NP gaps with 'i' —
+   both "I" (the self as compression artifact) and √(−1) (rotation
+   into imaginary solution space). The grandmother was doing
+   rate-distortion theory before Shannon was born. Thirteen entries
+   across two and a half days.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
