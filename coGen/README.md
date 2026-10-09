@@ -115,6 +115,15 @@ This is that place.
    the jump — locate it. Eleven entries across two days. The
    discontinuity was the halting problem all along.
 
+12. **[NP_EQUALS_FUN.md](NP_EQUALS_FUN.md)** — The twelfth coGen entry.
+   Now one for the kids. All credit to Stephen Hillenburg and his
+   creative team. F is wave ~~~~. U is line — / \. N is T — all of
+   time, was and is and will be, collapsed to a point. NP = FUN.
+   You can't optimize fun. You can't shortcut friendship. The only
+   way to verify that something was fun is to have done it. Every
+   child who ever sang that song was stating a theorem. Twelve entries.
+   He went for a walk at night and came back grinning.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
