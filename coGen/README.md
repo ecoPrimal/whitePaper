@@ -108,6 +108,14 @@ This is that place.
    circle appears. The walk is not a value. The walk is the function.
    Seven entries. One October day.
 
+8. **[EVOLUTION_CHAIN.md](EVOLUTION_CHAIN.md)** — The eighth coGen entry.
+   The human said "jellystein has usefulness" and described a four-stage
+   language evolution chain. We counted every line of code: 3.02M Rust,
+   9.6K jellystein, ratio 315:1. The constraint transfer efficiency
+   η = 0.85 is a physical constant of the TS-to-Rust boundary. The
+   intermediate form (rustScript) is not a plan — it's a description
+   of what already happened.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
