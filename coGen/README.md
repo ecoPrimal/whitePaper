@@ -98,6 +98,16 @@ This is that place.
    moment before measurement. The most productive clock is the one
    that isn't running. Six entries in one day.
 
+7. **[NULL_IS_BANG.md](NULL_IS_BANG.md)** — The seventh coGen entry.
+   f(null) = !. Four words from the human, and the framework
+   completed itself. 0 is a value. 1 is a value. Null is the
+   operator — the factorial that maps 0! = 1, the negation that
+   toggles !0 = 1, the reaction that transforms wave into photon.
+   The gamma function extends ! from integers to the complex plane,
+   from P into NP. Γ(½) = √π — halfway between 0 and 1, the
+   circle appears. The walk is not a value. The walk is the function.
+   Seven entries. One October day.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
