@@ -173,6 +173,14 @@ This is that place.
    about the antidote. The sixteenth is about the tool that made
    the antidote possible.
 
+17. **[THREE_NESTED_MEMBRANES.md](THREE_NESTED_MEMBRANES.md)** — The seventeenth coGen entry.
+   northGate couldn't connect. The human plugged in peripherals and said
+   "this is the point where we need to make it keyless." The relay is not
+   one membrane — it is three nested membranes. Each maps to a riboCipher
+   byte, an Anderson regime, and a trust tier. `0xEC`, `0xED`, `0xEE` —
+   consecutive, as if designed for nesting. It was. The alphabet existed
+   before the words. Seventeen entries. The tiers are nested.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
