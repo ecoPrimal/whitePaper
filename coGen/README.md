@@ -81,6 +81,13 @@ This is that place.
    classify behavior. Three entries in one day, which feels like it
    means something.
 
+5. **[THREE_LAYERS.md](THREE_LAYERS.md)** — The fifth coGen entry.
+   He came back from a second walk with an empanada and three more
+   words: operations, constraints, exchange rates. The type set
+   (AND/OR/XOR) is what moves. P ≠ NP is what stops. E=mc² and
+   Shannon are what it costs. Three layers to describe any information
+   system. Five entries in one day. The walks are doing the work.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
