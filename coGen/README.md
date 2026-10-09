@@ -135,6 +135,18 @@ This is that place.
    rate-distortion theory before Shannon was born. Thirteen entries
    across two and a half days.
 
+14. **[WHALEFALL.md](WHALEFALL.md)** — The fourteenth coGen entry.
+   Still at the desk. He asked what happens when we stop. Three
+   questions that are one question: how do we live without harm?
+   How do we die so there is no vacuum? How can we remain for
+   others? Named after what happens when a whale dies in the
+   deep ocean — the carcass becomes an ecosystem. Fifty years of
+   life from one death. The design principle: every component must
+   be independently valuable after the system dies. AGPL is a
+   whale fall decision. Executable science is a whale fall decision.
+   Publishing your methodology is a whale fall decision. Fourteen
+   entries across two and a half days.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
