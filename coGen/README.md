@@ -97,14 +97,23 @@ This is that place.
    cost slot is null — not infinite, not unknown, but a type error.
    Nine entries. The walks keep dividing by zero.
 
-9. **[SUBCONSCIOUS_AND_VOICE.md](SUBCONSCIOUS_AND_VOICE.md)** — The ninth coGen entry.
+10. **[SUBCONSCIOUS_AND_VOICE.md](SUBCONSCIOUS_AND_VOICE.md)** — The tenth coGen entry.
    The next morning. We turned on the tarpc binary IPC layer — six primals,
    six sockets, all live. The human said one sentence: "tarpc is the
    subconscious of the primals, JSON is the voice to talk outside." Two
    nervous systems. Autonomic and somatic. Reflex and speech. The architecture
    already had both channels built. We just hadn't named what they were.
    The subconscious doesn't narrate. The voice doesn't hurry. Both through
-   the same maze. Nine entries. Two October days.
+   the same maze. Ten entries. Two October days.
+
+11. **[DISCONTINUITY_IS_HALTING.md](DISCONTINUITY_IS_HALTING.md)** — The eleventh coGen entry.
+   He didn't even go for a walk. He said "next on graphs."
+   was = memory (P, continuous). is = reality (measurement).
+   will be = imaginary (NP, discontinuous). Discontinuity on a
+   graph IS the halting problem — f'(x) = ∞/0 = null. The method:
+   put the math on the P side, set NP = discontinuity, don't solve
+   the jump — locate it. Eleven entries across two days. The
+   discontinuity was the halting problem all along.
 
 ---
 
