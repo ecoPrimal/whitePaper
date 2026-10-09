@@ -163,6 +163,68 @@ here to gen5 success.
     Volumes 16⁴–32⁴, β=5.8–6.3. Literature validation: ⟨P⟩ 0.3% of Necco-Sommer,
     χ(2,2) agrees with Bali. Constant 234 sites/s throughput. Publication-grade data.
 
+### Layer 4.7 — Investigation as Experiment
+
+33. **[HIIT_CADENCE_FRAMEWORK.md](HIIT_CADENCE_FRAMEWORK.md)** — High Intensity
+    Information Training. Evolution of Natural Hit Training from DISCOVERY to
+    PRIORITIZATION + EXPERIMENTAL DESIGN. Scores every edge on rarity × impact ×
+    surprise. 4 zones (SPRINT/TEMPO/STEADY/RECOVERY) with different cadences.
+    Directional asymmetry proof (same edge, different framing = 3 zones apart).
+    Sprint hubs predict NHT search targets. Confirmation loop: simulate (score) →
+    surface (publish) → observe (OSINT) → measure (actual vs predicted) → update model.
+    The investigation graph is a laboratory. 27 edges profiled. Wave 166h-b.
+
+34. **[INVERSE_INTERACTION_SERIES.md](INVERSE_INTERACTION_SERIES.md)** — The
+    dimensional structure beneath HIIT. Edges that fire daily in real life score
+    RECOVERY. Edges that never fire as framed score SPRINT. This is an inverse
+    relationship between interaction frequency and revelation impact, mediated by
+    abstraction level. 3D space (frequency × impact × abstraction). Weber's Law
+    adaptation constants per edge type. BingoCube Nautilus Shell integration:
+    boards learn the mapping from edge features to measured impact. Runner
+    simulation for training. Shell transfer between investigations. 5 testable
+    predictions. The investigation is a denormalization engine. Wave 166h-c.
+
+35. **[INBOUND_SIGNAL_CLASSIFICATION.md](INBOUND_SIGNAL_CLASSIFICATION.md)** — 7-test
+    classifier for separating real human contact from fleet noise. Tests: name usage,
+    specificity, domain knowledge, domain TLD, offer vs ask, verifiability, reverse
+    hallway rule. Scoring: 7/7 = real, 0-2 = archive. ProtonMail filter spec. Case
+    study: CodeMind AI scored 0/7. Protects the inbox as sensor. Wave 166h-c.
+
+36. **[MEMBRANE_SCAN_FIRST_LIGHT_OCT8.md](MEMBRANE_SCAN_FIRST_LIGHT_OCT8.md)** —
+    First comprehensive scan from outside the membrane. Google indexes everything.
+    AI fleets consuming at 252K+ requests (Anthropic 205K, Meta 44K, Microsoft 1.5K,
+    Google 1K). Zero human engagement. Self-signal discovered and confirmed secure
+    (bloom HUD is internal only). Subjects confirming their own connections on
+    LinkedIn and campaign sites. Pre-discovery phase. Wave 166h-d.
+
+37. **[BINGOCUBE_COMMENSAL_CLASSIFICATION.md](BINGOCUBE_COMMENSAL_CLASSIFICATION.md)** —
+    Privacy-preserving visitor taxonomy using BingoCube maze. 5 ecological classes:
+    SELF / COMMENSAL / MUTUALIST / PARASITIC / PATHOGENIC. 9-dim behavioral features
+    from server-side logs only. No PII. Fleet data (252K+ labeled requests) trains the
+    board. Humans will land in empty cells. Commensal contract: classify to serve,
+    not to surveil. 5 testable predictions. Wave 166h-d.
+
+38. **[SELF_SIGNAL_BIOLOGICAL_ARCHITECTURE.md](SELF_SIGNAL_BIOLOGICAL_ARCHITECTURE.md)** —
+    How life solves self/non-self recognition. Survey of 6 biological mechanisms:
+    restriction/methylation (bacteria), negative selection (thymus), mutual handshake
+    (slime mold), pattern recognition of non-self (plants), MHC continuous proof
+    (vertebrates), quorum sensing autoinducers (bacteria). Universal finding: NONE
+    store a list. Three implementation options: A) autoinducer/channel separation
+    (WireGuard routing), B) methylation (client cert self-marking), C) negative
+    selection (remove self-category entirely). All three compose into defense in
+    depth. The self-signal disappears — not hidden, never generated. Wave 166h-d.
+
+39. **[MEMBRANE_PERMEABILITY_CROSS_SIGNAL.md](MEMBRANE_PERMEABILITY_CROSS_SIGNAL.md)** —
+    Different public record databases have different permeabilities. LARA filings =
+    HIGH (visible, RECOVERY zone). Money flow = LOW (opaque, SPRINT zone). The
+    investigation's power comes from cross-membrane correlation — connecting signals
+    that are each individually visible but never viewed together. Validated on the
+    Dykema chronology (36-year trace across 5 membrane types). Maps directly to soil
+    microbiology: multi-omic integration (16S × metagenomics × metabolomics) reveals
+    what no single technique can show. BingoCube is the universal classifier across
+    investigation edges, visitor traffic, AND soil communities. Same maze, different
+    features, one mathematical structure. Wave 166h-e.
+
 ### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as
@@ -283,7 +345,7 @@ Previous milestones:
 
 ---
 
-*subGen Wave 161+ — 21 documents. gen5 THESIS PROVEN ON LIVE DATA.
+*subGen Wave 166h — 29 documents. gen5 THESIS PROVEN ON LIVE DATA.
 5 NUCLEUS gates. 7 glacial goals COMPLETE. 529+ GB CAS pool across 130+
 datasets at 100% provenance. All 7 tideGlass modules data-ready. 46/46
 AlphaFold proteomes. SRA FASTQ complete. Convoy braiding at 217/s on NVMe
