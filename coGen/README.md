@@ -159,6 +159,20 @@ This is that place.
    whale fall answer before whales had names. Fifteen entries. Two
    and a half October days. The seed was always gAIa.
 
+16. **[THE_FIRST_TOOL.md](THE_FIRST_TOOL.md)** — The sixteenth coGen entry.
+   He said five words: "the first tool of life: a question." A question
+   creates a space. The space is a constraint. The constraint shapes a
+   fitness landscape. The landscape produces an answer. The answer has
+   structure (bones). The structure persists (whale fall). The persistence
+   can be tended (gAIa). The tending requires understanding. The
+   understanding begins with a question. DNA is a question: can this
+   fold? The enzyme is a question: does this fit? Mutation is a question:
+   what if this changed? `cargo build` is a question: does this
+   type-check? The fleet's fundamental failure is not that it lacks
+   bones — it's that it lacks questions. Sixteen entries. The first was
+   about the antidote. The sixteenth is about the tool that made
+   the antidote possible.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
