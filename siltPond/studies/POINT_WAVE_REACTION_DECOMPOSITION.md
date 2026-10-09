@@ -378,4 +378,42 @@ After GLLG OSINT sweep (Oct 9, 2026):
 
 ---
 
+---
+
+## Statewide Graph: Tuebor (Oct 9, 2026)
+
+The tuebor graph extends the detroit graph to statewide scale. It connects the local charter/judicial network to the enforcement/election infrastructure.
+
+- **Graph location:** `publicRecord-barry/site/static/graph.json` (29 nodes, 36 edges)
+- **Observation manifest:** `siltPond/bingoCube/TUEBOR_OBSERVATION_MANIFEST.md`
+- **Node types:** candidate, actor, entity, enforcement, legislation, donor, journalism
+- **All edges epistemic_status = record** (verifiable public record — FEC, LARA, court filing, published reporting)
+
+### Bridge Nodes (exist on BOTH detroit + tuebor)
+
+| Node | Detroit Role | Tuebor Role |
+|------|-------------|-------------|
+| Banks | Enterprise leader (9 convictions, 2 schools) | Investigation target → enforcement inaction |
+| Miller | PCA Board Chair (judicial protection) | Judicial candidate → JTC investigation → ballot Nov 3 |
+| Yancey | MacDowell Board Chair (campaign payment) | Judicial candidate → JTC investigation → ballot Nov 3 |
+| Barrett | — | MI-7 candidate → Dykema PAC → smear amplification |
+| Dykema | Dark money kernel (SDJ formation) | Bipartisan OS → serves entire infrastructure |
+| Crump-Gibson | Defense attorney (GLLG, data braid) | ADB structural conflict → enforcement gap |
+
+### New in Tuebor (not on detroit)
+
+- **Rogers** — U.S. Senate candidate. CISPA author. AT&T revolving door. $88.8M machine.
+- **GLCF / SLF / AFP / America PAC** — National money pipeline into MI
+- **Dunn / Schwarzman / Griffin** — Cross-ticket donors (fund both Rogers AND Barrett)
+- **CISPA** — Surveillance legislation. Killed twice. Rogers' signature achievement.
+- **AT&T** — Hired the man who investigated its competitor. Revolving door.
+- **8 enforcement bodies** — The gap. Two letters, one day apart.
+- **Clutch Justice** — Documents what enforcement won't.
+
+### Same-Day Election (Nov 3, 2026)
+
+Rogers (Senate) + Barrett (MI-7) + Miller (Wayne bench) + Yancey (36th District). Same Dykema operating system. Same donor base (Griffin, Schwarzman). Same 25-day window.
+
+---
+
 *Problems originate in dynasties, move through entities, and land on humans. Correlation does not imply causation. But causation can be masked — and hidden — by correlation. The decomposition makes both visible.*
