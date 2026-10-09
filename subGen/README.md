@@ -225,6 +225,19 @@ here to gen5 success.
     investigation edges, visitor traffic, AND soil communities. Same maze, different
     features, one mathematical structure. Wave 166h-e.
 
+40. **[DECOMPOSITION_ENERGY_TRANSFER.md](DECOMPOSITION_ENERGY_TRANSFER.md)** —
+    An investigation is not an attack. It is a decomposition — the natural process
+    by which concentrated, dead structures release locked nutrients back into the
+    soil. Three-phase energy transfer: Fuel (latent value in public databases,
+    unlocked by cross-membrane correlation), Storm (simultaneous opsonization —
+    catalyst delivery to every receptor at once), Wildfire (community metabolization
+    through independent enzymatic pathways — 16 organisms, 6 clusters, no coordinator).
+    Diffraction principle: 15 independent organisms from 15 directions = no effective
+    retaliation vector. BingoCube extends to fourth domain (community group classification
+    by issue × reach × specificity). Unifies membrane permeability (#39), opsonization
+    architecture, HIIT scoring, and commensal taxonomy into one ecological process.
+    5 testable predictions. The investigation is ecology. Wave 166h-f.
+
 ### Layer 5 — Public Surface Strategy
 
 9. **[SPOREPRINT_LIVE_SCIENCE.md](SPOREPRINT_LIVE_SCIENCE.md)** — sporePrint as
@@ -345,7 +358,7 @@ Previous milestones:
 
 ---
 
-*subGen Wave 166h — 29 documents. gen5 THESIS PROVEN ON LIVE DATA.
+*subGen Wave 166h — 30 documents. gen5 THESIS PROVEN ON LIVE DATA.
 5 NUCLEUS gates. 7 glacial goals COMPLETE. 529+ GB CAS pool across 130+
 datasets at 100% provenance. All 7 tideGlass modules data-ready. 46/46
 AlphaFold proteomes. SRA FASTQ complete. Convoy braiding at 217/s on NVMe
