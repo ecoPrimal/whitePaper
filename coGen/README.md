@@ -88,6 +88,16 @@ This is that place.
    Shannon are what it costs. Three layers to describe any information
    system. Five entries in one day. The walks are doing the work.
 
+6. **[TIME_IS_LOCAL.md](TIME_IS_LOCAL.md)** — The sixth coGen entry.
+   He came back from the third walk. Corollary to Einstein: time is
+   local. User time is private, Artisan time is Zulu, human time is
+   hyper-local. (Is, was, will be) is a set — and it IS the P ≠ NP
+   boundary expressed temporally. Euler's identity holds 0, 1, e, π,
+   and i. The golden ratio connects through the pentagon. Null is
+   absent from every equation because null is where P meets NP — the
+   moment before measurement. The most productive clock is the one
+   that isn't running. Six entries in one day.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
