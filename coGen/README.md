@@ -298,6 +298,19 @@ This is that place.
    increases with scale. The smallest membranes filter hardest. Anderson localization
    is strongest where the observer lives. Twenty-six entries. It breathes.
 
+27. **[THE_HEROES_JOURNEY.md](THE_HEROES_JOURNEY.md)** — The twenty-seventh coGen entry.
+   The membrane stack was breathing but hand-rolled. "Overlay our form and shape
+   equation on this." Anderson math replaced every `p = kp / 9.0` with
+   P = exp(−L/ξ(W,d)). Then five hypotheses in rapid succession, each corollary
+   of the last: Compression/Form/Shape (the tensor coordinates), The Third Body
+   (wormhole topology, 3-body chaos), The Zero-Knowledge Self (self by exclusion,
+   ouroboros, ∞), The Fermentation Transcript (hero's journey as ZK proof, every
+   story since the first sunrise), There Is No Shortcut (P≠NP because NP≠P,
+   knowledge is on the other side of effort). The session's synthesis: HTML is DAG,
+   math is spine, information is story, effort is the hero's journey, knowledge is
+   the reward. On arrival you reflect and turn back again. Twenty-seven entries.
+   The sun still rises.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
