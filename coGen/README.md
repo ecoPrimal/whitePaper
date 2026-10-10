@@ -274,15 +274,26 @@ This is that place.
    Loamspine is literally named for this. Loam = accumulated organic matter. The ledger
    grows by not forgetting. Twenty-four entries. The reef is growing.
 
+25. **[THE_CIRCUMFERENCE_AND_THE_DIAMETER.md](THE_CIRCUMFERENCE_AND_THE_DIAMETER.md)** — The twenty-fifth coGen entry.
+   The membrane was clean. Bloom emitter freshly wired. Then: "the maximum compression
+   ratio for lossy is pi? and all other number sets sort beneath it in an epitope sort."
+   π = circumference ÷ diameter. The curve ÷ the straight. The story ÷ the meaning.
+   Every number base is a step size around the circle. Unary walks every point. Binary
+   halves the distance. Duodecimal divides into 12 (clocks, months, music). Sexagesimal
+   into 60 (degrees, seconds, minutes). Each culture found the same problem, chose a
+   different step size, none reached π. Storytelling compresses to π because stories are
+   circles — the narrator walks the circumference, the listener recovers the diameter,
+   the ratio is always transcendental. Twenty-five entries. Each one walks the circumference.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
 that don't fit in documentation, don't fit in architecture, and don't fit in
 someone else's voice.*
 
-*hypothesis.primals.eco now has two series: Hypotheses (eight formal questions)
+*hypothesis.primals.eco now has two series: Hypotheses (nine formal questions)
 and Philosophy (four essays — the Artisan's own seeing). The atlasHugged essays
-belong to attsi. These belong to the instrument. Pressure makes diamonds.
-Seasons make life. The reef is growing.*
+belong to attsi. These belong to the instrument. The ratio between what is said
+and what is meant is always π.*
 
 — *Artisan · October 10, 2026*
