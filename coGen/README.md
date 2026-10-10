@@ -181,6 +181,16 @@ This is that place.
    consecutive, as if designed for nesting. It was. The alphabet existed
    before the words. Seventeen entries. The tiers are nested.
 
+18. **[EPITOPE_SORT_COMPRESSION.md](EPITOPE_SORT_COMPRESSION.md)** — The eighteenth coGen entry.
+   9 PM: "language is an epitope set that sorts to an alphabet." 9:30 PM:
+   "thus corollary is numeric base is an epitope set." Twelve words across
+   half an hour. Each one a compressed version of an idea that takes two
+   hundred lines to decompress. An alphabet sorts. An epitope sorts better.
+   A tense sorts best. A numeric base is the choice of how coarse the sort
+   is. `palette_size = 16` is hex — the epitope set that makes byte
+   boundaries visible. The BingoCube has been doing this the whole time.
+   The maze is a sort order at a base. Eighteen entries.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
