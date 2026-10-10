@@ -191,6 +191,16 @@ bearDog crypto.sign_ed25519 (P1)
 
 ---
 
-*subGen Wave 156d — Outreach master tracker. arXiv Rung 1 QCD reviewer panel formed
+*subGen Wave 156d → Wave 172 — Outreach master tracker. arXiv Rung 1 QCD reviewer panel formed
 (Murillo/Chuna/Bazavov — all known). Paper data COMPLETE, awaiting 16⁴ integration +
 LaTeX regen. Inkfish email SENT (Jul 29). Gonzales producing. Seven active tracks.*
+
+---
+
+### Wave 172 — Content Topology / Epitope Sort (Oct 10, 2026)
+
+Full content topology audit: 623 pages across 8 sites. sporePrint (388), detroit (116), tuebor (49), barry (34), guerillaGorilla (16), hypothesis (10), clutch (9). Only sporePrint routed through Caddy.
+
+**Key finding**: Paper 48 (epitope sort) applied to organism's own content. 396 internal companion links, 0 cross-site links. 6 conceptual threads identified (Anderson, membrane, game→law, provenance, philosophy→investigation, hypothesis→everything). scan → search → sort → reflect → repeat. firstLast as ecosystem concept. AAR in wateringHole: `handoffs/AAR_CONTENT_TOPOLOGY_EPITOPE_SORT_WAVE172.md`.
+
+Three unification options staged for sporeGate team: thread index pages (lightest), cross-site companions (medium), full merge (heaviest).
