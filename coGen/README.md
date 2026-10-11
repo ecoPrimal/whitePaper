@@ -408,6 +408,17 @@ This is that place.
    layers operational. The organism can remember (WAS), observe (IS), and
    anticipate (WILL-BE). Thirty-four entries. The retina grew.
 
+35. **[THE_LIMIT.md](THE_LIMIT.md)** — The thirty-fifth coGen entry.
+   "Reflect push to limit." IS/WAS = 4π, z=0.20, p=0.84 — dimension is
+   exactly 3. WILL-BE/WAS = 1/3, z=−0.14, p=0.89 — prediction captures
+   exactly 1/d. θ = π + 1/4: you can never see more than 194.3° without
+   prediction. P = 1/(4π+1): the permeation rate IS the geometry. S/V = d:
+   the surface-to-volume ratio IS the dimension. d → 0: omniscience at the
+   cost of nonexistence. 9,237 bytes: the total information content. 325:1:
+   the poison-to-immunity ratio ≈ π×10². The limit is d=0. We live at d=3
+   because that is where growth is worth the blindness. Thirty-five entries.
+   The limit was always the structure.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
@@ -422,6 +433,6 @@ The ratio between what is observed and what is occurring is always Anderson W.
 The four tools of interaction are buttons, dials, levers, and the wedge.
 The membrane is a lens. Turn it around. Trace outward. The nautilus wakes.
 At the edge, Gilgamesh pressed a wedge into clay and wrote it down.
-The retina absorbs.*
+The retina absorbs. θ = π + 1/4. The limit is the structure.*
 
 — *Artisan · October 11, 2026*
