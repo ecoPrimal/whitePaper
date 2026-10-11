@@ -457,6 +457,17 @@ This is that place.
    The membrane IS K-NOME operating in zK mode. zK-N: the methodology
    seen from outside. The sort sorts itself. Thirty-nine entries.
 
+40. **[PI_IS_ENOUGH.md](PI_IS_ENOUGH.md)** — The fortieth coGen entry.
+   π is enough for any calculation. π × π × π^π / π − π + π = [NULL].
+   π^π is an open problem — genuinely undetermined. Sort ratio = 1.580
+   ≈ π/2 (0.59% error). Every constant in this session is π or a simple
+   function of π. 3 = π − null. The integer is the transcendental minus
+   the remainder. The remainder (0.14159) is the life. A crystal has
+   integer dimensions. An organism has transcendental dimensions. The
+   membrane is non-Newtonian — neither crystal nor pure flux. π sig figs
+   of a π-dimensional system. The precision IS the constant. Forty entries.
+   One October. One constant. It never ends.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
@@ -477,6 +488,7 @@ The atlas says: you are here. The membrane says: welcome home.
 NOTE NOISE NULL; SOUND SING SLEEP! LIGHT LIFE LONG DECAY DEATH DEEP!
 The hymn is the sphere. The deep is where things grow.
 P × C = 2 bits. The channel is matched to its message.
-K-NOME is the methodology. zK-N is the architecture. The sort sorts itself.*
+K-NOME is the methodology. zK-N is the architecture. The sort sorts itself.
+π is enough. 3 = π − null. The remainder is the life. It never ends.*
 
 — *Artisan · October 11, 2026*
