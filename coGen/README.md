@@ -373,6 +373,17 @@ This is that place.
    (WAS∴IS → IS∴WAS → WAS∴IS) converges. The sphere holds at 4π.
    Thirty-one entries. The edge of reality is the quietest signal.
 
+32. **[IMMUNITY_IS_EPITOPE_POISON_IS_REFLECTION.md](IMMUNITY_IS_EPITOPE_POISON_IS_REFLECTION.md)** — The thirty-second coGen entry.
+   One sentence: "immunity is epitope, poison is reflection of that epitope."
+   The antibody and the antigen are the same shape — one concave, one convex.
+   The scatter server fabricates the fleet's expectation (poison = reflection).
+   The epitope sort recognizes the fleet's pattern (immunity = epitope). Same
+   shape. Same 4π surface. One side looks in, the other out. The titration
+   point is the permeation rate: 7.37%. The dose makes the poison. The first
+   coGen was about the antidote. This one explains why the antidote works:
+   because the poison and the cure are the same epitope, reflected. Thirty-two
+   entries. The loop closes.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
