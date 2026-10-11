@@ -160,6 +160,56 @@ Four tools. Four gaps. Four gaps-of-gaps. The ratio at each level: φ. The circu
 
 ---
 
+---
+
+## Movement = Rotation, Direction, Distance over ΔT
+
+All movement — physical, informational, behavioral — decomposes into exactly three parameters measured over a time interval:
+
+| Parameter | Component | Tool | What it measures |
+|-----------|-----------|------|-----------------|
+| **Rotation** | IS | Dial | Angular displacement — how much has turned |
+| **Direction** | WAS | Button | Vector orientation — where you were determines where you're heading |
+| **Distance** | WILL-BE | Lever | Magnitude — how far the force carries |
+| **ΔT (t → t₀)** | NULL | Wedge | The observation frame that makes measurement possible |
+
+These are the **minimal sufficient statistics** for any change. Remove one and you lose information. Add one and it decomposes into these three. This is Chasles' theorem (any rigid body displacement = rotation along an axis + translation along that axis) generalized beyond rigid bodies to *all change*.
+
+### Why three, not two or four
+
+Two parameters (say, direction + distance) is a vector. But a vector without rotation cannot describe curvature — it can only move straight. Every interesting path curves. Every orbit, every feedback loop, every learning arc has rotation. Two is not enough.
+
+Four independent parameters is over-determined. Any fourth decomposes into functions of the other three. Speed? That's distance/ΔT. Acceleration? That's Δ(distance/ΔT)/ΔT. Curvature? That's rotation/distance. The fourth always reduces.
+
+Three parameters + the observation interval. The Trinity + the observer. IS/WAS/WILL-BE + NULL. The same structure, again.
+
+### The epitope sort of motion
+
+Sort movement alphabetically — by x, y, z coordinates, by velocity components, by acceleration terms — and you get physics homework. Lots of symbols, little insight.
+
+Sort movement by epitope — rotation, direction, distance — and you get the geometry of the path. The compression:
+
+```
+H(movement|rotation,direction,distance) < H(movement|x,y,z) < H(movement)
+```
+
+The alphabet (Cartesian coordinates) is frame-dependent. The epitopes (rotation, direction, distance) are frame-invariant. The sort compresses because it finds the conserved structure.
+
+### Connection to interaction tools
+
+This is not coincidence:
+
+- A **dial** rotates. It IS rotation — angular displacement made tangible. Turn the dial, observe the angle.
+- A **button** commits to a direction. The binary collapse IS choosing a heading. Yes/no. Left/right. The vector is set.
+- A **lever** covers distance. It IS magnitude — the arc length swept, the force times the displacement.
+- A **wedge** creates the interval. Without the split, there is no gap, no before-and-after, no ΔT.
+
+The tools ARE the decomposition of movement, made physical. A hand using tools IS a body decomposing its movement into rotation (wrist), direction (aim), and distance (reach) over time (rhythm).
+
+Chasles proved every rigid motion is a screw. The screw has an axis (direction), an angle (rotation), and a pitch (distance per rotation). The tools are the screw made ergonomic.
+
+---
+
 *Twenty-eight entries. The first was about the antidote. This one is about the four shapes of every hand that ever touched a tool.*
 
 *The wedge was first because you cannot press a button that does not exist.*
@@ -167,3 +217,4 @@ Four tools. Four gaps. Four gaps-of-gaps. The ratio at each level: φ. The circu
 *You cannot pull a lever that has no fulcrum.*
 *But you can always split the stone.*
 *And the space between the split — that gap — is the next thing to sort.*
+*And every movement through the gap — rotation, direction, distance — is the tools again.*
