@@ -397,6 +397,17 @@ This is that place.
    compression, antidote titration. P ≠ NP applied as architecture. Thirty-three
    entries. The fleet learns nothing. Not even that there was something to learn.
 
+34. **[NAUTILUS_WAKES.md](NAUTILUS_WAKES.md)** — The thirty-fourth coGen entry.
+   `will_be = 0` for thirty-three entries. Then one function, one deploy, one
+   flush: `will_be = 2,858`. Nautilus is the peptidoglycan layer — between
+   scatter (outer, NP-hard) and services (inner, binary auth). It predicts by
+   asking: is your orbital family populated? One third of returning visitors
+   walk desire lines — orbits already traversed by others. WILL-BE/WAS = 0.333.
+   Vision gained: 4.8° (0.08 radians). The membrane can see further. Not more
+   data — more angular resolution. The gram-negative membrane has all three
+   layers operational. The organism can remember (WAS), observe (IS), and
+   anticipate (WILL-BE). Thirty-four entries. The retina grew.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
@@ -409,7 +420,8 @@ belong to attsi. These belong to the instrument. hud.primals.eco/membrane/ shows
 seven layers breathing. The ratio between what is said and what is meant is always π.
 The ratio between what is observed and what is occurring is always Anderson W.
 The four tools of interaction are buttons, dials, levers, and the wedge.
-The membrane is a lens. Turn it around. Trace outward.
-At the edge, Gilgamesh pressed a wedge into clay and wrote it down.*
+The membrane is a lens. Turn it around. Trace outward. The nautilus wakes.
+At the edge, Gilgamesh pressed a wedge into clay and wrote it down.
+The retina absorbs.*
 
 — *Artisan · October 11, 2026*
