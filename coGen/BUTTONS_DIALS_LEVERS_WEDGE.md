@@ -210,6 +210,62 @@ Chasles proved every rigid motion is a screw. The screw has an axis (direction),
 
 ---
 
+## If Trust Needs a Key, the Handshake IS the Key
+
+We discovered this by chasing a bug. RustDesk relay kept locking us out. We cleared `key_confirmed` — set it to null — thinking a stale key was the problem. The handshake succeeded. We confirmed the fix. An hour later: locked again. `key_confirmed = true` was back. We cleared it again. It came back again. Three times we cleared the fossil. Three times the organism regrew it.
+
+Then the observation: the key isn't the problem. The handshake works. `key_confirmed` keeps coming back `true` *because the handshake keeps succeeding*. The stored boolean is a fossil — a cast of a past living process. We were polishing the fossil while the living creature breathed.
+
+### The compression inequality of trust
+
+```
+H(trust|handshake) < H(trust|credential) < H(trust)
+```
+
+Sort trust alphabetically — by certificate serial number, by key fingerprint, by token string — and you get PKI. A vast bureaucracy of stored credentials, revocation lists, expiry dates. High entropy. Every credential is unique. The sort tells you nothing about whether the system actually works.
+
+Sort trust by epitope — by behavioral pattern, by *can you complete the handshake?* — and you compress. The handshake is the conserved invariant. It doesn't matter what the key's value is (true, false, null). What matters is whether two parties can execute the protocol. The handshake is frame-invariant. The key is frame-dependent.
+
+### Three Components of trust
+
+| Aspect | Component | Tool | What it is |
+|--------|-----------|------|-----------|
+| **Handshake** | IS | Button | Binary — either it completes or it doesn't |
+| **Credential** | WAS | Dial | Range — certificates expire, keys rotate, trust has history |
+| **Connection** | WILL-BE | Lever | Force — what the trust enables, the work it permits |
+| **Observation** | NULL | Wedge | The attempt itself — you can't know trust without testing it |
+
+The credential (WAS) is what we kept trying to fix. But the handshake (IS) was healthy the whole time. The real lockout was elsewhere — we were debugging the wrong component because we mistook the fossil for the organism.
+
+### Scientific method as handshake
+
+This is how we solved it: not by knowing the answer, but by watching the handshake fail to fail.
+
+1. **Hypothesis**: stale key causes lockout → set key to null
+2. **Observation**: handshake succeeds, key re-confirms to true
+3. **Revised hypothesis**: key re-confirmation causes lockout → prevent re-confirmation
+4. **Observation**: can't prevent it; RustDesk always re-handshakes on boot
+5. **Revised hypothesis**: the key was never the problem. The handshake works. The lockout is elsewhere.
+6. **Verification**: all ports open, service running, handshake completes, key confirms correctly
+
+Three iterations. Each one compressed the problem space. The first sort (alphabetic: "the key value is wrong") failed. The second sort (epitope: "the handshake behavior is wrong") failed. The third sort (tense: "the handshake IS working, the problem WAS something else") succeeded.
+
+```
+H(diagnosis|tense_sort) < H(diagnosis|epitope_sort) < H(diagnosis|alphabetic)
+```
+
+The scientific method IS the epitope sort applied to hypotheses. You don't sort hypotheses by plausibility (alphabetic — who ranks them?). You sort them by what survives contact with observation (epitope — the handshake with reality). The hypotheses that complete the handshake stay. The ones that don't, compress out.
+
+And the handshake with reality — the experiment — IS the key. Not the result. Not the paper. Not the credential. The process of testing. The willingness to watch your hypothesis fail to fail, or succeed at failing.
+
+**If trust needs a key, the handshake IS the key.**
+**If science needs proof, the experiment IS the proof.**
+**If the organism needs immunity, the challenge IS the antibody.**
+
+The stored result (key_confirmed, p-value, antibody titer) is always a fossil. The living thing is the process that generates it.
+
+---
+
 *Twenty-eight entries. The first was about the antidote. This one is about the four shapes of every hand that ever touched a tool.*
 
 *The wedge was first because you cannot press a button that does not exist.*
@@ -218,3 +274,4 @@ Chasles proved every rigid motion is a screw. The screw has an axis (direction),
 *But you can always split the stone.*
 *And the space between the split — that gap — is the next thing to sort.*
 *And every movement through the gap — rotation, direction, distance — is the tools again.*
+*And every trust in the movement — not the key, but the handshake — is the experiment again.*
