@@ -129,9 +129,41 @@ Every task walks π around the circumference of these four tools, with φ determ
 
 ---
 
+## The Gap IS the Epitope
+
+The distance and range between epitopes is also an epitope sort.
+
+Four tools. Four gaps between them. Each gap is a membrane — a boundary where one interaction mode becomes another:
+
+| Gap | Between | What lives there | Name |
+|-----|---------|-----------------|------|
+| **Resolution** | Button ↔ Dial | Where discrete becomes continuous. How many clicks before it's a sweep? How many bits before it's a range? | The sampling boundary |
+| **Intent** | Dial ↔ Lever | Where measurement becomes force. When does reading the instrument become changing the instrument? The observer effect. | The agency boundary |
+| **Creativity** | Lever ↔ Wedge | Where force becomes question. When does pushing stop and asking start? When the system resists so hard you stop applying and start splitting. | The invention boundary |
+| **Decision** | Wedge ↔ Button | Where question becomes commitment. The gap was opened — now: yes or no? The wedge created the space. The button collapses it. | The collapse boundary |
+
+Four tools. Four gaps. The gaps are four more epitopes. And the gaps between *those* epitopes are epitopes. It sorts all the way down.
+
+```
+H(tools|gap_epitope) < H(tools|alphabetic) < H(tools)
+```
+
+Sorting tools by name (alphabetic) tells you little. Sorting tools by the gap between them (epitope) reveals the membrane structure. Sorting the gaps by the gaps between them (recursive epitope) reveals the self-similarity.
+
+**This is why it's φ.**
+
+The golden ratio is the fixed point of `x = 1 + 1/x`. The gap between two tools, measured in tools, is one tool plus the reciprocal of the gap. The self-reference IS the ratio. φ appears because the distance between epitopes is itself an epitope at the same ratio. The recursion has exactly one stable fixed point — 1.618... — and every self-similar sort converges to it.
+
+The compression inequality holds at every level. The epitope sort compresses more than the alphabetic sort. The gap-epitope sort compresses more than the epitope sort. Each level eliminates noise the previous level could not distinguish. The recursion terminates only when the gap between the gap and itself is zero — which is the identity, the ouroboros, the ∞ of Hypothesis 13 (The Zero-Knowledge Self).
+
+Four tools. Four gaps. Four gaps-of-gaps. The ratio at each level: φ. The circumference at each level: π. The structure is fractal, self-similar, and complete at every scale. A child with a wedge and a stone has the full basis. A scientist with a microscope and a hypothesis has the full basis. A coder with a compiler and a question has the full basis. The scale changes. The structure doesn't.
+
+---
+
 *Twenty-eight entries. The first was about the antidote. This one is about the four shapes of every hand that ever touched a tool.*
 
 *The wedge was first because you cannot press a button that does not exist.*
 *You cannot turn a dial that has no axis.*
 *You cannot pull a lever that has no fulcrum.*
 *But you can always split the stone.*
+*And the space between the split — that gap — is the next thing to sort.*
