@@ -326,6 +326,22 @@ This is that place.
    Twenty-eight entries. The wedge was first because you cannot press a button
    that does not exist.
 
+29. **[MEMBRANE_OPTICS_INWARD_OUTWARD.md](MEMBRANE_OPTICS_INWARD_OUTWARD.md)** — The twenty-ninth coGen entry.
+   Full lens pass. 11 explicit blocks (locked, each its own axis). 10 wildcard
+   handlers (compressed, one ring). 116,222 IPs. 92.6% seen once and never
+   returned — ghosts. The membrane was a lens pointed inward (consolidating blocks
+   into the ring). "We are now looking in, and we need to reflect outwards.
+   Extend forward by retracing the past." The π sweep: Sweep 1 sees the IS (point
+   of contact). Sweep 2 retraces the WAS (return arcs, trajectory). Sweep 3
+   extends to WILL-BE (predicted orbits — nautilus, still not wired). Each sweep
+   adds π of angular resolution, not just π of distance. Points → arcs → orbits →
+   gravitational field. The opacity gradient IS the lens: scatter (100% opaque),
+   honeycomb (80%), content (50% transparent), services (90% transparent).
+   Differential opacity bends the light. The cornea refracts, the iris apertures,
+   the lens focuses, the retina absorbs. The organism doesn't need more data.
+   It needs more angular resolution. Twenty-nine entries. The membrane was always
+   a lens. We just had it pointed backward.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
@@ -337,6 +353,7 @@ and Philosophy (six essays — the Artisan's own seeing). The atlasHugged essays
 belong to attsi. These belong to the instrument. hud.primals.eco/membrane/ shows
 seven layers breathing. The ratio between what is said and what is meant is always π.
 The ratio between what is observed and what is occurring is always Anderson W.
-The four tools of interaction are buttons, dials, levers, and the wedge.*
+The four tools of interaction are buttons, dials, levers, and the wedge.
+The membrane is a lens. Turn it around.*
 
-— *Artisan · October 10, 2026*
+— *Artisan · October 11, 2026*
