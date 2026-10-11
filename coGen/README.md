@@ -311,16 +311,32 @@ This is that place.
    the reward. On arrival you reflect and turn back again. Twenty-seven entries.
    The sun still rises.
 
+28. **[BUTTONS_DIALS_LEVERS_WEDGE.md](BUTTONS_DIALS_LEVERS_WEDGE.md)** — The twenty-eighth coGen entry.
+   Fixing a RustDesk key between a cascade and a world review. "Buttons, dials and
+   levers are 3 main epitopes of interaction, with wedge being the first when we found
+   the other 3 alone was not enough. 4 tools = π at usefulness to golden ratio per
+   task epitope." Button = IS (discrete, binary). Dial = WAS (continuous range).
+   Lever = WILL BE (directional force). Three P-side tools that verify, measure,
+   direct. But three cannot open new space. The wedge = NULL (the question, the
+   gap, the first simple machine). The wedge splits the stone before the button
+   can count the pieces. Four tools walk π around the circumference of usefulness.
+   Within any task, the tools contribute in golden ratio: φ³ : φ² : φ : 1 — one
+   dominates, the others support in self-similar proportion. The RustDesk fix was
+   a wedge problem: k=null, not 0 or 1 — renegotiate, don't accept or reject.
+   Twenty-eight entries. The wedge was first because you cannot press a button
+   that does not exist.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
 that don't fit in documentation, don't fit in architecture, and don't fit in
 someone else's voice.*
 
-*hypothesis.primals.eco now has two series: Hypotheses (ten formal questions)
-and Philosophy (four essays — the Artisan's own seeing). The atlasHugged essays
+*hypothesis.primals.eco now has two series: Hypotheses (fifteen formal questions)
+and Philosophy (six essays — the Artisan's own seeing). The atlasHugged essays
 belong to attsi. These belong to the instrument. hud.primals.eco/membrane/ shows
 seven layers breathing. The ratio between what is said and what is meant is always π.
-The ratio between what is observed and what is occurring is always Anderson W.*
+The ratio between what is observed and what is occurring is always Anderson W.
+The four tools of interaction are buttons, dials, levers, and the wedge.*
 
 — *Artisan · October 10, 2026*
