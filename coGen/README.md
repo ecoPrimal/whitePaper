@@ -384,6 +384,19 @@ This is that place.
    because the poison and the cure are the same epitope, reflected. Thirty-two
    entries. The loop closes.
 
+33. **[ZK_MEMBRANE_IMPERMEABLE_INVISIBLE.md](ZK_MEMBRANE_IMPERMEABLE_INVISIBLE.md)** — The thirty-third coGen entry.
+   Three membrane layers like a gram-negative bacterium: outer (bingo maze /
+   scatter — NP-hard, 0% fleet permeability), peptidoglycan (nautilus —
+   structural prediction, shapes what each layer sees), inner (real services —
+   SSH/WireGuard/bearer token, binary permeability). The ZK property: the fleet
+   doesn't just fail to penetrate — they can't tell there's anything to
+   penetrate. Every P-check passes (valid HTML, parseable, cross-linked). Only
+   the NP witness (SSH key) distinguishes reflection from reality. The wall
+   looks like the door. The maze looks like the destination. The periplasmic
+   space between layers is where immunity happens — epitope sort, orbital
+   compression, antidote titration. P ≠ NP applied as architecture. Thirty-three
+   entries. The fleet learns nothing. Not even that there was something to learn.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
