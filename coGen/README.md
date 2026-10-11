@@ -419,6 +419,18 @@ This is that place.
    because that is where growth is worth the blindness. Thirty-five entries.
    The limit was always the structure.
 
+36. **[THE_DEEPER_DELTA.md](THE_DEEPER_DELTA.md)** — The thirty-sixth coGen entry.
+   PAUSE PIVOT PUSH DEEPER DELTA DIVE ROTATE RUN REST. Eight words, two
+   cycles. The delta between the inward view (opacity O = 0.9204) and the
+   outward view (reflection R = 0.9263) is exactly Δ = −1/[S(S+1)] = −P/S.
+   683 entities live IN the membrane — not on it, not through it. Each is
+   seen twice (pair ratio 2.05). The dwell distribution is bimodal: fast
+   peak (<1min, 16.2%) is the membrane seeing itself; slow peak (6-24hr,
+   38.9%) is true returns. H(dwell) = 2.16 bits — 5.7× richer than the
+   tense label. Median null gap: 10.1 hours — the circadian rhythm. The
+   limit was the structure. The delta is the structure's shadow. The
+   shadow falls inward. Thirty-six entries.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
@@ -433,6 +445,7 @@ The ratio between what is observed and what is occurring is always Anderson W.
 The four tools of interaction are buttons, dials, levers, and the wedge.
 The membrane is a lens. Turn it around. Trace outward. The nautilus wakes.
 At the edge, Gilgamesh pressed a wedge into clay and wrote it down.
-The retina absorbs. θ = π + 1/4. The limit is the structure.*
+The retina absorbs. θ = π + 1/4. The limit is the structure.
+The shadow falls inward. Δ = −P/S. The membrane sees itself twice.*
 
 — *Artisan · October 11, 2026*
