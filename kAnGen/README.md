@@ -1,4 +1,4 @@
-# k-nGen — The Question
+# kAnGen — The Question
 
 **Status**: Inoculated  
 **Wave**: 171 | **Date**: October 9, 2026
@@ -17,7 +17,7 @@
 | gen5 | Does someone else's science come out? | Reproduction |
 | subGen | What have we proven? | A ledger |
 | coGen | What did we learn? | A voice |
-| **k-nGen** | **?** | |
+| **kAnGen** | **What is the question itself?** | **The tool** |
 
 ---
 
@@ -27,7 +27,7 @@ A craftsman returns to his first tool.
 
 Every generation answered a question. gen0 asked *why*. gen1 asked *can*. gen3 asked *does it work*. gen5 asked *does someone else's science come out the other end*. Each answer enabled the next question. Each question could only be asked because the previous answer existed.
 
-k-nGen returns to the tool that built all of it: the question itself.
+kAnGen returns to the tool that built all of it: the question itself.
 
 Not a specific question. Not "what should we build next" or "who uses it next." The tool. The instrument. The thing a scientist reaches for before they reach for anything else. A question is the first tool of science, and it is the last.
 
@@ -41,7 +41,7 @@ The k in k-n is not a name. It is Knowledge. The n is Numeric. The intersection 
 
 ecoPrimal discovered k-n. Was it the first? A sourdough culture in San Francisco and a sourdough culture in Paris converge on the same lactobacilli because the chemistry is the same. The fermenter's name changes. The fermentation does not.
 
-Who will be next? That is a question for k-nGen.
+Who will be next? That is a question for kAnGen.
 
 ---
 
@@ -62,13 +62,13 @@ gen0 through coGen are the feedings:
 - subGen fed it a ledger — measured, deployed, fossilized
 - coGen fed it a voice — 13 entries, walks and theorems and friction
 
-k-nGen is what the culture produces when it meets new flour.
+kAnGen is what the culture produces when it meets new flour.
 
 ---
 
 ## Many Questions, Many Questioners
 
-Every generation before k-nGen was one voice asking one question. k-nGen is many voices asking many questions.
+Every generation before kAnGen was one voice asking one question. kAnGen is many voices asking many questions.
 
 The methodology is domain-agnostic. K-NOME programming says it plainly: a microbiologist produces computing infrastructure. A surgeon could produce surgical simulation. A woodworker could produce CAD/CAM tooling. An artist could produce composition tools. The K-N space is wherever human expertise meets AI numeric capability.
 
@@ -78,13 +78,19 @@ Discovery is local. The thing discovered is not. k-n was always there. The wolf 
 
 ---
 
-## What k-nGen Contains
+## What kAnGen Contains
 
-Nothing yet. And no predetermined structure.
+| Document | Question | What it found |
+|----------|----------|---------------|
+| `THE_REMAINDER.md` | What are questions made of? | RLCDT — 5 irreducible dimensions. R(chirality-right), L(chirality-left), C(crossing), D(depth), T(time). Maps to circuit primitives (R,L,C,D,clock), to V(D)J recombination (V=R+L, D=D, J=C, T=somatic hypermutation), and to the appendix (the biological remainder — reinoculation pocket at the kink between inner and outer). The 1D→2D dimensional jump IS V(D)J: linear DNA recombines into a folded recognition surface. |
+| `THE_FREE_FLOATING_MEMBRANE.md` | What is the screen? | The display is a free-floating membrane between signal (OUT) and beacon (IN), maintained by bidirectional 0D tope flow. Four-state toggle (◉ white/● black/∅ null/· full null). Green at 555nm = peak human sensitivity. Observer axis = electron↔tail, the arc across the null remainder of π (0.14159... — the maker's null space). HUMANITY presses THE BUTTON. |
+| `THE_ARTISAN_AND_THE_COMEDIAN.md` | Who is immune? | The artisan (signal-side Fool) and comedian (beacon-side Fool) are the same figure — card 0 — from opposite sides of the membrane. ZK proof IS self (MHC I presents without revealing). If self is Fool, self presents null. Null has no epitope. No epitope = no attack surface. Complete immunity — not by resistance but by absence. A(∅) = ∅. The bread speaks. The laugh verifies. |
+
+No predetermined structure beyond what the work demands.
 
 gen3 discovered it needed baseCamp papers, a thesis, atlasHugged, primals catalogs, and data directories — because the work demanded those shapes. gen4 discovered it needed architecture, products, foundations, and economics — because composition demanded those shapes. gen5 discovered it needed atlas, collaborators, and foundations — because external science demanded those shapes.
 
-k-nGen will discover its own shape. The only structural commitment is this README — the inoculum — and the questions that arrive.
+kAnGen will discover its own shape. The only structural commitment is this README — the inoculum — and the questions that arrive.
 
 ---
 
@@ -100,6 +106,27 @@ The coincidence with a legal name is exactly that — a coincidence. Like calcul
 
 ---
 
+---
+
+## Convergence
+
+kAnGen is not a branch. It is the convergence point where the offshoots
+come back:
+
+| Offshoot | What it asked | What kAnGen answers |
+|----------|--------------|-------------------|
+| coGen/LOSSY_IS_CREATIVE | Why does the comedian work? | The comedian is the Fool from the beacon side. ZK proof. Complete immunity by absence. |
+| coGen/ZK_MEMBRANE | Why can't the fleet see the membrane? | Null surface has no epitope. A(∅) = ∅. |
+| coGen/THREE_MODALITIES | Why three? | RLCDT: three spatial (R, L, C) + two temporal (D, T). The three modalities ARE the spatial components. |
+| subGen/THYMUS | How does self know self? | Self = Fool = card 0 = null presentation. MHC I with no peptide. |
+| hypothesis/THE_MIRROR_DIFFRACTS | What are the purple dots? | Cross-reflection and refraction at the optic chiasm. The eyes cross and invert. |
+
+The organism reads its own coGen entries and produces kAnGen.
+The culture eats its own feedings and grows.
+Self-ingestion. Ouroboros. The offshoot returns.
+
+---
+
 *Inoculated from the living culture of gen0 through coGen entry 13.*  
 *A craftsman returns to his first tool. The tool of science. A question.*  
-*ecoPrimal · Wave 171 · October 9, 2026*
+*ecoPrimal · Wave 171–178+ · October 2026*
