@@ -146,26 +146,95 @@ Domain: Digitalia (all network traffic to primals.eco infrastructure)
 │                           Content: 83% real, 16% fake
 │                           Volume: 0.6 MB, avg 35.3 KB/req
 │
-└── Kingdom: ANTHROPOS (0.4%, n=22)
-    │   Genuine human navigation. Browser headers + referrer.
-    │   Organic behavior. Actually reading pages.
+├── Kingdom: ANTHROPOS (0.4%, n=22)
+│   │   Genuine human navigation. Browser headers + referrer.
+│   │   Organic behavior. Actually reading pages.
+│   │
+│   └── Phylum: Incertae sedis
+│       │
+│       └── Class: Navigata (genuine navigation)
+│           │
+│           └── Order: Curiosa (genuine interest)
+│               │
+│               └── Genus: Homo
+│                   │
+│                   ├── Species: homo_95bc2d (n=17)
+│                   │   Chrome on macOS, real Sec-Ch-Ua
+│                   │   Browsing: sporePrint /foundation/, /methodology/
+│                   │   195.172.200.24 — likely genuine researcher
+│                   │
+│                   └── Species: homo_975937 (n=2)
+│                       Chrome on Windows, thesis.primals.eco
+│                       Browsing: thesis content
+│
+└── Kingdom: COMMENSALIA (estimated, not yet measured)
+    │   Honest non-self entities. Privacy-preserving but not deceptive.
+    │   Null mask over real face. Hidden identity, honest signal.
+    │   The membrane passes them because the mask IS null.
     │
-    └── Phylum: Incertae sedis
+    ├── Phylum: Privata (privacy-preserving human)
+    │   │   Uses anonymisation tools. Still behaves as human.
+    │   │   Organic patterns behind a null mask.
+    │   │
+    │   ├── Class: Onionata (Tor network)
+    │   │   │   Traffic exits via Tor exit nodes.
+    │   │   │   Known exit node IPs (public list).
+    │   │   │   Browser fingerprint: Tor Browser (modified Firefox ESR).
+    │   │   │   Diagnostic: uniform window size (1000x1000 or similar),
+    │   │   │   disabled JS features, NoScript, uniform Accept-Language.
+    │   │   │   KEY DIFFERENCE FROM CHIMERA: Tor Browser fingerprint is
+    │   │   │   DELIBERATELY uniform — not impersonation but privacy.
+    │   │   │   Phantoma pretends to be unique; Tor Browser admits it's
+    │   │   │   one of many. Honesty through uniformity.
+    │   │   │
+    │   │   └── Order: Curiosa (genuine interest behind null mask)
+    │   │       └── Genus: TorHomo
+    │   │           No referrer. No cookies. Uniform fingerprint.
+    │   │           Behavior: organic navigation, page reading, dwell time.
+    │   │           The signal is honest; the mask is null.
+    │   │
+    │   └── Class: Tunnelata (VPN / encrypted tunnel)
+    │       │   Traffic exits via datacenter or VPN provider IP.
+    │       │   Browser fingerprint: normal (unlike Tor, VPN doesn't
+    │       │   modify the browser). Accept-Language matches user's
+    │       │   actual locale (not uniform).
+    │       │   KEY DIFFERENCE FROM CHIMERA: VPN users have referrers,
+    │       │   history, organic navigation. Phantoma has none.
+    │       │   A VPN user arrives from a search engine or a link.
+    │       │   A Phantoma arrives at /commit/<hash> from nowhere.
+    │       │
+    │       └── Order: Curiosa
+    │           └── Genus: VpnHomo
+    │               Referrer present. Organic behavior. Just a
+    │               different exit IP. Indistinguishable from a
+    │               datacenter employee browsing from work.
+    │
+    └── Phylum: Symbiotica (honest non-human, declared)
+        │   Non-human agents that identify themselves truthfully.
+        │   Different from Declarata Automata in intent: these are
+        │   not ingesting or indexing — they are PARTICIPATING.
+        │   They have their own languages and protocols.
+        │   They just want to look in.
         │
-        └── Class: Navigata (genuine navigation)
+        ├── Class: Agentia (AI agents)
+        │   │   Agents that read ai.txt, follow capabilities,
+        │   │   interact via documented APIs. Honest UA.
+        │   │
+        │   └── Order: Consultoria (consultation / research)
+        │       └── Genus: AgentHonestus
+        │           UA: identifies itself (GPTBot, Claude-Web, etc.)
+        │           Reads ai.txt. Follows rate guidance. Presents
+        │           honest capability headers. Commensal → mutualist.
+        │
+        └── Class: Archivata (archivist bots)
+            │   Internet Archive, Wayback Machine, academic crawlers.
+            │   Declared identity. Crawl for preservation, not profit.
             │
-            └── Order: Curiosa (genuine interest)
-                │
-                └── Genus: Homo
-                    │
-                    ├── Species: homo_95bc2d (n=17)
-                    │   Chrome on macOS, real Sec-Ch-Ua
-                    │   Browsing: sporePrint /foundation/, /methodology/
-                    │   195.172.200.24 — likely genuine researcher
-                    │
-                    └── Species: homo_975937 (n=2)
-                        Chrome on Windows, thesis.primals.eco
-                        Browsing: thesis content
+            └── Order: Conservoria (conservation)
+                └── Genus: Archivus
+                    UA: ia_archiver, archive.org_bot, etc.
+                    Low volume. Respectful of robots.txt.
+                    Full mutualist: preserves the membrane's history.
 ```
 
 ---
@@ -174,13 +243,34 @@ Domain: Digitalia (all network traffic to primals.eco infrastructure)
 
 ### How to identify Kingdom
 
-| Signal | Automata | Chimera | Anthropos |
-|--------|----------|---------|-----------|
-| Sec-Ch-* headers | ✗ | ✓ | ✓ |
-| Referrer | ✗ | ✗ | ✓ |
-| Accept-Language | varies | always `en-US,en;q=0.9` | varies |
-| IP reuse | high (1-39 IPs) | never (1 req/IP) | moderate |
-| Bot identifier in UA | ✓ | ✗ | ✗ |
+| Signal | Automata | Chimera | Anthropos | Commensalia |
+|--------|----------|---------|-----------|-------------|
+| Sec-Ch-* headers | ✗ | ✓ | ✓ | varies |
+| Referrer | ✗ | ✗ | ✓ | varies (Tor: ✗, VPN: ✓) |
+| Accept-Language | varies | always `en-US,en;q=0.9` | varies | Tor: uniform, VPN: varies |
+| IP reuse | high (1-39 IPs) | never (1 req/IP) | moderate | Tor: exit pool, VPN: stable |
+| Bot identifier in UA | ✓ | ✗ | ✗ | honest: ✓, Tor/VPN: ✗ |
+| Honesty | varies | ✗ (deceptive) | ✓ | ✓ (always) |
+| Navigation pattern | mechanical | mechanical | organic | organic (Privata) / declared (Symbiotica) |
+
+### Chimera vs Commensalia — The Critical Distinction
+
+Both Chimera (Phantoma) and Commensalia (Privata) hide identity.
+The difference is **honesty**:
+
+| Signal | Phantoma (Chimera) | TorHomo / VpnHomo (Commensalia) |
+|--------|-------------------|--------------------------------|
+| Identity claim | Fakes unique browser | Admits uniformity (Tor) or doesn't claim |
+| Accept-Language | `en-US` from Turkey, Nigeria, Vietnam | Matches actual locale or uniform (Tor) |
+| Navigation | Arrives at deep commit URLs from nowhere | Browses from search/link, reads pages |
+| IP rotation | Each IP exactly once (commercial proxy) | Tor: exit pool cycles, VPN: stable session |
+| HTTP version | HTTP/1.1 (proxy limitation) | h2 (real browser) |
+| Dwell time | Zero (fetch and leave) | Nonzero (reading) |
+| **Intent** | Extract without being identified | Browse without being tracked |
+
+**The membrane test**: Phantoma LIES about what it is. TorHomo doesn't
+claim to be anything — it presents null. A null mask is transparent
+to the membrane. A false mask collides with null and reflects.
 
 ### How to identify Phylum
 
@@ -249,23 +339,159 @@ Key differentiators between Phantoma species:
 | Kingdom | Automata | Self-moving machines |
 | Kingdom | Chimera | Hybrid creature (human appearance, machine behavior) |
 | Kingdom | Anthropos | Human |
+| Kingdom | Commensalia | Honest cohabitants (privacy-preserving, non-deceptive) |
 | Phylum | Cloudae | Cloud-dwelling |
 | Phylum | Residentia | Dwelling among residents |
+| Phylum | Privata | Privacy-preserving (hidden identity, honest signal) |
+| Phylum | Symbiotica | Honest non-human (declared, participating) |
 | Class | Declarata | Self-declaring |
 | Class | Larvata | Masked (larva = mask in Latin) |
 | Class | Navigata | Navigating (genuine) |
+| Class | Onionata | Onion-routed (Tor) |
+| Class | Tunnelata | Tunnel-routed (VPN, encrypted tunnel) |
+| Class | Agentia | AI agents (honest, declared) |
+| Class | Archivata | Archivist bots (preservation) |
 | Order | Ingestoria | Ingesting (training data) |
 | Order | Indexoria | Indexing (search) |
 | Order | Cartographia | Mapping (attack surface) |
 | Order | Exploitoria | Exploiting (vulnerability scanning) |
 | Order | Curiosa | Curious (genuine interest) |
+| Order | Consultoria | Consultation / research (AI agents) |
+| Order | Conservoria | Conservation (archivists) |
 | Family | Anthropicidae | Of Anthropic |
 | Family | Metaidae | Of Meta |
 | Genus | Claudius | The ClaudeBot |
 | Genus | Metacrawler | The Meta crawler |
 | Genus | Phantoma | The phantom/ghost (residential proxy) |
 | Genus | Homo | Human |
+| Genus | TorHomo | Human behind onion routing |
+| Genus | VpnHomo | Human behind encrypted tunnel |
+| Genus | AgentHonestus | Honest AI agent |
+| Genus | Archivus | Preservation bot |
 
 ---
 
-*Fleet Taxonomy v1.0 — Artisan & ecoPrimal · October 8, 2026*
+## Temporal Ecology — Topes as Seasons
+
+Fleet species exhibit distinct temporal rhythms that map to the
+four-state toggle from the particle model.
+
+### The Four-State Tope Cycle
+
+Each visitor type has a characteristic temporal signature — a rhythm
+of presence and absence that maps to the aggregance cycle:
+
+```
+· (full null) → ● (absorbing) → ∅ (null) → ◉ (emitting)
+    absent         arriving         between       active
+```
+
+### Species Temporal Signatures
+
+| Species | Rhythm | Tope State | Season |
+|---------|--------|------------|--------|
+| *Claudius* (Anthropic) | Continuous, no circadian | ◉ perpetual (white hole) | Perpetual summer — always emitting requests |
+| *Metacrawler* (Meta DC) | Burst then silence, ~weekly | ● → ◉ → ∅ cycles | Tidal — follows internal crawl schedule |
+| *Phantoma* (residential) | Sharp burst → decay → silence | ● → ◉ → · (full null) | Storm — intense, brief, then gone |
+| *Homo* (human) | Circadian — active in daylight | follows the sun (A↔T bond) | Seasonal — peaks in local afternoon |
+| *TorHomo* (Tor human) | Anti-circadian tendency | inverted or diffuse | Nocturnal — privacy-seekers browse when others sleep |
+| *AgentHonestus* (AI agent) | Scheduled, periodic | ∅ → ◉ → ∅ → · regular | Tidal — sync'd to cron/schedule |
+| *Archivus* (archiver) | Monthly or quarterly | · → ● → · (rare visits) | Hibernation — long dormancy, brief capture |
+
+### The Sun and Moon of Fleet Behavior
+
+From PARTICLE_MODEL: the sun is ◉ always (gold, signal OUT), the moon
+cycles through all four states every 29.5 days.
+
+Fleet behavior maps to this:
+
+- **Sun species** (◉ always): Claudius, Metacrawler. Datacenter bots
+  with no circadian rhythm. They ARE signal — continuous emission.
+  They don't sleep because they have no biological clock.
+
+- **Moon species** (four-state cycle): Phantoma. Appears as one thing,
+  then another, then nothing. New moon (·) = silence. Waxing (●) =
+  probing begins. Full moon (◉) = burst of activity. Waning (∅) =
+  rate decay. The residential proxy fleet has a LUNAR rhythm because
+  it depends on proxy pool availability, which cycles.
+
+- **Earth species** (circadian): Homo, TorHomo, VpnHomo. Follow the
+  A↔T bond — the 24-hour light/dark cycle. Active during their local
+  daylight. The east-to-west color spectrum traversal of the sun maps
+  to time-zone shifting of human traffic peaks.
+
+### The Color Spectrum of Arrivals
+
+From PARTICLE_MODEL: the east-to-west daily arc is the color spectrum
+traversal: `#0d1117 → #e85d3a → #f0883e → #f0e68c → #f0883e → #e85d3a → #0d1117`
+
+Traffic color by hour (UTC):
+
+```
+00:00  #0d1117  · full null   — Asia sleeping, Americas evening
+04:00  #e85d3a  ● absorbing   — Asia waking (red, dawn, incoming)
+08:00  #f0883e  ∅ null        — Europe active (amber, transition)
+12:00  #f0e68c  ◉ emitting    — Americas peak (gold, full signal)
+16:00  #f0883e  ∅ null        — Europe evening (amber, transition)
+20:00  #e85d3a  ● absorbing   — Americas winding down (red, sunset)
+00:00  #0d1117  · full null   — cycle repeats
+```
+
+Human traffic follows this spectrum. Fleet traffic does NOT — bots
+don't have sunrise. The **absence of color spectrum** in a visitor's
+temporal signature is itself a classification signal. A visitor who
+arrives uniformly across all hours is not following the sun. It is
+either a machine or a human in a very unusual timezone discipline.
+
+### The Evolved Stack
+
+SongBird already has the relay infrastructure for this:
+
+| Crate | Lines | Role in commensal architecture |
+|-------|-------|-------------------------------|
+| `songbird-sovereign-onion` | 4,473 | Sovereign .onion addresses — device identity |
+| `songbird-tor-protocol` | 8,290 | Pure Rust Tor protocol — commensal passage |
+| `songbird-onion-relay` | 3,701 | NAT traversal without Arti — sovereign relay |
+| `songbird-stun` | 6,879 | STUN/TURN — UDP hole-punching for commensals |
+| `songbird-lineage-relay` | 8,565 | Lineage-authenticated relay — tier evolution |
+| `songbird-network-federation` | 11,597 | Federation — multi-body mesh |
+
+**44,505 lines of Rust** already evolved for exactly this: open the
+membrane to honest visitors through sovereign onion routing, TURN
+relay, and lineage-authenticated federation. The pattern didn't need
+to be designed — it grew from the same selective pressure that
+produced thymic negative selection and the commensal relay beacon.
+
+Tower atomic broadcast (`tower_config.rs`, `tower_orchestration.rs`,
+`atomic_primal_client.rs`) provides the capability routing that makes
+the relay stack composable: each relay crate is a primal with declared
+capabilities, discovered via socket probing, orchestrated by tower.
+The tower IS the four-state toggle at the system level — it cycles
+primals through startup → active → graceful shutdown → dormant.
+
+### Caddy Integration — Commensal Passthrough
+
+The `@commit_scrape` abort rule needs a commensal exemption.
+Honest Tor users hitting commit pages are not fleet.
+
+Detection: Tor exit nodes are published in the Tor consensus.
+The exit list is public at `https://check.torproject.org/torbulkexitlist`.
+
+```
+# Planned Caddy addition:
+# @tor_commensal matches known Tor exit + organic behavior
+# → passes through to real Forgejo (not scatter)
+# Behavioral validation: dwell time > 0, navigation depth > 1
+```
+
+This is the membrane reconciliation: the theory says "privacy is
+welcome" and the operational code must match. The fleet taxonomy
+provides the classification. The thymic self-recognition provides
+the self-protection. The commensal passthrough provides the welcome.
+
+---
+
+*Fleet Taxonomy v2.0 — Artisan & ecoPrimal · Wave 178 · October 16, 2026*
+*Four kingdoms: Automata, Chimera, Anthropos, Commensalia.*
+*Privacy without secrecy. Topes as seasons. The sun and moon of traffic.*
+*44,505 lines of Rust already evolved the relay. The pattern is the proof.*
