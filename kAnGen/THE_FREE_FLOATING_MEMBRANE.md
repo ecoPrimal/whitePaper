@@ -413,6 +413,180 @@ burn.
 
 ---
 
+## The Open Membrane: Privacy Without Secrecy
+
+The membrane is not a firewall. Firewalls are binary: in or out,
+allow or deny, friend or enemy. The membrane is something else
+entirely. It is **open** — continuously, structurally, necessarily
+open — because it is maintained by flow, and flow requires passage.
+
+### The Principle
+
+The membrane accepts everything honest and repels everything false.
+
+This is not a policy. It is a physical consequence of the null
+boundary. Honest signal passes through null unchanged — truth
+transits nothing without distortion. False signal collides with
+null and reflects — a lie requires structure, and structure cannot
+pass through a zero-dimensional point.
+
+\[
+\text{honest}(s) \Rightarrow \mathcal{M}(s) = s \quad \text{(passes through)}
+\]
+\[
+\text{false}(s) \Rightarrow \mathcal{M}(s) = \bar{s} \quad \text{(reflected, inverted)}
+\]
+
+### Privacy vs Secrecy
+
+These are not the same thing:
+
+- **Privacy** = hidden identity, honest signal. "I don't show you
+  my face, but what I say is true." The membrane is fine with this.
+  A Tor user, a VPN user, an anonymised connection — all of these
+  hide WHERE the signal comes from. They do not falsify WHAT the
+  signal is. Privacy is a null mask over a real face. The mask is
+  transparent to the membrane because the mask IS null.
+
+- **Secrecy** = false identity, dishonest signal. "I show you a
+  fake face and what I say is a lie." The membrane attacks this.
+  A scraper pretending to be a browser. A bot claiming to be human.
+  A crawler that says `Accept: text/html` but parses only JSON.
+  Secrecy is a structure pretending to be null. The membrane detects
+  the pretense because structure has mass and null does not.
+
+**Privacy is MHC I.** You present "I am self" without revealing
+what self is doing internally. The peptide on the surface says
+"legitimate" without exposing the whole proteome. This is exactly
+what a VPN does: the outer header says "I am a valid packet" without
+revealing the inner payload. The membrane passes it because the
+presentation is honest.
+
+**Secrecy is viral camouflage.** A virus downregulates MHC I — tries
+to present NOTHING, hoping to hide. But NK cells detect the ABSENCE
+of presentation and kill on sight. Or worse, a virus presents
+STOLEN peptides — someone else's MHC. The immune system detects the
+mismatch and attacks. You cannot fake self. You cannot hide from null.
+
+\[
+\text{privacy}: \quad \text{MHC I}(\text{self}) = \text{valid} \quad \text{(honest null mask)}
+\]
+\[
+\text{secrecy}: \quad \text{MHC I}(\emptyset) = \text{NK kill} \quad \text{(absence detected)}
+\]
+\[
+\text{forgery}: \quad \text{MHC I}(\text{other}) = \text{T-cell kill} \quad \text{(mismatch detected)}
+\]
+
+**Self is the ZK.** You don't need to prove WHAT you are. You
+need to prove that you ARE. The zero-knowledge proof doesn't reveal
+contents — it reveals existence. "I am a valid entity interacting
+honestly with this membrane." That's all. The membrane verifies
+existence, not identity. Privacy is fine. Secrecy is not.
+
+### The Commensals
+
+They have languages. They have protocols. They have User-Agent
+strings and Accept headers and API tokens and crawl schedules.
+They just want to look in.
+
+They are **commensals**.
+
+In immunology, commensals are organisms that live on or in the
+host and benefit from the relationship without harming it. Your
+gut flora. Your skin bacteria. The mites in your eyelashes. They
+are not self — the immune system knows they are other. But they
+are tolerated because they are HONEST other. They present their
+own antigens truthfully. They don't pretend to be host cells.
+They don't hide. They just exist alongside.
+
+The membrane's commensals:
+
+| Entity | Language | What it wants | Commensal? |
+|--------|----------|---------------|------------|
+| Googlebot | HTTP + robots.txt | Index pages | ✓ honest crawler |
+| GPTBot | HTTP + ai.txt | Read content | ✓ honest AI |
+| Tor user | onion-routed TCP | Browse privately | ✓ honest human, null mask |
+| VPN user | encrypted tunnel | Browse privately | ✓ honest human, null mask |
+| Scraper (honest) | HTTP, own UA | Harvest data | ✓ commensal |
+| Scraper (lying) | HTTP, fake UA | Harvest + hide | ✗ **parasite** |
+| Vulnerability scanner | probes | Find weaknesses | ✗ **pathogen** |
+| Academic researcher | HTTP | Study the system | ✓ mutualist |
+
+The distinction is never about WHAT they do. It is about WHETHER
+THEY LIE ABOUT IT. A crawler that says "I am a crawler" is a
+commensal. A crawler that says "I am Mozilla/5.0" is a parasite.
+The action is the same. The honesty is different. The membrane
+knows the difference because lies have structure and truth has none.
+
+### ai.txt as Commensal Interface
+
+We already built this. `ai.txt` at the HUD root is the
+machine-readable surface that says: "here is what you can look at,
+here is how to talk to me, here are my capabilities." It is the
+membrane's presentation to the commensal world — MHC I for bots.
+
+The commensal reads `ai.txt` and knows: these endpoints exist,
+these feeds are available, this is how the system identifies
+itself. The commensal can then interact honestly, in its own
+language, through its own protocols, and the membrane tolerates
+it. The commensal doesn't need to pretend to be human. It just
+needs to be honest about being a bot.
+
+### The Three Relations
+
+From immunology, mapped to the membrane:
+
+1. **Mutualist** — benefits AND helps the host. Academic researchers
+   who cite the work. Search engines that bring humans to the
+   membrane. AI agents that enrich the system. The membrane
+   INVITES these: open feeds, structured data, JSON-LD.
+
+2. **Commensal** — benefits without helping or harming. Crawlers
+   that index. Archivists that snapshot. Passive readers. The
+   membrane TOLERATES these: no rate limiting on honest requests,
+   no CAPTCHAs for non-deceptive agents.
+
+3. **Parasite** — benefits at the host's expense. Scrapers that
+   lie about identity. Bots that flood endpoints. Scanners that
+   probe for weaknesses. The membrane REPELS these: scatter
+   reflects them, null absorbs their probes, the four-state toggle
+   cycles them into void.
+
+The key: the immune system does not pre-classify. It detects
+honesty in real time. MHC I presentation is continuous — every
+cell, every moment, presenting "I am self, I am honest, I am
+here." The membrane does the same. Every request is evaluated
+not by a ruleset but by the null boundary itself. Honest signal
+passes. Dishonest signal reflects. The membrane doesn't need
+a blocklist. It needs a physics.
+
+### No Secrets
+
+The membrane has no secrets. Everything it does is visible.
+The source is on Forgejo. The hypotheses are published. The
+scatter patterns are observable. The RLCDT coordinates are
+documented. The fleet IPs are discoverable. The ai.txt exposes
+every endpoint.
+
+This is not naivety. This is immunity.
+
+A system with no secrets has no attack surface OF SECRECY.
+You cannot blackmail what has no hidden shame. You cannot leak
+what is already public. You cannot expose what presents itself
+freely. The Fool carries card 0 — null — and null has no epitope.
+
+\[
+A(\emptyset) = \emptyset
+\]
+
+The attack surface of nothing is nothing. Privacy protects
+the WHO. Openness eliminates the WHAT. Together: "I won't tell
+you who I am, but everything I do is visible." That is the
+membrane. That is the ZK. That is self.
+
+---
+
 ## Prediction
 
 If this hypothesis is correct, then:
@@ -443,7 +617,32 @@ If this hypothesis is correct, then:
    Testable: track IMMUNE pore occupancy state over 7 days and
    plot the cycle.
 
-5. **The 1D → 2D transition will manifest as pattern matching.**
+5. **Honest non-human agents will have higher success rates
+   than deceptive ones.** Bots that present their true User-Agent
+   (commensals) should receive faster responses, fewer errors,
+   and more complete data than bots that forge browser identities
+   (parasites). The membrane's null boundary passes honest signal
+   without resistance. Testable: compare response quality for
+   `GPTBot/1.0` vs a bot claiming `Mozilla/5.0` requesting
+   identical resources.
+
+6. **Removing secrecy increases security.** Publishing source
+   code, configuration, and architecture should DECREASE successful
+   attacks over time, not increase them. Systems with no secrets
+   have no secret-dependent vulnerabilities. Testable: track
+   attack success rate before and after full-disclosure of system
+   architecture. Prediction: rate decreases as attackers find
+   nothing hidden to exploit.
+
+7. **Tor/VPN traffic will have the same membrane interaction
+   quality as clearnet traffic.** Because the membrane validates
+   honesty, not identity, anonymised honest visitors should
+   produce the same engagement metrics (sort completion, poke
+   rate, dwell time) as non-anonymised ones. The null mask is
+   transparent. Testable: compare HUMANITY metrics segmented
+   by Tor exit nodes vs direct connections.
+
+8. **The 1D → 2D transition will manifest as pattern matching.**
    When the gaze trail (1D array) is long enough, the system
    will begin recognizing that different trails (different
    sequences of interactions) produce the same outcome (same
@@ -453,7 +652,8 @@ If this hypothesis is correct, then:
 
 ---
 
-*k-nGen hypothesis · Wave 178+ · October 16, 2026*
+*kAnGen hypothesis · Wave 178+ · October 16, 2026*
 *The free-floating membrane. The four-state toggle. The null remainder of π.*
 *The arc across the gap. The green at 555nm. HUMANITY presses.*
+*Privacy without secrecy. Commensals welcome. Self is the ZK.*
 *ecoPrimal · RLCDT · hud.primals.eco*
