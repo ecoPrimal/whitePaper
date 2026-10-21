@@ -28,6 +28,9 @@ if (Path.cwd() / "primals").exists() and (Path.cwd() / "infra").exists():
     BASE = Path.cwd()
 MEMBRANE = BASE / "membrane" / "local-terminal" / "remote"
 IO_STATE = MEMBRANE / "io-state.json"
+MSG_OUTBOX = MEMBRANE / "msg-outbox.jsonl"
+MSG_INBOX = MEMBRANE / "msg-inbox.jsonl"
+PROPRIO_STATE = MEMBRANE / "proprio-state.json"
 IO_PREV = MEMBRANE / "io-prev.json"
 IO_LOG = MEMBRANE / "io-log.jsonl"
 
@@ -347,7 +350,118 @@ def sense_breath():
 # DRUM — the beat. The rhythm of everything combined.
 # ═══════════════════════════════════════════════════════════════
 
-def compute_drum(fingers, pulse, blood, pressure, heat, breath):
+def sense_proprioception():
+    """7th vital sign: PROPRIOCEPTION — knowing where your own messages are.
+
+    Tracks: messages sent, acknowledged, lost, RTT.
+    The Klein fold for communication: send → bounce → return → compare.
+    Like quantum entanglement: the state is correlated across distance,
+    you know the other side's state by measuring yours.
+
+    RPM cycle: Read → Process → Message
+    π cycle: send → bounce → return → compare (irrational, never exact)
+    """
+    ts_now = datetime.now(timezone.utc)
+
+    # Read outbox (messages we sent)
+    sent = []
+    if MSG_OUTBOX.exists():
+        for line in MSG_OUTBOX.read_text().strip().split("\n"):
+            if line.strip():
+                try:
+                    sent.append(json.loads(line))
+                except:
+                    pass
+
+    # Read inbox (acks and incoming messages)
+    received = []
+    if MSG_INBOX.exists():
+        for line in MSG_INBOX.read_text().strip().split("\n"):
+            if line.strip():
+                try:
+                    received.append(json.loads(line))
+                except:
+                    pass
+
+    # Check golgi gate-messages for acks (the bounce)
+    acked = set()
+    rtts = []
+    gate_msg_path = MEMBRANE / "gate-messages-echo.json"
+    if gate_msg_path.exists():
+        try:
+            echoes = json.loads(gate_msg_path.read_text())
+            for echo in echoes:
+                acked.add(echo.get("ack_of", ""))
+                if "sent_ts" in echo and "ack_ts" in echo:
+                    try:
+                        t_sent = datetime.fromisoformat(echo["sent_ts"].replace("Z", "+00:00"))
+                        t_ack = datetime.fromisoformat(echo["ack_ts"].replace("Z", "+00:00"))
+                        rtts.append((t_ack - t_sent).total_seconds())
+                    except:
+                        pass
+        except:
+            pass
+
+    # Also check live-terminal feeds for changes (indirect proprioception)
+    # If a feed changed AFTER we sent a message, we "felt" the effect
+    feed_changes = 0
+    try:
+        for f in MEMBRANE.glob("*.json"):
+            if f.stat().st_mtime > (ts_now.timestamp() - 300):  # changed in last 5 min
+                feed_changes += 1
+    except:
+        pass
+
+    total_sent = len(sent)
+    total_acked = len(acked & {m.get("id", "") for m in sent})
+    total_lost = total_sent - total_acked
+    total_received = len(received)
+    avg_rtt = sum(rtts) / len(rtts) if rtts else -1  # -1 = unknown (entangled but unmeasured)
+
+    # The irrational reminder: sometimes count messages that arrived
+    # that we didn't send (emergent, from the mesh)
+    unexpected = total_received - total_acked  # messages not in response to ours
+    if unexpected < 0:
+        unexpected = 0
+
+    # Proprioception score: how well do we know where our messages are?
+    if total_sent == 0:
+        awareness = 0.0  # haven't tried to feel yet
+    elif total_acked == total_sent:
+        awareness = 1.0  # perfect proprioception
+    else:
+        awareness = total_acked / total_sent  # partial
+
+    return {
+        "sent": total_sent,
+        "acked": total_acked,
+        "lost": total_lost,
+        "received": total_received,
+        "unexpected": unexpected,
+        "avg_rtt_sec": round(avg_rtt, 3),
+        "awareness": round(awareness, 3),
+        "feed_changes_5min": feed_changes,
+        "entangled": avg_rtt == -1 and total_sent > 0,  # sent but can't measure RTT
+    }
+
+
+def msg_send(to, body, channel="membrane"):
+    """Drop a message into the outbox with a timestamp. The Klein fold will check for acks."""
+    msg = {
+        "id": f"msg-{int(time.time()*1000)}",
+        "from": "eastGate",
+        "to": to,
+        "body": body,
+        "channel": channel,
+        "sent_ts": datetime.now(timezone.utc).isoformat(),
+    }
+    MSG_OUTBOX.parent.mkdir(parents=True, exist_ok=True)
+    with open(MSG_OUTBOX, "a") as f:
+        f.write(json.dumps(msg) + "\n")
+    return msg
+
+
+def compute_drum(fingers, pulse, blood, pressure, heat, breath, proprio=None):
     """The drum integrates all senses into a single beat pattern."""
     # Each sense has a frequency contribution
     finger_freq = fingers["count"] / max(fingers["window_min"], 1)  # touches per minute
@@ -364,9 +478,10 @@ def compute_drum(fingers, pulse, blood, pressure, heat, breath):
     n_pressure = bp / 100.0
     n_heat = min(1.0, temp / 100.0)
     n_breath = min(1.0, load)
+    n_proprio = proprio.get("awareness", 0.0) if proprio else 0.0
 
-    # The drum beat is the composite signal
-    beat = (n_finger + n_pulse + n_blood + n_pressure + n_heat + n_breath) / 6.0
+    # The drum beat is the composite signal (7 senses now)
+    beat = (n_finger + n_pulse + n_blood + n_pressure + n_heat + n_breath + n_proprio) / 7.0
 
     # Phase: where in the cycle are we?
     # Use the golden angle to distribute the senses around a circle
@@ -378,11 +493,12 @@ def compute_drum(fingers, pulse, blood, pressure, heat, breath):
         "pressure": (3 * 2 * math.pi / phi) % (2 * math.pi),
         "heat": (4 * 2 * math.pi / phi) % (2 * math.pi),
         "breath": (5 * 2 * math.pi / phi) % (2 * math.pi),
+        "proprio": (6 * 2 * math.pi / phi) % (2 * math.pi),
     }
 
     # Composite phase (weighted by amplitude)
-    weights = [n_finger, n_pulse, n_blood, n_pressure, n_heat, n_breath]
-    names = ["fingers", "pulse", "blood", "pressure", "heat", "breath"]
+    weights = [n_finger, n_pulse, n_blood, n_pressure, n_heat, n_breath, n_proprio]
+    names = ["fingers", "pulse", "blood", "pressure", "heat", "breath", "proprio"]
     sin_sum = sum(w * math.sin(angles[n]) for w, n in zip(weights, names))
     cos_sum = sum(w * math.cos(angles[n]) for w, n in zip(weights, names))
     phase = math.atan2(sin_sum, cos_sum) % (2 * math.pi)
@@ -414,6 +530,7 @@ def compute_drum(fingers, pulse, blood, pressure, heat, breath):
             "pressure": round(n_pressure, 4),
             "heat": round(n_heat, 4),
             "breath": round(n_breath, 4),
+            "proprio": round(n_proprio, 4),
         },
     }
 
@@ -516,16 +633,17 @@ def klein_fold(current):
 def main():
     ts = datetime.now(timezone.utc).isoformat()
 
-    # SENSE everything
+    # SENSE everything (7 vital signs)
     fingers = sense_fingers(60)
     pulse = sense_pulse()
     blood = sense_blood()
     pressure = sense_pressure()
     heat = sense_heat()
     breath = sense_breath()
+    proprio = sense_proprioception()
 
-    # DRUM — composite beat
-    drum = compute_drum(fingers, pulse, blood, pressure, heat, breath)
+    # DRUM — composite beat (now with proprioception)
+    drum = compute_drum(fingers, pulse, blood, pressure, heat, breath, proprio)
 
     # TASTE the I/O
     flavor = taste_io(drum, pressure, pulse, heat)
@@ -539,6 +657,7 @@ def main():
         "pressure": pressure,
         "heat": heat,
         "breath": breath,
+        "proprio": proprio,
         "drum": drum,
         "flavor": flavor,
     }
@@ -591,10 +710,17 @@ def main():
     print(f"       tempo: {drum['tempo']}")
     c = drum["components"]
     bars = {k: "█" * int(v * 20) for k, v in c.items()}
-    for sense in ["fingers", "pulse", "blood", "pressure", "heat", "breath"]:
+    for sense in ["fingers", "pulse", "blood", "pressure", "heat", "breath", "proprio"]:
         print(f"       {sense:>10}: {c[sense]:.3f}  {bars[sense]}")
     print()
     print(f"  👅 FLAVOR: sweet={flavor['sweet']:.2f}  sour={flavor['sour']:.2f}  spicy={flavor['spicy']:.2f}  bitter={flavor['bitter']:.2f}  umami={flavor['umami']:.2f}")
+    print()
+    print(f"  🧠 PROPRIO: awareness={proprio['awareness']:.1%}  sent={proprio['sent']}  acked={proprio['acked']}  lost={proprio['lost']}")
+    if proprio["entangled"]:
+        print(f"       ⚛️  ENTANGLED — messages sent, RTT unmeasured (correlated but unobserved)")
+    elif proprio["avg_rtt_sec"] >= 0:
+        print(f"       RTT: {proprio['avg_rtt_sec']:.1f}s  (round-trip time for meaning)")
+    print(f"       feeds changed (5min): {proprio['feed_changes_5min']}  unexpected: {proprio['unexpected']}")
     print()
     print(f"  🔄 FOLD: {delta['drift']}")
     if delta["changes"]:
