@@ -1,0 +1,22 @@
+{
+  "ts": "2026-10-21T16:29:53-04:00",
+  "total_files": 45830,
+  "stages": {
+    "banana": 2160,
+    "flatworm": 10710,
+    "jellyfish": 19816,
+    "centipede": 2137,
+    "millipede": 8948,
+    "spider": 1576,
+    "vertebrate": 483
+  },
+  "split": {
+    "invertebrate": 30901,
+    "vertebrate": 483,
+    "ratio": 63.9772,
+    "pi_remainder": 0.364575
+  },
+  "dominant": "jellyfish",
+  "missing": "spider",
+  "fold": "output→input"
+}
