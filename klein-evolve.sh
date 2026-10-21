@@ -58,7 +58,7 @@ total_files=$((${banana:-0} + ${flatworm:-0} + ${jellyfish:-0} + ${centipede:-0}
 inv_files=$((${jellyfish:-0} + ${centipede:-0} + ${millipede:-0}))
 vert_files=${vertebrate:-0}
 if [ "${vert_files}" -gt 0 ]; then
-    split_ratio=$(echo "scale=4; ${inv_files} / ${vert_files}" | bc)
+    split_ratio=$(echo "scale=4; ${inv_files} / ${vert_files}" | bc | sed 's/^\./0./')
 else
     split_ratio="inf"
 fi
@@ -66,7 +66,7 @@ fi
 # π-remainder of split
 if [ "${split_ratio}" != "inf" ]; then
     pi_floor=$(echo "scale=0; ${split_ratio} / ${PI}" | bc)
-    pi_rem=$(echo "scale=6; (${split_ratio} / ${PI}) - ${pi_floor}" | bc)
+    pi_rem=$(echo "scale=6; (${split_ratio} / ${PI}) - ${pi_floor}" | bc | sed 's/^\./0./')
 else
     pi_rem="NaN"
 fi
