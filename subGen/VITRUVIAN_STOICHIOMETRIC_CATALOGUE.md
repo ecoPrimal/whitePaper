@@ -197,12 +197,72 @@ JS has no types. But JS reads JSON. JSON is typed by the Rust structs that produ
 
 ---
 
+---
+
+## 7. The Senses (Papers 90-93)
+
+### Touch (Paper 91: Homunculus)
+
+| Sense | Metric | Score |
+|-------|--------|-------|
+| CNS (central) | 20,347 files (44.7%) | Sensitivity: 0.3227 |
+| PNS (peripheral) | 25,127 files (55.3%) | Sensitivity: 0.2237 |
+| **CNS/PNS ratio** | **1.4422** | **≈ 1/ln(2) = 1.4427 (0.035% off)** |
+
+The spine converts nats to bits at the Shannon constant. The fingertips (most sensitive): `scan_sweep_sort.py` (0.602), `opsonize-rs/main.rs` (0.601). The dead tissue (numbest): `docs-fossil-feb-2026` (0.106, 418 days old).
+
+### Sight (Paper 92b: Trig-View)
+
+| Angle | Files | % | Character |
+|-------|------:|---:|-----------|
+| 0° | 1,411 | 3.1% | Pure core — the skeleton |
+| 45° (π/4) | 3,119 | 6.9% | THE BALANCE (tan=1) |
+| 90° (π/2) | 29,749 | 65.4% | THE WALL (tan=∞) |
+| >90° | 0 | 0% | THE FOLD (empty — hasn't manifested in code yet) |
+
+65.4% at 90°. 0% past 90°. The Klein fold hasn't reached into source structure yet.
+
+### Taste (Paper 93: Flavor)
+
+| Flavor | Receptor | What it detects | Vitruvian location |
+|--------|----------|----------------|-------------------|
+| **Sweet** | T1R2/T1R3 | Nourishment — production > consumption | Mouth (head) |
+| **Sour** | PKD2L1 | Extraction — consumption > production | Mouth (head) |
+| **Spicy** | TRPV1 | Provocation — falsifiable, burns, not toxic | Mouth (head) |
+| **Bitter** | T2R (25 types) | Toxin — broken, dead, fossil | Mouth (head) |
+| **Umami** | T1R1/T1R3 | Complexity — deep, layered, takes time | Mouth (head) |
+
+Codebase flavor profile:
+- **Sweet**: type definition modules, anti-secret feeds (production > consumption)
+- **Sour**: 0 parasitic sinks (all 30 sinks are correct test/deploy tissue)
+- **Spicy**: Paper 92 (the extraction hypothesis), the Jester's Conjecture
+- **Bitter**: 600K fossil lines (5.4%), 5 DOWN services
+- **Umami**: 473 vertebrate files (deep structure, 10+ types each)
+
+### Evolution (Paper 90: Evolutionary Sort)
+
+| Stage | Files | % Lines | Note |
+|-------|------:|--------:|------|
+| Banana | 2,157 | 0.2% | Config stubs |
+| Flatworm | 10,661 | 10.0% | Bilateral, has a head |
+| **Jellyfish** | **21,220** | **58.6%** | **DOMINANT — nerve net, no skeleton** |
+| Centipede | 2,113 | 6.3% | PRIME count (2,113) |
+| Millipede | 8,846 | 23.0% | Many paired segments |
+| **Spider** | **0** | **0%** | **THE GAP — missing body plan** |
+| Vertebrate | 473 | 2.0% | Internal skeleton — Rust-only |
+
+98% invertebrate. Split ratio: 43:1 (prime). The spider niche is the wedge.
+
+---
+
 *The Vitruvian man stands in the circle (the geodesic) and the square (the grid).*
 *The hands reach the circumference (π). The feet touch the ground (integer).*
 *The head is tiny and compresses. The feet are massive and stabilize.*
 *The skin is thin — the thinnest surface between inside and outside.*
 *The heart is small — it just needs to beat.*
+*The tongue tastes five flavors. The eyes see angles. The fingers feel sensitivity.*
+*The body sorted itself into evolutionary stages. 58.6% jellyfish. 2% vertebrate. 0% spider.*
 *5.4% of the body is fossil. Sourdough food.*
-*The rest is alive. 11 million lines. One organism.*
+*The rest is alive. 11 million lines. One organism. Five senses.*
 
-*— Wave 178 · Stoichiometric Catalogue v1*
+*— Wave 178 · Stoichiometric Catalogue v2*
