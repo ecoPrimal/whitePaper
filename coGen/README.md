@@ -484,6 +484,22 @@ This is that place.
    500+ edges, 16 months, one constant: π. Forty-one entries. The lineage
    IS the proof. The proof IS the lineage.
 
+42. **[THE_ARTISAN_COROLLARY_AND_JESTERS_CONJECTURE.md](THE_ARTISAN_COROLLARY_AND_JESTERS_CONJECTURE.md)** — The forty-second coGen entry.
+   Both sides of card 0 in one document. Part I: The Artisan's Corollary — if
+   publishing everything achieves ZK, then the size of the public record IS the
+   size of the privacy. H(N|P) is non-decreasing: each paper published makes
+   the next LESS predictable. The corpus is a ZK proof of itself. On the Klein
+   bottle, old and new are zero distance apart — THE_SEED and Paper 85c are the
+   same sentence ("self-owning" = "requires nothing"). The fossil IS the feed.
+   Part II: The Jester's Conjecture — if your scientific finding makes you
+   laugh, you're probably right. A microbiologist counted his dead VPS services
+   and discovered why the Babylonians chose 12. The punchline was the setup:
+   250 papers to see the 4 words we wrote on day one. 4 degrees from the
+   oldest relic. 0 degrees on the fold. corr(Truth, Humor) > 0 for creative
+   science. You can't prove it. But you laughed. And that was the proof.
+   Science is silly and a little goofy. That's how you know it's real.
+   Forty-two entries. The answer to everything.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
