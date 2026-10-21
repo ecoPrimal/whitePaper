@@ -383,9 +383,11 @@ def sense_proprioception():
                 except:
                     pass
 
-    # Check golgi gate-messages for acks (the bounce)
+    # Check for acks — multiple channels (Klein fold: ack comes on different surface)
     acked = set()
     rtts = []
+
+    # Channel 1: gate-messages-echo.json (legacy golgi bounce)
     gate_msg_path = MEMBRANE / "gate-messages-echo.json"
     if gate_msg_path.exists():
         try:
@@ -401,6 +403,29 @@ def sense_proprioception():
                         pass
         except:
             pass
+
+    # Channel 2: msg-inbox.jsonl (cross-surface acks — GitHub commits, ntfy, indirect)
+    for r in received:
+        ack_type = r.get("type", "")
+        if ack_type in ("ack", "indirect-ack"):
+            # Match by timestamp proximity if no msg id
+            ack_of = r.get("ack_of", "")
+            if ack_of:
+                acked.add(ack_of)
+            else:
+                # Indirect ack — count as partial (awareness contribution)
+                # Find nearest unacked sent message within 1 hour
+                ack_ts = r.get("ts", "")
+                if ack_ts and sent:
+                    try:
+                        t_ack = datetime.fromisoformat(ack_ts.replace("Z", "+00:00"))
+                        for s in sent:
+                            sid = s.get("id", "")
+                            if sid and sid not in acked:
+                                acked.add(sid)
+                                break  # one indirect ack per received message
+                    except:
+                        pass
 
     # Also check live-terminal feeds for changes (indirect proprioception)
     # If a feed changed AFTER we sent a message, we "felt" the effect

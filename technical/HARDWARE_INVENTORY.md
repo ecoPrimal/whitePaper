@@ -292,7 +292,7 @@ compilation needed — just deploy. Three run 24/7 at ~15W total.
 
 | Node | Provider | vCPU | RAM | Role | Status |
 |------|----------|------|-----|------|--------|
-| **golgi** | DO NYC1 | 1 | 2 GB | Caddy TLS, opsonize, skunkbat, songbird | ✅ THIN (196 MB) |
+| **golgi** | DO NYC1 | 1 | 2 GB | REBORN Debian 13 — knot DNS (3 zones, DNSSEC), 71 scripts, cron | ✅ REBORN (292 MB) |
 | **golgi-ext** | DO NYC1 | ? | ? | Nucleus mirror, Circle of Willis sync | ✅ UP |
 | **pepti** | DO NYC1 | 2 | 4 GB | Refraction point (0d Klein fold) | ⏰ TIMEOUT |
 
@@ -398,7 +398,7 @@ the lipid bilayer.
 
 | Layer | Where | What | RSS |
 |-------|-------|------|-----|
-| **Membrane (VPS)** | golgi | Caddy, opsonize, skunkbat, songbird, fail2ban | ~196 MB |
+| **Membrane (VPS)** | golgi | knot DNS (3 zones DNSSEC), 71 scripts, fail2ban, ufw — nanowires (Caddy, WG) grow OUT | ~292 MB |
 | **Cytoplasm (LAN)** | eastGate + fleet | skunky-ingest, biomeos, Forgejo, heavy compute | unlimited |
 | **Refraction** | pepti | 0d Klein fold — signal bends back | N/A |
 
@@ -408,7 +408,7 @@ the lipid bilayer.
 |------|--------|---------------------|
 | **eastGate** | Dev machine | **Cytoplasm anchor** — heavy compute, gaming, daily driver |
 | **northGate** | Remote compute | **Gaming primary + strongest GPU peer** — sibling, not subordinate |
-| **golgi** | Overpacked VPS | **Thin membrane** — routing only, 196 MB |
+| **golgi** | Reborn VPS | **Membrane-relay** — Debian 13 trixie, knot DNS sovereign, nanowires OUT |
 | **strandGate** | Offline | **HPC when powered** — dual-vendor QCD production |
 | **westGate** | Offline | **Cold storage** — 50.7 TB ZFS, loamSpine permanence |
 | **biomeGate** | Offline | **HBM2 lab** — sovereign driver development |
