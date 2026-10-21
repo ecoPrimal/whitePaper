@@ -1,0 +1,240 @@
+{
+  "ts": "2026-10-21T21:09:30Z",
+  "strategy": "nearest-neighbor TSP (Dijkstra-greedy)",
+  "route": [
+    "nestgate-connect",
+    "golgi-direct",
+    "sporeprint",
+    "ntfy-membrane",
+    "primals.eco",
+    "github-hud",
+    "nucleus"
+  ],
+  "nodes_visited": 7,
+  "nodes_total": 7,
+  "checks_ok": 20,
+  "checks_total": 22,
+  "health_pct": 90.9,
+  "total_distance_ms": 101130.4,
+  "pi_remainder": 0.115038,
+  "journal": [
+    {
+      "node": "nestgate-connect",
+      "type": "klein",
+      "distance_ms": 95.9,
+      "endpoints": [
+        {
+          "label": "connect page",
+          "path": "/",
+          "status": 200,
+          "latency_ms": 97.7,
+          "ok": true
+        },
+        {
+          "label": "campfire",
+          "path": "/campfire.json",
+          "status": 200,
+          "latency_ms": 94.9,
+          "ok": true
+        },
+        {
+          "label": "chipmunk",
+          "path": "/chipmunk.json",
+          "status": 200,
+          "latency_ms": 103.6,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "golgi-direct",
+      "type": "trans",
+      "distance_ms": 96.0,
+      "endpoints": [
+        {
+          "label": "Klein Gate",
+          "path": "/",
+          "status": 200,
+          "latency_ms": 94.8,
+          "ok": true
+        },
+        {
+          "label": "was.json (inner)",
+          "path": "/was.json",
+          "status": 200,
+          "latency_ms": 94.4,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "sporeprint",
+      "type": "trans",
+      "distance_ms": 139.4,
+      "endpoints": [
+        {
+          "label": "sporePrint",
+          "path": "/",
+          "status": 200,
+          "latency_ms": 136.7,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "ntfy-membrane",
+      "type": "neutrino",
+      "distance_ms": 184.2,
+      "endpoints": [
+        {
+          "label": "membrane channel",
+          "path": "/primals-membrane/json?poll=1&since=10m",
+          "status": 200,
+          "latency_ms": 187.7,
+          "ok": true
+        },
+        {
+          "label": "inbox channel",
+          "path": "/primals-membrane-inbox/json?poll=1&since=10m",
+          "status": 200,
+          "latency_ms": 181.8,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "primals.eco",
+      "type": "cis",
+      "distance_ms": 254.7,
+      "endpoints": [
+        {
+          "label": "HUD",
+          "path": "/",
+          "status": 200,
+          "latency_ms": 285.4,
+          "ok": true
+        },
+        {
+          "label": "was.json",
+          "path": "/api/was.json",
+          "status": 200,
+          "latency_ms": 234.2,
+          "ok": true
+        },
+        {
+          "label": "5/O/5",
+          "path": "/five-o-five",
+          "status": 200,
+          "latency_ms": 438.9,
+          "ok": true
+        },
+        {
+          "label": "watering hole",
+          "path": "/water",
+          "status": 200,
+          "latency_ms": 498.1,
+          "ok": true
+        },
+        {
+          "label": "chipmunk feed",
+          "path": "/chipmunk.json",
+          "status": 200,
+          "latency_ms": 284.2,
+          "ok": true
+        },
+        {
+          "label": "dashboard",
+          "path": "/dashboard.json",
+          "status": 200,
+          "latency_ms": 419.9,
+          "ok": true
+        },
+        {
+          "label": "negentropy",
+          "path": "/negentropy.json",
+          "status": 200,
+          "latency_ms": 240.3,
+          "ok": true
+        },
+        {
+          "label": "topology",
+          "path": "/topology.json",
+          "status": 200,
+          "latency_ms": 281.8,
+          "ok": true
+        },
+        {
+          "label": "now",
+          "path": "/now.json",
+          "status": 200,
+          "latency_ms": 427.6,
+          "ok": true
+        },
+        {
+          "label": "membrane",
+          "path": "/membrane.json",
+          "status": 200,
+          "latency_ms": 480.2,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "github-hud",
+      "type": "nucleus",
+      "distance_ms": 361.2,
+      "endpoints": [
+        {
+          "label": "hud commits",
+          "path": "/repos/ecoPrimal/hud/commits?per_page=1",
+          "status": 200,
+          "latency_ms": 148.2,
+          "ok": true
+        },
+        {
+          "label": "sporePrint commits",
+          "path": "/repos/ecoPrimal/sporePrint/commits?per_page=1",
+          "status": 200,
+          "latency_ms": 273.7,
+          "ok": true
+        }
+      ],
+      "all_ok": true
+    },
+    {
+      "node": "nucleus",
+      "type": "nucleus",
+      "distance_ms": 99999,
+      "endpoints": [
+        {
+          "label": "nucleus connect",
+          "path": "/",
+          "status": 0,
+          "latency_ms": 5004.9,
+          "ok": false
+        },
+        {
+          "label": "campfire (nucleus)",
+          "path": "/campfire.json",
+          "status": 0,
+          "latency_ms": 5005.2,
+          "ok": false
+        }
+      ],
+      "all_ok": false
+    }
+  ],
+  "graph_science": {
+    "dijkstra_1959": "shortest path, single source \u2014 used for distance measurement",
+    "tsp_dantzig_1954": "visit all nodes, minimize total distance \u2014 the route",
+    "euler_1736": "K\u00f6nigsberg bridges \u2014 can you walk every edge?",
+    "hamilton_1857": "can you visit every node exactly once?",
+    "nearest_neighbor": "greedy heuristic \u2014 always go to closest unvisited",
+    "marathon": "you can't optimize a route you haven't run. run first. map second."
+  }
+}
