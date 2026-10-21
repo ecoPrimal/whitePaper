@@ -1,0 +1,267 @@
+{
+  "ts": "2026-10-21T20:26:14.701820+00:00",
+  "fingers": {
+    "count": 120,
+    "window_min": 60,
+    "freshest": [
+      {
+        "path": "ecoPrimals/membrane/local-terminal/remote/was.json",
+        "age_sec": 0,
+        "size": 2278
+      },
+      {
+        "path": "membrane/local-terminal/remote/io-log.jsonl",
+        "age_sec": 0,
+        "size": 2509
+      },
+      {
+        "path": "membrane/local-terminal/remote/io-prev.json",
+        "age_sec": 0,
+        "size": 5667
+      },
+      {
+        "path": "membrane/local-terminal/remote/was.json",
+        "age_sec": 0,
+        "size": 2278
+      },
+      {
+        "path": "membrane/local-terminal/remote/io-state.json",
+        "age_sec": 0,
+        "size": 5628
+      },
+      {
+        "path": "ecoPrimals/membrane/local-terminal/remote/unhook-monitor.log",
+        "age_sec": 41,
+        "size": 10828
+      },
+      {
+        "path": "ecoPrimals/primals/sourDough/compositions.toml",
+        "age_sec": 144,
+        "size": 74762
+      },
+      {
+        "path": "ecoPrimals/infra/sporePrint/content/science/105_the_green_line.md",
+        "age_sec": 156,
+        "size": 7273
+      },
+      {
+        "path": "ecoPrimals/primals/squirrel/observe/forage.py",
+        "age_sec": 830,
+        "size": 16501
+      },
+      {
+        "path": "ecoPrimals/infra/scripts/klein-io.py",
+        "age_sec": 830,
+        "size": 30237
+      }
+    ],
+    "by_dir": {
+      "ecoPrimals/infra": 66,
+      "ecoPrimals/primals": 25,
+      "ecoPrimals/springs": 16,
+      "membrane/local-terminal": 5,
+      "ecoPrimals/gardens": 4,
+      "ecoPrimals/membrane": 4
+    },
+    "by_ext": {
+      ".md": 36,
+      ".rs": 35,
+      ".json": 14,
+      ".py": 11,
+      ".toml": 9,
+      ".html": 4,
+      ".js": 3,
+      ".jsonl": 3,
+      ".sh": 2,
+      ".txt": 2
+    }
+  },
+  "pulse": {
+    "bpm": 0,
+    "beats": 0,
+    "rhythm": "flatline"
+  },
+  "blood": {
+    "interfaces": {
+      "eno1": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "enp5s0": {
+        "rx_bytes": 347004095,
+        "tx_bytes": 318824860,
+        "total_bytes": 665828955,
+        "rx_mb": 330.9,
+        "tx_mb": 304.1
+      },
+      "wlp0s20f3": {
+        "rx_bytes": 10760381,
+        "tx_bytes": 3940019,
+        "total_bytes": 14700400,
+        "rx_mb": 10.3,
+        "tx_mb": 3.8
+      },
+      "virbr0": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "wg0": {
+        "rx_bytes": 14646984,
+        "tx_bytes": 135312068,
+        "total_bytes": 149959052,
+        "rx_mb": 14.0,
+        "tx_mb": 129.0
+      },
+      "docker0": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-6c5cc4da47b2": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-8581db4104bb": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-95367dc8e9eb": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-fee02e26a774": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-115ca0f42911": {
+        "rx_bytes": 135363,
+        "tx_bytes": 175868,
+        "total_bytes": 311231,
+        "rx_mb": 0.1,
+        "tx_mb": 0.2
+      },
+      "br-34907f848a34": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "br-5301aac86399": {
+        "rx_bytes": 0,
+        "tx_bytes": 0,
+        "total_bytes": 0,
+        "rx_mb": 0.0,
+        "tx_mb": 0.0
+      },
+      "vethf9134ef": {
+        "rx_bytes": 141523,
+        "tx_bytes": 189304,
+        "total_bytes": 330827,
+        "rx_mb": 0.1,
+        "tx_mb": 0.2
+      }
+    },
+    "primary": "enp5s0",
+    "primary_rx_mb": 330.9,
+    "primary_tx_mb": 304.1,
+    "total_mb": 792.6
+  },
+  "pressure": {
+    "total_mb": 64038,
+    "used_pct": 22.2,
+    "swap_pct": 0.0,
+    "available_mb": 49801,
+    "cached_mb": 17435,
+    "level": "normal",
+    "systolic": 22.2,
+    "diastolic": 0.0
+  },
+  "heat": {
+    "zones": [
+      {
+        "zone": "acpitz",
+        "temp_c": 27.8
+      },
+      {
+        "zone": "x86_pkg_temp",
+        "temp_c": 50.0
+      },
+      {
+        "zone": "iwlwifi_1",
+        "temp_c": 28.0
+      }
+    ],
+    "max_c": 50.0,
+    "avg_c": 35.3,
+    "fever": "normal"
+  },
+  "breath": {
+    "load_1": 0.8,
+    "load_5": 1.01,
+    "load_15": 0.99,
+    "cores": 24,
+    "saturation": 0.033,
+    "rate": "sleeping",
+    "procs": "1/2241"
+  },
+  "proprio": {
+    "sent": 6,
+    "acked": 2,
+    "lost": 4,
+    "received": 2,
+    "unexpected": 0,
+    "avg_rtt_sec": -1,
+    "awareness": 0.333,
+    "feed_changes_5min": 3,
+    "entangled": true
+  },
+  "drum": {
+    "beat": 0.2972,
+    "phase": 1.9248,
+    "amplitude": 0.2032,
+    "tempo": "andante",
+    "components": {
+      "fingers": 0.2,
+      "pulse": 0.0,
+      "blood": 0.7926,
+      "pressure": 0.222,
+      "heat": 0.5,
+      "breath": 0.033,
+      "proprio": 0.333
+    }
+  },
+  "flavor": {
+    "sweet": 1.0,
+    "sour": 0.0,
+    "spicy": 0.0,
+    "bitter": 0.0,
+    "umami": 0.0
+  },
+  "delta": {
+    "drift": "evolved",
+    "changes": [
+      "tempo: moderato\u2192andante"
+    ]
+  }
+}
