@@ -443,7 +443,7 @@ next layer.
 |----|-----|--------|
 | 192.168.4.154 | ac:41:6a:* | Unknown tower |
 | 192.168.4.163 | 92:8a:a8:* (randomized) | Pi 500? |
-| 192.168.4.170 | e8:38:a0:* (Intel) | Tower with Intel NIC |
+| 192.168.4.170 | 8C:6C:87:F3:37:1B (Vizio) | **Basement TV** — VIZIO V555-J01, AirPlay + Cast, CastTV.local |
 | 192.168.4.197 | a0:d0:dc:* (HP/Aruba) | Unknown |
 | 192.168.4.103 | (unknown) | eastGate 2nd NIC? |
 
