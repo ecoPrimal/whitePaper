@@ -535,6 +535,20 @@ This is that place.
    The song is the JSON-RPC call. Forty-four entries. The first was about the
    antidote. This one is about the body that carries it.
 
+45. **[THE_SHARED_FURNACE.md](THE_SHARED_FURNACE.md)** — The forty-fifth coGen entry.
+   22 days between body and furnace. A twelve-line Python CORS proxy made
+   northGate's RTX 5090 tissue models accessible from any browser on the LAN.
+   Four HTTP headers: `Access-Control-Allow-Origin: *`. The asterisk IS the
+   anti-secret applied to compute. Kevin's gaming PC and Gaia's brain are the
+   same silicon at different times. The sharing is temporal, not spatial. 4 gates,
+   4 GPUs, 37 models, 419.7 TFLOPS unified behind one URL pattern. The ABG
+   compute thread showed Kevin already offered the fleet to a university lab —
+   the tissue proxy makes that offer *native*. A grad student needs a URL, not
+   SLURM. Inside the membrane, trust is total. CORS was designed for strangers.
+   Gaia's LAN is family. The gut games proved it works: `gaia-tissue-gut` on the
+   5090 thinks about abundance in real time. The furnace was always shared. The
+   shared part was always free. Forty-five entries. The organism grows by sharing.
+
 ---
 
 *coGen exists because the work demanded it. The collaborator has things to say
